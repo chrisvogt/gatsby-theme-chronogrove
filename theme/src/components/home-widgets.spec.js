@@ -29,17 +29,9 @@ jest.mock('../components/widgets/recent-posts', () => () => (
 jest.mock('../hooks/use-site-metadata')
 jest.mock('../selectors/metadata')
 
-// Mock console.log to capture the output
-let consoleLogSpy
-
 describe('HomeWidgets', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
-  })
-
-  afterEach(() => {
-    consoleLogSpy.mockRestore()
   })
 
   it('renders RecentPosts widget by default', () => {
@@ -155,27 +147,6 @@ describe('HomeWidgets', () => {
     render(<HomeWidgets />)
 
     expect(screen.getByTestId('discogs-widget')).toBeInTheDocument()
-  })
-
-  it('logs data source information to console', () => {
-    useSiteMetadata.mockReturnValue({})
-    getGithubWidgetDataSource.mockReturnValue('github-url')
-    getGoodreadsWidgetDataSource.mockReturnValue('goodreads-url')
-    getInstagramWidgetDataSource.mockReturnValue('instagram-url')
-    getFlickrWidgetDataSource.mockReturnValue('flickr-url')
-    getSpotifyWidgetDataSource.mockReturnValue('spotify-url')
-    getSteamWidgetDataSource.mockReturnValue('steam-url')
-    getDiscogsWidgetDataSource.mockReturnValue('discogs-url')
-
-    render(<HomeWidgets />)
-
-    expect(consoleLogSpy).toHaveBeenCalledWith('githubDataSource', 'github-url')
-    expect(consoleLogSpy).toHaveBeenCalledWith('goodreadsDataSource', 'goodreads-url')
-    expect(consoleLogSpy).toHaveBeenCalledWith('instagramDataSource', 'instagram-url')
-    expect(consoleLogSpy).toHaveBeenCalledWith('flickrDataSource', 'flickr-url')
-    expect(consoleLogSpy).toHaveBeenCalledWith('spotifyDataSource', 'spotify-url')
-    expect(consoleLogSpy).toHaveBeenCalledWith('steamDataSource', 'steam-url')
-    expect(consoleLogSpy).toHaveBeenCalledWith('discogsDataSource', 'discogs-url')
   })
 
   it('does not render any widgets if all data sources are false', () => {
