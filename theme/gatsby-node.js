@@ -102,6 +102,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       spotify: SiteSiteMetadataWidgetConfig
       steam: SiteSiteMetadataWidgetConfig
       flickr: SiteSiteMetadataWidgetConfig
+      discogs: SiteSiteMetadataWidgetConfig
     }
 
     type SiteSiteMetadataWidgetConfig {

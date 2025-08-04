@@ -42,14 +42,6 @@ const HomeWidgets = () => {
   const steamDataSource = getSteamWidgetDataSource(metadata)
   const discogsDataSource = getDiscogsWidgetDataSource(metadata)
 
-  console.log('githubDataSource', githubDataSource)
-  console.log('goodreadsDataSource', goodreadsDataSource)
-  console.log('instagramDataSource', instagramDataSource)
-  console.log('flickrDataSource', flickrDataSource)
-  console.log('spotifyDataSource', spotifyDataSource)
-  console.log('steamDataSource', steamDataSource)
-  console.log('discogsDataSource', discogsDataSource)
-
   return (
     <>
       <RecentPosts />
