@@ -2,7 +2,7 @@ const boxen = require('boxen').default
 const chalk = require('chalk')
 const packageData = require('../theme/package.json')
 
-const banner = boxen(`${chalk.bold('www.chrisvogt.me')}\nMy Personal Website\nv${packageData.version}`, {
+const banner = boxen(`${chalk.bold('Chronogrove')}\nGatsbyJS Digital Garden Theme\nv${packageData.version}`, {
   align: 'center',
   backgroundColor: '#9b20dc',
   borderStyle: 'round',

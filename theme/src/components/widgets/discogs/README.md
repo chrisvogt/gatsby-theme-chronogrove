@@ -24,7 +24,7 @@ module.exports = {
   siteMetadata: {
     widgets: {
       discogs: {
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+        widgetDataSource: 'https://api.example.com/widgets/discogs'
       }
     }
   }
