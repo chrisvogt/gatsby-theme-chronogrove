@@ -1,11 +1,4 @@
-import {
-  getMedia,
-  getMetrics,
-  getProfileDisplayName,
-  getProfileURL,
-  getHasFatalError,
-  getIsLoading
-} from './instagram'
+import { getMedia, getMetrics, getProfileDisplayName, getProfileURL, getHasFatalError, getIsLoading } from './instagram'
 
 describe('Instagram selectors', () => {
   const mockState = {
