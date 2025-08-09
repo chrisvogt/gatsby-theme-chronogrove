@@ -20,8 +20,15 @@ import 'lightgallery/css/lg-video.css'
 import 'lightgallery/css/lg-autoplay.css'
 
 import fetchDataSource from '../../../actions/fetchDataSource'
-import { getInstagramUsername, getInstagramWidgetDataSource } from '../../../selectors/metadata'
-import { SUCCESS, FAILURE, getInstagramWidget } from '../../../reducers/widgets'
+import { getInstagramWidgetDataSource } from '../../../selectors/metadata'
+import {
+  getMedia,
+  getMetrics,
+  getProfileDisplayName,
+  getProfileURL,
+  getHasFatalError,
+  getIsLoading
+} from '../../../selectors/instagram'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 
 import Button from '../../button'
@@ -37,22 +44,18 @@ const MAX_IMAGES = {
   showMore: 16
 }
 
-const getMedia = state => getInstagramWidget(state).data?.collections?.media
-const getHasFatalError = state => getInstagramWidget(state).state === FAILURE
-const getIsLoading = state => getInstagramWidget(state).state !== SUCCESS
-const getMetrics = state => getInstagramWidget(state).data?.metrics
-
 export default () => {
   const dispatch = useDispatch()
 
   const metadata = useSiteMetadata()
-  const instagramUsername = getInstagramUsername(metadata)
   const instagramDataSource = getInstagramWidgetDataSource(metadata)
 
   const hasFatalError = useSelector(getHasFatalError)
   const isLoading = useSelector(getIsLoading)
   const media = useSelector(getMedia)
   const metrics = useSelector(getMetrics)
+  const profileDisplayName = useSelector(getProfileDisplayName)
+  const profileURL = useSelector(getProfileURL)
 
   const [isShowingMore, setIsShowingMore] = useState(false)
   const lightGalleryRef = useRef(null)
@@ -88,8 +91,8 @@ export default () => {
 
   const callToAction = (
     <CallToAction
-      title={`${instagramUsername} on Instagram`}
-      url={`https://www.instagram.com/${instagramUsername}`}
+      title={`${profileDisplayName || 'Instagram'} on Instagram`}
+      url={profileURL || `https://www.instagram.com/${metadata?.widgets?.instagram?.username || 'instagram'}`}
       isLoading={isLoading}
     >
       Visit Profile

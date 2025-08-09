@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.60.0
+
+### 🐛 Bug Fixes
+
+- **Instagram Widget Profile URL**: Fixed incorrect profile URL construction that was using hardcoded username instead of API response data
+  - **Root Cause**: Widget was using `metadata?.widgets?.instagram?.username` to construct profile URLs instead of using the actual `profileURL` from the Instagram API response
+  - **Solution**: Created new Instagram selectors (`src/selectors/instagram.js`) to properly access profile data from API response
+  - **Fallback Logic**: Added graceful fallback to configured username when API profile data is unavailable
+  - **Profile Display**: Widget now shows correct profile display name from API response in call-to-action link
+
+### 🔧 Architecture Improvements
+
+- **New Instagram Selectors**: Added comprehensive Instagram selectors following established patterns
+  - `getMedia()`: Access to Instagram media collections
+  - `getMetrics()`: Instagram profile metrics (followers, following, etc.)
+  - `getProfileDisplayName()`: Profile display name from API response
+  - `getProfileURL()`: Profile URL from API response with fallback support
+  - `getHasFatalError()` and `getIsLoading()`: Loading and error state management
+- **Component Refactoring**: Updated Instagram widget to use new selectors instead of inline data access
+- **Data Flow**: Improved separation of concerns between data access (selectors) and presentation (components)
+
+### 🧪 Testing
+
+- **100% Code Coverage**: Achieved complete test coverage for Instagram widget and selectors
+  - **New Test Files**: `instagram.spec.js` (selector tests), enhanced `instagram-widget.spec.js` (11 test cases)
+  - **Edge Case Coverage**: Tests for missing profile data, fallback scenarios, and error conditions
+  - **LightGallery Integration**: Added test for lightGallery instance error handling
+  - **Profile URL Scenarios**: Comprehensive testing of both API-provided and fallback profile URLs
+- **Test Quality**: All 707 tests pass with enhanced Instagram widget coverage
+
+### 🎯 User Experience
+
+- **Correct Profile Links**: Instagram widget now links to the correct profile URL (e.g., `instagram.com/c1v0` instead of `instagram.com/chrisvogt`)
+- **Dynamic Content**: Profile display names now reflect actual Instagram profile data
+- **Reliability**: Robust fallback handling ensures widget remains functional even with API data issues
+
+### 📚 Technical Details
+
+- **Backward Compatibility**: No breaking changes - existing configurations continue to work
+- **Performance**: Memoized selectors optimize re-rendering and data access patterns
+- **Error Handling**: Graceful degradation when Instagram API data is incomplete or unavailable
+
 ## 0.59.0
 
 ### ✨ Features

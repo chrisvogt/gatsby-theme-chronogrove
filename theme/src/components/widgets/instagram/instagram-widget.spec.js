@@ -19,12 +19,12 @@ const mockLightGalleryInstance = {
   openGallery: jest.fn()
 }
 
-jest.mock('lightgallery/react', () =>
-  jest.fn(({ onInit }) => {
-    onInit({ instance: mockLightGalleryInstance })
-    return <div data-testid='lightgallery-mock' />
-  })
-)
+let mockLightGalleryOnInit = ({ onInit }) => {
+  onInit({ instance: mockLightGalleryInstance })
+  return <div data-testid='lightgallery-mock' />
+}
+
+jest.mock('lightgallery/react', () => jest.fn(({ onInit }) => mockLightGalleryOnInit({ onInit })))
 
 jest.mock('lightgallery/plugins/thumbnail', () => jest.fn())
 jest.mock('lightgallery/plugins/zoom', () => jest.fn())
@@ -64,7 +64,11 @@ describe('InstagramWidget', () => {
             metrics: [
               { displayName: 'Followers', id: '1', value: 100 },
               { displayName: 'Following', id: '2', value: 50 }
-            ]
+            ],
+            profile: {
+              displayName: 'TestUser',
+              profileURL: 'https://instagram.com/testuser'
+            }
           }
         }
       }
@@ -156,7 +160,11 @@ describe('InstagramWidget', () => {
             metrics: [
               { displayName: 'Followers', id: '1', value: 100 },
               { displayName: 'Following', id: '2', value: 50 }
-            ]
+            ],
+            profile: {
+              displayName: 'TestUser',
+              profileURL: 'https://instagram.com/testuser'
+            }
           }
         }
       }
@@ -269,6 +277,71 @@ describe('InstagramWidget', () => {
     )
 
     expect(mockInstance).toBeDefined()
+  })
+
+  it('handles lightGallery instance not being initialized', () => {
+    // Temporarily override the mock to not provide an instance
+    const originalMockOnInit = mockLightGalleryOnInit
+    mockLightGalleryOnInit = () => <div data-testid='lightgallery-mock' />
+
+    render(
+      <ReduxProvider store={store}>
+        <ThemeUIProvider theme={theme}>
+          <InstagramWidget />
+        </ThemeUIProvider>
+      </ReduxProvider>
+    )
+
+    // Click on an item to trigger openLightbox
+    const instagramItem = screen.getByAltText(/Instagram post:/)
+    fireEvent.click(instagramItem)
+
+    // Verify that the error was logged when lightGallery instance is not available
+    expect(console.error).toHaveBeenCalledWith('LightGallery instance is not initialized')
+
+    // Restore the original mock
+    mockLightGalleryOnInit = originalMockOnInit
+  })
+
+  it('uses fallback URL when profileURL is not available', () => {
+    const storeWithoutProfileURL = mockStore({
+      widgets: {
+        instagram: {
+          state: 'SUCCESS',
+          data: {
+            collections: {
+              media: [
+                {
+                  id: '123',
+                  caption: 'Test Caption',
+                  cdnMediaURL: 'https://cdn.example.com/images/fake-instagram-image.jpg',
+                  mediaType: 'IMAGE',
+                  permalink: 'https://instagram.com/p/test'
+                }
+              ]
+            },
+            metrics: [
+              { displayName: 'Followers', id: '1', value: 100 },
+              { displayName: 'Following', id: '2', value: 50 }
+            ]
+            // No profile data
+          }
+        }
+      }
+    })
+
+    render(
+      <ReduxProvider store={storeWithoutProfileURL}>
+        <ThemeUIProvider theme={theme}>
+          <InstagramWidget />
+        </ThemeUIProvider>
+      </ReduxProvider>
+    )
+
+    // The CallToAction should use the fallback URL with the configured username
+    const link = screen.getByTitle('Instagram on Instagram')
+    expect(link).toBeInTheDocument()
+    expect(link).toHaveAttribute('href', 'https://www.instagram.com/instagram')
   })
 
   it('passes video object to LightGallery when mediaType is VIDEO and mediaURL is present', () => {
