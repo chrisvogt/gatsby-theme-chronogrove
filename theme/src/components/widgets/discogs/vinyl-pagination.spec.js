@@ -181,4 +181,111 @@ describe('VinylPagination', () => {
     const currentPageButton = getByLabelText('Go to page 5')
     expect(currentPageButton.getAttribute('aria-current')).toBe('page')
   })
+
+  it('does not call onPageChange when trying to go to invalid pages', () => {
+    const { getByLabelText } = render(
+      <VinylPagination currentPage={1} totalPages={3} onPageChange={mockOnPageChange} />
+    )
+
+    // Test the internal goToPage function boundaries by triggering goToPrevious
+    // when already on page 1 (should try to go to page 0, which is invalid)
+    const previousButton = getByLabelText('Previous page')
+    fireEvent.click(previousButton)
+
+    expect(mockOnPageChange).not.toHaveBeenCalled()
+  })
+
+  it('does not call onPageChange when trying to go beyond total pages', () => {
+    const { getByLabelText } = render(
+      <VinylPagination currentPage={3} totalPages={3} onPageChange={mockOnPageChange} />
+    )
+
+    // Test the internal goToPage function boundaries by triggering goToNext
+    // when already on last page (should try to go to page 4, which is invalid)
+    const nextButton = getByLabelText('Next page')
+    fireEvent.click(nextButton)
+
+    expect(mockOnPageChange).not.toHaveBeenCalled()
+  })
+
+  it('handles edge case with zero total pages', () => {
+    const { container } = render(<VinylPagination currentPage={1} totalPages={0} onPageChange={mockOnPageChange} />)
+
+    // Should not render any pagination controls when totalPages is 0
+    expect(container.querySelector('button')).toBeNull()
+    expect(container.textContent).not.toContain('Page')
+  })
+
+  it('renders page info text correctly for different page combinations', () => {
+    const { getByText, rerender } = render(
+      <VinylPagination currentPage={1} totalPages={2} onPageChange={mockOnPageChange} />
+    )
+
+    expect(getByText('Page 1 of 2')).toBeInTheDocument()
+
+    rerender(<VinylPagination currentPage={2} totalPages={2} onPageChange={mockOnPageChange} />)
+    expect(getByText('Page 2 of 2')).toBeInTheDocument()
+
+    rerender(<VinylPagination currentPage={7} totalPages={15} onPageChange={mockOnPageChange} />)
+    expect(getByText('Page 7 of 15')).toBeInTheDocument()
+  })
+
+  it('handles accessibility attributes correctly', () => {
+    const { getByLabelText } = render(
+      <VinylPagination currentPage={2} totalPages={4} onPageChange={mockOnPageChange} />
+    )
+
+    // Test aria-label attributes
+    expect(getByLabelText('Previous page')).toBeInTheDocument()
+    expect(getByLabelText('Next page')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 1')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 2')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+
+    // Test aria-current attribute is only on current page
+    const currentPageButton = getByLabelText('Go to page 2')
+    expect(currentPageButton.getAttribute('aria-current')).toBe('page')
+
+    const otherPageButtons = [
+      getByLabelText('Go to page 1'),
+      getByLabelText('Go to page 3'),
+      getByLabelText('Go to page 4')
+    ]
+    otherPageButtons.forEach(button => {
+      expect(button.getAttribute('aria-current')).toBe(null)
+    })
+
+    // Test disabled attribute on previous/next buttons
+    const prevButton = getByLabelText('Previous page')
+    const nextButton = getByLabelText('Next page')
+    expect(prevButton.disabled).toBe(false)
+    expect(nextButton.disabled).toBe(false)
+  })
+
+  it('handles button disabled states correctly', () => {
+    const { getByLabelText, rerender } = render(
+      <VinylPagination currentPage={1} totalPages={5} onPageChange={mockOnPageChange} />
+    )
+
+    // On first page, previous should be disabled
+    let prevButton = getByLabelText('Previous page')
+    let nextButton = getByLabelText('Next page')
+    expect(prevButton.disabled).toBe(true)
+    expect(nextButton.disabled).toBe(false)
+
+    // On last page, next should be disabled
+    rerender(<VinylPagination currentPage={5} totalPages={5} onPageChange={mockOnPageChange} />)
+    prevButton = getByLabelText('Previous page')
+    nextButton = getByLabelText('Next page')
+    expect(prevButton.disabled).toBe(false)
+    expect(nextButton.disabled).toBe(true)
+
+    // On middle page, both should be enabled
+    rerender(<VinylPagination currentPage={3} totalPages={5} onPageChange={mockOnPageChange} />)
+    prevButton = getByLabelText('Previous page')
+    nextButton = getByLabelText('Next page')
+    expect(prevButton.disabled).toBe(false)
+    expect(nextButton.disabled).toBe(false)
+  })
 })
