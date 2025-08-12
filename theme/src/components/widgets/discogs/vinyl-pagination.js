@@ -38,9 +38,9 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
               height: '40px',
               borderRadius: '50%',
               border: '2px solid',
-              borderColor: 'muted',
+              borderColor: 'primary',
               backgroundColor: 'transparent',
-              color: 'text',
+              color: 'primary',
               cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
               opacity: currentPage === 1 ? 0.5 : 1,
               transition: 'all 0.2s ease-in-out',
@@ -80,9 +80,9 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
                   px: 2,
                   borderRadius: '16px',
                   border: '2px solid',
-                  borderColor: page === currentPage ? 'primary' : 'muted',
+                  borderColor: page === currentPage ? 'primary' : 'primary',
                   backgroundColor: page === currentPage ? 'primary' : 'transparent',
-                  color: page === currentPage ? 'background' : 'text',
+                  color: page === currentPage ? 'white' : 'primary',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease-in-out',
                   fontSize: 0,
@@ -115,9 +115,9 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
               height: '40px',
               borderRadius: '50%',
               border: '2px solid',
-              borderColor: 'muted',
+              borderColor: 'primary',
               backgroundColor: 'transparent',
-              color: 'text',
+              color: 'primary',
               cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
               opacity: currentPage === totalPages ? 0.5 : 1,
               transition: 'all 0.2s ease-in-out',
@@ -144,7 +144,7 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
             textAlign: 'center',
             mt: 2,
             fontSize: 0,
-            color: 'muted'
+            color: 'primary'
           }}
         >
           Page {currentPage} of {totalPages}

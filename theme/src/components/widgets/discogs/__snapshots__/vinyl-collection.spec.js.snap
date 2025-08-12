@@ -2936,7 +2936,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
     >
       <button
         aria-label="Previous page"
-        className="css-177ffeg"
+        className="css-l7u2za"
         disabled={true}
         onClick={[Function]}
       >
@@ -2964,14 +2964,14 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
         <button
           aria-current="page"
           aria-label="Go to page 1"
-          className="css-11fvmam"
+          className="css-15rjzww"
           onClick={[Function]}
         >
           1
         </button>
         <button
           aria-label="Go to page 2"
-          className="css-t3hwd7"
+          className="css-gw23jf"
           onClick={[Function]}
         >
           2
@@ -2979,7 +2979,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       </div>
       <button
         aria-label="Next page"
-        className="css-17hitjp"
+        className="css-xurijl"
         disabled={false}
         onClick={[Function]}
       >
@@ -3003,7 +3003,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       </button>
     </div>
     <div
-      className="css-154xsx4"
+      className="css-1ssnnkr"
     >
       Page 
       1

@@ -9,7 +9,7 @@ exports[`VinylPagination disables next button on last page 1`] = `
   >
     <button
       aria-label="Previous page"
-      className="css-17hitjp"
+      className="css-xurijl"
       disabled={false}
       onClick={[Function]}
     >
@@ -36,14 +36,14 @@ exports[`VinylPagination disables next button on last page 1`] = `
     >
       <button
         aria-label="Go to page 1"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         1
       </button>
       <button
         aria-label="Go to page 2"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         2
@@ -51,7 +51,7 @@ exports[`VinylPagination disables next button on last page 1`] = `
       <button
         aria-current="page"
         aria-label="Go to page 3"
-        className="css-11fvmam"
+        className="css-15rjzww"
         onClick={[Function]}
       >
         3
@@ -59,7 +59,7 @@ exports[`VinylPagination disables next button on last page 1`] = `
     </div>
     <button
       aria-label="Next page"
-      className="css-177ffeg"
+      className="css-l7u2za"
       disabled={true}
       onClick={[Function]}
     >
@@ -83,7 +83,7 @@ exports[`VinylPagination disables next button on last page 1`] = `
     </button>
   </div>
   <div
-    className="css-154xsx4"
+    className="css-1ssnnkr"
   >
     Page 
     3
@@ -102,7 +102,7 @@ exports[`VinylPagination disables previous button on first page 1`] = `
   >
     <button
       aria-label="Previous page"
-      className="css-177ffeg"
+      className="css-l7u2za"
       disabled={true}
       onClick={[Function]}
     >
@@ -130,21 +130,21 @@ exports[`VinylPagination disables previous button on first page 1`] = `
       <button
         aria-current="page"
         aria-label="Go to page 1"
-        className="css-11fvmam"
+        className="css-15rjzww"
         onClick={[Function]}
       >
         1
       </button>
       <button
         aria-label="Go to page 2"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         2
       </button>
       <button
         aria-label="Go to page 3"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         3
@@ -152,7 +152,7 @@ exports[`VinylPagination disables previous button on first page 1`] = `
     </div>
     <button
       aria-label="Next page"
-      className="css-17hitjp"
+      className="css-xurijl"
       disabled={false}
       onClick={[Function]}
     >
@@ -176,7 +176,7 @@ exports[`VinylPagination disables previous button on first page 1`] = `
     </button>
   </div>
   <div
-    className="css-154xsx4"
+    className="css-1ssnnkr"
   >
     Page 
     1
@@ -201,7 +201,7 @@ exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `
   >
     <button
       aria-label="Previous page"
-      className="css-177ffeg"
+      className="css-l7u2za"
       disabled={true}
       onClick={[Function]}
     >
@@ -229,21 +229,21 @@ exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `
       <button
         aria-current="page"
         aria-label="Go to page 1"
-        className="css-11fvmam"
+        className="css-15rjzww"
         onClick={[Function]}
       >
         1
       </button>
       <button
         aria-label="Go to page 2"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         2
       </button>
       <button
         aria-label="Go to page 3"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         3
@@ -251,7 +251,7 @@ exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `
     </div>
     <button
       aria-label="Next page"
-      className="css-17hitjp"
+      className="css-xurijl"
       disabled={false}
       onClick={[Function]}
     >
@@ -275,7 +275,7 @@ exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `
     </button>
   </div>
   <div
-    className="css-154xsx4"
+    className="css-1ssnnkr"
   >
     Page 
     1
@@ -294,7 +294,7 @@ exports[`VinylPagination shows correct page info 1`] = `
   >
     <button
       aria-label="Previous page"
-      className="css-17hitjp"
+      className="css-xurijl"
       disabled={false}
       onClick={[Function]}
     >
@@ -321,7 +321,7 @@ exports[`VinylPagination shows correct page info 1`] = `
     >
       <button
         aria-label="Go to page 1"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         1
@@ -329,28 +329,28 @@ exports[`VinylPagination shows correct page info 1`] = `
       <button
         aria-current="page"
         aria-label="Go to page 2"
-        className="css-11fvmam"
+        className="css-15rjzww"
         onClick={[Function]}
       >
         2
       </button>
       <button
         aria-label="Go to page 3"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         3
       </button>
       <button
         aria-label="Go to page 4"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         4
       </button>
       <button
         aria-label="Go to page 5"
-        className="css-t3hwd7"
+        className="css-gw23jf"
         onClick={[Function]}
       >
         5
@@ -358,7 +358,7 @@ exports[`VinylPagination shows correct page info 1`] = `
     </div>
     <button
       aria-label="Next page"
-      className="css-17hitjp"
+      className="css-xurijl"
       disabled={false}
       onClick={[Function]}
     >
@@ -382,7 +382,7 @@ exports[`VinylPagination shows correct page info 1`] = `
     </button>
   </div>
   <div
-    className="css-154xsx4"
+    className="css-1ssnnkr"
   >
     Page 
     2
