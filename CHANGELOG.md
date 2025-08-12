@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.60.2
+
+### 🚀 Performance Improvements
+
+- **PhotoGallery Lazy Loading**: Implemented intersection observer-based lazy loading for LightGallery components
+  - **Root Cause**: PhotoGallery components were loading all LightGallery assets on initial page load, causing performance issues when multiple galleries were present
+  - **Solution**: Split component into lazy-loaded parts using existing theme LazyLoad component with dynamic imports
+  - **Components Enhanced**: Separated `PhotoGallery` (thumbnail grid) from `LightGalleryComponent` (lightbox functionality)
+  - **Bundle Optimization**: LightGallery JavaScript, plugins, and CSS now load only when galleries become visible
+
+### 🎯 User Experience
+
+- **Faster Initial Page Load**: Dramatically reduced initial bundle size by deferring heavy lightbox dependencies
+- **Progressive Enhancement**: Thumbnail galleries display immediately while lightbox functionality loads on-demand
+- **Responsive Loading**: Uses intersection observer to detect when galleries are nearly in view
+- **Multiple Gallery Support**: Optimized for pages with 10+ photo galleries without performance degradation
+
+### 🧪 Technical Details
+
+- **Dynamic Imports**: LightGallery React component, thumbnail/zoom plugins, and CSS stylesheets load asynchronously
+- **LazyLoad Integration**: Leverages existing `react-visibility-sensor` infrastructure from theme
+- **No Breaking Changes**: Maintains identical API and functionality for existing PhotoGallery usage
+- **Error Handling**: Graceful degradation when lightbox assets fail to load
+- **Memory Efficient**: Lightbox code only loads when needed, reducing memory footprint for long pages
+
+### 📦 Dependencies
+
+- **No New Dependencies**: Uses existing LazyLoad component and dynamic import patterns
+- **Backward Compatibility**: Existing PhotoGallery implementations continue to work without changes
+- **Performance**: Intersection observer provides better performance than previous scroll-based approaches
+
 ## 0.60.1
 
 ### 🐛 Bug Fixes
