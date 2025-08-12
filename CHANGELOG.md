@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.60.1
+
+### 🐛 Bug Fixes
+
+- **Discogs Pagination Light Mode**: Fixed text visibility issues in light mode for pagination component
+  - **Root Cause**: Pagination controls were using `muted` and `text` colors that were too light in light mode, making buttons and text hard to read
+  - **Solution**: Updated all pagination text elements to use `primary` color (`#422EA3`) for better contrast
+  - **Components Fixed**: Previous/next arrow buttons, unselected page numbers, and "Page n of x" text
+  - **Compatibility**: Dark mode appearance remains unchanged and continues to look great
+
+### 🎨 Visual Improvements
+
+- **Enhanced Readability**: Pagination controls now have excellent contrast in both light and dark modes
+  - **Previous/Next Buttons**: Changed from `muted` border/text to `primary` color
+  - **Page Numbers**: Unselected pages now use `primary` color instead of light `text` color
+  - **Page Info**: "Page n of x" text changed from `muted` to `primary` for better visibility
+  - **Active Pages**: Continue to use white text on primary background for optimal contrast
+
+### 🧪 Testing
+
+- **100% Code Coverage**: Expanded vinyl-pagination test suite from 14 to 20 comprehensive tests
+  - **New Edge Cases**: Added tests for zero pages, invalid page navigation, and boundary conditions
+  - **Accessibility Testing**: Comprehensive aria-label, aria-current, and disabled state validation
+  - **UI State Testing**: Enhanced testing of button states across different page positions
+  - **Snapshot Updates**: Updated snapshots to reflect new CSS classes from color changes
+- **Enhanced Test Quality**: All new tests pass with no linting errors and maintain 100% coverage
+
+### 🎯 User Experience
+
+- **Improved Navigation**: Pagination is now clearly visible and usable in light mode
+- **Consistent Design**: Maintains cohesive visual design across both color modes
+- **Better Accessibility**: Enhanced contrast ratios improve usability for all users
+
+### 📚 Technical Details
+
+- **Theme UI Integration**: Proper use of theme colors ensures consistent theming
+- **No Breaking Changes**: All existing functionality preserved
+- **Performance**: No impact on component performance or rendering
+
 ## 0.60.0
 
 ### 🐛 Bug Fixes
