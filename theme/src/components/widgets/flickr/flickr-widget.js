@@ -1,11 +1,8 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 
-import { Grid } from '@theme-ui/components'
-import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ReactPlaceholder from 'react-placeholder'
 import VanillaTilt from 'vanilla-tilt'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
@@ -24,19 +21,16 @@ import { getFlickrUsername, getFlickrWidgetDataSource } from '../../../selectors
 import { SUCCESS, FAILURE, getFlickrWidget } from '../../../reducers/widgets'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 
-import Button from '../../button'
 import CallToAction from '../call-to-action'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
+import WidgetCarousel from '../widget-carousel'
 import { faFlickr } from '@fortawesome/free-brands-svg-icons'
 
 import FlickrWidgetItem from './flickr-widget-item'
 
-const MAX_IMAGES = {
-  default: 8,
-  showMore: 16
-}
+const ITEMS_PER_PAGE = 8
 
 const getPhotos = state => getFlickrWidget(state).data?.collections?.photos
 const getHasFatalError = state => getFlickrWidget(state).state === FAILURE
@@ -55,8 +49,6 @@ export default () => {
   const isLoading = useSelector(getIsLoading)
   const photos = useSelector(getPhotos)
   const metrics = useSelector(getMetrics)
-
-  const [isShowingMore, setIsShowingMore] = useState(false)
 
   const openLightbox = useCallback(
     index => {
@@ -77,7 +69,7 @@ export default () => {
   }, [dispatch, flickrDataSource, isLoading])
 
   useEffect(() => {
-    if (isShowingMore || !isLoading) {
+    if (!isLoading) {
       VanillaTilt.init(document.querySelectorAll('.flickr-item-button'), {
         perspective: 1500,
         reverse: true,
@@ -85,7 +77,7 @@ export default () => {
         speed: 200
       })
     }
-  }, [isLoading, isShowingMore])
+  }, [isLoading])
 
   const callToAction = (
     <CallToAction
@@ -98,7 +90,9 @@ export default () => {
     </CallToAction>
   )
 
-  const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
+  const renderFlickrItem = (photo, idx) => (
+    <FlickrWidgetItem key={photo.id || idx} photo={photo} index={idx} handleClick={() => openLightbox(idx)} />
+  )
 
   return (
     <Widget id='flickr' hasFatalError={hasFatalError}>
@@ -109,42 +103,15 @@ export default () => {
       <ProfileMetricsBadge metrics={metrics} isLoading={isLoading} />
 
       <div className='gallery'>
-        <Grid
-          sx={{
-            gridGap: [3, 3, 3, 4],
-            gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', '', 'repeat(4, 1fr)']
-          }}
-        >
-          {(isLoading ? Array(countItemsToRender).fill({}) : photos).slice(0, countItemsToRender).map((photo, idx) => (
-            <ReactPlaceholder
-              customPlaceholder={
-                <div className='image-placeholder'>
-                  <RectShape
-                    color='#efefef'
-                    sx={{
-                      borderRadius: '8px',
-                      boxShadow: 'md',
-                      width: '100%',
-                      paddingBottom: '100%'
-                    }}
-                    showLoadingAnimation
-                  />
-                </div>
-              }
-              key={photo.id || idx}
-              ready={!isLoading}
-            >
-              <FlickrWidgetItem photo={photo} index={idx} handleClick={() => openLightbox(idx)} />
-            </ReactPlaceholder>
-          ))}
-        </Grid>
+        <WidgetCarousel
+          items={photos || []}
+          isLoading={isLoading}
+          itemsPerPage={ITEMS_PER_PAGE}
+          renderItem={renderFlickrItem}
+          gridTemplateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', '', 'repeat(4, 1fr)']}
+          gridGap={[3, 3, 3, 4]}
+        />
       </div>
-
-      {!isLoading && (
-        <div sx={{ my: 4, textAlign: 'center' }}>
-          <Button onClick={() => setIsShowingMore(!isShowingMore)}>{isShowingMore ? 'Show Less' : 'Show More'}</Button>
-        </div>
-      )}
 
       {photos?.length && (
         <LightGallery

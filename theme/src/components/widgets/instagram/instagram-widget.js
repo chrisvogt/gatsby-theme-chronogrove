@@ -1,16 +1,13 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 
-import { Grid } from '@theme-ui/components'
-import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useCallback, useState, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
 import lgVideo from 'lightgallery/plugins/video'
 import lgZoom from 'lightgallery/plugins/zoom'
 import LightGallery from 'lightgallery/react'
-import ReactPlaceholder from 'react-placeholder'
 import VanillaTilt from 'vanilla-tilt'
 
 import 'lightgallery/css/lightgallery.css'
@@ -31,18 +28,15 @@ import {
 } from '../../../selectors/instagram'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 
-import Button from '../../button'
 import CallToAction from '../call-to-action'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 import WidgetItem from './instagram-widget-item'
+import WidgetCarousel from '../widget-carousel'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 
-const MAX_IMAGES = {
-  default: 8,
-  showMore: 16
-}
+const ITEMS_PER_PAGE = 8
 
 export default () => {
   const dispatch = useDispatch()
@@ -57,7 +51,6 @@ export default () => {
   const profileDisplayName = useSelector(getProfileDisplayName)
   const profileURL = useSelector(getProfileURL)
 
-  const [isShowingMore, setIsShowingMore] = useState(false)
   const lightGalleryRef = useRef(null)
 
   useEffect(() => {
@@ -67,7 +60,7 @@ export default () => {
   }, [dispatch, instagramDataSource, isLoading])
 
   useEffect(() => {
-    if (isShowingMore || !isLoading) {
+    if (!isLoading) {
       VanillaTilt.init(document.querySelectorAll('.instagram-item-button'), {
         perspective: 1500,
         reverse: true,
@@ -75,7 +68,7 @@ export default () => {
         speed: 200
       })
     }
-  }, [isLoading, isShowingMore])
+  }, [isLoading])
 
   const openLightbox = useCallback(
     index => {
@@ -100,7 +93,9 @@ export default () => {
     </CallToAction>
   )
 
-  const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
+  const renderInstagramItem = (post, idx) => (
+    <WidgetItem key={post.id || idx} handleClick={() => openLightbox(idx)} index={idx} post={post} />
+  )
 
   return (
     <Widget id='instagram' hasFatalError={hasFatalError}>
@@ -111,43 +106,15 @@ export default () => {
       <ProfileMetricsBadge metrics={metrics} isLoading={isLoading} />
 
       <div className='gallery'>
-        <Grid
-          sx={{
-            gridGap: [3, 3, 3, 4],
-            gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', '', 'repeat(4, 1fr)']
-          }}
-        >
-          {(isLoading ? Array(countItemsToRender).fill({}) : media).slice(0, countItemsToRender).map((post, idx) => (
-            <ReactPlaceholder
-              customPlaceholder={
-                <div className='image-placeholder'>
-                  <RectShape
-                    color='#efefef'
-                    sx={{
-                      borderRadius: '8px',
-                      boxShadow: 'md',
-                      width: '100%',
-                      paddingBottom: '100%'
-                    }}
-                  />
-                </div>
-              }
-              key={isLoading ? idx : post.id}
-              ready={!isLoading}
-              showLoadingAnimation
-              type='rect'
-            >
-              <WidgetItem handleClick={() => openLightbox(idx)} index={idx} post={post} />
-            </ReactPlaceholder>
-          ))}
-        </Grid>
+        <WidgetCarousel
+          items={media || []}
+          isLoading={isLoading}
+          itemsPerPage={ITEMS_PER_PAGE}
+          renderItem={renderInstagramItem}
+          gridTemplateColumns={['repeat(2, 1fr)', 'repeat(3, 1fr)', '', 'repeat(4, 1fr)']}
+          gridGap={[3, 3, 3, 4]}
+        />
       </div>
-
-      {!isLoading && media?.length > MAX_IMAGES.default && (
-        <div sx={{ my: 4, textAlign: 'center' }}>
-          <Button onClick={() => setIsShowingMore(!isShowingMore)}>{isShowingMore ? 'Show Less' : 'Show More'}</Button>
-        </div>
-      )}
 
       {media?.length && (
         <LightGallery

@@ -6,7 +6,7 @@ import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useRef } from 'react'
-import VinylPagination from './vinyl-pagination'
+import WidgetPagination from '../widget-pagination'
 
 const placeholders = Array(18)
   .fill()
@@ -372,7 +372,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <VinylPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+        <WidgetPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       )}
     </div>
   )
