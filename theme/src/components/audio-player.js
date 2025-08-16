@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch } from 'react-redux'
@@ -11,6 +11,8 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
   const containerRef = useRef(null)
   const widgetRef = useRef(null)
   const dispatch = useDispatch()
+  const [colorMode] = useColorMode()
+  const { theme } = useThemeUI()
 
   // Create portal container on mount
   useEffect(() => {
@@ -45,6 +47,43 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
     return null
   }
 
+  // Define background colors for each mode
+  const getBackgroundColor = () => {
+    // Debug logging (only in development)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('AudioPlayer colorMode:', colorMode)
+      console.log('AudioPlayer theme colors:', theme?.colors)
+      if (typeof document !== 'undefined') {
+        console.log('Document theme attributes:', {
+          'data-theme-ui-color-mode': document.documentElement.getAttribute('data-theme-ui-color-mode'),
+          'data-theme': document.documentElement.getAttribute('data-theme')
+        })
+      }
+    }
+
+    // Primary method: use Theme UI's useColorMode hook
+    if (colorMode === 'dark') {
+      return 'rgba(1, 1, 1, 0.30)'
+    }
+
+    // Fallback method: check document attribute
+    if (typeof document !== 'undefined') {
+      const docMode =
+        document.documentElement.getAttribute('data-theme-ui-color-mode') ||
+        document.documentElement.getAttribute('data-theme')
+      if (docMode === 'dark') {
+        return 'rgba(1, 1, 1, 0.30)'
+      }
+    }
+
+    // Fallback to theme colors if available
+    if (theme && theme.colors && theme.colors['panel-background']) {
+      return theme.colors['panel-background']
+    }
+
+    return 'rgba(255, 255, 255, 0.35)'
+  }
+
   if (!isVisible || !provider || !containerRef.current) return null
 
   return createPortal(
@@ -54,7 +93,7 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
         bottom: 0,
         left: 0,
         right: 0,
-        background: 'panel-background',
+        background: [getBackgroundColor(), 'var(--theme-ui-colors-panel-background, rgba(255, 255, 255, 0.35))'],
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)', // for Safari
         pt: 2,

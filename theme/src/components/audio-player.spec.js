@@ -8,6 +8,22 @@ import AudioPlayer from '../components/audio-player'
 jest.mock('../shortcodes/soundcloud', () => jest.fn(() => <div>MockSoundCloud</div>))
 jest.mock('../shortcodes/spotify', () => jest.fn(() => <div>MockSpotify</div>))
 
+// Mock the useColorMode hook
+jest.mock('theme-ui', () => {
+  const original = jest.requireActual('theme-ui')
+  return {
+    ...original,
+    useColorMode: jest.fn().mockReturnValue(['default', () => {}]),
+    useThemeUI: jest.fn().mockReturnValue({
+      theme: {
+        colors: {
+          'panel-background': 'rgba(255, 255, 255, 0.35)'
+        }
+      }
+    })
+  }
+})
+
 const mockStore = configureStore([])
 
 describe('AudioPlayer', () => {
@@ -17,6 +33,8 @@ describe('AudioPlayer', () => {
     store = mockStore({})
     store.dispatch = jest.fn()
     document.body.innerHTML = ''
+    // Reset all mocks before each test
+    jest.clearAllMocks()
   })
 
   it('renders and cleans up the portal container', async () => {
