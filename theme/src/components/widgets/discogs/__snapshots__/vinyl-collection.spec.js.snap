@@ -42,7 +42,8 @@ exports[`VinylCollection Edge cases handles releases with empty artist name 1`] 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Unknown Artist"
@@ -54,21 +55,53 @@ exports[`VinylCollection Edge cases handles releases with empty artist name 1`] 
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • 2023 • Album • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -122,7 +155,8 @@ exports[`VinylCollection Edge cases handles releases with empty artists array 1`
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Unknown Artist"
@@ -134,21 +168,53 @@ exports[`VinylCollection Edge cases handles releases with empty artists array 1`
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • 2023 • Album • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,7 +268,8 @@ exports[`VinylCollection Edge cases handles releases with empty cdnThumbUrl 1`] 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -214,23 +281,53 @@ exports[`VinylCollection Edge cases handles releases with empty cdnThumbUrl 1`] 
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -284,7 +381,8 @@ exports[`VinylCollection Edge cases handles releases with empty resourceUrl 1`] 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -297,30 +395,60 @@ exports[`VinylCollection Edge cases handles releases with empty resourceUrl 1`] 
                 >
                   <img
                     alt="Album album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -374,7 +502,8 @@ exports[`VinylCollection Edge cases handles releases with missing artist name 1`
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Unknown Artist"
@@ -386,21 +515,53 @@ exports[`VinylCollection Edge cases handles releases with missing artist name 1`
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • 2023 • Album • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -454,7 +615,8 @@ exports[`VinylCollection Edge cases handles releases with missing basicInformati
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (Unknown) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (Unknown) - Unknown Artist"
@@ -466,19 +628,53 @@ exports[`VinylCollection Edge cases handles releases with missing basicInformati
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (Unknown) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
-                  />
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • Unknown Year • Album • Unknown Artist • Unknown Year • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -532,7 +728,8 @@ exports[`VinylCollection Edge cases handles releases with missing cdnThumbUrl pr
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -544,23 +741,53 @@ exports[`VinylCollection Edge cases handles releases with missing cdnThumbUrl pr
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -614,7 +841,8 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl 1`
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -627,30 +855,60 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl 1`
                 >
                   <img
                     alt="Album album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -704,7 +962,8 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl pr
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -717,30 +976,60 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl pr
                 >
                   <img
                     alt="Album album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -794,7 +1083,8 @@ exports[`VinylCollection Edge cases handles releases with missing title 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Unknown (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Unknown (2023) - Artist"
@@ -806,21 +1096,53 @@ exports[`VinylCollection Edge cases handles releases with missing title 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
-                  />
-                  <span
-                    className="css-53gxr7"
+                    className="css-kvy207"
                   >
-                    Artist
+                    Unknown (2023) - Artist
                   </span>
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Unknown • Artist • 2023 • Unknown • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -874,7 +1196,8 @@ exports[`VinylCollection Edge cases handles releases with missing year 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (Unknown) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (Unknown) - Artist"
@@ -886,21 +1209,53 @@ exports[`VinylCollection Edge cases handles releases with missing year 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (Unknown) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  />
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • Unknown Year • Album • Artist • Unknown Year • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -954,7 +1309,8 @@ exports[`VinylCollection Edge cases handles releases with null artists 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Unknown Artist"
@@ -966,21 +1322,53 @@ exports[`VinylCollection Edge cases handles releases with null artists 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • 2023 • Album • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1034,7 +1422,8 @@ exports[`VinylCollection Edge cases handles releases with undefined artist name 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Unknown Artist"
@@ -1046,21 +1435,53 @@ exports[`VinylCollection Edge cases handles releases with undefined artist name 
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • 2023 • Album • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1114,7 +1535,8 @@ exports[`VinylCollection Edge cases handles releases with undefined artists 1`] 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Unknown Artist"
@@ -1126,21 +1548,53 @@ exports[`VinylCollection Edge cases handles releases with undefined artists 1`] 
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Unknown Artist • 2023 • Album • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1194,7 +1648,8 @@ exports[`VinylCollection Edge cases handles releases with undefined cdnThumbUrl 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -1206,23 +1661,53 @@ exports[`VinylCollection Edge cases handles releases with undefined cdnThumbUrl 
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1276,7 +1761,8 @@ exports[`VinylCollection Edge cases handles releases with undefined resourceUrl 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album (2023) - Artist"
@@ -1289,30 +1775,60 @@ exports[`VinylCollection Edge cases handles releases with undefined resourceUrl 
                 >
                   <img
                     alt="Album album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album
+                    Album (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album • Artist • 2023 • Album • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1366,7 +1882,8 @@ exports[`VinylCollection handles releases with missing artist information 1`] = 
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album Without Artists (2023) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album Without Artists (2023) - Unknown Artist"
@@ -1378,21 +1895,53 @@ exports[`VinylCollection handles releases with missing artist information 1`] = 
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album Without Artists
+                    Album Without Artists (2023) - Unknown Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album Without Artists • Unknown Artist • 2023 • Album Without Artists • Unknown Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1446,7 +1995,8 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Unknown (Unknown) - Unknown Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Unknown (Unknown) - Unknown Artist"
@@ -1458,17 +2008,53 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
-                  />
-                  <span
-                    className="css-53gxr7"
-                  />
-                  <span
-                    className="css-yztu9z"
-                  />
+                    className="css-kvy207"
+                  >
+                    Unknown (Unknown) - Unknown Artist
+                  </span>
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Unknown • Unknown Artist • Unknown Year • Unknown • Unknown Artist • Unknown Year • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1477,7 +2063,8 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Valid Album (2023) - Valid Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Valid Album (2023) - Valid Artist"
@@ -1489,23 +2076,53 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Valid Album
+                    Valid Album (2023) - Valid Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Valid Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-2"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-2"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Valid Album • Valid Artist • 2023 • Valid Album • Valid Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1559,7 +2176,8 @@ exports[`VinylCollection handles releases with multiple artists 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Collaboration Album (2023) - Artist 1, Artist 2, Artist 3"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Collaboration Album (2023) - Artist 1, Artist 2, Artist 3"
@@ -1571,23 +2189,53 @@ exports[`VinylCollection handles releases with multiple artists 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Collaboration Album
+                    Collaboration Album (2023) - Artist 1, Artist 2, Artist 3
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 1, Artist 2, Artist 3
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Collaboration Album • Artist 1, Artist 2, Artist 3 • 2023 • Collaboration Album • Artist 1, Artist 2, Artist 3 • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1641,7 +2289,8 @@ exports[`VinylCollection handles releases without CDN thumb URL 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album Without Thumb (2023) - Artist"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album Without Thumb (2023) - Artist"
@@ -1653,23 +2302,53 @@ exports[`VinylCollection handles releases without CDN thumb URL 1`] = `
                   className="vinyl-record_image css-18n965x"
                 />
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album Without Thumb
+                    Album Without Thumb (2023) - Artist
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album Without Thumb • Artist • 2023 • Album Without Thumb • Artist • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1795,7 +2474,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 1 (2020) - Artist 1"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 1 (2020) - Artist 1"
@@ -1808,30 +2488,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 1 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb1.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 1
+                    Album 1 (2020) - Artist 1
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 1
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2020
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-1"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-1"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 1 • Artist 1 • 2020 • Album 1 • Artist 1 • 2020 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1840,7 +2550,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 2 (2021) - Artist 2"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 2 (2021) - Artist 2"
@@ -1853,30 +2564,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 2 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb2.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 2
+                    Album 2 (2021) - Artist 2
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 2
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2021
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-2"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-2"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 2 • Artist 2 • 2021 • Album 2 • Artist 2 • 2021 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1885,7 +2626,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 3 (2022) - Artist 3"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 3 (2022) - Artist 3"
@@ -1898,30 +2640,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 3 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb3.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 3
+                    Album 3 (2022) - Artist 3
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 3
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2022
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-3"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-3"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 3 • Artist 3 • 2022 • Album 3 • Artist 3 • 2022 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1930,7 +2702,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 4 (2023) - Artist 4"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 4 (2023) - Artist 4"
@@ -1943,30 +2716,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 4 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb4.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 4
+                    Album 4 (2023) - Artist 4
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 4
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-4"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-4"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 4 • Artist 4 • 2023 • Album 4 • Artist 4 • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1975,7 +2778,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 5 (2024) - Artist 5"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 5 (2024) - Artist 5"
@@ -1988,30 +2792,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 5 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb5.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 5
+                    Album 5 (2024) - Artist 5
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 5
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2024
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-5"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-5"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 5 • Artist 5 • 2024 • Album 5 • Artist 5 • 2024 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2020,7 +2854,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 6 (2020) - Artist 6"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 6 (2020) - Artist 6"
@@ -2033,30 +2868,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 6 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb6.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 6
+                    Album 6 (2020) - Artist 6
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 6
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2020
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-6"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-6"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 6 • Artist 6 • 2020 • Album 6 • Artist 6 • 2020 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2065,7 +2930,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 7 (2021) - Artist 7"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 7 (2021) - Artist 7"
@@ -2078,30 +2944,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 7 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb7.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 7
+                    Album 7 (2021) - Artist 7
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 7
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2021
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-7"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-7"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 7 • Artist 7 • 2021 • Album 7 • Artist 7 • 2021 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2110,7 +3006,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 8 (2022) - Artist 8"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 8 (2022) - Artist 8"
@@ -2123,30 +3020,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 8 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb8.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 8
+                    Album 8 (2022) - Artist 8
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 8
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2022
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-8"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-8"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 8 • Artist 8 • 2022 • Album 8 • Artist 8 • 2022 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2155,7 +3082,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 9 (2023) - Artist 9"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 9 (2023) - Artist 9"
@@ -2168,30 +3096,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 9 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb9.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 9
+                    Album 9 (2023) - Artist 9
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 9
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-9"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-9"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 9 • Artist 9 • 2023 • Album 9 • Artist 9 • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2200,7 +3158,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 10 (2024) - Artist 10"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 10 (2024) - Artist 10"
@@ -2213,30 +3172,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 10 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb10.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 10
+                    Album 10 (2024) - Artist 10
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 10
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2024
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-10"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-10"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 10 • Artist 10 • 2024 • Album 10 • Artist 10 • 2024 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2245,7 +3234,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 11 (2020) - Artist 11"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 11 (2020) - Artist 11"
@@ -2258,30 +3248,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 11 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb11.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 11
+                    Album 11 (2020) - Artist 11
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 11
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2020
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-11"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-11"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 11 • Artist 11 • 2020 • Album 11 • Artist 11 • 2020 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2290,7 +3310,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 12 (2021) - Artist 12"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 12 (2021) - Artist 12"
@@ -2303,30 +3324,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 12 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb12.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 12
+                    Album 12 (2021) - Artist 12
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 12
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2021
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-12"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-12"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 12 • Artist 12 • 2021 • Album 12 • Artist 12 • 2021 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2335,7 +3386,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 13 (2022) - Artist 13"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 13 (2022) - Artist 13"
@@ -2348,30 +3400,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 13 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb13.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 13
+                    Album 13 (2022) - Artist 13
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 13
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2022
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-13"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-13"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 13 • Artist 13 • 2022 • Album 13 • Artist 13 • 2022 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2380,7 +3462,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 14 (2023) - Artist 14"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 14 (2023) - Artist 14"
@@ -2393,30 +3476,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 14 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb14.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 14
+                    Album 14 (2023) - Artist 14
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 14
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-14"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-14"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 14 • Artist 14 • 2023 • Album 14 • Artist 14 • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2425,7 +3538,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 15 (2024) - Artist 15"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 15 (2024) - Artist 15"
@@ -2438,30 +3552,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 15 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb15.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 15
+                    Album 15 (2024) - Artist 15
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 15
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2024
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-15"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-15"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 15 • Artist 15 • 2024 • Album 15 • Artist 15 • 2024 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2470,7 +3614,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 16 (2020) - Artist 16"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 16 (2020) - Artist 16"
@@ -2483,30 +3628,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 16 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb16.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 16
+                    Album 16 (2020) - Artist 16
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 16
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2020
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-16"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-16"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 16 • Artist 16 • 2020 • Album 16 • Artist 16 • 2020 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2515,7 +3690,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 17 (2021) - Artist 17"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 17 (2021) - Artist 17"
@@ -2528,30 +3704,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 17 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb17.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 17
+                    Album 17 (2021) - Artist 17
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 17
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2021
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-17"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-17"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 17 • Artist 17 • 2021 • Album 17 • Artist 17 • 2021 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2560,7 +3766,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 18 (2022) - Artist 18"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 18 (2022) - Artist 18"
@@ -2573,30 +3780,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 18 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb18.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 18
+                    Album 18 (2022) - Artist 18
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 18
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2022
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-18"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-18"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 18 • Artist 18 • 2022 • Album 18 • Artist 18 • 2022 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2613,7 +3850,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 19 (2023) - Artist 19"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 19 (2023) - Artist 19"
@@ -2626,30 +3864,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 19 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb19.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 19
+                    Album 19 (2023) - Artist 19
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 19
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-19"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-19"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 19 • Artist 19 • 2023 • Album 19 • Artist 19 • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2658,7 +3926,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 20 (2024) - Artist 20"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 20 (2024) - Artist 20"
@@ -2671,30 +3940,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 20 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb20.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 20
+                    Album 20 (2024) - Artist 20
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 20
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2024
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-20"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-20"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 20 • Artist 20 • 2024 • Album 20 • Artist 20 • 2024 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2703,7 +4002,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 21 (2020) - Artist 21"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 21 (2020) - Artist 21"
@@ -2716,30 +4016,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 21 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb21.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 21
+                    Album 21 (2020) - Artist 21
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 21
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2020
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-21"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-21"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 21 • Artist 21 • 2020 • Album 21 • Artist 21 • 2020 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2748,7 +4078,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 22 (2021) - Artist 22"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 22 (2021) - Artist 22"
@@ -2761,30 +4092,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 22 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb22.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 22
+                    Album 22 (2021) - Artist 22
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 22
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2021
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-22"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-22"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 22 • Artist 22 • 2021 • Album 22 • Artist 22 • 2021 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2793,7 +4154,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 23 (2022) - Artist 23"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 23 (2022) - Artist 23"
@@ -2806,30 +4168,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 23 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb23.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 23
+                    Album 23 (2022) - Artist 23
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 23
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2022
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-23"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-23"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 23 • Artist 23 • 2022 • Album 23 • Artist 23 • 2022 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2838,7 +4230,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 24 (2023) - Artist 24"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 24 (2023) - Artist 24"
@@ -2851,30 +4244,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 24 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb24.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 24
+                    Album 24 (2023) - Artist 24
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 24
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-24"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-24"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 24 • Artist 24 • 2023 • Album 24 • Artist 24 • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2883,7 +4306,8 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Album 25 (2024) - Artist 25"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Album 25 (2024) - Artist 25"
@@ -2896,30 +4320,60 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
                 >
                   <img
                     alt="Album 25 album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb25.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Album 25
+                    Album 25 (2024) - Artist 25
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Artist 25
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2024
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-25"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-25"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Album 25 • Artist 25 • 2024 • Album 25 • Artist 25 • 2024 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3056,7 +4510,8 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan"
@@ -3069,30 +4524,60 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
                 >
                   <img
                     alt="The Rise & Fall Of A Midwest Princess album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb1.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    The Rise & Fall Of A Midwest Princess
+                    The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Chappell Roan
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2023
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-28461454"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-28461454"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            The Rise & Fall Of A Midwest Princess • Chappell Roan • 2023 • The Rise & Fall Of A Midwest Princess • Chappell Roan • 2023 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3101,7 +4586,8 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
             className="css-1f2wh2n"
           >
             <div
-              className="vinyl-record css-4gxhk2"
+              aria-label="Brat And It's Completely Different (2025) - Charli XCX"
+              className="vinyl-record css-wzryx7"
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
               title="Brat And It's Completely Different (2025) - Charli XCX"
@@ -3114,30 +4600,60 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
                 >
                   <img
                     alt="Brat And It's Completely Different album cover"
-                    className="css-1ybonlr"
+                    className="vinyl-record_album-art css-1ybonlr"
                     crossOrigin="anonymous"
                     loading="lazy"
                     src="https://example.com/thumb2.jpg"
                   />
                 </div>
                 <div
-                  className="vinyl-record_caption css-11wixuo"
+                  className="vinyl-record_caption css-17o6lvk"
                 >
                   <span
-                    className="css-kazeaq"
+                    className="css-kvy207"
                   >
-                    Brat And It's Completely Different
+                    Brat And It's Completely Different (2025) - Charli XCX
                   </span>
-                  <span
-                    className="css-53gxr7"
+                  <div
+                    className="vinyl-record_orbit css-gtrew8"
                   >
-                    Charli XCX
-                  </span>
-                  <span
-                    className="css-yztu9z"
-                  >
-                    2025
-                  </span>
+                    <svg
+                      aria-hidden="true"
+                      height="100%"
+                      role="presentation"
+                      style={
+                        {
+                          "display": "block",
+                        }
+                      }
+                      viewBox="0 0 100 100"
+                      width="100%"
+                    >
+                      <defs>
+                        <path
+                          d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                          id="textCircle-33129744"
+                        />
+                      </defs>
+                      <g
+                        className="css-1uqa7mt"
+                      >
+                        <text
+                          className="css-15q5jid"
+                          fill="currentColor"
+                        >
+                          <textPath
+                            href="#textCircle-33129744"
+                            method="align"
+                            spacing="auto"
+                            startOffset="0%"
+                          >
+                            Brat And It's Completely Different • Charli XCX • 2025 • Brat And It's Completely Different • Charli XCX • 2025 • 
+                          </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
