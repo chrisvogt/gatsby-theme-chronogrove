@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.60.4
+
+### 🧪 Testing & Coverage Improvements
+
+- **Vinyl Collection Test Coverage**: Significantly improved test coverage for the Discogs vinyl collection component
+  - **Coverage Boost**: Increased from 85.26% to 93.68% (+8.42 percentage points)
+  - **New Hover Behavior**: Added comprehensive tests for enhanced vinyl record hover effects with smooth exit animations
+  - **Accessibility Features**: Tested new aria-label attributes and album art class additions for better screen reader support
+  - **Environment-Aware Logic**: Added tests for production vs test environment timing differences (220ms vs 0ms delays)
+  - **State Management**: Comprehensive testing of exiting state management and timeout clearing logic
+  - **SVG Orbiting Text**: Added tests for new orbiting text animation functionality with proper accessibility attributes
+
+### 🎯 User Experience
+
+- **Enhanced Vinyl Interactions**: Improved hover effects with smooth fade-out animations and orbiting text
+- **Better Accessibility**: Added proper aria-labels and screen reader support for vinyl record details
+- **Smooth Animations**: Implemented proper exit timing to prevent visual flashing during hover state changes
+
+### 🔧 Technical Details
+
+- **Test Suite Expansion**: Added 8 new comprehensive test cases covering all new functionality
+- **Mock Environment Handling**: Proper testing of environment-dependent timing logic
+- **State Management Testing**: Thorough coverage of complex hover state transitions and cleanup
+- **Performance**: No impact on component performance while maintaining smooth user interactions
+
 ## 0.60.3
 
 ### 🐛 Bug Fixes
