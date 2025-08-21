@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.60.3
+
+### 🐛 Bug Fixes
+
+- **Discogs Widget Mobile Layout**: Prevented vinyl items from forcing a minimum width on small screens.
+  - Restored 3-up layout at the smallest breakpoint to match Spotify behavior
+  - Allowed grid items to shrink by adding `minWidth: 0` and `boxSizing: 'border-box'` on cards
+  - Reduced small-screen padding to avoid overflow
+  - Result: Items now grow/contract smoothly on mobile without distorting the page layout
+
 ## 0.60.2
 
 ### 🚀 Performance Improvements
