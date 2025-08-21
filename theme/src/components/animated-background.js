@@ -1,233 +1,95 @@
-import React, { useEffect, useRef, useCallback } from 'react'
+import React from 'react'
 import { useColorMode, useThemeUI } from 'theme-ui'
 
-// Helper function to convert hex to rgba
+// Convert a hex color to rgba with the provided alpha
 const hexToRgba = (hex, alpha = 1) => {
-  const [r, g, b] = hex
-    .replace(/^#/, '')
-    .match(/.{2}/g)
-    .map(x => parseInt(x, 16))
+  if (!hex || typeof hex !== 'string' || !/^#?[0-9a-fA-F]{6}$/.test(hex)) {
+    return `rgba(30, 30, 47, ${alpha})`
+  }
+  const safe = hex.startsWith('#') ? hex.slice(1) : hex
+  const r = parseInt(safe.slice(0, 2), 16)
+  const g = parseInt(safe.slice(2, 4), 16)
+  const b = parseInt(safe.slice(4, 6), 16)
   return `rgba(${r}, ${g}, ${b}, ${alpha})`
 }
 
-// Debounce function to limit resize event frequency
-const debounce = (func, wait) => {
-  let timeout
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout)
-      func(...args)
-    }
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
-  }
-}
-
-class Circle {
-  constructor(x, y, radius, gradientStops) {
-    this.x = x
-    this.y = y
-    this.radius = radius
-    this.gradientStops = gradientStops
-    this.dx = (Math.random() - 0.5) * 0.715 // Increased speed
-    this.dy = (Math.random() - 0.5) * 0.715 // Increased speed
-  }
-
-  draw(ctx) {
-    if (!ctx) return
-
-    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius)
-    this.gradientStops.forEach(stop => {
-      gradient.addColorStop(stop.position, stop.color)
-    })
-
-    ctx.globalAlpha = 0.5 // Balanced opacity
-    ctx.beginPath()
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
-    ctx.fillStyle = gradient
-    ctx.fill()
-    ctx.closePath()
-    ctx.globalAlpha = 1.0 // Reset transparency
-  }
-
-  update(canvas, ctx) {
-    if (!ctx || !canvas) return
-
-    this.x += this.dx
-    this.y += this.dy
-
-    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-      this.dx = -this.dx
-    }
-
-    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-      this.dy = -this.dy
-    }
-
-    this.draw(ctx)
-  }
-
-  // Method to reposition circle when canvas resizes
-  reposition(canvas) {
-    if (!canvas) return
-
-    // Keep circles within bounds after resize
-    if (this.x + this.radius > canvas.width) {
-      this.x = canvas.width - this.radius
-    }
-    if (this.x - this.radius < 0) {
-      this.x = this.radius
-    }
-    if (this.y + this.radius > canvas.height) {
-      this.y = canvas.height - this.radius
-    }
-    if (this.y - this.radius < 0) {
-      this.y = this.radius
-    }
-  }
-}
-
-export { Circle, hexToRgba } // Export hexToRgba for testing
-
 const AnimatedBackground = () => {
-  const canvasRef = useRef(null)
-  const animationRef = useRef(null)
-  const circlesRef = useRef([])
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
-  const backgroundHex = theme.rawColors?.background || '#1e1e2f' // Default to fallback color
-  const backgroundRgba = hexToRgba(backgroundHex, 0.35) // Apply transparency to background color
 
-  // Create circles with optimized count
-  const createCircles = useCallback((canvas, gradients) => {
-    const circles = []
-    const circleCount = 40 // Reduced from 80 for better performance
+  const isDark = colorMode === 'dark'
 
-    for (let i = 0; i < circleCount; i++) {
-      const isLarge = i < 3 // Reduced large circles from 4 to 3
-      const radius = isLarge ? Math.random() * 150 + 200 : Math.random() * 30 + 35 // Slightly smaller radii
-      const x = Math.random() * (canvas.width - radius * 2) + radius
-      const y = Math.random() * (canvas.height - radius * 2) + radius
-      const gradient = gradients[i % 2]
+  // Choose a soft, modern palette. Prefer theme tokens; fall back to tasteful defaults.
+  const primary = theme?.colors?.primary || '#422EA3'
+  const accent = theme?.colors?.accent || '#FF7AB6'
 
-      const circle = new Circle(x, y, radius, gradient)
-      circles.push(circle)
-    }
-    return circles
-  }, [])
+  const paletteLight = [accent, primary, '#30A8FF']
+  const paletteDark = [primary, '#B95DD7', '#00D7B9']
+  const [c1, c2, c3] = isDark ? paletteDark : paletteLight
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const setCanvasSize = () => {
-      const newWidth = window.innerWidth
-      const newHeight = window.innerHeight // Use viewport height instead of scroll height
-
-      // Only resize if dimensions actually changed
-      if (canvas.width !== newWidth || canvas.height !== newHeight) {
-        canvas.width = newWidth
-        canvas.height = newHeight
-
-        // Reposition existing circles to stay within new bounds
-        circlesRef.current.forEach(circle => circle.reposition(canvas))
-      }
-    }
-
-    setCanvasSize()
-
-    const darkModeGradients = [
-      [
-        { position: 0, color: 'rgba(128, 0, 128, 1)' }, // Royal Purple
-        { position: 0.2, color: 'rgba(128, 0, 128, 0.9)' },
-        { position: 0.4, color: 'rgba(128, 0, 128, 0.8)' },
-        { position: 0.6, color: 'rgba(255, 215, 0, 0.4)' }, // Gold accent
-        { position: 0.8, color: 'rgba(128, 0, 128, 0.7)' },
-        { position: 1, color: 'rgba(128, 0, 128, 0.6)' }
-      ],
-      [
-        { position: 0, color: 'rgba(128, 0, 128, 1)' }, // Royal Purple
-        { position: 0.2, color: 'rgba(128, 0, 128, 0.8)' },
-        { position: 0.4, color: 'rgba(255, 215, 0, 0.4)' }, // Gold accent
-        { position: 0.6, color: 'rgba(128, 0, 128, 0.7)' },
-        { position: 0.8, color: 'rgba(128, 0, 128, 0.6)' },
-        { position: 1, color: 'rgba(128, 0, 128, 0.5)' }
-      ]
-    ]
-
-    const lightModeGradients = [
-      [
-        { position: 0, color: 'rgba(66, 46, 163, 1)' }, // Primary Purple
-        { position: 0.4, color: 'rgba(255, 20, 147, 0.8)' }, // Hot Pink
-        { position: 1, color: 'rgba(30, 144, 255, 0.6)' } // Vibrant Blue
-      ],
-      [
-        { position: 0, color: 'rgba(255, 20, 147, 1)' }, // Hot Pink
-        { position: 0.5, color: 'rgba(30, 144, 255, 0.8)' }, // Vibrant Blue
-        { position: 1, color: 'rgba(255, 235, 200, 0.5)' } // Pale Peach
-      ]
-    ]
-
-    const gradients = colorMode === 'dark' ? darkModeGradients : lightModeGradients
-
-    // Create circles and store reference
-    circlesRef.current = createCircles(canvas, gradients)
-
-    const animate = () => {
-      if (!ctx || !canvas) return
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      circlesRef.current.forEach(circle => circle.update(canvas, ctx))
-
-      animationRef.current = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    // Debounced resize handler
-    const debouncedResize = debounce(setCanvasSize, 100)
-
-    window.addEventListener('resize', debouncedResize)
-
-    return () => {
-      window.removeEventListener('resize', debouncedResize)
-      if (animationRef.current) {
-        window.cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [colorMode, createCircles])
+  const baseBgHex = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#1e1e2f' : '#fdf8f5')
+  const veil = hexToRgba(baseBgHex, isDark ? 0.28 : 0.2)
 
   return (
-    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
-      <canvas
-        ref={canvasRef}
+    <div
+      aria-hidden='true'
+      style={{
+        position: 'absolute',
+        inset: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none'
+      }}
+    >
+      <style>{`
+        /* Modern blurred gradient blobs. CSS-only for excellent performance. */
+        .abg-blob {
+          position: absolute;
+          width: 48vmax;
+          height: 48vmax;
+          filter: blur(60px);
+          opacity: ${isDark ? 0.85 : 0.75};
+          will-change: transform, opacity;
+          transform: translate3d(0,0,0);
+          border-radius: 50%;
+          mix-blend-mode: ${isDark ? 'screen' : 'multiply'};
+          transition: opacity 300ms ease;
+        }
+
+        .abg-blob--1 { left: -10vmax; top: -8vmax; background: radial-gradient(closest-side, var(--abg-c1), transparent 65%); animation: abg-float-1 26s ease-in-out infinite alternate; }
+        .abg-blob--2 { right: -12vmax; top: -6vmax; background: radial-gradient(closest-side, var(--abg-c2), transparent 65%); animation: abg-float-2 32s ease-in-out infinite alternate; }
+        .abg-blob--3 { left: 10vmax; bottom: -14vmax; background: radial-gradient(closest-side, var(--abg-c3), transparent 65%); animation: abg-float-3 38s ease-in-out infinite alternate; }
+
+        @keyframes abg-float-1 { 0% { transform: translate3d(0,0,0) scale(1); } 100% { transform: translate3d(6vmax, 3vmax, 0) scale(1.05); } }
+        @keyframes abg-float-2 { 0% { transform: translate3d(0,0,0) scale(1.05); } 100% { transform: translate3d(-5vmax, 4vmax, 0) scale(0.95); } }
+        @keyframes abg-float-3 { 0% { transform: translate3d(0,0,0) scale(1); } 100% { transform: translate3d(2vmax, -5vmax, 0) scale(1.08); } }
+
+        /* Respect user preference for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          .abg-blob { animation: none !important; }
+        }
+      `}</style>
+
+      {/* Color variables for current theme */}
+      <div style={{ position: 'absolute', inset: 0, '--abg-c1': c1, '--abg-c2': c2, '--abg-c3': c3 }}>
+        <div className='abg-blob abg-blob--1' />
+        <div className='abg-blob abg-blob--2' />
+        <div className='abg-blob abg-blob--3' />
+      </div>
+
+      {/* Soft veil for that frosted look */}
+      <div
+        data-testid='abg-veil'
         style={{
-          display: 'block',
           position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%'
+          inset: 0,
+          backgroundColor: veil,
+          backdropFilter: 'blur(80px) saturate(140%)',
+          WebkitBackdropFilter: 'blur(80px) saturate(140%)'
         }}
       />
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: backgroundRgba, // Unified background color with transparency
-          backdropFilter: 'blur(75px)',
-          WebkitBackdropFilter: 'blur(75px)', // Safari
-          pointerEvents: 'none' // Ensure the overlay doesn't block interactions
-        }}
-      ></div>
     </div>
   )
 }
 
 export default AnimatedBackground
+export { hexToRgba }
