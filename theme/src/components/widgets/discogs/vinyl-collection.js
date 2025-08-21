@@ -213,6 +213,9 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                         key={id}
                         variant='actionCard'
                         sx={{
+                          p: [1, 2, 3],
+                          minWidth: 0,
+                          boxSizing: 'border-box',
                           height: '100%',
                           display: 'flex',
                           flexDirection: 'column',
