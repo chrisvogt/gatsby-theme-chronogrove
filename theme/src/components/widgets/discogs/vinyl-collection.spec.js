@@ -1048,4 +1048,109 @@ describe('VinylCollection', () => {
       expect(true).toBe(true)
     })
   })
+
+  describe('Hover exit timing and accessibility', () => {
+    const originalNodeEnv = process.env.NODE_ENV
+
+    afterEach(() => {
+      process.env.NODE_ENV = originalNodeEnv
+    })
+
+    it('adds exiting class on mouse leave and clears after delay (production env)', () => {
+      process.env.NODE_ENV = 'production'
+      const manyReleases = createManyReleases(25)
+      const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      // Focus via mouse enter
+      fireEvent.mouseEnter(vinylItem)
+      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+
+      // Trigger exit
+      fireEvent.mouseLeave(vinylItem)
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
+
+      // Advance timers to clear exit state
+      act(() => {
+        jest.advanceTimersByTime(220)
+      })
+
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
+      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
+    })
+
+    it('clears pending exit when re-entering quickly (production env)', () => {
+      process.env.NODE_ENV = 'production'
+      const manyReleases = createManyReleases(25)
+      const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      // Enter, then leave to schedule exit, then quickly re-enter
+      fireEvent.mouseEnter(vinylItem)
+      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+      fireEvent.mouseLeave(vinylItem)
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
+      fireEvent.mouseEnter(vinylItem)
+
+      // Exiting should be cleared and focused retained
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
+      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+    })
+
+    it('clears existing timeout if mouse leaves again before it fires (production env)', () => {
+      process.env.NODE_ENV = 'production'
+      const manyReleases = createManyReleases(25)
+      const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      // Focus then initiate exit to schedule a timeout
+      fireEvent.mouseEnter(vinylItem)
+      fireEvent.mouseLeave(vinylItem)
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
+
+      // Leave again before timer completes — should clear prior timeout path
+      fireEvent.mouseLeave(vinylItem)
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
+
+      // Let the timer run out, state should be cleared
+      act(() => {
+        jest.advanceTimersByTime(220)
+      })
+
+      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
+      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
+    })
+
+    it('exposes aria-label details and album art class', () => {
+      const releases = [
+        {
+          id: 1,
+          basicInformation: {
+            title: 'Test Album',
+            year: 2024,
+            artists: [{ name: 'Test Artist' }],
+            cdnThumbUrl: 'https://example.com/thumb.jpg'
+          }
+        }
+      ]
+      const { container } = render(<VinylCollection isLoading={false} releases={releases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+      const aria = vinylItem.getAttribute('aria-label')
+      expect(aria).toContain('Test Album')
+      expect(aria).toContain('2024')
+      expect(aria).toContain('Test Artist')
+
+      const img = container.querySelector('.vinyl-record_album-art')
+      expect(img).toBeTruthy()
+      expect(img.getAttribute('alt')).toContain('Test Album')
+    })
+  })
 })
