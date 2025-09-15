@@ -132,8 +132,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
           maxWidth: ['95vw', '90vw', '800px'],
           maxHeight: '90vh',
           overflow: 'auto',
-          position: 'relative',
-          width: '100%'
+          position: 'relative'
         }}
         onClick={e => e.stopPropagation()}
       >

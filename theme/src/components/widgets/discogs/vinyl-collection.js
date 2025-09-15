@@ -5,26 +5,9 @@ import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import VinylPagination from './vinyl-pagination'
 import DiscogsModal from './discogs-modal'
-
-const placeholders = Array(18)
-  .fill()
-  .map((item, idx) => (
-    <div className='show-loading-animation' key={idx}>
-      <RectShape
-        color='#efefef'
-        sx={{
-          borderRadius: '50%',
-          boxShadow: 'md',
-          paddingBottom: '100%',
-          width: '100%'
-        }}
-        showLoadingAnimation
-      />
-    </div>
-  ))
 
 const VinylCollection = ({ isLoading, releases = [] }) => {
   const [currentVinylId, setCurrentVinylId] = useState(false)
@@ -42,8 +25,57 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Calculate items per page and pagination
-  const itemsPerPage = 18 // 3 rows × 6 columns on desktop
-  const totalPages = Math.ceil(releases.length / itemsPerPage)
+  // Always maintain 3 rows per page across all breakpoints
+  // Breakpoints: [2, 3, 4, 5, 5] columns → [6, 9, 12, 15, 15] items per page
+  const itemsPerPageArray = [6, 9, 12, 15, 15] // 3 rows × columns per breakpoint
+  const [currentBreakpointIndex, setCurrentBreakpointIndex] = useState(4) // Default to largest breakpoint
+
+  // Detect current breakpoint based on window width
+  useEffect(() => {
+    const updateBreakpoint = () => {
+      const width = window.innerWidth
+      let breakpointIndex = 4 // Default to largest breakpoint
+
+      if (width < 640) {
+        breakpointIndex = 0 // Mobile: 2 columns
+      } else if (width < 768) {
+        breakpointIndex = 1 // Small: 3 columns
+      } else if (width < 1024) {
+        breakpointIndex = 2 // Medium: 4 columns
+      } else if (width < 1280) {
+        breakpointIndex = 3 // Large: 5 columns
+      } else {
+        breakpointIndex = 4 // XL: 5 columns
+      }
+
+      setCurrentBreakpointIndex(breakpointIndex)
+    }
+
+    updateBreakpoint()
+    window.addEventListener('resize', updateBreakpoint)
+    return () => window.removeEventListener('resize', updateBreakpoint)
+  }, [])
+
+  const currentItemsPerPage = itemsPerPageArray[currentBreakpointIndex]
+  const totalPages = Math.ceil(releases.length / currentItemsPerPage)
+
+  // Create responsive placeholders based on current breakpoint
+  const placeholders = Array(currentItemsPerPage)
+    .fill()
+    .map((item, idx) => (
+      <div className='show-loading-animation' key={idx}>
+        <RectShape
+          color='#efefef'
+          sx={{
+            borderRadius: '50%',
+            boxShadow: 'md',
+            paddingBottom: '100%',
+            width: '100%'
+          }}
+          showLoadingAnimation
+        />
+      </div>
+    ))
 
   // Swipe/drag handlers
   const handleMouseDown = e => {
@@ -154,8 +186,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   // Split items into pages
   const pages = []
-  for (let i = 0; i < vinylItems.length; i += itemsPerPage) {
-    pages.push(vinylItems.slice(i, i + itemsPerPage))
+  for (let i = 0; i < vinylItems.length; i += currentItemsPerPage) {
+    pages.push(vinylItems.slice(i, i + currentItemsPerPage))
   }
 
   // Calculate transform for carousel
@@ -167,8 +199,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   }
 
   return (
-    <div sx={{ mb: 4 }}>
-      <div sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+    <div sx={{ mb: 4, maxWidth: '100%', overflow: 'hidden' }}>
+      <div sx={{ display: 'flex', alignItems: 'center' }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
           Vinyl Collection
         </Heading>
@@ -217,12 +249,16 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                   display: 'grid',
                   gridGap: [3, 2, 2, 3],
                   gridTemplateColumns: [
-                    'repeat(3, 1fr)',
-                    'repeat(4, 1fr)',
-                    'repeat(4, 1fr)',
-                    'repeat(5, 1fr)',
-                    'repeat(6, 1fr)'
-                  ]
+                    'repeat(2, minmax(0, 1fr))',
+                    'repeat(3, minmax(0, 1fr))',
+                    'repeat(4, minmax(0, 1fr))',
+                    'repeat(5, minmax(0, 1fr))',
+                    'repeat(5, minmax(0, 1fr))'
+                  ],
+                  width: '100%',
+                  maxWidth: '100%',
+                  boxSizing: 'border-box',
+                  contain: 'layout'
                 }}
               >
                 <Placeholder ready={!isLoading} customPlaceholder={placeholders}>
