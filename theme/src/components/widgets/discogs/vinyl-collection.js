@@ -7,6 +7,7 @@ import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useRef } from 'react'
 import VinylPagination from './vinyl-pagination'
+import DiscogsModal from './discogs-modal'
 
 const placeholders = Array(18)
   .fill()
@@ -35,6 +36,10 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   const carouselRef = useRef(null)
   const [exitingVinylId, setExitingVinylId] = useState(null)
   const leaveTimeoutRef = useRef(null)
+
+  // Modal state
+  const [selectedRelease, setSelectedRelease] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Calculate items per page and pagination
   const itemsPerPage = 18 // 3 rows × 6 columns on desktop
@@ -115,6 +120,18 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     setTimeout(() => {
       setIsTransitioning(false)
     }, 300)
+  }
+
+  // Modal handlers
+  const handleVinylClick = release => {
+    if (isDragging || isTransitioning) return
+    setSelectedRelease(release)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedRelease(null)
   }
 
   // Create all vinyl items
@@ -210,6 +227,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
               >
                 <Placeholder ready={!isLoading} customPlaceholder={placeholders}>
                   {pageItems.map(({ id, title, year, artistName, cdnThumbUrl, details }) => {
+                    const release = releases.find(r => r.id === id)
                     return (
                       <Card
                         key={id}
@@ -258,8 +276,17 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                               leaveTimeoutRef.current = null
                             }, delay)
                           }}
+                          onClick={() => handleVinylClick(release)}
+                          onKeyDown={e => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              handleVinylClick(release)
+                            }
+                          }}
                           title={details}
-                          aria-label={details}
+                          aria-label={`${details}. Click to view details.`}
+                          tabIndex={0}
+                          role='button'
                           sx={{
                             display: 'block',
                             position: 'relative',
@@ -267,9 +294,15 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                             width: '100%',
                             transition: 'all 300ms ease-in-out',
                             transform: 'translateY(0) scale(1)',
+                            cursor: 'pointer',
                             '&:hover': {
                               transform: isDragging ? 'translateY(0) scale(1)' : 'translateY(-4px) scale(1.05)',
                               boxShadow: isDragging ? 'none' : 'xl'
+                            },
+                            '&:focus': {
+                              outline: '2px solid',
+                              outlineColor: 'primary',
+                              outlineOffset: '2px'
                             },
                             borderRadius: '50%',
                             overflow: 'hidden',
@@ -516,6 +549,9 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       {totalPages > 1 && (
         <VinylPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       )}
+
+      {/* Modal */}
+      <DiscogsModal isOpen={isModalOpen} onClose={handleCloseModal} release={selectedRelease} />
     </div>
   )
 }
