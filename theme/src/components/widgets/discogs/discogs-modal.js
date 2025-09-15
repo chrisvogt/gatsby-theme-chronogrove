@@ -69,11 +69,11 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
     resourceUrl
   } = basicInformation
 
-  const artistNames = artists.map(artist => artist.name).join(', ')
-  const genreList = genres.join(', ')
-  const styleList = styles.join(', ')
-  const labelInfo = labels.map(label => `${label.name}${label.catno ? ` (${label.catno})` : ''}`).join(', ')
-  const formatInfo = formats
+  const artistNames = (artists || []).map(artist => artist.name).join(', ')
+  const genreList = (genres || []).join(', ')
+  const styleList = (styles || []).join(', ')
+  const labelInfo = (labels || []).map(label => `${label.name}${label.catno ? ` (${label.catno})` : ''}`).join(', ')
+  const formatInfo = (formats || [])
     .map(format => `${format.name}${format.qty ? ` (${format.qty})` : ''}${format.text ? ` - ${format.text}` : ''}`)
     .join(', ')
 
@@ -96,15 +96,27 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         backdropFilter: 'blur(4px)',
         WebkitBackdropFilter: 'blur(4px)'
       }}
-      onClick={e => {
-        if (e.target === e.currentTarget) {
-          onClose()
-        }
-      }}
       role='dialog'
       aria-modal='true'
       aria-labelledby='modal-title'
     >
+      <button
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          width: '100%',
+          height: '100%',
+          zIndex: -1
+        }}
+        onClick={onClose}
+        aria-label='Close modal'
+      />
       <div
         ref={modalRef}
         tabIndex={-1}

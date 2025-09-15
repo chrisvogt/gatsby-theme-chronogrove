@@ -1,0 +1,1831 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`DiscogsModal formats formats with quantity and text 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Format Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Format Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (2) - 12", CD (1), Digital
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal formats labels with catalog numbers 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Label Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Label Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Label One (L001), Label Two (L002), Label Three
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with empty arrays 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Empty Arrays Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Unknown Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        />
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with missing artists 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Unknown Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <img
+            alt="Test Album album cover"
+            className="css-1qght08"
+            src="https://example.com/cover.jpg"
+          />
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Rock, Alternative
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Indie Rock, Alternative Rock
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Test Records (TR001)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (1) - 12"
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+        <a
+          className="css-1o8r63u"
+          href="https://discogs.com/release/12345"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
+              style={{}}
+            />
+          </svg>
+          View on Discogs
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with missing basicInformation 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Unknown Title
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Unknown Artist
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        />
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with missing cover image 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Rock, Alternative
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Indie Rock, Alternative Rock
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Test Records (TR001)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (1) - 12"
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+        <a
+          className="css-1o8r63u"
+          href="https://discogs.com/release/12345"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
+              style={{}}
+            />
+          </svg>
+          View on Discogs
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with missing resourceUrl 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <img
+            alt="Test Album album cover"
+            className="css-1qght08"
+            src="https://example.com/cover.jpg"
+          />
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Rock, Alternative
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Indie Rock, Alternative Rock
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Test Records (TR001)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (1) - 12"
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with missing title 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Unknown Title
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <img
+            alt="null album cover"
+            className="css-1qght08"
+            src="https://example.com/cover.jpg"
+          />
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Rock, Alternative
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Indie Rock, Alternative Rock
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Test Records (TR001)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (1) - 12"
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+        <a
+          className="css-1o8r63u"
+          href="https://discogs.com/release/12345"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
+              style={{}}
+            />
+          </svg>
+          View on Discogs
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with multiple artists 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Collaboration Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Artist One, Artist Two, Artist Three
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2024
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Electronic, Ambient
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Downtempo, Chillout
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Label One (L001), Label Two (L002)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (2) - 12", CD (1)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+        <a
+          className="css-1o8r63u"
+          href="https://discogs.com/release/11111"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
+              style={{}}
+            />
+          </svg>
+          View on Discogs
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with null arrays 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Null Arrays Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Unknown Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        />
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal handles release with undefined arrays 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Undefined Arrays Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Unknown Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        />
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal renders modal with complete release data 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <img
+            alt="Test Album album cover"
+            className="css-1qght08"
+            src="https://example.com/cover.jpg"
+          />
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Rock, Alternative
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Indie Rock, Alternative Rock
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Test Records (TR001)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (1) - 12"
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+        <a
+          className="css-1o8r63u"
+          href="https://discogs.com/release/12345"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
+              style={{}}
+            />
+          </svg>
+          View on Discogs
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal renders modal with minimal release data 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Minimal Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Minimal Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2022
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <div
+            className="css-w2j0pp"
+          >
+            No Image Available
+          </div>
+        </div>
+        <div
+          className="css-zqnl66"
+        />
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DiscogsModal uses coverImage when cdnCoverUrl is not available 1`] = `
+<div
+  aria-labelledby="modal-title"
+  aria-modal="true"
+  className="css-1f85zto"
+  role="dialog"
+>
+  <button
+    aria-label="Close modal"
+    className="css-ugcw57"
+    onClick={[MockFunction]}
+  />
+  <div
+    className="css-uc46j5"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    <button
+      aria-label="Close modal"
+      className="css-1eakr7c"
+      onClick={[MockFunction]}
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-xmark "
+        data-icon="xmark"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={{}}
+        viewBox="0 0 384 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+          fill="currentColor"
+          style={{}}
+        />
+      </svg>
+    </button>
+    <div
+      className="css-1x44wr8"
+    >
+      <div
+        className="css-16ilj6a"
+      >
+        <h2
+          className="css-aw4tjo"
+          id="modal-title"
+        >
+          Test Album
+        </h2>
+        <p
+          className="css-1frxl4t"
+        >
+          Test Artist
+        </p>
+        <p
+          className="css-y0ziuu"
+        >
+          2023
+        </p>
+      </div>
+      <div
+        className="css-73r8mm"
+      >
+        <div
+          className="css-32g3ao"
+        >
+          <img
+            alt="Test Album album cover"
+            className="css-1qght08"
+            src="https://example.com/cover-fallback.jpg"
+          />
+        </div>
+        <div
+          className="css-zqnl66"
+        >
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Genres
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Rock, Alternative
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Styles
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Indie Rock, Alternative Rock
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Labels
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Test Records (TR001)
+            </p>
+          </div>
+          <div>
+            <h4
+              className="css-1vvxkz4"
+            >
+              Formats
+            </h4>
+            <p
+              className="css-16r4ony"
+            >
+              Vinyl (1) - 12"
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1y1q5jg"
+      >
+        <button
+          className="css-1faxcgi"
+          onClick={[MockFunction]}
+        >
+          Close
+        </button>
+        <a
+          className="css-1o8r63u"
+          href="https://discogs.com/release/12345"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
+              style={{}}
+            />
+          </svg>
+          View on Discogs
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
