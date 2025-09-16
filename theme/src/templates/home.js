@@ -25,8 +25,8 @@ const HomeTemplate = () => (
           columns={[
             null,
             null,
-            '0.375fr 1.625fr' /* Sidebar 18%, Content 82% */,
-            '0.4fr 1.6fr' /* Sidebar 20%, Content 80% */
+            'minmax(200px, 0.375fr) minmax(0, 1.625fr)' /* Sidebar min 200px, Content flexible */,
+            'minmax(200px, 0.4fr) minmax(0, 1.6fr)' /* Sidebar min 200px, Content flexible */
           ]}
           gap={[null, 4]}
         >

@@ -26,8 +26,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   // Calculate items per page and pagination
   // Always maintain 3 rows per page across all breakpoints
-  // Breakpoints: [2, 3, 4, 5, 5] columns → [6, 9, 12, 15, 15] items per page
-  const itemsPerPageArray = [6, 9, 12, 15, 15] // 3 rows × columns per breakpoint
+  // Breakpoints: [3, 4, 4, 5, 6] columns → [9, 12, 12, 15, 18] items per page
+  const itemsPerPageArray = [9, 12, 12, 15, 18] // 3 rows × columns per breakpoint
   const [currentBreakpointIndex, setCurrentBreakpointIndex] = useState(4) // Default to largest breakpoint
 
   // Detect current breakpoint based on window width
@@ -37,15 +37,15 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       let breakpointIndex = 4 // Default to largest breakpoint
 
       if (width < 640) {
-        breakpointIndex = 0 // Mobile: 2 columns
+        breakpointIndex = 0 // Mobile: 3 columns
       } else if (width < 768) {
-        breakpointIndex = 1 // Small: 3 columns
+        breakpointIndex = 1 // Small: 4 columns
       } else if (width < 1024) {
         breakpointIndex = 2 // Medium: 4 columns
       } else if (width < 1280) {
         breakpointIndex = 3 // Large: 5 columns
       } else {
-        breakpointIndex = 4 // XL: 5 columns
+        breakpointIndex = 4 // XL: 6 columns
       }
 
       setCurrentBreakpointIndex(breakpointIndex)
@@ -249,11 +249,11 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                   display: 'grid',
                   gridGap: [3, 2, 2, 3],
                   gridTemplateColumns: [
-                    'repeat(2, minmax(0, 1fr))',
-                    'repeat(3, minmax(0, 1fr))',
-                    'repeat(4, minmax(0, 1fr))',
-                    'repeat(5, minmax(0, 1fr))',
-                    'repeat(5, minmax(0, 1fr))'
+                    'repeat(3, 1fr)',
+                    'repeat(4, 1fr)',
+                    'repeat(4, 1fr)',
+                    'repeat(5, 1fr)',
+                    'repeat(6, 1fr)'
                   ],
                   width: '100%',
                   maxWidth: '100%',
