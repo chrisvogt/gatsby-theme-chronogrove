@@ -20,11 +20,24 @@ const mockRelease = {
     artists: [{ name: 'Test Artist' }],
     genres: ['Rock', 'Alternative'],
     styles: ['Indie Rock', 'Alternative Rock'],
-    formats: [{ name: 'Vinyl', qty: '1', text: '12"' }],
+    formats: [{ name: 'Vinyl', qty: '1', text: '12"', descriptions: ['LP', 'Album'] }],
     labels: [{ name: 'Test Records', catno: 'TR001' }],
     cdnCoverUrl: 'https://example.com/cover.jpg',
     coverImage: 'https://example.com/cover-fallback.jpg',
     resourceUrl: 'https://discogs.com/release/12345'
+  },
+  resource: {
+    id: 12345,
+    uri: 'https://www.discogs.com/release/12345-Test-Artist-Test-Album',
+    country: 'US',
+    data_quality: 'Correct',
+    notes: 'Gatefold sleeve.\n\nSpecial thanks to all contributors.',
+    tracklist: [
+      { position: 'A1', title: 'Pardon Me Sir', duration: '3:37' },
+      { position: 'A2', title: 'High Time We Went', duration: '4:25' },
+      { position: 'B1', title: 'Midnight Rider', duration: '4:00' },
+      { position: 'B2', title: 'Do Right Woman', duration: '7:00' }
+    ]
   }
 }
 
@@ -35,6 +48,10 @@ const mockReleaseMinimal = {
     title: 'Minimal Album',
     year: 2022,
     artists: [{ name: 'Minimal Artist' }]
+  },
+  resource: {
+    id: 67890,
+    uri: 'https://www.discogs.com/release/67890-Minimal-Artist-Minimal-Album'
   }
 }
 
@@ -142,6 +159,10 @@ describe('DiscogsModal', () => {
       basicInformation: {
         ...mockRelease.basicInformation,
         resourceUrl: null
+      },
+      resource: {
+        ...mockRelease.resource,
+        uri: null
       }
     }
     const tree = renderer
@@ -183,6 +204,10 @@ describe('DiscogsModal', () => {
           { name: 'Label Two', catno: 'L002' }
         ],
         resourceUrl: 'https://discogs.com/release/11111'
+      },
+      resource: {
+        id: 11111,
+        uri: 'https://www.discogs.com/release/11111-Artist-One-Artist-Two-Artist-Three-Collaboration-Album'
       }
     }
     const tree = renderer
@@ -203,6 +228,10 @@ describe('DiscogsModal', () => {
         styles: [],
         formats: [],
         labels: []
+      },
+      resource: {
+        id: 88888,
+        uri: 'https://www.discogs.com/release/88888-Empty-Arrays-Album'
       }
     }
     const tree = renderer
@@ -223,10 +252,40 @@ describe('DiscogsModal', () => {
         styles: null,
         formats: null,
         labels: null
+      },
+      resource: {
+        id: 77777,
+        uri: 'https://www.discogs.com/release/77777-Null-Arrays-Album'
       }
     }
     const tree = renderer
       .create(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithNullArrays} />)
+      .toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('uses resource.uri for external link when available', () => {
+    const releaseWithUri = {
+      ...mockRelease,
+      resource: {
+        ...mockRelease.resource,
+        uri: 'https://www.discogs.com/release/12345-Test-Artist-Test-Album'
+      }
+    }
+    const tree = renderer.create(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithUri} />).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
+  it('falls back to basicInformation.resourceUrl when resource.uri is not available', () => {
+    const releaseWithoutUri = {
+      ...mockRelease,
+      resource: {
+        ...mockRelease.resource,
+        uri: null
+      }
+    }
+    const tree = renderer
+      .create(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithoutUri} />)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
