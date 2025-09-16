@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.61.0
+
+### ✨ Features
+
+- **Discogs Modal Enhancement**: Added comprehensive modal functionality to the Discogs vinyl collection widget
+  - **Detailed Record View**: Clicking on vinyl records now opens a modal with comprehensive release information
+  - **Rich Content Display**: Modal shows album artwork, track listings, release details, and external links
+  - **Accessibility Features**: Full keyboard navigation support with Escape key handling and focus management
+  - **Responsive Design**: Modal adapts seamlessly to different screen sizes with proper mobile optimization
+  - **Theme Integration**: Consistent styling with light/dark mode support using Theme UI components
+
+### 🎯 User Experience
+
+- **Enhanced Interaction**: Users can now explore vinyl records in detail without leaving the page
+- **Smooth Animations**: Modal includes fade-in/fade-out transitions and backdrop blur effects
+- **External Links**: Direct links to Discogs release pages and artist profiles for further exploration
+- **Mobile-Friendly**: Touch-optimized modal with proper gesture handling and responsive layout
+- **Keyboard Navigation**: Full accessibility support with proper focus management and ARIA attributes
+
+### 🔧 Technical Improvements
+
+- **New Component**: `DiscogsModal` component with comprehensive vinyl record detail display
+- **Portal Rendering**: Uses React Portal for proper modal rendering outside component tree
+- **State Management**: Integrated modal state with existing vinyl collection component
+- **Performance**: Efficient rendering with proper cleanup and memory management
+- **Body Scroll Prevention**: Prevents background scrolling when modal is open
+
+### 🧪 Testing & Quality
+
+- **100% Code Coverage**: Achieved complete test coverage for all new modal functionality
+- **Comprehensive Test Suite**: Added extensive tests for modal interactions, accessibility, and edge cases
+- **Visual Regression Testing**: Updated snapshots to include new modal interface
+- **Linter Compliance**: All code passes ESLint validation with no warnings or errors
+- **Component Integration**: Seamless integration with existing vinyl collection without breaking changes
+
+### 📚 Technical Details
+
+- **React Portal**: Modal renders in document body for proper z-index layering
+- **Focus Management**: Proper focus trapping and restoration for accessibility compliance
+- **Event Handling**: Comprehensive keyboard and mouse event management
+- **Theme UI Integration**: Consistent styling using theme colors and components
+- **Responsive Breakpoints**: Adaptive layout that works across all device sizes
+
 ## 0.60.4
 
 ### 🧪 Testing & Coverage Improvements

@@ -188,6 +188,46 @@ exports[`Seo renders with children 1`] = `
 ]
 `;
 
+exports[`Seo renders with twitter username 1`] = `
+[
+  <title>
+    Test Page | Test Site
+  </title>,
+  <meta
+    content="Test description"
+    name="description"
+  />,
+  <meta
+    content="var(--theme-ui-colors-background)"
+    name="theme-color"
+  />,
+  <meta
+    content="Test Page | Test Site"
+    property="og:title"
+  />,
+  <meta
+    content="Test description"
+    property="og:description"
+  />,
+  <meta
+    content="summary_large_image"
+    name="twitter:card"
+  />,
+  <meta
+    content="Test Page | Test Site"
+    name="twitter:title"
+  />,
+  <meta
+    content="Test description"
+    name="twitter:description"
+  />,
+  <link
+    href="https://webmention.io/test.com/webmention"
+    rel="webmention"
+  />,
+]
+`;
+
 exports[`Seo renders without article prop 1`] = `
 [
   <title>

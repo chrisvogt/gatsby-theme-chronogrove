@@ -574,4 +574,85 @@ describe('AnimatedBackground', () => {
     // Test draw with null context
     expect(() => testCircle.draw(null)).not.toThrow()
   })
+
+  it('covers animation loop and cleanup logic', () => {
+    const cancelAnimationFrameSpy = jest.spyOn(window, 'cancelAnimationFrame')
+    const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener')
+
+    const { unmount } = renderWithTheme(<AnimatedBackground />)
+
+    // Advance timers to start animation and ensure animationRef.current is set
+    act(() => {
+      jest.advanceTimersByTime(32) // Start animation
+    })
+
+    // Verify animation is running
+    expect(window.requestAnimationFrame).toHaveBeenCalled()
+
+    // Unmount to trigger cleanup
+    unmount()
+
+    // Verify cleanup is called
+    expect(cancelAnimationFrameSpy).toHaveBeenCalled()
+    expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function))
+
+    cancelAnimationFrameSpy.mockRestore()
+    removeEventListenerSpy.mockRestore()
+  })
+
+  it('covers animation loop with context and canvas available', () => {
+    renderWithTheme(<AnimatedBackground />)
+
+    // Advance timers to trigger animation loop
+    act(() => {
+      jest.advanceTimersByTime(16)
+    })
+
+    // Verify animation methods are called
+    expect(mockGetContext).toHaveBeenCalled()
+    expect(window.requestAnimationFrame).toHaveBeenCalled()
+  })
+
+  it('covers gradient selection logic for dark and light modes', () => {
+    // Test dark mode
+    const darkTheme = {
+      colors: {
+        background: '#1e1e2f',
+        modes: {
+          dark: {
+            background: '#1e1e2f'
+          }
+        }
+      }
+    }
+
+    renderWithTheme(<AnimatedBackground />, darkTheme)
+
+    act(() => {
+      jest.advanceTimersByTime(32)
+    })
+
+    const context = mockGetContext.mock.results[0].value
+    expect(context.createRadialGradient).toHaveBeenCalled()
+
+    // Test light mode
+    const lightTheme = {
+      colors: {
+        background: '#ffffff',
+        modes: {
+          light: {
+            background: '#ffffff'
+          }
+        }
+      }
+    }
+
+    renderWithTheme(<AnimatedBackground />, lightTheme)
+
+    act(() => {
+      jest.advanceTimersByTime(32)
+    })
+
+    expect(context.createRadialGradient).toHaveBeenCalled()
+  })
 })

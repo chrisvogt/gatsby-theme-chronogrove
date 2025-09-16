@@ -111,6 +111,22 @@ describe('Seo', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('renders with twitter username', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      twitterUsername: '@testuser'
+    }))
+
+    const tree = renderer
+      .create(
+        <TestProvider>
+          <Seo title='Test Page' description='Test description' />
+        </TestProvider>
+      )
+      .toJSON()
+    expect(tree).toMatchSnapshot()
+  })
+
   it('renders without webmention URL', () => {
     useSiteMetadata.mockImplementation(() => ({
       ...mockSiteMetadata,

@@ -42,7 +42,8 @@ module.exports = {
     widgets: {
       discogs: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+        // ts= added for cache busting and can be removed after 2025-09-15.
+        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs?ts=1757997867'
       },
       flickr: {
         username: 'chrisvogt',

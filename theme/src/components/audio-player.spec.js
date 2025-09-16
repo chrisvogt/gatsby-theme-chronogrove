@@ -202,16 +202,19 @@ describe('AudioPlayer', () => {
   it('dispatches hidePlayer when close button is clicked', async () => {
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
+    // Test that the component can be created without errors
     await act(async () => {
-      renderer.create(
+      const component = renderer.create(
         <Provider store={store}>
           <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
         </Provider>
       )
-    })
 
-    // Test that the dispatch function is available
-    expect(store.dispatch).toBeDefined()
+      // Component should be created successfully
+      expect(component).toBeTruthy()
+
+      component.unmount()
+    })
 
     createPortalMock.mockRestore()
   })

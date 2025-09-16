@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Discogs Index exports the discogs widget as default 1`] = `
+<div
+  data-testid="discogs-widget"
+>
+  Discogs Widget
+</div>
+`;

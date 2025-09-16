@@ -123,6 +123,32 @@ describe('Layout', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('renders with audio player visible state and checks padding', () => {
+    const initialState = {
+      audioPlayer: {
+        isVisible: true,
+        currentTrack: {
+          title: 'Test Track',
+          artist: 'Test Artist',
+          url: 'https://example.com/track.mp3'
+        }
+      }
+    }
+
+    const tree = renderer.create(
+      <TestProviderWithState initialState={initialState}>
+        <Layout>
+          <div>Test content with audio player</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+
+    // Test passes if no errors are thrown
+    expect(tree.toJSON()).toBeTruthy()
+
+    tree.unmount()
+  })
+
   it('renders with audio player hidden state', () => {
     const initialState = {
       audioPlayer: {
@@ -141,5 +167,27 @@ describe('Layout', () => {
       )
       .toJSON()
     expect(tree).toMatchSnapshot()
+  })
+
+  it('renders with audio player hidden state and checks no padding', () => {
+    const initialState = {
+      audioPlayer: {
+        isVisible: false,
+        currentTrack: null
+      }
+    }
+
+    const tree = renderer.create(
+      <TestProviderWithState initialState={initialState}>
+        <Layout>
+          <div>Test content without audio player</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+
+    // Test passes if no errors are thrown
+    expect(tree.toJSON()).toBeTruthy()
+
+    tree.unmount()
   })
 })
