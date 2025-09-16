@@ -5,7 +5,7 @@ import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import VinylPagination from './vinyl-pagination'
 import DiscogsModal from './discogs-modal'
 
@@ -27,8 +27,37 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   // Calculate items per page and pagination
   // Always maintain 3 rows per page across all breakpoints
   // Breakpoints: [3, 4, 4, 5, 6] columns → [9, 12, 12, 15, 18] items per page
-  const itemsPerPageArray = [9, 12, 12, 15, 18] // 3 rows × columns per breakpoint
+  const columnsPerBreakpoint = [3, 4, 4, 5, 6]
   const [currentBreakpointIndex, setCurrentBreakpointIndex] = useState(4) // Default to largest breakpoint
+
+  // Calculate pagination to ensure each page fills exactly 3 rows
+  const paginationData = useMemo(() => {
+    const currentColumns = columnsPerBreakpoint[currentBreakpointIndex]
+    const itemsPerRow = currentColumns
+    const itemsPerPage = itemsPerRow * 3 // Always 3 rows per page
+
+    // Calculate total pages ensuring each page fills exactly 3 rows
+    // If the last page would have fewer items than a full row,
+    // we need to adjust the pagination to avoid empty space
+    const totalPages = Math.ceil(releases.length / itemsPerPage)
+
+    // Check if the last page would have items that don't fill a complete row
+    const itemsOnLastPage = releases.length % itemsPerPage
+    const adjustedTotalPages =
+      itemsOnLastPage > 0 && itemsOnLastPage < itemsPerRow
+        ? Math.max(1, totalPages - 1) // Reduce pages to avoid partial last page
+        : totalPages
+
+    return {
+      currentColumns,
+      itemsPerRow,
+      itemsPerPage,
+      totalPages,
+      adjustedTotalPages
+    }
+  }, [currentBreakpointIndex, releases.length])
+
+  const { itemsPerPage, adjustedTotalPages } = paginationData
 
   // Detect current breakpoint based on window width
   useEffect(() => {
@@ -56,11 +85,20 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     return () => window.removeEventListener('resize', updateBreakpoint)
   }, [])
 
-  const currentItemsPerPage = itemsPerPageArray[currentBreakpointIndex]
-  const totalPages = Math.ceil(releases.length / currentItemsPerPage)
+  // Adjust current page if it becomes invalid after breakpoint change
+  useEffect(() => {
+    if (currentPage > adjustedTotalPages && adjustedTotalPages > 0) {
+      setCurrentPage(adjustedTotalPages)
+    }
+  }, [currentPage, adjustedTotalPages])
+
+  // Reset to page 1 when breakpoint changes to ensure consistent pagination
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [currentBreakpointIndex])
 
   // Create responsive placeholders based on current breakpoint
-  const placeholders = Array(currentItemsPerPage)
+  const placeholders = Array(itemsPerPage)
     .fill()
     .map((item, idx) => (
       <div className='show-loading-animation' key={idx}>
@@ -93,7 +131,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     let elasticDistance = distance
     if (distance > 0 && currentPage === 1) {
       elasticDistance = distance * 0.3
-    } else if (distance < 0 && currentPage === totalPages) {
+    } else if (distance < 0 && currentPage === adjustedTotalPages) {
       elasticDistance = distance * 0.3
     }
 
@@ -107,7 +145,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     if (Math.abs(dragDistance) > threshold) {
       if (dragDistance > 0 && currentPage > 1) {
         handlePageChange(currentPage - 1)
-      } else if (dragDistance < 0 && currentPage < totalPages) {
+      } else if (dragDistance < 0 && currentPage < adjustedTotalPages) {
         handlePageChange(currentPage + 1)
       }
     }
@@ -130,7 +168,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     let elasticDistance = distance
     if (distance > 0 && currentPage === 1) {
       elasticDistance = distance * 0.3
-    } else if (distance < 0 && currentPage === totalPages) {
+    } else if (distance < 0 && currentPage === adjustedTotalPages) {
       elasticDistance = distance * 0.3
     }
 
@@ -184,15 +222,17 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   })
 
-  // Split items into pages
+  // Split items into pages using adjusted total pages
   const pages = []
-  for (let i = 0; i < vinylItems.length; i += currentItemsPerPage) {
-    pages.push(vinylItems.slice(i, i + currentItemsPerPage))
+  for (let i = 0; i < adjustedTotalPages; i++) {
+    const start = i * itemsPerPage
+    const end = Math.min(start + itemsPerPage, vinylItems.length)
+    pages.push(vinylItems.slice(start, end))
   }
 
   // Calculate transform for carousel
   const getTransform = () => {
-    const pageWidth = 100 / totalPages
+    const pageWidth = 100 / adjustedTotalPages
     const baseTransform = -((currentPage - 1) * pageWidth)
     const dragOffset = isDragging ? (dragDistance / window.innerWidth) * pageWidth : 0
     return `translateX(${baseTransform + dragOffset}%)`
@@ -221,7 +261,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
           data-testid='vinyl-carousel'
           sx={{
             display: 'flex',
-            width: `${totalPages * 100}%`,
+            width: `${adjustedTotalPages * 100}%`,
             transform: getTransform(),
             transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             cursor: isDragging ? 'grabbing' : 'grab',
@@ -239,11 +279,12 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
             <div
               key={pageIndex}
               sx={{
-                width: `${100 / totalPages}%`,
+                width: `${100 / adjustedTotalPages}%`,
                 flexShrink: 0
               }}
             >
               <div
+                key={`grid-${currentBreakpointIndex}-${pageIndex}`}
                 className={`vinyl-collection_grid ${currentVinylId ? 'vinyl-collection_grid--interacting' : null}`}
                 sx={{
                   display: 'grid',
@@ -258,7 +299,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                   width: '100%',
                   maxWidth: '100%',
                   boxSizing: 'border-box',
-                  contain: 'layout'
+                  minHeight: 'auto',
+                  height: 'auto'
                 }}
               >
                 <Placeholder ready={!isLoading} customPlaceholder={placeholders}>
@@ -582,8 +624,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       </div>
 
       {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <VinylPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      {adjustedTotalPages > 1 && (
+        <VinylPagination currentPage={currentPage} totalPages={adjustedTotalPages} onPageChange={handlePageChange} />
       )}
 
       {/* Modal */}
