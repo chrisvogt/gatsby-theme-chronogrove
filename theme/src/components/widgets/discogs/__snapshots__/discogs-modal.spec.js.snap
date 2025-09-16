@@ -13,7 +13,7 @@ exports[`DiscogsModal formats formats with quantity and text 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -120,7 +120,7 @@ exports[`DiscogsModal formats labels with catalog numbers 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -227,7 +227,7 @@ exports[`DiscogsModal handles release with empty arrays 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -321,7 +321,7 @@ exports[`DiscogsModal handles release with missing artists 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -489,7 +489,7 @@ exports[`DiscogsModal handles release with missing basicInformation 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -578,7 +578,7 @@ exports[`DiscogsModal handles release with missing cover image 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -746,7 +746,7 @@ exports[`DiscogsModal handles release with missing resourceUrl 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -889,7 +889,7 @@ exports[`DiscogsModal handles release with missing title 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -1057,7 +1057,7 @@ exports[`DiscogsModal handles release with multiple artists 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -1225,7 +1225,7 @@ exports[`DiscogsModal handles release with null arrays 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -1319,7 +1319,7 @@ exports[`DiscogsModal handles release with undefined arrays 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -1413,7 +1413,7 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -1581,7 +1581,7 @@ exports[`DiscogsModal renders modal with minimal release data 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >
@@ -1675,7 +1675,7 @@ exports[`DiscogsModal uses coverImage when cdnCoverUrl is not available 1`] = `
     onClick={[MockFunction]}
   />
   <div
-    className="css-uc46j5"
+    className="css-16e73id"
     onClick={[Function]}
     tabIndex={-1}
   >

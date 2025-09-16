@@ -375,12 +375,21 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                             cursor: 'pointer',
                             '&:hover': {
                               transform: isDragging ? 'translateY(0) scale(1)' : 'translateY(-4px) scale(1.05)',
-                              boxShadow: isDragging ? 'none' : 'xl'
+                              boxShadow: isDragging ? 'none' : 'xl',
+                              // Reduce hover effects on mobile to prevent overflow
+                              '@media (max-width: 639px)': {
+                                transform: isDragging ? 'translateY(0) scale(1)' : 'translateY(-2px) scale(1.02)',
+                                boxShadow: isDragging ? 'none' : 'md'
+                              }
                             },
                             '&:focus': {
                               outline: '2px solid',
                               outlineColor: 'primary',
-                              outlineOffset: '2px'
+                              outlineOffset: '2px',
+                              // Reduce focus outline on mobile to prevent overflow
+                              '@media (max-width: 639px)': {
+                                outlineOffset: '1px'
+                              }
                             },
                             borderRadius: '50%',
                             overflow: 'hidden',
@@ -427,7 +436,11 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                               position: 'relative',
                               borderRadius: '50%',
                               background: 'linear-gradient(45deg, #1a1a1a 0%, #2d2d2d 100%)',
-                              border: '2px solid #333'
+                              border: '2px solid #333',
+                              // Reduce border on mobile to prevent overflow
+                              '@media (max-width: 639px)': {
+                                border: '1px solid #333'
+                              }
                             }}
                           >
                             {/* Vinyl record with album art */}

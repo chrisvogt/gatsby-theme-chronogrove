@@ -193,10 +193,10 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
     </div>
   </div>
   <div
-    className="css-sak8bt"
+    className="css-18bjwv1"
   >
     <div
-      className="css-ccroti"
+      className="css-10mejol"
     >
       <h3
         className="css-9nh3l5"
@@ -421,10 +421,10 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
     </div>
   </div>
   <div
-    className="css-sak8bt"
+    className="css-18bjwv1"
   >
     <div
-      className="css-ccroti"
+      className="css-10mejol"
     >
       <h3
         className="css-9nh3l5"
@@ -632,10 +632,10 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
     </div>
   </div>
   <div
-    className="css-sak8bt"
+    className="css-18bjwv1"
   >
     <div
-      className="css-ccroti"
+      className="css-10mejol"
     >
       <h3
         className="css-9nh3l5"
