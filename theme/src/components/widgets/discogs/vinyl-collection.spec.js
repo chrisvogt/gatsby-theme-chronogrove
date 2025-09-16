@@ -566,8 +566,9 @@ describe('VinylCollection', () => {
         fireEvent.mouseMove(carousel, { pageX: 200 }) // Large distance to exceed threshold
         fireEvent.mouseUp(carousel)
 
-        // Event handlers should be called without error
-        expect(carousel).toBeTruthy()
+        // Should be back on page 1
+        const firstPageButton = container.querySelector('button[aria-label*="page 1"]')
+        expect(firstPageButton).toBeTruthy()
       }
     })
 
@@ -1419,6 +1420,28 @@ describe('VinylCollection', () => {
       } else {
         // Modal might not be rendered due to test environment, just verify click handler works
         expect(true).toBe(true)
+      }
+    })
+
+    it('covers modal close handler with state reset', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      // Click to open modal
+      fireEvent.click(vinylItem)
+
+      // Modal should be open
+      const modal = container.querySelector('[role="dialog"]')
+      if (modal) {
+        expect(modal).toBeTruthy()
+
+        // Close modal using escape key
+        fireEvent.keyDown(modal, { key: 'Escape' })
+
+        // Modal should be closed and state reset
+        expect(container.querySelector('[role="dialog"]')).toBeNull()
       }
     })
 

@@ -356,13 +356,8 @@ describe('DiscogsModal', () => {
     it('covers escape key handler when modal is open', () => {
       const tree = renderer.create(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
 
-      // Simulate escape key press
-      const modalComponent = tree.getInstance()
-      if (modalComponent) {
-        // Test the escape key handler directly
-        // This tests the escape key logic
-        expect(true).toBe(true)
-      }
+      // Test that the modal renders without errors
+      expect(tree.toJSON()).toBeTruthy()
 
       tree.unmount()
     })
@@ -421,7 +416,7 @@ describe('DiscogsModal', () => {
     it('covers modal content click event propagation', () => {
       const tree = renderer.create(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
 
-      // Modal should render with click handlers
+      // Test that the modal renders without errors
       expect(tree.toJSON()).toBeTruthy()
 
       tree.unmount()

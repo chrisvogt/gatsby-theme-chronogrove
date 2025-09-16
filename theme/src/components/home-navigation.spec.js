@@ -517,6 +517,27 @@ describe('HomeNavigation', () => {
       expect(tree).toMatchSnapshot()
     })
 
+    it('handles server-side rendering when document is not available', () => {
+      // Store original document
+      const originalDocument = global.document
+
+      // Temporarily remove document
+      delete global.document
+
+      const tree = renderer
+        .create(
+          <TestProvider>
+            <HomeNavigation />
+          </TestProvider>
+        )
+        .toJSON()
+
+      expect(tree).toMatchSnapshot()
+
+      // Restore document
+      global.document = originalDocument
+    })
+
     it('handles navigation items with missing path', () => {
       const navigationWithMissingPath = {
         header: {
