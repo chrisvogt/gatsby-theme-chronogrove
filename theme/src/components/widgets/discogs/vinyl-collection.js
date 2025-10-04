@@ -36,28 +36,24 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     const itemsPerRow = currentColumns
     const itemsPerPage = itemsPerRow * 3 // Always 3 rows per page
 
-    // Calculate total pages ensuring each page fills exactly 3 rows
-    // If the last page would have fewer items than a full row,
-    // we need to adjust the pagination to avoid empty space
+    // Calculate total pages - always show all items, even if last page is partial
     const totalPages = Math.ceil(releases.length / itemsPerPage)
 
     // Check if the last page would have items that don't fill a complete row
     const itemsOnLastPage = releases.length % itemsPerPage
-    const adjustedTotalPages =
-      itemsOnLastPage > 0 && itemsOnLastPage < itemsPerRow
-        ? Math.max(1, totalPages - 1) // Reduce pages to avoid partial last page
-        : totalPages
+    const hasPartialLastPage = itemsOnLastPage > 0 && itemsOnLastPage < itemsPerRow
 
     return {
       currentColumns,
       itemsPerRow,
       itemsPerPage,
       totalPages,
-      adjustedTotalPages
+      hasPartialLastPage,
+      itemsOnLastPage: itemsOnLastPage || itemsPerPage // Use itemsPerPage if no remainder
     }
   }, [currentBreakpointIndex, releases.length])
 
-  const { itemsPerPage, adjustedTotalPages } = paginationData
+  const { itemsPerPage, totalPages } = paginationData
 
   // Detect current breakpoint based on window width
   useEffect(() => {
@@ -87,10 +83,10 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   // Adjust current page if it becomes invalid after breakpoint change
   useEffect(() => {
-    if (currentPage > adjustedTotalPages && adjustedTotalPages > 0) {
-      setCurrentPage(adjustedTotalPages)
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages)
     }
-  }, [currentPage, adjustedTotalPages])
+  }, [currentPage, totalPages])
 
   // Reset to page 1 when breakpoint changes to ensure consistent pagination
   useEffect(() => {
@@ -131,7 +127,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     let elasticDistance = distance
     if (distance > 0 && currentPage === 1) {
       elasticDistance = distance * 0.3
-    } else if (distance < 0 && currentPage === adjustedTotalPages) {
+    } else if (distance < 0 && currentPage === totalPages) {
       elasticDistance = distance * 0.3
     }
 
@@ -145,7 +141,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     if (Math.abs(dragDistance) > threshold) {
       if (dragDistance > 0 && currentPage > 1) {
         handlePageChange(currentPage - 1)
-      } else if (dragDistance < 0 && currentPage < adjustedTotalPages) {
+      } else if (dragDistance < 0 && currentPage < totalPages) {
         handlePageChange(currentPage + 1)
       }
     }
@@ -168,7 +164,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     let elasticDistance = distance
     if (distance > 0 && currentPage === 1) {
       elasticDistance = distance * 0.3
-    } else if (distance < 0 && currentPage === adjustedTotalPages) {
+    } else if (distance < 0 && currentPage === totalPages) {
       elasticDistance = distance * 0.3
     }
 
@@ -222,9 +218,9 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   })
 
-  // Split items into pages using adjusted total pages
+  // Split items into pages using total pages (ensures all items are displayed)
   const pages = []
-  for (let i = 0; i < adjustedTotalPages; i++) {
+  for (let i = 0; i < totalPages; i++) {
     const start = i * itemsPerPage
     const end = Math.min(start + itemsPerPage, vinylItems.length)
     pages.push(vinylItems.slice(start, end))
@@ -232,7 +228,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   // Calculate transform for carousel
   const getTransform = () => {
-    const pageWidth = 100 / adjustedTotalPages
+    const pageWidth = 100 / totalPages
     const baseTransform = -((currentPage - 1) * pageWidth)
     const dragOffset = isDragging ? (dragDistance / window.innerWidth) * pageWidth : 0
     return `translateX(${baseTransform + dragOffset}%)`
@@ -262,7 +258,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
           data-testid='vinyl-carousel'
           sx={{
             display: 'flex',
-            width: `${adjustedTotalPages * 100}%`,
+            width: `${totalPages * 100}%`,
             transform: getTransform(),
             transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             cursor: isDragging ? 'grabbing' : 'grab',
@@ -280,7 +276,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
             <div
               key={pageIndex}
               sx={{
-                width: `${100 / adjustedTotalPages}%`,
+                width: `${100 / totalPages}%`,
                 flexShrink: 0
               }}
             >
@@ -648,8 +644,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       </div>
 
       {/* Pagination Controls */}
-      {adjustedTotalPages > 1 && (
-        <VinylPagination currentPage={currentPage} totalPages={adjustedTotalPages} onPageChange={handlePageChange} />
+      {totalPages > 1 && (
+        <VinylPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       )}
 
       {/* Modal */}

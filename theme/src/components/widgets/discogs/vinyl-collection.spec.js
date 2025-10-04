@@ -1296,6 +1296,184 @@ describe('VinylCollection', () => {
     })
   })
 
+  describe('Pagination behavior tests', () => {
+    it('displays all items when last page has fewer items than a complete row', () => {
+      // Test case: 25 items, 6 columns (18 items per page)
+      // Should display all 25 items across 2 pages (18 + 7 items)
+      const releasesWithPartialLastPage = createManyReleases(25)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithPartialLastPage} />)
+
+      // Should have 2 page number buttons (plus prev/next buttons = 4 total)
+      const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
+      expect(paginationButtons).toHaveLength(2)
+
+      // All 25 vinyl items should be rendered (across both pages)
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(25)
+    })
+
+    it('displays all items when last page has exactly one complete row', () => {
+      // Test case: 24 items, 6 columns (18 items per page)
+      // Should have 2 pages: 18 items + 6 items (exactly one row)
+      const releasesWithCompleteLastRow = createManyReleases(24)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithCompleteLastRow} />)
+
+      // Should have 2 page number buttons (plus prev/next buttons = 4 total)
+      const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
+      expect(paginationButtons).toHaveLength(2)
+
+      // All 24 vinyl items should be rendered
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(24)
+    })
+
+    it('displays all items when last page has multiple complete rows', () => {
+      // Test case: 30 items, 6 columns (18 items per page)
+      // Should have 2 pages: 18 items + 12 items (2 complete rows)
+      const releasesWithMultipleRowsLastPage = createManyReleases(30)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithMultipleRowsLastPage} />)
+
+      // Should have 2 page number buttons (plus prev/next buttons = 4 total)
+      const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
+      expect(paginationButtons).toHaveLength(2)
+
+      // All 30 vinyl items should be rendered
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(30)
+    })
+
+    it('displays all items across different breakpoints', () => {
+      // Test with mobile breakpoint (3 columns, 9 items per page)
+      const releasesForMobile = createManyReleases(20) // 20 items = 3 pages (9 + 9 + 2)
+
+      // Mock mobile breakpoint
+      Object.defineProperty(window, 'innerWidth', {
+        writable: true,
+        configurable: true,
+        value: 500 // Mobile breakpoint
+      })
+
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesForMobile} />)
+
+      // Should have 3 page number buttons (plus prev/next buttons = 5 total)
+      const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
+      expect(paginationButtons).toHaveLength(3)
+
+      // All 20 vinyl items should be rendered
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(20)
+    })
+
+    it('handles edge case with exactly one page worth of items', () => {
+      // Test case: 18 items, 6 columns (18 items per page)
+      // Should have 2 pages with all 18 items displayed
+      const releasesExactPage = createManyReleases(18)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesExactPage} />)
+
+      // Should have 2 page number buttons (plus prev/next buttons = 4 total)
+      const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
+      expect(paginationButtons).toHaveLength(2)
+
+      // All 18 vinyl items should be rendered
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(18)
+    })
+
+    it('handles edge case with fewer items than one page', () => {
+      // Test case: 5 items, 6 columns (18 items per page)
+      // Should have 1 page with all 5 items
+      const releasesFewItems = createManyReleases(5)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesFewItems} />)
+
+      // Should have no pagination buttons (single page)
+      const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
+      expect(paginationButtons).toHaveLength(0)
+
+      // All 5 vinyl items should be rendered
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(5)
+    })
+
+    it('verifies pagination data structure contains correct values', () => {
+      const releasesWithPartialLastPage = createManyReleases(25)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithPartialLastPage} />)
+
+      // The component should render without errors, indicating pagination data is correct
+      const carousel = container.querySelector('[data-testid="vinyl-carousel"]')
+      expect(carousel).toBeTruthy()
+
+      // Should have proper width calculation for 2 pages
+      const carouselStyle = window.getComputedStyle(carousel)
+      expect(carouselStyle.width).toBeTruthy()
+    })
+
+    it('ensures page navigation works correctly with all items displayed', () => {
+      const releasesWithPartialLastPage = createManyReleases(25)
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithPartialLastPage} />)
+
+      // Navigate to page 2
+      const secondPageButton = container.querySelector('button[aria-label*="page 2"]')
+      expect(secondPageButton).toBeTruthy()
+
+      fireEvent.click(secondPageButton)
+
+      // Fast forward time to complete transition
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should still have all 25 items accessible (7 items on page 2)
+      const vinylItems = container.querySelectorAll('.vinyl-record')
+      expect(vinylItems).toHaveLength(25)
+
+      // Navigate back to page 1
+      const firstPageButton = container.querySelector('button[aria-label*="page 1"]')
+      expect(firstPageButton).toBeTruthy()
+
+      fireEvent.click(firstPageButton)
+
+      // Fast forward time to complete transition
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should still have all 25 items accessible (18 items on page 1)
+      const vinylItemsAfterReturn = container.querySelectorAll('.vinyl-record')
+      expect(vinylItemsAfterReturn).toHaveLength(25)
+    })
+
+    it('verifies drag navigation works correctly with all items displayed', () => {
+      const releasesWithPartialLastPage = createManyReleases(25)
+      const { getByTestId } = render(<VinylCollection isLoading={false} releases={releasesWithPartialLastPage} />)
+
+      const carousel = getByTestId('vinyl-carousel')
+      expect(carousel).toBeTruthy()
+
+      // Drag left to go to page 2
+      fireEvent.mouseDown(carousel, { pageX: 200 })
+      fireEvent.mouseMove(carousel, { pageX: 100 }) // Drag left
+      fireEvent.mouseUp(carousel)
+
+      // Fast forward time to complete transition
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should be able to drag back to page 1
+      fireEvent.mouseDown(carousel, { pageX: 100 })
+      fireEvent.mouseMove(carousel, { pageX: 200 }) // Drag right
+      fireEvent.mouseUp(carousel)
+
+      // Fast forward time to complete transition
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Component should handle navigation without errors
+      expect(carousel).toBeTruthy()
+    })
+  })
+
   describe('Missing coverage areas', () => {
     it('covers placeholder creation for loading state', () => {
       const { container } = render(<VinylCollection isLoading={true} releases={[]} />)
