@@ -171,15 +171,22 @@ describe('VinylPagination', () => {
       <VinylPagination currentPage={5} totalPages={10} onPageChange={mockOnPageChange} />
     )
 
-    // Should render all page numbers
+    // Should render smart pagination (current page ± 2, max 5 pages)
     const pageButtons = getAllByRole('button').filter(button =>
       button.getAttribute('aria-label')?.includes('Go to page')
     )
-    expect(pageButtons).toHaveLength(10)
+    expect(pageButtons).toHaveLength(5) // Pages 3, 4, 5, 6, 7
 
     // Should have correct current page
     const currentPageButton = getByLabelText('Go to page 5')
     expect(currentPageButton.getAttribute('aria-current')).toBe('page')
+
+    // Should show the smart pagination range
+    expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 5')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 6')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 7')).toBeInTheDocument()
   })
 
   it('does not call onPageChange when trying to go to invalid pages', () => {
