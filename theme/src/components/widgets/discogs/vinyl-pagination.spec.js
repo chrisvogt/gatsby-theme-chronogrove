@@ -171,15 +171,22 @@ describe('VinylPagination', () => {
       <VinylPagination currentPage={5} totalPages={10} onPageChange={mockOnPageChange} />
     )
 
-    // Should render all page numbers
+    // Should render smart pagination (current page ± 2, max 5 pages)
     const pageButtons = getAllByRole('button').filter(button =>
       button.getAttribute('aria-label')?.includes('Go to page')
     )
-    expect(pageButtons).toHaveLength(10)
+    expect(pageButtons).toHaveLength(5) // Pages 3, 4, 5, 6, 7
 
     // Should have correct current page
     const currentPageButton = getByLabelText('Go to page 5')
     expect(currentPageButton.getAttribute('aria-current')).toBe('page')
+
+    // Should show the smart pagination range
+    expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 5')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 6')).toBeInTheDocument()
+    expect(getByLabelText('Go to page 7')).toBeInTheDocument()
   })
 
   it('does not call onPageChange when trying to go to invalid pages', () => {
@@ -287,5 +294,178 @@ describe('VinylPagination', () => {
     nextButton = getByLabelText('Next page')
     expect(prevButton.disabled).toBe(false)
     expect(nextButton.disabled).toBe(false)
+  })
+
+  describe('Smart Pagination Logic', () => {
+    it('shows correct pages for middle position with many pages', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={5} totalPages={10} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show pages 3, 4, 5, 6, 7 (current ± 2)
+      expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 5')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 6')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 7')).toBeInTheDocument()
+
+      // Should not show pages outside the range
+      expect(() => getByLabelText('Go to page 1')).toThrow()
+      expect(() => getByLabelText('Go to page 2')).toThrow()
+      expect(() => getByLabelText('Go to page 8')).toThrow()
+      expect(() => getByLabelText('Go to page 9')).toThrow()
+      expect(() => getByLabelText('Go to page 10')).toThrow()
+    })
+
+    it('shows correct pages for first page position', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={1} totalPages={8} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show pages 1, 2, 3 (no previous pages)
+      expect(getByLabelText('Go to page 1')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 2')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+
+      // Should not show page 0 or pages beyond range
+      expect(() => getByLabelText('Go to page 0')).toThrow()
+      expect(() => getByLabelText('Go to page 4')).toThrow()
+    })
+
+    it('shows correct pages for second page position', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={2} totalPages={8} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show pages 1, 2, 3, 4 (only 1 page before)
+      expect(getByLabelText('Go to page 1')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 2')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+
+      // Should not show page 5
+      expect(() => getByLabelText('Go to page 5')).toThrow()
+    })
+
+    it('shows correct pages for last page position', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={8} totalPages={8} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show pages 6, 7, 8 (no next pages)
+      expect(getByLabelText('Go to page 6')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 7')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 8')).toBeInTheDocument()
+
+      // Should not show pages beyond range
+      expect(() => getByLabelText('Go to page 9')).toThrow()
+      expect(() => getByLabelText('Go to page 5')).toThrow()
+    })
+
+    it('shows correct pages for second-to-last page position', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={7} totalPages={8} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show pages 5, 6, 7, 8 (only 1 page after)
+      expect(getByLabelText('Go to page 5')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 6')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 7')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 8')).toBeInTheDocument()
+
+      // Should not show page 4
+      expect(() => getByLabelText('Go to page 4')).toThrow()
+    })
+
+    it('shows all pages when total pages is less than or equal to 5', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={3} totalPages={5} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show all pages 1, 2, 3, 4, 5
+      expect(getByLabelText('Go to page 1')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 2')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 5')).toBeInTheDocument()
+    })
+
+    it('shows all pages when total pages is 3', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={2} totalPages={3} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show all pages 1, 2, 3
+      expect(getByLabelText('Go to page 1')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 2')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+    })
+  })
+
+  describe('Responsive Pagination Behavior', () => {
+    it('maintains correct page count across different screen sizes', () => {
+      // Test that the smart pagination logic works consistently
+      // regardless of screen size (CSS handles the responsive hiding)
+      const { getByLabelText, getAllByRole } = render(
+        <VinylPagination currentPage={5} totalPages={10} onPageChange={mockOnPageChange} />
+      )
+
+      const pageButtons = getAllByRole('button').filter(button =>
+        button.getAttribute('aria-label')?.includes('Go to page')
+      )
+
+      // Should always render 5 pages (3, 4, 5, 6, 7)
+      expect(pageButtons).toHaveLength(5)
+
+      // Verify the specific pages are rendered
+      expect(getByLabelText('Go to page 3')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 4')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 5')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 6')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 7')).toBeInTheDocument()
+    })
+  })
+
+  describe('Edge Cases', () => {
+    it('handles single page correctly', () => {
+      const { queryByLabelText } = render(
+        <VinylPagination currentPage={1} totalPages={1} onPageChange={mockOnPageChange} />
+      )
+
+      // Should not render any page buttons
+      expect(queryByLabelText('Go to page 1')).not.toBeInTheDocument()
+      expect(queryByLabelText('Previous page')).not.toBeInTheDocument()
+      expect(queryByLabelText('Next page')).not.toBeInTheDocument()
+    })
+
+    it('handles two pages correctly', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={1} totalPages={2} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show both pages
+      expect(getByLabelText('Go to page 1')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 2')).toBeInTheDocument()
+
+      // Should have correct current page
+      expect(getByLabelText('Go to page 1').getAttribute('aria-current')).toBe('page')
+    })
+
+    it('handles very large page numbers correctly', () => {
+      const { getByLabelText } = render(
+        <VinylPagination currentPage={50} totalPages={100} onPageChange={mockOnPageChange} />
+      )
+
+      // Should show pages 48, 49, 50, 51, 52
+      expect(getByLabelText('Go to page 48')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 49')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 50')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 51')).toBeInTheDocument()
+      expect(getByLabelText('Go to page 52')).toBeInTheDocument()
+
+      // Should not show pages outside range
+      expect(() => getByLabelText('Go to page 47')).toThrow()
+      expect(() => getByLabelText('Go to page 53')).toThrow()
+    })
   })
 })

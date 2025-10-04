@@ -253,7 +253,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
         sx={{
           overflow: 'hidden',
           position: 'relative',
-          width: '100%'
+          width: '100%',
+          maxWidth: '100%'
         }}
       >
         <div
@@ -288,7 +289,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                 className={`vinyl-collection_grid ${currentVinylId ? 'vinyl-collection_grid--interacting' : null}`}
                 sx={{
                   display: 'grid',
-                  gridGap: [3, 2, 2, 3],
+                  gridGap: [1, 2, 2, 3],
                   gridTemplateColumns: [
                     'repeat(3, 1fr)',
                     'repeat(4, 1fr)',
@@ -311,7 +312,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                         key={id}
                         variant='actionCard'
                         sx={{
-                          p: [1, 2, 3],
+                          p: [0.5, 1, 2, 3],
                           minWidth: 0,
                           boxSizing: 'border-box',
                           height: '100%',
@@ -380,6 +381,11 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                               '@media (max-width: 639px)': {
                                 transform: isDragging ? 'translateY(0) scale(1)' : 'translateY(-2px) scale(1.02)',
                                 boxShadow: isDragging ? 'none' : 'md'
+                              },
+                              // Further reduce hover effects on very small screens to prevent overflow
+                              '@media (max-width: 515px)': {
+                                transform: isDragging ? 'translateY(0) scale(1)' : 'translateY(-1px) scale(1.01)',
+                                boxShadow: isDragging ? 'none' : 'sm'
                               }
                             },
                             '&:focus': {
@@ -388,6 +394,11 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                               outlineOffset: '2px',
                               // Reduce focus outline on mobile to prevent overflow
                               '@media (max-width: 639px)': {
+                                outlineOffset: '1px'
+                              },
+                              // Further reduce focus outline on very small screens
+                              '@media (max-width: 515px)': {
+                                outline: '1px solid',
                                 outlineOffset: '1px'
                               }
                             },

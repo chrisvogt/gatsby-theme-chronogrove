@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.61.1
+
+### 🐛 Bug Fixes
+
+- **Discogs Widget Overflow Fix**: Resolved horizontal overflow issues on small screens (≤515px)
+  - Implemented smart responsive pagination (current ± 1 on mobile, ± 2 on desktop)
+  - Reduced grid spacing and hover effects for mobile optimization
+  - Page now resizes down to ~373px without overflow
+
+### 🧪 Testing & Quality
+
+- Added 15 new unit tests for smart pagination functionality
+- Test suite increased from 16 to 31 tests (+94% increase)
+- All tests passing with clean linting
+
 ## 0.61.0
 
 ### ✨ Features

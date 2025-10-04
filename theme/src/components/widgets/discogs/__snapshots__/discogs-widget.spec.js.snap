@@ -210,7 +210,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      className="css-1alnzao"
+      className="css-1719y60"
     >
       <div
         className="css-ngfim1"
@@ -438,7 +438,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      className="css-1alnzao"
+      className="css-1719y60"
     >
       <div
         className="css-ngfim1"
@@ -649,7 +649,7 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      className="css-1alnzao"
+      className="css-1719y60"
     >
       <div
         className="css-ngfim1"

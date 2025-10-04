@@ -19,7 +19,7 @@ exports[`VinylCollection Edge cases handles releases with empty artist name 1`] 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -36,14 +36,14 @@ exports[`VinylCollection Edge cases handles releases with empty artist name 1`] 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -136,7 +136,7 @@ exports[`VinylCollection Edge cases handles releases with empty artists array 1`
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -153,14 +153,14 @@ exports[`VinylCollection Edge cases handles releases with empty artists array 1`
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -253,7 +253,7 @@ exports[`VinylCollection Edge cases handles releases with empty cdnThumbUrl 1`] 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -270,14 +270,14 @@ exports[`VinylCollection Edge cases handles releases with empty cdnThumbUrl 1`] 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -370,7 +370,7 @@ exports[`VinylCollection Edge cases handles releases with empty resourceUrl 1`] 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -387,14 +387,14 @@ exports[`VinylCollection Edge cases handles releases with empty resourceUrl 1`] 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -495,7 +495,7 @@ exports[`VinylCollection Edge cases handles releases with missing artist name 1`
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -512,14 +512,14 @@ exports[`VinylCollection Edge cases handles releases with missing artist name 1`
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -612,7 +612,7 @@ exports[`VinylCollection Edge cases handles releases with missing basicInformati
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -629,14 +629,14 @@ exports[`VinylCollection Edge cases handles releases with missing basicInformati
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (Unknown) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -729,7 +729,7 @@ exports[`VinylCollection Edge cases handles releases with missing cdnThumbUrl pr
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -746,14 +746,14 @@ exports[`VinylCollection Edge cases handles releases with missing cdnThumbUrl pr
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -846,7 +846,7 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl 1`
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -863,14 +863,14 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl 1`
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -971,7 +971,7 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl pr
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -988,14 +988,14 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl pr
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1096,7 +1096,7 @@ exports[`VinylCollection Edge cases handles releases with missing title 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1113,14 +1113,14 @@ exports[`VinylCollection Edge cases handles releases with missing title 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Unknown (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1213,7 +1213,7 @@ exports[`VinylCollection Edge cases handles releases with missing year 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1230,14 +1230,14 @@ exports[`VinylCollection Edge cases handles releases with missing year 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (Unknown) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1330,7 +1330,7 @@ exports[`VinylCollection Edge cases handles releases with null artists 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1347,14 +1347,14 @@ exports[`VinylCollection Edge cases handles releases with null artists 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1447,7 +1447,7 @@ exports[`VinylCollection Edge cases handles releases with undefined artist name 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1464,14 +1464,14 @@ exports[`VinylCollection Edge cases handles releases with undefined artist name 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1564,7 +1564,7 @@ exports[`VinylCollection Edge cases handles releases with undefined artists 1`] 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1581,14 +1581,14 @@ exports[`VinylCollection Edge cases handles releases with undefined artists 1`] 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1681,7 +1681,7 @@ exports[`VinylCollection Edge cases handles releases with undefined cdnThumbUrl 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1698,14 +1698,14 @@ exports[`VinylCollection Edge cases handles releases with undefined cdnThumbUrl 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1798,7 +1798,7 @@ exports[`VinylCollection Edge cases handles releases with undefined resourceUrl 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1815,14 +1815,14 @@ exports[`VinylCollection Edge cases handles releases with undefined resourceUrl 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -1923,7 +1923,7 @@ exports[`VinylCollection handles releases with missing artist information 1`] = 
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -1940,14 +1940,14 @@ exports[`VinylCollection handles releases with missing artist information 1`] = 
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album Without Artists (2023) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2040,7 +2040,7 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -2057,14 +2057,14 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Unknown (Unknown) - Unknown Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2132,11 +2132,11 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Valid Album (2023) - Valid Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2229,7 +2229,7 @@ exports[`VinylCollection handles releases with multiple artists 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -2246,14 +2246,14 @@ exports[`VinylCollection handles releases with multiple artists 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Collaboration Album (2023) - Artist 1, Artist 2, Artist 3. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2346,7 +2346,7 @@ exports[`VinylCollection handles releases without CDN thumb URL 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -2363,14 +2363,14 @@ exports[`VinylCollection handles releases without CDN thumb URL 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album Without Thumb (2023) - Artist. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2463,7 +2463,7 @@ exports[`VinylCollection renders empty state when no releases 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-ngfim1"
@@ -2499,7 +2499,7 @@ exports[`VinylCollection renders loading state 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-ngfim1"
@@ -2535,7 +2535,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-1wkhxkl"
@@ -2552,14 +2552,14 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
         className="css-ymqdh6"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 1 (2020) - Artist 1. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2635,11 +2635,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 2 (2021) - Artist 2. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2715,11 +2715,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 3 (2022) - Artist 3. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2795,11 +2795,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 4 (2023) - Artist 4. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2875,11 +2875,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 5 (2024) - Artist 5. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -2955,11 +2955,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 6 (2020) - Artist 6. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3035,11 +3035,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 7 (2021) - Artist 7. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3115,11 +3115,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 8 (2022) - Artist 8. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3195,11 +3195,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 9 (2023) - Artist 9. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3275,11 +3275,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 10 (2024) - Artist 10. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3355,11 +3355,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 11 (2020) - Artist 11. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3435,11 +3435,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 12 (2021) - Artist 12. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3515,11 +3515,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 13 (2022) - Artist 13. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3595,11 +3595,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 14 (2023) - Artist 14. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3675,11 +3675,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 15 (2024) - Artist 15. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3760,14 +3760,14 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
         className="css-ymqdh6"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 16 (2020) - Artist 16. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3843,11 +3843,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 17 (2021) - Artist 17. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -3923,11 +3923,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 18 (2022) - Artist 18. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4003,11 +4003,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 19 (2023) - Artist 19. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4083,11 +4083,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 20 (2024) - Artist 20. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4163,11 +4163,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 21 (2020) - Artist 21. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4243,11 +4243,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 22 (2021) - Artist 22. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4323,11 +4323,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 23 (2022) - Artist 23. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4403,11 +4403,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 24 (2023) - Artist 24. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4483,11 +4483,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Album 25 (2024) - Artist 25. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4570,11 +4570,11 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
     className="css-9vd5ud"
   >
     <div
-      className="css-gxwhxe"
+      className="css-cw2e6h"
     >
       <button
         aria-label="Previous page"
-        className="css-l7u2za"
+        className="css-1wqopuy"
         disabled={true}
         onClick={[Function]}
       >
@@ -4599,25 +4599,29 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       <div
         className="css-3umnwr"
       >
-        <button
-          aria-current="page"
-          aria-label="Go to page 1"
-          className="css-15rjzww"
-          onClick={[Function]}
+        <div
+          className="css-1b6rjoo"
         >
-          1
-        </button>
-        <button
-          aria-label="Go to page 2"
-          className="css-gw23jf"
-          onClick={[Function]}
-        >
-          2
-        </button>
+          <button
+            aria-current="page"
+            aria-label="Go to page 1"
+            className="css-qb4jev"
+            onClick={[Function]}
+          >
+            1
+          </button>
+          <button
+            aria-label="Go to page 2"
+            className="css-rjnzsf"
+            onClick={[Function]}
+          >
+            2
+          </button>
+        </div>
       </div>
       <button
         aria-label="Next page"
-        className="css-xurijl"
+        className="css-1b2ompy"
         disabled={false}
         onClick={[Function]}
       >
@@ -4641,7 +4645,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       </button>
     </div>
     <div
-      className="css-1ssnnkr"
+      className="css-1wp5sa6"
     >
       Page 
       1
@@ -4671,7 +4675,7 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
     My owned vinyl records from Discogs.
   </p>
   <div
-    className="css-1alnzao"
+    className="css-1719y60"
   >
     <div
       className="css-itz9zd"
@@ -4688,14 +4692,14 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
         className="css-gjogkf"
       >
         <div
-          className="vinyl-collection_grid null css-j2t515"
+          className="vinyl-collection_grid null css-i49jks"
         >
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
@@ -4771,11 +4775,11 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
             </div>
           </div>
           <div
-            className="css-1f2wh2n"
+            className="css-16bi5cb"
           >
             <div
               aria-label="Brat And It's Completely Different (2025) - Charli XCX. Click to view details."
-              className="vinyl-record css-y9roeg"
+              className="vinyl-record css-1xzjm1p"
               onClick={[Function]}
               onKeyDown={[Function]}
               onMouseEnter={[Function]}
