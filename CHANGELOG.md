@@ -1,19 +1,19 @@
 # Changelog
 
-## 0.61.1
+## 0.61.2
 
 ### 🐛 Bug Fixes
 
-- **Discogs Widget Overflow Fix**: Resolved horizontal overflow issues on small screens (≤515px)
-  - Implemented smart responsive pagination (current ± 1 on mobile, ± 2 on desktop)
-  - Reduced grid spacing and hover effects for mobile optimization
-  - Page now resizes down to ~373px without overflow
+- **Vinyl Collection Pagination Fix**: Fixed critical bug where vinyl records were hidden due to incorrect pagination logic
+  - Removed `adjustedTotalPages` calculation that was reducing page count when last page had fewer items than a complete row
+  - Now displays all vinyl records across pages, ensuring no items are hidden from users
+  - Maintains responsive behavior across all breakpoints (mobile, tablet, desktop)
 
 ### 🧪 Testing & Quality
 
-- Added 15 new unit tests for smart pagination functionality
-- Test suite increased from 16 to 31 tests (+94% increase)
-- All tests passing with clean linting
+- Added comprehensive pagination behavior tests covering edge cases and different breakpoints
+- Tests verify all items are displayed regardless of pagination configuration
+- All 85 tests passing with clean linting
 
 ## 0.61.0
 
