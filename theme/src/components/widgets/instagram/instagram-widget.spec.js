@@ -113,6 +113,32 @@ describe('InstagramWidget', () => {
     expect(placeholders.length).toBeGreaterThan(0)
   })
 
+  it('does not render LightGallery when media is empty during loading', () => {
+    const loadingStore = mockStore({
+      widgets: {
+        instagram: {
+          state: 'LOADING',
+          data: {
+            collections: {
+              media: [] // Empty array during loading
+            }
+          }
+        }
+      }
+    })
+
+    render(
+      <ReduxProvider store={loadingStore}>
+        <ThemeUIProvider theme={theme}>
+          <InstagramWidget />
+        </ThemeUIProvider>
+      </ReduxProvider>
+    )
+
+    // LightGallery should not be rendered when media array is empty
+    expect(screen.queryByTestId('lightgallery-mock')).not.toBeInTheDocument()
+  })
+
   it('renders media items when isLoading is false', () => {
     render(
       <ReduxProvider store={store}>
@@ -128,6 +154,19 @@ describe('InstagramWidget', () => {
       'src',
       expect.stringContaining('https://cdn.example.com/images/fake-instagram-image.jpg')
     )
+  })
+
+  it('renders LightGallery when media has items', () => {
+    render(
+      <ReduxProvider store={store}>
+        <ThemeUIProvider theme={theme}>
+          <InstagramWidget />
+        </ThemeUIProvider>
+      </ReduxProvider>
+    )
+
+    // LightGallery should be rendered when media array has items
+    expect(screen.getByTestId('lightgallery-mock')).toBeInTheDocument()
   })
 
   it('does not show "Show More" button when there are 8 or fewer images', () => {

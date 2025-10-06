@@ -4,6 +4,19 @@
 
 ### 🐛 Bug Fixes
 
+- **Instagram Widget Loading State Fix**: Fixed rendering issue where "0" character appeared below Instagram gallery during loading
+  - Changed `media?.length &&` to `media?.length > 0 &&` to prevent React from rendering falsy `0` value
+  - Ensures clean loading state without unwanted characters appearing below skeleton placeholders
+
+### 🧪 Testing & Quality
+
+- Added Instagram widget loading state tests to prevent regression of "0" character rendering issue
+- All 87 tests passing with clean linting
+
+## 0.61.1
+
+### 🐛 Bug Fixes
+
 - **Vinyl Collection Pagination Fix**: Fixed critical bug where vinyl records were hidden due to incorrect pagination logic
   - Removed `adjustedTotalPages` calculation that was reducing page count when last page had fewer items than a complete row
   - Now displays all vinyl records across pages, ensuring no items are hidden from users
@@ -14,6 +27,27 @@
 - Added comprehensive pagination behavior tests covering edge cases and different breakpoints
 - Tests verify all items are displayed regardless of pagination configuration
 - All 85 tests passing with clean linting
+
+## 0.61.1
+
+### 🐛 Bug Fixes
+
+- **Discogs Widget Overflow Fix**: Fixed horizontal overflow issue on small screens (≤515px)
+  - Reduced grid spacing and card padding to prevent content from exceeding viewport boundaries
+  - Implemented responsive hover effects with reduced scale and translation on mobile devices
+  - Added smart responsive pagination system with progressive enhancement across breakpoints
+
+### 🎯 User Experience
+
+- **Mobile Optimization**: Page now resizes down to ~373px without overflow issues
+- **Progressive Enhancement**: Enhanced pagination context on larger screens while maintaining mobile efficiency
+- **Touch-Friendly**: Responsive button sizing and optimized spacing for mobile interactions
+
+### 🧪 Testing & Quality
+
+- All existing tests pass (779 tests)
+- Updated pagination tests to match new smart pagination behavior
+- Verified responsive behavior across all breakpoints
 
 ## 0.61.0
 
