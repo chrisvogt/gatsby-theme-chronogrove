@@ -4,25 +4,25 @@
 export const sonomaRoadTrip = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759727070/chrisvogt-me/galleries/now-sept-2025/IMG_5913-2.jpg',
-    title: 'Checking into R3 Hotel in Guerneville',
+    title: 'Checking into R3 Hotel, Guerneville',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1759725697/chrisvogt-me/galleries/now-sept-2025/IMG_5786.jpg',
-    title: 'The pool at R3 Hotel in Guerneville during Labor Day weekend',
+    title: 'Poolside at R3 Hotel during Labor Day weekend',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1759725697/chrisvogt-me/galleries/now-sept-2025/IMG_5797.jpg',
-    title: 'A pool party at R3 Hotel in Guerneville, Labor Day weekend, 2025',
+    title: 'Pool party gathering at R3 Hotel',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725696/chrisvogt-me/galleries/now-sept-2025/IMG_5800.jpg',
-    title: "Gay Camp, comedy that ran at NYC's The Duplex for five years, as well as Fire Island, Ptown, and on tour",
+    title: 'Gay Camp',
     width: 4,
     height: 3
   }
@@ -31,37 +31,37 @@ export const sonomaRoadTrip = [
 export const sonomaWineries = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725698/chrisvogt-me/galleries/now-sept-2025/IMG_5833.jpg',
-    title: 'Wine grapes up close, at Rodney Strong winery',
+    title: 'Grape clusters at Rodney Strong',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725697/chrisvogt-me/galleries/now-sept-2025/IMG_5810.jpg',
-    title: 'Listening to music and drinking wine at Bacchus Landing in Healdsburg',
+    title: 'Music and wine at Bacchus Landing, Healdsburg',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725697/chrisvogt-me/galleries/now-sept-2025/IMG_5825.jpg',
-    title: 'Wine tasting at Rodney Strong winery in Healdsburg',
+    title: 'Wine tasting at Rodney Strong',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725698/chrisvogt-me/galleries/now-sept-2025/IMG_5829.jpg',
-    title: 'Chris and Nick posing with an oversized, prop wine bottle at Rodney Strong winery in Healdsburg',
+    title: 'Oversized wine bottle at Rodney Strong',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725699/chrisvogt-me/galleries/now-sept-2025/IMG_5852.jpg',
-    title: 'A row of grapevines at La Crema winery in Healdsburg',
+    title: 'Vineyard rows at La Crema',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725700/chrisvogt-me/galleries/now-sept-2025/IMG_5858.jpg',
-    title: 'Nick drinking a glass of wine at La Crema winery in Healdsburg',
+    title: 'Afternoon wine at La Crema',
     width: 3,
     height: 4
   }
@@ -70,19 +70,19 @@ export const sonomaWineries = [
 export const sonomaDriveHome = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725702/chrisvogt-me/galleries/now-sept-2025/IMG_5920.jpg',
-    title: 'Gleason Beach in Bodega Bay',
+    title: 'Gleason Beach, Bodega Bay',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725703/chrisvogt-me/galleries/now-sept-2025/IMG_5924.jpg',
-    title: 'Gleason Beach in Bodega Bay',
+    title: 'Gleason Beach, Bodega Bay',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725703/chrisvogt-me/galleries/now-sept-2025/IMG_5923.jpg',
-    title: 'Gleason Beach in Bodega Bay',
+    title: 'Gleason Beach, Bodega Bay',
     width: 4,
     height: 3
   }
@@ -91,7 +91,7 @@ export const sonomaDriveHome = [
 export const vinylCollection = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725705/chrisvogt-me/galleries/now-sept-2025/IMG_6130.jpg',
-    title: 'Vinyl collection display in living room',
+    title: 'Vinyl collection in living room',
     width: 3,
     height: 4
   },
@@ -103,7 +103,7 @@ export const vinylCollection = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725730/chrisvogt-me/galleries/now-sept-2025/IMG_6384.jpg',
-    title: 'Shopping for new albums at Amoeba Music in San Francisco',
+    title: 'Record hunting at Amoeba Music, San Francisco',
     width: 4,
     height: 3
   }
@@ -112,37 +112,37 @@ export const vinylCollection = [
 export const indoorGardening = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725705/chrisvogt-me/galleries/now-sept-2025/IMG_6128.jpg',
-    title: 'Basil in the AeroGarden at the beginning of the month',
+    title: 'Basil in AeroGarden, early September',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725722/chrisvogt-me/galleries/now-sept-2025/IMG_6327.jpg',
-    title: 'Basil at the end of the month',
+    title: 'Basil flourishing, end of September',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725725/chrisvogt-me/galleries/now-sept-2025/IMG_6328.jpg',
-    title: 'A bean plant growing outdoors on my patio',
+    title: 'Bean plant on patio',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725725/chrisvogt-me/galleries/now-sept-2025/IMG_6329.jpg',
-    title: 'Cucumber, jalapeño, and cherry tomatoes growing in the floor AeroGarden',
+    title: 'Cucumber, jalapeño, and cherry tomatoes in floor AeroGarden',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725726/chrisvogt-me/galleries/now-sept-2025/IMG_6330.jpg',
-    title: 'Cucumber up close',
+    title: 'Cucumber detail',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725729/chrisvogt-me/galleries/now-sept-2025/IMG_6381.jpg',
-    title: 'Cucumber by the end of the month',
+    title: "Cucumber at month's end",
     width: 3,
     height: 4
   }
@@ -151,19 +151,19 @@ export const indoorGardening = [
 export const sanDiego = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725709/chrisvogt-me/galleries/now-sept-2025/IMG_6190.jpg',
-    title: 'Seals on the beach in La Jolla',
+    title: 'Seals on beach, La Jolla',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725710/chrisvogt-me/galleries/now-sept-2025/IMG_6197.jpg',
-    title: 'Seals on the beach in La Jolla',
+    title: 'Seals on beach, La Jolla',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725711/chrisvogt-me/galleries/now-sept-2025/IMG_6206.jpg',
-    title: 'Pelicans on the beach in La Jolla',
+    title: 'Pelicans on beach, La Jolla',
     width: 3,
     height: 4
   }
@@ -172,73 +172,73 @@ export const sanDiego = [
 export const sanDiegoZoo = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725711/chrisvogt-me/galleries/now-sept-2025/IMG_6217.jpg',
-    title: 'Pygmy hippopotamus at San Diego Zoo',
+    title: 'Pygmy hippopotamus',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725712/chrisvogt-me/galleries/now-sept-2025/IMG_6233.jpg',
-    title: "Vus'musi, the largest elephant at San Diego Zoo",
+    title: "Vus'musi, the largest elephant",
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725715/chrisvogt-me/galleries/now-sept-2025/IMG_6245.jpg',
-    title: 'A group of baboons at San Diego Zoo',
+    title: 'Baboon troop',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725714/chrisvogt-me/galleries/now-sept-2025/IMG_6241.jpg',
-    title: 'Lemur standing up on its hind legs',
+    title: 'Lemur standing',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725715/chrisvogt-me/galleries/now-sept-2025/IMG_6242.jpg',
-    title: 'A group of curious lemurs',
+    title: 'Curious lemurs',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725716/chrisvogt-me/galleries/now-sept-2025/IMG_6248.jpg',
-    title: 'Playful bears at the zoo',
+    title: 'Playful bears',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725717/chrisvogt-me/galleries/now-sept-2025/IMG_6252.jpg',
-    title: 'A type of pig (?) at the San Diego Zoo',
+    title: 'Unknown pig species',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725722/chrisvogt-me/galleries/now-sept-2025/IMG_6271.jpg',
-    title: 'Large chinchilla creatures at the San Diego Zoo',
+    title: 'Large chinchilla-like creatures',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725719/chrisvogt-me/galleries/now-sept-2025/IMG_6256.jpg',
-    title: 'A snake up close',
+    title: 'Snake encounter',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725711/chrisvogt-me/galleries/now-sept-2025/IMG_6222.jpg',
-    title: 'Looking at the gondola at the San Diego Zoo',
+    title: 'Gondola view',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725720/chrisvogt-me/galleries/now-sept-2025/IMG_6261.jpg',
-    title: 'Riding the gondola',
+    title: 'Gondola ride',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725721/chrisvogt-me/galleries/now-sept-2025/IMG_6267.jpg',
-    title: 'Airplane landing next to the San Diego Zoo',
+    title: 'Airplane landing near the zoo',
     width: 3,
     height: 4
   }
@@ -247,7 +247,7 @@ export const sanDiegoZoo = [
 export const friendsHighlights = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725696/chrisvogt-me/galleries/now-sept-2025/IMG_1196.jpg',
-    title: 'Out with PJ, Tatum, Nick, Chris and Roc',
+    title: 'With PJ, Tatum, Nick, Chris and Roc',
     width: 4,
     height: 3
   },
