@@ -190,37 +190,37 @@ export const sanDiegoZoo = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725714/chrisvogt-me/galleries/now-sept-2025/IMG_6241.jpg',
-    title: 'Lemur standing',
+    title: 'Meerkat standing',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725715/chrisvogt-me/galleries/now-sept-2025/IMG_6242.jpg',
-    title: 'Curious lemurs',
+    title: 'Curious meerkats',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725716/chrisvogt-me/galleries/now-sept-2025/IMG_6248.jpg',
-    title: 'Playful bears',
+    title: 'Playful sloth bears',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725717/chrisvogt-me/galleries/now-sept-2025/IMG_6252.jpg',
-    title: 'Unknown pig species',
+    title: 'Babirusa at the zoo',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725722/chrisvogt-me/galleries/now-sept-2025/IMG_6271.jpg',
-    title: 'Large chinchilla-like creatures',
+    title: 'Peccary at the zoo',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725719/chrisvogt-me/galleries/now-sept-2025/IMG_6256.jpg',
-    title: 'Snake encounter',
+    title: 'King Cobra at the San Diego Zoo',
     width: 3,
     height: 4
   },
@@ -252,9 +252,21 @@ export const friendsHighlights = [
     height: 3
   },
   {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725703/chrisvogt-me/galleries/now-sept-2025/IMG_6103.jpg',
+    title: 'Nick, David, Matt, Karlos and Roc',
+    width: 3,
+    height: 4
+  },
+  {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725706/chrisvogt-me/galleries/now-sept-2025/IMG_6146_2.jpg',
     title: 'Trevor, Chris and Nick',
     width: 3,
     height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725729/chrisvogt-me/galleries/now-sept-2025/IMG_6334.jpg',
+    title: 'New metal prints I ordered from Shutterfly',
+    width: 4,
+    height: 3
   }
 ]
