@@ -24,7 +24,13 @@ const SectionHeader = ({ icon, title }) => (
         gap: 2
       }}
     >
-      <FontAwesomeIcon icon={icon} />
+      <FontAwesomeIcon
+        icon={icon}
+        sx={{
+          width: '20px',
+          height: '20px'
+        }}
+      />
       {title}
     </Text>
   </Box>
