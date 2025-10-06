@@ -19,7 +19,7 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
       }}
     >
       <Card
-        variant='PostCard'
+        variant='actionCard'
         sx={{
           display: 'flex',
           flexDirection: horizontal ? 'row' : 'column',
