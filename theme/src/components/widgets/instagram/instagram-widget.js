@@ -149,7 +149,7 @@ export default () => {
         </div>
       )}
 
-      {media?.length && (
+      {media?.length > 0 && (
         <LightGallery
           onInit={ref => {
             lightGalleryRef.current = ref.instance
