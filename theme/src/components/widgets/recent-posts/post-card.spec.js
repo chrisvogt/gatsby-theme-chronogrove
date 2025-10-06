@@ -83,19 +83,32 @@ describe('PostCard', () => {
     expect(tree).toBeTruthy()
   })
 
-  it('verifies excerpt is rendered when explicitly provided', () => {
-    const propsWithExcerpt = {
+  it('renders in horizontal layout when horizontal prop is true', () => {
+    const propsWithHorizontal = {
       ...baseProps,
-      excerpt: 'This is a test excerpt that should be displayed.'
+      horizontal: true
     }
+    const tree = renderer.create(<PostCard {...propsWithHorizontal} />).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
 
-    const component = renderer.create(<PostCard {...propsWithExcerpt} />)
-    const tree = component.toJSON()
+  it('renders as image-only recap when isRecap prop is true', () => {
+    const propsWithRecap = {
+      ...baseProps,
+      isRecap: true
+    }
+    const tree = renderer.create(<PostCard {...propsWithRecap} />).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
 
-    // Verify that excerpt paragraph is rendered
-    const excerptParagraph = findExcerptParagraph(tree)
-    expect(excerptParagraph).toBeTruthy()
-    expect(excerptParagraph.children).toContain('This is a test excerpt that should be displayed.')
+  it('renders as image-only recap with horizontal layout', () => {
+    const propsWithRecapAndHorizontal = {
+      ...baseProps,
+      isRecap: true,
+      horizontal: true
+    }
+    const tree = renderer.create(<PostCard {...propsWithRecapAndHorizontal} />).toJSON()
+    expect(tree).toMatchSnapshot()
   })
 })
 

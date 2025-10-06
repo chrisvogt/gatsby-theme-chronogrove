@@ -135,6 +135,62 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
 </a>
 `;
 
+exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
+<a
+  className="css-sod6qt"
+  href="/blog/article"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+>
+  <div
+    className="css-xz12ce"
+  >
+    <div
+      className="card-content css-ihz6y5"
+    >
+      <div
+        className="card-media css-1liniix"
+      >
+        <div
+          aria-label="My Blog Post"
+          className="css-1kkguim"
+          role="img"
+          title="My Blog Post"
+        />
+      </div>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`PostCard renders as image-only recap with horizontal layout 1`] = `
+<a
+  className="css-sod6qt"
+  href="/blog/article"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+>
+  <div
+    className="css-nwtitb"
+  >
+    <div
+      className="card-content css-1taqpx2"
+    >
+      <div
+        className="card-media css-1liniix"
+      >
+        <div
+          aria-label="My Blog Post"
+          className="css-1qp8vmu"
+          role="img"
+          title="My Blog Post"
+        />
+      </div>
+    </div>
+  </div>
+</a>
+`;
+
 exports[`PostCard renders excerpt when provided 1`] = `
 <a
   className="css-sod6qt"
@@ -179,6 +235,51 @@ exports[`PostCard renders excerpt when provided 1`] = `
         >
           This is a sample excerpt for the blog post.
         </p>
+      </div>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] = `
+<a
+  className="css-sod6qt"
+  href="/blog/article"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+>
+  <div
+    className="css-nwtitb"
+  >
+    <div
+      className="card-content css-1taqpx2"
+    >
+      <div
+        className="card-media css-1usooy4"
+      >
+        <div
+          className="css-1qp8vmu"
+          role="img"
+        />
+      </div>
+      <div
+        className="css-p08ytg"
+      >
+        <div
+          className="css-ulp4wu"
+        >
+          Personal
+        </div>
+        <h3
+          className="css-hso91r"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
       </div>
     </div>
   </div>
