@@ -8,23 +8,24 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
   onMouseEnter={[Function]}
 >
   <div
-    className="css-139dwiw"
+    className="css-xz12ce"
   >
     <div
       className="card-content css-ihz6y5"
     >
       <div
-        className="card-media css-2wrb05"
+        className="card-media css-1usooy4"
       >
         <div
           className="css-1kkguim"
+          role="img"
         />
       </div>
       <div
         className="css-iiqpqc"
       >
         <div
-          className="css-1blzwpa"
+          className="css-ulp4wu"
         >
           Personal
         </div>
@@ -52,23 +53,24 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
   onMouseEnter={[Function]}
 >
   <div
-    className="css-139dwiw"
+    className="css-xz12ce"
   >
     <div
       className="card-content css-ihz6y5"
     >
       <div
-        className="card-media css-2wrb05"
+        className="card-media css-1usooy4"
       >
         <div
           className="css-1kkguim"
+          role="img"
         />
       </div>
       <div
         className="css-iiqpqc"
       >
         <div
-          className="css-1blzwpa"
+          className="css-ulp4wu"
         >
           Personal
         </div>
@@ -96,23 +98,24 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
   onMouseEnter={[Function]}
 >
   <div
-    className="css-139dwiw"
+    className="css-xz12ce"
   >
     <div
       className="card-content css-ihz6y5"
     >
       <div
-        className="card-media css-2wrb05"
+        className="card-media css-1usooy4"
       >
         <div
           className="css-1kkguim"
+          role="img"
         />
       </div>
       <div
         className="css-iiqpqc"
       >
         <div
-          className="css-1blzwpa"
+          className="css-ulp4wu"
         >
           Personal
         </div>
@@ -140,23 +143,24 @@ exports[`PostCard renders excerpt when provided 1`] = `
   onMouseEnter={[Function]}
 >
   <div
-    className="css-139dwiw"
+    className="css-xz12ce"
   >
     <div
       className="card-content css-ihz6y5"
     >
       <div
-        className="card-media css-2wrb05"
+        className="card-media css-1usooy4"
       >
         <div
           className="css-1kkguim"
+          role="img"
         />
       </div>
       <div
         className="css-iiqpqc"
       >
         <div
-          className="css-1blzwpa"
+          className="css-ulp4wu"
         >
           Personal
         </div>
@@ -189,7 +193,7 @@ exports[`PostCard renders without banner when not provided 1`] = `
   onMouseEnter={[Function]}
 >
   <div
-    className="css-139dwiw"
+    className="css-xz12ce"
   >
     <div
       className="card-content css-ihz6y5"
@@ -198,7 +202,7 @@ exports[`PostCard renders without banner when not provided 1`] = `
         className="css-iiqpqc"
       >
         <div
-          className="css-1blzwpa"
+          className="css-ulp4wu"
         >
           Personal
         </div>
@@ -226,16 +230,17 @@ exports[`PostCard renders without category when not provided 1`] = `
   onMouseEnter={[Function]}
 >
   <div
-    className="css-139dwiw"
+    className="css-xz12ce"
   >
     <div
       className="card-content css-ihz6y5"
     >
       <div
-        className="card-media css-2wrb05"
+        className="card-media css-1usooy4"
       >
         <div
           className="css-1kkguim"
+          role="img"
         />
       </div>
       <div
