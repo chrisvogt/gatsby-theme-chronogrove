@@ -163,34 +163,6 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
 </a>
 `;
 
-exports[`PostCard renders as image-only recap with horizontal layout 1`] = `
-<a
-  className="css-sod6qt"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-nwtitb"
-  >
-    <div
-      className="card-content css-1taqpx2"
-    >
-      <div
-        className="card-media css-1liniix"
-      >
-        <div
-          aria-label="My Blog Post"
-          className="css-1qp8vmu"
-          role="img"
-          title="My Blog Post"
-        />
-      </div>
-    </div>
-  </div>
-</a>
-`;
-
 exports[`PostCard renders excerpt when provided 1`] = `
 <a
   className="css-sod6qt"
