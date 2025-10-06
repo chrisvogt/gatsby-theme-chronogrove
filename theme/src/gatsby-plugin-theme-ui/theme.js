@@ -90,7 +90,6 @@ export const PostCard = {
   flexDirection: 'column',
   '.card-media': {
     mb: 2,
-    height: '100%',
     overflow: 'hidden'
   },
   '.read-more-icon': {

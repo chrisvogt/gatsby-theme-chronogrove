@@ -11,30 +11,34 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
     className="css-139dwiw"
   >
     <div
-      className="card-content css-x4n4mc"
+      className="card-content css-ihz6y5"
     >
       <div
-        className="card-media"
+        className="card-media css-2wrb05"
       >
         <div
-          className="css-1ywf2dg"
+          className="css-1kkguim"
         />
       </div>
       <div
-        className="css-1blzwpa"
+        className="css-iiqpqc"
       >
-        Personal
+        <div
+          className="css-1blzwpa"
+        >
+          Personal
+        </div>
+        <h3
+          className="css-1t3cywp"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
       </div>
-      <h3
-        className="css-13imqch"
-      >
-        My Blog Post
-      </h3>
-      <time
-        className="created css-1c6hy0j"
-      >
-        1592202624
-      </time>
     </div>
   </div>
 </a>
@@ -51,30 +55,34 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
     className="css-139dwiw"
   >
     <div
-      className="card-content css-x4n4mc"
+      className="card-content css-ihz6y5"
     >
       <div
-        className="card-media"
+        className="card-media css-2wrb05"
       >
         <div
-          className="css-1ywf2dg"
+          className="css-1kkguim"
         />
       </div>
       <div
-        className="css-1blzwpa"
+        className="css-iiqpqc"
       >
-        Personal
+        <div
+          className="css-1blzwpa"
+        >
+          Personal
+        </div>
+        <h3
+          className="css-1t3cywp"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
       </div>
-      <h3
-        className="css-13imqch"
-      >
-        My Blog Post
-      </h3>
-      <time
-        className="created css-1c6hy0j"
-      >
-        1592202624
-      </time>
     </div>
   </div>
 </a>
@@ -91,30 +99,34 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
     className="css-139dwiw"
   >
     <div
-      className="card-content css-x4n4mc"
+      className="card-content css-ihz6y5"
     >
       <div
-        className="card-media"
+        className="card-media css-2wrb05"
       >
         <div
-          className="css-1ywf2dg"
+          className="css-1kkguim"
         />
       </div>
       <div
-        className="css-1blzwpa"
+        className="css-iiqpqc"
       >
-        Personal
+        <div
+          className="css-1blzwpa"
+        >
+          Personal
+        </div>
+        <h3
+          className="css-1t3cywp"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
       </div>
-      <h3
-        className="css-13imqch"
-      >
-        My Blog Post
-      </h3>
-      <time
-        className="created css-1c6hy0j"
-      >
-        1592202624
-      </time>
     </div>
   </div>
 </a>
@@ -131,35 +143,39 @@ exports[`PostCard renders excerpt when provided 1`] = `
     className="css-139dwiw"
   >
     <div
-      className="card-content css-x4n4mc"
+      className="card-content css-ihz6y5"
     >
       <div
-        className="card-media"
+        className="card-media css-2wrb05"
       >
         <div
-          className="css-1ywf2dg"
+          className="css-1kkguim"
         />
       </div>
       <div
-        className="css-1blzwpa"
+        className="css-iiqpqc"
       >
-        Personal
+        <div
+          className="css-1blzwpa"
+        >
+          Personal
+        </div>
+        <h3
+          className="css-1t3cywp"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
+        <p
+          className="description css-1uz48mf"
+        >
+          This is a sample excerpt for the blog post.
+        </p>
       </div>
-      <h3
-        className="css-13imqch"
-      >
-        My Blog Post
-      </h3>
-      <time
-        className="created css-1c6hy0j"
-      >
-        1592202624
-      </time>
-      <p
-        className="description css-1uz48mf"
-      >
-        This is a sample excerpt for the blog post.
-      </p>
     </div>
   </div>
 </a>
@@ -176,23 +192,27 @@ exports[`PostCard renders without banner when not provided 1`] = `
     className="css-139dwiw"
   >
     <div
-      className="card-content css-x4n4mc"
+      className="card-content css-ihz6y5"
     >
       <div
-        className="css-1blzwpa"
+        className="css-iiqpqc"
       >
-        Personal
+        <div
+          className="css-1blzwpa"
+        >
+          Personal
+        </div>
+        <h3
+          className="css-1t3cywp"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
       </div>
-      <h3
-        className="css-13imqch"
-      >
-        My Blog Post
-      </h3>
-      <time
-        className="created css-1c6hy0j"
-      >
-        1592202624
-      </time>
     </div>
   </div>
 </a>
@@ -209,25 +229,29 @@ exports[`PostCard renders without category when not provided 1`] = `
     className="css-139dwiw"
   >
     <div
-      className="card-content css-x4n4mc"
+      className="card-content css-ihz6y5"
     >
       <div
-        className="card-media"
+        className="card-media css-2wrb05"
       >
         <div
-          className="css-1ywf2dg"
+          className="css-1kkguim"
         />
       </div>
-      <h3
-        className="css-13imqch"
+      <div
+        className="css-iiqpqc"
       >
-        My Blog Post
-      </h3>
-      <time
-        className="created css-1c6hy0j"
-      >
-        1592202624
-      </time>
+        <h3
+          className="css-1t3cywp"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-1c6hy0j"
+        >
+          1592202624
+        </time>
+      </div>
     </div>
   </div>
 </a>
