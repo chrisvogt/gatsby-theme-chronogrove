@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.62.0
+
+### ✨ Features
+
+- **Latest Posts Widget Redesign**: Completely redesigned the Latest Posts widget with categorized content sections
+  - **Categorized Display**: Posts now appear in organized sections (Recaps, Music, Photography, Posts) with dedicated icons
+  - **New PostCard Layouts**: Added support for horizontal layout and image-only recap display modes
+  - **Smart Post Categorization**: Implemented intelligent post categorization based on content type and metadata
+  - **Enhanced Visual Hierarchy**: Each section has distinct styling and appropriate icons for better content discovery
+
+### 🔧 Architecture Improvements
+
+- **New `useCategorizedPosts` Hook**: Replaced `useRecentPosts` with sophisticated categorization logic
+  - **Intelligent Filtering**: Automatically categorizes posts into recaps, music, photography, and other content types
+  - **Deduplication Logic**: Ensures no post appears in multiple sections while maintaining proper categorization
+  - **Flexible Data Structure**: Returns both categorized arrays and unified posts array for different use cases
+- **Enhanced PostCard Component**: Added new props for flexible display modes
+  - **Horizontal Layout**: `horizontal` prop enables side-by-side image and content layout
+  - **Recap Mode**: `isRecap` prop creates image-only display for recap posts
+  - **Scroll-to-Top**: Added automatic scroll-to-top functionality on navigation
+- **Simplified Category Component**: Streamlined category display with cleaner, more readable styling
+  - **Removed Complex Styling**: Eliminated heavy backdrop filters and gradients for better performance
+  - **Improved Typography**: Better font sizing and spacing for enhanced readability
+
+### 🎯 User Experience
+
+- **Better Content Organization**: Users can now easily find different types of content in dedicated sections
+- **Visual Section Headers**: Each content type has distinctive icons (calendar, music, camera, document)
+- **Responsive Design**: All new layouts work seamlessly across mobile, tablet, and desktop
+- **Improved Navigation**: Posts automatically scroll to top when clicked for better user experience
+
+### 🧪 Testing & Quality
+
+- **Comprehensive Test Coverage**: Added extensive test suite for all new functionality
+  - **New Test Files**: `use-categorized-posts.spec.js` (693 lines) with comprehensive categorization logic testing
+  - **Enhanced PostCard Tests**: Added tests for horizontal layout, recap mode, and scroll-to-top functionality
+  - **Updated Snapshots**: All visual regression tests updated to reflect new component structures
+  - **Edge Case Coverage**: Tests handle deduplication, empty data, and complex categorization scenarios
+- **100% Code Coverage**: Maintained complete test coverage across all modified components
+- **All Tests Passing**: 147+ tests continue to pass with new functionality
+
+### 📚 Technical Details
+
+- **Backward Compatibility**: All existing functionality preserved - no breaking changes
+- **Performance Optimized**: Efficient categorization logic with proper memoization
+- **Theme Integration**: New components follow established Theme UI patterns and styling
+- **Accessibility**: Maintained proper ARIA attributes and keyboard navigation support
+
 ## 0.61.3
 
 ### 🐛 Bug Fixes

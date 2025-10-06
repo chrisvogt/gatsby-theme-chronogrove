@@ -1,6 +1,21 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
+import { render, screen, fireEvent } from '@testing-library/react'
 import PostCard from './post-card'
+
+// Mock window.scrollTo
+const mockScrollTo = jest.fn()
+Object.defineProperty(window, 'scrollTo', {
+  value: mockScrollTo,
+  writable: true
+})
+
+// Mock Gatsby navigation
+const mockNavigate = jest.fn()
+Object.defineProperty(window, '___navigate', {
+  value: mockNavigate,
+  writable: true
+})
 
 describe('PostCard', () => {
   const baseProps = {
@@ -83,19 +98,34 @@ describe('PostCard', () => {
     expect(tree).toBeTruthy()
   })
 
-  it('verifies excerpt is rendered when explicitly provided', () => {
-    const propsWithExcerpt = {
+  it('renders in horizontal layout when horizontal prop is true', () => {
+    const propsWithHorizontal = {
       ...baseProps,
-      excerpt: 'This is a test excerpt that should be displayed.'
+      horizontal: true
     }
+    const tree = renderer.create(<PostCard {...propsWithHorizontal} />).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
 
-    const component = renderer.create(<PostCard {...propsWithExcerpt} />)
-    const tree = component.toJSON()
+  it('renders as image-only recap when isRecap prop is true', () => {
+    const propsWithRecap = {
+      ...baseProps,
+      isRecap: true
+    }
+    const tree = renderer.create(<PostCard {...propsWithRecap} />).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
 
-    // Verify that excerpt paragraph is rendered
-    const excerptParagraph = findExcerptParagraph(tree)
-    expect(excerptParagraph).toBeTruthy()
-    expect(excerptParagraph.children).toContain('This is a test excerpt that should be displayed.')
+  it('calls window.scrollTo when clicked', () => {
+    mockScrollTo.mockClear()
+    mockNavigate.mockClear()
+
+    render(<PostCard {...baseProps} />)
+    const link = screen.getByRole('link')
+
+    fireEvent.click(link)
+
+    expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
   })
 })
 

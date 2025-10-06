@@ -93,7 +93,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
         "transform": "scale(1.015)",
       },
       ".card-media": {
-        "height": "100%",
         "mb": 2,
         "overflow": "hidden",
       },
