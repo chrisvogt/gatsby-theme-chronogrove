@@ -69,92 +69,80 @@ export const sonomaWineries = [
 
 export const sonomaDriveHome = [
   {
-    src: 'https://picsum.photos/1200/900?random=30',
-    title: 'Highway 1 coastal drive',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725702/chrisvogt-me/galleries/now-sept-2025/IMG_5920.jpg',
+    title: 'Gleason Beach in Bodega Bay',
     width: 4,
     height: 3
   },
   {
-    src: 'https://picsum.photos/900/1200?random=31',
-    title: 'Coastal stop for photos',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725703/chrisvogt-me/galleries/now-sept-2025/IMG_5924.jpg',
+    title: 'Gleason Beach in Bodega Bay',
     width: 3,
     height: 4
   },
   {
-    src: 'https://picsum.photos/1200/900?random=32',
-    title: 'Souvenir shopping',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725703/chrisvogt-me/galleries/now-sept-2025/IMG_5923.jpg',
+    title: 'Gleason Beach in Bodega Bay',
     width: 4,
     height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=33',
-    title: 'Final coastal views',
-    width: 3,
-    height: 4
   }
 ]
 
 export const vinylCollection = [
   {
-    src: 'https://picsum.photos/1200/900?random=6',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725705/chrisvogt-me/galleries/now-sept-2025/IMG_6130.jpg',
     title: 'Vinyl collection display in living room',
-    width: 4,
-    height: 3
+    width: 3,
+    height: 4
   },
   {
-    src: 'https://picsum.photos/900/1200?random=7',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725704/chrisvogt-me/galleries/now-sept-2025/IMG_6110.jpg',
     title: 'Record player setup',
     width: 3,
     height: 4
   },
   {
-    src: 'https://picsum.photos/1200/900?random=8',
-    title: 'New vinyl additions',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725730/chrisvogt-me/galleries/now-sept-2025/IMG_6384.jpg',
+    title: 'Shopping for new albums at Amoeba Music in San Francisco',
     width: 4,
     height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=9',
-    title: 'Music corner decoration',
-    width: 3,
-    height: 4
   }
 ]
 
 export const indoorGardening = [
   {
-    src: 'https://picsum.photos/1200/900?random=10',
-    title: 'Countertop Aerogarden setup',
-    width: 4,
-    height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=11',
-    title: 'Floor Aerogarden with cucumbers and tomatoes',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725705/chrisvogt-me/galleries/now-sept-2025/IMG_6128.jpg',
+    title: 'Basil in the AeroGarden at the beginning of the month',
     width: 3,
     height: 4
   },
   {
-    src: 'https://picsum.photos/1200/900?random=12',
-    title: 'Growing cucumber vine reaching for light',
-    width: 4,
-    height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=13',
-    title: 'Jalapeño plants growing',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725722/chrisvogt-me/galleries/now-sept-2025/IMG_6327.jpg',
+    title: 'Basil at the end of the month',
     width: 3,
     height: 4
   },
   {
-    src: 'https://picsum.photos/1200/900?random=14',
-    title: 'Cherry tomatoes on the vine',
-    width: 4,
-    height: 3
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725725/chrisvogt-me/galleries/now-sept-2025/IMG_6328.jpg',
+    title: 'A bean plant growing outdoors on my patio',
+    width: 3,
+    height: 4
   },
   {
-    src: 'https://picsum.photos/900/1200?random=15',
-    title: 'Herb garden in countertop Aerogarden',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725725/chrisvogt-me/galleries/now-sept-2025/IMG_6329.jpg',
+    title: 'Cucumber, jalapeño, and cherry tomatoes growing in the floor AeroGarden',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725726/chrisvogt-me/galleries/now-sept-2025/IMG_6330.jpg',
+    title: 'Cucumber up close',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725729/chrisvogt-me/galleries/now-sept-2025/IMG_6381.jpg',
+    title: 'Cucumber by the end of the month',
     width: 3,
     height: 4
   }
