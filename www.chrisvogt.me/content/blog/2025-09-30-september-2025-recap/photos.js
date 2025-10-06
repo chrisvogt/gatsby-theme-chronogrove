@@ -148,40 +148,97 @@ export const indoorGardening = [
   }
 ]
 
+export const sanDiego = [
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725709/chrisvogt-me/galleries/now-sept-2025/IMG_6190.jpg',
+    title: 'Seals on the beach in La Jolla',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725710/chrisvogt-me/galleries/now-sept-2025/IMG_6197.jpg',
+    title: 'Seals on the beach in La Jolla',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725711/chrisvogt-me/galleries/now-sept-2025/IMG_6206.jpg',
+    title: 'Pelicans on the beach in La Jolla',
+    width: 3,
+    height: 4
+  }
+]
+
 export const sanDiegoZoo = [
   {
-    src: 'https://picsum.photos/1200/900?random=16',
-    title: 'Bear at San Diego Zoo',
-    width: 4,
-    height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=17',
-    title: 'Snake exhibit',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725711/chrisvogt-me/galleries/now-sept-2025/IMG_6217.jpg',
+    title: 'Pygmy hippopotamus at San Diego Zoo',
     width: 3,
     height: 4
   },
   {
-    src: 'https://picsum.photos/1200/900?random=18',
-    title: 'Elephant family',
-    width: 4,
-    height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=19',
-    title: 'Playful lemurs',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725712/chrisvogt-me/galleries/now-sept-2025/IMG_6233.jpg',
+    title: "Vus'musi, the largest elephant at San Diego Zoo",
     width: 3,
     height: 4
   },
   {
-    src: 'https://picsum.photos/1200/900?random=20',
-    title: 'Zoo entrance and architecture',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725715/chrisvogt-me/galleries/now-sept-2025/IMG_6245.jpg',
+    title: 'A group of baboons at San Diego Zoo',
     width: 4,
     height: 3
   },
   {
-    src: 'https://picsum.photos/900/1200?random=21',
-    title: 'Additional animal photos',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725714/chrisvogt-me/galleries/now-sept-2025/IMG_6241.jpg',
+    title: 'Lemur standing up on its hind legs',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725715/chrisvogt-me/galleries/now-sept-2025/IMG_6242.jpg',
+    title: 'A group of curious lemurs',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725716/chrisvogt-me/galleries/now-sept-2025/IMG_6248.jpg',
+    title: 'Playful bears at the zoo',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725717/chrisvogt-me/galleries/now-sept-2025/IMG_6252.jpg',
+    title: 'A type of pig (?) at the San Diego Zoo',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725722/chrisvogt-me/galleries/now-sept-2025/IMG_6271.jpg',
+    title: 'Large chinchilla creatures at the San Diego Zoo',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725719/chrisvogt-me/galleries/now-sept-2025/IMG_6256.jpg',
+    title: 'A snake up close',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725711/chrisvogt-me/galleries/now-sept-2025/IMG_6222.jpg',
+    title: 'Looking at the gondola at the San Diego Zoo',
+    width: 4,
+    height: 3
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725720/chrisvogt-me/galleries/now-sept-2025/IMG_6261.jpg',
+    title: 'Riding the gondola',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725721/chrisvogt-me/galleries/now-sept-2025/IMG_6267.jpg',
+    title: 'Airplane landing next to the San Diego Zoo',
     width: 3,
     height: 4
   }
@@ -189,26 +246,14 @@ export const sanDiegoZoo = [
 
 export const friendsHighlights = [
   {
-    src: 'https://picsum.photos/1200/900?random=22',
-    title: 'Dinner with friends',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725696/chrisvogt-me/galleries/now-sept-2025/IMG_1196.jpg',
+    title: 'Out with PJ, Tatum, Nick, Chris and Roc',
     width: 4,
     height: 3
   },
   {
-    src: 'https://picsum.photos/900/1200?random=23',
-    title: 'Social gathering highlights',
-    width: 3,
-    height: 4
-  },
-  {
-    src: 'https://picsum.photos/1200/900?random=24',
-    title: 'Fun moments with friends',
-    width: 4,
-    height: 3
-  },
-  {
-    src: 'https://picsum.photos/900/1200?random=25',
-    title: 'September social highlights',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1759725706/chrisvogt-me/galleries/now-sept-2025/IMG_6146_2.jpg',
+    title: 'Trevor, Chris and Nick',
     width: 3,
     height: 4
   }
