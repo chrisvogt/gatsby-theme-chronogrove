@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.61.2
+## 0.61.3
 
 ### 🐛 Bug Fixes
 
@@ -13,7 +13,7 @@
 - Added Instagram widget loading state tests to prevent regression of "0" character rendering issue
 - All 87 tests passing with clean linting
 
-## 0.61.1
+## 0.61.2
 
 ### 🐛 Bug Fixes
 
