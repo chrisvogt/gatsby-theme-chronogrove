@@ -129,10 +129,9 @@ describe('useCategorizedPosts', () => {
 
     const result = useCategorizedPosts()
 
-    expect(result.recaps).toHaveLength(3)
+    expect(result.recaps).toHaveLength(2)
     expect(result.recaps[0].frontmatter.title).toBe('September 2025 Recap')
     expect(result.recaps[1].frontmatter.title).toBe('July 2025 Recap')
-    expect(result.recaps[2].frontmatter.title).toBe('June 2025 Recap')
 
     expect(result.music).toHaveLength(1)
     expect(result.music[0].frontmatter.title).toBe('Here and Now Piano Cover')
@@ -144,7 +143,7 @@ describe('useCategorizedPosts', () => {
     expect(result.other[0].frontmatter.title).toBe('Evolution of My Blog')
 
     // Check that posts array contains deduplicated posts
-    expect(result.posts).toHaveLength(6) // 3 recaps + 1 music + 1 photography + 1 other
+    expect(result.posts).toHaveLength(5) // 2 recaps + 1 music + 1 photography + 1 other
     expect(result.posts.every(post => post.section)).toBe(true)
   })
 

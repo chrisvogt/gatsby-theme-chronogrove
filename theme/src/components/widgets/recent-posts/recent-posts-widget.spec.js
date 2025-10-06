@@ -91,10 +91,10 @@ describe('RecentPostsWidget', () => {
     render(<RecentPostsWidget />)
 
     // Verify section headers are rendered
-    expect(screen.getByText('Latest Recaps')).toBeInTheDocument()
-    expect(screen.getByText('Latest Music')).toBeInTheDocument()
-    expect(screen.getByText('Latest Photography')).toBeInTheDocument()
-    expect(screen.getByText('Latest Posts')).toBeInTheDocument()
+    expect(screen.getByText('Recaps')).toBeInTheDocument()
+    expect(screen.getByText('Music')).toBeInTheDocument()
+    expect(screen.getByText('Photography')).toBeInTheDocument()
+    expect(screen.getByText('Posts')).toBeInTheDocument()
 
     // Verify all post cards are rendered
     const postCards = screen.getAllByTestId('post-card')
@@ -148,10 +148,10 @@ describe('RecentPostsWidget', () => {
     render(<RecentPostsWidget />)
 
     // Verify only recaps section is rendered
-    expect(screen.getByText('Latest Recaps')).toBeInTheDocument()
-    expect(screen.queryByText('Latest Music')).not.toBeInTheDocument()
-    expect(screen.queryByText('Latest Photography')).not.toBeInTheDocument()
-    expect(screen.queryByText('Latest Posts')).not.toBeInTheDocument()
+    expect(screen.getByText('Recaps')).toBeInTheDocument()
+    expect(screen.queryByText('Music')).not.toBeInTheDocument()
+    expect(screen.queryByText('Photography')).not.toBeInTheDocument()
+    expect(screen.queryByText('Posts')).not.toBeInTheDocument()
 
     // Verify post cards are rendered
     const postCards = screen.getAllByTestId('post-card')
@@ -172,10 +172,10 @@ describe('RecentPostsWidget', () => {
     render(<RecentPostsWidget />)
 
     // Verify no section headers are rendered
-    expect(screen.queryByText('Latest Recaps')).not.toBeInTheDocument()
-    expect(screen.queryByText('Latest Music')).not.toBeInTheDocument()
-    expect(screen.queryByText('Latest Photography')).not.toBeInTheDocument()
-    expect(screen.queryByText('Latest Posts')).not.toBeInTheDocument()
+    expect(screen.queryByText('Recaps')).not.toBeInTheDocument()
+    expect(screen.queryByText('Music')).not.toBeInTheDocument()
+    expect(screen.queryByText('Photography')).not.toBeInTheDocument()
+    expect(screen.queryByText('Posts')).not.toBeInTheDocument()
 
     // Verify no post cards are rendered
     expect(screen.queryByTestId('post-card')).not.toBeInTheDocument()
@@ -236,7 +236,7 @@ describe('RecentPostsWidget', () => {
     render(<RecentPostsWidget />)
 
     // Verify section headers are rendered without count
-    expect(screen.getByText('Latest Recaps')).toBeInTheDocument()
+    expect(screen.getByText('Recaps')).toBeInTheDocument()
     expect(screen.queryByText('(3)')).not.toBeInTheDocument()
   })
 })
