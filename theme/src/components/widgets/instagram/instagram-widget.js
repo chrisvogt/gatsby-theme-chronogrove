@@ -31,7 +31,7 @@ import {
 } from '../../../selectors/instagram'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 
-import Button from '../../button'
+import ActionButton from '../../action-button'
 import CallToAction from '../call-to-action'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
@@ -145,7 +145,9 @@ export default () => {
 
       {!isLoading && media?.length > MAX_IMAGES.default && (
         <div sx={{ my: 4, textAlign: 'center' }}>
-          <Button onClick={() => setIsShowingMore(!isShowingMore)}>{isShowingMore ? 'Show Less' : 'Show More'}</Button>
+          <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
+            {isShowingMore ? 'Show Less' : 'Show More'}
+          </ActionButton>
         </div>
       )}
 

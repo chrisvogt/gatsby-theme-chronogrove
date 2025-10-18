@@ -70,7 +70,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
     </p>
   </div>
   <div
-    className="css-19lpcf0"
+    className="css-gavibk"
   >
     <h3
       className="css-1pgqsji"
@@ -131,7 +131,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
     [{"label":"Games Played","value":5}]
   </div>
   <div
-    className="css-19lpcf0"
+    className="css-gavibk"
   >
     <h3
       className="css-1pgqsji"
@@ -387,7 +387,7 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
     [{"label":"Games Played","value":5}]
   </div>
   <div
-    className="css-19lpcf0"
+    className="css-gavibk"
   >
     <h3
       className="css-1pgqsji"
@@ -448,7 +448,7 @@ exports[`SteamWidget renders loading state 1`] = `
     []
   </div>
   <div
-    className="css-19lpcf0"
+    className="css-gavibk"
   >
     <h3
       className="css-1pgqsji"
@@ -512,7 +512,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
     []
   </div>
   <div
-    className="css-19lpcf0"
+    className="css-gavibk"
   >
     <h3
       className="css-1pgqsji"
@@ -573,7 +573,7 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
     [{"label":"Games Played","value":5}]
   </div>
   <div
-    className="css-19lpcf0"
+    className="css-gavibk"
   >
     <h3
       className="css-1pgqsji"

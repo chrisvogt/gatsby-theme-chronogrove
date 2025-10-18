@@ -6,7 +6,7 @@ import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useRef, useEffect, useMemo } from 'react'
-import VinylPagination from './vinyl-pagination'
+import Pagination from '../../pagination'
 import DiscogsModal from './discogs-modal'
 
 const VinylCollection = ({ isLoading, releases = [] }) => {
@@ -645,7 +645,13 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <VinylPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          variant='primary'
+          size='medium'
+        />
       )}
 
       {/* Modal */}

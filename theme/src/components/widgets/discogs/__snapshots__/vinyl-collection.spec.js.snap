@@ -4574,9 +4574,10 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
     >
       <button
         aria-label="Previous page"
-        className="css-1wqopuy"
+        className="css-ehv8pk"
         disabled={true}
         onClick={[Function]}
+        type="button"
       >
         <svg
           aria-hidden="true"
@@ -4599,31 +4600,32 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       <div
         className="css-3umnwr"
       >
-        <div
-          className="css-1b6rjoo"
+        <button
+          aria-current="page"
+          aria-label="Go to page 1"
+          className="css-zw0qbo"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
         >
-          <button
-            aria-current="page"
-            aria-label="Go to page 1"
-            className="css-qb4jev"
-            onClick={[Function]}
-          >
-            1
-          </button>
-          <button
-            aria-label="Go to page 2"
-            className="css-rjnzsf"
-            onClick={[Function]}
-          >
-            2
-          </button>
-        </div>
+          1
+        </button>
+        <button
+          aria-label="Go to page 2"
+          className="css-1cp4f9a"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          2
+        </button>
       </div>
       <button
         aria-label="Next page"
-        className="css-1b2ompy"
+        className="css-1cp4f9a"
         disabled={false}
         onClick={[Function]}
+        type="button"
       >
         <svg
           aria-hidden="true"
@@ -4645,7 +4647,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       </button>
     </div>
     <div
-      className="css-1wp5sa6"
+      className="css-2teccw"
     >
       Page 
       1
