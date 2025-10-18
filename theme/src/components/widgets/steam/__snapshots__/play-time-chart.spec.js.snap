@@ -41,15 +41,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -87,8 +79,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         <div
           className="css-k763k9"
         >
-          277.83
-          h total
+          277.83h total
         </div>
       </div>
     </div>
@@ -126,15 +117,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         <div
           className="css-k763k9"
         >
-          200
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            1h
-             recently
-          </span>
+          200h total • 1h recently
         </div>
       </div>
     </div>
@@ -209,15 +192,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
           <div
             class="css-k763k9"
           >
-            757.35
-            h total
-            <span
-              class="css-16sxbe5"
-            >
-              • 
-              2h
-               recently
-            </span>
+            757.35h total • 2h recently
           </div>
         </div>
       </div>
@@ -252,8 +227,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
           <div
             class="css-k763k9"
           >
-            277.83
-            h total
+            277.83h total
           </div>
         </div>
       </div>
@@ -288,15 +262,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
           <div
             class="css-k763k9"
           >
-            200
-            h total
-            <span
-              class="css-16sxbe5"
-            >
-              • 
-              1h
-               recently
-            </span>
+            200h total • 1h recently
           </div>
         </div>
       </div>
@@ -374,15 +340,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -420,8 +378,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         <div
           className="css-k763k9"
         >
-          277.83
-          h total
+          277.83h total
         </div>
       </div>
     </div>
@@ -459,15 +416,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         <div
           className="css-k763k9"
         >
-          200
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            1h
-             recently
-          </span>
+          200h total • 1h recently
         </div>
       </div>
     </div>
@@ -544,15 +493,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -590,8 +531,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         <div
           className="css-k763k9"
         >
-          277.83
-          h total
+          277.83h total
         </div>
       </div>
     </div>
@@ -629,15 +569,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         <div
           className="css-k763k9"
         >
-          200
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            1h
-             recently
-          </span>
+          200h total • 1h recently
         </div>
       </div>
     </div>
@@ -714,15 +646,7 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -847,15 +771,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -893,8 +809,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         <div
           className="css-k763k9"
         >
-          277.83
-          h total
+          277.83h total
         </div>
       </div>
     </div>
@@ -932,15 +847,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         <div
           className="css-k763k9"
         >
-          200
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            1h
-             recently
-          </span>
+          200h total • 1h recently
         </div>
       </div>
     </div>
@@ -1015,15 +922,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
           <div
             class="css-k763k9"
           >
-            757.35
-            h total
-            <span
-              class="css-16sxbe5"
-            >
-              • 
-              2h
-               recently
-            </span>
+            757.35h total • 2h recently
           </div>
         </div>
       </div>
@@ -1058,8 +957,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
           <div
             class="css-k763k9"
           >
-            277.83
-            h total
+            277.83h total
           </div>
         </div>
       </div>
@@ -1094,15 +992,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
           <div
             class="css-k763k9"
           >
-            200
-            h total
-            <span
-              class="css-16sxbe5"
-            >
-              • 
-              1h
-               recently
-            </span>
+            200h total • 1h recently
           </div>
         </div>
       </div>
@@ -1199,15 +1089,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -1245,8 +1127,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         <div
           className="css-k763k9"
         >
-          277.83
-          h total
+          277.83h total
         </div>
       </div>
     </div>
@@ -1284,15 +1165,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         <div
           className="css-k763k9"
         >
-          200
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            1h
-             recently
-          </span>
+          200h total • 1h recently
         </div>
       </div>
     </div>
@@ -1369,15 +1242,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         <div
           className="css-k763k9"
         >
-          757.35
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            2h
-             recently
-          </span>
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
@@ -1415,8 +1280,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         <div
           className="css-k763k9"
         >
-          277.83
-          h total
+          277.83h total
         </div>
       </div>
     </div>
@@ -1454,15 +1318,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         <div
           className="css-k763k9"
         >
-          200
-          h total
-          <span
-            className="css-16sxbe5"
-          >
-            • 
-            1h
-             recently
-          </span>
+          200h total • 1h recently
         </div>
       </div>
     </div>

@@ -84,7 +84,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
     Games I've played in the last two weeks.
   </p>
   <div
-    className="css-o8fdm3"
+    className="css-16xrr5x"
   />
   <div
     className="css-gavibk"
@@ -145,17 +145,73 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
     Games I've played in the last two weeks.
   </p>
   <div
-    className="css-o8fdm3"
+    className="css-16xrr5x"
   >
     <div
-      data-testid="PostCard"
+      className="css-1vdkwje"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      Half-Life
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="Half-Life header"
+          className="css-1hlyxwi"
+          src="https://example.com/halflife.jpg"
+        />
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-1i1qip1"
+      >
+        <div
+          className="css-1d0l7ja"
+        >
+          Half-Life
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          2 hours
+        </div>
+      </div>
     </div>
     <div
-      data-testid="PostCard"
+      className="css-1vdkwje"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
-      Portal
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="Portal header"
+          className="css-1hlyxwi"
+          src="https://example.com/portal.jpg"
+        />
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-1i1qip1"
+      >
+        <div
+          className="css-1d0l7ja"
+        >
+          Portal
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          45 minutes
+        </div>
+      </div>
     </div>
   </div>
   <div
@@ -212,15 +268,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
           <div
             className="css-k763k9"
           >
-            757.35
-            h total
-            <span
-              className="css-r795jk"
-            >
-              • 
-              2 hours
-               recently
-            </span>
+            757.35h total • 2 hours recently
           </div>
         </div>
       </div>
@@ -258,8 +306,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
           <div
             className="css-k763k9"
           >
-            277.83
-            h total
+            277.83h total
           </div>
         </div>
       </div>
@@ -354,7 +401,7 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
     Games I've played in the last two weeks.
   </p>
   <div
-    className="css-o8fdm3"
+    className="css-16xrr5x"
   />
   <div
     className="css-gavibk"
@@ -415,7 +462,7 @@ exports[`SteamWidget renders loading state 1`] = `
     Games I've played in the last two weeks.
   </p>
   <div
-    className="css-o8fdm3"
+    className="css-16xrr5x"
   />
   <div
     className="css-gavibk"
@@ -479,7 +526,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
     Games I've played in the last two weeks.
   </p>
   <div
-    className="css-o8fdm3"
+    className="css-16xrr5x"
   />
   <div
     className="css-gavibk"
@@ -540,7 +587,7 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
     Games I've played in the last two weeks.
   </p>
   <div
-    className="css-o8fdm3"
+    className="css-16xrr5x"
   />
   <div
     className="css-gavibk"
