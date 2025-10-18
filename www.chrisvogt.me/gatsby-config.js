@@ -59,7 +59,7 @@ module.exports = {
       },
       instagram: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram'
+        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram?t=1760771195'
       },
       spotify: {
         username: 'chrisvogt',

@@ -96,11 +96,11 @@ const SteamWidget = React.memo(() => {
 
       <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
-          My Games
+          Leaderboard
         </Heading>
       </div>
 
-      <Themed.p sx={{ mb: 4 }}>Games I own and their play time statistics.</Themed.p>
+      <Themed.p sx={{ mb: 4 }}>My top 10 most played games.</Themed.p>
 
       <PlayTimeChart games={ownedGames} isLoading={isLoading} profileURL={profileURL} />
     </Widget>

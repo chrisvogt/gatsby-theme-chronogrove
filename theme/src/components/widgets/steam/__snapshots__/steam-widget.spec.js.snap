@@ -104,7 +104,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
     className="css-16ilj6a"
   >
     <div
-      className="css-ichx2m"
+      className="css-1w2l54n"
     >
       <p
         className="css-ozcv56"
@@ -176,283 +176,171 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
     className="css-16ilj6a"
   >
     <div
-      className="css-13cuy4j"
+      className="css-tb97q7"
     >
       <div
-        className="css-tb97q7"
+        className="css-1gsn9vf"
+      />
+      <div>
+        <h3
+          className="css-1d4p7yv"
+        >
+          Gaming Library
+        </h3>
+        <p
+          className="css-b3lywm"
+        >
+          Top 
+          2
+           Most Played Games
+        </p>
+      </div>
+    </div>
+    <div
+      className="css-pk064c"
+    >
+      <div
+        className="css-1vdkwje"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
         <div
-          className="css-1gsn9vf"
-        />
-        <div>
-          <h3
-            className="css-1d4p7yv"
+          className="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            className="css-1hlyxwi"
+            src="https://example.com/cities-icon.jpg"
+          />
+          <div
+            className="css-g2qigx"
           >
-            Gaming Library
-          </h3>
-          <p
-            className="css-b3lywm"
+            1
+          </div>
+          <div
+            className="css-11nufqa"
+          />
+        </div>
+        <div
+          className="css-1i1qip1"
+        >
+          <div
+            className="css-1d0l7ja"
           >
-            Top 
+            Cities: Skylines
+          </div>
+          <div
+            className="css-k763k9"
+          >
+            757.35
+            h total
+            <span
+              className="css-r795jk"
+            >
+              • 
+              2 hours
+               recently
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1vdkwje"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="css-w24l45"
+        >
+          <img
+            alt="ARK: Survival Evolved header"
+            className="css-1hlyxwi"
+            src="https://example.com/ark-icon.jpg"
+          />
+          <div
+            className="css-1w6m93i"
+          >
             2
-             Most Played Games
-          </p>
+          </div>
           <div
-            className="css-1qn1d2e"
+            className="css-11nufqa"
+          />
+        </div>
+        <div
+          className="css-1i1qip1"
+        >
+          <div
+            className="css-1d0l7ja"
           >
-            <div
-              className="css-1b6rjoo"
-            >
-              <div
-                className="css-hgov20"
-              />
-              <span>
-                1st
-              </span>
-            </div>
-            <div
-              className="css-1b6rjoo"
-            >
-              <div
-                className="css-1gpukds"
-              />
-              <span>
-                2nd
-              </span>
-            </div>
-            <div
-              className="css-1b6rjoo"
-            >
-              <div
-                className="css-1lobtgo"
-              />
-              <span>
-                3rd
-              </span>
-            </div>
+            ARK: Survival Evolved
+          </div>
+          <div
+            className="css-k763k9"
+          >
+            277.83
+            h total
           </div>
         </div>
       </div>
+    </div>
+    <div
+      className="css-yoczvr"
+    >
       <div
-        className="css-4nao5k"
+        className="css-aq86v7"
       >
-        <div
-          className="css-zlegha"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
+        Total Hours:
+         
+        <span
+          className="css-rba8ex"
         >
-          <div
-            className="css-if3n60"
-          >
-            <div
-              className="css-5ekpf7"
-            >
-              1
-            </div>
-            <div
-              className="css-1xzv6nx"
-            >
-              <img
-                alt="Cities: Skylines header"
-                className="css-1hlyxwi"
-                src="https://example.com/cities-icon.jpg"
-              />
-            </div>
-            <div
-              className="css-44so8i"
-            >
-              Cities: Skylines
-            </div>
-          </div>
-          <div
-            className="css-187niig"
-          >
-            <div
-              className="css-1ssi4vd"
-            >
-              Cities: Skylines
-            </div>
-            <div
-              className="css-ps3dpt"
-            >
-              <div
-                className="css-46lypi"
-              >
-                <span>
-                  757.35
-                  h total
-                </span>
-                <span
-                  className="css-xj83bz"
-                >
-                  #
-                  1
-                   most played
-                </span>
-              </div>
-              <div
-                className="css-rs46q8"
-              >
-                <div
-                  className="css-k8ewr8"
-                />
-              </div>
-              <div
-                className="css-1hofln5"
-              >
-                757.35
-                h
-              </div>
-            </div>
-            <div
-              className="css-34ftfj"
-            >
-              757 hours, 21 minutes
-              <span
-                className="css-41bbhk"
-              >
-                • 
-                2 hours
-                 recently
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          className="css-mpmlf3"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="css-if3n60"
-          >
-            <div
-              className="css-9pdcsm"
-            >
-              2
-            </div>
-            <div
-              className="css-1xzv6nx"
-            >
-              <img
-                alt="ARK: Survival Evolved header"
-                className="css-1hlyxwi"
-                src="https://example.com/ark-icon.jpg"
-              />
-            </div>
-            <div
-              className="css-44so8i"
-            >
-              ARK: Survival Evolved
-            </div>
-          </div>
-          <div
-            className="css-187niig"
-          >
-            <div
-              className="css-1ssi4vd"
-            >
-              ARK: Survival Evolved
-            </div>
-            <div
-              className="css-ps3dpt"
-            >
-              <div
-                className="css-46lypi"
-              >
-                <span>
-                  277.83
-                  h total
-                </span>
-                <span
-                  className="css-xj83bz"
-                >
-                  #
-                  2
-                   most played
-                </span>
-              </div>
-              <div
-                className="css-rs46q8"
-              >
-                <div
-                  className="css-wo5j6q"
-                />
-              </div>
-              <div
-                className="css-1hofln5"
-              >
-                277.83
-                h
-              </div>
-            </div>
-            <div
-              className="css-34ftfj"
-            >
-              277 hours, 50 minutes
-            </div>
-          </div>
-        </div>
+          1035.2
+          h
+        </span>
       </div>
       <div
-        className="css-yoczvr"
+        className="css-aq86v7"
       >
-        <div
-          className="css-aq86v7"
+        Average:
+         
+        <span
+          className="css-rba8ex"
         >
-          Total Hours:
-           
-          <span
-            className="css-rba8ex"
-          >
-            1035.2
-            h
-          </span>
-        </div>
-        <div
-          className="css-aq86v7"
-        >
-          Average:
-           
-          <span
-            className="css-rba8ex"
-          >
-            517.6
-            h per game
-          </span>
-        </div>
+          517.6
+          h per game
+        </span>
       </div>
-      <div
-        className="css-the6ff"
+    </div>
+    <div
+      className="css-the6ff"
+    >
+      <a
+        className="css-drd097"
+        href="https://steamcommunity.com/id/themeuser/games/?tab=all"
       >
-        <a
-          className="css-drd097"
-          href="https://steamcommunity.com/id/themeuser/games/?tab=all"
-        >
-          View complete gaming library
-          <span>
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-up-right-from-square fa-xs "
-              data-icon="up-right-from-square"
-              data-prefix="fas"
-              focusable="false"
-              role="img"
+        View complete gaming library
+        <span>
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-up-right-from-square fa-xs "
+            data-icon="up-right-from-square"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            style={{}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
+              fill="currentColor"
               style={{}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M352 0c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9L370.7 96 201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L416 141.3l41.4 41.4c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-128c0-17.7-14.3-32-32-32L352 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"
-                fill="currentColor"
-                style={{}}
-              />
-            </svg>
-          </span>
-        </a>
-      </div>
+            />
+          </svg>
+        </span>
+      </a>
     </div>
   </div>
 </div>
@@ -507,7 +395,7 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
     className="css-16ilj6a"
   >
     <div
-      className="css-ichx2m"
+      className="css-1w2l54n"
     >
       <p
         className="css-ozcv56"
@@ -568,20 +456,16 @@ exports[`SteamWidget renders loading state 1`] = `
     className="css-16ilj6a"
   >
     <div
-      className="css-1tv6dui"
+      className="css-e2czm4"
     >
       <div
-        className="css-e2czm4"
+        className="css-1omu3y4"
+      />
+      <p
+        className="css-1snu6r4"
       >
-        <div
-          className="css-1omu3y4"
-        />
-        <p
-          className="css-1snu6r4"
-        >
-          Loading Gaming Library...
-        </p>
-      </div>
+        Loading Gaming Library...
+      </p>
     </div>
   </div>
 </div>
@@ -636,7 +520,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
     className="css-16ilj6a"
   >
     <div
-      className="css-ichx2m"
+      className="css-1w2l54n"
     >
       <p
         className="css-ozcv56"
@@ -697,7 +581,7 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
     className="css-16ilj6a"
   >
     <div
-      className="css-ichx2m"
+      className="css-1w2l54n"
     >
       <p
         className="css-ozcv56"
