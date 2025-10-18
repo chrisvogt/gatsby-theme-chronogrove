@@ -92,13 +92,13 @@ exports[`SteamWidget renders AI summary if present 1`] = `
     <h3
       className="css-1pgqsji"
     >
-      My Games
+      Leaderboard
     </h3>
   </div>
   <p
     className="css-1v9l0er"
   >
-    Games I own and their play time statistics.
+    My top 10 most played games.
   </p>
   <div
     className="css-16ilj6a"
@@ -164,38 +164,17 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
     <h3
       className="css-1pgqsji"
     >
-      My Games
+      Leaderboard
     </h3>
   </div>
   <p
     className="css-1v9l0er"
   >
-    Games I own and their play time statistics.
+    My top 10 most played games.
   </p>
   <div
     className="css-16ilj6a"
   >
-    <div
-      className="css-tb97q7"
-    >
-      <div
-        className="css-1gsn9vf"
-      />
-      <div>
-        <h3
-          className="css-1d4p7yv"
-        >
-          Gaming Library
-        </h3>
-        <p
-          className="css-b3lywm"
-        >
-          Top 
-          2
-           Most Played Games
-        </p>
-      </div>
-    </div>
     <div
       className="css-pk064c"
     >
@@ -214,12 +193,12 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
             src="https://example.com/cities-icon.jpg"
           />
           <div
-            className="css-g2qigx"
+            className="css-hx60di"
           >
             1
           </div>
           <div
-            className="css-11nufqa"
+            className="css-13txfr7"
           />
         </div>
         <div
@@ -260,12 +239,12 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
             src="https://example.com/ark-icon.jpg"
           />
           <div
-            className="css-1w6m93i"
+            className="css-hx60di"
           >
             2
           </div>
           <div
-            className="css-11nufqa"
+            className="css-13txfr7"
           />
         </div>
         <div
@@ -383,13 +362,13 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
     <h3
       className="css-1pgqsji"
     >
-      My Games
+      Leaderboard
     </h3>
   </div>
   <p
     className="css-1v9l0er"
   >
-    Games I own and their play time statistics.
+    My top 10 most played games.
   </p>
   <div
     className="css-16ilj6a"
@@ -444,13 +423,13 @@ exports[`SteamWidget renders loading state 1`] = `
     <h3
       className="css-1pgqsji"
     >
-      My Games
+      Leaderboard
     </h3>
   </div>
   <p
     className="css-1v9l0er"
   >
-    Games I own and their play time statistics.
+    My top 10 most played games.
   </p>
   <div
     className="css-16ilj6a"
@@ -508,13 +487,13 @@ exports[`SteamWidget renders with empty metrics 1`] = `
     <h3
       className="css-1pgqsji"
     >
-      My Games
+      Leaderboard
     </h3>
   </div>
   <p
     className="css-1v9l0er"
   >
-    Games I own and their play time statistics.
+    My top 10 most played games.
   </p>
   <div
     className="css-16ilj6a"
@@ -569,13 +548,13 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
     <h3
       className="css-1pgqsji"
     >
-      My Games
+      Leaderboard
     </h3>
   </div>
   <p
     className="css-1v9l0er"
   >
-    Games I own and their play time statistics.
+    My top 10 most played games.
   </p>
   <div
     className="css-16ilj6a"

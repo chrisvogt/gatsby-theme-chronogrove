@@ -5,27 +5,6 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        3
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -43,12 +22,12 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -89,12 +68,12 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
           src="https://example.com/ark-header.jpg"
         />
         <div
-          className="css-1pi7469"
+          className="css-18hnp9e"
         >
           2
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -128,12 +107,12 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
           src="https://example.com/pubg-header.jpg"
         />
         <div
-          className="css-1pbijs4"
+          className="css-18hnp9e"
         >
           3
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -197,27 +176,6 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
     class="css-sak8bt"
   >
     <div
-      class="css-1avmmla"
-    >
-      <div
-        class="css-solwvg"
-      />
-      <div>
-        <h3
-          class="css-15kivef"
-        >
-          Gaming Library
-        </h3>
-        <p
-          class="css-14xu9f5"
-        >
-          Top 
-          3
-           Most Played Games
-        </p>
-      </div>
-    </div>
-    <div
       class="css-zxiliy"
     >
       <div
@@ -232,12 +190,12 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-7icpz4"
+            class="css-18hnp9e"
           >
             1
           </div>
           <div
-            class="css-11nufqa"
+            class="css-13txfr7"
           />
         </div>
         <div
@@ -275,12 +233,12 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-1pi7469"
+            class="css-18hnp9e"
           >
             2
           </div>
           <div
-            class="css-11nufqa"
+            class="css-13txfr7"
           />
         </div>
         <div
@@ -311,12 +269,12 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-1pbijs4"
+            class="css-18hnp9e"
           >
             3
           </div>
           <div
-            class="css-11nufqa"
+            class="css-13txfr7"
           />
         </div>
         <div
@@ -380,27 +338,6 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        3
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -418,12 +355,12 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -464,12 +401,12 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
           src="https://example.com/ark-header.jpg"
         />
         <div
-          className="css-1pi7469"
+          className="css-18hnp9e"
         >
           2
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -503,12 +440,12 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
           src="https://example.com/pubg-header.jpg"
         />
         <div
-          className="css-1pbijs4"
+          className="css-18hnp9e"
         >
           3
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -571,27 +508,6 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        3
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -609,12 +525,12 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -655,12 +571,12 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
           src="https://example.com/ark-header.jpg"
         />
         <div
-          className="css-1pi7469"
+          className="css-18hnp9e"
         >
           2
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -694,12 +610,12 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
           src="https://example.com/pubg-header.jpg"
         />
         <div
-          className="css-1pbijs4"
+          className="css-18hnp9e"
         >
           3
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -762,27 +678,6 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        1
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -800,12 +695,12 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -916,27 +811,6 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        3
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -954,12 +828,12 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1000,12 +874,12 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
           src="https://example.com/ark-header.jpg"
         />
         <div
-          className="css-1pi7469"
+          className="css-18hnp9e"
         >
           2
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1039,12 +913,12 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
           src="https://example.com/pubg-header.jpg"
         />
         <div
-          className="css-1pbijs4"
+          className="css-18hnp9e"
         >
           3
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1108,27 +982,6 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
     class="css-sak8bt"
   >
     <div
-      class="css-1avmmla"
-    >
-      <div
-        class="css-solwvg"
-      />
-      <div>
-        <h3
-          class="css-15kivef"
-        >
-          Gaming Library
-        </h3>
-        <p
-          class="css-14xu9f5"
-        >
-          Top 
-          3
-           Most Played Games
-        </p>
-      </div>
-    </div>
-    <div
       class="css-zxiliy"
     >
       <div
@@ -1143,12 +996,12 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-7icpz4"
+            class="css-18hnp9e"
           >
             1
           </div>
           <div
-            class="css-11nufqa"
+            class="css-13txfr7"
           />
         </div>
         <div
@@ -1186,12 +1039,12 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-1pi7469"
+            class="css-18hnp9e"
           >
             2
           </div>
           <div
-            class="css-11nufqa"
+            class="css-13txfr7"
           />
         </div>
         <div
@@ -1222,12 +1075,12 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-1pbijs4"
+            class="css-18hnp9e"
           >
             3
           </div>
           <div
-            class="css-11nufqa"
+            class="css-13txfr7"
           />
         </div>
         <div
@@ -1310,27 +1163,6 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        3
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -1348,12 +1180,12 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1394,12 +1226,12 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
           src="https://example.com/ark-header.jpg"
         />
         <div
-          className="css-1pi7469"
+          className="css-18hnp9e"
         >
           2
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1433,12 +1265,12 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
           src="https://example.com/pubg-header.jpg"
         />
         <div
-          className="css-1pbijs4"
+          className="css-18hnp9e"
         >
           3
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1501,27 +1333,6 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1avmmla"
-  >
-    <div
-      className="css-solwvg"
-    />
-    <div>
-      <h3
-        className="css-15kivef"
-      >
-        Gaming Library
-      </h3>
-      <p
-        className="css-14xu9f5"
-      >
-        Top 
-        3
-         Most Played Games
-      </p>
-    </div>
-  </div>
-  <div
     className="css-zxiliy"
   >
     <div
@@ -1539,12 +1350,12 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
           src="https://example.com/cities-header.jpg"
         />
         <div
-          className="css-7icpz4"
+          className="css-18hnp9e"
         >
           1
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1585,12 +1396,12 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
           src="https://example.com/ark-header.jpg"
         />
         <div
-          className="css-1pi7469"
+          className="css-18hnp9e"
         >
           2
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
@@ -1624,12 +1435,12 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
           src="https://example.com/pubg-header.jpg"
         />
         <div
-          className="css-1pbijs4"
+          className="css-18hnp9e"
         >
           3
         </div>
         <div
-          className="css-11nufqa"
+          className="css-13txfr7"
         />
       </div>
       <div
