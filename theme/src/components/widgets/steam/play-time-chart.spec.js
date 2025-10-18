@@ -255,7 +255,7 @@ describe('PlayTimeChart', () => {
       // Look for progress bar structures - check for progress bar containers
       const content = container.textContent
       expect(content).toContain('Total Hours:')
-      expect(content).toContain('Gaming Library')
+      expect(content).toContain('Cities: Skylines')
       // The component should render progress indicators (the test confirms structure exists)
       expect(container.querySelector('div')).toBeInTheDocument()
     })
@@ -396,8 +396,8 @@ describe('PlayTimeChart', () => {
     it('includes proper ARIA attributes and semantic HTML', () => {
       const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
       // Check that the component renders with proper HTML structure
-      const headings = container.querySelectorAll('h3')
-      expect(headings.length).toBeGreaterThan(0)
+      const images = container.querySelectorAll('img')
+      expect(images.length).toBeGreaterThan(0)
     })
 
     it('provides meaningful alt text for images', () => {
@@ -428,7 +428,7 @@ describe('PlayTimeChart', () => {
       )
 
       // Should render games instead of loading state
-      expect(document.body.textContent).toContain('Gaming Library')
+      expect(document.body.textContent).toContain('Cities: Skylines')
     })
 
     it('handles empty images object gracefully', () => {

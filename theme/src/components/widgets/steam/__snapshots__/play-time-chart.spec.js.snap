@@ -5,336 +5,149 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
+          1
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          Top 
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="ARK: Survival Evolved header"
+          className="css-1hlyxwi"
+          src="https://example.com/ark-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
+          2
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
+        >
+          ARK: Survival Evolved
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          277.83h total
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="PUBG: BATTLEGROUNDS header"
+          className="css-1hlyxwi"
+          src="https://example.com/pubg-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
           3
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          PUBG: BATTLEGROUNDS
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          200h total • 1h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-y8dphg"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-mtl5a4"
-          >
-            2
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="ARK: Survival Evolved header"
-              className="css-1hlyxwi"
-              src="https://example.com/ark-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            ARK: Survival Evolved
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            ARK: Survival Evolved
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                277.83
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                2
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-wo5j6q"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              277.83
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            277h
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-1n7qq0a"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-9v2wzz"
-          >
-            3
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="PUBG: BATTLEGROUNDS header"
-              className="css-1hlyxwi"
-              src="https://example.com/pubg-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                200
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                3
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-121jqfe"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              200
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            200h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              1h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        1235.2
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          1235.2
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          411.7
-          h per game
-        </span>
-      </div>
+        411.7
+        h per game
+      </span>
     </div>
   </div>
 </div>
@@ -346,327 +159,140 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
     class="css-sak8bt"
   >
     <div
-      class="css-1kgp0vl"
+      class="css-zxiliy"
     >
       <div
-        class="css-1avmmla"
+        class="css-xsvu8c"
       >
         <div
-          class="css-solwvg"
-        />
-        <div>
-          <h3
-            class="css-15kivef"
+          class="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
           >
-            Gaming Library
-          </h3>
-          <p
-            class="css-14xu9f5"
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
           >
-            Top 
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
             3
-             Most Played Games
-          </p>
+          </div>
           <div
-            class="css-1s7447o"
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
           >
-            <div
-              class="css-yxli3f"
-            >
-              <div
-                class="css-hgov20"
-              />
-              <span>
-                1st
-              </span>
-            </div>
-            <div
-              class="css-yxli3f"
-            >
-              <div
-                class="css-1gpukds"
-              />
-              <span>
-                2nd
-              </span>
-            </div>
-            <div
-              class="css-yxli3f"
-            >
-              <div
-                class="css-1lobtgo"
-              />
-              <span>
-                3rd
-              </span>
-            </div>
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="css-rcbrnq"
+    >
       <div
-        class="css-cmxbok"
+        class="css-aq86v7"
       >
-        <div
-          class="css-lheylh"
+        Total Hours:
+         
+        <span
+          class="css-xdug5y"
         >
-          <div
-            class="css-ar1va"
-          >
-            <div
-              class="css-1uwe4nm"
-            >
-              1
-            </div>
-            <div
-              class="css-185js9c"
-            >
-              <img
-                alt="Cities: Skylines header"
-                class="css-1hlyxwi"
-                src="https://example.com/cities-header.jpg"
-              />
-            </div>
-            <div
-              class="css-o4xb28"
-            >
-              Cities: Skylines
-            </div>
-          </div>
-          <div
-            class="css-187niig"
-          >
-            <div
-              class="css-i79g0t"
-            >
-              Cities: Skylines
-            </div>
-            <div
-              class="css-a8yoc3"
-            >
-              <div
-                class="css-hzh2yj"
-              >
-                <span>
-                  757.35
-                  h total
-                </span>
-                <span
-                  class="css-11c4iyv"
-                >
-                  #
-                  1
-                   most played
-                </span>
-              </div>
-              <div
-                class="css-rs46q8"
-              >
-                <div
-                  class="css-k8ewr8"
-                />
-              </div>
-              <div
-                class="css-1mogv2v"
-              >
-                757.35
-                h
-              </div>
-            </div>
-            <div
-              class="css-jdlfzx"
-            >
-              757h
-              <span
-                class="css-1m4twn"
-              >
-                • 
-                2h
-                 recently
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="css-y8dphg"
-        >
-          <div
-            class="css-ar1va"
-          >
-            <div
-              class="css-mtl5a4"
-            >
-              2
-            </div>
-            <div
-              class="css-185js9c"
-            >
-              <img
-                alt="ARK: Survival Evolved header"
-                class="css-1hlyxwi"
-                src="https://example.com/ark-header.jpg"
-              />
-            </div>
-            <div
-              class="css-o4xb28"
-            >
-              ARK: Survival Evolved
-            </div>
-          </div>
-          <div
-            class="css-187niig"
-          >
-            <div
-              class="css-i79g0t"
-            >
-              ARK: Survival Evolved
-            </div>
-            <div
-              class="css-a8yoc3"
-            >
-              <div
-                class="css-hzh2yj"
-              >
-                <span>
-                  277.83
-                  h total
-                </span>
-                <span
-                  class="css-11c4iyv"
-                >
-                  #
-                  2
-                   most played
-                </span>
-              </div>
-              <div
-                class="css-rs46q8"
-              >
-                <div
-                  class="css-wo5j6q"
-                />
-              </div>
-              <div
-                class="css-1mogv2v"
-              >
-                277.83
-                h
-              </div>
-            </div>
-            <div
-              class="css-jdlfzx"
-            >
-              277h
-            </div>
-          </div>
-        </div>
-        <div
-          class="css-1n7qq0a"
-        >
-          <div
-            class="css-ar1va"
-          >
-            <div
-              class="css-9v2wzz"
-            >
-              3
-            </div>
-            <div
-              class="css-185js9c"
-            >
-              <img
-                alt="PUBG: BATTLEGROUNDS header"
-                class="css-1hlyxwi"
-                src="https://example.com/pubg-header.jpg"
-              />
-            </div>
-            <div
-              class="css-o4xb28"
-            >
-              PUBG: BATTLEGROUNDS
-            </div>
-          </div>
-          <div
-            class="css-187niig"
-          >
-            <div
-              class="css-i79g0t"
-            >
-              PUBG: BATTLEGROUNDS
-            </div>
-            <div
-              class="css-a8yoc3"
-            >
-              <div
-                class="css-hzh2yj"
-              >
-                <span>
-                  200
-                  h total
-                </span>
-                <span
-                  class="css-11c4iyv"
-                >
-                  #
-                  3
-                   most played
-                </span>
-              </div>
-              <div
-                class="css-rs46q8"
-              >
-                <div
-                  class="css-121jqfe"
-                />
-              </div>
-              <div
-                class="css-1mogv2v"
-              >
-                200
-                h
-              </div>
-            </div>
-            <div
-              class="css-jdlfzx"
-            >
-              200h
-              <span
-                class="css-1m4twn"
-              >
-                • 
-                1h
-                 recently
-              </span>
-            </div>
-          </div>
-        </div>
+          1235.2
+          h
+        </span>
       </div>
       <div
-        class="css-rcbrnq"
+        class="css-aq86v7"
       >
-        <div
-          class="css-aq86v7"
+        Average:
+         
+        <span
+          class="css-xdug5y"
         >
-          Total Hours:
-           
-          <span
-            class="css-xdug5y"
-          >
-            1235.2
-            h
-          </span>
-        </div>
-        <div
-          class="css-aq86v7"
-        >
-          Average:
-           
-          <span
-            class="css-xdug5y"
-          >
-            411.7
-            h per game
-          </span>
-        </div>
+          411.7
+          h per game
+        </span>
       </div>
     </div>
   </div>
@@ -678,336 +304,149 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
+          1
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          Top 
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="ARK: Survival Evolved header"
+          className="css-1hlyxwi"
+          src="https://example.com/ark-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
+          2
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
+        >
+          ARK: Survival Evolved
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          277.83h total
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="PUBG: BATTLEGROUNDS header"
+          className="css-1hlyxwi"
+          src="https://example.com/pubg-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
           3
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          PUBG: BATTLEGROUNDS
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          200h total • 1h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-y8dphg"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-mtl5a4"
-          >
-            2
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="ARK: Survival Evolved header"
-              className="css-1hlyxwi"
-              src="https://example.com/ark-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            ARK: Survival Evolved
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            ARK: Survival Evolved
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                277.83
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                2
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-wo5j6q"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              277.83
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            277h
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-1n7qq0a"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-9v2wzz"
-          >
-            3
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="PUBG: BATTLEGROUNDS header"
-              className="css-1hlyxwi"
-              src="https://example.com/pubg-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                200
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                3
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-121jqfe"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              200
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            200h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              1h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        1235.2
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          1235.2
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          411.7
-          h per game
-        </span>
-      </div>
+        411.7
+        h per game
+      </span>
     </div>
   </div>
 </div>
@@ -1018,336 +457,149 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
+          1
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          Top 
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="ARK: Survival Evolved header"
+          className="css-1hlyxwi"
+          src="https://example.com/ark-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
+          2
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
+        >
+          ARK: Survival Evolved
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          277.83h total
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="PUBG: BATTLEGROUNDS header"
+          className="css-1hlyxwi"
+          src="https://example.com/pubg-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
           3
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          PUBG: BATTLEGROUNDS
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          200h total • 1h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-y8dphg"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-mtl5a4"
-          >
-            2
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="ARK: Survival Evolved header"
-              className="css-1hlyxwi"
-              src="https://example.com/ark-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            ARK: Survival Evolved
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            ARK: Survival Evolved
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                277.83
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                2
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-wo5j6q"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              277.83
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            277h
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-1n7qq0a"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-9v2wzz"
-          >
-            3
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="PUBG: BATTLEGROUNDS header"
-              className="css-1hlyxwi"
-              src="https://example.com/pubg-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                200
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                3
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-121jqfe"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              200
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            200h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              1h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        1235.2
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          1235.2
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          411.7
-          h per game
-        </span>
-      </div>
+        411.7
+        h per game
+      </span>
     </div>
   </div>
 </div>
@@ -1358,177 +610,73 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
-        >
-          Top 
           1
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        757.4
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          757.4
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          757.4
-          h per game
-        </span>
-      </div>
+        757.4
+        h per game
+      </span>
     </div>
   </div>
 </div>
@@ -1539,7 +687,7 @@ exports[`PlayTimeChart Empty States renders empty state when games is null 1`] =
   className="css-sak8bt"
 >
   <div
-    className="css-1c1lvow"
+    className="css-16q7rgc"
   >
     <p
       className="css-13s56l1"
@@ -1555,7 +703,7 @@ exports[`PlayTimeChart Empty States renders empty state when games is undefined 
   className="css-sak8bt"
 >
   <div
-    className="css-1c1lvow"
+    className="css-16q7rgc"
   >
     <p
       className="css-13s56l1"
@@ -1571,7 +719,7 @@ exports[`PlayTimeChart Empty States renders empty state when no games provided 1
   className="css-sak8bt"
 >
   <div
-    className="css-1c1lvow"
+    className="css-16q7rgc"
   >
     <p
       className="css-13s56l1"
@@ -1587,336 +735,149 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
+          1
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          Top 
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="ARK: Survival Evolved header"
+          className="css-1hlyxwi"
+          src="https://example.com/ark-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
+          2
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
+        >
+          ARK: Survival Evolved
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          277.83h total
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="PUBG: BATTLEGROUNDS header"
+          className="css-1hlyxwi"
+          src="https://example.com/pubg-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
           3
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          PUBG: BATTLEGROUNDS
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          200h total • 1h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-y8dphg"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-mtl5a4"
-          >
-            2
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="ARK: Survival Evolved header"
-              className="css-1hlyxwi"
-              src="https://example.com/ark-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            ARK: Survival Evolved
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            ARK: Survival Evolved
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                277.83
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                2
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-wo5j6q"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              277.83
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            277h
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-1n7qq0a"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-9v2wzz"
-          >
-            3
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="PUBG: BATTLEGROUNDS header"
-              className="css-1hlyxwi"
-              src="https://example.com/pubg-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                200
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                3
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-121jqfe"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              200
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            200h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              1h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        1235.2
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          1235.2
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          411.7
-          h per game
-        </span>
-      </div>
+        411.7
+        h per game
+      </span>
     </div>
   </div>
 </div>
@@ -1928,327 +889,140 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
     class="css-sak8bt"
   >
     <div
-      class="css-1kgp0vl"
+      class="css-zxiliy"
     >
       <div
-        class="css-1avmmla"
+        class="css-xsvu8c"
       >
         <div
-          class="css-solwvg"
-        />
-        <div>
-          <h3
-            class="css-15kivef"
+          class="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
           >
-            Gaming Library
-          </h3>
-          <p
-            class="css-14xu9f5"
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
           >
-            Top 
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
             3
-             Most Played Games
-          </p>
+          </div>
           <div
-            class="css-1s7447o"
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
           >
-            <div
-              class="css-yxli3f"
-            >
-              <div
-                class="css-hgov20"
-              />
-              <span>
-                1st
-              </span>
-            </div>
-            <div
-              class="css-yxli3f"
-            >
-              <div
-                class="css-1gpukds"
-              />
-              <span>
-                2nd
-              </span>
-            </div>
-            <div
-              class="css-yxli3f"
-            >
-              <div
-                class="css-1lobtgo"
-              />
-              <span>
-                3rd
-              </span>
-            </div>
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="css-rcbrnq"
+    >
       <div
-        class="css-cmxbok"
+        class="css-aq86v7"
       >
-        <div
-          class="css-lheylh"
+        Total Hours:
+         
+        <span
+          class="css-xdug5y"
         >
-          <div
-            class="css-ar1va"
-          >
-            <div
-              class="css-1uwe4nm"
-            >
-              1
-            </div>
-            <div
-              class="css-185js9c"
-            >
-              <img
-                alt="Cities: Skylines header"
-                class="css-1hlyxwi"
-                src="https://example.com/cities-header.jpg"
-              />
-            </div>
-            <div
-              class="css-o4xb28"
-            >
-              Cities: Skylines
-            </div>
-          </div>
-          <div
-            class="css-187niig"
-          >
-            <div
-              class="css-i79g0t"
-            >
-              Cities: Skylines
-            </div>
-            <div
-              class="css-a8yoc3"
-            >
-              <div
-                class="css-hzh2yj"
-              >
-                <span>
-                  757.35
-                  h total
-                </span>
-                <span
-                  class="css-11c4iyv"
-                >
-                  #
-                  1
-                   most played
-                </span>
-              </div>
-              <div
-                class="css-rs46q8"
-              >
-                <div
-                  class="css-k8ewr8"
-                />
-              </div>
-              <div
-                class="css-1mogv2v"
-              >
-                757.35
-                h
-              </div>
-            </div>
-            <div
-              class="css-jdlfzx"
-            >
-              757h
-              <span
-                class="css-1m4twn"
-              >
-                • 
-                2h
-                 recently
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="css-y8dphg"
-        >
-          <div
-            class="css-ar1va"
-          >
-            <div
-              class="css-mtl5a4"
-            >
-              2
-            </div>
-            <div
-              class="css-185js9c"
-            >
-              <img
-                alt="ARK: Survival Evolved header"
-                class="css-1hlyxwi"
-                src="https://example.com/ark-header.jpg"
-              />
-            </div>
-            <div
-              class="css-o4xb28"
-            >
-              ARK: Survival Evolved
-            </div>
-          </div>
-          <div
-            class="css-187niig"
-          >
-            <div
-              class="css-i79g0t"
-            >
-              ARK: Survival Evolved
-            </div>
-            <div
-              class="css-a8yoc3"
-            >
-              <div
-                class="css-hzh2yj"
-              >
-                <span>
-                  277.83
-                  h total
-                </span>
-                <span
-                  class="css-11c4iyv"
-                >
-                  #
-                  2
-                   most played
-                </span>
-              </div>
-              <div
-                class="css-rs46q8"
-              >
-                <div
-                  class="css-wo5j6q"
-                />
-              </div>
-              <div
-                class="css-1mogv2v"
-              >
-                277.83
-                h
-              </div>
-            </div>
-            <div
-              class="css-jdlfzx"
-            >
-              277h
-            </div>
-          </div>
-        </div>
-        <div
-          class="css-1n7qq0a"
-        >
-          <div
-            class="css-ar1va"
-          >
-            <div
-              class="css-9v2wzz"
-            >
-              3
-            </div>
-            <div
-              class="css-185js9c"
-            >
-              <img
-                alt="PUBG: BATTLEGROUNDS header"
-                class="css-1hlyxwi"
-                src="https://example.com/pubg-header.jpg"
-              />
-            </div>
-            <div
-              class="css-o4xb28"
-            >
-              PUBG: BATTLEGROUNDS
-            </div>
-          </div>
-          <div
-            class="css-187niig"
-          >
-            <div
-              class="css-i79g0t"
-            >
-              PUBG: BATTLEGROUNDS
-            </div>
-            <div
-              class="css-a8yoc3"
-            >
-              <div
-                class="css-hzh2yj"
-              >
-                <span>
-                  200
-                  h total
-                </span>
-                <span
-                  class="css-11c4iyv"
-                >
-                  #
-                  3
-                   most played
-                </span>
-              </div>
-              <div
-                class="css-rs46q8"
-              >
-                <div
-                  class="css-121jqfe"
-                />
-              </div>
-              <div
-                class="css-1mogv2v"
-              >
-                200
-                h
-              </div>
-            </div>
-            <div
-              class="css-jdlfzx"
-            >
-              200h
-              <span
-                class="css-1m4twn"
-              >
-                • 
-                1h
-                 recently
-              </span>
-            </div>
-          </div>
-        </div>
+          1235.2
+          h
+        </span>
       </div>
       <div
-        class="css-rcbrnq"
+        class="css-aq86v7"
       >
-        <div
-          class="css-aq86v7"
+        Average:
+         
+        <span
+          class="css-xdug5y"
         >
-          Total Hours:
-           
-          <span
-            class="css-xdug5y"
-          >
-            1235.2
-            h
-          </span>
-        </div>
-        <div
-          class="css-aq86v7"
-        >
-          Average:
-           
-          <span
-            class="css-xdug5y"
-          >
-            411.7
-            h per game
-          </span>
-        </div>
+          411.7
+          h per game
+        </span>
       </div>
     </div>
   </div>
@@ -2260,20 +1034,16 @@ exports[`PlayTimeChart Loading State renders loading state correctly 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1bqz2bo"
+    className="css-nyc2gr"
   >
     <div
-      className="css-nyc2gr"
+      className="css-1omu3y4"
+    />
+    <p
+      className="css-1ylq8j3"
     >
-      <div
-        className="css-1omu3y4"
-      />
-      <p
-        className="css-1ylq8j3"
-      >
-        Loading Gaming Library...
-      </p>
-    </div>
+      Loading Gaming Library...
+    </p>
   </div>
 </div>
 `;
@@ -2283,336 +1053,149 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
+          1
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          Top 
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="ARK: Survival Evolved header"
+          className="css-1hlyxwi"
+          src="https://example.com/ark-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
+          2
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
+        >
+          ARK: Survival Evolved
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          277.83h total
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="PUBG: BATTLEGROUNDS header"
+          className="css-1hlyxwi"
+          src="https://example.com/pubg-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
           3
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          PUBG: BATTLEGROUNDS
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          200h total • 1h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-y8dphg"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-mtl5a4"
-          >
-            2
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="ARK: Survival Evolved header"
-              className="css-1hlyxwi"
-              src="https://example.com/ark-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            ARK: Survival Evolved
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            ARK: Survival Evolved
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                277.83
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                2
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-wo5j6q"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              277.83
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            277h
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-1n7qq0a"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-9v2wzz"
-          >
-            3
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="PUBG: BATTLEGROUNDS header"
-              className="css-1hlyxwi"
-              src="https://example.com/pubg-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                200
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                3
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-121jqfe"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              200
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            200h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              1h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        1235.2
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          1235.2
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          411.7
-          h per game
-        </span>
-      </div>
+        411.7
+        h per game
+      </span>
     </div>
   </div>
 </div>
@@ -2623,336 +1206,149 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
   className="css-sak8bt"
 >
   <div
-    className="css-1kgp0vl"
+    className="css-zxiliy"
   >
     <div
-      className="css-1avmmla"
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="css-solwvg"
-      />
-      <div>
-        <h3
-          className="css-15kivef"
+        className="css-w24l45"
+      >
+        <img
+          alt="Cities: Skylines header"
+          className="css-1hlyxwi"
+          src="https://example.com/cities-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
         >
-          Gaming Library
-        </h3>
-        <p
-          className="css-14xu9f5"
+          1
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          Top 
+          Cities: Skylines
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          757.35h total • 2h recently
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="ARK: Survival Evolved header"
+          className="css-1hlyxwi"
+          src="https://example.com/ark-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
+          2
+        </div>
+        <div
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
+        >
+          ARK: Survival Evolved
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          277.83h total
+        </div>
+      </div>
+    </div>
+    <div
+      className="css-xsvu8c"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="css-w24l45"
+      >
+        <img
+          alt="PUBG: BATTLEGROUNDS header"
+          className="css-1hlyxwi"
+          src="https://example.com/pubg-header.jpg"
+        />
+        <div
+          className="css-18hnp9e"
+        >
           3
-           Most Played Games
-        </p>
+        </div>
         <div
-          className="css-1s7447o"
+          className="css-13txfr7"
+        />
+      </div>
+      <div
+        className="css-rr301l"
+      >
+        <div
+          className="css-rkrxe3"
         >
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-hgov20"
-            />
-            <span>
-              1st
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1gpukds"
-            />
-            <span>
-              2nd
-            </span>
-          </div>
-          <div
-            className="css-yxli3f"
-          >
-            <div
-              className="css-1lobtgo"
-            />
-            <span>
-              3rd
-            </span>
-          </div>
+          PUBG: BATTLEGROUNDS
+        </div>
+        <div
+          className="css-k763k9"
+        >
+          200h total • 1h recently
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-rcbrnq"
+  >
     <div
-      className="css-cmxbok"
+      className="css-aq86v7"
     >
-      <div
-        className="css-lheylh"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+      Total Hours:
+       
+      <span
+        className="css-xdug5y"
       >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-1uwe4nm"
-          >
-            1
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="Cities: Skylines header"
-              className="css-1hlyxwi"
-              src="https://example.com/cities-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            Cities: Skylines
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            Cities: Skylines
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                757.35
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                1
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-k8ewr8"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              757.35
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            757h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              2h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-y8dphg"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-mtl5a4"
-          >
-            2
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="ARK: Survival Evolved header"
-              className="css-1hlyxwi"
-              src="https://example.com/ark-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            ARK: Survival Evolved
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            ARK: Survival Evolved
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                277.83
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                2
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-wo5j6q"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              277.83
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            277h
-          </div>
-        </div>
-      </div>
-      <div
-        className="css-1n7qq0a"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <div
-          className="css-ar1va"
-        >
-          <div
-            className="css-9v2wzz"
-          >
-            3
-          </div>
-          <div
-            className="css-185js9c"
-          >
-            <img
-              alt="PUBG: BATTLEGROUNDS header"
-              className="css-1hlyxwi"
-              src="https://example.com/pubg-header.jpg"
-            />
-          </div>
-          <div
-            className="css-o4xb28"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-        </div>
-        <div
-          className="css-187niig"
-        >
-          <div
-            className="css-i79g0t"
-          >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            className="css-a8yoc3"
-          >
-            <div
-              className="css-hzh2yj"
-            >
-              <span>
-                200
-                h total
-              </span>
-              <span
-                className="css-11c4iyv"
-              >
-                #
-                3
-                 most played
-              </span>
-            </div>
-            <div
-              className="css-rs46q8"
-            >
-              <div
-                className="css-121jqfe"
-              />
-            </div>
-            <div
-              className="css-1mogv2v"
-            >
-              200
-              h
-            </div>
-          </div>
-          <div
-            className="css-jdlfzx"
-          >
-            200h
-            <span
-              className="css-1m4twn"
-            >
-              • 
-              1h
-               recently
-            </span>
-          </div>
-        </div>
-      </div>
+        1235.2
+        h
+      </span>
     </div>
     <div
-      className="css-rcbrnq"
+      className="css-aq86v7"
     >
-      <div
-        className="css-aq86v7"
+      Average:
+       
+      <span
+        className="css-xdug5y"
       >
-        Total Hours:
-         
-        <span
-          className="css-xdug5y"
-        >
-          1235.2
-          h
-        </span>
-      </div>
-      <div
-        className="css-aq86v7"
-      >
-        Average:
-         
-        <span
-          className="css-xdug5y"
-        >
-          411.7
-          h per game
-        </span>
-      </div>
+        411.7
+        h per game
+      </span>
     </div>
   </div>
 </div>

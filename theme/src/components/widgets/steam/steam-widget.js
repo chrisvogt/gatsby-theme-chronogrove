@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import React from 'react'
 
 import CallToAction from '../call-to-action'
-import PostCard from '../recent-posts/post-card'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 import AiSummary from './ai-summary'
 import PlayTimeChart from './play-time-chart'
+import SteamGameCard from './steam-game-card'
 
 import {
   getAiSummary,
@@ -67,7 +67,7 @@ const SteamWidget = React.memo(() => {
 
       {aiSummary && <AiSummary aiSummary={aiSummary} />}
 
-      <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mt: 5, mb: 3 }}>
+      <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
           Recently-Played Games
         </Heading>
@@ -79,28 +79,27 @@ const SteamWidget = React.memo(() => {
         sx={{
           display: 'grid',
           gridGap: [3, 2, 2, 3],
-          gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)'],
+          gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)'],
           mb: 4
         }}
       >
         {recentlyPlayedGames.map(game => (
-          <PostCard
-            banner={game.images?.header}
-            date={getTimeSpent(game.playTime2Weeks * 60 * 1000)}
+          <SteamGameCard
             key={game.id}
-            link={`https://store.steampowered.com/app/${game.id}`}
-            title={game.displayName}
+            game={game}
+            showRank={false}
+            subtitle={getTimeSpent(game.playTime2Weeks * 60 * 1000)}
           />
         ))}
       </div>
 
       <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
-          My Games
+          Leaderboard
         </Heading>
       </div>
 
-      <Themed.p sx={{ mb: 4 }}>Games I own and their play time statistics.</Themed.p>
+      <Themed.p sx={{ mb: 4 }}>My top 10 most played games.</Themed.p>
 
       <PlayTimeChart games={ownedGames} isLoading={isLoading} profileURL={profileURL} />
     </Widget>
