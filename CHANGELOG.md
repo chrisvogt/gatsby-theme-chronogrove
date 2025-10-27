@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.62.1
+
+### 🔧 Modernization
+
+- **Modernized Error Boundary**: Converted the only class component to a functional component using `react-error-boundary`
+  - Replaced legacy `PlaylistsErrorBoundary` class component with modern functional component using the `react-error-boundary` library
+  - Eliminated the last class component from the theme codebase
+  - Maintained identical error handling behavior while adopting modern React patterns
+  - Improved code maintainability and consistency with the rest of the theme
+
+### 📦 Dependencies
+
+- Added `react-error-boundary` (v4.1.2) as a dependency for improved error boundary management
+
+### 🧪 Testing
+
+- All existing error boundary tests continue to pass with new implementation
+- No test changes required - functionality is fully backward compatible
+- All 37 Spotify widget tests passing
+
 ## 0.62.0
 
 ### ✨ Features
