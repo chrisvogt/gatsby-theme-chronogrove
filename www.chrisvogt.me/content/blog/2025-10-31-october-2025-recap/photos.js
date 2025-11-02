@@ -42,3 +42,36 @@ export const castroStreetFair = [
     height: 3
   }
 ]
+
+export const indoorGardening = [
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072238/chrisvogt-me/galleries/now-oct-2025/20251020-IMG_0209.jpg',
+    title: 'The kale and rosemary up close',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072236/chrisvogt-me/galleries/now-oct-2025/20251016-IMG_0149.jpg',
+    title: 'Kale and rosemary growing in a kitchen AeroGarden',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072237/chrisvogt-me/galleries/now-oct-2025/20251019-IMG_0197.jpg',
+    title: 'The tall AeroGarden in the dining room, with cucumber, jalapeño and cherry tomatoes',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072238/chrisvogt-me/galleries/now-oct-2025/20251020-IMG_0206.jpg',
+    title: 'Cucumber growing up close',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072227/chrisvogt-me/galleries/now-oct-2025/20251007-IMG_0005.jpg',
+    title: 'The tomatoes ripening in the large AeroGarden',
+    width: 3,
+    height: 4
+  }
+]
