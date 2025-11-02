@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.62.2
+
+### 🐛 Bug Fixes
+
+- **PhotoGallery LightGallery Initialization**: Fixed race condition where LightGallery wasn't initialized when users clicked images
+  - **Root Cause**: LightGallery was lazy-loaded using `LazyLoad` component, which only triggered when galleries were scrolled into view, causing clicks to fail before initialization
+  - **Solution**: Changed to use `VisibilitySensor` with 300px offset to start loading LightGallery before galleries come into view
+  - **Result**: Lightbox functionality now works reliably when users click images, even when scrolling quickly to galleries
+
+### 🎯 User Experience
+
+- **Improved Photo Gallery Performance**: Photo galleries now load their lightbox functionality earlier, preventing user-facing errors and improving perceived performance
+
 ## 0.62.1
 
 ### 🔧 Modernization
