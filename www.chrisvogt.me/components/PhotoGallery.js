@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { useRef, useCallback, useState, useEffect } from 'react'
-import LazyLoad from 'gatsby-theme-chronogrove/src/components/lazy-load'
+import VisibilitySensor from 'react-visibility-sensor'
 
 import Gallery from 'react-photo-gallery'
 
@@ -37,7 +37,9 @@ const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
   return (
     <LightGallery
       onInit={ref => {
-        lightGalleryRef.current = ref.instance
+        if (ref?.instance) {
+          lightGalleryRef.current = ref.instance
+        }
       }}
       plugins={[lgThumbnail, lgZoom]}
       download={false}
@@ -54,6 +56,7 @@ const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
 
 export const PhotoGallery = ({ photos }) => {
   const lightGalleryRef = useRef(null)
+  const [shouldLoadLightGallery, setShouldLoadLightGallery] = useState(false)
 
   const openLightbox = useCallback((event, { index }) => {
     const instance = lightGalleryRef.current
@@ -69,10 +72,20 @@ export const PhotoGallery = ({ photos }) => {
       {/* Render photo gallery - always visible */}
       <Gallery photos={photos} onClick={openLightbox} />
 
-      {/* Lazy load LightGallery only when component is nearly visible */}
-      <LazyLoad placeholder={<div style={{ height: '1px' }} />}>
-        <LightGalleryComponent lightGalleryRef={lightGalleryRef} photos={photos} />
-      </LazyLoad>
+      {/* Load LightGallery 300px before it comes into view */}
+      <VisibilitySensor
+        onChange={isVisible => {
+          if (isVisible) {
+            setShouldLoadLightGallery(true)
+          }
+        }}
+        partialVisibility={true}
+        offset={{ top: -300, bottom: -300 }}
+      >
+        <div style={{ minHeight: '1px' }}>
+          {shouldLoadLightGallery && <LightGalleryComponent lightGalleryRef={lightGalleryRef} photos={photos} />}
+        </div>
+      </VisibilitySensor>
     </div>
   )
 }
