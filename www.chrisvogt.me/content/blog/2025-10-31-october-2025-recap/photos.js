@@ -148,5 +148,62 @@ export const puertoVallarta = [
     title: 'A Cane Toad (_Rhinella marina_) that surprised me from the bushes',
     width: 3,
     height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072235/chrisvogt-me/galleries/now-oct-2025/20251012-IMG_0120.jpg',
+    title: 'Preparing to board the flight home on a United A320 (N484UA)',
+    width: 4,
+    height: 3
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072236/chrisvogt-me/galleries/now-oct-2025/20251012-IMG_0129.jpg',
+    title: 'Landing over San Francisco',
+    width: 3,
+    height: 4
+  }
+]
+
+export const halloweenInTheCastro = [
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072239/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0344.jpg',
+    title: 'Facing south on Castro St, towards Castro Theater',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072239/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0343.jpg',
+    title: 'Cow costume 🐮 in the Castro on Halloween',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072240/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0347.jpg',
+    title: '18th St during the Castro Night Market on Halloween',
+    width: 4,
+    height: 3
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072241/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0348.jpg',
+    title: 'The San Francisco Pride Band at Castro Night Market, Halloween 2025',
+    width: 4,
+    height: 3
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072241/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0360.jpg',
+    title: 'Nick hugging a dog he found at Toad Hall',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072242/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0363.jpg',
+    title: 'Castro Night Market on Halloween, after-dark photo',
+    width: 4,
+    height: 3
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1762072243/chrisvogt-me/galleries/now-oct-2025/20251031-IMG_0364.jpg',
+    title: 'The view towards downtown SF from a Halloween house party front porch',
+    width: 3,
+    height: 4
   }
 ]
