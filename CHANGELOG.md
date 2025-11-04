@@ -653,8 +653,6 @@ None. This change is fully backward compatible - existing sites will automatical
 
 ## 0.45.1
 
-### Performance Improvements
-
 - Performance optimizations and bug fixes
 
 ## 0.45.0
