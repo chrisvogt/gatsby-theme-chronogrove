@@ -2,47 +2,8 @@
 
 exports[`Layout matches the snapshot 1`] = `
 <div
-  className="css-ez1gh8"
+  className="css-e2rbjw"
 >
-  <div
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <canvas
-      style={
-        {
-          "display": "block",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        {
-          "WebkitBackdropFilter": "blur(75px)",
-          "backdropFilter": "blur(75px)",
-          "backgroundColor": "rgba(253, 248, 245, 0.35)",
-          "height": "100%",
-          "left": 0,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-  </div>
   <a
     data-reach-skip-link=""
     data-reach-skip-nav-link=""
@@ -51,7 +12,6 @@ exports[`Layout matches the snapshot 1`] = `
     Skip to content
   </a>
   <header
-    className="css-l5xv05"
     role="banner"
   >
     <div
@@ -112,7 +72,7 @@ exports[`Layout matches the snapshot 1`] = `
     </div>
   </main>
   <footer
-    className="css-fmjx8h"
+    className="css-2xzuv0"
     id="footer"
     role="contentinfo"
   >
@@ -177,47 +137,8 @@ exports[`Layout matches the snapshot 1`] = `
 
 exports[`Layout renders with audio player hidden state 1`] = `
 <div
-  className="css-ez1gh8"
+  className="css-e2rbjw"
 >
-  <div
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <canvas
-      style={
-        {
-          "display": "block",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        {
-          "WebkitBackdropFilter": "blur(75px)",
-          "backdropFilter": "blur(75px)",
-          "backgroundColor": "rgba(253, 248, 245, 0.35)",
-          "height": "100%",
-          "left": 0,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-  </div>
   <a
     data-reach-skip-link=""
     data-reach-skip-nav-link=""
@@ -226,7 +147,6 @@ exports[`Layout renders with audio player hidden state 1`] = `
     Skip to content
   </a>
   <header
-    className="css-l5xv05"
     role="banner"
   >
     <div
@@ -287,7 +207,7 @@ exports[`Layout renders with audio player hidden state 1`] = `
     </div>
   </main>
   <footer
-    className="css-fmjx8h"
+    className="css-2xzuv0"
     id="footer"
     role="contentinfo"
   >
@@ -352,47 +272,8 @@ exports[`Layout renders with audio player hidden state 1`] = `
 
 exports[`Layout renders with audio player visible state 1`] = `
 <div
-  className="css-ez1gh8"
+  className="css-e2rbjw"
 >
-  <div
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <canvas
-      style={
-        {
-          "display": "block",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        {
-          "WebkitBackdropFilter": "blur(75px)",
-          "backdropFilter": "blur(75px)",
-          "backgroundColor": "rgba(253, 248, 245, 0.35)",
-          "height": "100%",
-          "left": 0,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-  </div>
   <a
     data-reach-skip-link=""
     data-reach-skip-nav-link=""
@@ -401,7 +282,6 @@ exports[`Layout renders with audio player visible state 1`] = `
     Skip to content
   </a>
   <header
-    className="css-l5xv05"
     role="banner"
   >
     <div
@@ -462,7 +342,7 @@ exports[`Layout renders with audio player visible state 1`] = `
     </div>
   </main>
   <footer
-    className="css-fmjx8h"
+    className="css-2xzuv0"
     id="footer"
     role="contentinfo"
   >
@@ -527,47 +407,8 @@ exports[`Layout renders with audio player visible state 1`] = `
 
 exports[`Layout renders with disableMainWrapper prop 1`] = `
 <div
-  className="css-ez1gh8"
+  className="css-e2rbjw"
 >
-  <div
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <canvas
-      style={
-        {
-          "display": "block",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        {
-          "WebkitBackdropFilter": "blur(75px)",
-          "backdropFilter": "blur(75px)",
-          "backgroundColor": "rgba(253, 248, 245, 0.35)",
-          "height": "100%",
-          "left": 0,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-  </div>
   <a
     data-reach-skip-link=""
     data-reach-skip-nav-link=""
@@ -576,7 +417,6 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
     Skip to content
   </a>
   <header
-    className="css-l5xv05"
     role="banner"
   >
     <div
@@ -629,7 +469,7 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
     Test content without main wrapper
   </div>
   <footer
-    className="css-fmjx8h"
+    className="css-2xzuv0"
     id="footer"
     role="contentinfo"
   >
@@ -694,47 +534,8 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
 
 exports[`Layout renders with hideFooter prop 1`] = `
 <div
-  className="css-ez1gh8"
+  className="css-e2rbjw"
 >
-  <div
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <canvas
-      style={
-        {
-          "display": "block",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        {
-          "WebkitBackdropFilter": "blur(75px)",
-          "backdropFilter": "blur(75px)",
-          "backgroundColor": "rgba(253, 248, 245, 0.35)",
-          "height": "100%",
-          "left": 0,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-  </div>
   <a
     data-reach-skip-link=""
     data-reach-skip-nav-link=""
@@ -743,7 +544,6 @@ exports[`Layout renders with hideFooter prop 1`] = `
     Skip to content
   </a>
   <header
-    className="css-l5xv05"
     role="banner"
   >
     <div
@@ -808,47 +608,8 @@ exports[`Layout renders with hideFooter prop 1`] = `
 
 exports[`Layout renders with hideHeader prop 1`] = `
 <div
-  className="css-ez1gh8"
+  className="css-e2rbjw"
 >
-  <div
-    style={
-      {
-        "bottom": 0,
-        "left": 0,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
-    }
-  >
-    <canvas
-      style={
-        {
-          "display": "block",
-          "height": "100%",
-          "left": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        {
-          "WebkitBackdropFilter": "blur(75px)",
-          "backdropFilter": "blur(75px)",
-          "backgroundColor": "rgba(253, 248, 245, 0.35)",
-          "height": "100%",
-          "left": 0,
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-  </div>
   <a
     data-reach-skip-link=""
     data-reach-skip-nav-link=""
@@ -868,7 +629,7 @@ exports[`Layout renders with hideHeader prop 1`] = `
     </div>
   </main>
   <footer
-    className="css-fmjx8h"
+    className="css-2xzuv0"
     id="footer"
     role="contentinfo"
   >

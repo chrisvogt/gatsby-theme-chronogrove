@@ -126,4 +126,25 @@ describe('ActionButton', () => {
     const button = screen.getByRole('button', { name: /accessible button/i })
     expect(button).toHaveAttribute('type', 'button')
   })
+
+  it('falls back to primary variant when invalid variant is provided', () => {
+    renderWithProviders(<ActionButton variant='invalid'>Invalid Variant</ActionButton>)
+
+    const button = screen.getByRole('button', { name: /invalid variant/i })
+    // Should use primary color since invalid variant falls back to primary
+    expect(button).toHaveStyle({
+      color: '#422EA3'
+    })
+  })
+
+  it('falls back to medium size when invalid size is provided', () => {
+    renderWithProviders(<ActionButton size='invalid'>Invalid Size</ActionButton>)
+
+    const button = screen.getByRole('button', { name: /invalid size/i })
+    // Should use medium size since invalid size falls back to medium
+    expect(button).toHaveStyle({
+      fontSize: '12px',
+      padding: '8px 12px'
+    })
+  })
 })

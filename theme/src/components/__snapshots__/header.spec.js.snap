@@ -2,7 +2,7 @@
 
 exports[`Header renders with children 1`] = `
 <header
-  className="css-l5xv05"
+  className="css-1u8qly9"
   role="banner"
 >
   <div
@@ -17,7 +17,7 @@ exports[`Header renders with children 1`] = `
 
 exports[`Header renders with custom styles 1`] = `
 <header
-  className="css-l5xv05"
+  className="css-1u8qly9"
   role="banner"
 >
   <div
@@ -32,7 +32,7 @@ exports[`Header renders with custom styles 1`] = `
 
 exports[`Header renders with empty styles object 1`] = `
 <header
-  className="css-l5xv05"
+  className="css-1u8qly9"
   role="banner"
 >
   <div
@@ -47,7 +47,7 @@ exports[`Header renders with empty styles object 1`] = `
 
 exports[`Header renders without styles prop 1`] = `
 <header
-  className="css-l5xv05"
+  className="css-1u8qly9"
   role="banner"
 >
   <div

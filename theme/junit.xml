@@ -170,24 +170,6 @@
     <testcase classname="src/components/footer/footer.spec.js" name="Footer does not render footer text if none is available" time="0.012">
     </testcase>
   </testsuite>
-  <testsuite name="AnimatedBackground" errors="0" failures="0" skipped="0" timestamp="2025-06-11T04:26:01" time="0.133" tests="8">
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground renders without crashing" time="0.006">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground renders the canvas and overlay div correctly" time="0.004">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground sets up and tears down window resize event listeners" time="0.01">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground initializes canvas size and gradient drawing" time="0.005">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground uses requestAnimationFrame to animate" time="0.002">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground handles missing canvas gracefully" time="0.002">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground resizes canvas on window resize" time="0.002">
-    </testcase>
-    <testcase classname="src/components/animated-background.spec.js" name="AnimatedBackground tests Circle class behavior" time="0.014">
-    </testcase>
-  </testsuite>
   <testsuite name="RecentPostsWidget" errors="0" failures="0" skipped="0" timestamp="2025-06-11T04:26:01" time="0.203" tests="3">
     <testcase classname="src/components/widgets/recent-posts/recent-posts-widget.spec.js" name="RecentPostsWidget renders a grid with one post" time="0.029">
     </testcase>

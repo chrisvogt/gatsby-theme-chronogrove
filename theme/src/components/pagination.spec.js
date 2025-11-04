@@ -161,4 +161,42 @@ describe('Pagination', () => {
       height: '32px'
     })
   })
+
+  it('shows ellipsis when gap is exactly 2 pages from start', () => {
+    renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={4} maxVisiblePages={3} />)
+
+    // Should show ellipsis after page 1 since visiblePages[0] (4) > 2
+    const ellipsis = screen.getAllByText('...')
+    expect(ellipsis.length).toBeGreaterThan(0)
+    expect(screen.getByText('1')).toBeInTheDocument()
+  })
+
+  it('shows ellipsis when gap is exactly 2 pages from end', () => {
+    renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={7} maxVisiblePages={3} />)
+
+    // Should show ellipsis before last page since visiblePages[visiblePages.length - 1] (9) < totalPages - 1 (9)
+    const ellipsis = screen.getAllByText('...')
+    expect(ellipsis.length).toBeGreaterThan(0)
+    expect(screen.getByText('10')).toBeInTheDocument()
+  })
+
+  it('handles clicking first page button when first page is not visible', () => {
+    renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={5} maxVisiblePages={3} />)
+
+    // Click the first page button (should be visible with ellipsis)
+    const firstPageButton = screen.getByLabelText('Go to page 1')
+    fireEvent.click(firstPageButton)
+
+    expect(defaultProps.onPageChange).toHaveBeenCalledWith(1)
+  })
+
+  it('handles clicking last page button when last page is not visible', () => {
+    renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={5} maxVisiblePages={3} />)
+
+    // Click the last page button (should be visible with ellipsis)
+    const lastPageButton = screen.getByLabelText('Go to page 10')
+    fireEvent.click(lastPageButton)
+
+    expect(defaultProps.onPageChange).toHaveBeenCalledWith(10)
+  })
 })

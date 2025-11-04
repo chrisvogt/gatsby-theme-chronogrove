@@ -102,4 +102,40 @@ describe('HomeHeaderContent', () => {
     // Note: The animation might not be cleared immediately in test environment
     expect(emoji).toBeInTheDocument()
   })
+
+  it('handles mouse enter event and sets animation when emoji ref exists', () => {
+    const { container } = render(<HomeHeaderContent />)
+
+    const emoji = container.querySelector('.emoji')
+    const h1 = container.querySelector('h1')
+
+    expect(emoji).toBeInTheDocument()
+    expect(h1).toBeInTheDocument()
+
+    // Trigger mouse enter on h1 which should call handleMouseEnter
+    // The handler checks emojiRef.current and sets animation
+    fireEvent.mouseEnter(h1)
+
+    // Verify animation is set on emoji element
+    expect(emoji.style.animation).toBe('wobble 1s ease-in-out')
+  })
+
+  it('handles animation end event and clears animation when emoji ref exists', () => {
+    const { container } = render(<HomeHeaderContent />)
+
+    const emoji = container.querySelector('.emoji')
+    const h1 = container.querySelector('h1')
+
+    expect(emoji).toBeInTheDocument()
+    expect(h1).toBeInTheDocument()
+
+    // Set initial animation
+    emoji.style.animation = 'wobble 1s ease-in-out'
+
+    // Trigger animation end on emoji element (which has the onAnimationEnd handler)
+    fireEvent.animationEnd(emoji)
+
+    // Verify animation is cleared
+    expect(emoji.style.animation).toBe('none')
+  })
 })
