@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.62.3
+
+### 🗑️ Removals
+
+- **Removed Animated Background**: Removed the animated orb background component and all related code
+  - **Component Removal**: Deleted `animated-background.js` component and its test suite
+  - **Layout Cleanup**: Removed animated background from layout component
+  - **Positioning Fixes**: Removed positioning workarounds (`position: relative`) that were added to work around the animated background
+  - **Code Cleanup**: Removed all references to animated background from codebase and documentation
+  - **Impact**: Cleaner codebase with simpler layout structure and improved performance
+
+### 🎯 User Experience
+
+- **Improved Layout Structure**: Simplified layout without positioning hacks, resulting in cleaner CSS and better maintainability
+- **Performance**: Reduced overhead from canvas-based animation rendering
+
 ## 0.62.2
 
 ### 🐛 Bug Fixes
@@ -639,17 +655,7 @@ None. This change is fully backward compatible - existing sites will automatical
 
 ### Performance Improvements
 
-- **Fixed animated background freezing during window resize**: Resolved critical performance issue that caused page freezing and crashes when resizing the browser window or opening DevTools
-- **Optimized resize event handling**: Added 100ms debounce to prevent excessive resize event calls
-- **Reduced rendering overhead**: Decreased animated circle count from 80 to 40 for better performance
-- **Improved canvas sizing**: Replaced expensive `document.body.scrollHeight` calculations with faster `window.innerHeight`
-- **Enhanced memory management**: Added proper animation cleanup with `cancelAnimationFrame`
-
-### Technical Details
-
-- Implemented conditional canvas resizing (only when dimensions actually change)
-- Added circle repositioning logic to maintain bounds after resize
-- All existing functionality preserved with no breaking changes
+- Performance optimizations and bug fixes
 
 ## 0.45.0
 

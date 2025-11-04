@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import React from 'react'
 import { SkipNavLink, SkipNavContent } from '@reach/skip-nav'
 
-import BackgroundPattern from './animated-background'
 import Footer from './footer'
 import TopNavigation from './top-navigation'
 
@@ -22,7 +21,6 @@ const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter }) => {
     <div
       sx={{
         backgroundColor: 'background',
-        position: 'relative', // stretch to full height
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
@@ -32,12 +30,11 @@ const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter }) => {
         pb: isVisible ? '140px' : 0
       }}
     >
-      <BackgroundPattern />
       <SkipNavLink />
 
       {/* NOTE(chrisvogt): hide the top navigation on the home and 404 pages */}
       {!hideHeader && (
-        <header role='banner' sx={{ position: 'relative' }}>
+        <header role='banner'>
           <TopNavigation />
         </header>
       )}
