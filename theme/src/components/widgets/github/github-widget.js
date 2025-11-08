@@ -15,9 +15,10 @@ import WidgetHeader from '../widget-header'
 
 import fetchDataSource from '../../../actions/fetchDataSource'
 import { getGithubUsername, getGithubWidgetDataSource } from '../../../selectors/metadata'
-import { getMetrics } from '../../../selectors/github'
+import { getMetrics, getContributionCalendar } from '../../../selectors/github'
 import { SUCCESS, FAILURE, getGitHubWidget } from '../../../reducers/widgets'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
+import ContributionGraph from './contribution-graph'
 
 const getHasFatalError = state => getGitHubWidget(state).state === FAILURE
 const getIsLoading = state => getGitHubWidget(state).state !== SUCCESS
@@ -36,6 +37,7 @@ const GitHubWidget = () => {
   const lastPullRequest = useSelector(getLastPullRequest)
   const metrics = useSelector(getMetrics)
   const pinnedItems = useSelector(getPinnedItems)
+  const contributionCalendar = useSelector(getContributionCalendar)
 
   useEffect(() => {
     if (isLoading) {
@@ -62,6 +64,7 @@ const GitHubWidget = () => {
 
       {!hasFatalError && <ProfileMetricsBadge metrics={metrics} />}
 
+      <ContributionGraph isLoading={isLoading} contributionCalendar={contributionCalendar} />
       <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={2} />
       <LastPullRequest isLoading={isLoading} pullRequest={lastPullRequest} />
     </Widget>
