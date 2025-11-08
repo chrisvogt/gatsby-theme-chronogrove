@@ -38,7 +38,9 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
 
     contributionCalendar.weeks.forEach((week, weekIndex) => {
       if (week.contributionDays.length > 0) {
-        const firstDayOfWeek = new Date(week.contributionDays[0].date)
+        // Parse date string as local date to avoid timezone issues
+        const [year, monthNum, dayOfMonth] = week.contributionDays[0].date.split('-').map(Number)
+        const firstDayOfWeek = new Date(year, monthNum - 1, dayOfMonth)
         const month = firstDayOfWeek.getMonth()
 
         if (month !== lastMonth) {
@@ -70,7 +72,9 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
     const weekMaps = contributionCalendar.weeks.map(week => {
       const map = {}
       week.contributionDays.forEach(day => {
-        const date = new Date(day.date)
+        // Parse date string as local date to avoid timezone issues
+        const [year, month, dayOfMonth] = day.date.split('-').map(Number)
+        const date = new Date(year, month - 1, dayOfMonth)
         const dayOfWeek = date.getDay() // 0=Sun, 1=Mon, ..., 6=Sat
         // Convert to GitHub week: Sat=0, Sun=1, Mon=2, ..., Fri=6
         const githubDayOfWeek = dayOfWeek === 0 ? 1 : dayOfWeek === 6 ? 0 : dayOfWeek + 1
@@ -302,7 +306,11 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                     )
                   }
 
-                  const date = new Date(day.date)
+                  // Parse date string as local date to avoid timezone issues
+                  // Date strings in YYYY-MM-DD format are parsed as UTC, which can shift
+                  // the day when converted to local time. Parse manually to ensure consistency.
+                  const [year, month, dayOfMonth] = day.date.split('-').map(Number)
+                  const date = new Date(year, month - 1, dayOfMonth)
                   const formattedDate = date.toLocaleDateString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
