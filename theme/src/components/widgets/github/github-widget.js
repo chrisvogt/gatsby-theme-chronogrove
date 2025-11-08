@@ -64,9 +64,9 @@ const GitHubWidget = () => {
 
       {!hasFatalError && <ProfileMetricsBadge metrics={metrics} />}
 
-      <ContributionGraph isLoading={isLoading} contributionCalendar={contributionCalendar} />
       <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={2} />
       <LastPullRequest isLoading={isLoading} pullRequest={lastPullRequest} />
+      <ContributionGraph isLoading={isLoading} contributionCalendar={contributionCalendar} />
     </Widget>
   )
 }

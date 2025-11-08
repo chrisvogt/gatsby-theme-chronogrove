@@ -21,10 +21,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const containerRef = useRef(null)
-  const outerWrapperRef = useRef(null)
-  const rowRef = useRef(null)
-  const gridRef = useRef(null)
-  const monthLabelsRef = useRef(null)
 
   // Calculate total days for cell size calculation
   const totalDays = useMemo(() => {
@@ -178,12 +174,11 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const weeksCount = contributionCalendar.weeks.length
 
   return (
-    <Box sx={{ marginBottom: 4 }}>
+    <Box sx={{ mt: 4, mb: 0 }}>
       <Heading
         as='h3'
         sx={{
-          mb: 3,
-          fontSize: [3, 4]
+          mb: 3
         }}
       >
         Contribution Graph
@@ -201,7 +196,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
             minWidth: 0,
             contain: 'inline-size'
           }}
-          ref={outerWrapperRef}
         >
           <Box
             sx={{
@@ -212,30 +206,31 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
               maxWidth: '100%',
               overflow: 'hidden'
             }}
-            ref={rowRef}
           >
             {/* Day of week labels - fixed on the left, show Mon, Wed, Fri (GitHub week order: Sat, Sun, Mon, Tue, Wed, Thu, Fri) */}
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
+                position: 'relative',
                 mr: 2,
                 fontSize: 0,
                 color: 'textMuted',
                 width: '40px',
                 flexShrink: 0,
-                pt: '21px' // Offset for month labels height
+                pt: '24px', // Offset for month labels height (20px) + gap (4px)
+                height: `${7 * cellSize + 6 * 4}px` // Align container height with grid rows
               }}
             >
               {[2, 4, 6].map(dayOfWeek => (
                 <Box
                   key={dayOfWeek}
                   sx={{
+                    position: 'absolute',
+                    top: `${dayOfWeek * (cellSize + 4)}px`,
                     height: `${cellSize}px`,
                     lineHeight: `${cellSize}px`,
                     textAlign: 'right',
                     pr: 1,
-                    mb: 1 // Match grid gap
+                    width: '100%'
                   }}
                 >
                   {['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'][dayOfWeek]}
@@ -264,9 +259,8 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   mb: 1,
                   minWidth: 0
                 }}
-                ref={monthLabelsRef}
               >
-                {monthLabels.map((month, idx) => (
+                {monthLabels.slice(0, -1).map((month, idx) => (
                   <Box
                     key={`${month.date}-${idx}`}
                     sx={{
@@ -294,7 +288,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   minWidth: 'max-content'
                   // No width property - let it size naturally, parent handles overflow
                 }}
-                ref={gridRef}
               >
                 {gridItems.map(({ key, weekIndex, dayOfWeek, day }) => {
                   if (!day) {
