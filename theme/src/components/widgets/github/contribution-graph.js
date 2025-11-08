@@ -21,6 +21,10 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const containerRef = useRef(null)
+  const outerWrapperRef = useRef(null)
+  const rowRef = useRef(null)
+  const gridRef = useRef(null)
+  const monthLabelsRef = useRef(null)
 
   // Calculate total days for cell size calculation
   const totalDays = useMemo(() => {
@@ -193,15 +197,22 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
           sx={{
             width: '100%',
             maxWidth: '100%',
-            overflow: 'hidden' // Critical: prevents inner content from expanding page
+            overflow: 'hidden', // Critical: prevents inner content from expanding page
+            minWidth: 0,
+            contain: 'inline-size'
           }}
+          ref={outerWrapperRef}
         >
           <Box
             sx={{
               display: 'flex',
               position: 'relative',
-              pb: 3
+              pb: 3,
+              minWidth: 0,
+              maxWidth: '100%',
+              overflow: 'hidden'
             }}
+            ref={rowRef}
           >
             {/* Day of week labels - fixed on the left, show Mon, Wed, Fri (GitHub week order: Sat, Sun, Mon, Tue, Wed, Thu, Fri) */}
             <Box
@@ -239,7 +250,10 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                 overflowX: 'auto',
                 overflowY: 'visible',
                 flex: 1,
-                minWidth: 0 // Allow flex item to shrink below content size
+                minWidth: 0, // Allow flex item to shrink below content size
+                maxWidth: '100%',
+                WebkitOverflowScrolling: 'touch',
+                contain: 'inline-size'
               }}
             >
               {/* Month labels */}
@@ -247,8 +261,10 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                 sx={{
                   position: 'relative',
                   height: '20px',
-                  mb: 1
+                  mb: 1,
+                  minWidth: 0
                 }}
+                ref={monthLabelsRef}
               >
                 {monthLabels.map((month, idx) => (
                   <Box
@@ -274,9 +290,11 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   display: 'grid',
                   gridTemplateColumns: `repeat(${weeksCount}, ${cellSize}px)`,
                   gridTemplateRows: 'repeat(7, 1fr)',
-                  gap: 1
+                  gap: 1,
+                  minWidth: 'max-content'
                   // No width property - let it size naturally, parent handles overflow
                 }}
+                ref={gridRef}
               >
                 {gridItems.map(({ key, weekIndex, dayOfWeek, day }) => {
                   if (!day) {
