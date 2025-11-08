@@ -2242,10 +2242,10 @@ exports[`ContributionGraph Component matches the loading state snapshot 1`] = `
 
 exports[`ContributionGraph Component matches the successful state snapshot 1`] = `
 <div
-  className="css-lnnjou"
+  className="css-1yax49l"
 >
   <h3
-    className="css-174rnww"
+    className="css-uyljfj"
   >
     Contribution Graph
   </h3>
@@ -2259,106 +2259,104 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
        contributions in the last year
     </p>
     <div
-      className="css-voyooh"
+      className="css-10kqyow"
     >
       <div
-        className="css-amv7xy"
+        className="css-u4nsmq"
       >
         <div
-          className="css-195nor3"
-        >
-          Nov
-        </div>
-      </div>
-      <div
-        className="css-z5fbhm"
-      >
-        <div
-          className="css-wh9rbu"
+          className="css-rr7w73"
         >
           <div
-            className="css-1y751m3"
+            className="css-j8gbnp"
           >
             Mon
           </div>
           <div
-            className="css-1y751m3"
+            className="css-1n0fdlr"
           >
             Wed
           </div>
           <div
-            className="css-1y751m3"
+            className="css-f4t2mo"
           >
             Fri
           </div>
         </div>
         <div
-          className="css-1tiy0p2"
+          className="css-1cbsg9f"
         >
           <div
-            className="css-1gmywhw"
-            title="0 contributions on Saturday, November 2, 2024"
+            className="css-1zugrk"
           />
           <div
-            className="css-1btv0ha"
-            title="1 contribution on Sunday, November 3, 2024"
-          />
-          <div
-            className="css-1tf30gd"
-            title="5 contributions on Monday, November 4, 2024"
-          />
-          <div
-            className="css-1jpyts5"
-            title="0 contributions on Tuesday, November 5, 2024"
-          />
-          <div
-            className="css-fngrne"
-            title="0 contributions on Wednesday, November 6, 2024"
-          />
-          <div
-            className="css-wgbf1"
-            title="0 contributions on Thursday, November 7, 2024"
-          />
-          <div
-            className="css-1k3j8b4"
-            title="0 contributions on Friday, November 8, 2024"
-          />
+            className="css-bes6qg"
+          >
+            <div
+              className="css-1gmywhw"
+              title="0 contributions on Saturday, November 2, 2024"
+            />
+            <div
+              className="css-1btv0ha"
+              title="1 contribution on Sunday, November 3, 2024"
+            />
+            <div
+              className="css-1tf30gd"
+              title="5 contributions on Monday, November 4, 2024"
+            />
+            <div
+              className="css-1jpyts5"
+              title="0 contributions on Tuesday, November 5, 2024"
+            />
+            <div
+              className="css-fngrne"
+              title="0 contributions on Wednesday, November 6, 2024"
+            />
+            <div
+              className="css-wgbf1"
+              title="0 contributions on Thursday, November 7, 2024"
+            />
+            <div
+              className="css-1k3j8b4"
+              title="0 contributions on Friday, November 8, 2024"
+            />
+          </div>
         </div>
       </div>
+    </div>
+    <div
+      className="css-1ts1diq"
+    >
       <div
-        className="css-1ts1diq"
+        className="css-1yz7e9k"
+        component="span"
+      >
+        Less
+      </div>
+      <div
+        className="css-1amotyw"
       >
         <div
-          className="css-1yz7e9k"
-          component="span"
-        >
-          Less
-        </div>
+          className="css-wzni05"
+        />
         <div
-          className="css-1amotyw"
-        >
-          <div
-            className="css-wzni05"
-          />
-          <div
-            className="css-6gz19k"
-          />
-          <div
-            className="css-1s9oha1"
-          />
-          <div
-            className="css-17ttyd3"
-          />
-          <div
-            className="css-1q4xx2h"
-          />
-        </div>
+          className="css-6gz19k"
+        />
         <div
-          className="css-1yz7e9k"
-          component="span"
-        >
-          More
-        </div>
+          className="css-1s9oha1"
+        />
+        <div
+          className="css-17ttyd3"
+        />
+        <div
+          className="css-1q4xx2h"
+        />
+      </div>
+      <div
+        className="css-1yz7e9k"
+        component="span"
+      >
+        More
       </div>
     </div>
   </div>

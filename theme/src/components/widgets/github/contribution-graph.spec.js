@@ -81,4 +81,45 @@ describe('ContributionGraph Component', () => {
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
+
+  it('omits the last month label (matches GitHub behavior)', () => {
+    const multiMonthCalendar = {
+      totalContributions: 3,
+      weeks: [
+        {
+          contributionDays: [{ date: '2024-01-01', contributionCount: 1, color: '#9be9a8' }]
+        },
+        {
+          contributionDays: [{ date: '2024-02-01', contributionCount: 1, color: '#40c463' }]
+        },
+        {
+          contributionDays: [{ date: '2024-03-01', contributionCount: 1, color: '#30a14e' }]
+        }
+      ]
+    }
+
+    const testRenderer = renderer.create(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={multiMonthCalendar} />
+      </TestProviderWithState>
+    )
+
+    const root = testRenderer.root
+
+    const monthTexts = ['Jan', 'Feb', 'Mar']
+    const renderedMonthLabelNodes = root.findAll(
+      node =>
+        Array.isArray(node.children) &&
+        node.children.some(child => typeof child === 'string' && monthTexts.includes(child))
+    )
+
+    // Collect all month strings from matched nodes
+    const labels = renderedMonthLabelNodes.flatMap(n =>
+      n.children.filter(child => typeof child === 'string' && monthTexts.includes(child))
+    )
+
+    // Expect the last month to be omitted; at least the first should render
+    expect(labels).toContain('Jan')
+    expect(labels).not.toContain('Mar')
+  })
 })
