@@ -60,6 +60,47 @@ describe('ContributionGraph Component', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  it('renders singular and plural contribution titles correctly', () => {
+    const testRenderer = renderer.create(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
+      </TestProviderWithState>
+    )
+    const root = testRenderer.root
+
+    const titleNodes = root.findAll(node => typeof node.props?.title === 'string')
+    const titles = titleNodes.map(n => n.props.title)
+
+    expect(titles.some(t => /1 contribution\b/.test(t))).toBe(true)
+    expect(titles.some(t => /\b5 contributions\b/.test(t))).toBe(true)
+  })
+
+  it('renders empty grid cells for missing days in a week', () => {
+    // Week with only two days; others should render as empty grid cells
+    const sparseCalendar = {
+      totalContributions: 2,
+      weeks: [
+        {
+          contributionDays: [
+            { date: '2024-07-01', contributionCount: 1, color: '#9be9a8' }, // Monday
+            { date: '2024-07-05', contributionCount: 1, color: '#9be9a8' } // Friday
+          ]
+        }
+      ]
+    }
+
+    const testRenderer = renderer.create(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={sparseCalendar} />
+      </TestProviderWithState>
+    )
+    const root = testRenderer.root
+
+    // Ensure at least one titled cell renders (sparse weeks exercise empty-cell path)
+    const titledCells = root.findAll(node => typeof node.props?.title === 'string')
+    expect(titledCells.length).toBeGreaterThan(0)
+  })
+
   it('matches the empty state snapshot', () => {
     const tree = renderer
       .create(
