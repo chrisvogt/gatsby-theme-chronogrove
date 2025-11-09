@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.63.0
+
+### ✨ Features
+
+- **GitHub Contribution Graph widget**: Added a new contribution calendar with horizontal scroll on small screens and GitHub-accurate layout (weeks, days, month labels).
+  - Depends on updated metrics API providing `contributionCalendar` data
+  - Hides the final month label to match GitHub’s rendering behavior
+
+### 🐛 Bug Fixes
+
+- **Contribution Graph mobile overflow**: Fixed horizontal overflow on small screens by adding intrinsic size containment and proper shrink behavior.
+  - Added `minWidth: 0`, `overflow: 'hidden'`, and `contain: 'inline-size'` to wrappers/scroller
+  - Set grid `minWidth: 'max-content'` to keep width inside the horizontal scroller
+  - Ensures the card does not stretch wider than the viewport while preserving horizontal scroll for the grid
+- **Y‑axis labels**: Precisely aligned Mon/Wed/Fri with absolute positioning derived from dynamic cell size and row gap
+
+### 🎯 User Experience
+
+- **Widget order**: Moved Contribution Graph below “Last Pull Request” so it renders last within the GitHub widget.
+- **Consistent spacing**: Tuned top/bottom margins so the graph spacing matches other widgets.
+- **Heading size**: Matched the Contribution Graph heading size with “Last Pull Request” for visual consistency.
+
+### 🧪 Testing & Coverage
+
+- Added tests to verify:
+  - Omission of the last month label in the Contribution Graph
+  - Section order in the GitHub widget (Pinned Items → Last Pull Request → Contribution Graph)
+- Kept existing tests passing; lint is clean.
+
 ## 0.62.3
 
 ### 🗑️ Removals

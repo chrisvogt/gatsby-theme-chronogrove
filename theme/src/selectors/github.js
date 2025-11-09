@@ -21,3 +21,7 @@ export const getMetrics = createSelector([selectGitHubUser], user => {
 
   return metrics
 })
+
+export const getContributionCalendar = createSelector([selectGitHubUser], user => {
+  return user.contributionsCollection?.contributionCalendar ?? null
+})

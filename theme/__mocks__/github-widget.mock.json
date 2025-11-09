@@ -5,34 +5,34 @@
       "login": "chrisvogt",
       "name": "Chris Vogt",
       "createdAt": "2012-07-07T03:18:03Z",
-      "bio": "",
+      "bio": "Trying to leave the internet a little nicer than I found it. Work account: @cvogt-godaddy",
       "followers": {
-        "totalCount": 42
+        "totalCount": 47
       },
       "following": {
-        "totalCount": 64
+        "totalCount": 65
       },
       "url": "https://github.com/chrisvogt",
       "status": {
-        "emoji": null,
-        "updatedAt": "2020-03-23T19:24:51Z",
+        "emoji": ":cherry_blossom:",
+        "updatedAt": "2020-09-16T01:34:14Z",
         "createdAt": "2019-10-29T03:51:06Z",
         "expiresAt": null,
-        "message": "✌(◕‿◕) ✌"
+        "message": "✿◕‿◕"
       },
       "projectsUrl": "https://github.com/users/chrisvogt/projects",
       "location": "San Francisco, California, US",
-      "avatarUrl": "https://avatars3.githubusercontent.com/u/1934719?u=db48b4b6879c8d5ec084c66acc7e70a2c98515af&v=4",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1934719?u=f2d2dedda8d28c6d728b898f6c306f612b4eca42&v=4",
       "pinnedItems": {
         "totalCount": 4,
         "nodes": [
           {
             "__typename": "Repository",
             "createdAt": "2019-10-07T05:33:40Z",
-            "description": "A Gatsby personal blog theme with built-in GitHub, Goodreads, Instagram, and Spotify widgets.",
+            "description": "A homemade GatsbyJS theme for my personal blog and website.",
             "hasIssuesEnabled": true,
-            "hasWikiEnabled": true,
-            "homepageUrl": "",
+            "hasWikiEnabled": false,
+            "homepageUrl": "https://www.chrisvogt.me",
             "id": "MDEwOlJlcG9zaXRvcnkyMTMzMDI5NzQ=",
             "licenseInfo": {
               "name": "MIT License",
@@ -42,123 +42,2195 @@
             },
             "name": "gatsby-theme-chronogrove",
             "nameWithOwner": "chrisvogt/gatsby-theme-chronogrove",
-            "openGraphImageUrl": "https://avatars0.githubusercontent.com/u/1934719?s=400&v=4",
+            "openGraphImageUrl": "https://repository-images.githubusercontent.com/213302974/5de76280-3236-11eb-96ce-d0267c8e6f23",
             "primaryLanguage": {
               "id": "MDg6TGFuZ3VhZ2UxNDA=",
               "color": "#f1e05a",
               "name": "JavaScript"
             },
-            "updatedAt": "2020-06-12T01:42:55Z",
-            "pushedAt": "2020-06-12T03:21:36Z",
+            "updatedAt": "2025-11-04T07:08:25Z",
+            "pushedAt": "2025-11-04T07:08:23Z",
             "url": "https://github.com/chrisvogt/gatsby-theme-chronogrove",
-            "usesCustomOpenGraphImage": false
+            "usesCustomOpenGraphImage": true
           },
           {
             "__typename": "Repository",
-            "createdAt": "2018-08-12T21:59:08Z",
-            "description": "A personal API for storing and serving personal data and metrics collected from various online platforms.",
-            "hasIssuesEnabled": true,
-            "hasWikiEnabled": false,
-            "homepageUrl": "",
-            "id": "MDEwOlJlcG9zaXRvcnkxNDQ1MDM2NjQ=",
-            "licenseInfo": {
-              "name": "MIT License",
-              "nickname": null,
-              "key": "mit",
-              "url": "http://choosealicense.com/licenses/mit/"
-            },
-            "name": "core",
-            "nameWithOwner": "personal-api/core",
-            "openGraphImageUrl": "https://avatars1.githubusercontent.com/u/42729416?s=400&v=4",
-            "primaryLanguage": {
-              "id": "MDg6TGFuZ3VhZ2UxNDA=",
-              "color": "#f1e05a",
-              "name": "JavaScript"
-            },
-            "updatedAt": "2020-03-26T12:11:58Z",
-            "pushedAt": "2020-06-06T12:06:17Z",
-            "url": "https://github.com/personal-api/core",
-            "usesCustomOpenGraphImage": false
-          },
-          {
-            "__typename": "Repository",
-            "createdAt": "2018-10-17T03:27:18Z",
-            "description": "Slack bot that announces upcoming catered meals and supports ZeroCater.",
+            "createdAt": "2019-06-05T05:25:59Z",
+            "description": "Syncs data from services like Spotify and Goodreads into Firestore for my personal site.",
             "hasIssuesEnabled": true,
             "hasWikiEnabled": true,
-            "homepageUrl": "",
-            "id": "MDEwOlJlcG9zaXRvcnkxNTMzOTAxMDE=",
+            "homepageUrl": "https://metrics.chrisvogt.me/",
+            "id": "MDEwOlJlcG9zaXRvcnkxOTAzMzEwOTc=",
             "licenseInfo": {
               "name": "MIT License",
               "nickname": null,
               "key": "mit",
               "url": "http://choosealicense.com/licenses/mit/"
             },
-            "name": "slack-bot",
-            "nameWithOwner": "lunchly/slack-bot",
-            "openGraphImageUrl": "https://avatars3.githubusercontent.com/u/43972259?s=400&v=4",
+            "name": "metrics",
+            "nameWithOwner": "chrisvogt/metrics",
+            "openGraphImageUrl": "https://opengraph.githubassets.com/43683649a8c149c7884d80c83a8ee356b8d9c89dd36d59772f7de79330307a9a/chrisvogt/metrics",
             "primaryLanguage": {
               "id": "MDg6TGFuZ3VhZ2UxNDA=",
               "color": "#f1e05a",
               "name": "JavaScript"
             },
-            "updatedAt": "2019-08-21T01:53:12Z",
-            "pushedAt": "2020-03-13T23:05:11Z",
-            "url": "https://github.com/lunchly/slack-bot",
+            "updatedAt": "2025-11-08T05:52:40Z",
+            "pushedAt": "2025-11-08T05:52:17Z",
+            "url": "https://github.com/chrisvogt/metrics",
             "usesCustomOpenGraphImage": false
           },
           {
             "__typename": "Repository",
-            "createdAt": "2018-10-08T21:12:28Z",
-            "description": "Lunchly datasource for ZeroCater.",
+            "createdAt": "2015-09-15T05:53:17Z",
+            "description": "Compare estimated average annual salaries for public school teachers (K-12) by state and decade.",
             "hasIssuesEnabled": true,
-            "hasWikiEnabled": false,
-            "homepageUrl": "https://www.npmjs.com/package/@lunchly/service-zerocater",
-            "id": "MDEwOlJlcG9zaXRvcnkxNTIxNDc0MDk=",
+            "hasWikiEnabled": true,
+            "homepageUrl": "https://teachersalary.info",
+            "id": "MDEwOlJlcG9zaXRvcnk0MjQ5ODI0MA==",
             "licenseInfo": {
               "name": "MIT License",
               "nickname": null,
               "key": "mit",
               "url": "http://choosealicense.com/licenses/mit/"
             },
-            "name": "service-zerocater",
-            "nameWithOwner": "lunchly/service-zerocater",
-            "openGraphImageUrl": "https://avatars3.githubusercontent.com/u/43972259?s=400&v=4",
+            "name": "teachersalary.info",
+            "nameWithOwner": "chrisvogt/teachersalary.info",
+            "openGraphImageUrl": "https://opengraph.githubassets.com/cee6f7e80b8312d4450d427fb87f60e6f0700e489809c0d3043ea68a1b1cdf1d/chrisvogt/teachersalary.info",
             "primaryLanguage": {
               "id": "MDg6TGFuZ3VhZ2UxNDA=",
               "color": "#f1e05a",
               "name": "JavaScript"
             },
-            "updatedAt": "2019-03-28T08:26:47Z",
-            "pushedAt": "2019-03-25T18:31:55Z",
-            "url": "https://github.com/lunchly/service-zerocater",
+            "updatedAt": "2025-09-16T02:31:48Z",
+            "pushedAt": "2025-06-08T08:01:36Z",
+            "url": "https://github.com/chrisvogt/teachersalary.info",
+            "usesCustomOpenGraphImage": false
+          },
+          {
+            "__typename": "Repository",
+            "createdAt": "2024-11-26T09:45:30Z",
+            "description": "My piano repertoire.",
+            "hasIssuesEnabled": true,
+            "hasWikiEnabled": false,
+            "homepageUrl": "https://repertoire.chrisvogt.me",
+            "id": "R_kgDONU98Yg",
+            "licenseInfo": null,
+            "name": "repertoire.chrisvogt.me",
+            "nameWithOwner": "chrisvogt/repertoire.chrisvogt.me",
+            "openGraphImageUrl": "https://opengraph.githubassets.com/52bc18f1bcf39ef66f8260525ef4770bede1e15537959e856bb8886b4e98905d/chrisvogt/repertoire.chrisvogt.me",
+            "primaryLanguage": {
+              "id": "MDg6TGFuZ3VhZ2UxNDA=",
+              "color": "#f1e05a",
+              "name": "JavaScript"
+            },
+            "updatedAt": "2025-06-30T08:05:42Z",
+            "pushedAt": "2025-06-30T08:06:43Z",
+            "url": "https://github.com/chrisvogt/repertoire.chrisvogt.me",
             "usesCustomOpenGraphImage": false
           }
         ]
       },
       "repositories": {
-        "totalCount": 54
+        "totalCount": 69
+      },
+      "contributionsCollection": {
+        "contributionCalendar": {
+          "totalContributions": 487,
+          "weeks": [
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-11-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-11-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-11-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-11-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-26",
+                  "contributionCount": 13,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2024-11-27",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2024-11-28",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2024-11-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-11-30",
+                  "contributionCount": 11,
+                  "color": "#30a14e"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-12-01",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2024-12-02",
+                  "contributionCount": 11,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2024-12-03",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2024-12-04",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2024-12-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-07",
+                  "contributionCount": 14,
+                  "color": "#216e39"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-12-08",
+                  "contributionCount": 9,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2024-12-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-12-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-21",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-12-22",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2024-12-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-27",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2024-12-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2024-12-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2024-12-30",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2024-12-31",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-02",
+                  "contributionCount": 7,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-01-03",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-01-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-01-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-07",
+                  "contributionCount": 9,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-01-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-11",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-01-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-13",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-01-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-01-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-01-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-01-31",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-01",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-02-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-02-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-02-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-02-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-25",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-02-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-02-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-03-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-03-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-03-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-03-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-03-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-03-31",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-04-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-04-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-04-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-04-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-04-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-05-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-06",
+                  "contributionCount": 6,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-05-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-08",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-05-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-05-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-05-18",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-05-19",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-05-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-23",
+                  "contributionCount": 13,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2025-05-24",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-05-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-27",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-05-28",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-05-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-05-31",
+                  "contributionCount": 11,
+                  "color": "#30a14e"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-06-01",
+                  "contributionCount": 6,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-02",
+                  "contributionCount": 10,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-06-03",
+                  "contributionCount": 14,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2025-06-04",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-05",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-06",
+                  "contributionCount": 9,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-06-07",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-06-08",
+                  "contributionCount": 6,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-09",
+                  "contributionCount": 8,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-06-10",
+                  "contributionCount": 9,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-06-11",
+                  "contributionCount": 7,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-12",
+                  "contributionCount": 9,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-06-13",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-06-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-06-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-06-16",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-06-18",
+                  "contributionCount": 11,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-06-19",
+                  "contributionCount": 21,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2025-06-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-06-21",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-06-22",
+                  "contributionCount": 15,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2025-06-23",
+                  "contributionCount": 7,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-06-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-06-26",
+                  "contributionCount": 6,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-06-28",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-06-29",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-06-30",
+                  "contributionCount": 12,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2025-07-01",
+                  "contributionCount": 6,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-07-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-07-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-07-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-07-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-07-06",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-07",
+                  "contributionCount": 9,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-07-08",
+                  "contributionCount": 6,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-07-09",
+                  "contributionCount": 7,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-07-10",
+                  "contributionCount": 11,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-07-11",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-07-13",
+                  "contributionCount": 13,
+                  "color": "#216e39"
+                },
+                {
+                  "date": "2025-07-14",
+                  "contributionCount": 11,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-07-15",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-16",
+                  "contributionCount": 10,
+                  "color": "#30a14e"
+                },
+                {
+                  "date": "2025-07-17",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-07-18",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-19",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-07-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-07-21",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-22",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-23",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-24",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-25",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-07-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-07-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-07-28",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-29",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-07-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-07-31",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-08-03",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-08-04",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-08-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-08",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-08-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-08-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-11",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-08-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-08-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-20",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-08-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-22",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-08-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-08-24",
+                  "contributionCount": 1,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-08-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-08-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-08-31",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-09-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-09-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-15",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-09-16",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-09-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-18",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-09-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-27",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-09-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-09-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-02",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-03",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-04",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-10-05",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-10-06",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-10-07",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-08",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-09",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-10",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-11",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-10-12",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-13",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-14",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-15",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-16",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-17",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-18",
+                  "contributionCount": 3,
+                  "color": "#9be9a8"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-10-19",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-20",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-21",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-22",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-23",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-24",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-25",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-10-26",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-27",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                },
+                {
+                  "date": "2025-10-28",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-29",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-30",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-10-31",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-11-01",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                }
+              ]
+            },
+            {
+              "contributionDays": [
+                {
+                  "date": "2025-11-02",
+                  "contributionCount": 5,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-11-03",
+                  "contributionCount": 4,
+                  "color": "#40c463"
+                },
+                {
+                  "date": "2025-11-04",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-11-05",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-11-06",
+                  "contributionCount": 0,
+                  "color": "#ebedf0"
+                },
+                {
+                  "date": "2025-11-07",
+                  "contributionCount": 2,
+                  "color": "#9be9a8"
+                }
+              ]
+            }
+          ]
+        }
       },
       "pullRequests": {
         "nodes": [
           {
             "labels": {
-              "edges": []
+              "edges": [
+                {
+                  "node": {
+                    "id": "MDU6TGFiZWwxMzkxNjY5NTc4",
+                    "color": "a2eeef",
+                    "name": "enhancement"
+                  }
+                }
+              ]
             },
-            "lastEditedAt": "2020-06-12T01:35:12Z",
-            "url": "https://github.com/chrisvogt/gatsby-theme-chrisvogt/pull/40",
+            "lastEditedAt": "2025-11-08T05:49:40Z",
+            "url": "https://github.com/chrisvogt/metrics/pull/84",
             "closed": true,
-            "closedAt": "2020-06-12T01:42:52Z",
-            "createdAt": "2020-06-12T00:50:30Z",
-            "id": "MDExOlB1bGxSZXF1ZXN0NDMzNDA2MDQ5",
+            "closedAt": "2025-11-08T05:51:25Z",
+            "createdAt": "2025-11-08T05:46:08Z",
+            "id": "PR_kwDOC1g42c6yRfS-",
             "merged": true,
-            "number": 40,
+            "number": 84,
             "repository": {
-              "name": "gatsby-theme-chrisvogt",
-              "id": "MDEwOlJlcG9zaXRvcnkyMTMzMDI5NzQ=",
-              "url": "https://github.com/chrisvogt/gatsby-theme-chrisvogt"
+              "name": "metrics",
+              "id": "MDEwOlJlcG9zaXRvcnkxOTAzMzEwOTc=",
+              "url": "https://github.com/chrisvogt/metrics"
             },
-            "title": "Initial check-in of unit tests and coverage collection/reporting",
+            "title": "feat: add contribution graph data to GitHub widget data",
             "viewerDidAuthor": true
           }
         ]

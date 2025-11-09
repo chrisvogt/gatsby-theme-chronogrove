@@ -34,4 +34,19 @@ describe('GitHub Widget', () => {
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
+
+  it('renders sections in expected order: Pinned Items, Last Pull Request, Contribution Graph', () => {
+    const testRenderer = renderer.create(
+      <TestProviderWithState>
+        <GitHubWidget />
+      </TestProviderWithState>
+    )
+    const root = testRenderer.root
+    // Collect all h3 headings in the widget
+    const headings = root.findAll(node => node.type === 'h3')
+    const texts = headings.map(h => (Array.isArray(h.children) ? h.children.join('') : ''))
+    // Filter to the three widget subsection headings
+    const filtered = texts.filter(t => ['Pinned Items', 'Last Pull Request', 'Contribution Graph'].includes(t))
+    expect(filtered).toEqual(['Pinned Items', 'Last Pull Request', 'Contribution Graph'])
+  })
 })
