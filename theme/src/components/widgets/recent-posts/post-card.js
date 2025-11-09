@@ -9,6 +9,7 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
   return (
     <Link
       sx={{
+        display: 'flex',
         color: 'var(--theme-ui-colors-panel-text)',
         textDecoration: 'none'
       }}
@@ -21,6 +22,7 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
       <Card
         variant='actionCard'
         sx={{
+          height: '100%',
           display: 'flex',
           flexDirection: horizontal ? 'row' : 'column',
           transition: 'transform 0.2s ease-in-out',
