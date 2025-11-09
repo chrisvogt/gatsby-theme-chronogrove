@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.63.1
+
+### 🐛 Bug Fixes
+
+- **Contribution Graph width (large screens)**: Removed the 12px upper clamp on cell size so the grid expands to fill the container on wide screens.
+- **FOUC hardening**: Added inline style fallbacks (`overflow: hidden`, `minWidth: 0`, `maxWidth: 100%`) to wrappers and loading state to prevent pre‑hydration overflow/flash.
+- **Balanced spacing**: Adjusted left day‑label margin to match card padding, equalizing left/right spacing around the grid.
+
+### 🧪 Testing & Coverage
+
+- Added resize behavior tests to exercise the responsive sizing logic:
+  - Ensures resize runs on narrow and wide containers (min clamp honored; growth path executed).
+  - Updated snapshots for GitHub widget and Contribution Graph.
+
 ## 0.63.0
 
 ### ✨ Features
