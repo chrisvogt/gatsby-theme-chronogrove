@@ -2272,8 +2272,9 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
       className="css-10kqyow"
       style={
         {
+          "contain": "inline-size",
           "maxWidth": "100%",
-          "minWidth": 0,
+          "minWidth": "0",
           "overflow": "hidden",
           "width": "100%",
         }
@@ -2283,9 +2284,11 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
         className="css-u4nsmq"
         style={
           {
+            "display": "flex",
             "maxWidth": "100%",
-            "minWidth": 0,
+            "minWidth": "0",
             "overflow": "hidden",
+            "position": "relative",
           }
         }
       >
@@ -2293,17 +2296,17 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
           className="css-83rzot"
         >
           <div
-            className="css-j8gbnp"
+            className="css-16kxfna"
           >
             Mon
           </div>
           <div
-            className="css-1n0fdlr"
+            className="css-ad35aq"
           >
             Wed
           </div>
           <div
-            className="css-f4t2mo"
+            className="css-1rgyw9g"
           >
             Fri
           </div>
@@ -2312,8 +2315,11 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
           className="css-1cbsg9f"
           style={
             {
+              "WebkitOverflowScrolling": "touch",
+              "contain": "inline-size",
+              "flex": "1",
               "maxWidth": "100%",
-              "minWidth": 0,
+              "minWidth": "0",
               "overflowX": "auto",
               "overflowY": "visible",
             }
@@ -2326,31 +2332,31 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
             className="css-bes6qg"
           >
             <div
-              className="css-1gmywhw"
+              className="cell-hidden css-mv75v1"
               title="0 contributions on Saturday, November 9, 2024"
             />
             <div
-              className="css-1bzxg3d"
+              className="cell-hidden css-7ulxx8"
               title="0 contributions on Sunday, November 3, 2024"
             />
             <div
-              className="css-2iq5th"
+              className="cell-hidden css-5ozxn2"
               title="1 contribution on Monday, November 4, 2024"
             />
             <div
-              className="css-2h4t88"
+              className="cell-hidden css-1e84h3h"
               title="5 contributions on Tuesday, November 5, 2024"
             />
             <div
-              className="css-fngrne"
+              className="cell-hidden css-1wn25o2"
               title="0 contributions on Wednesday, November 6, 2024"
             />
             <div
-              className="css-wgbf1"
+              className="cell-hidden css-15pouz5"
               title="0 contributions on Thursday, November 7, 2024"
             />
             <div
-              className="css-1k3j8b4"
+              className="cell-hidden css-7b3nnl"
               title="0 contributions on Friday, November 8, 2024"
             />
           </div>
@@ -2361,7 +2367,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
       className="css-1ts1diq"
     >
       <div
-        className="css-1yz7e9k"
+        className="css-1mkj686"
         component="span"
       >
         Less
@@ -2370,23 +2376,23 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
         className="css-1amotyw"
       >
         <div
-          className="css-wzni05"
+          className="css-12cdg2e"
         />
         <div
-          className="css-6gz19k"
+          className="css-1kmbtpt"
         />
         <div
-          className="css-1s9oha1"
+          className="css-yqvrcy"
         />
         <div
-          className="css-17ttyd3"
+          className="css-jasgxx"
         />
         <div
-          className="css-1q4xx2h"
+          className="css-1y5li3y"
         />
       </div>
       <div
-        className="css-1yz7e9k"
+        className="css-8swnhh"
         component="span"
       >
         More

@@ -5,6 +5,13 @@ import { TestProviderWithState } from '../../../testUtils'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 
 jest.mock('../../../hooks/use-site-metadata')
+// Mock LazyLoad to render children immediately in tests
+jest.mock(
+  '../../lazy-load',
+  () =>
+    ({ children }) =>
+      children
+)
 
 const mockSiteMetadata = {
   widgets: {
