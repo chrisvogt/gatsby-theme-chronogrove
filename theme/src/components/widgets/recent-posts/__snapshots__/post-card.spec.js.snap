@@ -2,13 +2,13 @@
 
 exports[`PostCard does not render excerpt when explicitly null 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"
@@ -47,13 +47,13 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
 
 exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"
@@ -92,13 +92,13 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
 
 exports[`PostCard matches the snapshot without excerpt 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"
@@ -137,13 +137,13 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
 
 exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"
@@ -165,13 +165,13 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
 
 exports[`PostCard renders excerpt when provided 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"
@@ -215,13 +215,13 @@ exports[`PostCard renders excerpt when provided 1`] = `
 
 exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-nwtitb"
+    className="css-8wyef3"
   >
     <div
       className="card-content css-1taqpx2"
@@ -260,13 +260,13 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
 
 exports[`PostCard renders without banner when not provided 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"
@@ -297,13 +297,13 @@ exports[`PostCard renders without banner when not provided 1`] = `
 
 exports[`PostCard renders without category when not provided 1`] = `
 <a
-  className="css-sod6qt"
+  className="css-1355rc8"
   href="/blog/article"
   onClick={[Function]}
   onMouseEnter={[Function]}
 >
   <div
-    className="css-xz12ce"
+    className="css-139dwiw"
   >
     <div
       className="card-content css-ihz6y5"

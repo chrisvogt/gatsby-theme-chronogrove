@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.63.2
+
+### 🐛 Bug Fixes
+
+- **Recent Posts Card Height**: Fixed inconsistent card heights in Recent Posts widget when posts have varying content lengths
+  - Added `display: 'flex'` to Link wrapper to enable flex layout for equal-height children
+  - Added `height: '100%'` to Card component to fill parent container completely
+  - Ensures all cards in the grid have uniform height regardless of title, excerpt, or metadata length
+  - Improves visual consistency and grid alignment across all breakpoints
+
+### 🎯 User Experience
+
+- **Visual Consistency**: Recent Posts cards now maintain equal heights in grid layouts
+- **Better Grid Layout**: Eliminates jagged rows caused by varying card heights
+- **Professional Appearance**: Creates cleaner, more polished widget presentation
+
 ## 0.63.1
 
 ### 🐛 Bug Fixes
