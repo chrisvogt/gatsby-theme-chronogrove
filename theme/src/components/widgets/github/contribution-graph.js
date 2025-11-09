@@ -121,10 +121,8 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
       const availableWidth = containerWidth - 16 // Small padding for scrollbar/margins
       const calculatedSize = Math.floor((availableWidth - (weeksCount - 1) * gap) / weeksCount)
 
-      // Clamp between 8px and 12px for optimal display
-      // On mobile, this will be 8px and allow horizontal scrolling
-      // On desktop, this will scale up to 12px if there's space
-      const size = Math.max(8, Math.min(12, calculatedSize))
+      // Clamp at a minimum of 8px for mobile; allow growth on large screens to fill container
+      const size = Math.max(8, calculatedSize)
       setCellSize(size)
     }
 
@@ -145,7 +143,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
         >
           Contribution Graph
         </Heading>
-        <Card variant='actionCard'>
+        <Card variant='actionCard' style={{ overflow: 'hidden' }}>
           <Themed.p>Loading contribution data...</Themed.p>
           <Box
             sx={{
@@ -193,6 +191,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
 
         {/* Outer wrapper with explicit width constraint */}
         <Box
+          style={{ width: '100%', maxWidth: '100%', overflow: 'hidden', minWidth: 0 }}
           sx={{
             width: '100%',
             maxWidth: '100%',
@@ -202,6 +201,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
           }}
         >
           <Box
+            style={{ maxWidth: '100%', minWidth: 0, overflow: 'hidden' }}
             sx={{
               display: 'flex',
               position: 'relative',
@@ -215,7 +215,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
             <Box
               sx={{
                 position: 'relative',
-                mr: 2,
+                mr: 3,
                 fontSize: 0,
                 color: 'textMuted',
                 width: '40px',
@@ -245,6 +245,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
             {/* Scrollable container for month labels and contribution grid */}
             <Box
               ref={containerRef}
+              style={{ overflowX: 'auto', overflowY: 'visible', minWidth: 0, maxWidth: '100%' }}
               sx={{
                 overflowX: 'auto',
                 overflowY: 'visible',

@@ -11,6 +11,11 @@ exports[`ContributionGraph Component matches the empty state snapshot 1`] = `
   </h3>
   <div
     className="css-dqblq9"
+    style={
+      {
+        "overflow": "hidden",
+      }
+    }
   >
     <p
       className="css-1qwovgy"
@@ -1131,6 +1136,11 @@ exports[`ContributionGraph Component matches the loading state snapshot 1`] = `
   </h3>
   <div
     className="css-dqblq9"
+    style={
+      {
+        "overflow": "hidden",
+      }
+    }
   >
     <p
       className="css-1qwovgy"
@@ -2260,12 +2270,27 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
     </p>
     <div
       className="css-10kqyow"
+      style={
+        {
+          "maxWidth": "100%",
+          "minWidth": 0,
+          "overflow": "hidden",
+          "width": "100%",
+        }
+      }
     >
       <div
         className="css-u4nsmq"
+        style={
+          {
+            "maxWidth": "100%",
+            "minWidth": 0,
+            "overflow": "hidden",
+          }
+        }
       >
         <div
-          className="css-rr7w73"
+          className="css-83rzot"
         >
           <div
             className="css-j8gbnp"
@@ -2285,6 +2310,14 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
         </div>
         <div
           className="css-1cbsg9f"
+          style={
+            {
+              "maxWidth": "100%",
+              "minWidth": 0,
+              "overflowX": "auto",
+              "overflowY": "visible",
+            }
+          }
         >
           <div
             className="css-1zugrk"
