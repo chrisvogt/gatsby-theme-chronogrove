@@ -461,6 +461,11 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
     </h3>
     <div
       className="css-dqblq9"
+      style={
+        {
+          "overflow": "hidden",
+        }
+      }
     >
       <p
         className="css-1qwovgy"
