@@ -12,6 +12,7 @@ import PinnedItems from './pinned-items'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
+import LazyLoad from '../../lazy-load'
 
 import fetchDataSource from '../../../actions/fetchDataSource'
 import { getGithubUsername, getGithubWidgetDataSource } from '../../../selectors/metadata'
@@ -66,7 +67,11 @@ const GitHubWidget = () => {
 
       <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={2} />
       <LastPullRequest isLoading={isLoading} pullRequest={lastPullRequest} />
-      <ContributionGraph isLoading={isLoading} contributionCalendar={contributionCalendar} />
+
+      {/* Lazy load the contribution graph to prevent FOUC and improve initial render performance */}
+      <LazyLoad placeholder={<div style={{ minHeight: '200px' }} />}>
+        <ContributionGraph isLoading={isLoading} contributionCalendar={contributionCalendar} />
+      </LazyLoad>
     </Widget>
   )
 }
