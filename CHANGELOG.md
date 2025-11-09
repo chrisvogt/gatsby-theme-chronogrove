@@ -7,12 +7,44 @@
 - **Contribution Graph width (large screens)**: Removed the 12px upper clamp on cell size so the grid expands to fill the container on wide screens.
 - **FOUC hardening**: Added inline style fallbacks (`overflow: hidden`, `minWidth: 0`, `maxWidth: 100%`) to wrappers and loading state to prevent pre‑hydration overflow/flash.
 - **Balanced spacing**: Adjusted left day‑label margin to match card padding, equalizing left/right spacing around the grid.
+- **Mobile Layout Shift**: Fixed CLS issue where contribution graph rendered wider than viewport on initial mobile render by applying critical overflow styles inline.
+
+### 🎯 Performance & Animation Enhancements
+
+- **Lazy Loading**: Wrapped ContributionGraph in LazyLoad component to defer rendering until visible in viewport
+- **React.memo Optimization**: Prevented unnecessary re-renders with custom comparison function checking `isLoading` and `contributionCalendar` props
+- **Development Tracking**: Added render count logging in dev mode for debugging re-render issues
+- **Scroll-Triggered Animations**: Implemented IntersectionObserver-based animations that trigger when graph enters viewport (with 50px rootMargin and 0.1 threshold)
+- **Staggered Fade-In Effects**: Added cascading animations for visual interest:
+  - **Grid cells**: Staggered by week (0.015s) and day (0.01s) with scale (0.8→1) + translateY (10px→0) transform
+  - **Month labels**: Sequential fade-in with 0.1s delays and translateY (-10px→0)
+  - **Day labels**: Sequential fade-in starting at 0.3s with translateX (-10px→0)
+  - **Legend**: Final elements animate at 1.8s+ with scale (0.6→1) + translate effects
+- **Pre-render Optimization**: Card wrapper, heading, and contribution count text pre-render immediately; only graph elements (cells, labels, legend) animate on scroll
+- **Progressive Enhancement**: Animation falls back gracefully when IntersectionObserver is unavailable (SSR/older browsers)
 
 ### 🧪 Testing & Coverage
 
+- **98% Statement Coverage**: Added 12 new comprehensive test cases covering animation, memoization, and edge cases
+- **22 Total Tests**: All passing with complete coverage of new animation logic and performance optimizations
+- **New Test Coverage**:
+  - Animation classes and visibility state management
+  - Grid cells with contribution data rendering
+  - Empty weeks and missing data handling
+  - Total contributions count display
+  - Legend rendering with "Less" and "More" labels
+  - React.memo memoization behavior (prevents/allows re-renders based on prop changes)
+  - Loading state transitions
+  - Day labels (Mon, Wed, Fri) rendering
+  - IntersectionObserver setup, lifecycle, and visibility detection callback
+  - Development mode console.log tracking
+  - IntersectionObserver not called during loading state
+- **IntersectionObserver Mocking**: Proper test environment setup for browser API testing in JSDOM
+- **LazyLoad Component Mocking**: Updated GitHub widget tests to mock LazyLoad for compatibility with react-test-renderer
+- **Updated Snapshots**: All visual regression tests updated to reflect new inline styles and animation attributes
 - Added resize behavior tests to exercise the responsive sizing logic:
-  - Ensures resize runs on narrow and wide containers (min clamp honored; growth path executed).
-  - Updated snapshots for GitHub widget and Contribution Graph.
+  - Ensures resize runs on narrow and wide containers (min clamp honored; growth path executed)
+  - Updated snapshots for GitHub widget and Contribution Graph
 
 ## 0.63.0
 
