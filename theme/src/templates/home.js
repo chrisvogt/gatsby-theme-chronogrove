@@ -77,7 +77,7 @@ const HomeTemplate = () => {
           left: 0,
           right: 0,
           width: '100%',
-          height: '650px',
+          height: 'min(112.5vh, 1500px)',
           zIndex: 0.5,
           pointerEvents: 'none',
           background: isDark
