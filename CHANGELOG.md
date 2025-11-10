@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.63.3
+
+### 🐛 Bug Fixes
+
+- **Navigation Scroll Position**: Fixed inconsistent scroll-to-top behavior when navigating from Recent Posts widget
+  - Removed manual `onClick` scroll handler from PostCard that conflicted with Gatsby's navigation timing
+  - Updated `shouldUpdateScroll` in gatsby-browser to explicitly return `[0, 0]` coordinates instead of `true`
+  - Added `preventScroll: true` to skip-nav focus to prevent scroll interference
+  - Changed global CSS `scroll-behavior` from `smooth` to `auto` to eliminate awkward animation after navigation
+  - Navigation now consistently scrolls to top instantly across all pages (home, blog index, etc.)
+
+### 🎯 User Experience
+
+- **Instant Navigation**: Page transitions are now snappy and immediate with no visible scroll animation
+- **Consistent Behavior**: Recent Posts widget cards now behave identically to Blog index cards
+- **Better Performance**: Eliminated timing conflicts between manual scroll handlers and Gatsby's built-in navigation
+
+### 🧪 Testing & Coverage
+
+- **100% Test Coverage**: All modified files maintain complete test coverage
+- **Updated Tests**: Modified 8 existing tests to verify new scroll behavior
+  - Updated `shouldUpdateScroll` tests to expect `[0, 0]` scroll coordinates
+  - Updated `onRouteUpdate` tests to verify `preventScroll: true` parameter
+  - Removed obsolete manual scroll test from PostCard
+- **879 Tests Passing**: Full test suite passes with no regressions
+
 ## 0.63.2
 
 ### 🐛 Bug Fixes
