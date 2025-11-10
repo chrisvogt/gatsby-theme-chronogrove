@@ -85,5 +85,16 @@ describe('categoryHelpers', () => {
       expect(getCategoryGroup(null)).toBe('other')
       expect(getCategoryGroup(undefined)).toBe('other')
     })
+
+    it('returns "other" when both category and title are missing', () => {
+      expect(getCategoryGroup()).toBe('other')
+      expect(getCategoryGroup(null, null)).toBe('other')
+      expect(getCategoryGroup(undefined, undefined)).toBe('other')
+    })
+
+    it('uses "other" as default category when category is empty string', () => {
+      expect(getCategoryGroup('')).toBe('other')
+      expect(getCategoryGroup('', 'Some Post')).toBe('other')
+    })
   })
 })

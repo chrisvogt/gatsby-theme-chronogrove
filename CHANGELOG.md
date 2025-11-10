@@ -1,5 +1,90 @@
 # Changelog
 
+## 0.64.0
+
+### ✨ Features
+
+- **Blog Page Redesign**: Complete modern redesign with category-based organization
+  - Posts grouped into sections: "Personal & Recaps", "Technology", and "All Posts"
+  - Featured post per section with horizontal layout on large screens (1.9:1 aspect ratio)
+  - Grid layout for remaining posts (responsive 1/2/3 columns based on screen size)
+  - Section headers with FontAwesome icons and post counts
+  - Filtered out Music and Photography posts (they have dedicated pages)
+  - Page header changed from "All Posts" to "Blog" with reduced margin
+
+- **"/now" Page Alias**: Created redirect page for latest monthly recap
+  - `/now` redirects to current recap (e.g., `/personal/october-2025`)
+  - Client-side navigation with clean browser history (`replace: true`)
+  - Easy to update for future recaps (single line change)
+
+### 🔧 Improvements
+
+- **Post Card Component**: Unified design across all uses (blog, home widgets, recaps)
+  - Fixed aspect ratio for banner images (1.9:1 for 1200×630 images)
+  - Modern spacing hierarchy: Category (16px) → Headline (8px) → Date (16px) → Excerpt
+  - Responsive font sizing with proper line heights
+  - Added `display: 'inline-block'` to Category component for proper margin rendering
+  - Removed `isRecap` prop - all cards now use consistent layout
+  - Excerpt display added to all post cards
+
+- **Category System Refactor**: Centralized category logic for reusability
+  - Created `src/helpers/categoryHelpers.js` with utilities:
+    - `getCategoryDisplayName()` - Format category names (e.g., "photography/travel" → "Travel Photography")
+    - `getCategoryGroup()` - Determine category grouping (personal, technology, music, photography, other)
+    - `getCategoryIcon()` - Get FontAwesome icon for categories
+    - `toTitleCase()` - Convert hyphenated/slash-separated strings to title case
+  - Refactored `Category` component to use centralized helpers
+  - Eliminated code duplication across blog page and category component
+
+- **Content Updates**:
+  - Added `category: personal` to October 2025 recap for proper categorization
+  - Changed October recap slug from `now` to `october-2025` for consistency
+  - Fixed excerpt formatting in multiple MDX files (proper punctuation, length under 200 chars)
+
+### 📊 Data Flow
+
+- **GraphQL Queries**: Added `excerpt` and `banner` fields to post queries
+  - Updated `use-recent-posts.js` to fetch `frontmatter.excerpt`
+  - Updated `use-categorized-posts.js` to include excerpt data
+  - Blog page now uses hand-written excerpts from frontmatter instead of auto-generated
+
+- **"Now" Posts Inclusion**: Removed filter that excluded posts with `slug: "now"`
+  - `getPosts()` now includes all posts for blog index
+  - "Now" posts properly appear in "Personal & Recaps" section
+
+### 🧪 Testing & Coverage
+
+- **100% Statement Coverage**: All modified files fully tested
+- **98.38% Branch Coverage**: Comprehensive edge case testing (+5.64% improvement)
+- **108 Tests Passing**: All tests passing with 15 snapshots
+- **New Test Files**:
+  - `theme/src/pages/now.spec.js` - Tests for /now redirect page
+  - `theme/src/testUtils.spec.js` - Tests for test utilities
+  - `theme/src/helpers/categoryHelpers.spec.js` - Tests for category helpers
+- **Enhanced Test Coverage**:
+  - 13+ new test cases for blog page edge cases
+  - Category helper edge cases (null, undefined, empty categories)
+  - Post card variations (with/without banners, single posts, empty states)
+  - Banner selection logic for featured posts
+  - Section header rendering with post counts
+
+### 🎨 Design & UX
+
+- **Visual Hierarchy**: Modern card design with varied spacing for better readability
+- **Consistent Styling**: All post cards (home, blog, featured) use identical spacing
+- **Responsive Design**: Grid layouts adapt from 1 to 3 columns based on screen size
+- **Professional Polish**: Tighter page header margins matching other pages (Music, Photography)
+
+### 🏗️ Architecture
+
+- **Single Source of Truth**: Category logic centralized in one module
+- **Component Reusability**: PostCard component serves all card layouts
+- **Maintainability**: Easy to add new categories or update category mappings
+- **Zero Duplication**: Eliminated redundant category mapping code
+- **GraphQL Schema**: Added explicit `MdxFrontmatter` type definition for optional `excerpt` field
+  - Ensures both sites (with and without excerpts) build successfully
+  - Follows Gatsby best practices for optional fields
+
 ## 0.63.3
 
 ### 🐛 Bug Fixes

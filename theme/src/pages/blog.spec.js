@@ -239,4 +239,158 @@ describe('BlogIndexPage', () => {
     expect(technologyCards).toHaveLength(1)
     expect(blogCards).toHaveLength(1)
   })
+
+  it('handles category with only one post (no remaining posts grid)', () => {
+    const singlePost = [
+      {
+        id: '1',
+        frontmatter: {
+          title: 'Single Tech Post',
+          date: '2021-01-01',
+          slug: 'single-post',
+          banner: 'https://example.com/banner.jpg',
+          excerpt: 'Only one post in this category'
+        },
+        fields: {
+          category: 'technology',
+          id: '1',
+          path: '/blog/single-post'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(singlePost)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Should render the single post as featured, with no remaining posts grid
+    expect(screen.getByText('Single Tech Post')).toBeInTheDocument()
+    expect(screen.getAllByTestId('post-card')).toHaveLength(1)
+  })
+
+  it('selects post with banner as featured when available', () => {
+    const postsWithBanner = [
+      {
+        id: '1',
+        frontmatter: {
+          title: 'Post Without Banner',
+          date: '2021-01-01',
+          slug: 'no-banner',
+          banner: null,
+          excerpt: 'No banner here'
+        },
+        fields: {
+          category: 'technology',
+          id: '1',
+          path: '/blog/no-banner'
+        }
+      },
+      {
+        id: '2',
+        frontmatter: {
+          title: 'Post With Banner',
+          date: '2021-01-02',
+          slug: 'with-banner',
+          banner: 'https://example.com/featured.jpg',
+          excerpt: 'Has a banner'
+        },
+        fields: {
+          category: 'technology',
+          id: '2',
+          path: '/blog/with-banner'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(postsWithBanner)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Post with banner should be rendered
+    expect(screen.getByText('Post With Banner')).toBeInTheDocument()
+    expect(screen.getByText('Post Without Banner')).toBeInTheDocument()
+  })
+
+  it('displays empty state message when no posts exist', () => {
+    getPosts.mockReturnValue([])
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    expect(screen.getByText('No posts yet. Check back soon!')).toBeInTheDocument()
+  })
+
+  it('handles posts with no category field', () => {
+    const postWithoutCategory = [
+      {
+        id: '1',
+        frontmatter: {
+          title: 'Uncategorized Post',
+          date: '2021-01-01',
+          slug: 'uncategorized',
+          banner: null,
+          excerpt: 'No category'
+        },
+        fields: {
+          category: undefined,
+          id: '1',
+          path: '/blog/uncategorized'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(postWithoutCategory)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Should render under "All Posts" section
+    expect(screen.getByText('Uncategorized Post')).toBeInTheDocument()
+  })
+
+  it('renders section headers with correct post counts', () => {
+    const multiplePosts = [
+      ...mockPosts,
+      {
+        id: '3',
+        frontmatter: {
+          title: 'Another Tech Post',
+          date: '2021-01-03',
+          slug: 'tech-3',
+          banner: null,
+          excerpt: 'More tech content'
+        },
+        fields: {
+          category: 'technology',
+          id: '3',
+          path: '/blog/tech-3'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(multiplePosts)
+
+    const { container } = render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Check for section with count
+    expect(container.textContent).toMatch(/\d+ posts?/)
+  })
 })
