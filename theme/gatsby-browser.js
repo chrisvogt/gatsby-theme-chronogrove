@@ -16,7 +16,7 @@ export const shouldUpdateScroll = ({ routerProps }) => {
   // If routerProps is undefined, we're likely in a development environment
   // or the router hasn't initialized yet
   if (!routerProps) {
-    return true
+    return [0, 0]
   }
 
   const { location, prevLocation } = routerProps
@@ -24,8 +24,8 @@ export const shouldUpdateScroll = ({ routerProps }) => {
   if (prevLocation && location.pathname === prevLocation.pathname) {
     return false
   }
-  // For actual page changes, use default scroll behavior
-  return true
+  // For actual page changes, scroll to top
+  return [0, 0]
 }
 
 // See https://fossies.org/linux/gatsby/examples/using-reach-skip-nav/README.md
@@ -33,7 +33,8 @@ export const onRouteUpdate = ({ prevLocation }) => {
   if (prevLocation !== null) {
     const skipContent = document.querySelector('[data-reach-skip-nav-content]') // Comes with the <SkipNavContent> component.
     if (skipContent) {
-      skipContent.focus()
+      // Focus without scrolling to prevent interference with shouldUpdateScroll
+      skipContent.focus({ preventScroll: true })
     }
   }
 }

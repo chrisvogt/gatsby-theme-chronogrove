@@ -1,9 +1,9 @@
 html {
   min-height: 100%;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 
   @media (prefers-reduced-motion) {
-    scroll-behavior: unset;
+    scroll-behavior: auto;
   }
 }
 

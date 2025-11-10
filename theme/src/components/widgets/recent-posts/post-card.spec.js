@@ -1,21 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import { render, screen, fireEvent } from '@testing-library/react'
 import PostCard from './post-card'
-
-// Mock window.scrollTo
-const mockScrollTo = jest.fn()
-Object.defineProperty(window, 'scrollTo', {
-  value: mockScrollTo,
-  writable: true
-})
-
-// Mock Gatsby navigation
-const mockNavigate = jest.fn()
-Object.defineProperty(window, '___navigate', {
-  value: mockNavigate,
-  writable: true
-})
 
 describe('PostCard', () => {
   const baseProps = {
@@ -114,18 +99,6 @@ describe('PostCard', () => {
     }
     const tree = renderer.create(<PostCard {...propsWithRecap} />).toJSON()
     expect(tree).toMatchSnapshot()
-  })
-
-  it('calls window.scrollTo when clicked', () => {
-    mockScrollTo.mockClear()
-    mockNavigate.mockClear()
-
-    render(<PostCard {...baseProps} />)
-    const link = screen.getByRole('link')
-
-    fireEvent.click(link)
-
-    expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
   })
 })
 

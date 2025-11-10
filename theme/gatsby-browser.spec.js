@@ -23,14 +23,14 @@ afterEach(() => {
 
 describe('gatsby-browser', () => {
   describe('shouldUpdateScroll', () => {
-    it('should return true when routerProps is undefined', () => {
+    it('should return [0, 0] when routerProps is undefined', () => {
       const result = shouldUpdateScroll({})
-      expect(result).toBe(true)
+      expect(result).toEqual([0, 0])
     })
 
-    it('should return true when routerProps is null', () => {
+    it('should return [0, 0] when routerProps is null', () => {
       const result = shouldUpdateScroll({ routerProps: null })
-      expect(result).toBe(true)
+      expect(result).toEqual([0, 0])
     })
 
     it('should return false when only query parameters change', () => {
@@ -42,31 +42,31 @@ describe('gatsby-browser', () => {
       expect(result).toBe(false)
     })
 
-    it('should return true when pathname changes', () => {
+    it('should return [0, 0] when pathname changes', () => {
       const routerProps = {
         location: { pathname: '/about', search: '' },
         prevLocation: { pathname: '/blog', search: '' }
       }
       const result = shouldUpdateScroll({ routerProps })
-      expect(result).toBe(true)
+      expect(result).toEqual([0, 0])
     })
 
-    it('should return true when prevLocation is null', () => {
+    it('should return [0, 0] when prevLocation is null', () => {
       const routerProps = {
         location: { pathname: '/blog', search: '' },
         prevLocation: null
       }
       const result = shouldUpdateScroll({ routerProps })
-      expect(result).toBe(true)
+      expect(result).toEqual([0, 0])
     })
 
-    it('should return true when prevLocation is undefined', () => {
+    it('should return [0, 0] when prevLocation is undefined', () => {
       const routerProps = {
         location: { pathname: '/blog', search: '' },
         prevLocation: undefined
       }
       const result = shouldUpdateScroll({ routerProps })
-      expect(result).toBe(true)
+      expect(result).toEqual([0, 0])
     })
   })
 
@@ -77,22 +77,22 @@ describe('gatsby-browser', () => {
       expect(mockFocus).not.toHaveBeenCalled()
     })
 
-    it('should call focus when prevLocation is undefined', () => {
+    it('should call focus with preventScroll when prevLocation is undefined', () => {
       mockQuerySelector.mockReturnValue(mockSkipContent)
 
       onRouteUpdate({ prevLocation: undefined })
 
       expect(mockQuerySelector).toHaveBeenCalledWith('[data-reach-skip-nav-content]')
-      expect(mockFocus).toHaveBeenCalled()
+      expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
 
-    it('should call focus when skip content element exists', () => {
+    it('should call focus with preventScroll when skip content element exists', () => {
       mockQuerySelector.mockReturnValue(mockSkipContent)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
       expect(mockQuerySelector).toHaveBeenCalledWith('[data-reach-skip-nav-content]')
-      expect(mockFocus).toHaveBeenCalled()
+      expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
 
     it('should not call focus when skip content element does not exist', () => {
