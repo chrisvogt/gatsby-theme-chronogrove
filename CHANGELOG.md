@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.65.0
+
+### ✨ Features
+
+- **Animated Home Page Backgrounds**: Added dynamic animated backgrounds that change based on color mode
+  - **Light Mode**: Prismatic Burst animation with theme accent colors
+  - **Dark Mode**: Color Bends animation with cosmic theme colors (purple, gold, blues)
+  - Fixed positioning - animations stay in viewport while page scrolls
+  - Subtle transparency (70% light, 12% dark) to avoid distraction
+  - Memoized animations prevent restarts except on color mode changes
+  - Gradient overlay (112.5vh responsive height) protects header content from animation
+
+### 🔧 Improvements
+
+- **Theme Colors**: Updated dark mode background to `#14141F` for deeper contrast
+- **Panel Backgrounds**: Increased opacity from `0.35` to `0.45` (light) and adjusted dark mode to `rgba(20, 20, 31, 0.45)`
+- **Layout Component**: Added `transparentBackground` prop to support animated backgrounds
+- **Performance**: Used `useMemo` hook to prevent animation re-renders on every state change
+
+### 🧹 Code Cleanup
+
+- Removed unused background components (Aurora, Beams, Gradient Blinds)
+- Cleaned up home-backgrounds index exports to only include used components
+
+### 🔨 Technical
+
+- **Dependencies**: Added `ogl` for WebGL-based animations
+- **Browser Globals**: Added `cancelAnimationFrame` and `ResizeObserver` to ESLint config
+- **Tests**: Updated theme tests and snapshots for new color values
+- **React Imports**: Fixed React imports in background components for proper JSX compilation
+
 ## 0.64.0
 
 ### ✨ Features
