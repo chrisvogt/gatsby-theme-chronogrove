@@ -36,6 +36,12 @@ const AnimatedPageBackground = ({
   const [colorMode] = useColorMode()
   const isDark = colorMode === 'dark'
   const [overlayOpacity, setOverlayOpacity] = useState(1)
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure we're client-side before rendering color-specific content
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Handle scroll to fade out overlay as user scrolls down
   useEffect(() => {
@@ -75,6 +81,11 @@ const AnimatedPageBackground = ({
       ),
     [isDark]
   )
+
+  // Don't render anything until client-side to avoid SSR mismatch
+  if (!mounted) {
+    return null
+  }
 
   return (
     <>
