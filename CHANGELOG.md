@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.66.0
+
+### ✨ Features
+
+- **Reusable Animated Backgrounds**: Extended animated backgrounds to Blog, Music, and Photography pages
+  - Created `AnimatedPageBackground` component that can be used on any page
+  - Configurable overlay height and opacity per page (default: 75vh for non-home pages)
+  - Consistent color-mode aware animations across all pages
+  - Same light mode (Prismatic Burst) and dark mode (Color Bends) animations as home page
+  - Shorter gradient overlay for non-home pages to protect headers without covering content
+
+### 🔧 Improvements
+
+- **Component Reusability**: Refactored home page background logic into shared component
+  - `AnimatedPageBackground` accepts `overlayHeight`, `lightOpacity`, and `darkOpacity` props
+  - Home page continues to use full `min(112.5vh, 1500px)` overlay
+  - Other pages use `min(75vh, 1000px)` overlay for less coverage
+- **Layout Enhancement**: Extended `transparentBackground` prop usage to Music and Photography pages
+- **Testing**: Added comprehensive tests for `AnimatedPageBackground` component
+
+### 🔨 Technical
+
+- **New Component**: `theme/src/components/animated-page-background.js` with prop-based configuration
+- **Updated Pages**: Blog, Music, and Photography pages now use animated backgrounds
+- **Test Coverage**: 100% coverage for the new reusable component
+
 ## 0.65.0
 
 ### ✨ Features
