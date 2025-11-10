@@ -6,7 +6,6 @@ import { useStaticQuery } from 'gatsby'
 import { ThemeUIProvider } from 'theme-ui'
 
 // Mock components
-jest.mock('../components/animated-page-background', () => () => <div data-testid='animated-background'>Background</div>)
 jest.mock('../components/footer', () => () => <footer>Footer</footer>)
 jest.mock('../components/home-navigation', () => () => <nav>HomeNavigation</nav>)
 jest.mock('../components/home-widgets', () => () => <div data-testid='home-widgets'>HomeWidgets</div>)

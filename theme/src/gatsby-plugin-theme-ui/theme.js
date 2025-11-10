@@ -57,21 +57,6 @@ export const glassmorhismPanel = {
   border: '1px solid rgba(255, 255, 255, 0.15)'
 }
 
-export const backdropBlurStrong = {
-  backdropFilter: 'blur(20px) saturate(180%)',
-  WebkitBackdropFilter: 'blur(20px) saturate(180%)'
-}
-
-export const backdropBlurMedium = {
-  backdropFilter: 'blur(12px) saturate(150%)',
-  WebkitBackdropFilter: 'blur(12px) saturate(150%)'
-}
-
-export const backdropBlurLight = {
-  backdropFilter: 'blur(8px) saturate(120%)',
-  WebkitBackdropFilter: 'blur(8px) saturate(120%)'
-}
-
 export const card = {
   borderRadius: 'card',
   background: 'var(--theme-ui-colors-panel-background)',
@@ -80,9 +65,7 @@ export const card = {
   flexGrow: 1,
   padding: 3,
   fontSize: [1, 2],
-  textDecoration: 'none',
-  backdropFilter: 'blur(12px) saturate(150%)',
-  WebkitBackdropFilter: 'blur(12px) saturate(150%)'
+  textDecoration: 'none'
 }
 
 export const metricCard = {
@@ -332,23 +315,23 @@ export default merge(tailwind, {
   colors: {
     accent: 'deeppink',
     background: '#fdf8f5',
-    'panel-background': 'rgba(255, 255, 255, 0.45)',
+    'panel-background': 'rgba(255, 255, 255, 0.35)',
     'panel-divider': () => '1px solid rgba(255, 229, 224, 0.17)',
     'panel-highlight': theme => theme.colors.gray[1],
     modes: {
       dark: {
-        background: '#14141F',
-        'panel-background': 'rgba(20, 20, 31, 0.45)',
+        background: '#1e1e2f',
+        'panel-background': 'rgba(1, 1, 1, 0.30)',
         'panel-divider': theme => `1px solid ${theme.colors.gray[8]}`,
         'panel-highlight': theme => theme.colors.gray[8],
         primary: '#1E90FF',
         text: '#fff',
         textMuted: '#d8d8d8',
         tableText: '#fff',
-        tableBackground: 'rgba(30, 30, 47, 0.45)',
+        tableBackground: 'rgba(1, 1, 1, 0.30)',
         tableHeaderBackground: 'rgba(30, 37, 48, 0.8)',
-        tableRowBackground: 'rgba(30, 30, 47, 0.25)',
-        tableRowAlternateBackground: 'rgba(30, 37, 48, 0.5)',
+        tableRowBackground: 'rgba(1, 1, 1, 0.15)',
+        tableRowAlternateBackground: 'rgba(30, 37, 48, 0.4)',
         tableBorder: 'rgba(255, 255, 255, 0.1)'
       }
     },
