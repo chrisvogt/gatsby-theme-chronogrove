@@ -41,7 +41,13 @@ const AnimatedPageBackground = ({
   // Ensure we're client-side before rendering color-specific content
   useEffect(() => {
     setMounted(true)
+    console.log('[AnimatedPageBackground] Mounted - colorMode:', colorMode, 'isDark:', isDark)
   }, [])
+
+  // Debug color mode changes
+  useEffect(() => {
+    console.log('[AnimatedPageBackground] Color mode changed:', colorMode, 'isDark:', isDark)
+  }, [colorMode, isDark])
 
   // Handle scroll to fade out overlay as user scrolls down
   useEffect(() => {
@@ -87,12 +93,16 @@ const AnimatedPageBackground = ({
     return null
   }
 
+  // Get background colors - use explicit values
+  const bgColor = isDark ? '#14141F' : '#fdf8f5'
+  console.log('[AnimatedPageBackground] Rendering with bgColor:', bgColor, 'colorMode:', colorMode)
+
   return (
     <>
       {/* Fixed background animation */}
       <div
         key={`bg-${colorMode}`}
-        style={{ backgroundColor: isDark ? '#14141F' : '#fdf8f5' }}
+        style={{ backgroundColor: bgColor }}
         sx={{
           position: 'fixed',
           top: 0,
