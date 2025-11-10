@@ -94,16 +94,44 @@ const AnimatedPageBackground = ({
     return null
   }
 
-  // Get background colors from theme - this handles color mode properly
-  const bgColor = theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
+  // Get background colors from theme - use raw color values to avoid CSS variable issues
+  // Theme UI wraps colors in CSS variables, but we need the actual hex values for rgba conversion
+  const bgColorRaw = isDark
+    ? theme?.rawColors?.modes?.dark?.background || theme?.colors?.modes?.dark?.background || '#14141F'
+    : theme?.rawColors?.background || theme?.colors?.background || '#fdf8f5'
+
   console.log(
-    '[AnimatedPageBackground] Rendering with bgColor:',
-    bgColor,
+    '[AnimatedPageBackground] Rendering with bgColorRaw:',
+    bgColorRaw,
     'colorMode:',
     colorMode,
     'theme.colors.background:',
     theme?.colors?.background
   )
+
+  // Convert hex color to rgba for gradient stops
+  const hexToRgba = (hex, alpha) => {
+    // Handle CSS variables by returning a fallback
+    if (typeof hex === 'string' && hex.startsWith('var(')) {
+      // Return the CSS variable as-is for solid colors, but we can't do alpha on CSS vars easily
+      // So return a sensible fallback based on mode
+      const fallbackHex = isDark ? '#14141F' : '#fdf8f5'
+      const h = fallbackHex.replace('#', '')
+      const r = parseInt(h.substring(0, 2), 16)
+      const g = parseInt(h.substring(2, 4), 16)
+      const b = parseInt(h.substring(4, 6), 16)
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`
+    }
+
+    const h = hex.replace('#', '')
+    const r = parseInt(h.substring(0, 2), 16)
+    const g = parseInt(h.substring(2, 4), 16)
+    const b = parseInt(h.substring(4, 6), 16)
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+  }
+
+  // Build gradient using theme background color
+  const gradientOverlay = `linear-gradient(to bottom, ${bgColorRaw} 0%, ${bgColorRaw} 30%, ${hexToRgba(bgColorRaw, 0.6)} 65%, ${hexToRgba(bgColorRaw, 0.2)} 85%, transparent 100%)`
 
   return (
     <>
@@ -123,7 +151,7 @@ const AnimatedPageBackground = ({
           overflow: 'hidden',
           opacity: isDark ? darkOpacity : lightOpacity,
           pointerEvents: 'none',
-          backgroundColor: bgColor
+          backgroundColor: bgColorRaw
         }}
         aria-hidden='true'
       >
@@ -144,9 +172,7 @@ const AnimatedPageBackground = ({
           pointerEvents: 'none',
           opacity: overlayOpacity,
           transition: 'opacity 0.1s ease-out',
-          background: isDark
-            ? 'linear-gradient(to bottom, #14141F 0%, #14141F 30%, rgba(20, 20, 31, 0.6) 65%, rgba(20, 20, 31, 0.2) 85%, transparent 100%)'
-            : 'linear-gradient(to bottom, #fdf8f5 0%, #fdf8f5 30%, rgba(253, 248, 245, 0.6) 65%, rgba(253, 248, 245, 0.2) 85%, transparent 100%)'
+          background: gradientOverlay
         }}
         aria-hidden='true'
       />
