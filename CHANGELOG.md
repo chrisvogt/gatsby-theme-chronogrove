@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.65.0
+
+### ✨ Features
+
+- **Animated Page Backgrounds**: Added dynamic animated backgrounds that change based on color mode
+  - **Light Mode**: Prismatic Burst animation with theme accent colors
+  - **Dark Mode**: Color Bends animation with cosmic theme colors (purple, gold, blues)
+  - Fixed positioning - animations stay in viewport while page scrolls
+  - Subtle transparency (70% light, 12% dark) to avoid distraction
+  - Memoized animations prevent restarts except on color mode changes
+  - **Gradient overlay** with smooth fade-out on scroll (700px) protects header content
+  - Reusable `AnimatedPageBackground` component works on any page
+  - Enabled on **Home**, **Blog**, **Music**, and **Photography** pages
+
+### 🔧 Improvements
+
+- **Theme Colors**: Updated dark mode background to `#14141F` for deeper contrast
+- **Panel Backgrounds**: Increased opacity from `0.35` to `0.45` (light) and adjusted dark mode to `rgba(20, 20, 31, 0.45)`
+- **Layout Component**: Added `transparentBackground` prop to support animated backgrounds
+- **Performance**: Used `useMemo` hook to prevent animation re-renders on every state change
+- **Gradient Overlay**: Enhanced with 4-stop gradient (0%, 30%, 65%, 85%) for smoother transition
+  - Solid at top (30%) to protect headers
+  - Gradual fade (30-85%) with intermediate opacity steps
+  - Long tail (85-100%) for natural blend
+  - Fades out as user scrolls down for subtle, non-intrusive effect
+
+### 🧹 Code Cleanup
+
+- Removed unused background components (Aurora, Beams, Gradient Blinds)
+- Cleaned up home-backgrounds index exports to only include used components
+
+### 🔨 Technical
+
+- **Dependencies**: Added `ogl` for WebGL-based animations, `three` for 3D graphics
+- **Browser Globals**: Added `cancelAnimationFrame` and `ResizeObserver` to ESLint config
+- **New Component**: `theme/src/components/animated-page-background.js` with configurable props:
+  - `overlayHeight` - Gradient overlay height (default: `min(112.5vh, 1500px)` for home, `min(75vh, 1000px)` for others)
+  - `lightOpacity` / `darkOpacity` - Animation transparency
+  - `fadeDistance` - Scroll distance for overlay fade-out (default: 700px)
+- **Tests**: Comprehensive test coverage for all background components (949 tests passing)
+- **React Imports**: Fixed React imports in background components for proper JSX compilation
+
 ## 0.64.0
 
 ### ✨ Features
