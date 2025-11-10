@@ -14,10 +14,6 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
         textDecoration: 'none'
       }}
       to={link}
-      onClick={() => {
-        // Ensure page scrolls to top when navigating
-        window.scrollTo(0, 0)
-      }}
     >
       <Card
         variant='actionCard'
