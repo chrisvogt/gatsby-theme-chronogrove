@@ -337,8 +337,8 @@ export default merge(tailwind, {
     'panel-highlight': theme => theme.colors.gray[1],
     modes: {
       dark: {
-        background: '#1e1e2f',
-        'panel-background': 'rgba(30, 30, 47, 0.45)',
+        background: '#14141F',
+        'panel-background': 'rgba(20, 20, 31, 0.45)',
         'panel-divider': theme => `1px solid ${theme.colors.gray[8]}`,
         'panel-highlight': theme => theme.colors.gray[8],
         primary: '#1E90FF',

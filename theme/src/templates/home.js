@@ -31,7 +31,7 @@ const HomeTemplate = () => {
         <ColorBends
           colors={COLOR_BENDS_COLORS}
           rotation={30}
-          speed={0.05}
+          speed={0.1}
           scale={1}
           frequency={1}
           warpStrength={1}
@@ -61,66 +61,88 @@ const HomeTemplate = () => {
           maxHeight: '100vh',
           zIndex: 0,
           overflow: 'hidden',
-          opacity: isDark ? 0.25 : 0.7,
+          opacity: isDark ? 0.12 : 0.7,
           pointerEvents: 'none',
-          backgroundColor: isDark ? '#1e1e2f' : '#fdf8f5'
+          backgroundColor: isDark ? '#14141F' : '#fdf8f5'
         }}
         aria-hidden='true'
       >
         {backgroundAnimation}
       </div>
-      <Layout hideFooter disableMainWrapper>
-        <div
-          sx={{
-            minHeight: '500px',
-            pt: 3,
-            px: 0,
-            position: 'relative',
-            zIndex: 1
-          }}
-        >
-          <Container>
-            <Grid
-              columns={[
-                null,
-                null,
-                'minmax(200px, 0.375fr) minmax(0, 1.625fr)' /* Sidebar min 200px, Content flexible */,
-                'minmax(200px, 0.4fr) minmax(0, 1.6fr)' /* Sidebar min 200px, Content flexible */
-              ]}
-              gap={[null, 4]}
-            >
-              <aside sx={{ mb: [4, null] }}>
-                <HomeNavigation />
-              </aside>
-              <main role='main'>
-                <SkipNavContent />
-                <div
-                  sx={{
-                    position: 'relative',
-                    borderTopRightRadius: '3em',
-                    borderTopLeftRadius: '.5em',
-                    px: [3, 4],
-                    pt: [2, 3]
-                  }}
-                >
+      {/* Gradient overlay to protect header content */}
+      <div
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          height: '650px',
+          zIndex: 0.5,
+          pointerEvents: 'none',
+          background: isDark
+            ? 'linear-gradient(to bottom, #14141F 0%, #14141F 30%, rgba(20, 20, 31, 0.8) 60%, transparent 100%)'
+            : 'linear-gradient(to bottom, #fdf8f5 0%, #fdf8f5 30%, rgba(253, 248, 245, 0.8) 60%, transparent 100%)'
+        }}
+        aria-hidden='true'
+      />
+      <div
+        sx={{
+          position: 'relative',
+          zIndex: 1
+        }}
+      >
+        <Layout hideFooter disableMainWrapper transparentBackground>
+          <div
+            sx={{
+              minHeight: '500px',
+              pt: 3,
+              px: 0
+            }}
+          >
+            <Container>
+              <Grid
+                columns={[
+                  null,
+                  null,
+                  'minmax(200px, 0.375fr) minmax(0, 1.625fr)' /* Sidebar min 200px, Content flexible */,
+                  'minmax(200px, 0.4fr) minmax(0, 1.6fr)' /* Sidebar min 200px, Content flexible */
+                ]}
+                gap={[null, 4]}
+              >
+                <aside sx={{ mb: [4, null] }}>
+                  <HomeNavigation />
+                </aside>
+                <main role='main'>
+                  <SkipNavContent />
                   <div
                     sx={{
-                      maxWidth: '1200px'
+                      position: 'relative',
+                      borderTopRightRadius: '3em',
+                      borderTopLeftRadius: '.5em',
+                      px: [3, 4],
+                      pt: [2, 3]
                     }}
                   >
-                    <section>
-                      <HomeHeaderContent />
-                    </section>
-                    <HomeWidgets />
+                    <div
+                      sx={{
+                        maxWidth: '1200px'
+                      }}
+                    >
+                      <section>
+                        <HomeHeaderContent />
+                      </section>
+                      <HomeWidgets />
+                    </div>
                   </div>
-                </div>
-                <Footer />
-                <HCard />
-              </main>
-            </Grid>
-          </Container>
-        </div>
-      </Layout>
+                  <Footer />
+                  <HCard />
+                </main>
+              </Grid>
+            </Container>
+          </div>
+        </Layout>
+      </div>
     </Fragment>
   )
 }
