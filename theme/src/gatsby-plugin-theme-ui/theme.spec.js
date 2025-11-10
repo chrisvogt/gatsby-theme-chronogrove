@@ -122,12 +122,12 @@ describe('Theme Configuration', () => {
   describe('color mode configurations', () => {
     it('defines light mode background colors', () => {
       expect(theme.colors.background).toBe('#fdf8f5')
-      expect(theme.colors['panel-background']).toContain('rgba(255, 255, 255, 0.45)')
+      expect(theme.colors['panel-background']).toContain('rgba(255, 255, 255, 0.35)')
     })
 
     it('defines dark mode background colors', () => {
       const darkMode = theme.colors.modes.dark
-      expect(darkMode).toHaveProperty('background', '#14141F')
+      expect(darkMode).toHaveProperty('background', '#1e1e2f')
       expect(darkMode).toHaveProperty('primary', '#1E90FF')
       expect(darkMode).toHaveProperty('text', '#fff')
     })

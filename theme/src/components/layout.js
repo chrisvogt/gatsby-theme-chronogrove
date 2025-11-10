@@ -14,13 +14,13 @@ import TopNavigation from './top-navigation'
  * the default navigation, theme styles, and any important providers. Use shadowing
  * to extend this component and attach additional contexts and providers.
  */
-const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter, transparentBackground }) => {
+const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter }) => {
   const { isVisible } = useSelector(state => state.audioPlayer)
 
   return (
     <div
       sx={{
-        backgroundColor: transparentBackground ? 'transparent' : 'background',
+        backgroundColor: 'background',
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,

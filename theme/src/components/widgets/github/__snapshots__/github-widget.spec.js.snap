@@ -184,7 +184,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         className="css-nf0qmy"
       >
         <div
-          className="css-19c3fuf"
+          className="css-1rkcmha"
         >
           <div
             className="show-loading-animation"
@@ -296,7 +296,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         className="css-nf0qmy"
       >
         <div
-          className="css-19c3fuf"
+          className="css-1rkcmha"
         >
           <div
             className="show-loading-animation"
@@ -418,7 +418,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
       className="css-1srnkuc"
     >
       <div
-        className="css-zl6176"
+        className="css-dqblq9"
       >
         <div
           className="text-row show-loading-animation"
@@ -460,7 +460,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
       Contribution Graph
     </h3>
     <div
-      className="css-zl6176"
+      className="css-dqblq9"
       style={
         {
           "overflow": "hidden",

@@ -2,10 +2,8 @@
 import { Container, jsx } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Flex } from '@theme-ui/components'
-import { Fragment } from 'react'
 import { graphql } from 'gatsby'
 
-import AnimatedPageBackground from '../../../theme/src/components/animated-page-background'
 import { getPosts } from '../../../theme/src/hooks/use-recent-posts'
 import Layout from '../../../theme/src/components/layout'
 import PageHeader from '../../../theme/src/components/blog/page-header'
@@ -31,61 +29,51 @@ const PhotographyPage = ({ data }) => {
   const posts = getPosts(data)?.filter(post => post.fields.category?.startsWith('photography'))
 
   return (
-    <Fragment>
-      <AnimatedPageBackground overlayHeight='min(75vh, 1000px)' />
-      <div
+    <Layout>
+      <Flex
         sx={{
+          flexDirection: 'column',
+          flexGrow: 1,
           position: 'relative',
-          zIndex: 1
+          py: 3
         }}
       >
-        <Layout transparentBackground>
-          <Flex
+        <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 75vw)'] }}>
+          <PageHeader>My Photo Galleries</PageHeader>
+
+          <Themed.p>
+            These galleries are blog posts with photos and videos I've captured while traveling or at events.
+          </Themed.p>
+
+          <Themed.div
             sx={{
-              flexDirection: 'column',
-              flexGrow: 1,
-              position: 'relative',
-              py: 3
+              display: 'grid',
+              gridAutoRows: '1fr',
+              gridGap: [3, 3, 4],
+              gridTemplateColumns: [
+                '',
+                '1fr 1fr',
+                '1fr 1fr',
+                '1fr 1fr',
+                `repeat(${getColumnCount(posts.length)}, 1fr)`
+              ],
+              mt: 4
             }}
           >
-            <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 75vw)'] }}>
-              <PageHeader>My Photo Galleries</PageHeader>
-
-              <Themed.p>
-                These galleries are blog posts with photos and videos I've captured while traveling or at events.
-              </Themed.p>
-
-              <Themed.div
-                sx={{
-                  display: 'grid',
-                  gridAutoRows: '1fr',
-                  gridGap: [3, 3, 4],
-                  gridTemplateColumns: [
-                    '',
-                    '1fr 1fr',
-                    '1fr 1fr',
-                    '1fr 1fr',
-                    `repeat(${getColumnCount(posts.length)}, 1fr)`
-                  ],
-                  mt: 4
-                }}
-              >
-                {posts.map(post => (
-                  <PostCard
-                    banner={post.frontmatter.banner}
-                    category={post.fields.category}
-                    date={post.frontmatter.date}
-                    key={post.fields.id}
-                    link={post.fields.path}
-                    title={post.frontmatter.title}
-                  />
-                ))}
-              </Themed.div>
-            </Container>
-          </Flex>
-        </Layout>
-      </div>
-    </Fragment>
+            {posts.map(post => (
+              <PostCard
+                banner={post.frontmatter.banner}
+                category={post.fields.category}
+                date={post.frontmatter.date}
+                key={post.fields.id}
+                link={post.fields.path}
+                title={post.frontmatter.title}
+              />
+            ))}
+          </Themed.div>
+        </Container>
+      </Flex>
+    </Layout>
   )
 }
 

@@ -35,8 +35,6 @@ module.exports = [
         sessionStorage: 'readonly',
         fetch: 'readonly',
         requestAnimationFrame: 'readonly',
-        cancelAnimationFrame: 'readonly',
-        ResizeObserver: 'readonly',
         // Node.js globals
         ...globals.node
       }
