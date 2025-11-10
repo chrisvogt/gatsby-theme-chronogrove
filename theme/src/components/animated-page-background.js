@@ -80,6 +80,7 @@ const AnimatedPageBackground = ({
     <>
       {/* Fixed background animation */}
       <div
+        key={`bg-${colorMode}`}
         sx={{
           position: 'fixed',
           top: 0,
