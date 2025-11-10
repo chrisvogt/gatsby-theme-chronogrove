@@ -18,7 +18,6 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
       >
         <div
           className="css-1kkguim"
-          role="img"
         />
       </div>
       <div
@@ -67,7 +66,6 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
       >
         <div
           className="css-1kkguim"
-          role="img"
         />
       </div>
       <div
@@ -116,7 +114,6 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
       >
         <div
           className="css-1kkguim"
-          role="img"
         />
       </div>
       <div
@@ -161,14 +158,34 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
       className="card-content css-ihz6y5"
     >
       <div
-        className="card-media css-1liniix"
+        className="card-media css-1usooy4"
       >
         <div
-          aria-label="My Blog Post"
           className="css-1kkguim"
-          role="img"
-          title="My Blog Post"
         />
+      </div>
+      <div
+        className="css-iiqpqc"
+      >
+        <div
+          className="css-1mjogk7"
+        >
+          <div
+            className="css-1wualeq"
+          >
+            Personal
+          </div>
+        </div>
+        <h3
+          className="css-10lfs8r"
+        >
+          My Blog Post
+        </h3>
+        <time
+          className="created css-68op3f"
+        >
+          1592202624
+        </time>
       </div>
     </div>
   </div>
@@ -193,7 +210,6 @@ exports[`PostCard renders excerpt when provided 1`] = `
       >
         <div
           className="css-1kkguim"
-          role="img"
         />
       </div>
       <div
@@ -247,7 +263,6 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
       >
         <div
           className="css-13omqdc"
-          role="img"
         />
       </div>
       <div
@@ -337,7 +352,6 @@ exports[`PostCard renders without category when not provided 1`] = `
       >
         <div
           className="css-1kkguim"
-          role="img"
         />
       </div>
       <div
