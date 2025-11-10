@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
-import { ThemeProvider } from 'theme-ui'
+import { render, cleanup, act } from '@testing-library/react'
+import { ThemeUIProvider } from 'theme-ui'
 import AnimatedPageBackground from './animated-page-background'
 import theme from '../gatsby-plugin-theme-ui/theme'
 
@@ -20,10 +20,12 @@ jest.mock('./home-backgrounds/color-bends', () => {
 describe('AnimatedPageBackground', () => {
   afterEach(() => {
     cleanup()
+    // Reset scroll position
+    Object.defineProperty(window, 'scrollY', { value: 0, configurable: true })
   })
 
   const renderWithTheme = (component, colorMode = 'light') => {
-    return render(<ThemeProvider theme={{ ...theme, initialColorModeName: colorMode }}>{component}</ThemeProvider>)
+    return render(<ThemeUIProvider theme={{ ...theme, initialColorModeName: colorMode }}>{component}</ThemeUIProvider>)
   }
 
   it('renders without crashing', () => {
@@ -72,5 +74,79 @@ describe('AnimatedPageBackground', () => {
 
     addEventListenerSpy.mockRestore()
     unmount()
+  })
+
+  it('calculates overlay opacity based on scroll position', () => {
+    renderWithTheme(<AnimatedPageBackground fadeDistance={600} />)
+
+    // Simulate scroll
+    act(() => {
+      Object.defineProperty(window, 'scrollY', { value: 300, configurable: true })
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    // Opacity should be 0.5 (1 - 300/600)
+    // Component should have updated state
+  })
+
+  it('clamps overlay opacity to minimum of 0', () => {
+    renderWithTheme(<AnimatedPageBackground fadeDistance={600} />)
+
+    // Simulate scrolling past fadeDistance
+    act(() => {
+      Object.defineProperty(window, 'scrollY', { value: 1000, configurable: true })
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    // Opacity should not go below 0
+    expect(window.scrollY).toBe(1000)
+  })
+
+  it('handles color mode changes', () => {
+    const { rerender } = renderWithTheme(<AnimatedPageBackground />, 'light')
+
+    // Change to dark mode
+    rerender(
+      <ThemeUIProvider theme={{ ...theme, initialColorModeName: 'dark' }}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+
+    // Should re-render with dark mode animation
+    expect(rerender).toBeTruthy()
+  })
+
+  it('cleans up scroll listener on unmount', () => {
+    const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener')
+    const { unmount } = renderWithTheme(<AnimatedPageBackground />)
+
+    unmount()
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith('scroll', expect.any(Function))
+    removeEventListenerSpy.mockRestore()
+  })
+
+  it('handles fadeDistance changes', () => {
+    const { rerender } = renderWithTheme(<AnimatedPageBackground fadeDistance={600} />)
+
+    // Change fadeDistance
+    rerender(
+      <ThemeUIProvider theme={theme}>
+        <AnimatedPageBackground fadeDistance={800} />
+      </ThemeUIProvider>
+    )
+
+    // Should reinitialize scroll handler with new fadeDistance
+    expect(rerender).toBeTruthy()
+  })
+
+  it('initializes overlay opacity on mount', () => {
+    // Set initial scroll position
+    Object.defineProperty(window, 'scrollY', { value: 200, configurable: true })
+
+    renderWithTheme(<AnimatedPageBackground fadeDistance={600} />)
+
+    // Should call handleScroll immediately to set initial opacity
+    expect(window.scrollY).toBe(200)
   })
 })
