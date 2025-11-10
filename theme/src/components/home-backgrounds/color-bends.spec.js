@@ -360,10 +360,15 @@ describe('ColorBends', () => {
 
   it('handles missing container gracefully', () => {
     // When container ref is null, useEffect should return early without error
-    // This is tested by the component's defensive programming
+    // The component has a guard: if (!container) return
     render(<ColorBends />)
-    // If we got here without throwing, the test passes
-    expect(true).toBe(true)
+
+    // Verify component rendered without crashing
+    expect(mockScene.add).toHaveBeenCalled()
+
+    // The guard prevents crashes during SSR, rapid mount/unmount, or race conditions
+    // If renderer setup was called, the guard allowed execution to continue
+    expect(mockRenderer.setSize).toHaveBeenCalled()
   })
 
   it('handles clientWidth/Height of 0', () => {
