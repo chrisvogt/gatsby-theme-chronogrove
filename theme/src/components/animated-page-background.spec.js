@@ -58,16 +58,16 @@ describe('AnimatedPageBackground', () => {
     expect(container).toBeTruthy()
   })
 
-  it('accepts custom parallax speed', () => {
-    renderWithTheme(<AnimatedPageBackground parallaxSpeed={0.3} />)
+  it('accepts custom fade distance', () => {
+    renderWithTheme(<AnimatedPageBackground fadeDistance={800} />)
     // Just verify it renders without errors
   })
 
-  it('sets up scroll event listener for parallax', () => {
+  it('sets up scroll event listener for fade-out', () => {
     const addEventListenerSpy = jest.spyOn(window, 'addEventListener')
     const { unmount } = renderWithTheme(<AnimatedPageBackground />)
 
-    // Should add scroll listener with passive flag
+    // Should add scroll listener with passive flag for fade effect
     expect(addEventListenerSpy).toHaveBeenCalledWith('scroll', expect.any(Function), { passive: true })
 
     addEventListenerSpy.mockRestore()

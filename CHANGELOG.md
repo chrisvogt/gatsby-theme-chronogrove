@@ -1,42 +1,18 @@
 # Changelog
 
-## 0.66.0
-
-### ✨ Features
-
-- **Reusable Animated Backgrounds**: Extended animated backgrounds to Blog, Music, and Photography pages
-  - Created `AnimatedPageBackground` component that can be used on any page
-  - Configurable overlay height and opacity per page (default: 75vh for non-home pages)
-  - Consistent color-mode aware animations across all pages
-  - Same light mode (Prismatic Burst) and dark mode (Color Bends) animations as home page
-  - Shorter gradient overlay for non-home pages to protect headers without covering content
-
-### 🔧 Improvements
-
-- **Component Reusability**: Refactored home page background logic into shared component
-  - `AnimatedPageBackground` accepts `overlayHeight`, `lightOpacity`, and `darkOpacity` props
-  - Home page continues to use full `min(112.5vh, 1500px)` overlay
-  - Other pages use `min(75vh, 1000px)` overlay for less coverage
-- **Layout Enhancement**: Extended `transparentBackground` prop usage to Music and Photography pages
-- **Testing**: Added comprehensive tests for `AnimatedPageBackground` component
-
-### 🔨 Technical
-
-- **New Component**: `theme/src/components/animated-page-background.js` with prop-based configuration
-- **Updated Pages**: Blog, Music, and Photography pages now use animated backgrounds
-- **Test Coverage**: 100% coverage for the new reusable component
-
 ## 0.65.0
 
 ### ✨ Features
 
-- **Animated Home Page Backgrounds**: Added dynamic animated backgrounds that change based on color mode
+- **Animated Page Backgrounds**: Added dynamic animated backgrounds that change based on color mode
   - **Light Mode**: Prismatic Burst animation with theme accent colors
   - **Dark Mode**: Color Bends animation with cosmic theme colors (purple, gold, blues)
   - Fixed positioning - animations stay in viewport while page scrolls
   - Subtle transparency (70% light, 12% dark) to avoid distraction
   - Memoized animations prevent restarts except on color mode changes
-  - Gradient overlay (112.5vh responsive height) protects header content from animation
+  - **Gradient overlay** with smooth fade-out on scroll (700px) protects header content
+  - Reusable `AnimatedPageBackground` component works on any page
+  - Enabled on **Home**, **Blog**, **Music**, and **Photography** pages
 
 ### 🔧 Improvements
 
@@ -44,6 +20,11 @@
 - **Panel Backgrounds**: Increased opacity from `0.35` to `0.45` (light) and adjusted dark mode to `rgba(20, 20, 31, 0.45)`
 - **Layout Component**: Added `transparentBackground` prop to support animated backgrounds
 - **Performance**: Used `useMemo` hook to prevent animation re-renders on every state change
+- **Gradient Overlay**: Enhanced with 4-stop gradient (0%, 30%, 65%, 85%) for smoother transition
+  - Solid at top (30%) to protect headers
+  - Gradual fade (30-85%) with intermediate opacity steps
+  - Long tail (85-100%) for natural blend
+  - Fades out as user scrolls down for subtle, non-intrusive effect
 
 ### 🧹 Code Cleanup
 
@@ -52,9 +33,13 @@
 
 ### 🔨 Technical
 
-- **Dependencies**: Added `ogl` for WebGL-based animations
+- **Dependencies**: Added `ogl` for WebGL-based animations, `three` for 3D graphics
 - **Browser Globals**: Added `cancelAnimationFrame` and `ResizeObserver` to ESLint config
-- **Tests**: Updated theme tests and snapshots for new color values
+- **New Component**: `theme/src/components/animated-page-background.js` with configurable props:
+  - `overlayHeight` - Gradient overlay height (default: `min(112.5vh, 1500px)` for home, `min(75vh, 1000px)` for others)
+  - `lightOpacity` / `darkOpacity` - Animation transparency
+  - `fadeDistance` - Scroll distance for overlay fade-out (default: 700px)
+- **Tests**: Comprehensive test coverage for all background components (949 tests passing)
 - **React Imports**: Fixed React imports in background components for proper JSX compilation
 
 ## 0.64.0
