@@ -6,7 +6,6 @@ const useCategorizedPosts = () => {
       allMdx(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
-            excerpt(pruneLength: 255)
             fields {
               category
               id
@@ -17,6 +16,7 @@ const useCategorizedPosts = () => {
               banner
               date(formatString: "MMMM DD, YYYY")
               description
+              excerpt
               slug
               title
             }

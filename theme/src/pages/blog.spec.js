@@ -9,6 +9,7 @@ jest.mock('gatsby', () => ({
 }))
 
 import BlogIndexPage from './blog'
+import { TestProvider } from '../testUtils'
 
 // Mock the components
 jest.mock('../components/layout', () => ({ children }) => <div data-testid='layout'>{children}</div>)
@@ -73,17 +74,25 @@ describe('BlogIndexPage', () => {
   it('renders the blog index page with posts', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('Blog Posts')).toBeInTheDocument()
+    expect(screen.getByText('All Posts')).toBeInTheDocument()
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
   })
 
   it('renders Technology posts', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     const technologyPost = screen.getByText('Test Post 1')
     expect(technologyPost).toBeInTheDocument()
@@ -92,7 +101,11 @@ describe('BlogIndexPage', () => {
   it('renders Music posts', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     const musicPost = screen.getByText('Test Post 2')
     expect(musicPost).toBeInTheDocument()
@@ -158,35 +171,46 @@ describe('BlogIndexPage', () => {
     expect(screen.queryByText('Music Post')).not.toBeInTheDocument()
   })
 
-  it('filters out posts with slug "now"', () => {
+  it('includes posts with slug "now"', () => {
     const nowPost = {
       id: '5',
       excerpt: 'Now post',
       frontmatter: {
         title: 'Now Post',
         date: '2021-01-05',
-        category: 'Blog',
+        category: 'personal',
         path: '/blog/now',
-        slug: 'now'
+        slug: 'now',
+        banner: null,
+        excerpt: 'Now post'
       },
       fields: {
-        category: 'blog'
+        category: 'personal',
+        id: '5',
+        path: '/blog/now'
       }
     }
 
     getPosts.mockReturnValue([...mockPosts, nowPost])
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
-    // Should only render the 2 blog posts, not the now post
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
-    expect(screen.queryByText('Now Post')).not.toBeInTheDocument()
+    // Should render all posts including the now post
+    expect(screen.getByText('Now Post')).toBeInTheDocument()
   })
 
   it('renders posts grouped by category', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    const { container } = render(<BlogIndexPage data={mockData} />)
+    const { container } = render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     // Check that posts are rendered with their fields.category
     // Both posts have fields.category = 'blog', so look for that

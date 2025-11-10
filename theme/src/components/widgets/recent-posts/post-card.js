@@ -44,9 +44,9 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
                   backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat',
                   borderRadius: '8px',
-                  width: horizontal ? '120px' : '100%',
-                  height: horizontal ? '120px' : 'auto',
-                  aspectRatio: horizontal ? '1 / 1' : '1.9 / 1',
+                  width: horizontal ? ['100%', '200px'] : '100%',
+                  height: horizontal ? ['auto', '105px'] : 'auto',
+                  aspectRatio: '1.9 / 1',
                   transition: 'all 2.5s ease'
                 }}
                 title={isRecap ? title : undefined}
@@ -58,34 +58,50 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
 
           {!isRecap && (
             <div sx={{ flex: 1, ml: horizontal && banner ? 3 : 0 }}>
-              {category && <Category type={category} sx={{ mt: horizontal ? 0 : 1 }} />}
+              {category && (
+                <div sx={{ mb: 3 }}>
+                  <Category type={category} />
+                </div>
+              )}
 
-              <Themed.h3 sx={{ mt: horizontal ? 1 : 2, fontFamily: 'serif', fontSize: horizontal ? 2 : 3 }}>
+              <Themed.h3
+                sx={{
+                  mt: 0,
+                  mb: 2,
+                  fontFamily: 'serif',
+                  fontSize: horizontal ? 2 : 3,
+                  lineHeight: 1.3
+                }}
+              >
                 {title}
               </Themed.h3>
 
               <time
                 className='created'
                 sx={{
+                  display: 'block',
                   color: 'textMuted',
                   fontFamily: 'sans',
-                  fontSize: 1
+                  fontSize: 0,
+                  mb: excerpt ? 3 : 0
                 }}
               >
                 {date}
               </time>
 
               {excerpt && (
-                <Themed.p
+                <p
                   className='description'
                   sx={{
-                    mt: 2,
+                    mt: 0,
                     mb: 0,
-                    fontSize: 1
+                    fontSize: [1, 2],
+                    lineHeight: 1.6,
+                    color: 'text'
                   }}
                 >
                   {excerpt}
-                </Themed.p>
+                </p>
               )}
             </div>
           )}

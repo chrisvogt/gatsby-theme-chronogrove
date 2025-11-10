@@ -77,10 +77,11 @@ describe('useRecentPosts', () => {
     ])
   })
 
-  it('filters out posts with slug "now"', () => {
+  it('includes posts with slug "now"', () => {
     const { result } = renderHook(() => useRecentPosts())
     const nowPost = result.current.find(post => post.frontmatter.slug === 'now')
-    expect(nowPost).toBeUndefined()
+    expect(nowPost).toBeDefined()
+    expect(nowPost.frontmatter.title).toBe('Now Page')
   })
 
   it('returns limited posts when limit is provided', () => {
@@ -129,10 +130,11 @@ describe('getPosts', () => {
     expect(result[0].frontmatter.slug).toBe('a-blog-article')
   })
 
-  it('filters out posts with slug "now"', () => {
+  it('includes posts with slug "now"', () => {
     const result = getPosts(data)
     const nowPost = result.find(post => post.frontmatter.slug === 'now')
-    expect(nowPost).toBeUndefined()
+    expect(nowPost).toBeDefined()
+    expect(nowPost.frontmatter.title).toBe('Now Page')
   })
 
   it('handles empty query result', () => {
