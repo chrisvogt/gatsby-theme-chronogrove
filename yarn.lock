@@ -12592,6 +12592,7 @@ __metadata:
     lightgallery: "npm:^2.9.0-beta.1"
     lodash: "npm:^4.17.21"
     lottie-react-web: "npm:^2.2.2"
+    ogl: "npm:^1.0.11"
     prettier: "npm:3.6.2"
     prismjs: "npm:^1.30.0"
     react: "npm:^18.3.1"
@@ -12608,6 +12609,7 @@ __metadata:
     s-ago: "npm:^2.2.0"
     svg-loaders-react: "npm:^3.1.1"
     theme-ui: "npm:^0.17.2"
+    three: "npm:^0.181.1"
     vanilla-tilt: "npm:^1.8.1"
   peerDependencies:
     gatsby: 5.x
@@ -18422,6 +18424,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ogl@npm:^1.0.11":
+  version: 1.0.11
+  resolution: "ogl@npm:1.0.11"
+  checksum: 10c0/93cf2195da1c06a190c30cb8664231dd2d5fb06c5120d517754e11a22ab37fcb001361f9d2163dbac9f754a2aa2beb59ba82df37f972d6a674d6ebf9a2a089b8
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:2.4.1":
   version: 2.4.1
   resolution: "on-finished@npm:2.4.1"
@@ -22385,6 +22394,13 @@ __metadata:
     "@emotion/react": ">=11.1.1"
     react: ">=18"
   checksum: 10c0/c25ea61735da7a1564f46c5f99af92b24aa3b5a3724eb71dac0711cdd7a8f5719d23cc79b78127feb3d8dc4d47b3e3debd983962b62207dc802ac1b272691b4c
+  languageName: node
+  linkType: hard
+
+"three@npm:^0.181.1":
+  version: 0.181.1
+  resolution: "three@npm:0.181.1"
+  checksum: 10c0/ca848798fa75ac6f4a20b7da085e99b7eba18cc8bd51268e91cefa405a021e045561475fe8cea3841439e39e7723055d80ba942ad4c63f651713ac874f6d4e4a
   languageName: node
   linkType: hard
 
