@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.64.0",
+  "version": "0.65.0",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
@@ -98,6 +98,7 @@
     "lightgallery": "^2.9.0-beta.1",
     "lodash": "^4.17.21",
     "lottie-react-web": "^2.2.2",
+    "ogl": "^1.0.11",
     "prettier": "3.6.2",
     "prismjs": "^1.30.0",
     "react": "^18.3.1",
@@ -112,6 +113,7 @@
     "s-ago": "^2.2.0",
     "svg-loaders-react": "^3.1.1",
     "theme-ui": "^0.17.2",
+    "three": "^0.181.1",
     "vanilla-tilt": "^1.8.1"
   }
 }

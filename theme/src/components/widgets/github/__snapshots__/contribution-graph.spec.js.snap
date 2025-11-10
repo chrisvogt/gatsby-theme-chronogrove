@@ -10,7 +10,7 @@ exports[`ContributionGraph Component matches the empty state snapshot 1`] = `
     Contribution Graph
   </h3>
   <div
-    className="css-dqblq9"
+    className="css-zl6176"
     style={
       {
         "overflow": "hidden",
@@ -1135,7 +1135,7 @@ exports[`ContributionGraph Component matches the loading state snapshot 1`] = `
     Contribution Graph
   </h3>
   <div
-    className="css-dqblq9"
+    className="css-zl6176"
     style={
       {
         "overflow": "hidden",
@@ -2260,7 +2260,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
     Contribution Graph
   </h3>
   <div
-    className="css-dqblq9"
+    className="css-zl6176"
   >
     <p
       className="css-nfwjx8"

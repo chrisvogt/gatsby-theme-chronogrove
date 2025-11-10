@@ -349,7 +349,7 @@ exports[`Goodreads Widget matches the loading state snapshot 1`] = `
         className="css-1srnkuc"
       >
         <div
-          className="css-dqblq9"
+          className="css-zl6176"
         >
           <div
             className="text-row show-loading-animation"
@@ -752,7 +752,7 @@ exports[`Goodreads Widget renders with data and AI summary 1`] = `
         className="css-1srnkuc"
       >
         <div
-          className="css-dqblq9"
+          className="css-zl6176"
         >
           <div
             className="text-row show-loading-animation"
@@ -1155,7 +1155,7 @@ exports[`Goodreads Widget renders without AI summary when not available 1`] = `
         className="css-1srnkuc"
       >
         <div
-          className="css-dqblq9"
+          className="css-zl6176"
         >
           <div
             className="text-row show-loading-animation"
