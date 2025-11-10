@@ -73,14 +73,18 @@ describe('useRecentPosts', () => {
       },
       {
         ...data.allMdx.edges[1].node
+      },
+      {
+        ...data.allMdx.edges[2].node
       }
     ])
   })
 
-  it('filters out posts with slug "now"', () => {
+  it('includes posts with slug "now"', () => {
     const { result } = renderHook(() => useRecentPosts())
     const nowPost = result.current.find(post => post.frontmatter.slug === 'now')
-    expect(nowPost).toBeUndefined()
+    expect(nowPost).toBeDefined()
+    expect(nowPost.frontmatter.title).toBe('Now Page')
   })
 
   it('returns limited posts when limit is provided', () => {
@@ -93,7 +97,7 @@ describe('useRecentPosts', () => {
 
   it('returns all posts when limit is null', () => {
     const { result } = renderHook(() => useRecentPosts(null))
-    expect(result.current).toHaveLength(2) // Excluding the 'now' post
+    expect(result.current).toHaveLength(3) // Including the 'now' post
   })
 
   it('handles missing allMdx', () => {
@@ -118,9 +122,10 @@ describe('useRecentPosts', () => {
 describe('getPosts', () => {
   it('returns all posts when no limit is provided', () => {
     const result = getPosts(data)
-    expect(result).toHaveLength(2) // Excluding the 'now' post
+    expect(result).toHaveLength(3) // Including the 'now' post
     expect(result[0].frontmatter.slug).toBe('a-blog-article')
     expect(result[1].frontmatter.slug).toBe('another-article')
+    expect(result[2].frontmatter.slug).toBe('now')
   })
 
   it('returns limited posts when limit is provided', () => {
@@ -129,10 +134,11 @@ describe('getPosts', () => {
     expect(result[0].frontmatter.slug).toBe('a-blog-article')
   })
 
-  it('filters out posts with slug "now"', () => {
+  it('includes posts with slug "now"', () => {
     const result = getPosts(data)
     const nowPost = result.find(post => post.frontmatter.slug === 'now')
-    expect(nowPost).toBeUndefined()
+    expect(nowPost).toBeDefined()
+    expect(nowPost.frontmatter.title).toBe('Now Page')
   })
 
   it('handles empty query result', () => {

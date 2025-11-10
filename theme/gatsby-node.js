@@ -71,8 +71,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
 
-  // Define custom types for siteMetadata
+  // Define custom types for siteMetadata and MDX frontmatter
   const typeDefs = `
+    type MdxFrontmatter {
+      excerpt: String
+    }
+
     type SiteSiteMetadata implements Node {
       navigation: SiteSiteMetadataNavigation
       widgets: SiteSiteMetadataWidgets

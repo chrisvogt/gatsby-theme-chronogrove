@@ -1,30 +1,15 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
-
-// Special category mappings for custom formatting
-const categoryMappings = {
-  'photography/travel': 'Travel Photography',
-  'photography/events': 'Event Photography',
-  'music/piano-covers': 'Piano Covers',
-  'videos/bike-rides': 'Cycling Videos'
-}
-
-// Helper function to convert string to title case
-const toTitleCase = str => {
-  return str
-    .split(/[-/]/) // Split by hyphen or forward slash
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ')
-}
+import { getCategoryDisplayName } from '../helpers/categoryHelpers'
 
 const Category = ({ sx = {}, type }) => {
-  // Use mapping if exists, otherwise convert to title case
-  const category = categoryMappings[type] || toTitleCase(type)
+  const category = getCategoryDisplayName(type)
 
   return (
     <Themed.div
       sx={{
+        display: 'inline-block',
         fontSize: [0],
         fontFamily: 'heading',
         color: 'primary',

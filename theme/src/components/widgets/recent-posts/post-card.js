@@ -5,7 +5,7 @@ import { Card } from '@theme-ui/components'
 import { Link } from 'gatsby'
 import Category from '../../category'
 
-export default ({ banner, category, date, excerpt, link, title, horizontal = false, isRecap = false }) => {
+export default ({ banner, category, date, excerpt, link, title, horizontal = false }) => {
   return (
     <Link
       sx={{
@@ -36,7 +36,7 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
           }}
         >
           {banner && (
-            <div className='card-media' sx={{ flexShrink: 0, mb: isRecap ? '0 !important' : 2 }}>
+            <div className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
               <div
                 sx={{
                   backgroundImage: `url(${banner})`,
@@ -44,51 +44,64 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
                   backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat',
                   borderRadius: '8px',
-                  width: horizontal ? '120px' : '100%',
-                  height: horizontal ? '120px' : 'auto',
-                  aspectRatio: horizontal ? '1 / 1' : '1.9 / 1',
+                  width: horizontal ? ['100%', '200px'] : '100%',
+                  height: horizontal ? ['auto', '105px'] : 'auto',
+                  aspectRatio: '1.9 / 1',
                   transition: 'all 2.5s ease'
                 }}
-                title={isRecap ? title : undefined}
-                role='img'
-                aria-label={isRecap ? title : undefined}
               />
             </div>
           )}
 
-          {!isRecap && (
-            <div sx={{ flex: 1, ml: horizontal && banner ? 3 : 0 }}>
-              {category && <Category type={category} sx={{ mt: horizontal ? 0 : 1 }} />}
+          <div sx={{ flex: 1, ml: horizontal && banner ? 3 : 0 }}>
+            {category && (
+              <div sx={{ mb: 3 }}>
+                <Category type={category} />
+              </div>
+            )}
 
-              <Themed.h3 sx={{ mt: horizontal ? 1 : 2, fontFamily: 'serif', fontSize: horizontal ? 2 : 3 }}>
-                {title}
-              </Themed.h3>
+            <Themed.h3
+              sx={{
+                mt: 0,
+                mb: 2,
+                fontFamily: 'serif',
+                fontSize: horizontal ? 2 : 3,
+                lineHeight: 1.3
+              }}
+            >
+              {title}
+            </Themed.h3>
 
+            {date && (
               <time
                 className='created'
                 sx={{
+                  display: 'block',
                   color: 'textMuted',
                   fontFamily: 'sans',
-                  fontSize: 1
+                  fontSize: 0,
+                  mb: excerpt ? 3 : 0
                 }}
               >
                 {date}
               </time>
+            )}
 
-              {excerpt && (
-                <Themed.p
-                  className='description'
-                  sx={{
-                    mt: 2,
-                    mb: 0,
-                    fontSize: 1
-                  }}
-                >
-                  {excerpt}
-                </Themed.p>
-              )}
-            </div>
-          )}
+            {excerpt && (
+              <p
+                className='description'
+                sx={{
+                  mt: 0,
+                  mb: 0,
+                  fontSize: [1, 2],
+                  lineHeight: 1.6,
+                  color: 'text'
+                }}
+              >
+                {excerpt}
+              </p>
+            )}
+          </div>
         </div>
       </Card>
     </Link>

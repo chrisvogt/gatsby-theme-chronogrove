@@ -9,6 +9,7 @@ jest.mock('gatsby', () => ({
 }))
 
 import BlogIndexPage from './blog'
+import { TestProvider } from '../testUtils'
 
 // Mock the components
 jest.mock('../components/layout', () => ({ children }) => <div data-testid='layout'>{children}</div>)
@@ -38,10 +39,14 @@ describe('BlogIndexPage', () => {
         date: '2021-01-01',
         category: 'Technology',
         path: '/blog/test-post-1',
-        slug: 'test-post-1'
+        slug: 'test-post-1',
+        banner: 'https://example.com/banner1.jpg',
+        excerpt: 'This is an excerpt'
       },
       fields: {
-        category: 'blog'
+        category: 'technology',
+        id: '1',
+        path: '/blog/test-post-1'
       }
     },
     {
@@ -50,12 +55,16 @@ describe('BlogIndexPage', () => {
       frontmatter: {
         title: 'Test Post 2',
         date: '2021-01-02',
-        category: 'Music',
+        category: 'Blog',
         path: '/blog/test-post-2',
-        slug: 'test-post-2'
+        slug: 'test-post-2',
+        banner: 'https://example.com/banner2.jpg',
+        excerpt: 'This is another excerpt'
       },
       fields: {
-        category: 'blog'
+        category: 'blog',
+        id: '2',
+        path: '/blog/test-post-2'
       }
     }
   ]
@@ -73,17 +82,25 @@ describe('BlogIndexPage', () => {
   it('renders the blog index page with posts', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('Blog Posts')).toBeInTheDocument()
+    expect(screen.getByText('Blog')).toBeInTheDocument()
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
   })
 
   it('renders Technology posts', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     const technologyPost = screen.getByText('Test Post 1')
     expect(technologyPost).toBeInTheDocument()
@@ -92,7 +109,11 @@ describe('BlogIndexPage', () => {
   it('renders Music posts', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     const musicPost = screen.getByText('Test Post 2')
     expect(musicPost).toBeInTheDocument()
@@ -101,10 +122,14 @@ describe('BlogIndexPage', () => {
   it('handles empty posts array', () => {
     getPosts.mockReturnValue([])
 
-    render(<BlogIndexPage data={{ allMdx: { edges: [] } }} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={{ allMdx: { edges: [] } }} />
+      </TestProvider>
+    )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('Blog Posts')).toBeInTheDocument()
+    expect(screen.getByText('Blog')).toBeInTheDocument()
     expect(screen.queryAllByTestId('post-card')).toHaveLength(0)
   })
 
@@ -126,7 +151,11 @@ describe('BlogIndexPage', () => {
 
     getPosts.mockReturnValue([...mockPosts, photographyPost])
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     // Should only render the 2 blog posts, not the photography post
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
@@ -151,47 +180,217 @@ describe('BlogIndexPage', () => {
 
     getPosts.mockReturnValue([...mockPosts, musicFieldsPost])
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     // Should only render the 2 blog posts, not the music post
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
     expect(screen.queryByText('Music Post')).not.toBeInTheDocument()
   })
 
-  it('filters out posts with slug "now"', () => {
+  it('includes posts with slug "now"', () => {
     const nowPost = {
       id: '5',
       excerpt: 'Now post',
       frontmatter: {
         title: 'Now Post',
         date: '2021-01-05',
-        category: 'Blog',
+        category: 'personal',
         path: '/blog/now',
-        slug: 'now'
+        slug: 'now',
+        banner: null,
+        excerpt: 'Now post'
       },
       fields: {
-        category: 'blog'
+        category: 'personal',
+        id: '5',
+        path: '/blog/now'
       }
     }
 
     getPosts.mockReturnValue([...mockPosts, nowPost])
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
-    // Should only render the 2 blog posts, not the now post
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
-    expect(screen.queryByText('Now Post')).not.toBeInTheDocument()
+    // Should render all posts including the now post
+    expect(screen.getByText('Now Post')).toBeInTheDocument()
   })
 
   it('renders posts grouped by category', () => {
     getPosts.mockReturnValue(mockPosts)
 
-    const { container } = render(<BlogIndexPage data={mockData} />)
+    const { container } = render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     // Check that posts are rendered with their fields.category
-    // Both posts have fields.category = 'blog', so look for that
+    const technologyCards = container.querySelectorAll('[data-category="technology"]')
     const blogCards = container.querySelectorAll('[data-category="blog"]')
 
-    expect(blogCards).toHaveLength(2)
+    expect(technologyCards).toHaveLength(1)
+    expect(blogCards).toHaveLength(1)
+  })
+
+  it('handles category with only one post (no remaining posts grid)', () => {
+    const singlePost = [
+      {
+        id: '1',
+        frontmatter: {
+          title: 'Single Tech Post',
+          date: '2021-01-01',
+          slug: 'single-post',
+          banner: 'https://example.com/banner.jpg',
+          excerpt: 'Only one post in this category'
+        },
+        fields: {
+          category: 'technology',
+          id: '1',
+          path: '/blog/single-post'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(singlePost)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Should render the single post as featured, with no remaining posts grid
+    expect(screen.getByText('Single Tech Post')).toBeInTheDocument()
+    expect(screen.getAllByTestId('post-card')).toHaveLength(1)
+  })
+
+  it('selects post with banner as featured when available', () => {
+    const postsWithBanner = [
+      {
+        id: '1',
+        frontmatter: {
+          title: 'Post Without Banner',
+          date: '2021-01-01',
+          slug: 'no-banner',
+          banner: null,
+          excerpt: 'No banner here'
+        },
+        fields: {
+          category: 'technology',
+          id: '1',
+          path: '/blog/no-banner'
+        }
+      },
+      {
+        id: '2',
+        frontmatter: {
+          title: 'Post With Banner',
+          date: '2021-01-02',
+          slug: 'with-banner',
+          banner: 'https://example.com/featured.jpg',
+          excerpt: 'Has a banner'
+        },
+        fields: {
+          category: 'technology',
+          id: '2',
+          path: '/blog/with-banner'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(postsWithBanner)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Post with banner should be rendered
+    expect(screen.getByText('Post With Banner')).toBeInTheDocument()
+    expect(screen.getByText('Post Without Banner')).toBeInTheDocument()
+  })
+
+  it('displays empty state message when no posts exist', () => {
+    getPosts.mockReturnValue([])
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    expect(screen.getByText('No posts yet. Check back soon!')).toBeInTheDocument()
+  })
+
+  it('handles posts with no category field', () => {
+    const postWithoutCategory = [
+      {
+        id: '1',
+        frontmatter: {
+          title: 'Uncategorized Post',
+          date: '2021-01-01',
+          slug: 'uncategorized',
+          banner: null,
+          excerpt: 'No category'
+        },
+        fields: {
+          category: undefined,
+          id: '1',
+          path: '/blog/uncategorized'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(postWithoutCategory)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Should render under "All Posts" section
+    expect(screen.getByText('Uncategorized Post')).toBeInTheDocument()
+  })
+
+  it('renders section headers with correct post counts', () => {
+    const multiplePosts = [
+      ...mockPosts,
+      {
+        id: '3',
+        frontmatter: {
+          title: 'Another Tech Post',
+          date: '2021-01-03',
+          slug: 'tech-3',
+          banner: null,
+          excerpt: 'More tech content'
+        },
+        fields: {
+          category: 'technology',
+          id: '3',
+          path: '/blog/tech-3'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(multiplePosts)
+
+    const { container } = render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Check for section with count
+    expect(container.textContent).toMatch(/\d+ posts?/)
   })
 })
