@@ -99,7 +99,7 @@ exports[`Blog Post matches the snapshot 1`] = `
         id="mock-post-id"
       >
         <div
-          className="css-ulp4wu"
+          className="css-1wualeq"
         >
           Mock category
         </div>

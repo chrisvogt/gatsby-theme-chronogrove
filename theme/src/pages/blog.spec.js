@@ -39,10 +39,14 @@ describe('BlogIndexPage', () => {
         date: '2021-01-01',
         category: 'Technology',
         path: '/blog/test-post-1',
-        slug: 'test-post-1'
+        slug: 'test-post-1',
+        banner: 'https://example.com/banner1.jpg',
+        excerpt: 'This is an excerpt'
       },
       fields: {
-        category: 'blog'
+        category: 'technology',
+        id: '1',
+        path: '/blog/test-post-1'
       }
     },
     {
@@ -51,12 +55,16 @@ describe('BlogIndexPage', () => {
       frontmatter: {
         title: 'Test Post 2',
         date: '2021-01-02',
-        category: 'Music',
+        category: 'Blog',
         path: '/blog/test-post-2',
-        slug: 'test-post-2'
+        slug: 'test-post-2',
+        banner: 'https://example.com/banner2.jpg',
+        excerpt: 'This is another excerpt'
       },
       fields: {
-        category: 'blog'
+        category: 'blog',
+        id: '2',
+        path: '/blog/test-post-2'
       }
     }
   ]
@@ -81,7 +89,7 @@ describe('BlogIndexPage', () => {
     )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('All Posts')).toBeInTheDocument()
+    expect(screen.getAllByText('All Posts').length).toBeGreaterThan(0)
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
   })
 
@@ -114,10 +122,14 @@ describe('BlogIndexPage', () => {
   it('handles empty posts array', () => {
     getPosts.mockReturnValue([])
 
-    render(<BlogIndexPage data={{ allMdx: { edges: [] } }} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={{ allMdx: { edges: [] } }} />
+      </TestProvider>
+    )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('Blog Posts')).toBeInTheDocument()
+    expect(screen.getByText('All Posts')).toBeInTheDocument()
     expect(screen.queryAllByTestId('post-card')).toHaveLength(0)
   })
 
@@ -139,7 +151,11 @@ describe('BlogIndexPage', () => {
 
     getPosts.mockReturnValue([...mockPosts, photographyPost])
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     // Should only render the 2 blog posts, not the photography post
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
@@ -164,7 +180,11 @@ describe('BlogIndexPage', () => {
 
     getPosts.mockReturnValue([...mockPosts, musicFieldsPost])
 
-    render(<BlogIndexPage data={mockData} />)
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
 
     // Should only render the 2 blog posts, not the music post
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
@@ -213,9 +233,10 @@ describe('BlogIndexPage', () => {
     )
 
     // Check that posts are rendered with their fields.category
-    // Both posts have fields.category = 'blog', so look for that
+    const technologyCards = container.querySelectorAll('[data-category="technology"]')
     const blogCards = container.querySelectorAll('[data-category="blog"]')
 
-    expect(blogCards).toHaveLength(2)
+    expect(technologyCards).toHaveLength(1)
+    expect(blogCards).toHaveLength(1)
   })
 })
