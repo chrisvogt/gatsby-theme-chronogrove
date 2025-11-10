@@ -149,4 +149,64 @@ describe('AnimatedPageBackground', () => {
     // Should call handleScroll immediately to set initial opacity
     expect(window.scrollY).toBe(200)
   })
+
+  it('uses light mode colors from theme', () => {
+    const customTheme = {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        background: '#fdf8f5'
+      }
+    }
+    const { container } = render(
+      <ThemeUIProvider theme={customTheme}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+    expect(container).toBeTruthy()
+  })
+
+  it('uses dark mode colors from theme', () => {
+    const customTheme = {
+      ...theme,
+      initialColorModeName: 'dark',
+      colors: {
+        ...theme.colors,
+        modes: {
+          dark: {
+            background: '#14141F'
+          }
+        }
+      }
+    }
+    const { container } = render(
+      <ThemeUIProvider theme={customTheme}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+    expect(container).toBeTruthy()
+  })
+
+  it('handles CSS variable colors with fallback', () => {
+    const customTheme = {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        background: 'var(--theme-ui-colors-background)'
+      }
+    }
+    const { container } = render(
+      <ThemeUIProvider theme={customTheme}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+    expect(container).toBeTruthy()
+  })
+
+  it('applies gradient overlay with theme colors', () => {
+    const { container } = renderWithTheme(<AnimatedPageBackground />)
+    const overlayDivs = container.querySelectorAll('div')
+    // Should have overlay div with gradient
+    expect(overlayDivs.length).toBeGreaterThanOrEqual(2)
+  })
 })

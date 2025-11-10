@@ -42,13 +42,7 @@ const AnimatedPageBackground = ({
   // Ensure we're client-side before rendering color-specific content
   useEffect(() => {
     setMounted(true)
-    console.log('[AnimatedPageBackground] Mounted - colorMode:', colorMode, 'isDark:', isDark)
   }, [])
-
-  // Debug color mode changes
-  useEffect(() => {
-    console.log('[AnimatedPageBackground] Color mode changed:', colorMode, 'isDark:', isDark)
-  }, [colorMode, isDark])
 
   // Handle scroll to fade out overlay as user scrolls down
   useEffect(() => {
@@ -99,15 +93,6 @@ const AnimatedPageBackground = ({
   const bgColorRaw = isDark
     ? theme?.rawColors?.modes?.dark?.background || theme?.colors?.modes?.dark?.background || '#14141F'
     : theme?.rawColors?.background || theme?.colors?.background || '#fdf8f5'
-
-  console.log(
-    '[AnimatedPageBackground] Rendering with bgColorRaw:',
-    bgColorRaw,
-    'colorMode:',
-    colorMode,
-    'theme.colors.background:',
-    theme?.colors?.background
-  )
 
   // Convert hex color to rgba for gradient stops
   const hexToRgba = (hex, alpha) => {
