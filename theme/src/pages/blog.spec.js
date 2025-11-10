@@ -89,7 +89,7 @@ describe('BlogIndexPage', () => {
     )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getAllByText('All Posts').length).toBeGreaterThan(0)
+    expect(screen.getByText('Blog')).toBeInTheDocument()
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
   })
 
@@ -129,7 +129,7 @@ describe('BlogIndexPage', () => {
     )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
-    expect(screen.getByText('All Posts')).toBeInTheDocument()
+    expect(screen.getByText('Blog')).toBeInTheDocument()
     expect(screen.queryAllByTestId('post-card')).toHaveLength(0)
   })
 

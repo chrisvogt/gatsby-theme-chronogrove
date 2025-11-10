@@ -14,7 +14,7 @@ import PostCard from '../components/widgets/recent-posts/post-card'
 
 // Section Header Component
 const SectionHeader = ({ icon, title, count }) => (
-  <Box sx={{ mb: 4, mt: 5 }}>
+  <Box sx={{ mb: 4, mt: 3 }}>
     <Flex sx={{ alignItems: 'center', gap: 3 }}>
       <Box
         sx={{
@@ -84,7 +84,7 @@ const BlogIndexPage = ({ data }) => {
         }}
       >
         <Container sx={{ flexGrow: 1, maxWidth: '1400px', px: [3, 4, 5] }}>
-          <PageHeader>All Posts</PageHeader>
+          <PageHeader>Blog</PageHeader>
 
           {/* Category Sections */}
           {['personal', 'technology', 'other'].map(categoryKey => {
