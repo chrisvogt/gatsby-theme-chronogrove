@@ -210,6 +210,12 @@ describe('ColorBends', () => {
     expect(mockMaterial.uniforms.uColorCount.value).toBe(3)
   })
 
+  it('filters out non-string colors (numbers, objects, arrays)', () => {
+    // Should only process string values, ignoring numbers, objects, etc.
+    render(<ColorBends colors={['#FF0000', 123, { color: 'red' }, ['#00FF00'], true, '#0000FF']} />)
+    expect(mockMaterial.uniforms.uColorCount.value).toBe(2) // Only '#FF0000' and '#0000FF'
+  })
+
   it('limits colors to MAX_COLORS (8)', () => {
     const manyColors = Array(15)
       .fill(0)

@@ -258,7 +258,10 @@ export default function ColorBends({
       return new THREE.Vector3(v[0] / 255, v[1] / 255, v[2] / 255)
     }
 
-    const arr = (colors || []).filter(Boolean).slice(0, MAX_COLORS).map(toVec3)
+    const arr = (colors || [])
+      .filter(color => typeof color === 'string')
+      .slice(0, MAX_COLORS)
+      .map(toVec3)
 
     for (let i = 0; i < MAX_COLORS; i++) {
       const vec = material.uniforms.uColors.value[i]
