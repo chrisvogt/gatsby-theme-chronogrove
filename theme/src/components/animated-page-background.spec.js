@@ -4,6 +4,19 @@ import { ThemeUIProvider } from 'theme-ui'
 import AnimatedPageBackground from './animated-page-background'
 import theme from '../gatsby-plugin-theme-ui/theme'
 
+// Store original hooks
+let mockColorMode = 'default'
+let mockSetColorMode = jest.fn()
+
+// Mock theme-ui's useColorMode hook
+jest.mock('theme-ui', () => {
+  const original = jest.requireActual('theme-ui')
+  return {
+    ...original,
+    useColorMode: jest.fn(() => [mockColorMode, mockSetColorMode])
+  }
+})
+
 // Mock the background components
 jest.mock('./home-backgrounds/prismatic-burst', () => {
   return function MockPrismaticBurst() {
@@ -18,6 +31,11 @@ jest.mock('./home-backgrounds/color-bends', () => {
 })
 
 describe('AnimatedPageBackground', () => {
+  beforeEach(() => {
+    mockColorMode = 'default'
+    mockSetColorMode = jest.fn()
+  })
+
   afterEach(() => {
     cleanup()
     // Reset scroll position
@@ -35,6 +53,12 @@ describe('AnimatedPageBackground', () => {
   it('renders PrismaticBurst in light mode', () => {
     const { getByTestId } = renderWithTheme(<AnimatedPageBackground />, 'light')
     expect(getByTestId('prismatic-burst')).toBeInTheDocument()
+  })
+
+  it('renders ColorBends in dark mode', () => {
+    mockColorMode = 'dark'
+    const { getByTestId } = renderWithTheme(<AnimatedPageBackground />, 'dark')
+    expect(getByTestId('color-bends')).toBeInTheDocument()
   })
 
   it('applies custom overlay height', () => {
@@ -166,25 +190,18 @@ describe('AnimatedPageBackground', () => {
     expect(container).toBeTruthy()
   })
 
-  it('uses dark mode colors from theme', () => {
-    const customTheme = {
-      ...theme,
-      initialColorModeName: 'dark',
-      colors: {
-        ...theme.colors,
-        modes: {
-          dark: {
-            background: '#14141F'
-          }
-        }
-      }
-    }
-    const { container } = render(
-      <ThemeUIProvider theme={customTheme}>
-        <AnimatedPageBackground />
-      </ThemeUIProvider>
-    )
-    expect(container).toBeTruthy()
+  it('uses dark mode colors from theme with rawColors', () => {
+    mockColorMode = 'dark'
+    const { getByTestId } = renderWithTheme(<AnimatedPageBackground />, 'dark')
+    // Should render ColorBends in dark mode
+    expect(getByTestId('color-bends')).toBeInTheDocument()
+  })
+
+  it('uses dark mode with custom darkOpacity', () => {
+    mockColorMode = 'dark'
+    const { getByTestId } = renderWithTheme(<AnimatedPageBackground darkOpacity={0.2} />, 'dark')
+    // Should render ColorBends in dark mode with custom opacity
+    expect(getByTestId('color-bends')).toBeInTheDocument()
   })
 
   it('handles CSS variable colors with fallback', () => {
