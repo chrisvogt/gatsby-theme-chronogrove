@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useMemo, useEffect, useState } from 'react'
-import { jsx, useColorMode } from 'theme-ui'
+import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import PrismaticBurst from './home-backgrounds/prismatic-burst'
 import ColorBends from './home-backgrounds/color-bends'
 
@@ -34,6 +34,7 @@ const AnimatedPageBackground = ({
   fadeDistance = 700
 }) => {
   const [colorMode] = useColorMode()
+  const { theme } = useThemeUI()
   const isDark = colorMode === 'dark'
   const [overlayOpacity, setOverlayOpacity] = useState(1)
   const [mounted, setMounted] = useState(false)
@@ -85,7 +86,7 @@ const AnimatedPageBackground = ({
       ) : (
         <PrismaticBurst colors={PRISMATIC_COLORS} speed={0.3} blur={100} />
       ),
-    [isDark]
+    [isDark, colorMode]
   )
 
   // Don't render anything until client-side to avoid SSR mismatch
@@ -93,16 +94,22 @@ const AnimatedPageBackground = ({
     return null
   }
 
-  // Get background colors - use explicit values
-  const bgColor = isDark ? '#14141F' : '#fdf8f5'
-  console.log('[AnimatedPageBackground] Rendering with bgColor:', bgColor, 'colorMode:', colorMode)
+  // Get background colors from theme - this handles color mode properly
+  const bgColor = theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
+  console.log(
+    '[AnimatedPageBackground] Rendering with bgColor:',
+    bgColor,
+    'colorMode:',
+    colorMode,
+    'theme.colors.background:',
+    theme?.colors?.background
+  )
 
   return (
     <>
       {/* Fixed background animation */}
       <div
         key={`bg-${colorMode}`}
-        style={{ backgroundColor: bgColor }}
         sx={{
           position: 'fixed',
           top: 0,
@@ -115,7 +122,8 @@ const AnimatedPageBackground = ({
           zIndex: 0,
           overflow: 'hidden',
           opacity: isDark ? darkOpacity : lightOpacity,
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          backgroundColor: bgColor
         }}
         aria-hidden='true'
       >
