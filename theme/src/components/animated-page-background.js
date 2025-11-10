@@ -81,6 +81,7 @@ const AnimatedPageBackground = ({
       {/* Fixed background animation */}
       <div
         key={`bg-${colorMode}`}
+        style={{ backgroundColor: isDark ? '#14141F' : '#fdf8f5' }}
         sx={{
           position: 'fixed',
           top: 0,
@@ -93,8 +94,7 @@ const AnimatedPageBackground = ({
           zIndex: 0,
           overflow: 'hidden',
           opacity: isDark ? darkOpacity : lightOpacity,
-          pointerEvents: 'none',
-          backgroundColor: isDark ? '#14141F' : '#fdf8f5'
+          pointerEvents: 'none'
         }}
         aria-hidden='true'
       >
@@ -103,6 +103,7 @@ const AnimatedPageBackground = ({
 
       {/* Gradient overlay to protect header content - fades out on scroll */}
       <div
+        key={`overlay-${colorMode}`}
         sx={{
           position: 'absolute',
           top: 0,
