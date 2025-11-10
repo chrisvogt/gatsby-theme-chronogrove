@@ -202,7 +202,7 @@ describe('HomeNavigation', () => {
         </TestProvider>
       )
 
-      expect(mockAddEventListener).toHaveBeenCalledWith('scroll', expect.any(Function))
+      expect(mockAddEventListener).toHaveBeenCalledWith('scroll', expect.any(Function), { passive: true })
     })
 
     it('removes scroll event listener on unmount', () => {

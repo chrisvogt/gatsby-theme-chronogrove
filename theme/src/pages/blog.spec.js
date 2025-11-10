@@ -12,6 +12,7 @@ import BlogIndexPage from './blog'
 import { TestProvider } from '../testUtils'
 
 // Mock the components
+jest.mock('../components/animated-page-background', () => () => <div data-testid='animated-background'>Background</div>)
 jest.mock('../components/layout', () => ({ children }) => <div data-testid='layout'>{children}</div>)
 jest.mock('../components/blog/page-header', () => ({ children }) => <h1>{children}</h1>)
 jest.mock('../components/widgets/recent-posts/post-card', () => ({ title, category }) => (
