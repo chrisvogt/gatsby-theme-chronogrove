@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React, { useMemo, useEffect, useState } from 'react'
-import { jsx, useColorMode, useThemeUI } from 'theme-ui'
+import { jsx, useColorMode } from 'theme-ui'
 import PrismaticBurst from './home-backgrounds/prismatic-burst'
 import ColorBends from './home-backgrounds/color-bends'
 
@@ -34,7 +34,6 @@ const AnimatedPageBackground = ({
   fadeDistance = 700
 }) => {
   const [colorMode] = useColorMode()
-  const { theme } = useThemeUI()
   const isDark = colorMode === 'dark'
   const [overlayOpacity, setOverlayOpacity] = useState(1)
   const [mounted, setMounted] = useState(false)
@@ -94,17 +93,6 @@ const AnimatedPageBackground = ({
     return null
   }
 
-  // Get background colors from theme - this handles color mode properly
-  const bgColor = theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
-  console.log(
-    '[AnimatedPageBackground] Rendering with bgColor:',
-    bgColor,
-    'colorMode:',
-    colorMode,
-    'theme.colors.background:',
-    theme?.colors?.background
-  )
-
   return (
     <>
       {/* Fixed background animation */}
@@ -123,7 +111,8 @@ const AnimatedPageBackground = ({
           overflow: 'hidden',
           opacity: isDark ? darkOpacity : lightOpacity,
           pointerEvents: 'none',
-          backgroundColor: bgColor
+          // Use Theme UI token so CSS variables handle color mode correctly
+          backgroundColor: 'background'
         }}
         aria-hidden='true'
       >
