@@ -88,11 +88,10 @@ const AnimatedPageBackground = ({
     return null
   }
 
-  // Get background colors from theme - use raw color values to avoid CSS variable issues
-  // Theme UI wraps colors in CSS variables, but we need the actual hex values for rgba conversion
-  const bgColorRaw = isDark
-    ? theme?.rawColors?.modes?.dark?.background || theme?.colors?.modes?.dark?.background || '#14141F'
-    : theme?.rawColors?.background || theme?.colors?.background || '#fdf8f5'
+  // Get background colors from theme - Theme UI provides the correct color based on active mode
+  // Use rawColors if available (raw hex values), otherwise fall back to theme.colors
+  // with mode-specific defaults if needed
+  const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
 
   // Convert hex color to rgba for gradient stops
   const hexToRgba = (hex, alpha) => {

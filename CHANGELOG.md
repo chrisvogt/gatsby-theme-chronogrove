@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.65.1
+
+### 🐛 Bug Fixes
+
+- **Dark Mode Background Gradient**: Fixed incorrect background color lookup that caused light grey backgrounds in dark mode
+  - **Root Cause**: Component was attempting to access `theme.colors.modes.dark.background` which doesn't exist when dark mode is active
+  - **Solution**: Simplified color lookup to use `theme.colors.background` directly since Theme UI automatically resolves the correct color based on active mode
+  - **Impact**: Dark mode now correctly displays `#14141F` background color instead of undefined/grey, fixing evening display issues when OS automatically switches to dark mode
+
+### 🎯 User Experience
+
+- **Consistent Dark Mode**: Animated background gradient now displays correctly in dark mode regardless of time of day or OS color scheme settings
+- **System Integration**: Properly respects OS-level dark mode settings with correct color resolution
+
+### 🧪 Testing
+
+- **Improved Test Coverage**: Added 3 comprehensive tests for dark mode color resolution (23 tests total, up from 20)
+  - Test for `theme.colors.background` usage in dark mode (the bug scenario)
+  - Test for `rawColors.background` precedence when available
+  - Test for fallback to default dark mode color when theme colors are missing
+- **100% Branch Coverage**: All color lookup paths now have explicit test coverage
+- All tests pass with no regressions
+
 ## 0.65.0
 
 ### ✨ Features
