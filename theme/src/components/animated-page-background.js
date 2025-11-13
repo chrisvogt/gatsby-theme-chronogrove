@@ -102,7 +102,7 @@ const AnimatedPageBackground = ({
 
       // Always check computed DOM styles to see what's actually rendered
       setTimeout(() => {
-        const bgDiv = document.querySelector('[data-debug-bg]')
+        const bgDiv = document.querySelector('[data-debug-bg="true"]')
         if (bgDiv) {
           const computedStyle = window.getComputedStyle(bgDiv)
           const computedBg = computedStyle.backgroundColor
@@ -116,7 +116,10 @@ const AnimatedPageBackground = ({
             zIndex,
             position,
             // Check if there are any CSS overrides
-            inlineStyle: bgDiv.getAttribute('style') || 'none'
+            inlineStyle: bgDiv.getAttribute('style') || 'none',
+            // Also check the sx prop values
+            expectedBgColor: bgColorRaw,
+            expectedOpacity: isDark ? darkOpacity : lightOpacity
           })
 
           // Check parent/body background that might be showing through
@@ -126,10 +129,25 @@ const AnimatedPageBackground = ({
             bodyBackground: bodyBg,
             htmlBackground: htmlBg
           })
+
+          // Check if there are any elements on top that might be covering it
+          const rect = bgDiv.getBoundingClientRect()
+          const elementAtCenter = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2)
+          if (elementAtCenter && elementAtCenter !== bgDiv) {
+            console.warn('[AnimatedPageBackground] Element on top:', {
+              tagName: elementAtCenter.tagName,
+              className: elementAtCenter.className,
+              zIndex: window.getComputedStyle(elementAtCenter).zIndex,
+              backgroundColor: window.getComputedStyle(elementAtCenter).backgroundColor
+            })
+          }
         } else {
           console.warn('[AnimatedPageBackground] Could not find background div with data-debug-bg attribute')
+          // Try alternative selectors
+          const allDivs = document.querySelectorAll('div[style*="position: fixed"], div[style*="position:fixed"]')
+          console.log('[AnimatedPageBackground] Found fixed divs:', allDivs.length)
         }
-      }, 200)
+      }, 300)
     }
 
     if (debugEnabled) {
@@ -226,7 +244,7 @@ const AnimatedPageBackground = ({
       {/* Fixed background animation */}
       <div
         key={`bg-${colorMode}`}
-        data-debug-bg={process.env.GATSBY_DEBUG_BACKGROUND === 'true' ? 'true' : undefined}
+        data-debug-bg='true'
         sx={{
           position: 'fixed',
           top: 0,
