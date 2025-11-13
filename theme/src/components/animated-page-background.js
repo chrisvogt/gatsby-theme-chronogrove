@@ -68,8 +68,37 @@ const AnimatedPageBackground = ({
   // Debug logging for production issues (enable with GATSBY_DEBUG_BACKGROUND=true)
   // Must be before early return to maintain hook order
   useEffect(() => {
-    if (!mounted) return
-    if (typeof window !== 'undefined' && process.env.GATSBY_DEBUG_BACKGROUND === 'true') {
+    // Always log env var status to help diagnose why logs might not appear
+    const debugEnabled = typeof window !== 'undefined' && process.env.GATSBY_DEBUG_BACKGROUND === 'true'
+    if (typeof window !== 'undefined') {
+      console.log('[AnimatedPageBackground] Debug check:', {
+        envVarExists: typeof process.env.GATSBY_DEBUG_BACKGROUND !== 'undefined',
+        envVarValue: process.env.GATSBY_DEBUG_BACKGROUND,
+        debugEnabled,
+        mounted,
+        componentRendered: true
+      })
+    }
+
+    if (!mounted) {
+      if (debugEnabled) {
+        console.log('[AnimatedPageBackground] Component not mounted yet, waiting...')
+      }
+      return
+    }
+
+    // Always log minimal critical info (even without env var) to help debug production issues
+    if (typeof window !== 'undefined' && mounted) {
+      console.log('[AnimatedPageBackground] Status:', {
+        colorMode,
+        isDark,
+        bgColorRaw,
+        bgColorType: typeof bgColorRaw,
+        isCssVar: typeof bgColorRaw === 'string' && bgColorRaw.startsWith('var(')
+      })
+    }
+
+    if (debugEnabled) {
       console.group('🎨 AnimatedPageBackground Debug')
       console.log('colorMode:', colorMode)
       console.log('isDark:', isDark)
@@ -97,6 +126,8 @@ const AnimatedPageBackground = ({
           const computedBg = computedStyle.backgroundColor
           console.log('Computed backgroundColor from DOM:', computedBg)
           console.log('Computed opacity from DOM:', computedStyle.opacity)
+        } else {
+          console.warn('[AnimatedPageBackground] Could not find background div with data-debug-bg attribute')
         }
       }, 100)
 
