@@ -80,128 +80,6 @@ const AnimatedPageBackground = ({
     return () => window.removeEventListener('scroll', handleScroll)
   }, [fadeDistance])
 
-  // Debug logging for production issues (enable with GATSBY_DEBUG_BACKGROUND=true)
-  // Must be before early return to maintain hook order
-  useEffect(() => {
-    // Always log env var status to help diagnose why logs might not appear
-    const debugEnabled = typeof window !== 'undefined' && process.env.GATSBY_DEBUG_BACKGROUND === 'true'
-    if (typeof window !== 'undefined') {
-      console.log('[AnimatedPageBackground] Debug check:', {
-        envVarExists: typeof process.env.GATSBY_DEBUG_BACKGROUND !== 'undefined',
-        envVarValue: process.env.GATSBY_DEBUG_BACKGROUND,
-        debugEnabled,
-        mounted,
-        componentRendered: true
-      })
-    }
-
-    if (!mounted) {
-      if (debugEnabled) {
-        console.log('[AnimatedPageBackground] Component not mounted yet, waiting...')
-      }
-      return
-    }
-
-    // Always log minimal critical info (even without env var) to help debug production issues
-    if (typeof window !== 'undefined' && mounted) {
-      console.log('[AnimatedPageBackground] Status:', {
-        colorMode,
-        isDark,
-        bgColorRaw,
-        bgColorType: typeof bgColorRaw,
-        isCssVar: typeof bgColorRaw === 'string' && bgColorRaw.startsWith('var('),
-        darkOpacity,
-        lightOpacity,
-        currentOpacity: isDark ? darkOpacity : lightOpacity
-      })
-
-      // Always check computed DOM styles to see what's actually rendered
-      setTimeout(() => {
-        const bgDiv = document.querySelector('[data-debug-bg="true"]')
-        if (bgDiv) {
-          const computedStyle = window.getComputedStyle(bgDiv)
-          const computedBg = computedStyle.backgroundColor
-          const computedOpacity = computedStyle.opacity
-          const zIndex = computedStyle.zIndex
-          const position = computedStyle.position
-
-          console.log('[AnimatedPageBackground] DOM Computed Styles:', {
-            backgroundColor: computedBg,
-            opacity: computedOpacity,
-            zIndex,
-            position,
-            // Check if there are any CSS overrides
-            inlineStyle: bgDiv.getAttribute('style') || 'none',
-            // Also check the sx prop values
-            expectedBgColor: bgColorRaw,
-            expectedOpacity: isDark ? darkOpacity : lightOpacity
-          })
-
-          // Check parent/body background that might be showing through
-          const bodyBg = window.getComputedStyle(document.body).backgroundColor
-          const htmlBg = window.getComputedStyle(document.documentElement).backgroundColor
-          console.log('[AnimatedPageBackground] Page Backgrounds:', {
-            bodyBackground: bodyBg,
-            htmlBackground: htmlBg
-          })
-
-          // Check if there are any elements on top that might be covering it
-          const rect = bgDiv.getBoundingClientRect()
-          const elementAtCenter = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2)
-          if (elementAtCenter && elementAtCenter !== bgDiv) {
-            console.warn('[AnimatedPageBackground] Element on top:', {
-              tagName: elementAtCenter.tagName,
-              className: elementAtCenter.className,
-              zIndex: window.getComputedStyle(elementAtCenter).zIndex,
-              backgroundColor: window.getComputedStyle(elementAtCenter).backgroundColor
-            })
-          }
-        } else {
-          console.warn('[AnimatedPageBackground] Could not find background div with data-debug-bg attribute')
-          // Try alternative selectors
-          const allDivs = document.querySelectorAll('div[style*="position: fixed"], div[style*="position:fixed"]')
-          console.log('[AnimatedPageBackground] Found fixed divs:', allDivs.length)
-        }
-      }, 300)
-    }
-
-    if (debugEnabled) {
-      console.group('🎨 AnimatedPageBackground Debug')
-      console.log('colorMode:', colorMode)
-      console.log('isDark:', isDark)
-      console.log('theme.rawColors?.background:', theme?.rawColors?.background)
-      console.log('theme.colors?.background:', theme?.colors?.background)
-      console.log('theme.colors?.modes?.dark?.background:', theme?.colors?.modes?.dark?.background)
-      console.log('Final bgColorRaw:', bgColorRaw)
-      console.log('bgColorRaw type:', typeof bgColorRaw)
-      console.log('bgColorRaw starts with var?:', typeof bgColorRaw === 'string' && bgColorRaw.startsWith('var('))
-      console.log('Theme object keys:', theme ? Object.keys(theme) : 'theme is null/undefined')
-      console.log('Theme.colors keys:', theme?.colors ? Object.keys(theme.colors) : 'colors is null/undefined')
-      if (theme?.colors?.modes) {
-        console.log('Theme.colors.modes keys:', Object.keys(theme.colors.modes))
-      }
-      console.log('backgroundColor applied to div:', bgColorRaw)
-      console.log('darkOpacity:', darkOpacity)
-      console.log('lightOpacity:', lightOpacity)
-      console.log('Current opacity:', isDark ? darkOpacity : lightOpacity)
-
-      // Check computed styles from DOM
-      setTimeout(() => {
-        const bgDiv = document.querySelector('[data-debug-bg]')
-        if (bgDiv) {
-          const computedStyle = window.getComputedStyle(bgDiv)
-          const computedBg = computedStyle.backgroundColor
-          console.log('Computed backgroundColor from DOM:', computedBg)
-          console.log('Computed opacity from DOM:', computedStyle.opacity)
-        } else {
-          console.warn('[AnimatedPageBackground] Could not find background div with data-debug-bg attribute')
-        }
-      }, 100)
-
-      console.groupEnd()
-    }
-  }, [mounted, colorMode, isDark, bgColorRaw, theme, darkOpacity, lightOpacity])
-
   // Memoize the background component so it only changes when color mode changes
   const backgroundAnimation = useMemo(
     () =>
@@ -259,7 +137,6 @@ const AnimatedPageBackground = ({
       {/* Fixed background animation */}
       <div
         key={`bg-${colorMode}`}
-        data-debug-bg='true'
         sx={{
           position: 'fixed',
           top: 0,

@@ -8,7 +8,7 @@ describe('gatsby-ssr', () => {
     expect(gatsbySSR.wrapRootElement).toBeDefined()
   })
 
-  it('sets html lang attribute and injects the color mode script', () => {
+  it('sets html lang attribute and injects the color mode and HTML background scripts', () => {
     const setHtmlAttributes = jest.fn()
     const setPreBodyComponents = jest.fn()
 
@@ -17,16 +17,27 @@ describe('gatsby-ssr', () => {
     // Assert the HTML lang attribute
     expect(setHtmlAttributes).toHaveBeenCalledWith({ lang: 'en' })
 
-    // Test the color mode script
+    // Test that both scripts are injected
     expect(setPreBodyComponents).toHaveBeenCalledTimes(1)
     const scriptComponents = setPreBodyComponents.mock.calls[0][0]
-    expect(scriptComponents).toHaveLength(1)
+    expect(scriptComponents).toHaveLength(2)
 
-    const { container: scriptContainer } = render(scriptComponents[0])
-    const scriptTag = scriptContainer.querySelector('script')
-    expect(scriptTag).toBeInTheDocument()
-    expect(scriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
-    expect(scriptTag).toHaveTextContent(/prefers-color-scheme/)
-    expect(scriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
+    // Test the color mode script (first script)
+    const { container: colorModeScriptContainer } = render(scriptComponents[0])
+    const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
+    expect(colorModeScriptTag).toBeInTheDocument()
+    expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
+    expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
+    expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
+
+    // Test the HTML background script (second script)
+    const { container: htmlBgScriptContainer } = render(scriptComponents[1])
+    const htmlBgScriptTag = htmlBgScriptContainer.querySelector('script')
+    expect(htmlBgScriptTag).toBeInTheDocument()
+    expect(htmlBgScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
+    expect(htmlBgScriptTag).toHaveTextContent(/prefers-color-scheme/)
+    expect(htmlBgScriptTag).toHaveTextContent(/backgroundColor/)
+    expect(htmlBgScriptTag).toHaveTextContent(/#14141F/)
+    expect(htmlBgScriptTag).toHaveTextContent(/#fdf8f5/)
   })
 })
