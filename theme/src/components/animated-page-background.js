@@ -94,8 +94,42 @@ const AnimatedPageBackground = ({
         isDark,
         bgColorRaw,
         bgColorType: typeof bgColorRaw,
-        isCssVar: typeof bgColorRaw === 'string' && bgColorRaw.startsWith('var(')
+        isCssVar: typeof bgColorRaw === 'string' && bgColorRaw.startsWith('var('),
+        darkOpacity,
+        lightOpacity,
+        currentOpacity: isDark ? darkOpacity : lightOpacity
       })
+
+      // Always check computed DOM styles to see what's actually rendered
+      setTimeout(() => {
+        const bgDiv = document.querySelector('[data-debug-bg]')
+        if (bgDiv) {
+          const computedStyle = window.getComputedStyle(bgDiv)
+          const computedBg = computedStyle.backgroundColor
+          const computedOpacity = computedStyle.opacity
+          const zIndex = computedStyle.zIndex
+          const position = computedStyle.position
+
+          console.log('[AnimatedPageBackground] DOM Computed Styles:', {
+            backgroundColor: computedBg,
+            opacity: computedOpacity,
+            zIndex,
+            position,
+            // Check if there are any CSS overrides
+            inlineStyle: bgDiv.getAttribute('style') || 'none'
+          })
+
+          // Check parent/body background that might be showing through
+          const bodyBg = window.getComputedStyle(document.body).backgroundColor
+          const htmlBg = window.getComputedStyle(document.documentElement).backgroundColor
+          console.log('[AnimatedPageBackground] Page Backgrounds:', {
+            bodyBackground: bodyBg,
+            htmlBackground: htmlBg
+          })
+        } else {
+          console.warn('[AnimatedPageBackground] Could not find background div with data-debug-bg attribute')
+        }
+      }, 200)
     }
 
     if (debugEnabled) {
