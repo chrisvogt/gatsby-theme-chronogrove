@@ -60,6 +60,50 @@ const AnimatedPageBackground = ({
     return () => window.removeEventListener('scroll', handleScroll)
   }, [fadeDistance])
 
+  // Get background colors from theme - Theme UI provides the correct color based on active mode
+  // Use rawColors if available (raw hex values), otherwise fall back to theme.colors
+  // with mode-specific defaults if needed
+  const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
+
+  // Debug logging for production issues (enable with GATSBY_DEBUG_BACKGROUND=true)
+  // Must be before early return to maintain hook order
+  useEffect(() => {
+    if (!mounted) return
+    if (typeof window !== 'undefined' && process.env.GATSBY_DEBUG_BACKGROUND === 'true') {
+      console.group('🎨 AnimatedPageBackground Debug')
+      console.log('colorMode:', colorMode)
+      console.log('isDark:', isDark)
+      console.log('theme.rawColors?.background:', theme?.rawColors?.background)
+      console.log('theme.colors?.background:', theme?.colors?.background)
+      console.log('theme.colors?.modes?.dark?.background:', theme?.colors?.modes?.dark?.background)
+      console.log('Final bgColorRaw:', bgColorRaw)
+      console.log('bgColorRaw type:', typeof bgColorRaw)
+      console.log('bgColorRaw starts with var?:', typeof bgColorRaw === 'string' && bgColorRaw.startsWith('var('))
+      console.log('Theme object keys:', theme ? Object.keys(theme) : 'theme is null/undefined')
+      console.log('Theme.colors keys:', theme?.colors ? Object.keys(theme.colors) : 'colors is null/undefined')
+      if (theme?.colors?.modes) {
+        console.log('Theme.colors.modes keys:', Object.keys(theme.colors.modes))
+      }
+      console.log('backgroundColor applied to div:', bgColorRaw)
+      console.log('darkOpacity:', darkOpacity)
+      console.log('lightOpacity:', lightOpacity)
+      console.log('Current opacity:', isDark ? darkOpacity : lightOpacity)
+
+      // Check computed styles from DOM
+      setTimeout(() => {
+        const bgDiv = document.querySelector('[data-debug-bg]')
+        if (bgDiv) {
+          const computedStyle = window.getComputedStyle(bgDiv)
+          const computedBg = computedStyle.backgroundColor
+          console.log('Computed backgroundColor from DOM:', computedBg)
+          console.log('Computed opacity from DOM:', computedStyle.opacity)
+        }
+      }, 100)
+
+      console.groupEnd()
+    }
+  }, [mounted, colorMode, isDark, bgColorRaw, theme, darkOpacity, lightOpacity])
+
   // Memoize the background component so it only changes when color mode changes
   const backgroundAnimation = useMemo(
     () =>
@@ -87,11 +131,6 @@ const AnimatedPageBackground = ({
   if (!mounted) {
     return null
   }
-
-  // Get background colors from theme - Theme UI provides the correct color based on active mode
-  // Use rawColors if available (raw hex values), otherwise fall back to theme.colors
-  // with mode-specific defaults if needed
-  const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
 
   // Convert hex color to rgba for gradient stops
   const hexToRgba = (hex, alpha) => {
@@ -122,6 +161,7 @@ const AnimatedPageBackground = ({
       {/* Fixed background animation */}
       <div
         key={`bg-${colorMode}`}
+        data-debug-bg={process.env.GATSBY_DEBUG_BACKGROUND === 'true' ? 'true' : undefined}
         sx={{
           position: 'fixed',
           top: 0,
