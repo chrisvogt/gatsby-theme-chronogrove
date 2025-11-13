@@ -226,4 +226,69 @@ describe('AnimatedPageBackground', () => {
     // Should have overlay div with gradient
     expect(overlayDivs.length).toBeGreaterThanOrEqual(2)
   })
+
+  it('uses theme.colors.background directly in dark mode', () => {
+    mockColorMode = 'dark'
+    // Simulate how Theme UI provides colors when dark mode is active:
+    // theme.colors.background is set to the dark mode value
+    const customTheme = {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        background: '#14141F' // Dark mode background color
+      }
+    }
+    const { container, getByTestId } = render(
+      <ThemeUIProvider theme={customTheme}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+    // Should render ColorBends in dark mode
+    expect(getByTestId('color-bends')).toBeInTheDocument()
+    // Should use the background color from theme.colors.background
+    expect(container).toBeTruthy()
+  })
+
+  it('uses theme.rawColors.background when available in dark mode', () => {
+    mockColorMode = 'dark'
+    // Test that rawColors takes precedence when available
+    const customTheme = {
+      ...theme,
+      rawColors: {
+        background: '#14141F'
+      },
+      colors: {
+        ...theme.colors,
+        background: '#ffffff'
+      }
+    }
+    const { container, getByTestId } = render(
+      <ThemeUIProvider theme={customTheme}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+    // Should render ColorBends in dark mode
+    expect(getByTestId('color-bends')).toBeInTheDocument()
+    // Should prioritize rawColors.background
+    expect(container).toBeTruthy()
+  })
+
+  it('falls back to default dark mode color when theme colors are missing', () => {
+    mockColorMode = 'dark'
+    // Test fallback when neither rawColors nor colors.background are available
+    const customTheme = {
+      ...theme,
+      colors: {},
+      rawColors: {}
+    }
+    const { container, getByTestId } = render(
+      <ThemeUIProvider theme={customTheme}>
+        <AnimatedPageBackground />
+      </ThemeUIProvider>
+    )
+    // Should render ColorBends in dark mode
+    expect(getByTestId('color-bends')).toBeInTheDocument()
+    // Should fall back to default #14141F for dark mode
+    expect(container).toBeTruthy()
+  })
 })

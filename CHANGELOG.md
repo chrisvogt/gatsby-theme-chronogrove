@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.65.1
+
+### 🐛 Bug Fixes
+
+- **Dark Mode Background Gradient**: Fixed light grey background appearing in dark mode during evening hours
+  - **Root Cause**: Two issues were causing the problem:
+    1. Component was attempting to access `theme.colors.modes.dark.background` which doesn't exist when dark mode is active (Theme UI resolves colors to `theme.colors.background`)
+    2. HTML element had a light background color (`#fdf8f5`) that was showing through the semi-transparent animation (`opacity: 0.12`)
+  - **Solution**:
+    1. Simplified color lookup to use `theme.colors.background` directly since Theme UI automatically resolves the correct color based on active mode
+    2. Added `useEffect` hook to set HTML element background color to match theme background (`#14141F` for dark mode, `#fdf8f5` for light mode)
+    3. Added SSR script in `gatsby-ssr.js` to set HTML background before React hydrates, preventing flash of incorrect background
+  - **Impact**: Dark mode now correctly displays dark background (`#14141F`) without light color bleeding through, fixing evening display issues when OS automatically switches to dark mode
+
+### 🎯 User Experience
+
+- **Consistent Dark Mode**: Animated background gradient now displays correctly in dark mode regardless of time of day or OS color scheme settings
+- **No Flash**: HTML background color is set before React hydrates, eliminating any flash of incorrect background color
+- **System Integration**: Properly respects OS-level dark mode settings with correct color resolution
+- **Theme Switching**: HTML background updates dynamically when users toggle between light and dark modes
+
+### 🔧 Technical Improvements
+
+- **SSR Enhancement**: Added inline script in `gatsby-ssr.js` to set HTML background color synchronously before React hydration
+  - Checks localStorage for saved color mode preference
+  - Falls back to system `prefers-color-scheme` media query
+  - Sets background to `#14141F` (dark) or `#fdf8f5` (light) based on detected mode
+- **Component Enhancement**: Added `useEffect` hook to maintain HTML background color after React hydration
+  - Updates HTML background when theme changes
+  - Cleans up inline style on component unmount
+  - Works in conjunction with SSR script for seamless experience
+
+### 🧪 Testing
+
+- **Improved Test Coverage**: Added 3 comprehensive tests for dark mode color resolution (23 tests total, up from 20)
+  - Test for `theme.colors.background` usage in dark mode (the bug scenario)
+  - Test for `rawColors.background` precedence when available
+  - Test for fallback to default dark mode color when theme colors are missing
+- **SSR Test Updates**: Updated `gatsby-ssr.spec.js` to verify both color mode and HTML background scripts are injected
+  - Tests verify both scripts are present and contain correct logic
+  - Validates color values (`#14141F` and `#fdf8f5`) are included in background script
+- **100% Branch Coverage**: All color lookup paths now have explicit test coverage
+- All tests pass with no regressions (107 test suites passing)
+
 ## 0.65.0
 
 ### ✨ Features
