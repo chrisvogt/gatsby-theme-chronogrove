@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.65.2
+
+### 🐛 Bug Fixes
+
+- **GitHub Pinned Items**: Fixed "Last updated" date showing repository metadata changes instead of actual code activity
+  - **Root Cause**: Component was using the `updatedAt` field from GitHub's GraphQL API, which tracks when repository settings or About section were modified, not when code was pushed or PRs were merged
+  - **Solution**: Updated component to use `pushedAt` field (last push to default branch) with fallback to `updatedAt` for backwards compatibility
+  - **Impact**: "Last updated" timestamps now accurately reflect the last time code was pushed to the repository's main branch, including merged pull requests
+  - **User Experience**: Kept user-friendly "Last updated" label while fixing underlying data source
+  - **Backend Note**: Metrics API should be updated to query `pushedAt` field in addition to `updatedAt`
+
+### 🧪 Testing
+
+- Updated test mocks to include `pushedAt` field
+- Added test case to verify fallback behavior when `pushedAt` is not available
+- Updated snapshots to reflect changes
+- All tests passing (10/10 test suites, 38/38 tests)
+
 ## 0.65.1
 
 ### 🐛 Bug Fixes
