@@ -39,10 +39,7 @@ const AnimatedPageBackground = ({
   const [overlayOpacity, setOverlayOpacity] = useState(1)
   const [mounted, setMounted] = useState(false)
 
-  // Get background colors from theme - Theme UI provides the correct color based on active mode
-  // Use rawColors if available (raw hex values), otherwise fall back to theme.colors
-  // with mode-specific defaults if needed
-  // Calculate this early so we can use it in useEffect hooks
+  // Get background colors from theme for gradient overlay
   const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
 
   // Ensure we're client-side before rendering color-specific content
@@ -50,19 +47,8 @@ const AnimatedPageBackground = ({
     setMounted(true)
   }, [])
 
-  // Set HTML background color to match theme to prevent light background showing through
-  useEffect(() => {
-    if (typeof document !== 'undefined' && mounted) {
-      const htmlElement = document.documentElement
-      // Set HTML background to match theme background so it doesn't show through the semi-transparent animation
-      htmlElement.style.backgroundColor = bgColorRaw
-
-      return () => {
-        // Cleanup: remove inline style when component unmounts
-        htmlElement.style.backgroundColor = ''
-      }
-    }
-  }, [mounted, bgColorRaw])
+  // Note: HTML background color is now managed globally in RootWrapper
+  // to prevent white flash during page transitions
 
   // Handle scroll to fade out overlay as user scrolls down
   useEffect(() => {

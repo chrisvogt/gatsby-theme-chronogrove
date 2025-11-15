@@ -7,6 +7,22 @@ import RootWrapper from './root-wrapper'
 // Mock AudioPlayer component
 jest.mock('./audio-player', () => jest.fn(() => <div>MockAudioPlayer</div>))
 
+// Mock theme-ui hooks
+jest.mock('theme-ui', () => ({
+  ...jest.requireActual('theme-ui'),
+  useColorMode: jest.fn(() => ['light', jest.fn()]),
+  useThemeUI: jest.fn(() => ({
+    theme: {
+      rawColors: {
+        background: '#fdf8f5'
+      },
+      colors: {
+        background: '#fdf8f5'
+      }
+    }
+  }))
+}))
+
 const mockStore = configureStore([])
 
 describe('RootWrapper', () => {
