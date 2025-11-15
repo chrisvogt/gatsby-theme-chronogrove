@@ -15,6 +15,7 @@ describe('Widget/GitHub/PinnedItemCard', () => {
         description: 'A fake NodeJS project.',
         nameWithOwner: 'themeuser/sample-repo',
         openGraphImageUrl: './fake-image-path.png',
+        pushedAt: '2024-06-01T12:00:00Z',
         updatedAt: '1592808981'
       }
       const tree = renderer.create(<PinnedItemCard item={mockRepositoryItem} type='Repository' />).toJSON()
