@@ -13,8 +13,8 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(game)}
-      onMouseLeave={() => setIsHovered(null)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
       sx={{
         variant: 'styles.InstagramItem',
