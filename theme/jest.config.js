@@ -52,7 +52,7 @@ module.exports = {
   },
 
   // Allow specific ESM packages in node_modules to be transformed
-  transformIgnorePatterns: ['node_modules/(?!(gatsby|@mdx-js/react)/)'],
+  transformIgnorePatterns: ['node_modules/(?!(gatsby|@mdx-js/react|react-error-boundary)/)'],
 
   // Indicates whether each individual test should be reported during the run
   verbose: false
