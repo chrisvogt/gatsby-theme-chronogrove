@@ -1,5 +1,60 @@
 # Changelog
 
+## 0.65.3
+
+### 📦 Dependencies
+
+- **Workspace-wide Dependency Updates**: Updated dependencies across all workspace packages to latest versions
+  - **Root Package**:
+    - ESLint ecosystem: `@eslint/compat` (^1.3.1 → ^2.0.0), `@eslint/js` (^9.30.1 → ^9.39.1), `eslint` (^9.30.1 → ^9.39.1)
+    - ESLint plugins: `eslint-config-prettier` (^10.1.5 → ^10.1.8), `eslint-plugin-jest` (^29.0.1 → ^29.1.0), `eslint-plugin-prettier` (^5.5.1 → ^5.5.4), `eslint-plugin-react-hooks` (^5.2.0 → ^7.0.1)
+    - Development tools: `lint-staged` (^16.1.2 → ^16.2.6)
+  - **Theme Package**:
+    - Gatsby core: `gatsby` (^5.14.5 → ^5.15.0) and all related plugins updated to ^5.15.0 or ^6.15.0 series
+    - Testing libraries: `@testing-library/dom` (^10.4.0 → ^10.4.1), `@testing-library/jest-dom` (^6.6.3 → ^6.9.1), `jest` (^30.0.4 → ^30.2.0), `jest-environment-jsdom` (^30.0.4 → ^30.2.0)
+    - React testing: `react-test-renderer` (^18.3.1 → ^19.2.0)
+    - Build tools: `babel-preset-gatsby` (^3.14.0 → ^3.15.0)
+    - MDX ecosystem: `@mdx-js/loader`, `@mdx-js/mdx`, `@mdx-js/react` (^3.1.0 → ^3.1.1)
+    - UI libraries: `@fortawesome/react-fontawesome` (^0.2.2 → ^0.2.6), `lightgallery` (^2.9.0-beta.1 → ^2.9.0)
+    - State management: `@reduxjs/toolkit` (^2.8.2 → ^2.10.1)
+    - Error handling: `react-error-boundary` (^4.0.13 → ^6.0.0) - **major version bump**
+    - Utilities: `html-react-parser` (^5.2.5 → ^5.2.10), `humanize-duration` (^3.33.0 → ^3.33.1)
+  - **www.chrisvogt.me Package**:
+    - Gatsby: `gatsby` (^5.14.5 → ^5.15.0)
+    - Gatsby plugins: `gatsby-plugin-google-analytics` (^5.14.0 → ^5.15.0), `gatsby-plugin-sitemap` (^6.14.0 → ^6.15.0)
+  - **www.chronogrove.com Package**:
+    - Gatsby: `gatsby` (^5.0.0 → ^5.15.0)
+    - React: `react` (^18.0.0 → ^18.3.1), `react-dom` (^18.0.0 → ^18.3.1)
+    - Babel: `@babel/core`, `@babel/preset-env`, `@babel/preset-react` (^7.0.0 → ^7.28.5)
+
+### ⚠️ Notable Changes
+
+- **react-error-boundary**: Major version update (4.x → 6.x) - now ESM-only, requires Jest transformation
+- **react-test-renderer**: Initially attempted upgrade to v19.2.0 but **downgraded back to ^18.3.1** for React 18 compatibility
+- **lightgallery**: Graduated from beta (2.9.0-beta.1 → 2.9.0 stable release)
+- **Gatsby 5.15.0**: Latest stable release with performance improvements and bug fixes
+
+### 🔧 Configuration Changes
+
+- **Jest Configuration**: Updated `transformIgnorePatterns` to include `react-error-boundary` for ESM transformation
+  - Required because v6.x is ESM-only and must be transformed by Babel in Jest environment
+  - Pattern: `node_modules/(?!(gatsby|@mdx-js/react|react-error-boundary)/)`
+
+### 🐛 Compatibility Fixes
+
+- **react-test-renderer**: Kept at v18.3.1 instead of v19.2.0
+  - React 19's test renderer is incompatible with React 18.x projects
+  - Error: `Cannot read properties of undefined (reading 'S')`
+  - Test renderer version must exactly match React version (18.x requires 18.x renderer)
+
+### 🧪 Testing
+
+- All dependency updates tested with development server (`yarn develop:https`)
+- Successfully completed Gatsby build process with all plugins
+- **All 107 test suites passing** (987 tests) with full compatibility
+- Development server running without errors or warnings
+- All existing functionality verified to work correctly with updated dependencies
+
 ## 0.65.2
 
 ### 🐛 Bug Fixes
