@@ -3,7 +3,7 @@ import { jsx } from 'theme-ui'
 import { Grid, Box, Text } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faCalendarAlt, faMusic, faCamera, faFileAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faMusic, faCamera, faFileAlt, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 
 import useCategorizedPosts from '../../../hooks/use-categorized-posts'
 
@@ -72,7 +72,7 @@ export default () => {
 
   return (
     <Widget id='posts' styleOverrides={{ pt: 0 }}>
-      <WidgetHeader aside={callToAction} icon='faNewspaper'>
+      <WidgetHeader aside={callToAction} icon={faNewspaper}>
         Latest Posts
       </WidgetHeader>
 
