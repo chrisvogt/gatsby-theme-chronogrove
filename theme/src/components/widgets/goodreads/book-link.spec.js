@@ -10,6 +10,9 @@ jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }))
 
+// Mock LazyLoad component
+jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
+
 describe('Widget/Goodreads/BookLink', () => {
   const mockProps = {
     id: '123',
@@ -61,5 +64,16 @@ describe('Widget/Goodreads/BookLink', () => {
         scrollPosition: 200
       }
     })
+  })
+
+  it('handles invalid thumbnail URLs gracefully', () => {
+    const invalidUrlProps = {
+      ...mockProps,
+      thumbnailURL: 'not-a-valid-url'
+    }
+    render(<BookLink {...invalidUrlProps} />)
+    const image = screen.getByTestId('book-preview-thumbnail')
+    // Should use the original invalid URL as fallback
+    expect(image).toHaveAttribute('xlink:href', 'not-a-valid-url')
   })
 })

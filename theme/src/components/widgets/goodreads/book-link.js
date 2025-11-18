@@ -2,7 +2,11 @@
 import { jsx } from 'theme-ui'
 import { Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
+import { RectShape } from 'react-placeholder/lib/placeholders'
 import Book from '../../artwork/book'
+import LazyLoad from '../../lazy-load'
+
+import 'react-placeholder/lib/reactPlaceholder.css'
 
 const BookLink = ({ id, thumbnailURL, title }) => {
   // Ensure we have a valid URL and append webp format if it's a CDN URL
@@ -62,7 +66,22 @@ const BookLink = ({ id, thumbnailURL, title }) => {
           }
         }}
       >
-        <Book thumbnailURL={imageUrl} title={title} />
+        <LazyLoad
+          placeholder={
+            <div className='show-loading-animation' style={{ width: '100%' }}>
+              <RectShape
+                color='#efefef'
+                style={{
+                  width: '100%',
+                  paddingBottom: '100%', // Square aspect ratio to match SVG viewBox
+                  borderRadius: '4px'
+                }}
+              />
+            </div>
+          }
+        >
+          <Book thumbnailURL={imageUrl} title={title} />
+        </LazyLoad>
       </Card>
     </a>
   )

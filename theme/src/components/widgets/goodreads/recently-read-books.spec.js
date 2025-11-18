@@ -6,6 +6,9 @@ import { Router, LocationProvider } from '@gatsbyjs/reach-router'
 import RecentlyReadBooks, { HEADLINE, BODY_TEXT } from './recently-read-books'
 import goodreadsMock from '../../../../__mocks__/goodreads-widget.mock.json'
 
+// Mock LazyLoad component
+jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
+
 const mockBooks = goodreadsMock.payload.collections.recentlyReadBooks
 
 const renderWithRouter = ui =>

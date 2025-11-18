@@ -15,6 +15,7 @@ const renderWithThemeForTesting = component => {
 
 // Mock external dependencies
 jest.mock('../view-external', () => () => <span>ViewExternal</span>)
+jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 jest.mock('./get-time-spent', () =>
   jest.fn(milliseconds => {
     const hours = Math.floor(milliseconds / (1000 * 60 * 60))

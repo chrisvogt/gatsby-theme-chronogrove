@@ -13,6 +13,7 @@ jest.mock('../profile-metrics-badge', () => props => (
 ))
 jest.mock('../widget', () => props => <div data-testid='Widget'>{props.children}</div>)
 jest.mock('../widget-header', () => props => <div data-testid='WidgetHeader'>{props.children}</div>)
+jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 
 // Mock hooks and selectors
 jest.mock('../../../hooks/use-site-metadata', () => () => ({

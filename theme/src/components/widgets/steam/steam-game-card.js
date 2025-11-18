@@ -1,7 +1,11 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
 import { useState } from 'react'
+import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
+import LazyLoad from '../../lazy-load'
+
+import 'react-placeholder/lib/reactPlaceholder.css'
 
 const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, onClick = null }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -42,17 +46,31 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
           overflow: 'hidden'
         }}
       >
-        <img
-          src={gameImage}
-          alt={`${game.displayName} header`}
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transition: 'transform 0.3s ease',
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-          }}
-        />
+        <LazyLoad
+          placeholder={
+            <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+              <RectShape
+                color='#efefef'
+                style={{
+                  width: '100%',
+                  height: '200px'
+                }}
+              />
+            </div>
+          }
+        >
+          <img
+            src={gameImage}
+            alt={`${game.displayName} header`}
+            sx={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'transform 0.3s ease',
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+            }}
+          />
+        </LazyLoad>
 
         {/* Rank Badge */}
         {showRank && rank && (

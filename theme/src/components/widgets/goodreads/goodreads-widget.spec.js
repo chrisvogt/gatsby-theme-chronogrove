@@ -6,6 +6,7 @@ import useSiteMetadata from '../../../hooks/use-site-metadata'
 import { Router, LocationProvider } from '@gatsbyjs/reach-router'
 
 jest.mock('../../../hooks/use-site-metadata')
+jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 
 const mockSiteMetadata = {
   widgets: {
