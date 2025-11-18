@@ -2,6 +2,7 @@
 import { jsx, useThemeUI } from 'theme-ui'
 import { useState } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
+import LazyLoad from '../../lazy-load'
 
 const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, onClick = null }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -42,17 +43,47 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
           overflow: 'hidden'
         }}
       >
-        <img
-          src={gameImage}
-          alt={`${game.displayName} header`}
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transition: 'transform 0.3s ease',
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-          }}
-        />
+        <LazyLoad
+          placeholder={
+            <div
+              sx={{
+                width: '100%',
+                height: '100%',
+                backgroundColor: darkModeActive ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <div
+                sx={{
+                  width: '40px',
+                  height: '40px',
+                  border: darkModeActive ? '3px solid rgba(255, 255, 255, 0.2)' : '3px solid rgba(0, 0, 0, 0.2)',
+                  borderTop: darkModeActive ? '3px solid rgba(255, 255, 255, 0.6)' : '3px solid rgba(0, 0, 0, 0.6)',
+                  borderRadius: '50%',
+                  '@keyframes spin': {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' }
+                  },
+                  animation: 'spin 1s linear infinite'
+                }}
+              />
+            </div>
+          }
+        >
+          <img
+            src={gameImage}
+            alt={`${game.displayName} header`}
+            sx={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'transform 0.3s ease',
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+            }}
+          />
+        </LazyLoad>
 
         {/* Rank Badge */}
         {showRank && rank && (
