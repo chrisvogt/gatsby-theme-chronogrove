@@ -1,8 +1,11 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
 import { useState } from 'react'
+import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
 import LazyLoad from '../../lazy-load'
+
+import 'react-placeholder/lib/reactPlaceholder.css'
 
 const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, onClick = null }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -45,28 +48,12 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
       >
         <LazyLoad
           placeholder={
-            <div
-              sx={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: darkModeActive ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <div
-                sx={{
-                  width: '40px',
-                  height: '40px',
-                  border: darkModeActive ? '3px solid rgba(255, 255, 255, 0.2)' : '3px solid rgba(0, 0, 0, 0.2)',
-                  borderTop: darkModeActive ? '3px solid rgba(255, 255, 255, 0.6)' : '3px solid rgba(0, 0, 0, 0.6)',
-                  borderRadius: '50%',
-                  '@keyframes spin': {
-                    '0%': { transform: 'rotate(0deg)' },
-                    '100%': { transform: 'rotate(360deg)' }
-                  },
-                  animation: 'spin 1s linear infinite'
+            <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+              <RectShape
+                color='#efefef'
+                style={{
+                  width: '100%',
+                  height: '200px'
                 }}
               />
             </div>

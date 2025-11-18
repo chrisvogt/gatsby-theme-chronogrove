@@ -10,6 +10,9 @@ jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }))
 
+// Mock LazyLoad component
+jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
+
 describe('Widget/Goodreads/BookLink', () => {
   const mockProps = {
     id: '123',
