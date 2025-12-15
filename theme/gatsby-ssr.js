@@ -12,8 +12,14 @@ export const onRenderBody = ({ setHtmlAttributes, setPreBodyComponents }) => {
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
         }
+        // Set both attributes to ensure compatibility
         document.documentElement.setAttribute('data-theme-ui-color-mode', mode);
-      } catch (e) {}
+        document.documentElement.setAttribute('data-theme', mode);
+        // Also set the class for additional compatibility
+        document.documentElement.classList.add('theme-ui-' + mode);
+      } catch (e) {
+        console.warn('Failed to set color mode:', e);
+      }
     })();
   `
 
