@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.65.4
+
+### 📦 Dependencies
+
+- Minor dependency updates across the project
+
 ## 0.65.3
 
 ### 📦 Dependencies
