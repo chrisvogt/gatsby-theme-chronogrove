@@ -3366,10 +3366,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.39.1, @eslint/js@npm:^9.39.1":
-  version: 9.39.1
-  resolution: "@eslint/js@npm:9.39.1"
-  checksum: 10c0/6f7f26f8cdb7ad6327bbf9741973b6278eb946f18f70e35406e88194b0d5c522d0547a34a02f2a208eec95c5d1388cdf7ccb20039efd2e4cb6655615247a50f1
+"@eslint/eslintrc@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "@eslint/eslintrc@npm:3.3.3"
+  dependencies:
+    ajv: "npm:^6.12.4"
+    debug: "npm:^4.3.2"
+    espree: "npm:^10.0.1"
+    globals: "npm:^14.0.0"
+    ignore: "npm:^5.2.0"
+    import-fresh: "npm:^3.2.1"
+    js-yaml: "npm:^4.1.1"
+    minimatch: "npm:^3.1.2"
+    strip-json-comments: "npm:^3.1.1"
+  checksum: 10c0/532c7acc7ddd042724c28b1f020bd7bf148fcd4653bb44c8314168b5f772508c842ce4ee070299cac51c5c5757d2124bdcfcef5551c8c58ff9986e3e17f2260d
+  languageName: node
+  linkType: hard
+
+"@eslint/js@npm:9.39.2, @eslint/js@npm:^9.39.2":
+  version: 9.39.2
+  resolution: "@eslint/js@npm:9.39.2"
+  checksum: 10c0/00f51c52b04ac79faebfaa65a9652b2093b9c924e945479f1f3945473f78aee83cbc76c8d70bbffbf06f7024626575b16d97b66eab16182e1d0d39daff2f26f5
   languageName: node
   linkType: hard
 
@@ -3451,13 +3468,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/react-fontawesome@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@fortawesome/react-fontawesome@npm:3.1.0"
+"@fortawesome/react-fontawesome@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@fortawesome/react-fontawesome@npm:3.1.1"
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": ~6 || ~7
     react: ^18.0.0 || ^19.0.0
-  checksum: 10c0/ee1e005ee4c1dcff95627bb19d4548d16da679349f77cd3f8adf302fcd4944661f3e1d0d917bcccdd70b74d2e6e0f4b85849f72b156a8ffd7c5d7612157f72e8
+  checksum: 10c0/cda7a307bad6a01eec2b12896ea94b7757dc516de2f781ac482804457c240bdc507ea6ec14270f5252934c74f8939fdd127e173c1bc621b9dc4351a4e6fff9c0
   languageName: node
   linkType: hard
 
@@ -5199,13 +5216,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^2.10.1":
-  version: 2.10.1
-  resolution: "@reduxjs/toolkit@npm:2.10.1"
+"@reduxjs/toolkit@npm:^2.11.2":
+  version: 2.11.2
+  resolution: "@reduxjs/toolkit@npm:2.11.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     "@standard-schema/utils": "npm:^0.3.0"
-    immer: "npm:^10.2.0"
+    immer: "npm:^11.0.0"
     redux: "npm:^5.0.1"
     redux-thunk: "npm:^3.1.0"
     reselect: "npm:^5.1.0"
@@ -5217,7 +5234,7 @@ __metadata:
       optional: true
     react-redux:
       optional: true
-  checksum: 10c0/0296a73c8dfbe8b2a14095cfaaf67a8e4c5537b164c021bdb81c43922d10042a2fe733fbdfc956f9233884a6db5491fbc6d950a8883e1cd6137251db392f6a9e
+  checksum: 10c0/4d388b96dc4b12a577af23607c252b3647c1b3b5136dbb0212e1dbbef9bb309e93d3ba6a95795ee165e87e4286453025cd67a98b5b3bb6d244b93ea487dd1ac0
   languageName: node
   linkType: hard
 
@@ -5560,9 +5577,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:^16.3.0":
-  version: 16.3.0
-  resolution: "@testing-library/react@npm:16.3.0"
+"@testing-library/react@npm:^16.3.1":
+  version: 16.3.1
+  resolution: "@testing-library/react@npm:16.3.1"
   dependencies:
     "@babel/runtime": "npm:^7.12.5"
   peerDependencies:
@@ -5576,7 +5593,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/3a2cb1f87c9a67e1ebbbcfd99b94b01e496fc35147be8bc5d8bf07a699c7d523a09d57ef2f7b1d91afccd1a28e21eda3b00d80187fbb51b1de01e422592d845e
+  checksum: 10c0/5a26ceaa4ab1d065be722d93e3b019883864ae038f9fd1c974f5b8a173f5f35a25768ecb2baa02a783299f009cbcd09fa7ee0b8b3d360d1c0f81535436358b28
   languageName: node
   linkType: hard
 
@@ -5590,298 +5607,298 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@theme-ui/color-modes@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/color-modes@npm:0.17.2"
+"@theme-ui/color-modes@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/color-modes@npm:0.17.4"
   dependencies:
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
     deepmerge: "npm:^4.2.2"
   peerDependencies:
     "@emotion/react": ^11.13.3
     react: ">=18"
-  checksum: 10c0/66a193c709d6bf1c9f035694fced5f3f649e0850f1996d406b39378b557f94878be6ef89ef4cbd17d8d1f5f8d0e1c6f8dacda9ff17b31bd9e9a6c4cbfa99f420
+  checksum: 10c0/3e07058c49ec1f60cf7147c01140d079db4dd36a60d056d571bd2883095d13abffd7939616f757948d9d5d212f3adf9be9fdfda6b0c047697ad8ae66031c6fc2
   languageName: node
   linkType: hard
 
-"@theme-ui/color@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/color@npm:0.17.2"
+"@theme-ui/color@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/color@npm:0.17.4"
   dependencies:
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/css": "npm:^0.17.4"
     polished: "npm:^4.0.5"
-  checksum: 10c0/54a7136a18ca202519692862f647726563117adaad20c7acd46a026d2068d122f16d317ce5b5130587df33e4e9a2ea262299e2e737abfbd44bc1b98b7dbd50eb
+  checksum: 10c0/1b03a92ee29444b37d004654319e19d8a7ba5b2c34fffa55c0e0f5b8a74a16e14e8771471d2976d09ca7582b60c7db3ff05f1c9307a08c812c2b8421d180aa94
   languageName: node
   linkType: hard
 
-"@theme-ui/components@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/components@npm:0.17.2"
+"@theme-ui/components@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/components@npm:0.17.4"
   dependencies:
     "@styled-system/color": "npm:^5.1.2"
     "@styled-system/should-forward-prop": "npm:^5.1.2"
     "@styled-system/space": "npm:^5.1.2"
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
     "@types/styled-system": "npm:^5.1.13"
   peerDependencies:
     "@emotion/react": ^11.13.3
-    "@theme-ui/theme-provider": ^0.17.2
+    "@theme-ui/theme-provider": ^0.17.4
     react: ">=18"
-  checksum: 10c0/6b2f77720ddbb07ff178ede962d53f95e181da578d06cc340f0bf6480b2662acb1045e26bbffcab87bbecd40098a5253ea15ca4365f7f5a55c46deb4da040cfd
+  checksum: 10c0/3d54c53307072b662f7606f06c860825a1737974fc91ab5e213a11bbb770fde12314c616e6d9b8c19f0d9558b955c8c504066612e4a21bc787e3ccf4e67c231d
   languageName: node
   linkType: hard
 
-"@theme-ui/core@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/core@npm:0.17.2"
+"@theme-ui/core@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/core@npm:0.17.4"
   dependencies:
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/css": "npm:^0.17.4"
     deepmerge: "npm:^4.2.2"
   peerDependencies:
     "@emotion/react": ^11.13.3
     react: ">=18"
-  checksum: 10c0/bfe6deb8d0684af0fd0f61be07c57b04a850305ee1a24de2691ac9505c5a3fa047f2a2b59e532b19ee6bc3dcb93a8351d3fff6a89d97296e4e81f8679923f900
+  checksum: 10c0/41f3ac7e433b74f9a6e1bbe0f4ca89ed73ef0a2e19c743378034b92046bea909fe884e5ff779e8b69c08082e3a7feaa1bcb815c714198c77e6a0af5062f5b23b
   languageName: node
   linkType: hard
 
-"@theme-ui/css@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/css@npm:0.17.2"
+"@theme-ui/css@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/css@npm:0.17.4"
   dependencies:
     csstype: "npm:^3.0.10"
   peerDependencies:
     "@emotion/react": ^11.11.1
-  checksum: 10c0/3acec4560def432822d67dc6be6f6fc81203096e6921832cfa72926bbcc7264828f6edf49357a72c71b315e7add1cf1f3d613776c375fcfa84fc883fa250ed18
+  checksum: 10c0/43b3cf773ebb9bd99ee0fe7688df01c1061fb5263d200fd804ba82326f09c08219e9fd1fb3eeb511112c0f4038b963a5a638697f21dc5c5fc2ca229510d5415d
   languageName: node
   linkType: hard
 
-"@theme-ui/global@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/global@npm:0.17.2"
+"@theme-ui/global@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/global@npm:0.17.4"
   dependencies:
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
   peerDependencies:
     "@emotion/react": ^11.13.3
     react: ">=18"
-  checksum: 10c0/c2d5448a6ecea8ede43914d7e8d1c5b5797101ff65478cf95219fbf4102957626c3133deb5ace91ddd513ec4f71307b210a54a66e61e2852b124f513eca13942
+  checksum: 10c0/0c07d5c4b29811bad078e76e13e7270aef90739fd8350a4b5d0e8896cf6a3a28ced82e0fadd60f2f2fc9c2c3a252ece2e8ac95d3037f166ea5ae89a16992b50b
   languageName: node
   linkType: hard
 
-"@theme-ui/mdx@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/mdx@npm:0.17.2"
+"@theme-ui/mdx@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/mdx@npm:0.17.4"
   dependencies:
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
   peerDependencies:
     "@emotion/react": ^11.13.3
     "@types/mdx": ^2.0.2
     react: ">=18"
-  checksum: 10c0/ea7c8e96509587d180b7d193a59422df7e7faf92a055bcc2a9c4f65c99f7b137c0dbf82ea600aacc1149f379117eb5c7c9ce585d7258dea9aaae0a27389f68a5
+  checksum: 10c0/01c91364ee670c1d5b252ee1e91940e0d31fe0ccd65472a2a89c9ae24954705a5166bb14ce2ac710debcb12fce6639462c4515a810cec27358a0d7178d31d86d
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-base@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-base@npm:0.17.2"
+"@theme-ui/preset-base@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-base@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/39891368dafee1bb922ee03d4291f91132a8c1efabdb07c5d647b1162b041834228bda4ef001f3f96d8d6ea805adabd197c4fcc984188aa450fa6232e3e1b99d
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/73346b9db31c3f89f6de4f2589c1f2c3bf28ace4572102902b815b71f5f0bd39cd1e3eea60a8b2ecbed6a017f393daecbe1e0d2ea40d43a50063efb8e9e3f9b6
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-bootstrap@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-bootstrap@npm:0.17.2"
+"@theme-ui/preset-bootstrap@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-bootstrap@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/cc597a8b5897cbf1bb5857a1d852cb69fb8bd43f2c692bf71585e01ea3e54dd845575c04e32bce8963ea337b7148b8b82cec02192e12074b786e441e3a7a6464
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/9d14bb6aa5c28811190b7ff0fc70ae5023962344e0c834dfae2e063ee80d3c77fb90945543f731e4388f82a5ec6040b220ca69c5e8df3ba622c621376a19e0db
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-bulma@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-bulma@npm:0.17.2"
+"@theme-ui/preset-bulma@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-bulma@npm:0.17.4"
   dependencies:
-    "@theme-ui/preset-base": "npm:^0.17.2"
+    "@theme-ui/preset-base": "npm:^0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/d009d8339c51ee008805c75e7121f3a0ff7127ef4f4edb64303e1e6f97cc3d7913bd3da4860ec35816e9f8c2f071f78cc734c7d560f06a165d8d05e801d57dd6
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/ed71bbfda464ca3ad9c96dc36e20156d15ab6b552fff2c75f59b9bacdf8615dfd48707c0a76717efeb742632de64adb45d5abd74304639d587ff26ca62941ebe
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-dark@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-dark@npm:0.17.2"
+"@theme-ui/preset-dark@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-dark@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/9a6907d19432ce079c82c714ad44668962341a5a6f366e912dcb48d2d7cf12246710783aea9f3fdfe5384ebf20d40e221b3d4f6fd2c67ce6dc7a9cea4d04a77c
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/12b88200727b802c51205d5e88fc621eb24268662dfbaf7156e601ac36bff6747ffc9d1f6cc3997cb93daee0b3a1d9777539cc39bba03546999e1e2efcdb104d
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-deep@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-deep@npm:0.17.2"
+"@theme-ui/preset-deep@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-deep@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/6fda4d1573dcf2168a140a9c7930315231a0b9732875d454ee9148d49a548123b5c16ecdbf85a9016658c8a01041cd7a305350d8b54f23d96f2062cef5182c9f
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/dc651fefc687189f1188eb6940fa39819a6343f35f05f03915bc0cb1efcc36a23a8212b17248726f14285e9031634b365cf9fabe192496376f52c10ec26564c4
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-funk@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-funk@npm:0.17.2"
+"@theme-ui/preset-funk@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-funk@npm:0.17.4"
   dependencies:
-    "@theme-ui/preset-base": "npm:^0.17.2"
+    "@theme-ui/preset-base": "npm:^0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/c9b93f2b79e033e32251b5e73c83a8bf23e72317db172d0bf868c633410885a9b43724009a5293ef8cee05de6556652306cb3150b61c0f57cca241cac6855949
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/3aa8a28aa494dbc7d3f9d15324183bbec18480b017bceecf436b31231e9f9a2bac96aa916af2b95c83077b751b22aed158868e7eb6740144ba9132b83327c783
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-future@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-future@npm:0.17.2"
+"@theme-ui/preset-future@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-future@npm:0.17.4"
   dependencies:
-    "@theme-ui/preset-base": "npm:^0.17.2"
+    "@theme-ui/preset-base": "npm:^0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/0cb855538bab4b9838a412137b3db43ee665063123bc8ad4940c1e3c42e5b037addb6966490ee16fc30d7e3ef2525a0b60c926f9f73ef2db269c30b0e3bcec81
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/10206610a1a70021c128cd29367458a726b9b69528f065b07575fcb6da4312edbf5b2c8920cdd283bfb68a4ba12746245356da857ae0ae17f3b99cebe2a3d27d
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-polaris@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-polaris@npm:0.17.2"
+"@theme-ui/preset-polaris@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-polaris@npm:0.17.4"
   dependencies:
-    "@theme-ui/preset-base": "npm:^0.17.2"
+    "@theme-ui/preset-base": "npm:^0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/54f94bba42dad9feac4b6280f352f06069dd18e17831113c98e08b96923e45c56f6ca021efb90d71fd39496e807b40f7331b7cf16c1a4bce94f292300bd60af9
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/d6b460614af6bebea584249ed6f5c0dc6a8c709d9cf2c42730e4a6b89a20a40b86291f3fb1c03c95112d00cbeae11c894496b6886602916fde0bb029f8d31bfc
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-roboto@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-roboto@npm:0.17.2"
+"@theme-ui/preset-roboto@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-roboto@npm:0.17.4"
   dependencies:
-    "@theme-ui/preset-base": "npm:^0.17.2"
+    "@theme-ui/preset-base": "npm:^0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/6a5b29fa52680a9a3e27060b467148425ee434ce2f5ee47943be90647033ed283bbecf5d13d89f7de1f6c77b06d0d0e96378a7e9edd0930e80d57643e7ce5ada
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/ff234a555d48cd6d0c9b7a6f8268dad9887e95fe2cf296b2ec7c0ce24904375a34a8d3a720c0b44c48dc1e3a06bc230cd09196440a0dadf22f14e1543feeccf2
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-sketchy@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-sketchy@npm:0.17.2"
+"@theme-ui/preset-sketchy@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-sketchy@npm:0.17.4"
   dependencies:
-    "@theme-ui/css": "npm:^0.17.2"
-  checksum: 10c0/af0f4bd6a43a80728502f4b73a291952b570acaa1951ab17becfbc3e066a4f6b3757030dfcd6a1467a70512eb3ae31072948a8e5ef3acfff7902f118038b5233
+    "@theme-ui/css": "npm:^0.17.4"
+  checksum: 10c0/1b03ce3bb472ac717d986fc3e466761748c302d2badef3037cef6b985d9227b75706a18598d89097bad8716d212706bacc18a38b79793e336c40deac2aeaff8d
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-swiss@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-swiss@npm:0.17.2"
+"@theme-ui/preset-swiss@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-swiss@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/59d000160a71e7f13f4d130ba2e3ab5a33c16032d6363f8478106810800e4d95e825799841671b006ea74effc87c3dc0ac27eba013007717d36eea98bfde2367
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/ad881d3b99f65a1c742790a8aa9217d5378698dab05917cd942defa02fda571527c8526ee84937f57190b03318ab5da2d2ad88ccf5388239253019f856661104
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-system@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-system@npm:0.17.2"
+"@theme-ui/preset-system@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-system@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/002c6f3ae61145e99c5b680485c949f6c66bdec7617bc705869df78b4fcfeed77799ffa1d6f599babad155367ebbe0c57634c95053b6051aae19dd61ae74db23
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/48e79632c9b18bcb08f681442b1bf13d4b91e1646d3909c043343af1fbd09b99758bba958a0f980bbeacf3891dd6ac0e9998879c9f63b2da1b3247e16e280fcd
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-tailwind@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-tailwind@npm:0.17.2"
+"@theme-ui/preset-tailwind@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-tailwind@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/6d32520ccdf962f6f53dbdfb5ff3eec43a905b28f5d88ea7a3d44577c2fc25a478c4a3b12e95603d9c83f368efe85c9438922b8dd2d1797b04e0fde5d9fcaf28
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/828724e4d5663455c1c654a548e08fa7de172627c1ac130d7fbf3173f341e81814d124f7c69a67ea62325b4bb1a2dd5bc9a28c3ea540c440dd0c2a8469b04b9b
   languageName: node
   linkType: hard
 
-"@theme-ui/preset-tosh@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/preset-tosh@npm:0.17.2"
+"@theme-ui/preset-tosh@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/preset-tosh@npm:0.17.4"
   peerDependencies:
-    "@theme-ui/css": ^0.17.2
-  checksum: 10c0/009aa9803a837db5f6fb7d5ea92ece1a56d877cb9214b6c4e60da33a97ab618f5840fcffe3241498e5010c3a656781619ef43c875a995b91da6da452212072ae
+    "@theme-ui/css": ^0.17.4
+  checksum: 10c0/f61f7168b8103736b63940caeb86e0a665aa8786b2a64fc527d3555252ba4a0c3b17d78d426243ab52c19d51194fbe900dec1e4024008efae2ddabc79b355115
   languageName: node
   linkType: hard
 
-"@theme-ui/presets@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/presets@npm:0.17.2"
+"@theme-ui/presets@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/presets@npm:0.17.4"
   dependencies:
-    "@theme-ui/preset-base": "npm:^0.17.2"
-    "@theme-ui/preset-bootstrap": "npm:^0.17.2"
-    "@theme-ui/preset-bulma": "npm:^0.17.2"
-    "@theme-ui/preset-dark": "npm:^0.17.2"
-    "@theme-ui/preset-deep": "npm:^0.17.2"
-    "@theme-ui/preset-funk": "npm:^0.17.2"
-    "@theme-ui/preset-future": "npm:^0.17.2"
-    "@theme-ui/preset-polaris": "npm:^0.17.2"
-    "@theme-ui/preset-roboto": "npm:^0.17.2"
-    "@theme-ui/preset-sketchy": "npm:^0.17.2"
-    "@theme-ui/preset-swiss": "npm:^0.17.2"
-    "@theme-ui/preset-system": "npm:^0.17.2"
-    "@theme-ui/preset-tailwind": "npm:^0.17.2"
-    "@theme-ui/preset-tosh": "npm:^0.17.2"
-  checksum: 10c0/c6771298693fca4cd2ebd97e97c307fc204d3cc986f9faf68b2075fafe648ae0768a3e2d64b05c9ab05700d0cc0a8c2125b4f916a72d73f186e09a9387b3c337
+    "@theme-ui/preset-base": "npm:^0.17.4"
+    "@theme-ui/preset-bootstrap": "npm:^0.17.4"
+    "@theme-ui/preset-bulma": "npm:^0.17.4"
+    "@theme-ui/preset-dark": "npm:^0.17.4"
+    "@theme-ui/preset-deep": "npm:^0.17.4"
+    "@theme-ui/preset-funk": "npm:^0.17.4"
+    "@theme-ui/preset-future": "npm:^0.17.4"
+    "@theme-ui/preset-polaris": "npm:^0.17.4"
+    "@theme-ui/preset-roboto": "npm:^0.17.4"
+    "@theme-ui/preset-sketchy": "npm:^0.17.4"
+    "@theme-ui/preset-swiss": "npm:^0.17.4"
+    "@theme-ui/preset-system": "npm:^0.17.4"
+    "@theme-ui/preset-tailwind": "npm:^0.17.4"
+    "@theme-ui/preset-tosh": "npm:^0.17.4"
+  checksum: 10c0/1c85b8861a5573641a5d604018d85b074a91a31bd0fba2f9bcd1c2841a7598973e7c6d35d214ad1b21ce8017bba73add0b269018d9402541be8538be86bdae88
   languageName: node
   linkType: hard
 
-"@theme-ui/prism@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/prism@npm:0.17.2"
+"@theme-ui/prism@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/prism@npm:0.17.4"
   dependencies:
-    "@theme-ui/core": "npm:^0.17.2"
+    "@theme-ui/core": "npm:^0.17.4"
     prism-react-renderer: "npm:^1.1.1"
   peerDependencies:
-    "@theme-ui/mdx": ^0.17.2
-    theme-ui: ^0.17.2
-  checksum: 10c0/fd8ae2399dfd56a949e1eaa1cf2fe84b836d1ba085713ea0d8a92224330bce02b615608aeb1ca24db4dcbfa9f2ea53c5ab485eb20c80f87070be3c3f88e0e105
+    "@theme-ui/mdx": ^0.17.4
+    theme-ui: ^0.17.4
+  checksum: 10c0/fd0d72e6265d68210e23479cfd9ddf31ae09c478ebbe18827549282e261e543b14fc17e9e9af1913a76d655b9af8e88b25a49c12bd0b2d9f6db2e17599287e70
   languageName: node
   linkType: hard
 
-"@theme-ui/style-guide@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/style-guide@npm:0.17.2"
+"@theme-ui/style-guide@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/style-guide@npm:0.17.4"
   dependencies:
-    "@theme-ui/color": "npm:^0.17.2"
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/presets": "npm:^0.17.2"
+    "@theme-ui/color": "npm:^0.17.4"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/presets": "npm:^0.17.4"
     "@types/color": "npm:^3.0.3"
     color: "npm:^3.1.2"
     lodash.get: "npm:^4.4.2"
   peerDependencies:
     react: ">=18"
-    theme-ui: ^0.17.2
-  checksum: 10c0/ac5ca11268ca3ad5899277cae36c7f21df4490c925e7bfc05980419293b9e81efef6ac89900db9b8bfaf5e79710fa25e00d90e5fd9d989e57cd7bb60a0c08ead
+    theme-ui: ^0.17.4
+  checksum: 10c0/c074dd33b0b2f5c61775425f87ec6868d2d17b5c6648214ec8d9ac1dde194638d9098b5dd2073b72220da1d236eb8c3fd332130ef7568f6a9222918796276ba5
   languageName: node
   linkType: hard
 
-"@theme-ui/theme-provider@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "@theme-ui/theme-provider@npm:0.17.2"
+"@theme-ui/theme-provider@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "@theme-ui/theme-provider@npm:0.17.4"
   dependencies:
-    "@theme-ui/color-modes": "npm:^0.17.2"
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
+    "@theme-ui/color-modes": "npm:^0.17.4"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
   peerDependencies:
     "@emotion/react": ^11.13.3
     react: ">=18"
-  checksum: 10c0/307011464c970f9d7b1ef03fc4134da01296604ae259cf05ce6186bd8a28605a8584c207cc2c0ba48daed6c440eb7632cc92095066d43af8ce3f122ec2f7236e
+  checksum: 10c0/7d833c8272d630a5096ce093599d41fda6045eb7c49509db117343abed737121c2998936e920974393e3a6d5b2f409ab2815135e8dfc44a2e7815b3ce194eb77
   languageName: node
   linkType: hard
 
@@ -8804,7 +8821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^14.0.1":
+"commander@npm:^14.0.2":
   version: 14.0.2
   resolution: "commander@npm:14.0.2"
   checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
@@ -10792,9 +10809,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jest@npm:^29.1.0":
-  version: 29.1.0
-  resolution: "eslint-plugin-jest@npm:29.1.0"
+"eslint-plugin-jest@npm:^29.12.1":
+  version: 29.12.1
+  resolution: "eslint-plugin-jest@npm:29.12.1"
   dependencies:
     "@typescript-eslint/utils": "npm:^8.0.0"
   peerDependencies:
@@ -10806,7 +10823,7 @@ __metadata:
       optional: true
     jest:
       optional: true
-  checksum: 10c0/3fe5d4c35279025eb96bfb0adfad1b0eca03f5987db96adbe656279b5b4ed3eaa5240dd1876e54e7ea98b28acbd451256f8c7613cf2d2d6d3387f6360fcb3704
+  checksum: 10c0/54c149328c97964a34958b7e32c56f24e9c9fb8eeb6892c357ae527d543cc766d960ef024baaa57be603befda8cb1e25f5cb9701993f554655143e199264ba7a
   languageName: node
   linkType: hard
 
@@ -11076,9 +11093,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.39.1":
-  version: 9.39.1
-  resolution: "eslint@npm:9.39.1"
+"eslint@npm:^9.39.2":
+  version: 9.39.2
+  resolution: "eslint@npm:9.39.2"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.8.0"
     "@eslint-community/regexpp": "npm:^4.12.1"
@@ -11086,7 +11103,7 @@ __metadata:
     "@eslint/config-helpers": "npm:^0.4.2"
     "@eslint/core": "npm:^0.17.0"
     "@eslint/eslintrc": "npm:^3.3.1"
-    "@eslint/js": "npm:9.39.1"
+    "@eslint/js": "npm:9.39.2"
     "@eslint/plugin-kit": "npm:^0.4.1"
     "@humanfs/node": "npm:^0.16.6"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
@@ -11121,7 +11138,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 10c0/59b2480639404ba24578ca480f973683b87b7aac8aa7e349240474a39067804fd13cd8b9cb22fee074170b8c7c563b57bab703ec0f0d3f81ea017e5d2cad299d
+  checksum: 10c0/bb88ca8fd16bb7e1ac3e13804c54d41c583214460c0faa7b3e7c574e69c5600c7122295500fb4b0c06067831111db740931e98da1340329527658e1cf80073d3
   languageName: node
   linkType: hard
 
@@ -12390,18 +12407,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-theme-ui@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "gatsby-plugin-theme-ui@npm:0.17.2"
+"gatsby-plugin-theme-ui@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "gatsby-plugin-theme-ui@npm:0.17.4"
   peerDependencies:
     "@emotion/react": ^11.13.3
     "@mdx-js/react": ^1 || ^2
-    "@theme-ui/css": ^0.17.2
-    "@theme-ui/mdx": ^0.17.2
+    "@theme-ui/css": ^0.17.4
+    "@theme-ui/mdx": ^0.17.4
     gatsby: ^4 || ^5
     react: ">=18"
-    theme-ui: ^0.17.2
-  checksum: 10c0/16f0cb1fb6a55d5b54215ed60d4128b0902ca1552942fab3f5a36edddb067b1cf111b99f8dce490e106e75a20a5a8cb06a6f7edd63b99a823d3c822bfce24023
+    theme-ui: ^0.17.4
+  checksum: 10c0/3d35ca859a3ed68bbb74e4a13fe12ea5efaa8765f92750be32c63666fc2a815a394a63b72c6cdf1261ee0be6e4b5d645faa11220a537d30b2e8863cfbea7dbd1
   languageName: node
   linkType: hard
 
@@ -12600,24 +12617,24 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": "npm:^7.1.0"
     "@fortawesome/free-regular-svg-icons": "npm:^7.1.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.1.0"
-    "@fortawesome/react-fontawesome": "npm:^3.1.0"
+    "@fortawesome/react-fontawesome": "npm:^3.1.1"
     "@loadable/component": "npm:^5.16.7"
     "@mdx-js/loader": "npm:^3.1.1"
     "@mdx-js/mdx": "npm:^3.1.1"
     "@mdx-js/react": "npm:^3.1.1"
     "@reach/skip-nav": "npm:^0.18.0"
-    "@reduxjs/toolkit": "npm:^2.10.1"
+    "@reduxjs/toolkit": "npm:^2.11.2"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
-    "@testing-library/react": "npm:^16.3.0"
+    "@testing-library/react": "npm:^16.3.1"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@theme-toggles/react": "npm:^4.1.0"
-    "@theme-ui/color": "npm:^0.17.2"
-    "@theme-ui/components": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
-    "@theme-ui/mdx": "npm:^0.17.2"
-    "@theme-ui/presets": "npm:^0.17.2"
-    "@theme-ui/prism": "npm:^0.17.2"
+    "@theme-ui/color": "npm:^0.17.4"
+    "@theme-ui/components": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
+    "@theme-ui/mdx": "npm:^0.17.4"
+    "@theme-ui/presets": "npm:^0.17.4"
+    "@theme-ui/prism": "npm:^0.17.4"
     babel-preset-gatsby: "npm:^3.15.0"
     boxen: "npm:^8.0.1"
     classnames: "npm:^2.5.1"
@@ -12627,19 +12644,19 @@ __metadata:
     gatsby-plugin-manifest: "npm:^5.15.0"
     gatsby-plugin-mdx: "npm:^5.15.0"
     gatsby-plugin-sharp: "npm:^5.15.0"
-    gatsby-plugin-theme-ui: "npm:^0.17.2"
+    gatsby-plugin-theme-ui: "npm:^0.17.4"
     gatsby-remark-autolink-headers: "npm:^6.15.0"
     gatsby-remark-copy-linked-files: "npm:^6.15.0"
     gatsby-remark-embed-video: "npm:^3.2.1"
     gatsby-remark-images: "npm:^7.15.0"
     gatsby-remark-prismjs: "npm:^7.15.0"
     gatsby-source-filesystem: "npm:^5.15.0"
-    gatsby-theme-style-guide: "npm:^0.17.2"
+    gatsby-theme-style-guide: "npm:^0.17.4"
     gatsby-transformer-json: "npm:^5.15.0"
     gatsby-transformer-remark: "npm:^6.15.0"
     gatsby-transformer-sharp: "npm:^5.15.0"
-    html-react-parser: "npm:^5.2.10"
-    humanize-duration: "npm:^3.33.1"
+    html-react-parser: "npm:^5.2.11"
+    humanize-duration: "npm:^3.33.2"
     husky: "npm:^9.1.7"
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:^30.2.0"
@@ -12650,11 +12667,11 @@ __metadata:
     lodash: "npm:^4.17.21"
     lottie-react-web: "npm:^2.2.2"
     ogl: "npm:^1.0.11"
-    prettier: "npm:3.6.2"
+    prettier: "npm:3.7.4"
     prismjs: "npm:^1.30.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-error-boundary: "npm:^6.0.0"
+    react-error-boundary: "npm:^6.0.1"
     react-photo-gallery: "npm:^8.0.0"
     react-placeholder: "npm:^4.1.0"
     react-redux: "npm:^9.2.0"
@@ -12665,8 +12682,8 @@ __metadata:
     reselect: "npm:^5.1.1"
     s-ago: "npm:^2.2.0"
     svg-loaders-react: "npm:^3.1.1"
-    theme-ui: "npm:^0.17.2"
-    three: "npm:^0.181.1"
+    theme-ui: "npm:^0.17.4"
+    three: "npm:^0.182.0"
     vanilla-tilt: "npm:^1.8.1"
   peerDependencies:
     gatsby: 5.x
@@ -12675,18 +12692,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"gatsby-theme-style-guide@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "gatsby-theme-style-guide@npm:0.17.2"
+"gatsby-theme-style-guide@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "gatsby-theme-style-guide@npm:0.17.4"
   dependencies:
-    "@theme-ui/mdx": "npm:^0.17.2"
-    "@theme-ui/style-guide": "npm:^0.17.2"
-    theme-ui: "npm:^0.17.2"
+    "@theme-ui/mdx": "npm:^0.17.4"
+    "@theme-ui/style-guide": "npm:^0.17.4"
+    theme-ui: "npm:^0.17.4"
   peerDependencies:
     gatsby: ^4 || ^5
     react: ">=18"
     react-dom: ">=18"
-  checksum: 10c0/31d7ed2cd9a1094500d26f6782acc2d23ab1281a71401102b27a8dcf34cf060f8c0d822035d82a3182cc5e59844acba09473f68239907d3d1d6d2e0fc85354e9
+  checksum: 10c0/8c5c95bbc165de195fbcea34ededaaf22b255ac62853757d946115c43250a8e1c83c25f20d6e54c886f584347bf4ca7e54bd0fce8478e4e6f9ff45d32d1667d1
   languageName: node
   linkType: hard
 
@@ -13839,9 +13856,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-react-parser@npm:^5.2.10":
-  version: 5.2.10
-  resolution: "html-react-parser@npm:5.2.10"
+"html-react-parser@npm:^5.2.11":
+  version: 5.2.11
+  resolution: "html-react-parser@npm:5.2.11"
   dependencies:
     domhandler: "npm:5.0.3"
     html-dom-parser: "npm:5.1.2"
@@ -13853,7 +13870,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/af93dc554eb47633a2a8d1a5c9276768730606fd30f7355de30e02ad6ef16bb269b0e4b4ae7190ba1a056da43acf2c17cd4fae0f3981486d117f6b3646245974
+  checksum: 10c0/9173df6db4523aab142e1e4c4b55bf9ae6a18a6581d98a2ce9d92af0d3a5dccebb39f26719cf3b5d35d7cc21d49fc774508dda54146771ac7e67e9a1fa252d8a
   languageName: node
   linkType: hard
 
@@ -13989,10 +14006,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"humanize-duration@npm:^3.33.1":
-  version: 3.33.1
-  resolution: "humanize-duration@npm:3.33.1"
-  checksum: 10c0/d62ea8806c0efdc10fa28f274c21d90c5c2e218a84805b1a223836dbcbddf0a45bee9b2321252bec0d017924f31af220bd3aaff90449671d7891f822ccdff50f
+"humanize-duration@npm:^3.33.2":
+  version: 3.33.2
+  resolution: "humanize-duration@npm:3.33.2"
+  checksum: 10c0/eae493c113f1c11c96e42195002e8016ab7c08bfcc3414ba5459027da4faaa2df012429bc4eae200873a65d0a86b7cc6a9656783aa45705ffe6106b5256af973
   languageName: node
   linkType: hard
 
@@ -14069,10 +14086,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immer@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "immer@npm:10.2.0"
-  checksum: 10c0/35e66b0585b2aec4e85ae7a993f049405f170799ba89d79205bc3fdae2c5bdaa2b1d35f62803d8beee42b7e85c7f7315a6e93b6a5a510c5a46f03dbe63619e87
+"immer@npm:^11.0.0":
+  version: 11.1.3
+  resolution: "immer@npm:11.1.3"
+  checksum: 10c0/2d0bcb7946274bb99254b8129026da9579591569afdd4f29e5ef3ebf231375c7ab97c344ffbfc9eeabea27a2145623fca1287c17e3ebd007c8cdcfd82954eeb7
   languageName: node
   linkType: hard
 
@@ -15526,6 +15543,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-yaml@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "js-yaml@npm:4.1.1"
+  dependencies:
+    argparse: "npm:^2.0.1"
+  bin:
+    js-yaml: bin/js-yaml.js
+  checksum: 10c0/561c7d7088c40a9bb53cc75becbfb1df6ae49b34b5e6e5a81744b14ae8667ec564ad2527709d1a6e7d5e5fa6d483aa0f373a50ad98d42fde368ec4a190d4fae7
+  languageName: node
+  linkType: hard
+
 "jsbn@npm:1.1.0":
   version: 1.1.0
   resolution: "jsbn@npm:1.1.0"
@@ -15785,11 +15813,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^16.2.6":
-  version: 16.2.6
-  resolution: "lint-staged@npm:16.2.6"
+"lint-staged@npm:^16.2.7":
+  version: 16.2.7
+  resolution: "lint-staged@npm:16.2.7"
   dependencies:
-    commander: "npm:^14.0.1"
+    commander: "npm:^14.0.2"
     listr2: "npm:^9.0.5"
     micromatch: "npm:^4.0.8"
     nano-spawn: "npm:^2.0.0"
@@ -15798,7 +15826,7 @@ __metadata:
     yaml: "npm:^2.8.1"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10c0/6bae38082a0fcb3f699b144d1a4b85394f259f17a1f8a58b22122b9f1c6bb5e8340d6ee4bff12e52dbc4267377d6dde9e5c206157f381f1924a2640717f769c1
+  checksum: 10c0/9a677c21a8112d823ae5bc565ba2c9e7b803786f2a021c46827a55fe44ed59def96edb24fc99c06a2545cdbbf366022ad82addcb3bf60c712f3b98ef92069717
   languageName: node
   linkType: hard
 
@@ -19511,12 +19539,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.6.2, prettier@npm:^3.6.2":
-  version: 3.6.2
-  resolution: "prettier@npm:3.6.2"
+"prettier@npm:3.7.4, prettier@npm:^3.7.4":
+  version: 3.7.4
+  resolution: "prettier@npm:3.7.4"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/488cb2f2b99ec13da1e50074912870217c11edaddedeadc649b1244c749d15ba94e846423d062e2c4c9ae683e2d65f754de28889ba06e697ac4f988d44f45812
+  checksum: 10c0/9675d2cd08eacb1faf1d1a2dbfe24bfab6a912b059fc9defdb380a408893d88213e794a40a2700bd29b140eb3172e0b07c852853f6e22f16f3374659a1a13389
   languageName: node
   linkType: hard
 
@@ -19924,14 +19952,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "react-error-boundary@npm:6.0.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.12.5"
+"react-error-boundary@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "react-error-boundary@npm:6.0.1"
   peerDependencies:
-    react: ">=16.13.1"
-  checksum: 10c0/1914d600dee95a14f14af4afe9867b0d35c26c4f7826d23208800ba2a99728659029aad60a6ef95e13430b4d79c2c4c9b3585f50bf508450478760d2e4e732d8
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  checksum: 10c0/f557a924ab45169183cdb7b39b5d0d532cbada247991b9202c1e660c3777c18550fcf0388cbe253bd5d0b6d14628f94f3e24717ebc8c021a00662fe246d07479
   languageName: node
   linkType: hard
 
@@ -20834,21 +20861,21 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@eslint/compat": "npm:^2.0.0"
-    "@eslint/eslintrc": "npm:^3.3.1"
-    "@eslint/js": "npm:^9.39.1"
+    "@eslint/eslintrc": "npm:^3.3.3"
+    "@eslint/js": "npm:^9.39.2"
     boxen: "npm:^8.0.1"
-    eslint: "npm:^9.39.1"
+    eslint: "npm:^9.39.2"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-jest: "npm:^29.1.0"
+    eslint-plugin-jest: "npm:^29.12.1"
     eslint-plugin-json: "npm:^4.0.1"
     eslint-plugin-jsx-a11y: "npm:^6.10.2"
     eslint-plugin-prettier: "npm:^5.5.4"
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     husky: "npm:^9.1.7"
-    lint-staged: "npm:^16.2.6"
+    lint-staged: "npm:^16.2.7"
     lodash: "npm:^4.17.21"
-    prettier: "npm:^3.6.2"
+    prettier: "npm:^3.7.4"
     pretty-quick: "npm:^4.2.2"
   languageName: unknown
   linkType: soft
@@ -22408,27 +22435,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"theme-ui@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "theme-ui@npm:0.17.2"
+"theme-ui@npm:^0.17.4":
+  version: 0.17.4
+  resolution: "theme-ui@npm:0.17.4"
   dependencies:
-    "@theme-ui/color-modes": "npm:^0.17.2"
-    "@theme-ui/components": "npm:^0.17.2"
-    "@theme-ui/core": "npm:^0.17.2"
-    "@theme-ui/css": "npm:^0.17.2"
-    "@theme-ui/global": "npm:^0.17.2"
-    "@theme-ui/theme-provider": "npm:^0.17.2"
+    "@theme-ui/color-modes": "npm:^0.17.4"
+    "@theme-ui/components": "npm:^0.17.4"
+    "@theme-ui/core": "npm:^0.17.4"
+    "@theme-ui/css": "npm:^0.17.4"
+    "@theme-ui/global": "npm:^0.17.4"
+    "@theme-ui/theme-provider": "npm:^0.17.4"
   peerDependencies:
     "@emotion/react": ">=11.1.1"
     react: ">=18"
-  checksum: 10c0/c25ea61735da7a1564f46c5f99af92b24aa3b5a3724eb71dac0711cdd7a8f5719d23cc79b78127feb3d8dc4d47b3e3debd983962b62207dc802ac1b272691b4c
+  checksum: 10c0/0797c0581b269d860ebe562be554c3a859eb76d57e9b5e82fe1b676b74f124dbd9b4b0e318b13c189b12694342f98374a8cacf15c9d6808f87febbbda210b74f
   languageName: node
   linkType: hard
 
-"three@npm:^0.181.1":
-  version: 0.181.1
-  resolution: "three@npm:0.181.1"
-  checksum: 10c0/ca848798fa75ac6f4a20b7da085e99b7eba18cc8bd51268e91cefa405a021e045561475fe8cea3841439e39e7723055d80ba942ad4c63f651713ac874f6d4e4a
+"three@npm:^0.182.0":
+  version: 0.182.0
+  resolution: "three@npm:0.182.0"
+  checksum: 10c0/8ddb3380dc881c75a91cb9fb29a3610b1d01de7feff4b7610fb305a24efc51c98d51b8bcef6ab74e82a1af1947bc81343a9eab1dc9ebe17b504eab19a321430b
   languageName: node
   linkType: hard
 
@@ -24102,7 +24129,7 @@ __metadata:
     gatsby-plugin-sitemap: "npm:^6.15.0"
     gatsby-plugin-webpack-bundle-analyser-v2: "npm:^1.1.32"
     gatsby-theme-chronogrove: "npm:*"
-    prettier: "npm:3.6.2"
+    prettier: "npm:3.7.4"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
   languageName: unknown
