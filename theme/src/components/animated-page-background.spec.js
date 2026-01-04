@@ -17,13 +17,7 @@ jest.mock('theme-ui', () => {
   }
 })
 
-// Mock the background components
-jest.mock('./home-backgrounds/prismatic-burst', () => {
-  return function MockPrismaticBurst() {
-    return <div data-testid='prismatic-burst'>Prismatic Burst</div>
-  }
-})
-
+// Mock the background component (only ColorBends is used now)
 jest.mock('./home-backgrounds/color-bends', () => {
   return function MockColorBends() {
     return <div data-testid='color-bends'>Color Bends</div>
@@ -50,9 +44,12 @@ describe('AnimatedPageBackground', () => {
     renderWithTheme(<AnimatedPageBackground />)
   })
 
-  it('renders PrismaticBurst in light mode', () => {
-    const { getByTestId } = renderWithTheme(<AnimatedPageBackground />, 'light')
-    expect(getByTestId('prismatic-burst')).toBeInTheDocument()
+  it('renders solid background in light mode (no animation)', () => {
+    const { queryByTestId, container } = renderWithTheme(<AnimatedPageBackground />, 'light')
+    // Should NOT render any animation component in light mode
+    expect(queryByTestId('color-bends')).not.toBeInTheDocument()
+    // Should render the fixed background container
+    expect(container.querySelector('div[aria-hidden="true"]')).toBeInTheDocument()
   })
 
   it('renders ColorBends in dark mode', () => {
@@ -67,8 +64,9 @@ describe('AnimatedPageBackground', () => {
     expect(container).toBeTruthy()
   })
 
-  it('accepts custom opacity props', () => {
-    renderWithTheme(<AnimatedPageBackground lightOpacity={0.5} darkOpacity={0.2} />)
+  it('accepts custom darkOpacity prop', () => {
+    mockColorMode = 'dark'
+    renderWithTheme(<AnimatedPageBackground darkOpacity={0.2} />, 'dark')
     // Just verify it renders without errors
   })
 
