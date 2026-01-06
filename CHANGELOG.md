@@ -1,5 +1,52 @@
 # Changelog
 
+## 0.66.0
+
+### 🚀 Performance Improvements
+
+- **Lazy Loading for Widget Images**: Implemented granular lazy loading for image-heavy widgets to significantly improve Lighthouse performance scores
+  - **Steam Widget**: Each game card image now lazy loads individually as it enters the viewport
+    - Added `LazyLoad` wrapper around game header images in `SteamGameCard` component
+    - Replaced spinner placeholders with animated skeleton loaders using `react-placeholder`
+    - Prevents 16-18 game images (~2-3MB) from loading until visible
+    - Tests updated with `LazyLoad` mocks for compatibility with `react-test-renderer`
+  - **Goodreads Widget**: Each book cover image now lazy loads individually
+    - Added `LazyLoad` wrapper around book SVG components in `BookLink` component
+    - Square aspect ratio skeleton placeholder maintains layout stability
+    - Prevents 12 book cover images from loading until visible
+    - Tests updated with `LazyLoad` mocks across all Goodreads test files
+  - **Benefits**:
+    - Reduces initial page load time and network congestion
+    - Improves Time to Interactive (TTI) and Core Web Vitals
+    - Better mobile experience on slower connections
+    - Progressive enhancement: grid structure visible immediately, images load on-demand
+
+- **Simplified Background Animation**: Removed light mode animation for better performance
+  - Deleted `PrismaticBurst` component and all related files (component, CSS, tests)
+  - Light mode now uses solid background color (no canvas animation overhead)
+  - Dark mode preserves existing `ColorBends` animation
+  - Removed `lightOpacity` prop from `AnimatedPageBackground` (no longer needed)
+  - Updated component documentation and tests to reflect solid light mode background
+  - Reduces JavaScript execution and improves light mode Lighthouse scores
+
+### 🧪 Testing
+
+- Added test for invalid URL handling in `BookLink` component (100% coverage)
+- Updated 3 test files with `LazyLoad` mocks: `steam-widget.spec.js`, `play-time-chart.spec.js`, `recently-read-books.spec.js`
+- Updated `AnimatedPageBackground` tests to verify solid light mode background
+- Test suite: 970 tests passing (18 fewer after removing PrismaticBurst tests)
+- Maintained 100% line coverage on modified files
+
+### 📦 Files Changed
+
+- Modified: `theme/src/components/widgets/steam/steam-game-card.js`
+- Modified: `theme/src/components/widgets/goodreads/book-link.js`
+- Modified: `theme/src/components/animated-page-background.js`
+- Modified: Test files for Steam, Goodreads, and AnimatedPageBackground components
+- Deleted: `theme/src/components/home-backgrounds/prismatic-burst.js`
+- Deleted: `theme/src/components/home-backgrounds/prismatic-burst.css`
+- Deleted: `theme/src/components/home-backgrounds/prismatic-burst.spec.js`
+
 ## 0.65.4
 
 ### 📦 Dependencies
