@@ -7,7 +7,7 @@ exports[`InstagramWidgetItem matches the snapshot 1`] = `
   >
     <img
       alt="Instagram post: This is a test caption"
-      class="instagram-item-image css-flbgi6"
+      class="instagram-item-image css-62khl7"
       height="280"
       loading="lazy"
       src="https://cdn.example.com/images/fake-instagram-image.jpg?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format"

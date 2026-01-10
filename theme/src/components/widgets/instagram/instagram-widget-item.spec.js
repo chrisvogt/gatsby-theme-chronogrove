@@ -157,28 +157,28 @@ describe('InstagramWidgetItem', () => {
 
       // After first interval + transition time, should show second image
       act(() => {
-        jest.advanceTimersByTime(5000) // Interval
+        jest.advanceTimersByTime(3200) // Interval
       })
       act(() => {
-        jest.advanceTimersByTime(400) // Transition duration
+        jest.advanceTimersByTime(300) // Transition duration
       })
       expect(screen.getByRole('img').src).toContain('child2.jpg')
 
       // After another interval + transition, should show third image
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
       expect(screen.getByRole('img').src).toContain('child3.jpg')
 
       // After another interval + transition, should wrap back to first image
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
       expect(screen.getByRole('img').src).toContain('child1.jpg')
     })
@@ -192,10 +192,10 @@ describe('InstagramWidgetItem', () => {
 
       // Advance to show a different image (interval + transition)
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
       expect(screen.getByRole('img').src).toContain('child2.jpg')
 
@@ -288,10 +288,10 @@ describe('InstagramWidgetItem', () => {
 
       // After first interval + transition, should show child2 (skipping null)
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
       // With only one valid image in filtered array, it should still work
       expect(screen.getByRole('img')).toBeInTheDocument()
@@ -396,10 +396,10 @@ describe('InstagramWidgetItem', () => {
 
       // Advance remaining time for first interval + transition
       act(() => {
-        jest.advanceTimersByTime(3000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
 
       // Image should have changed after original 5 seconds, not reset
@@ -440,10 +440,10 @@ describe('InstagramWidgetItem', () => {
 
       // Carousel should still be cycling - advance time and check image changes
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
       expect(screen.getByRole('img').src).toContain('child2.jpg')
     })
@@ -468,10 +468,10 @@ describe('InstagramWidgetItem', () => {
 
       // Carousel should still be cycling
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
       expect(screen.getByRole('img').src).toContain('child2.jpg')
     })
@@ -486,7 +486,7 @@ describe('InstagramWidgetItem', () => {
 
       // Wait for interval to fire (starts the setTimeout for transition)
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
 
       // Quickly leave before the 400ms transition completes
@@ -497,7 +497,7 @@ describe('InstagramWidgetItem', () => {
 
       // Advance past when the orphaned timeout would have fired
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
 
       // Should show the first child image (index 0), not skip to second
@@ -534,7 +534,7 @@ describe('InstagramWidgetItem', () => {
 
       // Wait for interval to fire (starts the setTimeout for transition)
       act(() => {
-        jest.advanceTimersByTime(5000)
+        jest.advanceTimersByTime(3200)
       })
 
       // Unmount while the 400ms transition timeout is still pending
@@ -543,7 +543,7 @@ describe('InstagramWidgetItem', () => {
 
       // Advance time past when the timeout would have fired
       act(() => {
-        jest.advanceTimersByTime(400)
+        jest.advanceTimersByTime(300)
       })
 
       // No error should have occurred - the timeout was cleaned up

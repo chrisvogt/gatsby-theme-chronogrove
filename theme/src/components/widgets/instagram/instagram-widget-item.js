@@ -5,17 +5,34 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { faImages, faVideo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const CAROUSEL_INTERVAL_MS = 5000
+const CAROUSEL_INTERVAL_MS = 3000
 
-// Ken Burns effect - slow cinematic pan and zoom
+// Ken Burns effect - fast start, slow finish with visible movement throughout
 const kenBurnsAnimation = keyframes`
   0% {
-    transform: scale(1.0) translate(0, 0);
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  33% {
+    transform: scale(1.05) translate3d(-0.9%, -0.6%, 0);
+  }
+  66% {
+    transform: scale(1.08) translate3d(-1.2%, -0.8%, 0);
   }
   100% {
-    transform: scale(1.12) translate(-2%, -1%);
+    transform: scale(1.10) translate3d(-1.5%, -1%, 0);
   }
 `
+
+// Helper to build image URL with CDN params
+const buildImageURL = url =>
+  url ? `${url}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format` : ''
+
+// Preload an image by creating a hidden Image object
+const preloadImage = url => {
+  if (!url) return
+  const img = new window.Image()
+  img.src = buildImageURL(url)
+}
 
 const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL, children, id, mediaType } = {} }) => {
   const isCarousel = mediaType === 'CAROUSEL_ALBUM'
@@ -38,6 +55,21 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   // Get current image URL based on active state
   const currentImageURL = hasCarouselImages && isActive ? carouselImages[currentImageIndex] || cdnMediaURL : cdnMediaURL
 
+  // Preload the next image whenever current image changes
+  useEffect(() => {
+    if (hasCarouselImages && isActive && carouselImages.length > 1) {
+      const nextIndex = (currentImageIndex + 1) % carouselImages.length
+      preloadImage(carouselImages[nextIndex])
+    }
+  }, [currentImageIndex, hasCarouselImages, isActive, carouselImages])
+
+  // Preload all carousel images when hover/focus starts
+  useEffect(() => {
+    if (hasCarouselImages && isActive) {
+      carouselImages.forEach(preloadImage)
+    }
+  }, [hasCarouselImages, isActive, carouselImages])
+
   const startCarouselRotation = useCallback(() => {
     if (!hasCarouselImages || intervalRef.current) return
 
@@ -47,7 +79,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
         setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
         setIsTransitioning(false)
         timeoutRef.current = null
-      }, 400) // Crossfade duration
+      }, 300) // Crossfade duration
     }, CAROUSEL_INTERVAL_MS)
   }, [hasCarouselImages, carouselImages.length])
 
@@ -168,7 +200,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
         key={currentImageIndex}
         className='instagram-item-image'
         loading='lazy'
-        src={`${currentImageURL}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format`}
+        src={buildImageURL(currentImageURL)}
         height='280'
         width='280'
         alt={caption ? `Instagram post: ${caption}` : 'Instagram post thumbnail'}
@@ -177,11 +209,12 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
           height: '100%',
           objectFit: 'cover',
           opacity: isTransitioning ? 0 : 1,
-          transition: 'opacity 0.5s ease-in-out',
+          transition: 'opacity 0.3s ease-in-out',
           // Apply Ken Burns effect only when active (hovering or focused)
           ...(hasCarouselImages &&
             isActive && {
-              animation: `${kenBurnsAnimation} ${CAROUSEL_INTERVAL_MS}ms ease-out forwards`
+              animation: `${kenBurnsAnimation} ${CAROUSEL_INTERVAL_MS + 800}ms linear forwards`,
+              willChange: 'transform'
             })
         }}
       />
