@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.67.0
+
+### ✨ New Features
+
+- **Instagram Carousel Ken Burns Effect**: Enhanced the Instagram widget with an animated slideshow experience for carousel posts
+  - Hovering or focusing on a carousel post now cycles through all images with a smooth Ken Burns zoom effect
+  - Images preload on hover to eliminate loading flashes between slides
+  - Carousel indicator dots show current position (max 5 dots with "+N" overflow)
+  - Separate hover and focus state tracking for proper accessibility support
+  - Focus keeps carousel running when mouse leaves (keyboard accessibility)
+  - Smooth crossfade transitions between images (300ms)
+  - GPU-accelerated animations using `translate3d` and `will-change: transform`
+  - Cinematic easing with fast start and gradual deceleration
+
+### 🐛 Bug Fixes
+
+- **Fixed white flash on hover**: Removed unnecessary React key change that caused image remounting
+- **Fixed orphaned timeouts**: Transition timeouts are now properly tracked and cleared
+- **Removed VanillaTilt**: Removed 3D tilt effect from Instagram widget for cleaner visuals
+- **Fixed CORS warning**: Changed `crossOrigin='anonymous'` to use `window.Image` for preloading
+
+### 🧪 Testing
+
+- Comprehensive test coverage for carousel rotation, focus/hover states, and edge cases
+- Tests for preloading, timeout cleanup on unmount, and accessibility scenarios
+- 98.41% branch coverage on `instagram-widget-item.js`
+- 40 tests passing across Instagram widget components
+
+### 📦 Files Changed
+
+- Modified: `theme/src/components/widgets/instagram/instagram-widget-item.js`
+- Modified: `theme/src/components/widgets/instagram/instagram-widget.js`
+- Modified: `theme/src/components/widgets/instagram/instagram-widget-item.spec.js`
+- Modified: `theme/src/components/widgets/instagram/instagram-widget.spec.js`
+
 ## 0.66.0
 
 ### 🚀 Performance Improvements

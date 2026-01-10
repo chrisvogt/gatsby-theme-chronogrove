@@ -6,7 +6,6 @@ import configureStore from 'redux-mock-store'
 import InstagramWidget from './instagram-widget'
 import { ThemeUIProvider } from 'theme-ui'
 import theme from '../../../gatsby-plugin-theme-ui'
-import VanillaTilt from 'vanilla-tilt'
 
 jest.mock('../../../hooks/use-site-metadata', () =>
   jest.fn(() => ({
@@ -239,63 +238,6 @@ describe('InstagramWidget', () => {
     fireEvent.click(thumbnails[0])
 
     expect(mockLightGalleryInstance.openGallery).toHaveBeenCalledWith(0)
-  })
-
-  it('calls VanillaTilt.init when isShowingMore or !isLoading is true', () => {
-    const storeWithManyImages = mockStore({
-      widgets: {
-        instagram: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              media: Array.from({ length: 10 }, (_, i) => ({
-                id: `image-${i}`,
-                caption: `Test Caption ${i}`,
-                cdnMediaURL: `https://cdn.example.com/images/fake-instagram-image-${i}.jpg`,
-                mediaType: 'IMAGE',
-                permalink: `https://instagram.com/p/test${i}`
-              }))
-            },
-            metrics: []
-          }
-        }
-      }
-    })
-
-    render(
-      <ReduxProvider store={storeWithManyImages}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
-    )
-
-    fireEvent.click(screen.getByText(/Show More/i))
-    expect(VanillaTilt.init).toHaveBeenCalled()
-
-    VanillaTilt.init.mockClear()
-
-    const storeWithNoImages = mockStore({
-      widgets: {
-        instagram: {
-          state: 'SUCCESS',
-          data: {
-            collections: { media: [] },
-            metrics: []
-          }
-        }
-      }
-    })
-
-    render(
-      <ReduxProvider store={storeWithNoImages}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
-    )
-
-    expect(VanillaTilt.init).toHaveBeenCalled()
   })
 
   it('assigns lightGalleryRef correctly on initialization', () => {

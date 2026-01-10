@@ -11,7 +11,6 @@ import lgVideo from 'lightgallery/plugins/video'
 import lgZoom from 'lightgallery/plugins/zoom'
 import LightGallery from 'lightgallery/react'
 import ReactPlaceholder from 'react-placeholder'
-import VanillaTilt from 'vanilla-tilt'
 
 import 'lightgallery/css/lightgallery.css'
 import 'lightgallery/css/lg-thumbnail.css'
@@ -65,17 +64,6 @@ export default () => {
       dispatch(fetchDataSource('instagram', instagramDataSource))
     }
   }, [dispatch, instagramDataSource, isLoading])
-
-  useEffect(() => {
-    if (isShowingMore || !isLoading) {
-      VanillaTilt.init(document.querySelectorAll('.instagram-item-button'), {
-        perspective: 1500,
-        reverse: true,
-        scale: 1.05,
-        speed: 200
-      })
-    }
-  }, [isLoading, isShowingMore])
 
   const openLightbox = useCallback(
     index => {
