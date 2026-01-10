@@ -636,5 +636,242 @@ describe('InstagramWidgetItem', () => {
       // Should not throw and component should still work
       expect(screen.getByRole('img')).toBeInTheDocument()
     })
+
+    it('handles children prop changing mid-rotation without index out of bounds', () => {
+      // Start with 5 children
+      const initialProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' },
+            { id: 'child3', cdnMediaURL: 'https://cdn.example.com/images/child3.jpg' },
+            { id: 'child4', cdnMediaURL: 'https://cdn.example.com/images/child4.jpg' },
+            { id: 'child5', cdnMediaURL: 'https://cdn.example.com/images/child5.jpg' }
+          ]
+        }
+      }
+
+      const { rerender } = render(<InstagramWidgetItem {...initialProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // Advance through several rotations to get to index 3
+      for (let i = 0; i < 3; i++) {
+        act(() => {
+          jest.advanceTimersByTime(3200)
+        })
+        act(() => {
+          jest.advanceTimersByTime(300)
+        })
+      }
+
+      // Should now be showing child4 (index 3)
+      expect(screen.getByRole('img').src).toContain('child4.jpg')
+
+      // Now rerender with only 2 children (simulating data refetch)
+      const reducedProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/new-child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/new-child2.jpg' }
+          ]
+        }
+      }
+
+      rerender(<InstagramWidgetItem {...reducedProps} />)
+
+      // Advance to trigger the next rotation
+      // With the fix, this should use the new length (2) instead of stale length (5)
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // The index should wrap correctly with the new length
+      // Without the fix, (3+1) % 5 = 4, which would be out of bounds for 2-item array
+      // With the fix, (3+1) % 2 = 0, which is valid
+      const imgSrc = screen.getByRole('img').src
+      expect(imgSrc).toMatch(/new-child[12]\.jpg/)
+      expect(imgSrc).not.toContain('undefined')
+    })
+
+    it('handles children prop shrinking to empty array mid-rotation', () => {
+      // Start with 3 children
+      const initialProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' },
+            { id: 'child3', cdnMediaURL: 'https://cdn.example.com/images/child3.jpg' }
+          ]
+        }
+      }
+
+      const { rerender } = render(<InstagramWidgetItem {...initialProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // Advance to show second image
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+
+      // Now rerender with empty children (all URLs become falsy)
+      const emptyChildrenProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: []
+        }
+      }
+
+      rerender(<InstagramWidgetItem {...emptyChildrenProps} />)
+
+      // Advance to trigger the next rotation
+      // With the fix, currentLength will be 1 (fallback to [cdnMediaURL])
+      // The guard (currentLength > 0) prevents division by zero
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should fall back to main image without crashing
+      const img = screen.getByRole('img')
+      expect(img).toBeInTheDocument()
+      expect(img.src).not.toContain('NaN')
+      expect(img.src).not.toContain('undefined')
+    })
+
+    it('handles children prop growing mid-rotation', () => {
+      // Start with 2 children
+      const initialProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' }
+          ]
+        }
+      }
+
+      const { rerender } = render(<InstagramWidgetItem {...initialProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // Advance to show second image (index 1)
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+
+      // Now rerender with 5 children (simulating data refetch adding more items)
+      const expandedProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/new-child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/new-child2.jpg' },
+            { id: 'child3', cdnMediaURL: 'https://cdn.example.com/images/new-child3.jpg' },
+            { id: 'child4', cdnMediaURL: 'https://cdn.example.com/images/new-child4.jpg' },
+            { id: 'child5', cdnMediaURL: 'https://cdn.example.com/images/new-child5.jpg' }
+          ]
+        }
+      }
+
+      rerender(<InstagramWidgetItem {...expandedProps} />)
+
+      // Advance to trigger the next rotation
+      // With the fix, this should use the new length (5)
+      // (1+1) % 5 = 2, should show new-child3
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      expect(screen.getByRole('img').src).toContain('new-child3.jpg')
+    })
+
+    it('handles children URLs all becoming falsy mid-rotation', () => {
+      // Start with 3 valid children
+      const initialProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' },
+            { id: 'child3', cdnMediaURL: 'https://cdn.example.com/images/child3.jpg' }
+          ]
+        }
+      }
+
+      const { rerender } = render(<InstagramWidgetItem {...initialProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // Advance to show second image
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+
+      // Now rerender with all falsy URLs (simulating CDN issues)
+      const falsyUrlsProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: null },
+            { id: 'child2', cdnMediaURL: undefined },
+            { id: 'child3', cdnMediaURL: '' }
+          ]
+        }
+      }
+
+      rerender(<InstagramWidgetItem {...falsyUrlsProps} />)
+
+      // Advance to trigger the next rotation
+      // carouselImages will be [cdnMediaURL] (length 1) after filtering
+      // The guard (currentLength > 0) ensures valid modulo operation
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should show main image without crashing
+      const img = screen.getByRole('img')
+      expect(img.src).toContain('main-image.jpg')
+      expect(img.src).not.toContain('NaN')
+    })
   })
 })

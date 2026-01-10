@@ -45,12 +45,16 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   const [isTransitioning, setIsTransitioning] = useState(false)
   const intervalRef = useRef(null)
   const timeoutRef = useRef(null)
+  const carouselImagesLengthRef = useRef(0)
 
   // Carousel is active when either hovering OR focused (for accessibility)
   const isActive = isMouseOver || isFocused
 
   // Get all carousel image URLs, fallback to main image if no children
   const carouselImages = hasCarouselImages ? children.map(child => child.cdnMediaURL).filter(Boolean) : [cdnMediaURL]
+
+  // Keep ref in sync with current carousel images length to avoid stale closures in setInterval
+  carouselImagesLengthRef.current = carouselImages.length
 
   // Get current image URL based on active state
   const currentImageURL = hasCarouselImages && isActive ? carouselImages[currentImageIndex] || cdnMediaURL : cdnMediaURL
@@ -78,7 +82,9 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
     intervalRef.current = setInterval(() => {
       setIsTransitioning(true)
       timeoutRef.current = setTimeout(() => {
-        setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
+        // Use ref to get current length, avoiding stale closure if children prop changes mid-rotation
+        const currentLength = carouselImagesLengthRef.current
+        setCurrentImageIndex(prev => (currentLength > 0 ? (prev + 1) % currentLength : 0))
         setIsTransitioning(false)
         timeoutRef.current = null
       }, 300) // Crossfade duration
