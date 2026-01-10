@@ -56,8 +56,8 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   // Keep ref in sync with current carousel images length to avoid stale closures in setInterval
   carouselImagesLengthRef.current = carouselImages.length
 
-  // Get current image URL based on active state
-  const currentImageURL = hasCarouselImages && isActive ? carouselImages[currentImageIndex] || cdnMediaURL : cdnMediaURL
+  // Get current image URL - carousel posts show current slide even when not hovering (pauses at last shown)
+  const currentImageURL = hasCarouselImages ? carouselImages[currentImageIndex] || cdnMediaURL : cdnMediaURL
 
   // Preload the next image whenever current image changes
   useEffect(() => {
@@ -100,7 +100,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
       clearTimeout(timeoutRef.current)
       timeoutRef.current = null
     }
-    setCurrentImageIndex(0)
+    // Keep currentImageIndex as-is so carousel pauses at last shown image
     setIsTransitioning(false)
   }, [])
 

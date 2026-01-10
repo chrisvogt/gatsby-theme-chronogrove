@@ -149,8 +149,8 @@ describe('InstagramWidgetItem', () => {
 
       const button = screen.getByRole('button')
 
-      // Initially shows main cdnMediaURL (when not hovering)
-      expect(screen.getByRole('img').src).toContain('main-image.jpg')
+      // Initially shows first carousel child image
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
 
       // Start hovering
       fireEvent.mouseEnter(button)
@@ -183,7 +183,7 @@ describe('InstagramWidgetItem', () => {
       expect(screen.getByRole('img').src).toContain('child1.jpg')
     })
 
-    it('resets to main image when mouse leaves', () => {
+    it('pauses at current image when mouse leaves', () => {
       render(<InstagramWidgetItem {...carouselProps} />)
 
       const button = screen.getByRole('button')
@@ -199,9 +199,48 @@ describe('InstagramWidgetItem', () => {
       })
       expect(screen.getByRole('img').src).toContain('child2.jpg')
 
-      // Mouse leave should reset to main image
+      // Mouse leave should pause at current image, not reset
       fireEvent.mouseLeave(button)
-      expect(screen.getByRole('img').src).toContain('main-image.jpg')
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+    })
+
+    it('resumes rotation from paused position when re-entering', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // First hover: advance to child2
+      fireEvent.mouseEnter(button)
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+
+      // Leave - should pause at child2
+      fireEvent.mouseLeave(button)
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+
+      // Re-enter and continue rotation - should go to child3 next
+      fireEvent.mouseEnter(button)
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByRole('img').src).toContain('child3.jpg')
+
+      // And then wrap to child1
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
     })
 
     it('shows carousel indicators on focus for accessibility', () => {
