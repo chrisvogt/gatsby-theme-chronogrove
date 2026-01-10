@@ -549,5 +549,30 @@ describe('InstagramWidgetItem', () => {
       // No error should have occurred - the timeout was cleaned up
       expect(true).toBe(true)
     })
+
+    it('handles preloading when cdnMediaURL is undefined', () => {
+      const undefinedUrlProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          mediaType: 'CAROUSEL_ALBUM',
+          cdnMediaURL: undefined,
+          children: [
+            { id: 'child1', cdnMediaURL: undefined },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' }
+          ]
+        }
+      }
+
+      render(<InstagramWidgetItem {...undefinedUrlProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Hover to trigger preloading - should handle undefined URLs gracefully
+      fireEvent.mouseEnter(button)
+
+      // Should not throw and component should still work
+      expect(screen.getByRole('img')).toBeInTheDocument()
+    })
   })
 })
