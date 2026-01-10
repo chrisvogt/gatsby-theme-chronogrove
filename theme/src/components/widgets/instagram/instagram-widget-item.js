@@ -148,7 +148,6 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
 
       <img
         key={hasCarouselImages && isHovering ? `carousel-${currentImageIndex}` : 'static'}
-        crossOrigin='anonymous'
         className='instagram-item-image'
         loading='lazy'
         src={`${currentImageURL}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format`}

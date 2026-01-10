@@ -241,5 +241,183 @@ describe('InstagramWidgetItem', () => {
       fireEvent.mouseEnter(button)
       expect(screen.queryByTestId('carousel-indicators')).not.toBeInTheDocument()
     })
+
+    it('shows +N indicator when carousel has more than 5 images', () => {
+      const manyImagesProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/child1.jpg' },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' },
+            { id: 'child3', cdnMediaURL: 'https://cdn.example.com/images/child3.jpg' },
+            { id: 'child4', cdnMediaURL: 'https://cdn.example.com/images/child4.jpg' },
+            { id: 'child5', cdnMediaURL: 'https://cdn.example.com/images/child5.jpg' },
+            { id: 'child6', cdnMediaURL: 'https://cdn.example.com/images/child6.jpg' },
+            { id: 'child7', cdnMediaURL: 'https://cdn.example.com/images/child7.jpg' }
+          ]
+        }
+      }
+
+      render(<InstagramWidgetItem {...manyImagesProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      const indicators = screen.getByTestId('carousel-indicators')
+      expect(indicators).toBeInTheDocument()
+      expect(indicators).toHaveTextContent('+2')
+    })
+
+    it('handles carousel child with missing cdnMediaURL gracefully', () => {
+      const missingUrlProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: null },
+            { id: 'child2', cdnMediaURL: 'https://cdn.example.com/images/child2.jpg' }
+          ]
+        }
+      }
+
+      render(<InstagramWidgetItem {...missingUrlProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // After first interval + transition, should show child2 (skipping null)
+      act(() => {
+        jest.advanceTimersByTime(5000)
+      })
+      act(() => {
+        jest.advanceTimersByTime(400)
+      })
+      // With only one valid image in filtered array, it should still work
+      expect(screen.getByRole('img')).toBeInTheDocument()
+    })
+
+    it('falls back to cdnMediaURL when carousel image at index is undefined', () => {
+      // Create a scenario where carouselImages array access could return undefined
+      // This happens if the filtered array is empty or index exceeds bounds
+      const emptyChildrenUrlsProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: undefined },
+            { id: 'child2', cdnMediaURL: undefined },
+            { id: 'child3', cdnMediaURL: undefined }
+          ]
+        }
+      }
+
+      render(<InstagramWidgetItem {...emptyChildrenUrlsProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // With all children having undefined URLs, the filtered array is empty
+      // so carouselImages[currentImageIndex] will be undefined, triggering the || cdnMediaURL fallback
+      expect(screen.getByRole('img').src).toContain('main-image.jpg')
+    })
+  })
+
+  describe('Edge cases', () => {
+    it('uses fallback alt text when no caption is provided', () => {
+      const noCaptionProps = {
+        ...defaultProps,
+        post: {
+          ...defaultProps.post,
+          caption: null
+        }
+      }
+
+      render(<InstagramWidgetItem {...noCaptionProps} />)
+
+      expect(screen.getByAltText('Instagram post thumbnail')).toBeInTheDocument()
+    })
+
+    it('uses fallback alt text when caption is undefined', () => {
+      const undefinedCaptionProps = {
+        ...defaultProps,
+        post: {
+          ...defaultProps.post,
+          caption: undefined
+        }
+      }
+
+      render(<InstagramWidgetItem {...undefinedCaptionProps} />)
+
+      expect(screen.getByAltText('Instagram post thumbnail')).toBeInTheDocument()
+    })
+
+    it('uses fallback alt text when caption is empty string', () => {
+      const emptyCaptionProps = {
+        ...defaultProps,
+        post: {
+          ...defaultProps.post,
+          caption: ''
+        }
+      }
+
+      render(<InstagramWidgetItem {...emptyCaptionProps} />)
+
+      expect(screen.getByAltText('Instagram post thumbnail')).toBeInTheDocument()
+    })
+
+    it('handles stopCarouselRotation when no interval is running', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Call blur without first entering (no interval running)
+      fireEvent.blur(button)
+
+      // Should not throw and component should still work
+      expect(screen.getByRole('img')).toBeInTheDocument()
+    })
+
+    it('does not restart carousel if already running', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Enter once to start carousel
+      fireEvent.mouseEnter(button)
+
+      // Advance time a bit
+      act(() => {
+        jest.advanceTimersByTime(2000)
+      })
+
+      // Focus again (should not restart the interval)
+      fireEvent.focus(button)
+
+      // Advance remaining time for first interval + transition
+      act(() => {
+        jest.advanceTimersByTime(3000)
+      })
+      act(() => {
+        jest.advanceTimersByTime(400)
+      })
+
+      // Image should have changed after original 5 seconds, not reset
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+    })
+
+    it('renders with default empty post object', () => {
+      const emptyPostProps = {
+        handleClick: mockHandleClick,
+        index: 0,
+        post: undefined
+      }
+
+      render(<InstagramWidgetItem {...emptyPostProps} />)
+
+      // Should render without crashing
+      expect(screen.getByRole('button')).toBeInTheDocument()
+      expect(screen.getByRole('img')).toBeInTheDocument()
+    })
   })
 })
