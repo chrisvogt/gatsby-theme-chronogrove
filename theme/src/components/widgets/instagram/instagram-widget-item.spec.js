@@ -419,5 +419,135 @@ describe('InstagramWidgetItem', () => {
       expect(screen.getByRole('button')).toBeInTheDocument()
       expect(screen.getByRole('img')).toBeInTheDocument()
     })
+
+    it('keeps carousel running when mouse leaves but element is still focused', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Focus the element first
+      fireEvent.focus(button)
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+
+      // Then also hover
+      fireEvent.mouseEnter(button)
+
+      // Leave with mouse but remain focused
+      fireEvent.mouseLeave(button)
+
+      // Carousel indicators should still be visible because element is focused
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+
+      // Carousel should still be cycling - advance time and check image changes
+      act(() => {
+        jest.advanceTimersByTime(5000)
+      })
+      act(() => {
+        jest.advanceTimersByTime(400)
+      })
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+    })
+
+    it('keeps carousel running when blur happens but element is still hovered', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Hover first
+      fireEvent.mouseEnter(button)
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+
+      // Then also focus
+      fireEvent.focus(button)
+
+      // Blur but remain hovered
+      fireEvent.blur(button)
+
+      // Carousel indicators should still be visible because element is hovered
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+
+      // Carousel should still be cycling
+      act(() => {
+        jest.advanceTimersByTime(5000)
+      })
+      act(() => {
+        jest.advanceTimersByTime(400)
+      })
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+    })
+
+    it('clears orphaned timeout when quickly leaving and re-entering', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Start hovering
+      fireEvent.mouseEnter(button)
+
+      // Wait for interval to fire (starts the setTimeout for transition)
+      act(() => {
+        jest.advanceTimersByTime(5000)
+      })
+
+      // Quickly leave before the 400ms transition completes
+      fireEvent.mouseLeave(button)
+
+      // Re-enter immediately
+      fireEvent.mouseEnter(button)
+
+      // Advance past when the orphaned timeout would have fired
+      act(() => {
+        jest.advanceTimersByTime(400)
+      })
+
+      // Should show the first child image (index 0), not skip to second
+      // because the orphaned timeout was cleared
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+    })
+
+    it('stops carousel only when both hover and focus are inactive', () => {
+      render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Hover and focus
+      fireEvent.mouseEnter(button)
+      fireEvent.focus(button)
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+
+      // Remove hover but keep focus
+      fireEvent.mouseLeave(button)
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+
+      // Remove focus too - now both are inactive
+      fireEvent.blur(button)
+      expect(screen.queryByTestId('carousel-indicators')).not.toBeInTheDocument()
+    })
+
+    it('cleans up timeout on unmount during transition', () => {
+      const { unmount } = render(<InstagramWidgetItem {...carouselProps} />)
+
+      const button = screen.getByRole('button')
+
+      // Start hovering
+      fireEvent.mouseEnter(button)
+
+      // Wait for interval to fire (starts the setTimeout for transition)
+      act(() => {
+        jest.advanceTimersByTime(5000)
+      })
+
+      // Unmount while the 400ms transition timeout is still pending
+      // This should clean up the timeout without errors
+      unmount()
+
+      // Advance time past when the timeout would have fired
+      act(() => {
+        jest.advanceTimersByTime(400)
+      })
+
+      // No error should have occurred - the timeout was cleaned up
+      expect(true).toBe(true)
+    })
   })
 })

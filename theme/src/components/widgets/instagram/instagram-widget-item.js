@@ -23,25 +23,30 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   const hasCarouselImages = isCarousel && children?.length > 0
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isHovering, setIsHovering] = useState(false)
+  const [isMouseOver, setIsMouseOver] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const intervalRef = useRef(null)
+  const timeoutRef = useRef(null)
+
+  // Carousel is active when either hovering OR focused (for accessibility)
+  const isActive = isMouseOver || isFocused
 
   // Get all carousel image URLs, fallback to main image if no children
   const carouselImages = hasCarouselImages ? children.map(child => child.cdnMediaURL).filter(Boolean) : [cdnMediaURL]
 
-  // Get current image URL based on hover state
-  const currentImageURL =
-    hasCarouselImages && isHovering ? carouselImages[currentImageIndex] || cdnMediaURL : cdnMediaURL
+  // Get current image URL based on active state
+  const currentImageURL = hasCarouselImages && isActive ? carouselImages[currentImageIndex] || cdnMediaURL : cdnMediaURL
 
   const startCarouselRotation = useCallback(() => {
     if (!hasCarouselImages || intervalRef.current) return
 
     intervalRef.current = setInterval(() => {
       setIsTransitioning(true)
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
         setIsTransitioning(false)
+        timeoutRef.current = null
       }, 400) // Crossfade duration
     }, CAROUSEL_INTERVAL_MS)
   }, [hasCarouselImages, carouselImages.length])
@@ -51,35 +56,48 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
       clearInterval(intervalRef.current)
       intervalRef.current = null
     }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
     setCurrentImageIndex(0)
     setIsTransitioning(false)
   }, [])
 
   const handleMouseEnter = useCallback(() => {
-    setIsHovering(true)
+    setIsMouseOver(true)
     startCarouselRotation()
   }, [startCarouselRotation])
 
   const handleMouseLeave = useCallback(() => {
-    setIsHovering(false)
-    stopCarouselRotation()
-  }, [stopCarouselRotation])
+    setIsMouseOver(false)
+    // Only stop carousel if not focused (accessibility: focus should keep carousel running)
+    if (!isFocused) {
+      stopCarouselRotation()
+    }
+  }, [isFocused, stopCarouselRotation])
 
   const handleFocus = useCallback(() => {
-    setIsHovering(true)
+    setIsFocused(true)
     startCarouselRotation()
   }, [startCarouselRotation])
 
   const handleBlur = useCallback(() => {
-    setIsHovering(false)
-    stopCarouselRotation()
-  }, [stopCarouselRotation])
+    setIsFocused(false)
+    // Only stop carousel if not hovering
+    if (!isMouseOver) {
+      stopCarouselRotation()
+    }
+  }, [isMouseOver, stopCarouselRotation])
 
-  // Cleanup interval on unmount
+  // Cleanup interval and timeout on unmount
   useEffect(() => {
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current)
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
       }
     }
   }, [])
@@ -114,7 +132,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
       )}
 
       {/* Carousel indicator dots */}
-      {hasCarouselImages && isHovering && (
+      {hasCarouselImages && isActive && (
         <div
           data-testid='carousel-indicators'
           sx={{
@@ -147,7 +165,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
       )}
 
       <img
-        key={hasCarouselImages && isHovering ? `carousel-${currentImageIndex}` : 'static'}
+        key={currentImageIndex}
         className='instagram-item-image'
         loading='lazy'
         src={`${currentImageURL}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format`}
@@ -160,9 +178,9 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
           objectFit: 'cover',
           opacity: isTransitioning ? 0 : 1,
           transition: 'opacity 0.5s ease-in-out',
-          // Apply Ken Burns effect only when hovering over carousel
+          // Apply Ken Burns effect only when active (hovering or focused)
           ...(hasCarouselImages &&
-            isHovering && {
+            isActive && {
               animation: `${kenBurnsAnimation} ${CAROUSEL_INTERVAL_MS}ms ease-out forwards`
             })
         }}
