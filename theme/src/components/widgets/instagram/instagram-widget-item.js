@@ -71,7 +71,9 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   }, [hasCarouselImages, isActive, carouselImages])
 
   const startCarouselRotation = useCallback(() => {
-    if (!hasCarouselImages || intervalRef.current) return
+    // Guard against empty carouselImages array (all children have falsy cdnMediaURL)
+    // and single-image carousels (no point rotating)
+    if (!hasCarouselImages || carouselImages.length < 2 || intervalRef.current) return
 
     intervalRef.current = setInterval(() => {
       setIsTransitioning(true)

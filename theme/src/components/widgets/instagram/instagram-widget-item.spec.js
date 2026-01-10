@@ -321,6 +321,68 @@ describe('InstagramWidgetItem', () => {
       // so carouselImages[currentImageIndex] will be undefined, triggering the || cdnMediaURL fallback
       expect(screen.getByRole('img').src).toContain('main-image.jpg')
     })
+
+    it('does not start carousel rotation when all children have falsy cdnMediaURL values', () => {
+      // This prevents NaN from (prev + 1) % 0 when carouselImages is empty after filtering
+      const allFalsyUrlsProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: null },
+            { id: 'child2', cdnMediaURL: '' },
+            { id: 'child3', cdnMediaURL: undefined }
+          ]
+        }
+      }
+
+      render(<InstagramWidgetItem {...allFalsyUrlsProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // Wait for multiple intervals to pass - if rotation started, it would cause NaN issues
+      act(() => {
+        jest.advanceTimersByTime(10000)
+      })
+
+      // Image should still show main image (no NaN corruption of currentImageIndex)
+      const img = screen.getByRole('img')
+      expect(img.src).toContain('main-image.jpg')
+      // Verify the src is a valid URL, not containing NaN
+      expect(img.src).not.toContain('NaN')
+    })
+
+    it('does not start carousel rotation when only one valid image exists', () => {
+      // No point rotating through a single image
+      const singleValidImageProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [
+            { id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/only-valid.jpg' },
+            { id: 'child2', cdnMediaURL: null },
+            { id: 'child3', cdnMediaURL: undefined }
+          ]
+        }
+      }
+
+      render(<InstagramWidgetItem {...singleValidImageProps} />)
+
+      const button = screen.getByRole('button')
+      fireEvent.mouseEnter(button)
+
+      // Wait for interval - rotation should not occur with only 1 image
+      act(() => {
+        jest.advanceTimersByTime(3200)
+      })
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should still show the single valid image
+      expect(screen.getByRole('img').src).toContain('only-valid.jpg')
+    })
   })
 
   describe('Edge cases', () => {
