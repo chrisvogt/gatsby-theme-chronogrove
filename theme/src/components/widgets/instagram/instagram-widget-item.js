@@ -153,6 +153,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
       className='instagram-item-button'
       sx={{
         variant: 'styles.InstagramItem',
+        position: 'relative', // Required for absolutely positioned children (icon, indicators)
         overflow: 'hidden' // Clip Ken Burns zoom effect
       }}
     >
@@ -164,7 +165,15 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
             position: 'absolute',
             top: 2,
             right: 2,
-            zIndex: 1
+            zIndex: 1,
+            backgroundColor: 'rgba(20, 20, 31, 0.7)',
+            borderRadius: '50%',
+            width: '24px',
+            height: '24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px'
           }}
         >
           <FontAwesomeIcon icon={isVideo ? faVideo : faImages} />
