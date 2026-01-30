@@ -1,7 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
-import { render } from '@testing-library/react'
-import { act } from 'react'
+import { render, act } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { TestProvider } from '../testUtils'
 import HomeNavigation from './home-navigation'
@@ -69,14 +68,12 @@ describe('HomeNavigation', () => {
   })
 
   it('matches the snapshot', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles navigation data with empty home items', () => {
@@ -86,40 +83,34 @@ describe('HomeNavigation', () => {
       }
     }))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles navigation data with missing header', () => {
     useNavigationData.mockImplementation(() => ({}))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles navigation data with null values', () => {
     useNavigationData.mockImplementation(() => null)
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles navigation items with missing icon reactIcon', () => {
@@ -136,14 +127,12 @@ describe('HomeNavigation', () => {
     }
     useNavigationData.mockImplementation(() => navigationWithMissingIcons)
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles navigation items with discogs slug for icon mapping', () => {
@@ -160,14 +149,12 @@ describe('HomeNavigation', () => {
     }
     useNavigationData.mockImplementation(() => navigationWithDiscogs)
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles navigation items with complex slug names', () => {
@@ -184,14 +171,12 @@ describe('HomeNavigation', () => {
     }
     useNavigationData.mockImplementation(() => navigationWithComplexSlugs)
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <HomeNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   describe('Scroll event handling', () => {
@@ -507,14 +492,12 @@ describe('HomeNavigation', () => {
         }
       }))
 
-      const tree = renderer
-        .create(
-          <TestProvider>
-            <HomeNavigation />
-          </TestProvider>
-        )
-        .toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(
+        <TestProvider>
+          <HomeNavigation />
+        </TestProvider>
+      )
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('handles server-side rendering when document is not available', () => {
@@ -524,15 +507,13 @@ describe('HomeNavigation', () => {
       // Temporarily remove document
       delete global.document
 
-      const tree = renderer
-        .create(
-          <TestProvider>
-            <HomeNavigation />
-          </TestProvider>
-        )
-        .toJSON()
+      const { asFragment } = render(
+        <TestProvider>
+          <HomeNavigation />
+        </TestProvider>
+      )
 
-      expect(tree).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
 
       // Restore document
       global.document = originalDocument
@@ -551,14 +532,12 @@ describe('HomeNavigation', () => {
       }
       useNavigationData.mockImplementation(() => navigationWithMissingPath)
 
-      const tree = renderer
-        .create(
-          <TestProvider>
-            <HomeNavigation />
-          </TestProvider>
-        )
-        .toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(
+        <TestProvider>
+          <HomeNavigation />
+        </TestProvider>
+      )
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('handles navigation items with missing text', () => {
@@ -574,14 +553,12 @@ describe('HomeNavigation', () => {
       }
       useNavigationData.mockImplementation(() => navigationWithMissingText)
 
-      const tree = renderer
-        .create(
-          <TestProvider>
-            <HomeNavigation />
-          </TestProvider>
-        )
-        .toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(
+        <TestProvider>
+          <HomeNavigation />
+        </TestProvider>
+      )
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

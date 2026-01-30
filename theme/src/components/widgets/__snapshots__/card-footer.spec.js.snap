@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`CardFooter matches the snapshot 1`] = `null`;
+exports[`CardFooter matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1c6hy0j"
+  >
+    Test
+  </div>
+</DocumentFragment>
+`;

@@ -1,9 +1,283 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Media Post renders correctly with a SoundCloud source 1`] = `null`;
+exports[`Media Post renders correctly with a SoundCloud source 1`] = `
+<DocumentFragment>
+  <div
+    class="layoutMock"
+  >
+    <div
+      class="css-1v7u0sc"
+    >
+      <div
+        class="css-1aa5heh"
+      >
+        <article
+          class="h-entry"
+          id="mock-media-id"
+        >
+          <div
+            class="css-1wualeq"
+          >
+            Mock category
+          </div>
+          <h1
+            class="p-name css-1sus4jf"
+          >
+            A Mock Blog Post
+          </h1>
+          <time
+            class="dt-published created"
+          >
+            Published Mon, 17 Jun 2024 03:30:26 GMT
+          </time>
+          <div
+            style="display: none;"
+          >
+            <a
+              class="u-url"
+              href="https://example.com/music/mock-media"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-media-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              Mock Description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              music
+            </span>
+          </div>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`Media Post renders correctly with a YouTube source 1`] = `null`;
+exports[`Media Post renders correctly with a YouTube source 1`] = `
+<DocumentFragment>
+  <div
+    class="layoutMock"
+  >
+    <div
+      class="css-rh73xg"
+    >
+      <div
+        class="css-io6end"
+      >
+        <div
+          class="youtubeMock"
+        >
+          mockYoutubeSrc
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1v7u0sc"
+    >
+      <div
+        class="css-1aa5heh"
+      >
+        <article
+          class="h-entry"
+          id="mock-media-id"
+        >
+          <div
+            class="css-1wualeq"
+          >
+            Mock category
+          </div>
+          <h1
+            class="p-name css-1sus4jf"
+          >
+            A Mock Blog Post
+          </h1>
+          <time
+            class="dt-published created"
+          >
+            Published Mon, 17 Jun 2024 03:30:26 GMT
+          </time>
+          <div
+            style="display: none;"
+          >
+            <a
+              class="u-url"
+              href="https://example.com/music/mock-media"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-media-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              Mock Description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              music
+            </span>
+          </div>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`Media Post renders correctly with no media sources 1`] = `null`;
+exports[`Media Post renders correctly with no media sources 1`] = `
+<DocumentFragment>
+  <div
+    class="layoutMock"
+  >
+    <div
+      class="css-1v7u0sc"
+    >
+      <div
+        class="css-1aa5heh"
+      >
+        <article
+          class="h-entry"
+          id="mock-media-id"
+        >
+          <div
+            class="css-1wualeq"
+          >
+            Mock category
+          </div>
+          <h1
+            class="p-name css-1sus4jf"
+          >
+            A Mock Blog Post
+          </h1>
+          <time
+            class="dt-published created"
+          >
+            Published Mon, 17 Jun 2024 03:30:26 GMT
+          </time>
+          <div
+            style="display: none;"
+          >
+            <a
+              class="u-url"
+              href="https://example.com/music/mock-media"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-media-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              Mock Description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              music
+            </span>
+          </div>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`Media Post renders the Head component with SEO data 1`] = `null`;
+exports[`Media Post renders the Head component with SEO data 1`] = `
+<DocumentFragment>
+  <div
+    class="seoMock"
+  />
+</DocumentFragment>
+`;

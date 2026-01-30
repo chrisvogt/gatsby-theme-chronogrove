@@ -1,13 +1,14 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import PinnedItemCard from './pinned-item-card'
 
 describe('Widget/GitHub/PinnedItemCard', () => {
   describe('snapshots', () => {
     it('matches the placeholder snapshot', () => {
-      const tree = renderer.create(<PinnedItemCard type='placeholder' />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(<PinnedItemCard type='placeholder' />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('matches the repository variant snapshot', () => {
@@ -18,8 +19,8 @@ describe('Widget/GitHub/PinnedItemCard', () => {
         pushedAt: '2024-06-01T12:00:00Z',
         updatedAt: '1592808981'
       }
-      const tree = renderer.create(<PinnedItemCard item={mockRepositoryItem} type='Repository' />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(<PinnedItemCard item={mockRepositoryItem} type='Repository' />)
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

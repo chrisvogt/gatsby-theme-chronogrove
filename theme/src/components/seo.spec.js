@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { TestProvider } from '../testUtils'
 import Seo from './seo'
@@ -24,75 +25,63 @@ describe('Seo', () => {
   })
 
   it('matches the snapshot with basic props', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with all optional props', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo
-            title='Test Page'
-            description='Test description'
-            image='https://example.com/image.jpg'
-            keywords='test, keywords'
-            article={true}
-          />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo
+          title='Test Page'
+          description='Test description'
+          image='https://example.com/image.jpg'
+          keywords='test, keywords'
+          article={true}
+        />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without description', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without image', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without keywords', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without article prop', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without twitter username', () => {
@@ -101,14 +90,12 @@ describe('Seo', () => {
       twitterUsername: null
     }))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with twitter username', () => {
@@ -117,14 +104,12 @@ describe('Seo', () => {
       twitterUsername: '@testuser'
     }))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without webmention URL', () => {
@@ -133,27 +118,23 @@ describe('Seo', () => {
       webmentionUrl: null
     }))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page' description='Test description' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with children', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Test Page'>
-            <meta name='custom' content='value' />
-          </Seo>
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page'>
+          <meta name='custom' content='value' />
+        </Seo>
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles title template replacement', () => {
@@ -162,14 +143,12 @@ describe('Seo', () => {
       titleTemplate: 'Custom %s Template'
     }))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Page Title' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Page Title' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles missing title template', () => {
@@ -178,13 +157,11 @@ describe('Seo', () => {
       titleTemplate: null
     }))
 
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <Seo title='Page Title' />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Page Title' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

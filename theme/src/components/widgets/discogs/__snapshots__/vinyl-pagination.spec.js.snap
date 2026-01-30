@@ -1,11 +1,342 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`VinylPagination disables next button on last page 1`] = `null`;
+exports[`VinylPagination disables next button on last page 1`] = `
+<DocumentFragment>
+  <div
+    class="css-9vd5ud"
+  >
+    <div
+      class="css-cw2e6h"
+    >
+      <button
+        aria-label="Previous page"
+        class="css-1b2ompy"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-left"
+          data-icon="chevron-left"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        class="css-3umnwr"
+      >
+        <div
+          class="css-1b6rjoo"
+        >
+          <button
+            aria-label="Go to page 1"
+            class="css-rjnzsf"
+          >
+            1
+          </button>
+          <button
+            aria-label="Go to page 2"
+            class="css-1tpqzpg"
+          >
+            2
+          </button>
+          <button
+            aria-current="page"
+            aria-label="Go to page 3"
+            class="css-qb4jev"
+          >
+            3
+          </button>
+        </div>
+      </div>
+      <button
+        aria-label="Next page"
+        class="css-1wqopuy"
+        disabled=""
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-right"
+          data-icon="chevron-right"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M311.1 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L243.2 256 73.9 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="css-1wp5sa6"
+    >
+      Page 3 of 3
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`VinylPagination disables previous button on first page 1`] = `null`;
+exports[`VinylPagination disables previous button on first page 1`] = `
+<DocumentFragment>
+  <div
+    class="css-9vd5ud"
+  >
+    <div
+      class="css-cw2e6h"
+    >
+      <button
+        aria-label="Previous page"
+        class="css-1wqopuy"
+        disabled=""
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-left"
+          data-icon="chevron-left"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        class="css-3umnwr"
+      >
+        <div
+          class="css-1b6rjoo"
+        >
+          <button
+            aria-current="page"
+            aria-label="Go to page 1"
+            class="css-qb4jev"
+          >
+            1
+          </button>
+          <button
+            aria-label="Go to page 2"
+            class="css-1tpqzpg"
+          >
+            2
+          </button>
+          <button
+            aria-label="Go to page 3"
+            class="css-rjnzsf"
+          >
+            3
+          </button>
+        </div>
+      </div>
+      <button
+        aria-label="Next page"
+        class="css-1b2ompy"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-right"
+          data-icon="chevron-right"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M311.1 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L243.2 256 73.9 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="css-1wp5sa6"
+    >
+      Page 1 of 3
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`VinylPagination does not render pagination controls when totalPages <= 1 1`] = `null`;
+exports[`VinylPagination does not render pagination controls when totalPages <= 1 1`] = `
+<DocumentFragment>
+  <div
+    class="css-9vd5ud"
+  />
+</DocumentFragment>
+`;
 
-exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `null`;
+exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `
+<DocumentFragment>
+  <div
+    class="css-9vd5ud"
+  >
+    <div
+      class="css-cw2e6h"
+    >
+      <button
+        aria-label="Previous page"
+        class="css-1wqopuy"
+        disabled=""
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-left"
+          data-icon="chevron-left"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        class="css-3umnwr"
+      >
+        <div
+          class="css-1b6rjoo"
+        >
+          <button
+            aria-current="page"
+            aria-label="Go to page 1"
+            class="css-qb4jev"
+          >
+            1
+          </button>
+          <button
+            aria-label="Go to page 2"
+            class="css-1tpqzpg"
+          >
+            2
+          </button>
+          <button
+            aria-label="Go to page 3"
+            class="css-rjnzsf"
+          >
+            3
+          </button>
+        </div>
+      </div>
+      <button
+        aria-label="Next page"
+        class="css-1b2ompy"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-right"
+          data-icon="chevron-right"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M311.1 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L243.2 256 73.9 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="css-1wp5sa6"
+    >
+      Page 1 of 3
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
-exports[`VinylPagination shows correct page info 1`] = `null`;
+exports[`VinylPagination shows correct page info 1`] = `
+<DocumentFragment>
+  <div
+    class="css-9vd5ud"
+  >
+    <div
+      class="css-cw2e6h"
+    >
+      <button
+        aria-label="Previous page"
+        class="css-1b2ompy"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-left"
+          data-icon="chevron-left"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <div
+        class="css-3umnwr"
+      >
+        <div
+          class="css-1b6rjoo"
+        >
+          <button
+            aria-label="Go to page 1"
+            class="css-rjnzsf"
+          >
+            1
+          </button>
+          <button
+            aria-current="page"
+            aria-label="Go to page 2"
+            class="css-qb4jev"
+          >
+            2
+          </button>
+          <button
+            aria-label="Go to page 3"
+            class="css-1tpqzpg"
+          >
+            3
+          </button>
+          <button
+            aria-label="Go to page 4"
+            class="css-rjnzsf"
+          >
+            4
+          </button>
+        </div>
+      </div>
+      <button
+        aria-label="Next page"
+        class="css-1b2ompy"
+      >
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-chevron-right"
+          data-icon="chevron-right"
+          data-prefix="fas"
+          role="img"
+          viewBox="0 0 320 512"
+        >
+          <path
+            d="M311.1 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L243.2 256 73.9 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="css-1wp5sa6"
+    >
+      Page 2 of 5
+    </div>
+  </div>
+</DocumentFragment>
+`;

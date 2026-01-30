@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useStaticQuery } from 'gatsby'
 import useRecentPosts, { getPosts } from './use-recent-posts'
 

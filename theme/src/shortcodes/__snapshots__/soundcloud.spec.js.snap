@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`SoundCloud Shortcode matches the snapshot in dark mode 1`] = `null`;
+exports[`SoundCloud Shortcode matches the snapshot in dark mode 1`] = `
+<DocumentFragment>
+  <iframe
+    allow="autoplay"
+    frameborder="no"
+    height="166"
+    scrolling="no"
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/880888540&color=%23800080&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+    title="Song on SoundCloud"
+    width="100%"
+  />
+</DocumentFragment>
+`;
 
-exports[`SoundCloud Shortcode matches the snapshot in light mode 1`] = `null`;
+exports[`SoundCloud Shortcode matches the snapshot in light mode 1`] = `
+<DocumentFragment>
+  <iframe
+    allow="autoplay"
+    frameborder="no"
+    height="166"
+    scrolling="no"
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/880888540&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+    title="Song on SoundCloud"
+    width="100%"
+  />
+</DocumentFragment>
+`;

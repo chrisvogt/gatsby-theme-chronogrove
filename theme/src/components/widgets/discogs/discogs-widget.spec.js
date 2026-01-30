@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { TestProviderWithState } from '../../../testUtils'
 import DiscogsWidget from './discogs-widget'
@@ -25,14 +26,12 @@ describe('Discogs Widget', () => {
   })
 
   it('matches the loading state snapshot', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <DiscogsWidget />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <DiscogsWidget />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('matches the loaded state snapshot', () => {
@@ -68,14 +67,12 @@ describe('Discogs Widget', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={initialState}>
-          <DiscogsWidget />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={initialState}>
+        <DiscogsWidget />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('matches the error state snapshot', () => {
@@ -88,13 +85,11 @@ describe('Discogs Widget', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={initialState}>
-          <DiscogsWidget />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={initialState}>
+        <DiscogsWidget />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

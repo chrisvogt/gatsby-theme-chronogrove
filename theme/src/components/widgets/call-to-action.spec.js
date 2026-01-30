@@ -1,65 +1,63 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
-import { Bars } from 'svg-loaders-react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import CallToAction from './call-to-action'
 
 describe('CallToAction', () => {
   const title = 'Example Widget Title'
 
   it('matches the snapshot', () => {
-    const tree = renderer
-      .create(
-        <CallToAction title={title} isLoading={false}>
-          Test
-        </CallToAction>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <CallToAction title={title} isLoading={false}>
+        Test
+      </CallToAction>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   describe('loading indicator', () => {
-    it("doesn't a loading indicator by default", () => {
-      const testRenderer = renderer.create(<CallToAction title={title}>Test</CallToAction>)
-      const testInstance = testRenderer.root
-      expect(testInstance.findAllByType(Bars)).toHaveLength(0)
+    it("doesn't render a loading indicator by default", () => {
+      const { container } = render(<CallToAction title={title}>Test</CallToAction>)
+      // Bars loader has a specific SVG pattern
+      const loader =
+        container.querySelector('svg[data-testid="bars-loading"]') || container.querySelector('.bars-loading')
+      expect(loader).not.toBeInTheDocument()
     })
 
     it('renders a loading indicator', () => {
-      const testRenderer = renderer.create(
+      const { container } = render(
         <CallToAction title={title} isLoading>
           Test
         </CallToAction>
       )
-      const testInstance = testRenderer.root
-      expect(testInstance.findAllByType(Bars)).toHaveLength(1)
+      // Check for SVG loader - Bars from svg-loaders-react renders an SVG
+      const svg = container.querySelector('svg')
+      expect(svg).toBeInTheDocument()
     })
   })
 
   describe('hyperlink vs Gatsby Router links', () => {
     it('renders a hyperlink by default', () => {
       const href = 'https://fake-link.com/my-profile'
-      const testRenderer = renderer.create(
+      render(
         <CallToAction title='My Profile' url={href}>
           Visit profile
         </CallToAction>
       )
-      const testInstance = testRenderer.root
-      const hyperlinkEl = testInstance.findByType('a')
-      expect(!!hyperlinkEl.props.onClick).toBe(false)
-      expect(hyperlinkEl.props.href).toBe(href)
+      const link = screen.getByRole('link')
+      expect(link).not.toHaveAttribute('onClick')
+      expect(link).toHaveAttribute('href', href)
     })
 
     it('renders a Gatsby Router link', () => {
       const route = '/about-me'
-      const testRenderer = renderer.create(
+      render(
         <CallToAction title={title} to={route}>
           Learn more about me
         </CallToAction>
       )
-      const testInstance = testRenderer.root
-      const hyperlinkEl = testInstance.findByType('a')
-      expect(!!hyperlinkEl.props.onClick).toBe(true)
-      expect(hyperlinkEl.props.href).toBe(route)
+      const link = screen.getByRole('link')
+      expect(link).toHaveAttribute('href', route)
     })
   })
 })

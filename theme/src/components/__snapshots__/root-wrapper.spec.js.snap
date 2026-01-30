@@ -1,3 +1,14 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`RootWrapper renders children and AudioPlayer 1`] = `null`;
+exports[`RootWrapper renders children and AudioPlayer 1`] = `
+<DocumentFragment>
+  <div>
+    Test Child
+  </div>
+  <div
+    data-testid="mock-audio-player"
+  >
+    MockAudioPlayer
+  </div>
+</DocumentFragment>
+`;

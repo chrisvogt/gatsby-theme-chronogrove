@@ -19,6 +19,10 @@ const renderWithProvider = component => {
 }
 
 describe('Playlists Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders playlists correctly when not loading', () => {
     const expectedItems = playlists
       .map(item => {
@@ -52,7 +56,7 @@ describe('Playlists Component', () => {
         isLoading: false,
         items: expectedItems
       }),
-      {}
+      undefined
     )
 
     expect(getByTestId('media-item-grid')).toBeInTheDocument()
@@ -81,7 +85,7 @@ describe('Playlists Component', () => {
           details: `${playlist.name} (10 tracks)`
         }))
       }),
-      {}
+      undefined
     )
   })
 
@@ -102,7 +106,7 @@ describe('Playlists Component', () => {
       expect.objectContaining({
         items: []
       }),
-      {}
+      undefined
     )
   })
 
@@ -114,7 +118,7 @@ describe('Playlists Component', () => {
         isLoading: true,
         items: []
       }),
-      expect.anything()
+      undefined
     )
   })
 
@@ -125,7 +129,7 @@ describe('Playlists Component', () => {
       expect.objectContaining({
         items: []
       }),
-      {}
+      undefined
     )
   })
 
@@ -153,7 +157,7 @@ describe('Playlists Component', () => {
       expect.objectContaining({
         items: []
       }),
-      {}
+      undefined
     )
   })
 
@@ -217,7 +221,7 @@ describe('Playlists Component', () => {
           }
         ]
       }),
-      {}
+      undefined
     )
   })
 

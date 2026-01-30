@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Widget matches the snapshot 1`] = `null`;
+exports[`Widget matches the snapshot 1`] = `
+<DocumentFragment>
+  <section
+    class="css-1nbeq9o"
+  >
+    Test
+  </section>
+</DocumentFragment>
+`;

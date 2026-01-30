@@ -1,5 +1,4 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
 import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MediaItemGrid from './media-item-grid'
@@ -23,13 +22,13 @@ const mockItems = [
 
 describe('MediaItemGrid', () => {
   it('matches loading state snapshot', () => {
-    const tree = renderer.create(<MediaItemGrid isLoading={false} items={mockItems} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<MediaItemGrid isLoading={false} items={mockItems} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('matches the ready state snapshot state', () => {
-    const tree = renderer.create(<MediaItemGrid isLoading={true} items={[]} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<MediaItemGrid isLoading={true} items={[]} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('calls onTrackClick when item is clicked', () => {

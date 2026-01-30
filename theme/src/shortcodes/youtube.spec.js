@@ -1,23 +1,22 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import YouTube from './youtube'
 
 describe('YouTube Shortcode', () => {
   it('matches the snapshot', () => {
-    const tree = renderer
-      .create(
-        <YouTube
-          title='Here, There And Everywhere (Piano Cover) by Theme User'
-          url='https://www.youtube-nocookie.com/embed/XJashBvI17A'
-        />
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <YouTube
+        title='Here, There And Everywhere (Piano Cover) by Theme User'
+        url='https://www.youtube-nocookie.com/embed/XJashBvI17A'
+      />
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders a default title if one is not provided', () => {
-    const testRenderer = renderer.create(<YouTube url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />)
-    const testInstance = testRenderer.root
-    expect(testInstance.findByType('iframe').props.title).toEqual('Video on YouTube')
+    const { container } = render(<YouTube url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />)
+    const iframe = container.querySelector('iframe')
+    expect(iframe).toHaveAttribute('title', 'Video on YouTube')
   })
 })

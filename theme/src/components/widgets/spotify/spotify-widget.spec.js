@@ -1,6 +1,7 @@
 import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import SpotifyWidget from './spotify-widget'
-import renderer from 'react-test-renderer'
 import { TestProviderWithState } from '../../../testUtils'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 
@@ -25,14 +26,12 @@ describe('Spotify Widget', () => {
   })
 
   it('matches the loading state snapshot', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <SpotifyWidget />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <SpotifyWidget />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('matches the loaded state snapshot', () => {
@@ -77,14 +76,12 @@ describe('Spotify Widget', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={initialState}>
-          <SpotifyWidget />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={initialState}>
+        <SpotifyWidget />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('matches the error state snapshot', () => {
@@ -97,13 +94,11 @@ describe('Spotify Widget', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={initialState}>
-          <SpotifyWidget />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={initialState}>
+        <SpotifyWidget />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

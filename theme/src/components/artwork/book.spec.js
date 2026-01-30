@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Book from './book'
 
 describe('Book', () => {
@@ -7,15 +8,13 @@ describe('Book', () => {
   const title = 'Fake Book'
 
   it('matches the snapshot', () => {
-    const tree = renderer.create(<Book thumbnailURL={thumbnailURL} title={title} />).toJSON()
-
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<Book thumbnailURL={thumbnailURL} title={title} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders an image using the image prop', () => {
-    const testRenderer = renderer.create(<Book thumbnailURL={thumbnailURL} title={title} />)
-    const testInstance = testRenderer.root
-
-    expect(testInstance.findByType('image').props.xlinkHref).toEqual(thumbnailURL)
+    const { container } = render(<Book thumbnailURL={thumbnailURL} title={title} />)
+    const image = container.querySelector('image')
+    expect(image).toHaveAttribute('xlink:href', thumbnailURL)
   })
 })

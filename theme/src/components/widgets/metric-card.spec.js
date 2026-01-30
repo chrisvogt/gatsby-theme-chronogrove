@@ -1,10 +1,11 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import MetricCard from './metric-card'
 
 describe('MetricCard', () => {
   it('matches the snapshot', () => {
-    const tree = renderer.create(<MetricCard title='Fake Metric' value='Fake Value' ready='true' />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<MetricCard title='Fake Metric' value='Fake Value' ready='true' />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -1,3 +1,24 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`WidgetHeader matches the snapshot 1`] = `null`;
+exports[`WidgetHeader matches the snapshot 1`] = `
+<DocumentFragment>
+  <header
+    class="css-ef6z63"
+  >
+    <h2
+      class="css-gifmxh"
+    >
+      Neat & Interesting Widget
+    </h2>
+    <div
+      class="css-pizwmh"
+    >
+      <div
+        class="sidebar-content"
+      >
+        Sidebar
+      </div>
+    </div>
+  </header>
+</DocumentFragment>
+`;

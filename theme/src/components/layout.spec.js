@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { TestProviderWithState } from '../testUtils'
 import Layout from './layout'
@@ -48,55 +49,47 @@ describe('Layout', () => {
   })
 
   it('matches the snapshot', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <Layout>
-            <div>Test content</div>
-          </Layout>
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <Layout>
+          <div>Test content</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with hideHeader prop', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <Layout hideHeader>
-            <div>Test content without header</div>
-          </Layout>
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <Layout hideHeader>
+          <div>Test content without header</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with hideFooter prop', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <Layout hideFooter>
-            <div>Test content without footer</div>
-          </Layout>
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <Layout hideFooter>
+          <div>Test content without footer</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with disableMainWrapper prop', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <Layout disableMainWrapper>
-            <div>Test content without main wrapper</div>
-          </Layout>
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <Layout disableMainWrapper>
+          <div>Test content without main wrapper</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with audio player visible state', () => {
@@ -111,16 +104,14 @@ describe('Layout', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={initialState}>
-          <Layout>
-            <div>Test content with audio player</div>
-          </Layout>
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={initialState}>
+        <Layout>
+          <div>Test content with audio player</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with audio player visible state and checks padding', () => {
@@ -135,7 +126,7 @@ describe('Layout', () => {
       }
     }
 
-    const tree = renderer.create(
+    const { asFragment } = render(
       <TestProviderWithState initialState={initialState}>
         <Layout>
           <div>Test content with audio player</div>
@@ -144,9 +135,7 @@ describe('Layout', () => {
     )
 
     // Test passes if no errors are thrown
-    expect(tree.toJSON()).toBeTruthy()
-
-    tree.unmount()
+    expect(asFragment()).toBeTruthy()
   })
 
   it('renders with audio player hidden state', () => {
@@ -157,16 +146,14 @@ describe('Layout', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={initialState}>
-          <Layout>
-            <div>Test content without audio player</div>
-          </Layout>
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={initialState}>
+        <Layout>
+          <div>Test content without audio player</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with audio player hidden state and checks no padding', () => {
@@ -177,7 +164,7 @@ describe('Layout', () => {
       }
     }
 
-    const tree = renderer.create(
+    const { asFragment } = render(
       <TestProviderWithState initialState={initialState}>
         <Layout>
           <div>Test content without audio player</div>
@@ -186,8 +173,6 @@ describe('Layout', () => {
     )
 
     // Test passes if no errors are thrown
-    expect(tree.toJSON()).toBeTruthy()
-
-    tree.unmount()
+    expect(asFragment()).toBeTruthy()
   })
 })

@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`StatusCard matches the snapshot 1`] = `null`;
+exports[`StatusCard matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="css-luhscj"
+  />
+</DocumentFragment>
+`;

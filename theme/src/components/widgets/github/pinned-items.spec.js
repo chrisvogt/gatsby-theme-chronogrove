@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import PinnedItems from './pinned-items'
 
@@ -14,13 +15,13 @@ const mockPinnedItems = [
 describe('Widget/GitHub/PinnedItems', () => {
   describe('snapshots', () => {
     it('matches the placeholder snapshot', () => {
-      const tree = renderer.create(<PinnedItems isLoading />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(<PinnedItems isLoading />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('matches the successful state', () => {
-      const tree = renderer.create(<PinnedItems pinnedItems={mockPinnedItems} isLoading={false} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(<PinnedItems pinnedItems={mockPinnedItems} isLoading={false} />)
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 })

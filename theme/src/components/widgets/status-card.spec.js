@@ -1,11 +1,12 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import StatusCard from './status-card'
 
 describe('StatusCard', () => {
   it('matches the snapshot', () => {
     const message = 'Lorum ipsum dolor sit amet.'
-    const tree = renderer.create(<StatusCard>{message}</StatusCard>).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<StatusCard>{message}</StatusCard>)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

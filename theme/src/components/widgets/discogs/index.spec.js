@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import DiscogsWidget from './index'
 
@@ -12,7 +13,7 @@ jest.mock('./discogs-widget', () => {
 
 describe('Discogs Index', () => {
   it('exports the discogs widget as default', () => {
-    const tree = renderer.create(<DiscogsWidget />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<DiscogsWidget />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { useStaticQuery } from 'gatsby'
 
 import Post, { Head } from './post'
@@ -47,8 +48,8 @@ describe('Blog Post', () => {
   })
 
   it('matches the snapshot', () => {
-    const tree = renderer.create(<Post data={data}>{BlogPostContent}</Post>).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<Post data={data}>{BlogPostContent}</Post>)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('does not render category when not provided', () => {
@@ -62,12 +63,12 @@ describe('Blog Post', () => {
         }
       }
     }
-    const tree = renderer.create(<Post data={noCategoryData}>{BlogPostContent}</Post>).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<Post data={noCategoryData}>{BlogPostContent}</Post>)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders Seo component with the correct props', () => {
-    const seoTree = renderer.create(<Head data={data} />).toJSON()
-    expect(seoTree).toMatchSnapshot()
+    const { asFragment } = render(<Head data={data} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })
