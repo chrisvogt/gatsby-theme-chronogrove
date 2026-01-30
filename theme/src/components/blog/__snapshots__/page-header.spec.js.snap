@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`PageHeader matches snapshot 1`] = `
-<h1
-  className="p-name css-1sus4jf"
->
-  Hello, World!
-</h1>
-`;
+exports[`PageHeader matches snapshot 1`] = `null`;

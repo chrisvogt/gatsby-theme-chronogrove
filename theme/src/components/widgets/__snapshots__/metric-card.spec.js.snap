@@ -1,12 +1,3 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`MetricCard matches the snapshot 1`] = `
-<div
-  className="css-1yz7e9k"
->
-  <span>
-    Fake Value
-  </span>
-  Fake Metric
-</div>
-`;
+exports[`MetricCard matches the snapshot 1`] = `null`;

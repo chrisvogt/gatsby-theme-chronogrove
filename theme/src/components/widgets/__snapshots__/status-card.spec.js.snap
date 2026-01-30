@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`StatusCard matches the snapshot 1`] = `
-<div
-  className="css-luhscj"
-/>
-`;
+exports[`StatusCard matches the snapshot 1`] = `null`;

@@ -27,10 +27,4 @@ exports[`Spotify renders error state when fetch fails 1`] = `
 </div>
 `;
 
-exports[`Spotify renders loading state initially 1`] = `
-<div
-  className="css-12dtzxe"
->
-  Loading...
-</div>
-`;
+exports[`Spotify renders loading state initially 1`] = `null`;

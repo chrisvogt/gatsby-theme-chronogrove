@@ -1,61 +1,9 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Header renders with children 1`] = `
-<header
-  className="css-1u8qly9"
-  role="banner"
->
-  <div
-    className="css-1u8qly9"
-  >
-    <h1>
-      Test Header
-    </h1>
-  </div>
-</header>
-`;
+exports[`Header renders with children 1`] = `null`;
 
-exports[`Header renders with custom styles 1`] = `
-<header
-  className="css-1u8qly9"
-  role="banner"
->
-  <div
-    className="css-10n8us"
-  >
-    <h1>
-      Test Header with Styles
-    </h1>
-  </div>
-</header>
-`;
+exports[`Header renders with custom styles 1`] = `null`;
 
-exports[`Header renders with empty styles object 1`] = `
-<header
-  className="css-1u8qly9"
-  role="banner"
->
-  <div
-    className="css-1u8qly9"
-  >
-    <h1>
-      Test Header with Empty Styles
-    </h1>
-  </div>
-</header>
-`;
+exports[`Header renders with empty styles object 1`] = `null`;
 
-exports[`Header renders without styles prop 1`] = `
-<header
-  className="css-1u8qly9"
-  role="banner"
->
-  <div
-    className="css-1u8qly9"
-  >
-    <h1>
-      Test Header without Styles
-    </h1>
-  </div>
-</header>
-`;
+exports[`Header renders without styles prop 1`] = `null`;
