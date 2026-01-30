@@ -1,9 +1,9 @@
 import React from 'react'
-import renderer, { act } from 'react-test-renderer'
+import { render, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import { configureStore as configureRealStore } from '@reduxjs/toolkit'
-// import SteamWidget from './steam-widget' // REMOVE THIS LINE
 
 // Mock child components to isolate the test
 jest.mock('../call-to-action', () => props => <div data-testid='CallToAction'>{props.title}</div>)
@@ -84,15 +84,13 @@ describe('SteamWidget', () => {
       }
     })
 
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
-      .toJSON()
+    const { asFragment } = render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
 
-    expect(tree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders loading state', () => {
@@ -104,15 +102,13 @@ describe('SteamWidget', () => {
       }
     })
 
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
-      .toJSON()
+    const { asFragment } = render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
 
-    expect(tree).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders error state (hasFatalError)', () => {
@@ -135,14 +131,12 @@ describe('SteamWidget', () => {
         }
       }
     })
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders AI summary if present', () => {
@@ -165,14 +159,12 @@ describe('SteamWidget', () => {
         }
       }
     })
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with empty metrics', () => {
@@ -194,14 +186,12 @@ describe('SteamWidget', () => {
         }
       }
     })
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with empty recentlyPlayedGames and ownedGames', () => {
@@ -223,14 +213,12 @@ describe('SteamWidget', () => {
         }
       }
     })
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('calls fetchDataSource when isLoading is true', async () => {
@@ -253,13 +241,15 @@ describe('SteamWidget', () => {
       return state
     }
     const store = configureRealStore({ reducer: { widgets } })
-    await act(async () => {
-      renderer.create(
-        <Provider store={store}>
-          <SteamWidget />
-        </Provider>
-      )
+
+    render(
+      <Provider store={store}>
+        <SteamWidget />
+      </Provider>
+    )
+
+    await waitFor(() => {
+      expect(mockFetchDataSource).toHaveBeenCalled()
     })
-    expect(mockFetchDataSource).toHaveBeenCalled()
   })
 })

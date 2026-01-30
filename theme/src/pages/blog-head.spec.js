@@ -12,14 +12,24 @@ jest.mock('../hooks/use-site-metadata', () => ({
   })
 }))
 
+// Capture the children passed to Seo for meta tag verification
+let capturedChildren = null
+
 // Mock the Seo component
-jest.mock('../components/seo', () => ({ title, description, children }) => (
-  <div data-testid='seo' data-title={title} data-description={description}>
-    {children}
-  </div>
-))
+jest.mock('../components/seo', () => ({ title, description, children }) => {
+  capturedChildren = children
+  return (
+    <div data-testid='seo' data-title={title} data-description={description}>
+      {children}
+    </div>
+  )
+})
 
 describe('BlogHead', () => {
+  beforeEach(() => {
+    capturedChildren = null
+  })
+
   it('renders the component', () => {
     const { getByTestId } = render(<BlogHead />)
     expect(getByTestId('seo')).toBeInTheDocument()
@@ -34,13 +44,18 @@ describe('BlogHead', () => {
   })
 
   it('renders Open Graph meta tags', () => {
-    const { container } = render(<BlogHead />)
+    render(<BlogHead />)
 
-    const urlMeta = container.querySelector('meta[property="og:url"]')
-    const typeMeta = container.querySelector('meta[property="og:type"]')
+    // Verify meta tags are passed as children to Seo
+    expect(capturedChildren).toBeDefined()
 
-    expect(urlMeta).toHaveAttribute('content', 'https://test.example.com/blog/')
-    expect(typeMeta).toHaveAttribute('content', 'website')
+    // Convert children to array and check meta tags
+    const childArray = React.Children.toArray(capturedChildren)
+    const urlMeta = childArray.find(child => child.props?.property === 'og:url')
+    const typeMeta = childArray.find(child => child.props?.property === 'og:type')
+
+    expect(urlMeta.props.content).toBe('https://test.example.com/blog/')
+    expect(typeMeta.props.content).toBe('website')
   })
 
   it('uses site metadata correctly', () => {

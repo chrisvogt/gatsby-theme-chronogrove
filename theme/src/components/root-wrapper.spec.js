@@ -1,11 +1,12 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import configureStore from 'redux-mock-store'
 import { Provider } from 'react-redux'
 import RootWrapper from './root-wrapper'
 
 // Mock AudioPlayer component
-jest.mock('./audio-player', () => jest.fn(() => <div>MockAudioPlayer</div>))
+jest.mock('./audio-player', () => jest.fn(() => <div data-testid='mock-audio-player'>MockAudioPlayer</div>))
 
 // Mock theme-ui hooks
 jest.mock('theme-ui', () => ({
@@ -39,7 +40,7 @@ describe('RootWrapper', () => {
   })
 
   it('renders children and AudioPlayer', () => {
-    const component = renderer.create(
+    const { asFragment } = render(
       <Provider store={store}>
         <RootWrapper>
           <div>Test Child</div>
@@ -47,12 +48,12 @@ describe('RootWrapper', () => {
       </Provider>
     )
 
-    expect(component.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('passes correct props to AudioPlayer', () => {
     const AudioPlayer = require('./audio-player')
-    renderer.create(
+    render(
       <Provider store={store}>
         <RootWrapper>
           <div>Test Child</div>
@@ -60,12 +61,10 @@ describe('RootWrapper', () => {
       </Provider>
     )
 
-    expect(AudioPlayer).toHaveBeenCalledWith(
-      {
-        soundcloudId: '123',
-        isVisible: true
-      },
-      expect.anything()
-    )
+    // Check that AudioPlayer was called with the expected props
+    expect(AudioPlayer).toHaveBeenCalled()
+    const callArgs = AudioPlayer.mock.calls[0][0]
+    expect(callArgs.soundcloudId).toBe('123')
+    expect(callArgs.isVisible).toBe(true)
   })
 })

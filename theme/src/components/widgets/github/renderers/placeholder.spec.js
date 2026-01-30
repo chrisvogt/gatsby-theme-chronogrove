@@ -1,10 +1,11 @@
 import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Placeholder from './placeholder'
-import renderer from 'react-test-renderer'
 
 describe('GitHub Placeholder Renderer', () => {
   it('matches the snapshot', () => {
-    const tree = renderer.create(<Placeholder />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<Placeholder />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

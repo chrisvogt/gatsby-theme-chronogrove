@@ -285,7 +285,8 @@ describe('parseSafeHtml', () => {
     const { container } = render(<div>{result}</div>)
     const link = container.querySelector('a')
     expect(link).toBeInTheDocument()
-    expect(link.href).toBe('javascript:alert(1)')
+    // React 19 blocks javascript: URLs for security - it replaces them with a security error
+    expect(link.href).toContain('javascript:')
     expect(link.textContent).toBe('javascript link')
   })
 

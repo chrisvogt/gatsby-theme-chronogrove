@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import PostCard from './post-card'
 
 describe('PostCard', () => {
@@ -12,8 +13,8 @@ describe('PostCard', () => {
   }
 
   it('matches the snapshot without excerpt', () => {
-    const tree = renderer.create(<PostCard {...baseProps} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...baseProps} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders excerpt when provided', () => {
@@ -21,8 +22,8 @@ describe('PostCard', () => {
       ...baseProps,
       excerpt: 'This is a sample excerpt for the blog post.'
     }
-    const tree = renderer.create(<PostCard {...propsWithExcerpt} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithExcerpt} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('does not render excerpt when explicitly null', () => {
@@ -30,8 +31,8 @@ describe('PostCard', () => {
       ...baseProps,
       excerpt: null
     }
-    const tree = renderer.create(<PostCard {...propsWithNullExcerpt} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithNullExcerpt} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('does not render excerpt when explicitly undefined', () => {
@@ -39,8 +40,8 @@ describe('PostCard', () => {
       ...baseProps,
       excerpt: undefined
     }
-    const tree = renderer.create(<PostCard {...propsWithUndefinedExcerpt} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithUndefinedExcerpt} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without banner when not provided', () => {
@@ -50,8 +51,8 @@ describe('PostCard', () => {
       link: '/blog/article',
       title: 'My Blog Post'
     }
-    const tree = renderer.create(<PostCard {...propsWithoutBanner} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithoutBanner} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without category when not provided', () => {
@@ -61,8 +62,8 @@ describe('PostCard', () => {
       link: '/blog/article',
       title: 'My Blog Post'
     }
-    const tree = renderer.create(<PostCard {...propsWithoutCategory} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithoutCategory} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('specifically tests excerpt prop handling for blog page change', () => {
@@ -72,15 +73,14 @@ describe('PostCard', () => {
       // excerpt is intentionally not included, simulating the commented out line
     }
 
-    const component = renderer.create(<PostCard {...propsWithoutExcerpt} />)
-    const tree = component.toJSON()
+    const { container, asFragment } = render(<PostCard {...propsWithoutExcerpt} />)
 
-    // Verify that no excerpt paragraph is rendered
-    const excerptParagraph = findExcerptParagraph(tree)
-    expect(excerptParagraph).toBeNull()
+    // Verify that no excerpt paragraph is rendered (check for description class)
+    const excerptParagraph = container.querySelector('p.description, [class*="description"]')
+    expect(excerptParagraph).not.toBeInTheDocument()
 
     // Verify that the component still renders correctly without excerpt
-    expect(tree).toBeTruthy()
+    expect(asFragment()).toBeTruthy()
   })
 
   it('renders in horizontal layout when horizontal prop is true', () => {
@@ -88,8 +88,8 @@ describe('PostCard', () => {
       ...baseProps,
       horizontal: true
     }
-    const tree = renderer.create(<PostCard {...propsWithHorizontal} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithHorizontal} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders as image-only recap when isRecap prop is true', () => {
@@ -97,23 +97,7 @@ describe('PostCard', () => {
       ...baseProps,
       isRecap: true
     }
-    const tree = renderer.create(<PostCard {...propsWithRecap} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<PostCard {...propsWithRecap} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })
-
-// Helper function to find the excerpt paragraph in the rendered tree
-function findExcerptParagraph(tree) {
-  if (!tree || !tree.children) return null
-
-  for (const child of tree.children) {
-    if (child.type === 'p' && child.props && child.props.className && child.props.className.includes('description')) {
-      return child
-    }
-    if (child.children) {
-      const found = findExcerptParagraph(child)
-      if (found) return found
-    }
-  }
-  return null
-}

@@ -1,18 +1,17 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import Header from './header'
 
 describe('Header', () => {
   it('renders with children', () => {
-    const tree = renderer
-      .create(
-        <Header>
-          <h1>Test Header</h1>
-        </Header>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Header>
+        <h1>Test Header</h1>
+      </Header>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with custom styles', () => {
@@ -20,35 +19,29 @@ describe('Header', () => {
       backgroundColor: 'red',
       color: 'white'
     }
-    const tree = renderer
-      .create(
-        <Header styles={customStyles}>
-          <h1>Test Header with Styles</h1>
-        </Header>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Header styles={customStyles}>
+        <h1>Test Header with Styles</h1>
+      </Header>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without styles prop', () => {
-    const tree = renderer
-      .create(
-        <Header>
-          <h1>Test Header without Styles</h1>
-        </Header>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Header>
+        <h1>Test Header without Styles</h1>
+      </Header>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with empty styles object', () => {
-    const tree = renderer
-      .create(
-        <Header styles={{}}>
-          <h1>Test Header with Empty Styles</h1>
-        </Header>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <Header styles={{}}>
+        <h1>Test Header with Empty Styles</h1>
+      </Header>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

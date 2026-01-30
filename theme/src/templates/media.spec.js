@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import { useStaticQuery } from 'gatsby'
 import { Provider } from 'react-redux'
@@ -78,7 +79,7 @@ describe('Media Post', () => {
 
   // Helper function to wrap components in the ThemeUIProvider and Redux Provider
   const renderWithTheme = component =>
-    renderer.create(
+    render(
       <Provider store={store}>
         <ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>
       </Provider>
@@ -86,8 +87,8 @@ describe('Media Post', () => {
 
   // Test with no media sources
   it('renders correctly with no media sources', () => {
-    const tree = renderWithTheme(<Media data={data} children={MediaPostContent} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Media data={data} children={MediaPostContent} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   // Test with YouTube source
@@ -99,8 +100,8 @@ describe('Media Post', () => {
         frontmatter: { ...data.mdx.frontmatter, youtubeSrc: 'mockYoutubeSrc' }
       }
     }
-    const tree = renderWithTheme(<Media data={youtubeData} children={MediaPostContent} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Media data={youtubeData} children={MediaPostContent} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   // Test with SoundCloud source
@@ -112,13 +113,13 @@ describe('Media Post', () => {
         frontmatter: { ...data.mdx.frontmatter, soundcloudId: 'mockSoundCloudId' }
       }
     }
-    const tree = renderWithTheme(<Media data={soundcloudData} children={MediaPostContent} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Media data={soundcloudData} children={MediaPostContent} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   // Test the SEO Head component
   it('renders the Head component with SEO data', () => {
-    const seoTree = renderWithTheme(<Head data={data} />).toJSON()
-    expect(seoTree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Head data={data} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

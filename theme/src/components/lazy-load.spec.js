@@ -4,21 +4,14 @@ import '@testing-library/jest-dom'
 import LazyLoad from './lazy-load'
 
 // Control visibility per test
-let mockVisibility = false
+let mockInView = false
 
-jest.mock('react-visibility-sensor', () => {
-  const React = require('react')
-  return {
-    __esModule: true,
-    default: ({ onChange, children }) => {
-      React.useEffect(() => {
-        onChange(mockVisibility)
-      }, [onChange])
-
-      return <div>{children}</div>
-    }
-  }
-})
+jest.mock('react-intersection-observer', () => ({
+  useInView: () => ({
+    ref: jest.fn(),
+    inView: mockInView
+  })
+}))
 
 // Mock placeholder component
 const MockPlaceholder = () => <div data-testid='placeholder'>Placeholder</div>
@@ -26,7 +19,7 @@ const MockPlaceholder = () => <div data-testid='placeholder'>Placeholder</div>
 describe('LazyLoad', () => {
   afterEach(() => {
     jest.clearAllMocks()
-    mockVisibility = false // Reset visibility after each test
+    mockInView = false // Reset visibility after each test
   })
 
   it('renders the default placeholder initially', () => {
@@ -41,7 +34,7 @@ describe('LazyLoad', () => {
   })
 
   it('renders the children when visible', () => {
-    mockVisibility = true
+    mockInView = true
 
     render(
       <LazyLoad>
@@ -64,7 +57,7 @@ describe('LazyLoad', () => {
   })
 
   it('does not re-render children if already visible', () => {
-    mockVisibility = true
+    mockInView = true
 
     const { rerender } = render(
       <LazyLoad>
@@ -75,7 +68,7 @@ describe('LazyLoad', () => {
     expect(screen.getByTestId('content')).toBeInTheDocument()
 
     // Change visibility to false (should not affect render after being visible once)
-    mockVisibility = false
+    mockInView = false
 
     rerender(
       <LazyLoad>

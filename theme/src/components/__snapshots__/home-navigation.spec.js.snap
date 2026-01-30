@@ -1,730 +1,660 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`HomeNavigation Edge cases handles navigation data with undefined home items 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation Edge cases handles navigation items with missing path 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-    >
-      Test
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+      >
+        Test
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation Edge cases handles navigation items with missing text 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/test"
-    />
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/test"
+      />
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation Edge cases handles server-side rendering when document is not available 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/about"
-    >
-      About
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/blog"
-    >
-      Blog
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/about"
+      >
+        About
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/blog"
+      >
+        Blog
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation handles navigation data with empty home items 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation handles navigation data with missing header 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation handles navigation data with null values 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/complex-slug"
-    >
-      Complex Slug
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/complex-slug"
+      >
+        Complex Slug
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation handles navigation items with discogs slug for icon mapping 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/discogs"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-record-vinyl css-1ni16ne"
-        data-icon="record-vinyl"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/discogs"
       >
-        <path
-          d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-          fill="currentColor"
-        />
-      </svg>
-      Discogs
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-record-vinyl css-1ni16ne"
+          data-icon="record-vinyl"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+            fill="currentColor"
+          />
+        </svg>
+        Discogs
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/test"
-    >
-      Test
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/test"
+      >
+        Test
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`HomeNavigation matches the snapshot 1`] = `
-<div
-  className="css-h0d98v"
->
-  <nav
-    aria-label="On-page navigation"
-    role="navigation"
+<DocumentFragment>
+  <div
+    class="css-h0d98v"
   >
-    <a
-      className="active css-14xb3ys"
-      href="#top"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-house css-1ni16ne"
-        data-icon="house"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+      <a
+        class="active css-14xb3ys"
+        href="#top"
       >
-        <path
-          d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
-          fill="currentColor"
-        />
-      </svg>
-      Home
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="#posts"
-    >
-      <svg
-        aria-hidden="true"
-        className="svg-inline--fa fa-newspaper css-1ni16ne"
-        data-icon="newspaper"
-        data-prefix="fas"
-        role="img"
-        style={
-          {
-            "height": "18px",
-          }
-        }
-        viewBox="0 0 512 512"
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-house css-1ni16ne"
+          data-icon="house"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"
+            fill="currentColor"
+          />
+        </svg>
+        Home
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="#posts"
       >
-        <path
-          d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
-          fill="currentColor"
-        />
-      </svg>
-      Latest Posts
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/about"
-    >
-      About
-    </a>
-    <a
-      className="css-14xb3ys"
-      href="/blog"
-    >
-      Blog
-    </a>
-  </nav>
-</div>
+        <svg
+          aria-hidden="true"
+          class="svg-inline--fa fa-newspaper css-1ni16ne"
+          data-icon="newspaper"
+          data-prefix="fas"
+          role="img"
+          style="height: 18px;"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M0 416L0 120c0-13.3 10.7-24 24-24s24 10.7 24 24l0 288c0 13.3 10.7 24 24 24s24-10.7 24-24L96 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64zM160 128l0 64c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32zm24 240c-13.3 0-24 10.7-24 24s10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0zm-24-72c0 13.3 10.7 24 24 24l240 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-240 0c-13.3 0-24 10.7-24 24zM360 176c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0z"
+            fill="currentColor"
+          />
+        </svg>
+        Latest Posts
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/about"
+      >
+        About
+      </a>
+      <a
+        class="css-14xb3ys"
+        href="/blog"
+      >
+        Blog
+      </a>
+    </nav>
+  </div>
+</DocumentFragment>
 `;

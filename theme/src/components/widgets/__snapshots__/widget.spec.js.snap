@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Widget matches the snapshot 1`] = `
-<section
-  className="css-1nbeq9o"
->
-  Test
-</section>
+<DocumentFragment>
+  <section
+    class="css-1nbeq9o"
+  >
+    Test
+  </section>
+</DocumentFragment>
 `;

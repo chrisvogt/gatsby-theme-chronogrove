@@ -1,290 +1,283 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Media Post renders correctly with a SoundCloud source 1`] = `
-<div
-  className="layoutMock"
->
+<DocumentFragment>
   <div
-    className="css-1v7u0sc"
+    class="layoutMock"
   >
     <div
-      className="css-1aa5heh"
-    >
-      <article
-        className="h-entry"
-        id="mock-media-id"
-      >
-        <div
-          className="css-1wualeq"
-        >
-          Mock category
-        </div>
-        <h1
-          className="p-name css-1sus4jf"
-        >
-          A Mock Blog Post
-        </h1>
-        <time
-          className="dt-published created"
-        >
-          Published 
-          Mon, 17 Jun 2024 03:30:26 GMT
-        </time>
-        <div
-          style={
-            {
-              "display": "none",
-            }
-          }
-        >
-          <a
-            className="u-url"
-            href="https://example.com/music/mock-media"
-          />
-          <span
-            className="u-uid"
-          >
-            mock-media-id
-          </span>
-          <div
-            className="p-summary"
-          >
-            Mock Description
-          </div>
-          <img
-            alt=""
-            className="u-photo"
-            src="mock-banner.jpg"
-          />
-          <span
-            className="p-category"
-          >
-            Mock Category
-          </span>
-          <span
-            className="p-category"
-          >
-            mock
-          </span>
-          <span
-            className="p-category"
-          >
-            test
-          </span>
-          <span
-            className="p-category"
-          >
-            music
-          </span>
-        </div>
-        <div
-          className="e-content article-content"
-        >
-          <div>
-            Lorum ipsum dolor sit amet.
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Media Post renders correctly with a YouTube source 1`] = `
-<div
-  className="layoutMock"
->
-  <div
-    className="css-rh73xg"
-  >
-    <div
-      className="css-io6end"
+      class="css-1v7u0sc"
     >
       <div
-        className="youtubeMock"
+        class="css-1aa5heh"
       >
-        mockYoutubeSrc
+        <article
+          class="h-entry"
+          id="mock-media-id"
+        >
+          <div
+            class="css-1wualeq"
+          >
+            Mock category
+          </div>
+          <h1
+            class="p-name css-1sus4jf"
+          >
+            A Mock Blog Post
+          </h1>
+          <time
+            class="dt-published created"
+          >
+            Published Mon, 17 Jun 2024 03:30:26 GMT
+          </time>
+          <div
+            style="display: none;"
+          >
+            <a
+              class="u-url"
+              href="https://example.com/music/mock-media"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-media-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              Mock Description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              music
+            </span>
+          </div>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
+</DocumentFragment>
+`;
+
+exports[`Media Post renders correctly with a YouTube source 1`] = `
+<DocumentFragment>
   <div
-    className="css-1v7u0sc"
+    class="layoutMock"
   >
     <div
-      className="css-1aa5heh"
+      class="css-rh73xg"
     >
-      <article
-        className="h-entry"
-        id="mock-media-id"
+      <div
+        class="css-io6end"
       >
         <div
-          className="css-1wualeq"
+          class="youtubeMock"
         >
-          Mock category
+          mockYoutubeSrc
         </div>
-        <h1
-          className="p-name css-1sus4jf"
+      </div>
+    </div>
+    <div
+      class="css-1v7u0sc"
+    >
+      <div
+        class="css-1aa5heh"
+      >
+        <article
+          class="h-entry"
+          id="mock-media-id"
         >
-          A Mock Blog Post
-        </h1>
-        <time
-          className="dt-published created"
-        >
-          Published 
-          Mon, 17 Jun 2024 03:30:26 GMT
-        </time>
-        <div
-          style={
-            {
-              "display": "none",
-            }
-          }
-        >
-          <a
-            className="u-url"
-            href="https://example.com/music/mock-media"
-          />
-          <span
-            className="u-uid"
-          >
-            mock-media-id
-          </span>
           <div
-            className="p-summary"
+            class="css-1wualeq"
           >
-            Mock Description
+            Mock category
           </div>
-          <img
-            alt=""
-            className="u-photo"
-            src="mock-banner.jpg"
-          />
-          <span
-            className="p-category"
+          <h1
+            class="p-name css-1sus4jf"
           >
-            Mock Category
-          </span>
-          <span
-            className="p-category"
+            A Mock Blog Post
+          </h1>
+          <time
+            class="dt-published created"
           >
-            mock
-          </span>
-          <span
-            className="p-category"
+            Published Mon, 17 Jun 2024 03:30:26 GMT
+          </time>
+          <div
+            style="display: none;"
           >
-            test
-          </span>
-          <span
-            className="p-category"
-          >
-            music
-          </span>
-        </div>
-        <div
-          className="e-content article-content"
-        >
-          <div>
-            Lorum ipsum dolor sit amet.
+            <a
+              class="u-url"
+              href="https://example.com/music/mock-media"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-media-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              Mock Description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              music
+            </span>
           </div>
-        </div>
-      </article>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`Media Post renders correctly with no media sources 1`] = `
-<div
-  className="layoutMock"
->
+<DocumentFragment>
   <div
-    className="css-1v7u0sc"
+    class="layoutMock"
   >
     <div
-      className="css-1aa5heh"
+      class="css-1v7u0sc"
     >
-      <article
-        className="h-entry"
-        id="mock-media-id"
+      <div
+        class="css-1aa5heh"
       >
-        <div
-          className="css-1wualeq"
+        <article
+          class="h-entry"
+          id="mock-media-id"
         >
-          Mock category
-        </div>
-        <h1
-          className="p-name css-1sus4jf"
-        >
-          A Mock Blog Post
-        </h1>
-        <time
-          className="dt-published created"
-        >
-          Published 
-          Mon, 17 Jun 2024 03:30:26 GMT
-        </time>
-        <div
-          style={
-            {
-              "display": "none",
-            }
-          }
-        >
-          <a
-            className="u-url"
-            href="https://example.com/music/mock-media"
-          />
-          <span
-            className="u-uid"
-          >
-            mock-media-id
-          </span>
           <div
-            className="p-summary"
+            class="css-1wualeq"
           >
-            Mock Description
+            Mock category
           </div>
-          <img
-            alt=""
-            className="u-photo"
-            src="mock-banner.jpg"
-          />
-          <span
-            className="p-category"
+          <h1
+            class="p-name css-1sus4jf"
           >
-            Mock Category
-          </span>
-          <span
-            className="p-category"
+            A Mock Blog Post
+          </h1>
+          <time
+            class="dt-published created"
           >
-            mock
-          </span>
-          <span
-            className="p-category"
+            Published Mon, 17 Jun 2024 03:30:26 GMT
+          </time>
+          <div
+            style="display: none;"
           >
-            test
-          </span>
-          <span
-            className="p-category"
-          >
-            music
-          </span>
-        </div>
-        <div
-          className="e-content article-content"
-        >
-          <div>
-            Lorum ipsum dolor sit amet.
+            <a
+              class="u-url"
+              href="https://example.com/music/mock-media"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-media-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              Mock Description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              music
+            </span>
           </div>
-        </div>
-      </article>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`Media Post renders the Head component with SEO data 1`] = `
-<div
-  className="seoMock"
-/>
+<DocumentFragment>
+  <div
+    class="seoMock"
+  />
+</DocumentFragment>
 `;

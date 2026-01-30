@@ -1,10 +1,11 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import CardFooter from './card-footer'
 
 describe('CardFooter', () => {
   it('matches the snapshot', () => {
-    const tree = renderer.create(<CardFooter>Test</CardFooter>).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<CardFooter>Test</CardFooter>)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

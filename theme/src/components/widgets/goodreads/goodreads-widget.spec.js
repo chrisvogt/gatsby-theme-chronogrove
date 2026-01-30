@@ -1,6 +1,7 @@
 import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import GoodreadsWidget from './goodreads-widget'
-import renderer from 'react-test-renderer'
 import { TestProviderWithState } from '../../../testUtils'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import { Router, LocationProvider } from '@gatsbyjs/reach-router'
@@ -40,10 +41,10 @@ describe('Goodreads Widget', () => {
   )
 
   it('matches the loading state snapshot', () => {
-    const tree = renderer
-      .create(<TestProviderWithState>{renderWithRouter(<GoodreadsWidget default />)}</TestProviderWithState>)
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>{renderWithRouter(<GoodreadsWidget default />)}</TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with data and AI summary', () => {
@@ -62,14 +63,12 @@ describe('Goodreads Widget', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={mockState}>
-          {renderWithRouter(<GoodreadsWidget default />)}
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={mockState}>
+        {renderWithRouter(<GoodreadsWidget default />)}
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders without AI summary when not available', () => {
@@ -87,13 +86,11 @@ describe('Goodreads Widget', () => {
       }
     }
 
-    const tree = renderer
-      .create(
-        <TestProviderWithState initialState={mockState}>
-          {renderWithRouter(<GoodreadsWidget default />)}
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState initialState={mockState}>
+        {renderWithRouter(<GoodreadsWidget default />)}
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

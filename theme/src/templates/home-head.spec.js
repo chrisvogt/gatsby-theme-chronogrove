@@ -4,12 +4,18 @@ import '@testing-library/jest-dom'
 import { useStaticQuery } from 'gatsby'
 import HomeHead from './home-head'
 
+// Capture the children passed to Seo for meta tag verification
+let capturedChildren = null
+
 // Mock the Seo component
-jest.mock('../components/seo', () => ({ title, description, children }) => (
-  <div data-testid='seo' data-title={title} data-description={description}>
-    {children}
-  </div>
-))
+jest.mock('../components/seo', () => ({ title, description, children }) => {
+  capturedChildren = children
+  return (
+    <div data-testid='seo' data-title={title} data-description={description}>
+      {children}
+    </div>
+  )
+})
 
 // Mock gatsby useStaticQuery
 jest.mock('gatsby')
@@ -26,8 +32,15 @@ const mockSiteMetadata = {
   }
 }
 
+// Helper to find child element by props
+const findChildByProps = (children, matcher) => {
+  const childArray = React.Children.toArray(children)
+  return childArray.find(child => child.props && matcher(child.props))
+}
+
 describe('HomeHead', () => {
   beforeEach(() => {
+    capturedChildren = null
     useStaticQuery.mockReturnValue({
       site: {
         siteMetadata: mockSiteMetadata
@@ -49,21 +62,23 @@ describe('HomeHead', () => {
   })
 
   it('renders Open Graph meta tags', () => {
-    const { container } = render(<HomeHead />)
+    render(<HomeHead />)
 
-    const urlMeta = container.querySelector('meta[property="og:url"]')
-    const typeMeta = container.querySelector('meta[property="og:type"]')
+    const urlMeta = findChildByProps(capturedChildren, p => p.property === 'og:url')
+    const typeMeta = findChildByProps(capturedChildren, p => p.property === 'og:type')
 
-    expect(urlMeta).toHaveAttribute('content', 'https://test.com')
-    expect(typeMeta).toHaveAttribute('content', 'website')
+    expect(urlMeta.props.content).toBe('https://test.com')
+    expect(typeMeta.props.content).toBe('website')
   })
 
   it('renders structured data with person schema', () => {
-    const { container } = render(<HomeHead />)
-    const script = container.querySelector('script[type="application/ld+json"]')
+    render(<HomeHead />)
 
-    expect(script).toBeInTheDocument()
-    const structuredData = JSON.parse(script.textContent)
+    const script = findChildByProps(capturedChildren, p => p.type === 'application/ld+json')
+    expect(script).toBeDefined()
+
+    // The script uses children, not dangerouslySetInnerHTML
+    const structuredData = JSON.parse(script.props.children)
 
     expect(structuredData['@type']).toBe('Person')
     expect(structuredData.name).toBe('Test Person')
@@ -81,10 +96,10 @@ describe('HomeHead', () => {
       }
     })
 
-    const { container } = render(<HomeHead />)
-    const urlMeta = container.querySelector('meta[property="og:url"]')
+    render(<HomeHead />)
+    const urlMeta = findChildByProps(capturedChildren, p => p.property === 'og:url')
 
-    expect(urlMeta).toHaveAttribute('content', 'https://base.com')
+    expect(urlMeta.props.content).toBe('https://base.com')
   })
 
   it('handles missing social data gracefully', () => {
@@ -97,9 +112,9 @@ describe('HomeHead', () => {
       }
     })
 
-    const { container } = render(<HomeHead />)
-    const script = container.querySelector('script[type="application/ld+json"]')
-    const structuredData = JSON.parse(script.textContent)
+    render(<HomeHead />)
+    const script = findChildByProps(capturedChildren, p => p.type === 'application/ld+json')
+    const structuredData = JSON.parse(script.props.children)
 
     expect(structuredData.sameAs).toBeUndefined()
   })
@@ -117,9 +132,9 @@ describe('HomeHead', () => {
       }
     })
 
-    const { container } = render(<HomeHead />)
-    const script = container.querySelector('script[type="application/ld+json"]')
-    const structuredData = JSON.parse(script.textContent)
+    render(<HomeHead />)
+    const script = findChildByProps(capturedChildren, p => p.type === 'application/ld+json')
+    const structuredData = JSON.parse(script.props.children)
 
     expect(structuredData['@type']).toBe('Organization')
   })
@@ -131,14 +146,14 @@ describe('HomeHead', () => {
       }
     })
 
-    const { getByTestId, container } = render(<HomeHead />)
+    const { getByTestId } = render(<HomeHead />)
     const seoElement = getByTestId('seo')
 
     expect(seoElement).toHaveAttribute('data-title', 'Home')
     expect(seoElement).toHaveAttribute('data-description', 'A personal website and digital garden built with Gatsby.')
 
-    const script = container.querySelector('script[type="application/ld+json"]')
-    const structuredData = JSON.parse(script.textContent)
+    const script = findChildByProps(capturedChildren, p => p.type === 'application/ld+json')
+    const structuredData = JSON.parse(script.props.children)
     expect(structuredData.name).toBe('Person')
   })
 })

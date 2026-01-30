@@ -1,13 +1,13 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
 import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import HomeHeaderContent from './home-header-content'
 
 describe('HomeHeaderContent', () => {
   it('matches the snapshot', () => {
-    const tree = renderer.create(<HomeHeaderContent />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<HomeHeaderContent />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles mouse enter event on emoji', () => {

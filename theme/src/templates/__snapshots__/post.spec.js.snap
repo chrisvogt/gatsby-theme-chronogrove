@@ -1,185 +1,181 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Blog Post does not render category when not provided 1`] = `
-<div
-  className="layoutMock"
->
+<DocumentFragment>
   <div
-    className="css-43plg"
+    class="layoutMock"
   >
     <div
-      className="css-1qfp07i"
+      class="css-43plg"
     >
-      <article
-        className="h-entry c1v0-blog-post"
-        id="mock-post-id"
+      <div
+        class="css-1qfp07i"
       >
-        <h1
-          className="p-name css-1sus4jf"
+        <article
+          class="h-entry c1v0-blog-post"
+          id="mock-post-id"
         >
-          A Mock Blog Post
-        </h1>
-        <div
-          className="css-1pa74su"
-        >
-          <time
-            className="dt-published created"
+          <h1
+            class="p-name css-1sus4jf"
           >
-            Published 
-            Mon, 17 Jun 2024 03:30:26 GMT
-          </time>
-        </div>
-        <div
-          style={
-            {
-              "display": "none",
-            }
-          }
-        >
-          <a
-            className="u-url"
-            href="https://example.com/blog/mock-post"
-          />
-          <span
-            className="u-uid"
-          >
-            mock-post-id
-          </span>
+            A Mock Blog Post
+          </h1>
           <div
-            className="p-summary"
+            class="css-1pa74su"
           >
-            This is a mock description
+            <time
+              class="dt-published created"
+            >
+              Published Mon, 17 Jun 2024 03:30:26 GMT
+            </time>
           </div>
-          <img
-            alt=""
-            className="u-photo"
-            src="mock-banner.jpg"
-          />
-          <span
-            className="p-category"
+          <div
+            style="display: none;"
           >
-            mock
-          </span>
-          <span
-            className="p-category"
-          >
-            test
-          </span>
-          <span
-            className="p-category"
-          >
-            blog
-          </span>
-        </div>
-        <div
-          className="e-content article-content"
-        >
-          <div>
-            Lorum ipsum dolor sit amet.
+            <a
+              class="u-url"
+              href="https://example.com/blog/mock-post"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-post-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              This is a mock description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              blog
+            </span>
           </div>
-        </div>
-      </article>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`Blog Post matches the snapshot 1`] = `
-<div
-  className="layoutMock"
->
+<DocumentFragment>
   <div
-    className="css-43plg"
+    class="layoutMock"
   >
     <div
-      className="css-1qfp07i"
+      class="css-43plg"
     >
-      <article
-        className="h-entry c1v0-blog-post"
-        id="mock-post-id"
+      <div
+        class="css-1qfp07i"
       >
-        <div
-          className="css-1wualeq"
+        <article
+          class="h-entry c1v0-blog-post"
+          id="mock-post-id"
         >
-          Mock category
-        </div>
-        <h1
-          className="p-name css-1sus4jf"
-        >
-          A Mock Blog Post
-        </h1>
-        <div
-          className="css-1pa74su"
-        >
-          <time
-            className="dt-published created"
-          >
-            Published 
-            Mon, 17 Jun 2024 03:30:26 GMT
-          </time>
-        </div>
-        <div
-          style={
-            {
-              "display": "none",
-            }
-          }
-        >
-          <a
-            className="u-url"
-            href="https://example.com/blog/mock-post"
-          />
-          <span
-            className="u-uid"
-          >
-            mock-post-id
-          </span>
           <div
-            className="p-summary"
+            class="css-1wualeq"
           >
-            This is a mock description
+            Mock category
           </div>
-          <img
-            alt=""
-            className="u-photo"
-            src="mock-banner.jpg"
-          />
-          <span
-            className="p-category"
+          <h1
+            class="p-name css-1sus4jf"
           >
-            Mock Category
-          </span>
-          <span
-            className="p-category"
+            A Mock Blog Post
+          </h1>
+          <div
+            class="css-1pa74su"
           >
-            mock
-          </span>
-          <span
-            className="p-category"
-          >
-            test
-          </span>
-          <span
-            className="p-category"
-          >
-            blog
-          </span>
-        </div>
-        <div
-          className="e-content article-content"
-        >
-          <div>
-            Lorum ipsum dolor sit amet.
+            <time
+              class="dt-published created"
+            >
+              Published Mon, 17 Jun 2024 03:30:26 GMT
+            </time>
           </div>
-        </div>
-      </article>
+          <div
+            style="display: none;"
+          >
+            <a
+              class="u-url"
+              href="https://example.com/blog/mock-post"
+            />
+            <span
+              class="u-uid"
+            >
+              mock-post-id
+            </span>
+            <div
+              class="p-summary"
+            >
+              This is a mock description
+            </div>
+            <img
+              alt=""
+              class="u-photo"
+              src="mock-banner.jpg"
+            />
+            <span
+              class="p-category"
+            >
+              Mock Category
+            </span>
+            <span
+              class="p-category"
+            >
+              mock
+            </span>
+            <span
+              class="p-category"
+            >
+              test
+            </span>
+            <span
+              class="p-category"
+            >
+              blog
+            </span>
+          </div>
+          <div
+            class="e-content article-content"
+          >
+            <div>
+              Lorum ipsum dolor sit amet.
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`Blog Post renders Seo component with the correct props 1`] = `
-<div
-  className="seoMock"
-/>
+<DocumentFragment>
+  <div
+    class="seoMock"
+  />
+</DocumentFragment>
 `;

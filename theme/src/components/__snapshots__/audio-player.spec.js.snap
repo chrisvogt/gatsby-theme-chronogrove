@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`AudioPlayer matches snapshot when visible with SoundCloud 1`] = `null`;
+exports[`AudioPlayer matches snapshot when visible with SoundCloud 1`] = `<DocumentFragment />`;
 
-exports[`AudioPlayer matches snapshot when visible with Spotify 1`] = `null`;
+exports[`AudioPlayer matches snapshot when visible with Spotify 1`] = `<DocumentFragment />`;

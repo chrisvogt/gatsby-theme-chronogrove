@@ -1,374 +1,374 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`PostCard does not render excerpt when explicitly null 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1kkguim"
-        />
-      </div>
-      <div
-        className="css-iiqpqc"
-      >
-        <div
-          className="css-1mjogk7"
+          class="card-media css-1usooy4"
         >
           <div
-            className="css-1wualeq"
-          >
-            Personal
-          </div>
+            class="css-1kkguim"
+          />
         </div>
-        <h3
-          className="css-10lfs8r"
+        <div
+          class="css-iiqpqc"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
-        >
-          1592202624
-        </time>
+          <div
+            class="css-1mjogk7"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
+          </div>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1kkguim"
-        />
-      </div>
-      <div
-        className="css-iiqpqc"
-      >
-        <div
-          className="css-1mjogk7"
+          class="card-media css-1usooy4"
         >
           <div
-            className="css-1wualeq"
-          >
-            Personal
-          </div>
+            class="css-1kkguim"
+          />
         </div>
-        <h3
-          className="css-10lfs8r"
+        <div
+          class="css-iiqpqc"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
-        >
-          1592202624
-        </time>
+          <div
+            class="css-1mjogk7"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
+          </div>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard matches the snapshot without excerpt 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1kkguim"
-        />
-      </div>
-      <div
-        className="css-iiqpqc"
-      >
-        <div
-          className="css-1mjogk7"
+          class="card-media css-1usooy4"
         >
           <div
-            className="css-1wualeq"
-          >
-            Personal
-          </div>
+            class="css-1kkguim"
+          />
         </div>
-        <h3
-          className="css-10lfs8r"
+        <div
+          class="css-iiqpqc"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
-        >
-          1592202624
-        </time>
+          <div
+            class="css-1mjogk7"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
+          </div>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1kkguim"
-        />
-      </div>
-      <div
-        className="css-iiqpqc"
-      >
-        <div
-          className="css-1mjogk7"
+          class="card-media css-1usooy4"
         >
           <div
-            className="css-1wualeq"
-          >
-            Personal
-          </div>
+            class="css-1kkguim"
+          />
         </div>
-        <h3
-          className="css-10lfs8r"
+        <div
+          class="css-iiqpqc"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
-        >
-          1592202624
-        </time>
+          <div
+            class="css-1mjogk7"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
+          </div>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard renders excerpt when provided 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1kkguim"
-        />
-      </div>
-      <div
-        className="css-iiqpqc"
-      >
-        <div
-          className="css-1mjogk7"
+          class="card-media css-1usooy4"
         >
           <div
-            className="css-1wualeq"
-          >
-            Personal
-          </div>
+            class="css-1kkguim"
+          />
         </div>
-        <h3
-          className="css-10lfs8r"
+        <div
+          class="css-iiqpqc"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-x6ddoz"
-        >
-          1592202624
-        </time>
-        <p
-          className="description css-1w28v9e"
-        >
-          This is a sample excerpt for the blog post.
-        </p>
+          <div
+            class="css-1mjogk7"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
+          </div>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-x6ddoz"
+          >
+            1592202624
+          </time>
+          <p
+            class="description css-1w28v9e"
+          >
+            This is a sample excerpt for the blog post.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-8wyef3"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-1taqpx2"
+      class="css-8wyef3"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-1taqpx2"
       >
         <div
-          className="css-13omqdc"
-        />
-      </div>
-      <div
-        className="css-p08ytg"
-      >
-        <div
-          className="css-1mjogk7"
+          class="card-media css-1usooy4"
         >
           <div
-            className="css-1wualeq"
-          >
-            Personal
-          </div>
+            class="css-13omqdc"
+          />
         </div>
-        <h3
-          className="css-zzhc1o"
+        <div
+          class="css-p08ytg"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
-        >
-          1592202624
-        </time>
+          <div
+            class="css-1mjogk7"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
+          </div>
+          <h3
+            class="css-zzhc1o"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard renders without banner when not provided 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="css-iiqpqc"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1mjogk7"
+          class="css-iiqpqc"
         >
           <div
-            className="css-1wualeq"
+            class="css-1mjogk7"
           >
-            Personal
+            <div
+              class="css-1wualeq"
+            >
+              Personal
+            </div>
           </div>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
         </div>
-        <h3
-          className="css-10lfs8r"
-        >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
-        >
-          1592202624
-        </time>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;
 
 exports[`PostCard renders without category when not provided 1`] = `
-<a
-  className="css-1355rc8"
-  href="/blog/article"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
->
-  <div
-    className="css-139dwiw"
+<DocumentFragment>
+  <a
+    class="css-1355rc8"
+    href="/blog/article"
   >
     <div
-      className="card-content css-ihz6y5"
+      class="css-139dwiw"
     >
       <div
-        className="card-media css-1usooy4"
+        class="card-content css-ihz6y5"
       >
         <div
-          className="css-1kkguim"
-        />
-      </div>
-      <div
-        className="css-iiqpqc"
-      >
-        <h3
-          className="css-10lfs8r"
+          class="card-media css-1usooy4"
         >
-          My Blog Post
-        </h3>
-        <time
-          className="created css-68op3f"
+          <div
+            class="css-1kkguim"
+          />
+        </div>
+        <div
+          class="css-iiqpqc"
         >
-          1592202624
-        </time>
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
+          <time
+            class="created css-68op3f"
+          >
+            1592202624
+          </time>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</DocumentFragment>
 `;

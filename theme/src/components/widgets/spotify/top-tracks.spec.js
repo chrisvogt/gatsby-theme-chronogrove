@@ -1,5 +1,7 @@
 /** @jsx jsx */
-import renderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { jsx } from 'theme-ui'
 import TopTracks from './top-tracks'
 import { TestProviderWithState } from '../../../testUtils'
@@ -12,6 +14,10 @@ jest.mock('./media-item-grid', () => jest.fn(() => <div data-testid='media-item-
 import MediaItemGrid from './media-item-grid'
 
 describe('TopTracks Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   const mockTracks = [
     {
       id: '1',
@@ -37,25 +43,21 @@ describe('TopTracks Component', () => {
   ]
 
   it('renders correctly with tracks', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <TopTracks isLoading={false} tracks={mockTracks} />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={mockTracks} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders correctly when loading', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <TopTracks isLoading={true} />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={true} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles tracks without a 300px image gracefully', () => {
@@ -68,25 +70,21 @@ describe('TopTracks Component', () => {
         spotifyURL: 'http://spotify.com/track3'
       }
     ]
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <TopTracks isLoading={false} tracks={incompleteTracks} />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={incompleteTracks} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders correctly with no tracks', () => {
-    const tree = renderer
-      .create(
-        <TestProviderWithState>
-          <TopTracks isLoading={false} tracks={[]} />
-        </TestProviderWithState>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={[]} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('dispatches setSpotifyTrack action when track is clicked', () => {
@@ -104,7 +102,7 @@ describe('TopTracks Component', () => {
     )
 
     // Render the component
-    renderer.create(
+    render(
       <TestProviderWithMockStore>
         <TopTracks isLoading={false} tracks={mockTracks} />
       </TestProviderWithMockStore>

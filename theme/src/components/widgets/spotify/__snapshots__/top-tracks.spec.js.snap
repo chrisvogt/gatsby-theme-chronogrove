@@ -1,97 +1,105 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TopTracks Component handles tracks without a 300px image gracefully 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-ccroti"
+    class="css-sak8bt"
   >
-    <h3
-      className="css-9nh3l5"
+    <div
+      class="css-ccroti"
     >
-      Top Tracks
-    </h3>
+      <h3
+        class="css-9nh3l5"
+      >
+        Top Tracks
+      </h3>
+    </div>
+    <p
+      class="css-1qwovgy"
+    >
+      My 12 most-played tracks over the last 4 weeks.
+    </p>
+    <div
+      data-testid="media-item-grid"
+    />
   </div>
-  <p
-    className="css-1qwovgy"
-  >
-    My 12 most-played tracks over the last 4 weeks.
-  </p>
-  <div
-    data-testid="media-item-grid"
-  />
-</div>
+</DocumentFragment>
 `;
 
 exports[`TopTracks Component renders correctly when loading 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-ccroti"
+    class="css-sak8bt"
   >
-    <h3
-      className="css-9nh3l5"
+    <div
+      class="css-ccroti"
     >
-      Top Tracks
-    </h3>
+      <h3
+        class="css-9nh3l5"
+      >
+        Top Tracks
+      </h3>
+    </div>
+    <p
+      class="css-1qwovgy"
+    >
+      My 12 most-played tracks over the last 4 weeks.
+    </p>
+    <div
+      data-testid="media-item-grid"
+    />
   </div>
-  <p
-    className="css-1qwovgy"
-  >
-    My 12 most-played tracks over the last 4 weeks.
-  </p>
-  <div
-    data-testid="media-item-grid"
-  />
-</div>
+</DocumentFragment>
 `;
 
 exports[`TopTracks Component renders correctly with no tracks 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-ccroti"
+    class="css-sak8bt"
   >
-    <h3
-      className="css-9nh3l5"
+    <div
+      class="css-ccroti"
     >
-      Top Tracks
-    </h3>
+      <h3
+        class="css-9nh3l5"
+      >
+        Top Tracks
+      </h3>
+    </div>
+    <p
+      class="css-1qwovgy"
+    >
+      My 12 most-played tracks over the last 4 weeks.
+    </p>
+    <div
+      data-testid="media-item-grid"
+    />
   </div>
-  <p
-    className="css-1qwovgy"
-  >
-    My 12 most-played tracks over the last 4 weeks.
-  </p>
-  <div
-    data-testid="media-item-grid"
-  />
-</div>
+</DocumentFragment>
 `;
 
 exports[`TopTracks Component renders correctly with tracks 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-ccroti"
+    class="css-sak8bt"
   >
-    <h3
-      className="css-9nh3l5"
+    <div
+      class="css-ccroti"
     >
-      Top Tracks
-    </h3>
+      <h3
+        class="css-9nh3l5"
+      >
+        Top Tracks
+      </h3>
+    </div>
+    <p
+      class="css-1qwovgy"
+    >
+      My 12 most-played tracks over the last 4 weeks.
+    </p>
+    <div
+      data-testid="media-item-grid"
+    />
   </div>
-  <p
-    className="css-1qwovgy"
-  >
-    My 12 most-played tracks over the last 4 weeks.
-  </p>
-  <div
-    data-testid="media-item-grid"
-  />
-</div>
+</DocumentFragment>
 `;

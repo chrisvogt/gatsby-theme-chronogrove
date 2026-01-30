@@ -1,160 +1,149 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in dark mode 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-zxiliy"
+    class="css-sak8bt"
   >
     <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      class="css-zxiliy"
     >
       <div
-        className="css-w24l45"
+        class="css-xsvu8c"
       >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
         <div
-          className="css-18hnp9e"
+          class="css-w24l45"
         >
-          1
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
         </div>
         <div
-          className="css-13txfr7"
-        />
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
       </div>
       <div
-        className="css-rr301l"
+        class="css-xsvu8c"
       >
         <div
-          className="css-rkrxe3"
+          class="css-w24l45"
         >
-          Cities: Skylines
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
         </div>
         <div
-          className="css-k763k9"
+          class="css-rr301l"
         >
-          757.35h total • 2h recently
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            3
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
+          </div>
         </div>
       </div>
     </div>
     <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      class="css-rcbrnq"
     >
       <div
-        className="css-w24l45"
+        class="css-aq86v7"
       >
-        <img
-          alt="ARK: Survival Evolved header"
-          className="css-1hlyxwi"
-          src="https://example.com/ark-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
+        Total Hours: 
+        <span
+          class="css-xdug5y"
         >
-          2
-        </div>
-        <div
-          className="css-13txfr7"
-        />
+          1235.2h
+        </span>
       </div>
       <div
-        className="css-rr301l"
+        class="css-aq86v7"
       >
-        <div
-          className="css-rkrxe3"
+        Average: 
+        <span
+          class="css-xdug5y"
         >
-          ARK: Survival Evolved
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          277.83h total
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="PUBG: BATTLEGROUNDS header"
-          className="css-1hlyxwi"
-          src="https://example.com/pubg-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          3
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          PUBG: BATTLEGROUNDS
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          200h total • 1h recently
-        </div>
+          411.7h per game
+        </span>
       </div>
     </div>
   </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        1235.2
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        411.7
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game card in dark mode 1`] = `
-<div>
+<DocumentFragment>
   <div
     class="css-sak8bt"
   >
@@ -273,618 +262,30 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
       <div
         class="css-aq86v7"
       >
-        Total Hours:
-         
+        Total Hours: 
         <span
           class="css-xdug5y"
         >
-          1235.2
-          h
+          1235.2h
         </span>
       </div>
       <div
         class="css-aq86v7"
       >
-        Average:
-         
+        Average: 
         <span
           class="css-xdug5y"
         >
-          411.7
-          h per game
+          411.7h per game
         </span>
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-zxiliy"
-  >
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          1
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          Cities: Skylines
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          757.35h total • 2h recently
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="ARK: Survival Evolved header"
-          className="css-1hlyxwi"
-          src="https://example.com/ark-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          2
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          ARK: Survival Evolved
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          277.83h total
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="PUBG: BATTLEGROUNDS header"
-          className="css-1hlyxwi"
-          src="https://example.com/pubg-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          3
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          PUBG: BATTLEGROUNDS
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          200h total • 1h recently
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        1235.2
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        411.7
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-zxiliy"
-  >
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          1
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          Cities: Skylines
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          757.35h total • 2h recently
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="ARK: Survival Evolved header"
-          className="css-1hlyxwi"
-          src="https://example.com/ark-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          2
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          ARK: Survival Evolved
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          277.83h total
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="PUBG: BATTLEGROUNDS header"
-          className="css-1hlyxwi"
-          src="https://example.com/pubg-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          3
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          PUBG: BATTLEGROUNDS
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          200h total • 1h recently
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        1235.2
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        411.7
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-zxiliy"
-  >
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          1
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          Cities: Skylines
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          757.35h total • 2h recently
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        757.4
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        757.4
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Empty States renders empty state when games is null 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-16q7rgc"
-  >
-    <p
-      className="css-13s56l1"
-    >
-      No gaming data available for library.
-    </p>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Empty States renders empty state when games is undefined 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-16q7rgc"
-  >
-    <p
-      className="css-13s56l1"
-    >
-      No gaming data available for library.
-    </p>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Empty States renders empty state when no games provided 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-16q7rgc"
-  >
-    <p
-      className="css-13s56l1"
-    >
-      No gaming data available for library.
-    </p>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in light mode 1`] = `
-<div
-  className="css-sak8bt"
->
-  <div
-    className="css-zxiliy"
-  >
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          1
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          Cities: Skylines
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          757.35h total • 2h recently
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="ARK: Survival Evolved header"
-          className="css-1hlyxwi"
-          src="https://example.com/ark-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          2
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          ARK: Survival Evolved
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          277.83h total
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="PUBG: BATTLEGROUNDS header"
-          className="css-1hlyxwi"
-          src="https://example.com/pubg-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          3
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          PUBG: BATTLEGROUNDS
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          200h total • 1h recently
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        1235.2
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        411.7
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game card in light mode 1`] = `
-<div>
+<DocumentFragment>
   <div
     class="css-sak8bt"
   >
@@ -1003,353 +404,881 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
       <div
         class="css-aq86v7"
       >
-        Total Hours:
-         
+        Total Hours: 
         <span
           class="css-xdug5y"
         >
-          1235.2
-          h
+          1235.2h
         </span>
       </div>
       <div
         class="css-aq86v7"
       >
-        Average:
-         
+        Average: 
         <span
           class="css-xdug5y"
         >
-          411.7
-          h per game
+          411.7h per game
         </span>
       </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-zxiliy"
+    >
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            3
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-rcbrnq"
+    >
+      <div
+        class="css-aq86v7"
+      >
+        Total Hours: 
+        <span
+          class="css-xdug5y"
+        >
+          1235.2h
+        </span>
+      </div>
+      <div
+        class="css-aq86v7"
+      >
+        Average: 
+        <span
+          class="css-xdug5y"
+        >
+          411.7h per game
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-zxiliy"
+    >
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-rcbrnq"
+    >
+      <div
+        class="css-aq86v7"
+      >
+        Total Hours: 
+        <span
+          class="css-xdug5y"
+        >
+          757.4h
+        </span>
+      </div>
+      <div
+        class="css-aq86v7"
+      >
+        Average: 
+        <span
+          class="css-xdug5y"
+        >
+          757.4h per game
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Empty States renders empty state when games is null 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-16q7rgc"
+    >
+      <p
+        class="css-13s56l1"
+      >
+        No gaming data available for library.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Empty States renders empty state when games is undefined 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-16q7rgc"
+    >
+      <p
+        class="css-13s56l1"
+      >
+        No gaming data available for library.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Empty States renders empty state when no games provided 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-16q7rgc"
+    >
+      <p
+        class="css-13s56l1"
+      >
+        No gaming data available for library.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in light mode 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-zxiliy"
+    >
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            3
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-rcbrnq"
+    >
+      <div
+        class="css-aq86v7"
+      >
+        Total Hours: 
+        <span
+          class="css-xdug5y"
+        >
+          1235.2h
+        </span>
+      </div>
+      <div
+        class="css-aq86v7"
+      >
+        Average: 
+        <span
+          class="css-xdug5y"
+        >
+          411.7h per game
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game card in light mode 1`] = `
+<DocumentFragment>
+  <div
+    class="css-sak8bt"
+  >
+    <div
+      class="css-zxiliy"
+    >
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            3
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-rcbrnq"
+    >
+      <div
+        class="css-aq86v7"
+      >
+        Total Hours: 
+        <span
+          class="css-xdug5y"
+        >
+          1235.2h
+        </span>
+      </div>
+      <div
+        class="css-aq86v7"
+      >
+        Average: 
+        <span
+          class="css-xdug5y"
+        >
+          411.7h per game
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`PlayTimeChart Loading State renders loading state correctly 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-nyc2gr"
+    class="css-sak8bt"
   >
     <div
-      className="css-1omu3y4"
-    />
-    <p
-      className="css-1ylq8j3"
+      class="css-nyc2gr"
     >
-      Loading Gaming Library...
-    </p>
+      <div
+        class="css-1omu3y4"
+      />
+      <p
+        class="css-1ylq8j3"
+      >
+        Loading Gaming Library...
+      </p>
+    </div>
   </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-zxiliy"
+    class="css-sak8bt"
   >
     <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      class="css-zxiliy"
     >
       <div
-        className="css-w24l45"
+        class="css-xsvu8c"
       >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
         <div
-          className="css-18hnp9e"
+          class="css-w24l45"
         >
-          1
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
         </div>
         <div
-          className="css-13txfr7"
-        />
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
       </div>
       <div
-        className="css-rr301l"
+        class="css-xsvu8c"
       >
         <div
-          className="css-rkrxe3"
+          class="css-w24l45"
         >
-          Cities: Skylines
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
         </div>
         <div
-          className="css-k763k9"
+          class="css-rr301l"
         >
-          757.35h total • 2h recently
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            3
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
+          </div>
         </div>
       </div>
     </div>
     <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      class="css-rcbrnq"
     >
       <div
-        className="css-w24l45"
+        class="css-aq86v7"
       >
-        <img
-          alt="ARK: Survival Evolved header"
-          className="css-1hlyxwi"
-          src="https://example.com/ark-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
+        Total Hours: 
+        <span
+          class="css-xdug5y"
         >
-          2
-        </div>
-        <div
-          className="css-13txfr7"
-        />
+          1235.2h
+        </span>
       </div>
       <div
-        className="css-rr301l"
+        class="css-aq86v7"
       >
-        <div
-          className="css-rkrxe3"
+        Average: 
+        <span
+          class="css-xdug5y"
         >
-          ARK: Survival Evolved
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          277.83h total
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="PUBG: BATTLEGROUNDS header"
-          className="css-1hlyxwi"
-          src="https://example.com/pubg-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          3
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          PUBG: BATTLEGROUNDS
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          200h total • 1h recently
-        </div>
+          411.7h per game
+        </span>
       </div>
     </div>
   </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        1235.2
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        411.7
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
+</DocumentFragment>
 `;
 
 exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
-<div
-  className="css-sak8bt"
->
+<DocumentFragment>
   <div
-    className="css-zxiliy"
+    class="css-sak8bt"
   >
     <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      class="css-zxiliy"
     >
       <div
-        className="css-w24l45"
+        class="css-xsvu8c"
       >
-        <img
-          alt="Cities: Skylines header"
-          className="css-1hlyxwi"
-          src="https://example.com/cities-header.jpg"
-        />
         <div
-          className="css-18hnp9e"
+          class="css-w24l45"
         >
-          1
+          <img
+            alt="Cities: Skylines header"
+            class="css-1hlyxwi"
+            src="https://example.com/cities-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            1
+          </div>
+          <div
+            class="css-13txfr7"
+          />
         </div>
         <div
-          className="css-13txfr7"
-        />
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            Cities: Skylines
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            757.35h total • 2h recently
+          </div>
+        </div>
       </div>
       <div
-        className="css-rr301l"
+        class="css-xsvu8c"
       >
         <div
-          className="css-rkrxe3"
+          class="css-w24l45"
         >
-          Cities: Skylines
+          <img
+            alt="ARK: Survival Evolved header"
+            class="css-1hlyxwi"
+            src="https://example.com/ark-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            2
+          </div>
+          <div
+            class="css-13txfr7"
+          />
         </div>
         <div
-          className="css-k763k9"
+          class="css-rr301l"
         >
-          757.35h total • 2h recently
+          <div
+            class="css-rkrxe3"
+          >
+            ARK: Survival Evolved
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            277.83h total
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-xsvu8c"
+      >
+        <div
+          class="css-w24l45"
+        >
+          <img
+            alt="PUBG: BATTLEGROUNDS header"
+            class="css-1hlyxwi"
+            src="https://example.com/pubg-header.jpg"
+          />
+          <div
+            class="css-18hnp9e"
+          >
+            3
+          </div>
+          <div
+            class="css-13txfr7"
+          />
+        </div>
+        <div
+          class="css-rr301l"
+        >
+          <div
+            class="css-rkrxe3"
+          >
+            PUBG: BATTLEGROUNDS
+          </div>
+          <div
+            class="css-k763k9"
+          >
+            200h total • 1h recently
+          </div>
         </div>
       </div>
     </div>
     <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      class="css-rcbrnq"
     >
       <div
-        className="css-w24l45"
+        class="css-aq86v7"
       >
-        <img
-          alt="ARK: Survival Evolved header"
-          className="css-1hlyxwi"
-          src="https://example.com/ark-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
+        Total Hours: 
+        <span
+          class="css-xdug5y"
         >
-          2
-        </div>
-        <div
-          className="css-13txfr7"
-        />
+          1235.2h
+        </span>
       </div>
       <div
-        className="css-rr301l"
+        class="css-aq86v7"
       >
-        <div
-          className="css-rkrxe3"
+        Average: 
+        <span
+          class="css-xdug5y"
         >
-          ARK: Survival Evolved
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          277.83h total
-        </div>
-      </div>
-    </div>
-    <div
-      className="css-xsvu8c"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="css-w24l45"
-      >
-        <img
-          alt="PUBG: BATTLEGROUNDS header"
-          className="css-1hlyxwi"
-          src="https://example.com/pubg-header.jpg"
-        />
-        <div
-          className="css-18hnp9e"
-        >
-          3
-        </div>
-        <div
-          className="css-13txfr7"
-        />
-      </div>
-      <div
-        className="css-rr301l"
-      >
-        <div
-          className="css-rkrxe3"
-        >
-          PUBG: BATTLEGROUNDS
-        </div>
-        <div
-          className="css-k763k9"
-        >
-          200h total • 1h recently
-        </div>
+          411.7h per game
+        </span>
       </div>
     </div>
   </div>
-  <div
-    className="css-rcbrnq"
-  >
-    <div
-      className="css-aq86v7"
-    >
-      Total Hours:
-       
-      <span
-        className="css-xdug5y"
-      >
-        1235.2
-        h
-      </span>
-    </div>
-    <div
-      className="css-aq86v7"
-    >
-      Average:
-       
-      <span
-        className="css-xdug5y"
-      >
-        411.7
-        h per game
-      </span>
-    </div>
-  </div>
-</div>
+</DocumentFragment>
 `;

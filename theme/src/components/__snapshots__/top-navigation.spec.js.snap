@@ -1,59 +1,55 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TopNavigation matches the snapshot 1`] = `
-<div
-  className="css-1916vvp"
->
+<DocumentFragment>
   <div
-    className="css-17dzpzi"
+    class="css-1916vvp"
   >
     <div
-      className="css-7xu00p"
+      class="css-17dzpzi"
     >
-      <a
-        aria-current="page"
-        className="css-1wdhl9p"
-        href="/"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        style={{}}
-      >
-        My Personal Blog & Portfolio
-      </a>
       <div
-        className="css-9cpsy"
-      >
-        <button
-          aria-label="Toggle color mode"
-          aria-pressed={false}
-          className="theme-toggle"
-          data-testid="dark-mode-toggle"
-          duration={750}
-          id="theme-toggle"
-          onClick={[Function]}
-          type="button"
-        >
-          Mock Expand
-        </button>
-      </div>
-    </div>
-    <div
-      className="css-3uks8f"
-    >
-      <nav
-        role="navigation"
+        class="css-7xu00p"
       >
         <a
-          className="css-1hen0m7"
-          href="/about-me"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          title="About Me"
+          aria-current="page"
+          class="css-1wdhl9p"
+          href="/"
         >
-          About Me
+          My Personal Blog & Portfolio
         </a>
-      </nav>
+        <div
+          class="css-9cpsy"
+        >
+          <button
+            aria-label="Toggle color mode"
+            aria-pressed="false"
+            class="theme-toggle"
+            data-testid="dark-mode-toggle"
+            duration="750"
+            id="theme-toggle"
+            type="button"
+          >
+            Mock Expand
+          </button>
+        </div>
+      </div>
+      <div
+        class="css-3uks8f"
+      >
+        <nav
+          role="navigation"
+        >
+          <a
+            class="css-1hen0m7"
+            href="/about-me"
+            title="About Me"
+          >
+            About Me
+          </a>
+        </nav>
+      </div>
     </div>
   </div>
-</div>
+</DocumentFragment>
 `;

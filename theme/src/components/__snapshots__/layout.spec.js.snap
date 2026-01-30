@@ -1,693 +1,675 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Layout matches the snapshot 1`] = `
-<div
-  className="css-e2rbjw"
->
-  <a
-    data-reach-skip-link=""
-    data-reach-skip-nav-link=""
-    href="#reach-skip-nav"
+<DocumentFragment>
+  <div
+    class="css-e2rbjw"
   >
-    Skip to content
-  </a>
-  <header
-    role="banner"
-  >
-    <div
-      className="css-1916vvp"
+    <a
+      data-reach-skip-link=""
+      data-reach-skip-nav-link=""
+      href="#reach-skip-nav"
+    >
+      Skip to content
+    </a>
+    <header
+      role="banner"
     >
       <div
-        className="css-17dzpzi"
+        class="css-1916vvp"
       >
         <div
-          className="css-7xu00p"
-        >
-          <a
-            aria-current="page"
-            className="css-1wdhl9p"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            style={{}}
-          >
-            Test Site
-          </a>
-          <div
-            className="css-9cpsy"
-          >
-            <button
-              aria-label="Toggle color mode"
-              aria-pressed={false}
-              className="theme-toggle"
-              data-testid="dark-mode-toggle"
-              duration={750}
-              id="theme-toggle"
-              onClick={[Function]}
-              type="button"
-            >
-              Mock Expand
-            </button>
-          </div>
-        </div>
-        <div
-          className="css-3uks8f"
-        >
-          <nav
-            role="navigation"
-          />
-        </div>
-      </div>
-    </div>
-  </header>
-  <main
-    role="main"
-  >
-    <div
-      data-reach-skip-nav-content=""
-      id="reach-skip-nav"
-    />
-    <div>
-      Test content
-    </div>
-  </main>
-  <footer
-    className="css-2xzuv0"
-    id="footer"
-    role="contentinfo"
-  >
-    <div
-      className="css-13vusp9"
-    >
-      <div
-        className="css-1jhg6p1"
-      >
-        <div
-          className="css-1hl8ss2"
+          class="css-17dzpzi"
         >
           <div
-            className="css-1a85y5n"
-          >
-            Connect with me
-          </div>
-          <div
-            className="css-codtt7"
+            class="css-7xu00p"
           >
             <a
-              className="css-1srm7sz"
-              rel="me"
+              aria-current="page"
+              class="css-1wdhl9p"
+              href="/"
+            >
+              Test Site
+            </a>
+            <div
+              class="css-9cpsy"
+            >
+              <button
+                aria-label="Toggle color mode"
+                aria-pressed="false"
+                class="theme-toggle"
+                data-testid="dark-mode-toggle"
+                duration="750"
+                id="theme-toggle"
+                type="button"
+              >
+                Mock Expand
+              </button>
+            </div>
+          </div>
+          <div
+            class="css-3uks8f"
+          >
+            <nav
+              role="navigation"
             />
           </div>
         </div>
+      </div>
+    </header>
+    <main
+      role="main"
+    >
+      <div
+        data-reach-skip-nav-content=""
+        id="reach-skip-nav"
+      />
+      <div>
+        Test content
+      </div>
+    </main>
+    <footer
+      class="css-2xzuv0"
+      id="footer"
+      role="contentinfo"
+    >
+      <div
+        class="css-13vusp9"
+      >
         <div
-          className="css-k5zx4s"
+          class="css-1jhg6p1"
         >
-          <span>
-            <a
-              className="css-4d1obe"
-              href="/rss.xml"
+          <div
+            class="css-1hl8ss2"
+          >
+            <div
+              class="css-1a85y5n"
             >
-              Subscribe via RSS
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="/privacy"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
+              Connect with me
+            </div>
+            <div
+              class="css-codtt7"
             >
-              Privacy Policy
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-            >
-              View Source
-            </a>
-          </span>
+              <a
+                class="css-1srm7sz"
+                rel="me"
+              />
+            </div>
+          </div>
+          <div
+            class="css-k5zx4s"
+          >
+            <span>
+              <a
+                class="css-4d1obe"
+                href="/rss.xml"
+              >
+                Subscribe via RSS
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="/privacy"
+              >
+                Privacy Policy
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
+              >
+                View Source
+              </a>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`Layout renders with audio player hidden state 1`] = `
-<div
-  className="css-e2rbjw"
->
-  <a
-    data-reach-skip-link=""
-    data-reach-skip-nav-link=""
-    href="#reach-skip-nav"
+<DocumentFragment>
+  <div
+    class="css-e2rbjw"
   >
-    Skip to content
-  </a>
-  <header
-    role="banner"
-  >
-    <div
-      className="css-1916vvp"
+    <a
+      data-reach-skip-link=""
+      data-reach-skip-nav-link=""
+      href="#reach-skip-nav"
+    >
+      Skip to content
+    </a>
+    <header
+      role="banner"
     >
       <div
-        className="css-17dzpzi"
+        class="css-1916vvp"
       >
         <div
-          className="css-7xu00p"
-        >
-          <a
-            aria-current="page"
-            className="css-1wdhl9p"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            style={{}}
-          >
-            Test Site
-          </a>
-          <div
-            className="css-9cpsy"
-          >
-            <button
-              aria-label="Toggle color mode"
-              aria-pressed={false}
-              className="theme-toggle"
-              data-testid="dark-mode-toggle"
-              duration={750}
-              id="theme-toggle"
-              onClick={[Function]}
-              type="button"
-            >
-              Mock Expand
-            </button>
-          </div>
-        </div>
-        <div
-          className="css-3uks8f"
-        >
-          <nav
-            role="navigation"
-          />
-        </div>
-      </div>
-    </div>
-  </header>
-  <main
-    role="main"
-  >
-    <div
-      data-reach-skip-nav-content=""
-      id="reach-skip-nav"
-    />
-    <div>
-      Test content without audio player
-    </div>
-  </main>
-  <footer
-    className="css-2xzuv0"
-    id="footer"
-    role="contentinfo"
-  >
-    <div
-      className="css-13vusp9"
-    >
-      <div
-        className="css-1jhg6p1"
-      >
-        <div
-          className="css-1hl8ss2"
+          class="css-17dzpzi"
         >
           <div
-            className="css-1a85y5n"
-          >
-            Connect with me
-          </div>
-          <div
-            className="css-codtt7"
+            class="css-7xu00p"
           >
             <a
-              className="css-1srm7sz"
-              rel="me"
+              aria-current="page"
+              class="css-1wdhl9p"
+              href="/"
+            >
+              Test Site
+            </a>
+            <div
+              class="css-9cpsy"
+            >
+              <button
+                aria-label="Toggle color mode"
+                aria-pressed="false"
+                class="theme-toggle"
+                data-testid="dark-mode-toggle"
+                duration="750"
+                id="theme-toggle"
+                type="button"
+              >
+                Mock Expand
+              </button>
+            </div>
+          </div>
+          <div
+            class="css-3uks8f"
+          >
+            <nav
+              role="navigation"
             />
           </div>
         </div>
+      </div>
+    </header>
+    <main
+      role="main"
+    >
+      <div
+        data-reach-skip-nav-content=""
+        id="reach-skip-nav"
+      />
+      <div>
+        Test content without audio player
+      </div>
+    </main>
+    <footer
+      class="css-2xzuv0"
+      id="footer"
+      role="contentinfo"
+    >
+      <div
+        class="css-13vusp9"
+      >
         <div
-          className="css-k5zx4s"
+          class="css-1jhg6p1"
         >
-          <span>
-            <a
-              className="css-4d1obe"
-              href="/rss.xml"
+          <div
+            class="css-1hl8ss2"
+          >
+            <div
+              class="css-1a85y5n"
             >
-              Subscribe via RSS
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="/privacy"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
+              Connect with me
+            </div>
+            <div
+              class="css-codtt7"
             >
-              Privacy Policy
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-            >
-              View Source
-            </a>
-          </span>
+              <a
+                class="css-1srm7sz"
+                rel="me"
+              />
+            </div>
+          </div>
+          <div
+            class="css-k5zx4s"
+          >
+            <span>
+              <a
+                class="css-4d1obe"
+                href="/rss.xml"
+              >
+                Subscribe via RSS
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="/privacy"
+              >
+                Privacy Policy
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
+              >
+                View Source
+              </a>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`Layout renders with audio player visible state 1`] = `
-<div
-  className="css-e2rbjw"
->
-  <a
-    data-reach-skip-link=""
-    data-reach-skip-nav-link=""
-    href="#reach-skip-nav"
+<DocumentFragment>
+  <div
+    class="css-e2rbjw"
   >
-    Skip to content
-  </a>
-  <header
-    role="banner"
-  >
-    <div
-      className="css-1916vvp"
+    <a
+      data-reach-skip-link=""
+      data-reach-skip-nav-link=""
+      href="#reach-skip-nav"
+    >
+      Skip to content
+    </a>
+    <header
+      role="banner"
     >
       <div
-        className="css-17dzpzi"
+        class="css-1916vvp"
       >
         <div
-          className="css-7xu00p"
-        >
-          <a
-            aria-current="page"
-            className="css-1wdhl9p"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            style={{}}
-          >
-            Test Site
-          </a>
-          <div
-            className="css-9cpsy"
-          >
-            <button
-              aria-label="Toggle color mode"
-              aria-pressed={false}
-              className="theme-toggle"
-              data-testid="dark-mode-toggle"
-              duration={750}
-              id="theme-toggle"
-              onClick={[Function]}
-              type="button"
-            >
-              Mock Expand
-            </button>
-          </div>
-        </div>
-        <div
-          className="css-3uks8f"
-        >
-          <nav
-            role="navigation"
-          />
-        </div>
-      </div>
-    </div>
-  </header>
-  <main
-    role="main"
-  >
-    <div
-      data-reach-skip-nav-content=""
-      id="reach-skip-nav"
-    />
-    <div>
-      Test content with audio player
-    </div>
-  </main>
-  <footer
-    className="css-2xzuv0"
-    id="footer"
-    role="contentinfo"
-  >
-    <div
-      className="css-13vusp9"
-    >
-      <div
-        className="css-1jhg6p1"
-      >
-        <div
-          className="css-1hl8ss2"
+          class="css-17dzpzi"
         >
           <div
-            className="css-1a85y5n"
-          >
-            Connect with me
-          </div>
-          <div
-            className="css-codtt7"
+            class="css-7xu00p"
           >
             <a
-              className="css-1srm7sz"
-              rel="me"
+              aria-current="page"
+              class="css-1wdhl9p"
+              href="/"
+            >
+              Test Site
+            </a>
+            <div
+              class="css-9cpsy"
+            >
+              <button
+                aria-label="Toggle color mode"
+                aria-pressed="false"
+                class="theme-toggle"
+                data-testid="dark-mode-toggle"
+                duration="750"
+                id="theme-toggle"
+                type="button"
+              >
+                Mock Expand
+              </button>
+            </div>
+          </div>
+          <div
+            class="css-3uks8f"
+          >
+            <nav
+              role="navigation"
             />
           </div>
         </div>
+      </div>
+    </header>
+    <main
+      role="main"
+    >
+      <div
+        data-reach-skip-nav-content=""
+        id="reach-skip-nav"
+      />
+      <div>
+        Test content with audio player
+      </div>
+    </main>
+    <footer
+      class="css-2xzuv0"
+      id="footer"
+      role="contentinfo"
+    >
+      <div
+        class="css-13vusp9"
+      >
         <div
-          className="css-k5zx4s"
+          class="css-1jhg6p1"
         >
-          <span>
-            <a
-              className="css-4d1obe"
-              href="/rss.xml"
+          <div
+            class="css-1hl8ss2"
+          >
+            <div
+              class="css-1a85y5n"
             >
-              Subscribe via RSS
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="/privacy"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
+              Connect with me
+            </div>
+            <div
+              class="css-codtt7"
             >
-              Privacy Policy
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-            >
-              View Source
-            </a>
-          </span>
+              <a
+                class="css-1srm7sz"
+                rel="me"
+              />
+            </div>
+          </div>
+          <div
+            class="css-k5zx4s"
+          >
+            <span>
+              <a
+                class="css-4d1obe"
+                href="/rss.xml"
+              >
+                Subscribe via RSS
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="/privacy"
+              >
+                Privacy Policy
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
+              >
+                View Source
+              </a>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`Layout renders with disableMainWrapper prop 1`] = `
-<div
-  className="css-e2rbjw"
->
-  <a
-    data-reach-skip-link=""
-    data-reach-skip-nav-link=""
-    href="#reach-skip-nav"
+<DocumentFragment>
+  <div
+    class="css-e2rbjw"
   >
-    Skip to content
-  </a>
-  <header
-    role="banner"
-  >
-    <div
-      className="css-1916vvp"
+    <a
+      data-reach-skip-link=""
+      data-reach-skip-nav-link=""
+      href="#reach-skip-nav"
+    >
+      Skip to content
+    </a>
+    <header
+      role="banner"
     >
       <div
-        className="css-17dzpzi"
+        class="css-1916vvp"
       >
         <div
-          className="css-7xu00p"
-        >
-          <a
-            aria-current="page"
-            className="css-1wdhl9p"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            style={{}}
-          >
-            Test Site
-          </a>
-          <div
-            className="css-9cpsy"
-          >
-            <button
-              aria-label="Toggle color mode"
-              aria-pressed={false}
-              className="theme-toggle"
-              data-testid="dark-mode-toggle"
-              duration={750}
-              id="theme-toggle"
-              onClick={[Function]}
-              type="button"
-            >
-              Mock Expand
-            </button>
-          </div>
-        </div>
-        <div
-          className="css-3uks8f"
-        >
-          <nav
-            role="navigation"
-          />
-        </div>
-      </div>
-    </div>
-  </header>
-  <div>
-    Test content without main wrapper
-  </div>
-  <footer
-    className="css-2xzuv0"
-    id="footer"
-    role="contentinfo"
-  >
-    <div
-      className="css-13vusp9"
-    >
-      <div
-        className="css-1jhg6p1"
-      >
-        <div
-          className="css-1hl8ss2"
+          class="css-17dzpzi"
         >
           <div
-            className="css-1a85y5n"
-          >
-            Connect with me
-          </div>
-          <div
-            className="css-codtt7"
+            class="css-7xu00p"
           >
             <a
-              className="css-1srm7sz"
-              rel="me"
+              aria-current="page"
+              class="css-1wdhl9p"
+              href="/"
+            >
+              Test Site
+            </a>
+            <div
+              class="css-9cpsy"
+            >
+              <button
+                aria-label="Toggle color mode"
+                aria-pressed="false"
+                class="theme-toggle"
+                data-testid="dark-mode-toggle"
+                duration="750"
+                id="theme-toggle"
+                type="button"
+              >
+                Mock Expand
+              </button>
+            </div>
+          </div>
+          <div
+            class="css-3uks8f"
+          >
+            <nav
+              role="navigation"
             />
           </div>
         </div>
+      </div>
+    </header>
+    <div>
+      Test content without main wrapper
+    </div>
+    <footer
+      class="css-2xzuv0"
+      id="footer"
+      role="contentinfo"
+    >
+      <div
+        class="css-13vusp9"
+      >
         <div
-          className="css-k5zx4s"
+          class="css-1jhg6p1"
         >
-          <span>
-            <a
-              className="css-4d1obe"
-              href="/rss.xml"
+          <div
+            class="css-1hl8ss2"
+          >
+            <div
+              class="css-1a85y5n"
             >
-              Subscribe via RSS
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="/privacy"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
+              Connect with me
+            </div>
+            <div
+              class="css-codtt7"
             >
-              Privacy Policy
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-            >
-              View Source
-            </a>
-          </span>
+              <a
+                class="css-1srm7sz"
+                rel="me"
+              />
+            </div>
+          </div>
+          <div
+            class="css-k5zx4s"
+          >
+            <span>
+              <a
+                class="css-4d1obe"
+                href="/rss.xml"
+              >
+                Subscribe via RSS
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="/privacy"
+              >
+                Privacy Policy
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
+              >
+                View Source
+              </a>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>
+</DocumentFragment>
 `;
 
 exports[`Layout renders with hideFooter prop 1`] = `
-<div
-  className="css-e2rbjw"
->
-  <a
-    data-reach-skip-link=""
-    data-reach-skip-nav-link=""
-    href="#reach-skip-nav"
+<DocumentFragment>
+  <div
+    class="css-e2rbjw"
   >
-    Skip to content
-  </a>
-  <header
-    role="banner"
-  >
-    <div
-      className="css-1916vvp"
+    <a
+      data-reach-skip-link=""
+      data-reach-skip-nav-link=""
+      href="#reach-skip-nav"
+    >
+      Skip to content
+    </a>
+    <header
+      role="banner"
     >
       <div
-        className="css-17dzpzi"
+        class="css-1916vvp"
       >
         <div
-          className="css-7xu00p"
-        >
-          <a
-            aria-current="page"
-            className="css-1wdhl9p"
-            href="/"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            style={{}}
-          >
-            Test Site
-          </a>
-          <div
-            className="css-9cpsy"
-          >
-            <button
-              aria-label="Toggle color mode"
-              aria-pressed={false}
-              className="theme-toggle"
-              data-testid="dark-mode-toggle"
-              duration={750}
-              id="theme-toggle"
-              onClick={[Function]}
-              type="button"
-            >
-              Mock Expand
-            </button>
-          </div>
-        </div>
-        <div
-          className="css-3uks8f"
-        >
-          <nav
-            role="navigation"
-          />
-        </div>
-      </div>
-    </div>
-  </header>
-  <main
-    role="main"
-  >
-    <div
-      data-reach-skip-nav-content=""
-      id="reach-skip-nav"
-    />
-    <div>
-      Test content without footer
-    </div>
-  </main>
-</div>
-`;
-
-exports[`Layout renders with hideHeader prop 1`] = `
-<div
-  className="css-e2rbjw"
->
-  <a
-    data-reach-skip-link=""
-    data-reach-skip-nav-link=""
-    href="#reach-skip-nav"
-  >
-    Skip to content
-  </a>
-  <main
-    role="main"
-  >
-    <div
-      data-reach-skip-nav-content=""
-      id="reach-skip-nav"
-    />
-    <div>
-      Test content without header
-    </div>
-  </main>
-  <footer
-    className="css-2xzuv0"
-    id="footer"
-    role="contentinfo"
-  >
-    <div
-      className="css-13vusp9"
-    >
-      <div
-        className="css-1jhg6p1"
-      >
-        <div
-          className="css-1hl8ss2"
+          class="css-17dzpzi"
         >
           <div
-            className="css-1a85y5n"
-          >
-            Connect with me
-          </div>
-          <div
-            className="css-codtt7"
+            class="css-7xu00p"
           >
             <a
-              className="css-1srm7sz"
-              rel="me"
+              aria-current="page"
+              class="css-1wdhl9p"
+              href="/"
+            >
+              Test Site
+            </a>
+            <div
+              class="css-9cpsy"
+            >
+              <button
+                aria-label="Toggle color mode"
+                aria-pressed="false"
+                class="theme-toggle"
+                data-testid="dark-mode-toggle"
+                duration="750"
+                id="theme-toggle"
+                type="button"
+              >
+                Mock Expand
+              </button>
+            </div>
+          </div>
+          <div
+            class="css-3uks8f"
+          >
+            <nav
+              role="navigation"
             />
           </div>
         </div>
+      </div>
+    </header>
+    <main
+      role="main"
+    >
+      <div
+        data-reach-skip-nav-content=""
+        id="reach-skip-nav"
+      />
+      <div>
+        Test content without footer
+      </div>
+    </main>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Layout renders with hideHeader prop 1`] = `
+<DocumentFragment>
+  <div
+    class="css-e2rbjw"
+  >
+    <a
+      data-reach-skip-link=""
+      data-reach-skip-nav-link=""
+      href="#reach-skip-nav"
+    >
+      Skip to content
+    </a>
+    <main
+      role="main"
+    >
+      <div
+        data-reach-skip-nav-content=""
+        id="reach-skip-nav"
+      />
+      <div>
+        Test content without header
+      </div>
+    </main>
+    <footer
+      class="css-2xzuv0"
+      id="footer"
+      role="contentinfo"
+    >
+      <div
+        class="css-13vusp9"
+      >
         <div
-          className="css-k5zx4s"
+          class="css-1jhg6p1"
         >
-          <span>
-            <a
-              className="css-4d1obe"
-              href="/rss.xml"
+          <div
+            class="css-1hl8ss2"
+          >
+            <div
+              class="css-1a85y5n"
             >
-              Subscribe via RSS
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="/privacy"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
+              Connect with me
+            </div>
+            <div
+              class="css-codtt7"
             >
-              Privacy Policy
-            </a>
-          </span>
-           | 
-          <span>
-            <a
-              href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-            >
-              View Source
-            </a>
-          </span>
+              <a
+                class="css-1srm7sz"
+                rel="me"
+              />
+            </div>
+          </div>
+          <div
+            class="css-k5zx4s"
+          >
+            <span>
+              <a
+                class="css-4d1obe"
+                href="/rss.xml"
+              >
+                Subscribe via RSS
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="/privacy"
+              >
+                Privacy Policy
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
+              >
+                View Source
+              </a>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>
+</DocumentFragment>
 `;

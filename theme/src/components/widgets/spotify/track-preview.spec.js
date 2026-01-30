@@ -1,18 +1,17 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import TrackPreview from './track-preview'
 
 describe('TrackPreview', () => {
   it('matches the snapshot', () => {
-    const tree = renderer
-      .create(
-        <TrackPreview
-          link='https://www.fake-book-website.com/book-example'
-          name='Fake Song'
-          thumbnailURL='https://placehold.it/400/400'
-        />
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TrackPreview
+        link='https://www.fake-book-website.com/book-example'
+        name='Fake Song'
+        thumbnailURL='https://placehold.it/400/400'
+      />
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

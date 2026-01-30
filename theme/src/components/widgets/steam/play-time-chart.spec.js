@@ -1,15 +1,11 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
 import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import theme from '../../../gatsby-plugin-theme-ui'
 import PlayTimeChart from './play-time-chart'
 
 const renderWithTheme = component => {
-  return renderer.create(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
-}
-
-const renderWithThemeForTesting = component => {
   return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
 }
 
@@ -69,42 +65,42 @@ describe('PlayTimeChart', () => {
 
   describe('Loading State', () => {
     it('renders loading state correctly', () => {
-      const tree = renderWithTheme(<PlayTimeChart games={[]} isLoading={true} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={[]} isLoading={true} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('shows loading spinner and message when isLoading is true', () => {
-      const { getByText } = renderWithThemeForTesting(<PlayTimeChart games={[]} isLoading={true} />)
+      const { getByText } = renderWithTheme(<PlayTimeChart games={[]} isLoading={true} />)
       expect(getByText('Loading Gaming Library...')).toBeInTheDocument()
     })
   })
 
   describe('Empty States', () => {
     it('renders empty state when no games provided', () => {
-      const tree = renderWithTheme(<PlayTimeChart games={[]} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={[]} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('renders empty state when games is null', () => {
-      const tree = renderWithTheme(<PlayTimeChart games={null} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={null} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('renders empty state when games is undefined', () => {
-      const tree = renderWithTheme(<PlayTimeChart games={undefined} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={undefined} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('shows correct empty state message', () => {
-      const { getByText } = renderWithThemeForTesting(<PlayTimeChart games={[]} />)
+      const { getByText } = renderWithTheme(<PlayTimeChart games={[]} />)
       expect(getByText('No gaming data available for library.')).toBeInTheDocument()
     })
   })
 
   describe('Data Processing', () => {
     it('renders correctly with sample data', () => {
-      const tree = renderWithTheme(<PlayTimeChart games={sampleGames} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('filters out games with zero playtime', () => {
@@ -121,8 +117,8 @@ describe('PlayTimeChart', () => {
           }
         }
       ]
-      const tree = renderWithTheme(<PlayTimeChart games={gamesWithZeroTime} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={gamesWithZeroTime} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('limits to top 10 games by playtime', () => {
@@ -137,7 +133,7 @@ describe('PlayTimeChart', () => {
         }
       }))
 
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={manyGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={manyGames} />)
       // Should only show top 10 games - count game containers by looking for images
       const gameImages = container.querySelectorAll('img[alt*="header"]')
       expect(gameImages.length).toBeLessThanOrEqual(10)
@@ -150,7 +146,7 @@ describe('PlayTimeChart', () => {
         { id: 3, displayName: 'Game 3', playTimeForever: 200, images: { header: 'h3.jpg' } }
       ]
 
-      const { getAllByText } = renderWithThemeForTesting(<PlayTimeChart games={unsortedGames} />)
+      const { getAllByText } = renderWithTheme(<PlayTimeChart games={unsortedGames} />)
       // The highest playtime game should be visible (Game 2 with 300 minutes = 5 hours)
       const game2Elements = getAllByText('Game 2')
       expect(game2Elements.length).toBeGreaterThan(0)
@@ -166,7 +162,7 @@ describe('PlayTimeChart', () => {
         }
       ]
 
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={gameWith90Minutes} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={gameWith90Minutes} />)
       // Component should render without errors
       expect(container).toBeInTheDocument()
     })
@@ -174,7 +170,7 @@ describe('PlayTimeChart', () => {
 
   describe('Interactive Features', () => {
     it('handles mouse hover on game cards', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const gameCard = container.querySelector('[role="button"]') || container.querySelector('div[onclick]')
 
       if (gameCard) {
@@ -186,7 +182,7 @@ describe('PlayTimeChart', () => {
     })
 
     it('opens Steam store page when game card is clicked', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
 
       // Find game cards by looking for elements with onclick handlers
       const allDivs = container.querySelectorAll('div')
@@ -227,7 +223,7 @@ describe('PlayTimeChart', () => {
 
   describe('Game Display Elements', () => {
     it('displays game rankings with proper badges', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       // Look for rank numbers in the page
       const content = container.textContent
       expect(content).toContain('1')
@@ -236,7 +232,7 @@ describe('PlayTimeChart', () => {
     })
 
     it('displays game images with proper alt text', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const images = container.querySelectorAll('img')
       expect(images.length).toBeGreaterThan(0)
 
@@ -246,13 +242,13 @@ describe('PlayTimeChart', () => {
     })
 
     it('shows game names and play time information', () => {
-      const { getAllByText } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { getAllByText } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const citiesElements = getAllByText('Cities: Skylines')
       expect(citiesElements.length).toBeGreaterThan(0)
     })
 
     it('displays progress bars for each game', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       // Look for progress bar structures - check for progress bar containers
       const content = container.textContent
       expect(content).toContain('Total Hours:')
@@ -264,20 +260,20 @@ describe('PlayTimeChart', () => {
 
   describe('Footer and Summary Stats', () => {
     it('displays total hours calculation', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const totalText = container.textContent
       expect(totalText).toContain('Total Hours:')
     })
 
     it('displays average hours per game', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const averageText = container.textContent
       expect(averageText).toContain('Average:')
     })
 
     it('includes link to view complete gaming library', () => {
       const profileURL = 'https://steamcommunity.com/id/testuser'
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} profileURL={profileURL} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} profileURL={profileURL} />)
       const link = container.querySelector('a[href*="steamcommunity.com"]')
       expect(link).toBeInTheDocument()
     })
@@ -286,20 +282,20 @@ describe('PlayTimeChart', () => {
   describe('View All Games Link', () => {
     it('renders the correct Steam library link using profileURL', () => {
       const profileURL = 'https://steamcommunity.com/id/testuser'
-      const { getByText } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} profileURL={profileURL} />)
+      const { getByText } = renderWithTheme(<PlayTimeChart games={sampleGames} profileURL={profileURL} />)
       const link = getByText('View complete gaming library').closest('a')
       expect(link).toHaveAttribute('href', 'https://steamcommunity.com/id/testuser/games/?tab=all')
     })
 
     it('does not render the link when profileURL is not provided', () => {
-      const { queryByText } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { queryByText } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const link = queryByText('View complete gaming library')
       expect(link).toBeNull()
     })
 
     it('removes trailing slash from profileURL before appending path', () => {
       const profileURL = 'https://steamcommunity.com/id/testuser/'
-      const { getByText } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} profileURL={profileURL} />)
+      const { getByText } = renderWithTheme(<PlayTimeChart games={sampleGames} profileURL={profileURL} />)
       const link = getByText('View complete gaming library').closest('a')
       expect(link).toHaveAttribute('href', 'https://steamcommunity.com/id/testuser/games/?tab=all')
     })
@@ -308,21 +304,19 @@ describe('PlayTimeChart', () => {
   describe('Theme Integration', () => {
     it('renders correctly in light mode', () => {
       // Default theme mode
-      const tree = renderWithTheme(<PlayTimeChart games={sampleGames} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('adapts to dark mode styling', () => {
       // We'll test that the component renders without errors in different color modes
       const darkTheme = { ...theme, initialColorModeName: 'dark' }
-      const tree = renderer
-        .create(
-          <ThemeUIProvider theme={darkTheme}>
-            <PlayTimeChart games={sampleGames} />
-          </ThemeUIProvider>
-        )
-        .toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(
+        <ThemeUIProvider theme={darkTheme}>
+          <PlayTimeChart games={sampleGames} />
+        </ThemeUIProvider>
+      )
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 
@@ -338,7 +332,7 @@ describe('PlayTimeChart', () => {
       ]
 
       expect(() => {
-        renderWithThemeForTesting(<PlayTimeChart games={gamesWithMissingImages} />)
+        renderWithTheme(<PlayTimeChart games={gamesWithMissingImages} />)
       }).not.toThrow()
     })
 
@@ -353,7 +347,7 @@ describe('PlayTimeChart', () => {
         }
       ]
 
-      renderWithThemeForTesting(<PlayTimeChart games={gamesWithNoRecentTime} />)
+      renderWithTheme(<PlayTimeChart games={gamesWithNoRecentTime} />)
       // Should render without errors
     })
 
@@ -368,14 +362,14 @@ describe('PlayTimeChart', () => {
       ]
 
       expect(() => {
-        renderWithThemeForTesting(<PlayTimeChart games={gamesWithLargePlaytime} />)
+        renderWithTheme(<PlayTimeChart games={gamesWithLargePlaytime} />)
       }).not.toThrow()
     })
 
     it('handles single game scenario', () => {
       const singleGame = [sampleGames[0]]
-      const tree = renderWithTheme(<PlayTimeChart games={singleGame} />).toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={singleGame} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('handles games with missing playTimeForever', () => {
@@ -388,21 +382,21 @@ describe('PlayTimeChart', () => {
       ]
 
       expect(() => {
-        renderWithThemeForTesting(<PlayTimeChart games={gamesWithMissingPlaytime} />)
+        renderWithTheme(<PlayTimeChart games={gamesWithMissingPlaytime} />)
       }).not.toThrow()
     })
   })
 
   describe('Accessibility', () => {
     it('includes proper ARIA attributes and semantic HTML', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       // Check that the component renders with proper HTML structure
       const images = container.querySelectorAll('img')
       expect(images.length).toBeGreaterThan(0)
     })
 
     it('provides meaningful alt text for images', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       const images = container.querySelectorAll('img')
       images.forEach(img => {
         expect(img).toHaveAttribute('alt')
@@ -414,12 +408,12 @@ describe('PlayTimeChart', () => {
   describe('Component Props and Error Handling', () => {
     it('uses default props correctly', () => {
       expect(() => {
-        renderWithThemeForTesting(<PlayTimeChart />)
+        renderWithTheme(<PlayTimeChart />)
       }).not.toThrow()
     })
 
     it('handles isLoading prop changes', () => {
-      const { rerender } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} isLoading={true} />)
+      const { rerender } = renderWithTheme(<PlayTimeChart games={sampleGames} isLoading={true} />)
 
       // Switch to not loading
       rerender(
@@ -443,12 +437,12 @@ describe('PlayTimeChart', () => {
       ]
 
       expect(() => {
-        renderWithThemeForTesting(<PlayTimeChart games={gamesWithEmptyImages} />)
+        renderWithTheme(<PlayTimeChart games={gamesWithEmptyImages} />)
       }).not.toThrow()
     })
 
     it('handles hover states correctly', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
 
       // Find a game card by looking for elements with game names
       const gameNameElements = container.querySelectorAll('div')
@@ -483,7 +477,7 @@ describe('PlayTimeChart', () => {
         { id: 3, displayName: 'Game 3', playTimeForever: 120, images: { header: 'g3.jpg' } } // 2 hours
       ]
 
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={gamesDifferentHours} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={gamesDifferentHours} />)
       const content = container.textContent
 
       // Should show the games and calculate totals
@@ -559,18 +553,16 @@ describe('PlayTimeChart', () => {
     })
 
     it('matches snapshot for a game card in dark mode', () => {
-      const tree = renderer
-        .create(
-          <ThemeUIProvider theme={darkTheme}>
-            <PlayTimeChart games={sampleGames} />
-          </ThemeUIProvider>
-        )
-        .toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = render(
+        <ThemeUIProvider theme={darkTheme}>
+          <PlayTimeChart games={sampleGames} />
+        </ThemeUIProvider>
+      )
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('matches snapshot for a hovered game card in dark mode', () => {
-      const { container } = render(
+      const { container, asFragment } = render(
         <ThemeUIProvider theme={darkTheme}>
           <PlayTimeChart games={sampleGames} />
         </ThemeUIProvider>
@@ -593,24 +585,18 @@ describe('PlayTimeChart', () => {
       if (gameCard) {
         fireEvent.mouseEnter(gameCard)
       }
-      expect(container).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
   })
 
   describe('Light Mode Coverage', () => {
     it('matches snapshot for a game card in light mode', () => {
-      const tree = renderer
-        .create(
-          <ThemeUIProvider theme={theme}>
-            <PlayTimeChart games={sampleGames} />
-          </ThemeUIProvider>
-        )
-        .toJSON()
-      expect(tree).toMatchSnapshot()
+      const { asFragment } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('matches snapshot for a hovered game card in light mode', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container, asFragment } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       // Simulate hover on a game card
       const allDivs = container.querySelectorAll('div')
       let gameCard = null
@@ -629,11 +615,11 @@ describe('PlayTimeChart', () => {
       if (gameCard) {
         fireEvent.mouseEnter(gameCard)
       }
-      expect(container).toMatchSnapshot()
+      expect(asFragment()).toMatchSnapshot()
     })
 
     it('applies correct hover styles in light mode', () => {
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       // Simulate hover on a game card
       const allDivs = container.querySelectorAll('div')
       let gameCard = null
@@ -660,7 +646,7 @@ describe('PlayTimeChart', () => {
   describe('Game Card Click', () => {
     it('calls window.open with correct URL when game card is clicked', () => {
       window.open = jest.fn()
-      const { container } = renderWithThemeForTesting(<PlayTimeChart games={sampleGames} />)
+      const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       // Find a clickable game card
       const allDivs = container.querySelectorAll('div')
       let gameCard = null

@@ -1,36 +1,11 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Spotify renders embed when fetch succeeds 1`] = `
-<div
-  className="css-tmbyjz"
-  dangerouslySetInnerHTML={
-    {
-      "__html": "<iframe src="https://open.spotify.com/embed/track/123"></iframe>",
-    }
-  }
-/>
-`;
-
-exports[`Spotify renders error state when HTTP response is not ok 1`] = `
-<div
-  className="css-12dtzxe"
->
-  Failed to load Spotify embed
-</div>
-`;
-
-exports[`Spotify renders error state when fetch fails 1`] = `
-<div
-  className="css-12dtzxe"
->
-  Failed to load Spotify embed
-</div>
-`;
-
 exports[`Spotify renders loading state initially 1`] = `
-<div
-  className="css-12dtzxe"
->
-  Loading...
-</div>
+<DocumentFragment>
+  <div
+    class="css-12dtzxe"
+  >
+    Loading...
+  </div>
+</DocumentFragment>
 `;

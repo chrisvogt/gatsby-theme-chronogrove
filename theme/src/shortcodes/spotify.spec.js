@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render, screen, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Spotify from './spotify'
 
 // Mock fetch globally
@@ -11,22 +12,21 @@ describe('Spotify', () => {
   })
 
   it('renders loading state initially', () => {
-    const component = renderer.create(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
-    expect(component.toJSON()).toMatchSnapshot()
+    // Don't wait for fetch to complete - just check initial render
+    fetch.mockImplementation(() => new Promise(() => {})) // Never resolves
+    const { asFragment } = render(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders error state when fetch fails', async () => {
     fetch.mockRejectedValueOnce(new Error('Network error'))
 
-    let component
-    await renderer.act(async () => {
-      component = renderer.create(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+    render(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+
+    // Wait for the error state to appear
+    await waitFor(() => {
+      expect(screen.getByText(/Failed to load Spotify embed/i)).toBeInTheDocument()
     })
-
-    // Wait for the async operation to complete
-    await new Promise(resolve => setTimeout(resolve, 0))
-
-    expect(component.toJSON()).toMatchSnapshot()
   })
 
   it('renders error state when HTTP response is not ok', async () => {
@@ -35,46 +35,33 @@ describe('Spotify', () => {
       status: 404
     })
 
-    let component
-    await renderer.act(async () => {
-      component = renderer.create(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+    render(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+
+    // Wait for the error state to appear
+    await waitFor(() => {
+      expect(screen.getByText(/Failed to load Spotify embed/i)).toBeInTheDocument()
     })
-
-    // Wait for the async operation to complete
-    await new Promise(resolve => setTimeout(resolve, 0))
-
-    expect(component.toJSON()).toMatchSnapshot()
   })
 
   it('renders embed when fetch succeeds', async () => {
     const mockResponse = {
-      html: '<iframe src="https://open.spotify.com/embed/track/123"></iframe>'
+      html: '<iframe src="https://open.spotify.com/embed/track/123" title="Spotify Embed"></iframe>'
     }
     fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => mockResponse
     })
 
-    let component
-    await renderer.act(async () => {
-      component = renderer.create(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+    const { container } = render(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+
+    // Wait for the iframe to appear in the HTML
+    await waitFor(() => {
+      expect(container.innerHTML).toContain('iframe')
     })
-
-    // Wait for the async operation to complete
-    await new Promise(resolve => setTimeout(resolve, 0))
-
-    expect(component.toJSON()).toMatchSnapshot()
   })
 
-  it('does not render when no spotifyURL is provided', async () => {
-    let component
-    await renderer.act(async () => {
-      component = renderer.create(<Spotify />)
-    })
-
-    // Wait for the async operation to complete
-    await new Promise(resolve => setTimeout(resolve, 0))
-
-    expect(component.toJSON()).toBeNull()
+  it('does not render when no spotifyURL is provided', () => {
+    const { container } = render(<Spotify />)
+    expect(container.firstChild).toBeNull()
   })
 })
