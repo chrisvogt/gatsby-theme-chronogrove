@@ -20,8 +20,8 @@
     "gatsby-plugin-sitemap": "^6.16.0",
     "gatsby-theme-chronogrove": "*",
     "prettier": "3.8.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.32"

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { useRef, useCallback, useState, useEffect } from 'react'
-import VisibilitySensor from 'react-visibility-sensor'
+import { useInView } from 'react-intersection-observer'
 
 import Gallery from 'react-photo-gallery'
 
@@ -58,6 +58,17 @@ export const PhotoGallery = ({ photos }) => {
   const lightGalleryRef = useRef(null)
   const [shouldLoadLightGallery, setShouldLoadLightGallery] = useState(false)
 
+  // Load LightGallery 300px before it comes into view
+  const { ref } = useInView({
+    rootMargin: '300px',
+    triggerOnce: true,
+    onChange: inView => {
+      if (inView) {
+        setShouldLoadLightGallery(true)
+      }
+    }
+  })
+
   const openLightbox = useCallback((event, { index }) => {
     const instance = lightGalleryRef.current
     if (instance) {
@@ -72,20 +83,10 @@ export const PhotoGallery = ({ photos }) => {
       {/* Render photo gallery - always visible */}
       <Gallery photos={photos} onClick={openLightbox} />
 
-      {/* Load LightGallery 300px before it comes into view */}
-      <VisibilitySensor
-        onChange={isVisible => {
-          if (isVisible) {
-            setShouldLoadLightGallery(true)
-          }
-        }}
-        partialVisibility={true}
-        offset={{ top: -300, bottom: -300 }}
-      >
-        <div style={{ minHeight: '1px' }}>
-          {shouldLoadLightGallery && <LightGalleryComponent lightGalleryRef={lightGalleryRef} photos={photos} />}
-        </div>
-      </VisibilitySensor>
+      {/* Sentinel element to trigger loading LightGallery 300px before view */}
+      <div ref={ref} style={{ minHeight: '1px' }}>
+        {shouldLoadLightGallery && <LightGalleryComponent lightGalleryRef={lightGalleryRef} photos={photos} />}
+      </div>
     </div>
   )
 }
