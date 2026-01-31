@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.67.0",
+  "version": "0.67.1",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
@@ -74,7 +74,7 @@
     "@theme-ui/prism": "^0.17.4",
     "boxen": "^8.0.1",
     "classnames": "^2.5.1",
-    "gatsby": "^5.16.0",
+    "gatsby": "patch:gatsby@npm%3A5.16.0#~/.yarn/patches/gatsby-npm-5.16.0-79b028a7a8.patch",
     "gatsby-plugin-emotion": "^8.16.0",
     "gatsby-plugin-feed": "^5.16.0",
     "gatsby-plugin-manifest": "^5.16.0",

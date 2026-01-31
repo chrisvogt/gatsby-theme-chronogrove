@@ -1,6 +1,6 @@
 {
   "name": "www.chronogrove.com",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Official demo site for gatsby-theme-chronogrove",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "gatsby": "^5.16.0",
+    "gatsby": "patch:gatsby@npm%3A5.16.0#~/.yarn/patches/gatsby-npm-5.16.0-79b028a7a8.patch",
     "gatsby-theme-chronogrove": "workspace:*",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
