@@ -80,7 +80,6 @@ export const renderWithProviders = (ui, { queryClient, ...options } = {}) => {
   )
 
   // Import render from @testing-library/react at runtime to avoid issues
-  // eslint-disable-next-line no-undef
   const { render } = require('@testing-library/react')
   return {
     ...render(ui, { wrapper: Wrapper, ...options }),
