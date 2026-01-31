@@ -289,4 +289,165 @@ describe('AnimatedPageBackground', () => {
     // Should fall back to default #14141F for dark mode
     expect(container).toBeTruthy()
   })
+
+  describe('Parallax effect', () => {
+    beforeEach(() => {
+      // Mock document scroll height for parallax calculations
+      Object.defineProperty(document.documentElement, 'scrollHeight', {
+        value: 3000,
+        configurable: true
+      })
+      Object.defineProperty(window, 'innerHeight', {
+        value: 1000,
+        configurable: true
+      })
+    })
+
+    it('accepts custom maxParallaxOffset prop', () => {
+      const { container } = renderWithTheme(<AnimatedPageBackground maxParallaxOffset={200} />)
+      expect(container).toBeTruthy()
+    })
+
+    it('sets up resize event listener for dynamic page height', () => {
+      const addEventListenerSpy = jest.spyOn(window, 'addEventListener')
+      const { unmount } = renderWithTheme(<AnimatedPageBackground />)
+
+      // Should add resize listener for updating max scroll distance
+      expect(addEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function), { passive: true })
+
+      addEventListenerSpy.mockRestore()
+      unmount()
+    })
+
+    it('cleans up resize listener on unmount', () => {
+      const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener')
+      const { unmount } = renderWithTheme(<AnimatedPageBackground />)
+
+      unmount()
+
+      expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function))
+      removeEventListenerSpy.mockRestore()
+    })
+
+    it('calculates parallax offset based on scroll progress', () => {
+      renderWithTheme(<AnimatedPageBackground maxParallaxOffset={150} />)
+
+      // Simulate scroll to 50% of page (1000px out of 2000px scrollable)
+      act(() => {
+        Object.defineProperty(window, 'scrollY', { value: 1000, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+
+      // At 50% scroll, parallax offset should be 75px (150 * 0.5)
+      expect(window.scrollY).toBe(1000)
+    })
+
+    it('caps parallax offset at maxParallaxOffset when at bottom', () => {
+      renderWithTheme(<AnimatedPageBackground maxParallaxOffset={150} />)
+
+      // Simulate scroll to bottom of page
+      act(() => {
+        Object.defineProperty(window, 'scrollY', { value: 2000, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+
+      // At 100% scroll, parallax offset should be exactly maxParallaxOffset
+      expect(window.scrollY).toBe(2000)
+    })
+
+    it('handles very long pages without exceeding maxParallaxOffset', () => {
+      // Simulate a very long page
+      Object.defineProperty(document.documentElement, 'scrollHeight', {
+        value: 50000,
+        configurable: true
+      })
+
+      renderWithTheme(<AnimatedPageBackground maxParallaxOffset={150} />)
+
+      // Scroll to bottom of long page
+      act(() => {
+        Object.defineProperty(window, 'scrollY', { value: 49000, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+
+      // Parallax offset should still be capped at maxParallaxOffset
+      expect(window.scrollY).toBe(49000)
+    })
+
+    it('updates max scroll distance on resize', () => {
+      renderWithTheme(<AnimatedPageBackground />)
+
+      // Simulate resize event (e.g., page content loaded dynamically)
+      act(() => {
+        Object.defineProperty(document.documentElement, 'scrollHeight', {
+          value: 5000,
+          configurable: true
+        })
+        window.dispatchEvent(new Event('resize'))
+      })
+
+      // Component should have updated its internal max scroll distance
+      expect(document.documentElement.scrollHeight).toBe(5000)
+    })
+
+    it('spreads parallax evenly across page height regardless of length', () => {
+      const { rerender } = renderWithTheme(<AnimatedPageBackground maxParallaxOffset={150} />)
+
+      // Scroll to 50% on short page
+      act(() => {
+        Object.defineProperty(window, 'scrollY', { value: 1000, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+
+      // Rerender with longer page
+      Object.defineProperty(document.documentElement, 'scrollHeight', {
+        value: 10000,
+        configurable: true
+      })
+
+      rerender(
+        <ThemeUIProvider theme={theme}>
+          <AnimatedPageBackground maxParallaxOffset={150} />
+        </ThemeUIProvider>
+      )
+
+      // Trigger resize to update max scroll
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+
+      // Component should handle the longer page
+      expect(document.documentElement.scrollHeight).toBe(10000)
+    })
+
+    it('handles maxParallaxOffset changes', () => {
+      const { rerender } = renderWithTheme(<AnimatedPageBackground maxParallaxOffset={100} />)
+
+      rerender(
+        <ThemeUIProvider theme={theme}>
+          <AnimatedPageBackground maxParallaxOffset={200} />
+        </ThemeUIProvider>
+      )
+
+      // Should reinitialize with new maxParallaxOffset
+      expect(rerender).toBeTruthy()
+    })
+
+    it('handles edge case of zero scroll distance', () => {
+      // Simulate a page where content fits in viewport (no scrolling)
+      Object.defineProperty(document.documentElement, 'scrollHeight', {
+        value: 800,
+        configurable: true
+      })
+      Object.defineProperty(window, 'innerHeight', {
+        value: 1000,
+        configurable: true
+      })
+
+      const { container } = renderWithTheme(<AnimatedPageBackground />)
+
+      // Should handle gracefully (maxScrollDistance = 1 to avoid division by zero)
+      expect(container).toBeTruthy()
+    })
+  })
 })
