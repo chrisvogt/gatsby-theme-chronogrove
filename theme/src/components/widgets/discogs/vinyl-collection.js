@@ -1,15 +1,18 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { Card } from '@theme-ui/components'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useRef, useEffect, useMemo } from 'react'
+import isDarkMode from '../../../helpers/isDarkMode'
 import Pagination from '../../pagination'
 import DiscogsModal from './discogs-modal'
 
 const VinylCollection = ({ isLoading, releases = [] }) => {
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   const [currentVinylId, setCurrentVinylId] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [isDragging, setIsDragging] = useState(false)
@@ -99,7 +102,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     .map((item, idx) => (
       <div className='show-loading-animation' key={idx}>
         <RectShape
-          color='#efefef'
+          color={darkModeActive ? '#3a3a4a' : '#efefef'}
           sx={{
             borderRadius: '50%',
             boxShadow: 'md',

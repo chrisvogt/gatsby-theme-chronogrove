@@ -1,10 +1,11 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { Themed } from '@theme-ui/mdx'
 import { useLocation, navigate } from '@gatsbyjs/reach-router'
 import { useEffect } from 'react'
+import isDarkMode from '../../../helpers/isDarkMode'
 
 import BookExplorer from './book-explorer'
 import BookLink from './book-link'
@@ -13,6 +14,8 @@ export const HEADLINE = 'Books'
 export const BODY_TEXT = 'The last 12 books I read and finished.'
 
 const RecentlyReadBooks = ({ books = [], isLoading }) => {
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   const location = useLocation()
   const params = new URLSearchParams(location.search)
   const bookId = params.get('bookId')
@@ -112,7 +115,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                 .fill()
                 .map((item, idx) => (
                   <RectShape
-                    color='#efefef'
+                    color={darkModeActive ? '#3a3a4a' : '#efefef'}
                     key={idx}
                     sx={{
                       boxShadow: 'md',

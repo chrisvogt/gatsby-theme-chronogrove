@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 
 import { Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useEffect, useCallback, useRef } from 'react'
+import isDarkMode from '../../../helpers/isDarkMode'
 import ReactPlaceholder from 'react-placeholder'
 import VanillaTilt from 'vanilla-tilt'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
@@ -37,6 +38,8 @@ const MAX_IMAGES = {
 }
 
 export default () => {
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   const lightGalleryRef = useRef(null)
 
   const metadata = useSiteMetadata()
@@ -109,7 +112,7 @@ export default () => {
                 customPlaceholder={
                   <div className='image-placeholder'>
                     <RectShape
-                      color='#efefef'
+                      color={darkModeActive ? '#3a3a4a' : '#efefef'}
                       sx={{
                         borderRadius: '8px',
                         boxShadow: 'md',
