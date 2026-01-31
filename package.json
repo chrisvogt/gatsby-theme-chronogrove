@@ -42,5 +42,10 @@
   "resolutions": {
     "lodash": "^4.17.23"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.9.2",
+  "browserslist": [
+    ">0.25%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
