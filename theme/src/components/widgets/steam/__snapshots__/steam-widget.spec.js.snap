@@ -172,7 +172,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-18hnp9e"
+              class="css-c86zxy"
             >
               1
             </div>
@@ -207,7 +207,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-18hnp9e"
+              class="css-c86zxy"
             >
               2
             </div>
@@ -410,7 +410,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-18hnp9e"
+              class="css-c86zxy"
             >
               1
             </div>
@@ -445,7 +445,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-18hnp9e"
+              class="css-c86zxy"
             >
               2
             </div>
@@ -773,7 +773,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-18hnp9e"
+              class="css-c86zxy"
             >
               1
             </div>
@@ -808,7 +808,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-18hnp9e"
+              class="css-c86zxy"
             >
               2
             </div>

@@ -20,7 +20,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -55,7 +55,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -90,7 +90,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -162,7 +162,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -197,7 +197,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -232,7 +232,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -304,7 +304,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -339,7 +339,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -374,7 +374,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -446,7 +446,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -481,7 +481,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -516,7 +516,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -588,7 +588,7 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -714,7 +714,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -749,7 +749,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -784,7 +784,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -856,7 +856,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -891,7 +891,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -926,7 +926,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -1019,7 +1019,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -1054,7 +1054,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -1089,7 +1089,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
@@ -1161,7 +1161,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             1
           </div>
@@ -1196,7 +1196,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             2
           </div>
@@ -1231,7 +1231,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-18hnp9e"
+            class="css-c86zxy"
           >
             3
           </div>
