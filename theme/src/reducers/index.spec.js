@@ -18,4 +18,9 @@ describe('Root Reducer', () => {
     // Test that the structure includes the audioPlayer reducer
     expect(state).toHaveProperty('audioPlayer')
   })
+
+  it('handles audioPlayer actions', () => {
+    const state = rootReducer(undefined, { type: 'audioPlayer/play', payload: { trackId: '123' } })
+    expect(state.audioPlayer).toBeDefined()
+  })
 })

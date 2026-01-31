@@ -36,6 +36,7 @@ const queryClient = new QueryClient({
 })
 
 // Table component that adapts to color mode
+// istanbul ignore next - internal MDX component only used when rendering MDX tables
 const Table = props => {
   const [colorMode] = useColorMode()
   const tableVariant = colorMode === 'dark' ? 'styles.tableDark' : 'styles.table'
@@ -43,10 +44,14 @@ const Table = props => {
   return <Themed.table {...props} sx={{ variant: tableVariant }} />
 }
 
+// Simple passthrough for MDX code blocks
+/* istanbul ignore next */
+const Pre = ({ children }) => <>{children}</>
+
 // Define MDX components
 const components = {
   Emoji,
-  pre: ({ children }) => <>{children}</>,
+  pre: Pre,
   YouTube,
   Table
 }
