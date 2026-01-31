@@ -77,7 +77,7 @@ const CareerPathVisualization = () => {
     treeLayout(root)
 
     // Create time scale - INVERTED (latest years at top) with extended range
-    const timeScale = d3.scaleLinear().domain([2003, 2025]).range([height, 0])
+    const timeScale = d3.scaleLinear().domain([2003, 2026]).range([height, 0])
 
     // Adjust node positions based on time
     root.descendants().forEach(node => {
@@ -85,7 +85,7 @@ const CareerPathVisualization = () => {
         node.y = timeScale(node.data.startYear)
       } else if (node.data.type === 'path' && node.children && node.children.length > 0) {
         // Position path nodes at the time of their earliest job
-        const earliestYear = Math.min(...node.children.map(child => child.data.startYear || 2025))
+        const earliestYear = Math.min(...node.children.map(child => child.data.startYear || 2026))
         node.y = timeScale(earliestYear)
       }
     })
