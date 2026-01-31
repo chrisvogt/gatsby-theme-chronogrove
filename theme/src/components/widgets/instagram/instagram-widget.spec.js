@@ -1,18 +1,23 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
-import { Provider as ReduxProvider } from 'react-redux'
 import '@testing-library/jest-dom'
-import configureStore from 'redux-mock-store'
 import InstagramWidget from './instagram-widget'
-import { ThemeUIProvider } from 'theme-ui'
-import theme from '../../../gatsby-plugin-theme-ui'
+import { TestProviderWithQuery } from '../../../testUtils'
 
 jest.mock('../../../hooks/use-site-metadata', () =>
   jest.fn(() => ({
-    instagramUsername: 'test_username',
-    instagramDataSource: 'test_data_source'
+    widgets: {
+      instagram: {
+        username: 'test_username',
+        widgetDataSource: 'https://fake-api.example.com/social/instagram'
+      }
+    }
   }))
 )
+
+// Mock useWidgetData hook
+jest.mock('../../../hooks/use-widget-data')
+import useWidgetData from '../../../hooks/use-widget-data'
 
 const mockLightGalleryInstance = {
   openGallery: jest.fn()
@@ -31,47 +36,54 @@ jest.mock('lightgallery/plugins/video', () => jest.fn())
 jest.mock('lightgallery/plugins/autoplay', () => jest.fn())
 
 jest.mock('vanilla-tilt')
-jest.mock('../../../actions/fetchDataSource', () =>
-  jest.fn(() => ({
-    type: 'FETCH_DATASOURCE'
-  }))
-)
 
-const mockStore = configureStore([])
+const mockLoadingState = {
+  data: undefined,
+  isLoading: true,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
+
+const mockSuccessState = {
+  data: {
+    collections: {
+      media: [
+        {
+          id: '123',
+          caption: 'Test Caption',
+          cdnMediaURL: 'https://cdn.example.com/images/fake-instagram-image.jpg',
+          mediaType: 'IMAGE',
+          permalink: 'https://instagram.com/p/test'
+        }
+      ]
+    },
+    metrics: [
+      { displayName: 'Followers', id: '1', value: 100 },
+      { displayName: 'Following', id: '2', value: 50 }
+    ],
+    profile: {
+      displayName: 'TestUser',
+      profileURL: 'https://instagram.com/testuser'
+    }
+  },
+  isLoading: false,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
+
+const mockErrorState = {
+  data: undefined,
+  isLoading: false,
+  hasFatalError: true,
+  isError: true,
+  error: new Error('Failed to fetch')
+}
 
 describe('InstagramWidget', () => {
-  let store
-
   beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
-    store = mockStore({
-      widgets: {
-        instagram: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              media: [
-                {
-                  id: '123',
-                  caption: 'Test Caption',
-                  cdnMediaURL: 'https://cdn.example.com/images/fake-instagram-image.jpg',
-                  mediaType: 'IMAGE',
-                  permalink: 'https://instagram.com/p/test'
-                }
-              ]
-            },
-            metrics: [
-              { displayName: 'Followers', id: '1', value: 100 },
-              { displayName: 'Following', id: '2', value: 50 }
-            ],
-            profile: {
-              displayName: 'TestUser',
-              profileURL: 'https://instagram.com/testuser'
-            }
-          }
-        }
-      }
-    })
   })
 
   afterEach(() => {
@@ -80,32 +92,23 @@ describe('InstagramWidget', () => {
   })
 
   it('renders without crashing', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
     expect(screen.getByText(/Instagram/i)).toBeInTheDocument()
   })
 
   it('renders placeholders when isLoading is true', () => {
-    const loadingStore = mockStore({
-      widgets: {
-        instagram: {
-          state: 'LOADING',
-          data: null
-        }
-      }
-    })
+    useWidgetData.mockReturnValue(mockLoadingState)
 
     render(
-      <ReduxProvider store={loadingStore}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     const placeholders = screen.getAllByText('', { selector: '.image-placeholder' })
@@ -113,25 +116,20 @@ describe('InstagramWidget', () => {
   })
 
   it('does not render LightGallery when media is empty during loading', () => {
-    const loadingStore = mockStore({
-      widgets: {
-        instagram: {
-          state: 'LOADING',
-          data: {
-            collections: {
-              media: [] // Empty array during loading
-            }
-          }
+    const loadingWithEmptyMedia = {
+      ...mockLoadingState,
+      data: {
+        collections: {
+          media: []
         }
       }
-    })
+    }
+    useWidgetData.mockReturnValue(loadingWithEmptyMedia)
 
     render(
-      <ReduxProvider store={loadingStore}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     // LightGallery should not be rendered when media array is empty
@@ -139,12 +137,12 @@ describe('InstagramWidget', () => {
   })
 
   it('renders media items when isLoading is false', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     const thumbnails = screen.getAllByAltText(/Instagram post: Test Caption/i)
@@ -156,12 +154,12 @@ describe('InstagramWidget', () => {
   })
 
   it('renders LightGallery when media has items', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     // LightGallery should be rendered when media array has items
@@ -169,51 +167,39 @@ describe('InstagramWidget', () => {
   })
 
   it('does not show "Show More" button when there are 8 or fewer images', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     expect(screen.queryByText(/Show More/i)).not.toBeInTheDocument()
   })
 
   it('shows and toggles "Show More"/"Show Less" button when there are more than 8 images', () => {
-    const storeWithManyImages = mockStore({
-      widgets: {
-        instagram: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              media: Array.from({ length: 10 }, (_, i) => ({
-                id: `image-${i}`,
-                caption: `Test Caption ${i}`,
-                cdnMediaURL: `https://cdn.example.com/images/fake-instagram-image-${i}.jpg`,
-                mediaType: 'IMAGE',
-                permalink: `https://instagram.com/p/test${i}`
-              }))
-            },
-            metrics: [
-              { displayName: 'Followers', id: '1', value: 100 },
-              { displayName: 'Following', id: '2', value: 50 }
-            ],
-            profile: {
-              displayName: 'TestUser',
-              profileURL: 'https://instagram.com/testuser'
-            }
-          }
+    const stateWithManyImages = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          media: Array.from({ length: 10 }, (_, i) => ({
+            id: `image-${i}`,
+            caption: `Test Caption ${i}`,
+            cdnMediaURL: `https://cdn.example.com/images/fake-instagram-image-${i}.jpg`,
+            mediaType: 'IMAGE',
+            permalink: `https://instagram.com/p/test${i}`
+          }))
         }
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithManyImages)
 
     render(
-      <ReduxProvider store={storeWithManyImages}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     const button = screen.getByText(/Show More/i)
@@ -226,12 +212,12 @@ describe('InstagramWidget', () => {
   })
 
   it('opens LightGallery when handleClick is called', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     const thumbnails = screen.getAllByAltText(/Instagram post: Test Caption/i)
@@ -240,37 +226,17 @@ describe('InstagramWidget', () => {
     expect(mockLightGalleryInstance.openGallery).toHaveBeenCalledWith(0)
   })
 
-  it('assigns lightGalleryRef correctly on initialization', () => {
-    const mockInstance = {}
-    jest.mock('lightgallery/react', () =>
-      jest.fn(({ onInit }) => {
-        onInit({ instance: mockInstance })
-        return <div data-testid='lightgallery-mock' />
-      })
-    )
-
-    render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
-    )
-
-    expect(mockInstance).toBeDefined()
-  })
-
   it('handles lightGallery instance not being initialized', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     // Temporarily override the mock to not provide an instance
     const originalMockOnInit = mockLightGalleryOnInit
     mockLightGalleryOnInit = () => <div data-testid='lightgallery-mock' />
 
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     // Click on an item to trigger openLightbox
@@ -285,80 +251,69 @@ describe('InstagramWidget', () => {
   })
 
   it('uses fallback URL when profileURL is not available', () => {
-    const storeWithoutProfileURL = mockStore({
-      widgets: {
-        instagram: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              media: [
-                {
-                  id: '123',
-                  caption: 'Test Caption',
-                  cdnMediaURL: 'https://cdn.example.com/images/fake-instagram-image.jpg',
-                  mediaType: 'IMAGE',
-                  permalink: 'https://instagram.com/p/test'
-                }
-              ]
-            },
-            metrics: [
-              { displayName: 'Followers', id: '1', value: 100 },
-              { displayName: 'Following', id: '2', value: 50 }
-            ]
-            // No profile data
-          }
-        }
+    const stateWithoutProfileURL = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        profile: undefined
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithoutProfileURL)
 
     render(
-      <ReduxProvider store={storeWithoutProfileURL}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     // The CallToAction should use the fallback URL with the configured username
     const link = screen.getByTitle('Instagram on Instagram')
     expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', 'https://www.instagram.com/instagram')
+    expect(link).toHaveAttribute('href', 'https://www.instagram.com/test_username')
   })
 
   it('passes video object to LightGallery when mediaType is VIDEO and mediaURL is present', () => {
-    const videoStore = mockStore({
-      widgets: {
-        instagram: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              media: [
-                {
-                  id: 'video1',
-                  caption: 'Video Caption',
-                  cdnMediaURL: 'https://cdn.example.com/images/fake-video-thumbnail.jpg',
-                  mediaType: 'VIDEO',
-                  mediaURL: 'https://cdn.example.com/videos/fake-video.mp4',
-                  permalink: 'https://instagram.com/p/video'
-                }
-              ]
-            },
-            metrics: []
-          }
+    const videoState = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          media: [
+            {
+              id: 'video1',
+              caption: 'Video Caption',
+              cdnMediaURL: 'https://cdn.example.com/images/fake-video-thumbnail.jpg',
+              mediaType: 'VIDEO',
+              mediaURL: 'https://cdn.example.com/videos/fake-video.mp4',
+              permalink: 'https://instagram.com/p/video'
+            }
+          ]
         }
       }
-    })
+    }
+    useWidgetData.mockReturnValue(videoState)
 
     render(
-      <ReduxProvider store={videoStore}>
-        <ThemeUIProvider theme={theme}>
-          <InstagramWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
     )
 
     expect(screen.getByTestId('lightgallery-mock')).toBeInTheDocument()
     // Indirect test – rendering succeeds, LightGallery was initialized
     expect(mockLightGalleryInstance.openGallery).not.toHaveBeenCalled() // Ensures it's only initialized, not opened
+  })
+
+  it('handles fatal error state correctly', () => {
+    useWidgetData.mockReturnValue(mockErrorState)
+
+    render(
+      <TestProviderWithQuery>
+        <InstagramWidget />
+      </TestProviderWithQuery>
+    )
+
+    expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument()
+    expect(screen.getByText(/Failed to load this widget/i)).toBeInTheDocument()
   })
 })

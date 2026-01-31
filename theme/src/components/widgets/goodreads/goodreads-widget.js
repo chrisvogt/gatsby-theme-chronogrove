@@ -1,22 +1,10 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { faGoodreads } from '@fortawesome/free-brands-svg-icons'
 
 import { getGoodreadsUsername, getGoodreadsWidgetDataSource } from '../../../selectors/metadata'
-import {
-  getAiSummary,
-  getBooks,
-  getHasFatalError,
-  getIsLoading,
-  getMetrics,
-  getProfileDisplayName,
-  getUserStatus
-} from '../../../selectors/goodreads'
-
-import fetchDataSource from '../../../actions/fetchDataSource'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
+import useWidgetData from '../../../hooks/use-widget-data'
 
 import AiSummary from '../steam/ai-summary'
 import CallToAction from '../call-to-action'
@@ -27,25 +15,34 @@ import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 
 export default () => {
-  const dispatch = useDispatch()
-
   const metadata = useSiteMetadata()
   const goodreadsUsername = getGoodreadsUsername(metadata)
   const goodreadsDataSource = getGoodreadsWidgetDataSource(metadata)
 
-  const aiSummary = useSelector(getAiSummary)
-  const books = useSelector(getBooks)
-  const hasFatalError = useSelector(getHasFatalError)
-  const isLoading = useSelector(getIsLoading)
-  const metrics = useSelector(getMetrics)
-  const profileDisplayName = useSelector(getProfileDisplayName)
-  const status = useSelector(getUserStatus)
+  const { data, isLoading, hasFatalError } = useWidgetData('goodreads', goodreadsDataSource)
 
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchDataSource('goodreads', goodreadsDataSource))
-    }
-  }, [dispatch, goodreadsDataSource, isLoading])
+  // Extract data from the query result (matching API structure)
+  const aiSummary = data?.aiSummary
+
+  // Books come from recentlyReadBooks, filtered to only those with thumbnails
+  const recentlyReadBooks = data?.collections?.recentlyReadBooks || []
+  const books = recentlyReadBooks.filter(({ thumbnail }) => Boolean(thumbnail)).slice(0, 12)
+
+  // Build metrics from profile data
+  const metrics = []
+  if (data?.profile?.friendsCount) {
+    metrics.push({ displayName: 'Friends', id: 'friends-count', value: data.profile.friendsCount })
+  }
+  if (data?.profile?.readCount) {
+    metrics.push({ displayName: 'Books Read', id: 'read-count', value: data.profile.readCount })
+  }
+
+  // Profile display name
+  const profileDisplayName = data?.profile?.name
+
+  // Status comes from updates collection, finding first userstatus or review
+  const updates = data?.collections?.updates || []
+  const status = updates.find(({ type }) => type === 'userstatus' || type === 'review')
 
   const callToAction = (
     <CallToAction

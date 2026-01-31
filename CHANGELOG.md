@@ -1,5 +1,65 @@
 # Changelog
 
+## 0.68.0
+
+### ✨ New Features
+
+- **TanStack Query Integration**: Migrated widget data fetching from Redux to TanStack Query (React Query) for improved caching, deduplication, and state management
+  - **New `useWidgetData` Hook**: Centralized data fetching logic with built-in loading states, error handling, and caching
+  - **Widget Migrations**: Updated all 7 widget components (GitHub, Spotify, Flickr, Instagram, Goodreads, Steam, Discogs) to use the new hook
+  - **QueryClientProvider**: Added TanStack Query provider to `wrapRootElement.js` with optimized default settings for Gatsby static sites
+  - **Improved DX**: Simplified widget component code by removing Redux boilerplate (`useDispatch`, `useSelector` for widget data)
+  - **Performance**: Built-in request deduplication, stale-while-revalidate caching, and configurable retry logic
+
+### 🔧 Technical Improvements
+
+- **Data Fetching Architecture**: Replaced manual `fetchDataSource` Redux action with declarative `useWidgetData` hook
+- **Caching Strategy**: 5-minute stale time, 30-minute garbage collection, disabled refetch on window focus/reconnect (optimized for static sites)
+- **Error Handling**: Consistent `hasFatalError` state across all widgets with graceful degradation
+- **Test Infrastructure**: Added `TestProviderWithQuery` utility for testing components with TanStack Query
+
+### 🐛 Bug Fixes
+
+- **Goodreads UserStatus**: Fixed runtime error when `status` prop is undefined during loading
+- **Goodreads Data Paths**: Corrected data extraction paths for books, status, and profile display name
+- **Discogs Metrics**: Fixed metrics transformation to convert object format to array format for `ProfileMetricsBadge`
+
+### 📦 Dependencies
+
+- Added `@tanstack/react-query` (^5.66.0) for modern data fetching
+
+### 🧪 Testing
+
+- Updated all 7 widget test files to mock `useWidgetData` hook
+- Added comprehensive test coverage for `useWidgetData` hook
+- Updated test utilities with `TestProviderWithQuery` wrapper
+- All 954 tests passing with updated snapshots
+
+### 📦 Files Changed
+
+- New: `theme/src/hooks/use-widget-data.js`
+- New: `theme/src/hooks/use-widget-data.spec.js`
+- Modified: `theme/wrapRootElement.js`
+- Modified: `theme/src/testUtils.js`
+- Modified: All widget components and their test files
+
+---
+
+## 0.67.1
+
+### 🐛 Bug Fixes
+
+- **Lighthouse Best Practices & SEO**: Fixed broken Lighthouse reports caused by Gatsby issue [gatsbyjs/gatsby#39415](https://github.com/gatsbyjs/gatsby/issues/39415)
+  - Applied patch from [gatsbyjs/gatsby#39417](https://github.com/gatsbyjs/gatsby/pull/39417) to resolve the issue
+  - Lighthouse Best Practices and SEO scores now report correctly
+
+### 📦 Dependencies
+
+- **Gatsby**: Updated to `5.16.0` with patch applied via Yarn patch protocol
+- Applied `.yarn/patches/gatsby-npm-5.16.0-79b028a7a8.patch` to fix Lighthouse reporting
+
+---
+
 ## 0.67.0
 
 ### ✨ New Features

@@ -23,8 +23,12 @@ const mapStatusToTemplate = {
 }
 
 const UserStatus = ({ isLoading, status, actorName }) => {
-  const { created, link, type, updated } = status
+  // Handle undefined/null status gracefully
+  if (!status && !isLoading) {
+    return null
+  }
 
+  const { created, link, type, updated } = status || {}
   const statusText = mapStatusToTemplate[type] ? mapStatusToTemplate[type](status) : 'Loading...'
 
   return (

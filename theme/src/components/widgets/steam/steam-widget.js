@@ -1,10 +1,8 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { faSteam } from '@fortawesome/free-brands-svg-icons'
-import { useEffect } from 'react'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
-import { useDispatch, useSelector } from 'react-redux'
 import React from 'react'
 
 import CallToAction from '../call-to-action'
@@ -15,40 +13,24 @@ import AiSummary from './ai-summary'
 import PlayTimeChart from './play-time-chart'
 import SteamGameCard from './steam-game-card'
 
-import {
-  getAiSummary,
-  getHasFatalError,
-  getIsLoading,
-  getMetrics,
-  getOwnedGames,
-  getProfileDisplayName,
-  getProfileURL,
-  getRecentlyPlayedGames
-} from '../../../selectors/steam'
-import fetchDataSource from '../../../actions/fetchDataSource'
 import { getSteamWidgetDataSource } from '../../../selectors/metadata'
 import getTimeSpent from './get-time-spent'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
+import useWidgetData from '../../../hooks/use-widget-data'
 
 const SteamWidget = React.memo(() => {
-  const dispatch = useDispatch()
   const metadata = useSiteMetadata()
   const steamDataSource = getSteamWidgetDataSource(metadata)
 
-  const aiSummary = useSelector(getAiSummary)
-  const hasFatalError = useSelector(getHasFatalError)
-  const isLoading = useSelector(getIsLoading)
-  const metrics = useSelector(getMetrics)
-  const ownedGames = useSelector(getOwnedGames)
-  const profileDisplayName = useSelector(getProfileDisplayName)
-  const profileURL = useSelector(getProfileURL)
-  const recentlyPlayedGames = useSelector(getRecentlyPlayedGames)
+  const { data, isLoading, hasFatalError } = useWidgetData('steam', steamDataSource)
 
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchDataSource('steam', steamDataSource))
-    }
-  }, [dispatch, steamDataSource, isLoading])
+  // Extract data from the query result
+  const aiSummary = data?.aiSummary
+  const metrics = data?.metrics
+  const ownedGames = data?.collections?.ownedGames || []
+  const profileDisplayName = data?.profile?.displayName
+  const profileURL = data?.profile?.profileURL
+  const recentlyPlayedGames = data?.collections?.recentlyPlayedGames || []
 
   const callToAction = (
     <CallToAction title={`${profileDisplayName} on Steam`} url={profileURL} isLoading={isLoading}>

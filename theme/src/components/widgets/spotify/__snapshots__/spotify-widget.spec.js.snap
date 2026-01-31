@@ -47,148 +47,23 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
       <div
         class="css-1rgtmy6"
       >
-        <svg
-          class="svg-loaders-svg css-ao632c"
-          fill="#1E90FF"
-          height="24"
-          viewBox="0 0 135 140"
-          width="24"
+        <a
+          class="css-1u2ig8x"
+          href=""
+          title=" on "
         >
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            y="10"
+          Browse Playlists
+          <span
+            class="read-more-icon"
           >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="30"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="140"
-            rx="6"
-            width="15"
-            x="60"
-          >
-            <animate
-              attributeName="height"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="90"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="120"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-        </svg>
+            →
+          </span>
+        </a>
       </div>
     </header>
     <div
       class="css-1hw7zrq"
-    >
-      <div
-        class="css-1giak3r"
-      >
-         
-      </div>
-      <div
-        class="css-zcaudb"
-      >
-         
-      </div>
-    </div>
+    />
     <div
       class="css-sak8bt"
     >
@@ -208,104 +83,7 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
       </p>
       <div
         class="media-item_grid null css-5stlgz"
-      >
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-      </div>
+      />
     </div>
     <div>
       <div
@@ -324,104 +102,7 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
       </p>
       <div
         class="media-item_grid null css-5stlgz"
-      >
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-      </div>
+      />
     </div>
   </section>
 </DocumentFragment>
@@ -430,26 +111,9 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
 exports[`Spotify Widget matches the loaded state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1k28k4o"
+    class="css-1pk2a5b"
     id="spotify"
   >
-    <div
-      class="css-rmw57n"
-    >
-      <div
-        class="css-59lkxq"
-      >
-        <h4>
-          Something went wrong
-        </h4>
-        <p>
-          Failed to load this widget.
-        </p>
-      </div>
-      <div
-        class="css-bgces8"
-      />
-    </div>
     <header
       class="css-x6ikgs"
     >
@@ -474,132 +138,18 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
       <div
         class="css-1rgtmy6"
       >
-        <svg
-          class="svg-loaders-svg css-ao632c"
-          fill="#1E90FF"
-          height="24"
-          viewBox="0 0 135 140"
-          width="24"
+        <a
+          class="css-1u2ig8x"
+          href="https://spotify.com/user/test"
+          title="Test User on Spotify"
         >
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            y="10"
+          Browse Playlists
+          <span
+            class="read-more-icon"
           >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="30"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="140"
-            rx="6"
-            width="15"
-            x="60"
-          >
-            <animate
-              attributeName="height"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="90"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="120"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-        </svg>
+            →
+          </span>
+        </a>
       </div>
     </header>
     <div
@@ -608,12 +158,12 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
       <div
         class="css-1giak3r"
       >
-         
+        10 Playlists
       </div>
       <div
         class="css-zcaudb"
       >
-         
+        20 Top Tracks
       </div>
     </div>
     <div
@@ -636,102 +186,28 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
       <div
         class="media-item_grid null css-5stlgz"
       >
-        <div
-          class="show-loading-animation"
+        <a
+          class="media-item_media css-13fusor"
+          title="Test Track – [object Object]"
         >
           <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
+            class="css-x4b07x"
+          >
+            <div
+              class="media-item_caption css-e7oldi"
+            >
+              <span>
+                Test Track
+              </span>
+            </div>
+            <img
+              alt="cover artwork"
+              class="css-karewm"
+              crossorigin="anonymous"
+              loading="lazy"
+            />
+          </div>
+        </a>
       </div>
     </div>
     <div>
@@ -751,104 +227,7 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
       </p>
       <div
         class="media-item_grid null css-5stlgz"
-      >
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-        <div
-          class="show-loading-animation"
-        >
-          <div
-            class="rect-shape css-2us3i8"
-            style="background-color: rgb(239, 239, 239); width: 100%; height: 100%; margin-right: 10px;"
-          />
-        </div>
-      </div>
+      />
     </div>
   </section>
 </DocumentFragment>
@@ -857,26 +236,9 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
 exports[`Spotify Widget matches the loading state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1k28k4o"
+    class="css-1pk2a5b"
     id="spotify"
   >
-    <div
-      class="css-rmw57n"
-    >
-      <div
-        class="css-59lkxq"
-      >
-        <h4>
-          Something went wrong
-        </h4>
-        <p>
-          Failed to load this widget.
-        </p>
-      </div>
-      <div
-        class="css-bgces8"
-      />
-    </div>
     <header
       class="css-x6ikgs"
     >

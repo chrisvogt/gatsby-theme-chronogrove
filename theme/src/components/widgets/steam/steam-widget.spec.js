@@ -1,9 +1,8 @@
 import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { Provider } from 'react-redux'
-import configureMockStore from 'redux-mock-store'
-import { configureStore as configureRealStore } from '@reduxjs/toolkit'
+import SteamWidget from './steam-widget'
+import { TestProviderWithQuery } from '../../../testUtils'
 
 // Mock child components to isolate the test
 jest.mock('../call-to-action', () => props => <div data-testid='CallToAction'>{props.title}</div>)
@@ -15,241 +14,171 @@ jest.mock('../widget', () => props => <div data-testid='Widget'>{props.children}
 jest.mock('../widget-header', () => props => <div data-testid='WidgetHeader'>{props.children}</div>)
 jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 
-// Mock hooks and selectors
+// Mock hooks
 jest.mock('../../../hooks/use-site-metadata', () => () => ({
-  widgets: { steam: { url: 'https://example.com/steam-feed' } }
-}))
-jest.mock('../../../selectors/metadata', () => ({
-  getSteamWidgetDataSource: () => 'https://example.com/steam-feed'
+  widgets: { steam: { widgetDataSource: 'https://example.com/steam-feed' } }
 }))
 
-// Move fetchDataSource mock before importing the component
-let mockFetchDataSource
-jest.mock('../../../actions/fetchDataSource', () => {
-  mockFetchDataSource = jest.fn(() => ({ type: 'MOCK_ACTION' }))
-  return mockFetchDataSource
-})
+// Mock useWidgetData hook
+jest.mock('../../../hooks/use-widget-data')
+import useWidgetData from '../../../hooks/use-widget-data'
 
-const mockStore = configureMockStore([]) // no middleware
+const mockLoadingState = {
+  data: undefined,
+  isLoading: true,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
 
-// Re-import after mocks
-const SteamWidget = require('./steam-widget').default
+const mockSuccessState = {
+  data: {
+    metrics: [{ label: 'Games Played', value: 5 }],
+    profile: {
+      displayName: 'Chris',
+      profileURL: 'https://steamcommunity.com/id/themeuser'
+    },
+    collections: {
+      recentlyPlayedGames: [
+        {
+          id: '123',
+          displayName: 'Half-Life',
+          playTime2Weeks: 120,
+          images: { header: 'https://example.com/halflife.jpg' }
+        },
+        {
+          id: '456',
+          displayName: 'Portal',
+          playTime2Weeks: 45,
+          images: { header: 'https://example.com/portal.jpg' }
+        }
+      ],
+      ownedGames: [
+        {
+          id: '255710',
+          displayName: 'Cities: Skylines',
+          playTimeForever: 45441,
+          playTime2Weeks: 120,
+          images: { icon: 'https://example.com/cities-icon.jpg' }
+        },
+        {
+          id: '346110',
+          displayName: 'ARK: Survival Evolved',
+          playTimeForever: 16670,
+          playTime2Weeks: null,
+          images: { icon: 'https://example.com/ark-icon.jpg' }
+        }
+      ]
+    }
+  },
+  isLoading: false,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
+
+const mockErrorState = {
+  data: undefined,
+  isLoading: false,
+  hasFatalError: true,
+  isError: true,
+  error: new Error('Failed to fetch')
+}
 
 describe('SteamWidget', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders correctly with sample data', () => {
-    const store = mockStore({
-      widgets: {
-        steam: {
-          state: 'SUCCESS',
-          data: {
-            metrics: [{ label: 'Games Played', value: 5 }],
-            profile: {
-              displayName: 'Chris',
-              profileURL: 'https://steamcommunity.com/id/themeuser'
-            },
-            collections: {
-              recentlyPlayedGames: [
-                {
-                  id: '123',
-                  displayName: 'Half-Life',
-                  playTime2Weeks: 120,
-                  images: { header: 'https://example.com/halflife.jpg' }
-                },
-                {
-                  id: '456',
-                  displayName: 'Portal',
-                  playTime2Weeks: 45,
-                  images: { header: 'https://example.com/portal.jpg' }
-                }
-              ],
-              ownedGames: [
-                {
-                  id: '255710',
-                  displayName: 'Cities: Skylines',
-                  playTimeForever: 45441,
-                  playTime2Weeks: 120,
-                  images: { icon: 'https://example.com/cities-icon.jpg' }
-                },
-                {
-                  id: '346110',
-                  displayName: 'ARK: Survival Evolved',
-                  playTimeForever: 16670,
-                  playTime2Weeks: null,
-                  images: { icon: 'https://example.com/ark-icon.jpg' }
-                }
-              ]
-            }
-          }
-        }
-      }
-    })
+    useWidgetData.mockReturnValue(mockSuccessState)
 
     const { asFragment } = render(
-      <Provider store={store}>
+      <TestProviderWithQuery>
         <SteamWidget />
-      </Provider>
+      </TestProviderWithQuery>
     )
 
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders loading state', () => {
-    const store = mockStore({
-      widgets: {
-        steam: {
-          state: 'LOADING'
-        }
-      }
-    })
+    useWidgetData.mockReturnValue(mockLoadingState)
 
     const { asFragment } = render(
-      <Provider store={store}>
+      <TestProviderWithQuery>
         <SteamWidget />
-      </Provider>
+      </TestProviderWithQuery>
     )
 
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders error state (hasFatalError)', () => {
-    const store = mockStore({
-      widgets: {
-        steam: {
-          state: 'SUCCESS',
-          data: {
-            metrics: [{ label: 'Games Played', value: 5 }],
-            profile: {
-              displayName: 'Chris',
-              profileURL: 'https://steamcommunity.com/id/themeuser'
-            },
-            collections: {
-              recentlyPlayedGames: [],
-              ownedGames: []
-            }
-          },
-          hasFatalError: true
-        }
-      }
-    })
+    useWidgetData.mockReturnValue(mockErrorState)
+
     const { asFragment } = render(
-      <Provider store={store}>
+      <TestProviderWithQuery>
         <SteamWidget />
-      </Provider>
+      </TestProviderWithQuery>
     )
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders AI summary if present', () => {
-    const store = mockStore({
-      widgets: {
-        steam: {
-          state: 'SUCCESS',
-          data: {
-            aiSummary: 'This is an AI summary',
-            metrics: [{ label: 'Games Played', value: 5 }],
-            profile: {
-              displayName: 'Chris',
-              profileURL: 'https://steamcommunity.com/id/themeuser'
-            },
-            collections: {
-              recentlyPlayedGames: [],
-              ownedGames: []
-            }
-          }
-        }
+    const stateWithAiSummary = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        aiSummary: 'This is an AI summary'
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithAiSummary)
+
     const { asFragment } = render(
-      <Provider store={store}>
+      <TestProviderWithQuery>
         <SteamWidget />
-      </Provider>
+      </TestProviderWithQuery>
     )
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with empty metrics', () => {
-    const store = mockStore({
-      widgets: {
-        steam: {
-          state: 'SUCCESS',
-          data: {
-            metrics: [],
-            profile: {
-              displayName: 'Chris',
-              profileURL: 'https://steamcommunity.com/id/themeuser'
-            },
-            collections: {
-              recentlyPlayedGames: [],
-              ownedGames: []
-            }
-          }
-        }
+    const stateWithEmptyMetrics = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        metrics: []
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithEmptyMetrics)
+
     const { asFragment } = render(
-      <Provider store={store}>
+      <TestProviderWithQuery>
         <SteamWidget />
-      </Provider>
+      </TestProviderWithQuery>
     )
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders with empty recentlyPlayedGames and ownedGames', () => {
-    const store = mockStore({
-      widgets: {
-        steam: {
-          state: 'SUCCESS',
-          data: {
-            metrics: [{ label: 'Games Played', value: 5 }],
-            profile: {
-              displayName: 'Chris',
-              profileURL: 'https://steamcommunity.com/id/themeuser'
-            },
-            collections: {
-              recentlyPlayedGames: [],
-              ownedGames: []
-            }
-          }
+    const stateWithEmptyGames = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          recentlyPlayedGames: [],
+          ownedGames: []
         }
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithEmptyGames)
+
     const { asFragment } = render(
-      <Provider store={store}>
+      <TestProviderWithQuery>
         <SteamWidget />
-      </Provider>
+      </TestProviderWithQuery>
     )
     expect(asFragment()).toMatchSnapshot()
-  })
-
-  it('calls fetchDataSource when isLoading is true', async () => {
-    mockFetchDataSource.mockClear()
-    // Use a real Redux store for this test
-    const initialState = {
-      widgets: {
-        steam: {
-          state: 'INIT',
-          data: {
-            metrics: [],
-            profile: {},
-            collections: { recentlyPlayedGames: [], ownedGames: [] }
-          }
-        }
-      }
-    }
-    // Minimal reducer to support the selectors
-    function widgets(state = initialState.widgets) {
-      return state
-    }
-    const store = configureRealStore({ reducer: { widgets } })
-
-    render(
-      <Provider store={store}>
-        <SteamWidget />
-      </Provider>
-    )
-
-    await waitFor(() => {
-      expect(mockFetchDataSource).toHaveBeenCalled()
-    })
   })
 })
