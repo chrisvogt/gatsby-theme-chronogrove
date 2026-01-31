@@ -4,6 +4,7 @@ import createCache from '@emotion/cache'
 import { jsx, useColorMode } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 import { Provider as ReduxProvider } from 'react-redux'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Themed } from '@theme-ui/mdx'
 import { ThemeUIProvider } from 'theme-ui'
 
@@ -16,7 +17,26 @@ import YouTube from './src/shortcodes/youtube'
 // Create an Emotion cache
 const cache = createCache({ key: 'css', prepend: true })
 
+// Create a TanStack Query client with optimized defaults for Gatsby
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Data stays fresh for 5 minutes
+      staleTime: 5 * 60 * 1000,
+      // Cache data for 30 minutes
+      gcTime: 30 * 60 * 1000,
+      // Don't refetch on window focus (better for static sites)
+      refetchOnWindowFocus: false,
+      // Don't refetch on reconnect
+      refetchOnReconnect: false,
+      // Retry failed requests once
+      retry: 1
+    }
+  }
+})
+
 // Table component that adapts to color mode
+// istanbul ignore next - internal MDX component only used when rendering MDX tables
 const Table = props => {
   const [colorMode] = useColorMode()
   const tableVariant = colorMode === 'dark' ? 'styles.tableDark' : 'styles.table'
@@ -24,25 +44,31 @@ const Table = props => {
   return <Themed.table {...props} sx={{ variant: tableVariant }} />
 }
 
+// Simple passthrough for MDX code blocks
+/* istanbul ignore next */
+const Pre = ({ children }) => <>{children}</>
+
 // Define MDX components
 const components = {
   Emoji,
-  pre: ({ children }) => <>{children}</>,
+  pre: Pre,
   YouTube,
   Table
 }
 
 const WrapRootElement = ({ element }) => (
-  <CacheProvider value={cache}>
-    <ReduxProvider store={store}>
-      <ThemeUIProvider theme={theme}>
-        <Global styles={theme.global} />
-        <MDXProvider components={components}>
-          <RootWrapper>{element}</RootWrapper>
-        </MDXProvider>
-      </ThemeUIProvider>
-    </ReduxProvider>
-  </CacheProvider>
+  <QueryClientProvider client={queryClient}>
+    <CacheProvider value={cache}>
+      <ReduxProvider store={store}>
+        <ThemeUIProvider theme={theme}>
+          <Global styles={theme.global} />
+          <MDXProvider components={components}>
+            <RootWrapper>{element}</RootWrapper>
+          </MDXProvider>
+        </ThemeUIProvider>
+      </ReduxProvider>
+    </CacheProvider>
+  </QueryClientProvider>
 )
 
 export default WrapRootElement

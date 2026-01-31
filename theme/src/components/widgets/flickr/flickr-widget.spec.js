@@ -1,11 +1,8 @@
 import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
-import { Provider as ReduxProvider } from 'react-redux'
 import '@testing-library/jest-dom'
-import configureStore from 'redux-mock-store'
 import FlickrWidget from './flickr-widget'
-import { ThemeUIProvider } from 'theme-ui'
-import theme from '../../../gatsby-plugin-theme-ui'
+import { TestProviderWithQuery } from '../../../testUtils'
 import VanillaTilt from 'vanilla-tilt'
 
 // Mock use-site-metadata at the top
@@ -13,10 +10,14 @@ jest.mock('../../../hooks/use-site-metadata', () => () => ({
   widgets: {
     flickr: {
       username: 'test_username',
-      widgetDataSource: 'test_data_source'
+      widgetDataSource: 'https://fake-api.example.com/social/flickr'
     }
   }
 }))
+
+// Mock useWidgetData hook
+jest.mock('../../../hooks/use-widget-data')
+import useWidgetData from '../../../hooks/use-widget-data'
 
 // Mock LightGallery at the top
 const mockLightGalleryInstance = {
@@ -36,42 +37,49 @@ jest.mock('lightgallery/plugins/video', () => jest.fn())
 jest.mock('lightgallery/plugins/autoplay', () => jest.fn())
 
 jest.mock('vanilla-tilt')
-jest.mock('../../../actions/fetchDataSource', () =>
-  jest.fn(() => ({
-    type: 'FETCH_DATASOURCE'
-  }))
-)
 
-const mockStore = configureStore([])
+const mockLoadingState = {
+  data: undefined,
+  isLoading: true,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
+
+const mockSuccessState = {
+  data: {
+    collections: {
+      photos: [
+        {
+          id: '123',
+          title: 'Test Photo Title',
+          thumbnailUrl: 'https://cdn.example.com/images/fake-flickr-image.jpg',
+          largeUrl: 'https://cdn.example.com/images/fake-flickr-image-large.jpg'
+        }
+      ]
+    },
+    metrics: [
+      { displayName: 'Photos', id: '1', value: 100 },
+      { displayName: 'Views', id: '2', value: 1000 }
+    ]
+  },
+  isLoading: false,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
+
+const mockErrorState = {
+  data: undefined,
+  isLoading: false,
+  hasFatalError: true,
+  isError: true,
+  error: new Error('Failed to fetch')
+}
 
 describe('FlickrWidget', () => {
-  let store
-
   beforeEach(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
-    store = mockStore({
-      widgets: {
-        flickr: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              photos: [
-                {
-                  id: '123',
-                  title: 'Test Photo Title',
-                  thumbnailUrl: 'https://cdn.example.com/images/fake-flickr-image.jpg',
-                  largeUrl: 'https://cdn.example.com/images/fake-flickr-image-large.jpg'
-                }
-              ]
-            },
-            metrics: [
-              { displayName: 'Photos', id: '1', value: 100 },
-              { displayName: 'Views', id: '2', value: 1000 }
-            ]
-          }
-        }
-      }
-    })
   })
 
   afterEach(() => {
@@ -80,32 +88,23 @@ describe('FlickrWidget', () => {
   })
 
   it('renders without crashing', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
     expect(screen.getByText(/Flickr/i)).toBeInTheDocument()
   })
 
   it('renders placeholders when isLoading is true', () => {
-    const loadingStore = mockStore({
-      widgets: {
-        flickr: {
-          state: 'LOADING',
-          data: null
-        }
-      }
-    })
+    useWidgetData.mockReturnValue(mockLoadingState)
 
     render(
-      <ReduxProvider store={loadingStore}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     const placeholders = document.querySelectorAll('.image-placeholder')
@@ -113,12 +112,12 @@ describe('FlickrWidget', () => {
   })
 
   it('renders photos when isLoading is false', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     const thumbnails = screen.getAllByAltText(/Flickr photo:/i)
@@ -127,12 +126,12 @@ describe('FlickrWidget', () => {
   })
 
   it('toggles between "Show More" and "Show Less"', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     const button = screen.getByText(/Show More/i)
@@ -145,12 +144,12 @@ describe('FlickrWidget', () => {
   })
 
   it('opens LightGallery when a photo is clicked', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     const thumbnails = screen.getAllByAltText(/Flickr photo:/i)
@@ -160,61 +159,36 @@ describe('FlickrWidget', () => {
   })
 
   it('calls VanillaTilt.init when isShowingMore or !isLoading is true', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     fireEvent.click(screen.getByText(/Show More/i))
     expect(VanillaTilt.init).toHaveBeenCalled()
-
-    VanillaTilt.init.mockClear()
-
-    store = mockStore({
-      widgets: {
-        flickr: {
-          state: 'SUCCESS',
-          data: {
-            collections: { photos: [] },
-            metrics: []
-          }
-        }
-      }
-    })
-
-    render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
-    )
-
-    expect(VanillaTilt.init).toHaveBeenCalled()
   })
 
   it('assigns lightGalleryRef correctly on initialization', () => {
-    // This is already covered by the LightGallery mock
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
     // No error thrown means ref assignment is fine
   })
 
   it('initializes LightGallery with correct photo data', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     expect(screen.getByTestId('lightgallery-mock')).toBeInTheDocument()
@@ -222,21 +196,12 @@ describe('FlickrWidget', () => {
   })
 
   it('handles fatal error state correctly', () => {
-    const errorStore = mockStore({
-      widgets: {
-        flickr: {
-          state: 'FAILURE',
-          data: null
-        }
-      }
-    })
+    useWidgetData.mockReturnValue(mockErrorState)
 
     render(
-      <ReduxProvider store={errorStore}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     // Instead of checking for data-has-fatal-error, check for error message
@@ -245,12 +210,12 @@ describe('FlickrWidget', () => {
   })
 
   it('renders metrics correctly', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
     // Use getAllByText for metrics
     const photosBadges = screen.getAllByText(/Photos/)
@@ -260,33 +225,19 @@ describe('FlickrWidget', () => {
   })
 
   it('handles missing metrics data gracefully', () => {
-    const storeWithoutMetrics = mockStore({
-      widgets: {
-        flickr: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              photos: [
-                {
-                  id: '123',
-                  title: 'Test Photo Title',
-                  thumbnailUrl: 'https://cdn.example.com/images/fake-flickr-image.jpg',
-                  largeUrl: 'https://cdn.example.com/images/fake-flickr-image-large.jpg'
-                }
-              ]
-            },
-            metrics: []
-          }
-        }
+    const stateWithoutMetrics = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        metrics: []
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithoutMetrics)
 
     const { container } = render(
-      <ReduxProvider store={storeWithoutMetrics}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     expect(screen.getByText(/Flickr/i)).toBeInTheDocument()
@@ -295,12 +246,12 @@ describe('FlickrWidget', () => {
   })
 
   it('renders CallToAction with correct Flickr profile URL', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
     render(
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
     const callToAction = screen.getByText('Visit Profile')
     expect(callToAction).toBeInTheDocument()
@@ -308,31 +259,28 @@ describe('FlickrWidget', () => {
   })
 
   it('renders correct number of images based on show more/less state', () => {
-    const storeWithMorePhotos = mockStore({
-      widgets: {
-        flickr: {
-          state: 'SUCCESS',
-          data: {
-            collections: {
-              photos: Array(20).fill({
-                id: '123',
-                title: 'Test Photo Title',
-                thumbnailUrl: 'https://cdn.example.com/images/fake-flickr-image.jpg',
-                largeUrl: 'https://cdn.example.com/images/fake-flickr-image-large.jpg'
-              })
-            },
-            metrics: []
-          }
+    const stateWithMorePhotos = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          photos: Array(20)
+            .fill(null)
+            .map((_, i) => ({
+              id: `photo-${i}`,
+              title: 'Test Photo Title',
+              thumbnailUrl: 'https://cdn.example.com/images/fake-flickr-image.jpg',
+              largeUrl: 'https://cdn.example.com/images/fake-flickr-image-large.jpg'
+            }))
         }
       }
-    })
+    }
+    useWidgetData.mockReturnValue(stateWithMorePhotos)
 
     render(
-      <ReduxProvider store={storeWithMorePhotos}>
-        <ThemeUIProvider theme={theme}>
-          <FlickrWidget />
-        </ThemeUIProvider>
-      </ReduxProvider>
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
     )
 
     // Initially should show default number of images

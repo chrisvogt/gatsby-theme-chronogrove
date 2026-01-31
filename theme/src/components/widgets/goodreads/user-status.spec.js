@@ -15,6 +15,24 @@ const mockTheme = {
 const renderWithTheme = component => render(<ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>)
 
 describe('UserStatus', () => {
+  it('returns null when status is undefined and not loading', () => {
+    const { container } = renderWithTheme(<UserStatus isLoading={false} status={undefined} actorName='Test User' />)
+
+    expect(container.firstChild).toBeNull()
+  })
+
+  it('returns null when status is null and not loading', () => {
+    const { container } = renderWithTheme(<UserStatus isLoading={false} status={null} actorName='Test User' />)
+
+    expect(container.firstChild).toBeNull()
+  })
+
+  it('renders when loading even without status', () => {
+    const { container } = renderWithTheme(<UserStatus isLoading={true} status={undefined} actorName='Test User' />)
+
+    expect(container).toHaveTextContent('Last Update')
+  })
+
   const mockReviewStatus = {
     type: 'review',
     book: { title: 'The Great Gatsby' },

@@ -47,148 +47,23 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       <div
         class="css-1rgtmy6"
       >
-        <svg
-          class="svg-loaders-svg css-ao632c"
-          fill="#1E90FF"
-          height="24"
-          viewBox="0 0 135 140"
-          width="24"
+        <a
+          class="css-1u2ig8x"
+          href="https://www.discogs.com"
+          title="Collection on Discogs"
         >
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            y="10"
+          Browse Collection
+          <span
+            class="read-more-icon"
           >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="30"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="140"
-            rx="6"
-            width="15"
-            x="60"
-          >
-            <animate
-              attributeName="height"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="90"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="120"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-        </svg>
+            →
+          </span>
+        </a>
       </div>
     </header>
     <div
       class="css-1hw7zrq"
-    >
-      <div
-        class="css-1giak3r"
-      >
-         
-      </div>
-      <div
-        class="css-zcaudb"
-      >
-         
-      </div>
-    </div>
+    />
     <div
       class="css-18bjwv1"
     >
@@ -222,26 +97,9 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
 exports[`Discogs Widget matches the loaded state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1k28k4o"
+    class="css-1pk2a5b"
     id="discogs"
   >
-    <div
-      class="css-rmw57n"
-    >
-      <div
-        class="css-59lkxq"
-      >
-        <h4>
-          Something went wrong
-        </h4>
-        <p>
-          Failed to load this widget.
-        </p>
-      </div>
-      <div
-        class="css-bgces8"
-      />
-    </div>
     <header
       class="css-x6ikgs"
     >
@@ -266,132 +124,18 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
       <div
         class="css-1rgtmy6"
       >
-        <svg
-          class="svg-loaders-svg css-ao632c"
-          fill="#1E90FF"
-          height="24"
-          viewBox="0 0 135 140"
-          width="24"
+        <a
+          class="css-1u2ig8x"
+          href="https://www.discogs.com/user/chrisvogt/collection"
+          title="Collection on Discogs"
         >
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            y="10"
+          Browse Collection
+          <span
+            class="read-more-icon"
           >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="30"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="140"
-            rx="6"
-            width="15"
-            x="60"
-          >
-            <animate
-              attributeName="height"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="90"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="120"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-        </svg>
+            →
+          </span>
+        </a>
       </div>
     </header>
     <div
@@ -400,12 +144,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
       <div
         class="css-1giak3r"
       >
-         
-      </div>
-      <div
-        class="css-zcaudb"
-      >
-         
+        37 Vinyls Owned
       </div>
     </div>
     <div
@@ -429,9 +168,90 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         class="css-1719y60"
       >
         <div
-          class="css-ngfim1"
+          class="css-itz9zd"
           data-testid="vinyl-carousel"
-        />
+        >
+          <div
+            class="css-gjogkf"
+          >
+            <div
+              class="vinyl-collection_grid null css-qstdbb"
+            >
+              <div
+                class="css-r4jg7j"
+              >
+                <div
+                  aria-label="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan. Click to view details."
+                  class="vinyl-record css-1uxsoal"
+                  role="button"
+                  tabindex="0"
+                  title="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan"
+                >
+                  <div
+                    class="css-12d7pfc"
+                  >
+                    <div
+                      class="vinyl-record_image css-18n965x"
+                    >
+                      <img
+                        alt="The Rise & Fall Of A Midwest Princess album cover"
+                        class="vinyl-record_album-art css-1ybonlr"
+                        crossorigin="anonymous"
+                        loading="lazy"
+                        src="https://example.com/thumb.jpg"
+                      />
+                    </div>
+                    <div
+                      class="vinyl-record_caption css-12vw5gc"
+                    >
+                      <span
+                        class="css-kvy207"
+                      >
+                        The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan
+                      </span>
+                      <div
+                        class="vinyl-record_orbit css-nh7rc5"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          height="100%"
+                          role="presentation"
+                          style="display: block;"
+                          viewBox="0 0 100 100"
+                          width="100%"
+                        >
+                          <defs>
+                            <path
+                              d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                              id="textCircle-28461454"
+                            />
+                          </defs>
+                          <g
+                            class="css-1uqa7mt"
+                          >
+                            <text
+                              class="css-ir7wai"
+                              fill="currentColor"
+                            >
+                              <textpath
+                                href="#textCircle-28461454"
+                                method="align"
+                                spacing="auto"
+                                startOffset="0%"
+                              >
+                                The Rise & Fall Of A Midwest Princess • Chappell Roan • 2023 • The Rise & Fall Of A Midwest Princess • Chappell Roan • 2023 • 
+                              </textpath>
+                            </text>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -441,26 +261,9 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
 exports[`Discogs Widget matches the loading state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1k28k4o"
+    class="css-1pk2a5b"
     id="discogs"
   >
-    <div
-      class="css-rmw57n"
-    >
-      <div
-        class="css-59lkxq"
-      >
-        <h4>
-          Something went wrong
-        </h4>
-        <p>
-          Failed to load this widget.
-        </p>
-      </div>
-      <div
-        class="css-bgces8"
-      />
-    </div>
     <header
       class="css-x6ikgs"
     >

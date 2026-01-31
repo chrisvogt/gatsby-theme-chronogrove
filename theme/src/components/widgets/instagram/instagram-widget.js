@@ -3,8 +3,7 @@ import { jsx } from 'theme-ui'
 
 import { Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useCallback, useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useCallback, useState, useRef } from 'react'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
 import lgVideo from 'lightgallery/plugins/video'
@@ -18,17 +17,9 @@ import 'lightgallery/css/lg-zoom.css'
 import 'lightgallery/css/lg-video.css'
 import 'lightgallery/css/lg-autoplay.css'
 
-import fetchDataSource from '../../../actions/fetchDataSource'
 import { getInstagramWidgetDataSource } from '../../../selectors/metadata'
-import {
-  getMedia,
-  getMetrics,
-  getProfileDisplayName,
-  getProfileURL,
-  getHasFatalError,
-  getIsLoading
-} from '../../../selectors/instagram'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
+import useWidgetData from '../../../hooks/use-widget-data'
 
 import ActionButton from '../../action-button'
 import CallToAction from '../call-to-action'
@@ -44,26 +35,19 @@ const MAX_IMAGES = {
 }
 
 export default () => {
-  const dispatch = useDispatch()
-
   const metadata = useSiteMetadata()
   const instagramDataSource = getInstagramWidgetDataSource(metadata)
 
-  const hasFatalError = useSelector(getHasFatalError)
-  const isLoading = useSelector(getIsLoading)
-  const media = useSelector(getMedia)
-  const metrics = useSelector(getMetrics)
-  const profileDisplayName = useSelector(getProfileDisplayName)
-  const profileURL = useSelector(getProfileURL)
+  const { data, isLoading, hasFatalError } = useWidgetData('instagram', instagramDataSource)
+
+  // Extract data from the query result
+  const media = data?.collections?.media
+  const metrics = data?.metrics
+  const profileDisplayName = data?.profile?.displayName
+  const profileURL = data?.profile?.profileURL
 
   const [isShowingMore, setIsShowingMore] = useState(false)
   const lightGalleryRef = useRef(null)
-
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchDataSource('instagram', instagramDataSource))
-    }
-  }, [dispatch, instagramDataSource, isLoading])
 
   const openLightbox = useCallback(
     index => {
@@ -105,29 +89,31 @@ export default () => {
             gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', '', 'repeat(4, 1fr)']
           }}
         >
-          {(isLoading ? Array(countItemsToRender).fill({}) : media).slice(0, countItemsToRender).map((post, idx) => (
-            <ReactPlaceholder
-              customPlaceholder={
-                <div className='image-placeholder'>
-                  <RectShape
-                    color='#efefef'
-                    sx={{
-                      borderRadius: '8px',
-                      boxShadow: 'md',
-                      width: '100%',
-                      paddingBottom: '100%'
-                    }}
-                  />
-                </div>
-              }
-              key={isLoading ? idx : post.id}
-              ready={!isLoading}
-              showLoadingAnimation
-              type='rect'
-            >
-              <WidgetItem handleClick={() => openLightbox(idx)} index={idx} post={post} />
-            </ReactPlaceholder>
-          ))}
+          {(isLoading ? Array(countItemsToRender).fill({}) : media || [])
+            .slice(0, countItemsToRender)
+            .map((post, idx) => (
+              <ReactPlaceholder
+                customPlaceholder={
+                  <div className='image-placeholder'>
+                    <RectShape
+                      color='#efefef'
+                      sx={{
+                        borderRadius: '8px',
+                        boxShadow: 'md',
+                        width: '100%',
+                        paddingBottom: '100%'
+                      }}
+                    />
+                  </div>
+                }
+                key={isLoading ? idx : post.id}
+                ready={!isLoading}
+                showLoadingAnimation
+                type='rect'
+              >
+                <WidgetItem handleClick={() => openLightbox(idx)} index={idx} post={post} />
+              </ReactPlaceholder>
+            ))}
         </Grid>
       </div>
 
