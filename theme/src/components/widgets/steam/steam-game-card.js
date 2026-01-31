@@ -50,7 +50,7 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
           placeholder={
             <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
               <RectShape
-                color='#efefef'
+                color={darkModeActive ? '#3a3a4a' : '#efefef'}
                 style={{
                   width: '100%',
                   height: '200px'
@@ -79,10 +79,10 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
               position: 'absolute',
               top: 2,
               left: 2,
-              background: darkModeActive ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.25)',
+              background: darkModeActive ? 'rgba(20, 20, 31, 0.85)' : 'rgba(255, 255, 255, 0.9)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
-              border: darkModeActive ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.3)',
+              border: darkModeActive ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.1)',
               color: darkModeActive ? '#fff' : '#000',
               width: '28px',
               height: '28px',
@@ -92,7 +92,7 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
               justifyContent: 'center',
               fontWeight: 'bold',
               fontSize: '12px',
-              boxShadow: darkModeActive ? '0 4px 16px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.1)'
+              boxShadow: darkModeActive ? '0 4px 16px rgba(0, 0, 0, 0.4)' : '0 4px 16px rgba(0, 0, 0, 0.15)'
             }}
           >
             {rank}

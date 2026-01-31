@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.68.1
+
+### ♿ Accessibility
+
+- **Fixed Lighthouse contrast issue**: Resolved the only remaining accessibility failure in Lighthouse audit
+  - **Steam rank badge**: Changed from transparent white overlay to opaque dark background in dark mode (`rgba(20, 20, 31, 0.85)`) to ensure white text has sufficient contrast regardless of game image
+  - Lighthouse was unable to calculate backdrop-filter blur effects, so the badge now provides guaranteed contrast through its own background
+
+### 🎨 UI Improvements
+
+- **Dark mode loading placeholders**: Updated all loading placeholder colors to be mode-appropriate
+  - Light mode: `#efefef` (light gray)
+  - Dark mode: `#3a3a4a` (dark gray)
+  - Affected widgets: Steam, Goodreads, Discogs, Spotify, GitHub, Instagram, Flickr
+
+### 📦 Files Changed
+
+- `theme/src/components/widgets/steam/steam-game-card.js`
+- `theme/src/components/widgets/goodreads/book-link.js`
+- `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `theme/src/components/widgets/discogs/vinyl-collection.js`
+- `theme/src/components/widgets/spotify/media-item-grid.js`
+- `theme/src/components/widgets/github/renderers/placeholder.js`
+- `theme/src/components/widgets/instagram/instagram-widget.js`
+- `theme/src/components/widgets/flickr/flickr-widget.js`
+
+---
+
 ## 0.68.0
 
 ### ✨ New Features

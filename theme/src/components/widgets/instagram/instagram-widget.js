@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 
 import { Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useCallback, useState, useRef } from 'react'
+import isDarkMode from '../../../helpers/isDarkMode'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
 import lgVideo from 'lightgallery/plugins/video'
@@ -35,6 +36,8 @@ const MAX_IMAGES = {
 }
 
 export default () => {
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   const metadata = useSiteMetadata()
   const instagramDataSource = getInstagramWidgetDataSource(metadata)
 
@@ -96,7 +99,7 @@ export default () => {
                 customPlaceholder={
                   <div className='image-placeholder'>
                     <RectShape
-                      color='#efefef'
+                      color={darkModeActive ? '#3a3a4a' : '#efefef'}
                       sx={{
                         borderRadius: '8px',
                         boxShadow: 'md',

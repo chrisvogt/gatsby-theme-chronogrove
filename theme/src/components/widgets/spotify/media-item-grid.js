@@ -1,31 +1,34 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState } from 'react'
+import isDarkMode from '../../../helpers/isDarkMode'
 
 import { glassmorhismPanel } from '../../../gatsby-plugin-theme-ui/theme'
 
-const placeholders = Array(12)
-  .fill()
-  .map((item, idx) => (
-    <div className='show-loading-animation' key={idx}>
-      <RectShape
-        color='#efefef'
-        sx={{
-          borderRadius: '8px',
-          boxShadow: 'md',
-          paddingBottom: '100%',
-          width: '100%'
-        }}
-        showLoadingAnimation
-      />
-    </div>
-  ))
-
 const MediaItemGrid = ({ isLoading, items = [], onTrackClick }) => {
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   const [currentMediaId, setCurrentMediaId] = useState(false)
+
+  const placeholders = Array(12)
+    .fill()
+    .map((item, idx) => (
+      <div className='show-loading-animation' key={idx}>
+        <RectShape
+          color={darkModeActive ? '#3a3a4a' : '#efefef'}
+          sx={{
+            borderRadius: '8px',
+            boxShadow: 'md',
+            paddingBottom: '100%',
+            width: '100%'
+          }}
+          showLoadingAnimation
+        />
+      </div>
+    ))
 
   const handleClick = (e, spotifyURL) => {
     if (!onTrackClick) {

@@ -1,14 +1,17 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
 import { RectShape } from 'react-placeholder/lib/placeholders'
+import isDarkMode from '../../../helpers/isDarkMode'
 import Book from '../../artwork/book'
 import LazyLoad from '../../lazy-load'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
 const BookLink = ({ id, thumbnailURL, title }) => {
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   // Ensure we have a valid URL and append webp format if it's a CDN URL
   const imageUrl = (() => {
     try {
@@ -70,7 +73,7 @@ const BookLink = ({ id, thumbnailURL, title }) => {
           placeholder={
             <div className='show-loading-animation' style={{ width: '100%' }}>
               <RectShape
-                color='#efefef'
+                color={darkModeActive ? '#3a3a4a' : '#efefef'}
                 style={{
                   width: '100%',
                   paddingBottom: '100%', // Square aspect ratio to match SVG viewBox
