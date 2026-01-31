@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.68.2
+
+### ✨ New Features
+
+- **Parallax Background Effect**: Added a subtle parallax effect to the animated page background
+  - Background moves slightly opposite to scroll direction, creating depth
+  - Effect scales dynamically based on page height — works smoothly on pages of any length
+  - Canvas extends beyond viewport only by the parallax offset amount (150px by default) for efficiency
+  - Uses GPU-accelerated `transform: translateY()` for smooth performance
+  - New configurable prop: `maxParallaxOffset` (default: 150px) controls total parallax movement
+
+### 🔧 Technical Improvements
+
+- **Dynamic Page Height Detection**: Background now tracks document height on mount and resize
+- **Scroll Progress Calculation**: Parallax offset is percentage-based, spreading evenly across any page length
+- **Performance Optimizations**: Added `willChange: 'transform'` hint for GPU compositing
+
+### 🧪 Testing
+
+- Added comprehensive test coverage for parallax functionality
+- Tests for resize event handling, scroll progress calculation, and edge cases
+- Tests for dynamic page height changes and maxParallaxOffset prop
+
+### 📦 Files Changed
+
+- `theme/src/components/animated-page-background.js`
+- `theme/src/components/animated-page-background.spec.js`
+
+---
+
 ## 0.68.1
 
 ### ♿ Accessibility

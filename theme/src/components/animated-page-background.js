@@ -18,16 +18,29 @@ const COLOR_BENDS_STYLE = { width: '100%', height: '100%' }
  * to protect header content from being obscured. The overlay fades out as
  * the user scrolls down.
  *
+ * A subtle parallax effect moves the background opposite to scroll direction,
+ * creating depth. The canvas extends beyond the viewport to accommodate
+ * this movement without exposing empty space. The parallax effect is spread
+ * across the entire page height, working smoothly on pages of any length.
+ *
  * Props:
- * @param {number} overlayHeight - Height of the gradient overlay (default: 'min(112.5vh, 1500px)')
+ * @param {string} overlayHeight - Height of the gradient overlay (default: 'min(112.5vh, 1500px)')
  * @param {number} darkOpacity - Opacity for dark mode animation (default: 0.12)
- * @param {number} fadeDistance - Distance in pixels over which overlay fades out (default: 600)
+ * @param {number} fadeDistance - Distance in pixels over which overlay fades out (default: 700)
+ * @param {number} maxParallaxOffset - Total parallax movement in pixels from top to bottom of page (default: 150)
  */
-const AnimatedPageBackground = ({ overlayHeight = 'min(112.5vh, 1500px)', darkOpacity = 0.12, fadeDistance = 700 }) => {
+const AnimatedPageBackground = ({
+  overlayHeight = 'min(112.5vh, 1500px)',
+  darkOpacity = 0.12,
+  fadeDistance = 700,
+  maxParallaxOffset = 150
+}) => {
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
   const isDark = colorMode === 'dark'
   const [overlayOpacity, setOverlayOpacity] = useState(1)
+  const [parallaxOffset, setParallaxOffset] = useState(0)
+  const [maxScrollDistance, setMaxScrollDistance] = useState(1)
   const [mounted, setMounted] = useState(false)
 
   // Get background colors from theme for gradient overlay
@@ -41,21 +54,41 @@ const AnimatedPageBackground = ({ overlayHeight = 'min(112.5vh, 1500px)', darkOp
   // Note: HTML background color is now managed globally in RootWrapper
   // to prevent white flash during page transitions
 
-  // Handle scroll to fade out overlay as user scrolls down
+  // Calculate max scroll distance on mount and resize
+  useEffect(() => {
+    const updateMaxScroll = () => {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+      setMaxScrollDistance(maxScroll)
+    }
+
+    updateMaxScroll()
+
+    window.addEventListener('resize', updateMaxScroll, { passive: true })
+    return () => window.removeEventListener('resize', updateMaxScroll)
+  }, [])
+
+  // Handle scroll to fade out overlay and apply parallax effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY
       // Calculate opacity: 1 at top, 0 after fadeDistance pixels
       const opacity = Math.max(0, 1 - scrollY / fadeDistance)
       setOverlayOpacity(opacity)
+
+      // Calculate parallax offset based on scroll progress through the page
+      // This spreads the parallax effect across the entire page height
+      // scrollProgress goes from 0 (top) to 1 (bottom)
+      const scrollProgress = Math.min(scrollY / maxScrollDistance, 1)
+      const offset = scrollProgress * maxParallaxOffset
+      setParallaxOffset(offset)
     }
 
-    // Set initial opacity
+    // Set initial values
     handleScroll()
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [fadeDistance])
+  }, [fadeDistance, maxParallaxOffset, maxScrollDistance])
 
   // Memoize the background component so it only changes when color mode changes
   // Only render animation in dark mode; light mode uses solid background color
@@ -111,6 +144,7 @@ const AnimatedPageBackground = ({ overlayHeight = 'min(112.5vh, 1500px)', darkOp
   return (
     <>
       {/* Fixed background - animation only in dark mode, solid color in light mode */}
+      {/* Canvas extends beyond viewport to accommodate parallax movement */}
       <div
         key={`bg-${colorMode}`}
         sx={{
@@ -118,15 +152,16 @@ const AnimatedPageBackground = ({ overlayHeight = 'min(112.5vh, 1500px)', darkOp
           top: 0,
           left: 0,
           right: 0,
-          bottom: 0,
           width: '100vw',
-          height: '100vh',
-          maxHeight: '100vh',
+          height: `calc(100vh + ${maxParallaxOffset}px)`,
           zIndex: 0,
           overflow: 'hidden',
           opacity: isDark ? darkOpacity : 1,
           pointerEvents: 'none',
-          backgroundColor: bgColorRaw
+          backgroundColor: bgColorRaw,
+          // Parallax: translate up as user scrolls down
+          transform: `translateY(-${parallaxOffset}px)`,
+          willChange: 'transform'
         }}
         aria-hidden='true'
       >
