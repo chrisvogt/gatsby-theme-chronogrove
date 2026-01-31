@@ -2,6 +2,48 @@ import React from 'react'
 import Seo from '../../../../theme/src/components/seo'
 
 export default function HomeHead() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': 'https://www.chrisvogt.me/#website',
+        url: 'https://www.chrisvogt.me',
+        name: 'Chris Vogt',
+        description: 'Software Engineer in San Francisco blogging about code, photography and piano music.',
+        publisher: {
+          '@id': 'https://www.chrisvogt.me/#person'
+        },
+        inLanguage: 'en-US'
+      },
+      {
+        '@type': 'Person',
+        '@id': 'https://www.chrisvogt.me/#person',
+        name: 'Chris Vogt',
+        url: 'https://www.chrisvogt.me',
+        image: {
+          '@type': 'ImageObject',
+          url: 'https://www.chrisvogt.me/images/avatar-256px.jpg'
+        },
+        sameAs: [
+          'https://linkedin.com/in/cjvogt',
+          'https://github.com/chrisvogt',
+          'https://x.com/c1v0',
+          'https://twitter.com/c1v0',
+          'https://www.instagram.com/c1v0',
+          'https://stackoverflow.com/users/1391826/chris-vogt',
+          'https://bsky.app/profile/chrisvogt.me',
+          'https://hachyderm.io/@chrisvogt'
+        ],
+        jobTitle: 'Principal Software Engineer',
+        worksFor: {
+          '@type': 'Organization',
+          name: 'GoDaddy'
+        }
+      }
+    ]
+  }
+
   return (
     <Seo
       title='Home'
@@ -10,27 +52,7 @@ export default function HomeHead() {
     >
       <meta property='og:url' content='https://www.chrisvogt.me' />
       <meta property='og:type' content='website' />
-      <script type='application/ld+json'>
-        {`{
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Chris Vogt",
-          "url": "https://www.chrisvogt.me",
-          "sameAs": [
-            "https://linkedin.com/in/cjvogt",
-            "https://github.com/chrisvogt",
-            "https://x.com/c1v0",
-            "https://twitter.com/c1v0",
-            "https://www.instagram.com/c1v0",
-            "https://stackoverflow.com/users/1391826/chris-vogt"
-          ],
-          "jobTitle": "Principal Software Engineer",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "GoDaddy"
-          }
-        }`}
-      </script>
+      <script type='application/ld+json'>{JSON.stringify(structuredData)}</script>
     </Seo>
   )
 }

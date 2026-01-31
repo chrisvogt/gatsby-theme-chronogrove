@@ -70,8 +70,41 @@ export const Head = ({ data: { mdx } }) => {
   const banner = mdx.frontmatter.banner
   const description = mdx.frontmatter.description
   const title = mdx.frontmatter.title
+  const category = mdx.fields.category
 
-  return <Seo article={true} description={description} image={banner} title={title} />
+  // Format category for display (capitalize first letter)
+  const categoryDisplay = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'Blog'
+
+  // Breadcrumb structured data for SEO
+  const breadcrumbData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.chrisvogt.me'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: categoryDisplay,
+        item: `https://www.chrisvogt.me/${category || 'blog'}`
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: title
+      }
+    ]
+  }
+
+  return (
+    <Seo article={true} description={description} image={banner} title={title}>
+      <script type='application/ld+json'>{JSON.stringify(breadcrumbData)}</script>
+    </Seo>
+  )
 }
 
 export const pageQuery = graphql`

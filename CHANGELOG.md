@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.68.3
+
+### 🔍 SEO Improvements
+
+- **Enhanced Structured Data for Google Sitelinks**: Added comprehensive Schema.org markup to improve search result appearance
+  - **WebSite Schema**: Added `@graph` structure to homepage combining `WebSite` and `Person` schemas with linked `@id` references
+  - **Publisher Relationship**: WebSite schema references Person as publisher for better entity recognition
+  - **Language Declaration**: Added `inLanguage: 'en-US'` to WebSite schema
+  - **Profile Image**: Added ImageObject schema for author avatar
+
+- **Breadcrumb Navigation Schema**: Added BreadcrumbList structured data to blog and media post templates
+  - **Blog Posts**: Home → Category → Post Title breadcrumb trail
+  - **Music Posts**: Home → Category → Post Title breadcrumb trail
+  - **Dynamic Categories**: Breadcrumb category name auto-capitalizes from URL slug
+  - Helps Google understand site hierarchy for potential sitelinks display
+
+### 🧪 Testing
+
+- Added comprehensive test coverage for new structured data
+  - Tests for `@graph` structure with WebSite and Person schemas
+  - Tests for WebSite schema properties (`@id`, `url`, `name`, `publisher`, `inLanguage`)
+  - Tests for Person schema with social profiles (including new BlueSky and Mastodon)
+  - Tests for breadcrumb structured data on post and media templates
+- Updated snapshots to include breadcrumb JSON-LD scripts
+- All 928 tests passing
+
+### 📦 Files Changed
+
+- `www.chrisvogt.me/src/gatsby-theme-chronogrove/templates/home-head.js`
+- `www.chrisvogt.me/src/gatsby-theme-chronogrove/templates/home-head.spec.js`
+- `theme/src/templates/post.js`
+- `theme/src/templates/post.spec.js`
+- `theme/src/templates/media.js`
+- `theme/src/templates/media.spec.js`
+
+---
+
 ## 0.68.2
 
 ### ✨ New Features
