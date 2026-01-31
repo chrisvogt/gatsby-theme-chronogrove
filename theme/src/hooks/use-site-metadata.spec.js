@@ -7,7 +7,7 @@ const data = {
     siteMetadata: {
       baseURL: 'https://www.fake-site.com',
       description: 'A fake website for unit tests!',
-      footerText: '© 2025',
+      footerText: '© 2026',
       headline: 'My New Website',
       subhead: 'A place for my stuff on the web'
     }

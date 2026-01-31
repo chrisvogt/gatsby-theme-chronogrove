@@ -315,7 +315,7 @@ lsof -ti:8000 | xargs kill -9
 
 ## 📄 License
 
-Copyright © 2019-2025 [Chris Vogt](https://www.chrisvogt.me). Released under the [MIT License](LICENSE).
+Copyright © 2019 [Chris Vogt](https://www.chrisvogt.me). Released under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
