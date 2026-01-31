@@ -278,6 +278,12 @@ exports[`Media Post renders the Head component with SEO data 1`] = `
 <DocumentFragment>
   <div
     class="seoMock"
-  />
+  >
+    <script
+      type="application/ld+json"
+    >
+      {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.chrisvogt.me"},{"@type":"ListItem","position":2,"name":"Mock Category","item":"https://www.chrisvogt.me/Mock Category"},{"@type":"ListItem","position":3,"name":"A Mock Blog Post"}]}
+    </script>
+  </div>
 </DocumentFragment>
 `;

@@ -41,7 +41,7 @@ describe('HomeHead (chrisvogt.me shadow)', () => {
     expect(typeMeta).toHaveAttribute('content', 'website')
   })
 
-  it('renders structured data with Chris Vogt-specific information', () => {
+  it('renders structured data with @graph containing WebSite and Person schemas', () => {
     const { container } = render(<HomeHead />)
     const script = container.querySelector('script[type="application/ld+json"]')
 
@@ -49,19 +49,45 @@ describe('HomeHead (chrisvogt.me shadow)', () => {
     const structuredData = JSON.parse(script.textContent)
 
     expect(structuredData['@context']).toBe('https://schema.org')
-    expect(structuredData['@type']).toBe('Person')
-    expect(structuredData.name).toBe('Chris Vogt')
-    expect(structuredData.url).toBe('https://www.chrisvogt.me')
-    expect(structuredData.jobTitle).toBe('Principal Software Engineer')
-    expect(structuredData.worksFor.name).toBe('GoDaddy')
-    expect(structuredData.sameAs).toContain('https://github.com/chrisvogt')
-    expect(structuredData.sameAs).toContain('https://linkedin.com/in/cjvogt')
+    expect(structuredData['@graph']).toBeDefined()
+    expect(structuredData['@graph']).toHaveLength(2)
   })
 
-  it('includes social media profiles in structured data', () => {
+  it('includes WebSite schema with correct information', () => {
     const { container } = render(<HomeHead />)
     const script = container.querySelector('script[type="application/ld+json"]')
     const structuredData = JSON.parse(script.textContent)
+
+    const websiteSchema = structuredData['@graph'].find(item => item['@type'] === 'WebSite')
+
+    expect(websiteSchema).toBeDefined()
+    expect(websiteSchema['@id']).toBe('https://www.chrisvogt.me/#website')
+    expect(websiteSchema.url).toBe('https://www.chrisvogt.me')
+    expect(websiteSchema.name).toBe('Chris Vogt')
+    expect(websiteSchema.inLanguage).toBe('en-US')
+    expect(websiteSchema.publisher['@id']).toBe('https://www.chrisvogt.me/#person')
+  })
+
+  it('includes Person schema with Chris Vogt-specific information', () => {
+    const { container } = render(<HomeHead />)
+    const script = container.querySelector('script[type="application/ld+json"]')
+    const structuredData = JSON.parse(script.textContent)
+
+    const personSchema = structuredData['@graph'].find(item => item['@type'] === 'Person')
+
+    expect(personSchema).toBeDefined()
+    expect(personSchema['@id']).toBe('https://www.chrisvogt.me/#person')
+    expect(personSchema.name).toBe('Chris Vogt')
+    expect(personSchema.url).toBe('https://www.chrisvogt.me')
+    expect(personSchema.jobTitle).toBe('Principal Software Engineer')
+    expect(personSchema.worksFor.name).toBe('GoDaddy')
+  })
+
+  it('includes social media profiles in Person schema', () => {
+    const { container } = render(<HomeHead />)
+    const script = container.querySelector('script[type="application/ld+json"]')
+    const structuredData = JSON.parse(script.textContent)
+    const personSchema = structuredData['@graph'].find(item => item['@type'] === 'Person')
 
     const expectedProfiles = [
       'https://linkedin.com/in/cjvogt',
@@ -69,11 +95,13 @@ describe('HomeHead (chrisvogt.me shadow)', () => {
       'https://x.com/c1v0',
       'https://twitter.com/c1v0',
       'https://www.instagram.com/c1v0',
-      'https://stackoverflow.com/users/1391826/chris-vogt'
+      'https://stackoverflow.com/users/1391826/chris-vogt',
+      'https://bsky.app/profile/chrisvogt.me',
+      'https://hachyderm.io/@chrisvogt'
     ]
 
     expectedProfiles.forEach(profile => {
-      expect(structuredData.sameAs).toContain(profile)
+      expect(personSchema.sameAs).toContain(profile)
     })
   })
 })

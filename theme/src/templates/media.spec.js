@@ -122,4 +122,28 @@ describe('Media Post', () => {
     const { asFragment } = renderWithTheme(<Head data={data} />)
     expect(asFragment()).toMatchSnapshot()
   })
+
+  it('renders breadcrumb structured data', () => {
+    const { container } = renderWithTheme(<Head data={data} />)
+    const script = container.querySelector('script[type="application/ld+json"]')
+
+    expect(script).toBeInTheDocument()
+    const breadcrumbData = JSON.parse(script.textContent)
+
+    expect(breadcrumbData['@context']).toBe('https://schema.org')
+    expect(breadcrumbData['@type']).toBe('BreadcrumbList')
+    expect(breadcrumbData.itemListElement).toHaveLength(3)
+
+    // Check Home breadcrumb
+    expect(breadcrumbData.itemListElement[0].name).toBe('Home')
+    expect(breadcrumbData.itemListElement[0].position).toBe(1)
+
+    // Check Category breadcrumb
+    expect(breadcrumbData.itemListElement[1].name).toBe('Mock Category')
+    expect(breadcrumbData.itemListElement[1].position).toBe(2)
+
+    // Check Media title breadcrumb
+    expect(breadcrumbData.itemListElement[2].name).toBe('A Mock Blog Post')
+    expect(breadcrumbData.itemListElement[2].position).toBe(3)
+  })
 })
