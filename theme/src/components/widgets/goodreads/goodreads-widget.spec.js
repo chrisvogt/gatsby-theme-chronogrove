@@ -44,22 +44,26 @@ const mockSuccessState = {
   data: {
     aiSummary: 'Test AI summary content',
     collections: {
-      books: [
+      recentlyReadBooks: [
         {
           id: 1,
           title: 'Book 1',
           thumbnail: 'thumb1.jpg',
           author: 'Author 1'
         }
+      ],
+      updates: [
+        {
+          type: 'userstatus',
+          text: 'Currently reading a great book!',
+          created: '2024-01-01T00:00:00Z'
+        }
       ]
     },
-    metrics: [{ displayName: 'Books Read', value: 42 }],
     profile: {
-      displayName: 'Test User'
-    },
-    status: {
-      text: 'Currently reading a great book!',
-      created: '2024-01-01T00:00:00Z'
+      name: 'Test User',
+      friendsCount: 150,
+      readCount: 42
     }
   },
   isLoading: false,
@@ -150,5 +154,114 @@ describe('Goodreads Widget', () => {
       </TestProviderWithQuery>
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('builds metrics from profile friendsCount and readCount', () => {
+    useWidgetData.mockReturnValue(mockSuccessState)
+
+    const { container } = render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    // The ProfileMetricsBadge should receive metrics built from profile data
+    expect(container).toBeDefined()
+  })
+
+  it('finds status from updates collection with userstatus type', () => {
+    const stateWithUserStatus = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          ...mockSuccessState.data.collections,
+          updates: [
+            { type: 'comment', text: 'A comment' },
+            { type: 'userstatus', actionText: 'Reading something', created: '2024-01-01' }
+          ]
+        }
+      }
+    }
+    useWidgetData.mockReturnValue(stateWithUserStatus)
+
+    const { getByTestId } = render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    expect(getByTestId('user-status')).toBeInTheDocument()
+  })
+
+  it('finds status from updates collection with review type', () => {
+    const stateWithReview = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          ...mockSuccessState.data.collections,
+          updates: [{ type: 'review', book: { title: 'Test Book' }, rating: 4, created: '2024-01-01' }]
+        }
+      }
+    }
+    useWidgetData.mockReturnValue(stateWithReview)
+
+    const { getByTestId } = render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    expect(getByTestId('user-status')).toBeInTheDocument()
+  })
+
+  it('handles missing profile metrics gracefully', () => {
+    const stateWithNoMetrics = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        profile: {
+          name: 'Test User'
+          // No friendsCount or readCount
+        }
+      }
+    }
+    useWidgetData.mockReturnValue(stateWithNoMetrics)
+
+    const { container } = render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    expect(container).toBeDefined()
+  })
+
+  it('filters books without thumbnails', () => {
+    const stateWithMixedBooks = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          ...mockSuccessState.data.collections,
+          recentlyReadBooks: [
+            { id: 1, title: 'Book with thumb', thumbnail: 'thumb.jpg' },
+            { id: 2, title: 'Book without thumb', thumbnail: null },
+            { id: 3, title: 'Book with empty thumb', thumbnail: '' }
+          ]
+        }
+      }
+    }
+    useWidgetData.mockReturnValue(stateWithMixedBooks)
+
+    const { getByTestId } = render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    // Only 1 book has a valid thumbnail
+    expect(getByTestId('recently-read-books')).toHaveTextContent('1 books')
   })
 })

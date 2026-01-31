@@ -310,7 +310,18 @@ exports[`Goodreads Widget renders with data and AI summary 1`] = `
     </header>
     <div
       class="css-1hw7zrq"
-    />
+    >
+      <div
+        class="css-1giak3r"
+      >
+        150 Friends
+      </div>
+      <div
+        class="css-zcaudb"
+      >
+        42 Books Read
+      </div>
+    </div>
     <div
       data-testid="ai-summary"
     >
@@ -319,12 +330,12 @@ exports[`Goodreads Widget renders with data and AI summary 1`] = `
     <div
       data-testid="recently-read-books"
     >
-      0 books
+      1 books
     </div>
     <div
       data-testid="user-status"
     >
-      No status
+      Test User: Currently reading a great book!
     </div>
   </section>
 </DocumentFragment>
