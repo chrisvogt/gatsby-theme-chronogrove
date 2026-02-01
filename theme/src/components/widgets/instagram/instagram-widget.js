@@ -202,10 +202,12 @@ export default () => {
   }, [isLoading, media, isShowingMore, isInView])
 
   const openLightbox = useCallback(
-    index => {
+    widgetItemIndex => {
       const instance = lightGalleryRef.current
       if (instance) {
-        instance.openGallery(index)
+        // Map widget item index to the correct LightGallery slide index
+        const slideIndex = indexMapRef.current[widgetItemIndex] ?? widgetItemIndex
+        instance.openGallery(slideIndex)
       } else {
         console.error('LightGallery instance is not initialized')
       }
@@ -229,28 +231,84 @@ export default () => {
   // Memoize LightGallery props to prevent reinitializing on every render
   const lightGalleryPlugins = useMemo(() => [lgThumbnail, lgZoom, lgVideo, lgAutoplay], [])
 
-  const dynamicEl = useMemo(() => {
-    if (!media?.length) return []
-    return media.map(post => ({
-      thumb: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format&fit=clip&w=100&h=100`,
-      subHtml: post.caption || '',
-      ...(post.mediaType !== 'VIDEO' ? { src: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format` } : {}),
-      video:
-        post.mediaType === 'VIDEO' && post.mediaURL
-          ? {
-              source: [
-                {
-                  src: post.mediaURL,
-                  type: 'video/mp4'
-                }
-              ],
-              attributes: {
-                controls: true
-              }
-            }
-          : undefined
-    }))
+  // Build flattened gallery elements with all carousel images expanded
+  // Also creates a mapping from widget item index to LightGallery slide index
+  const { dynamicEl, itemIndexToSlideIndex } = useMemo(() => {
+    if (!media?.length) return { dynamicEl: [], itemIndexToSlideIndex: {} }
+
+    const slides = []
+    const indexMap = {} // Maps widget item index to first LightGallery slide index for that post
+    let slideIndex = 0
+
+    media.forEach((post, postIndex) => {
+      // Store the starting slide index for this post
+      indexMap[postIndex] = slideIndex
+
+      const caption = post.caption || ''
+      const isCarousel = post.mediaType === 'CAROUSEL_ALBUM' && post.children?.length > 0
+      const isVideo = post.mediaType === 'VIDEO'
+
+      if (isCarousel) {
+        // Expand carousel: each child becomes a separate slide
+        const children = post.children.filter(child => child.cdnMediaURL)
+        const totalImages = children.length
+
+        children.forEach((child, childIndex) => {
+          const positionLabel = `<span class="lg-post-position">${childIndex + 1} / ${totalImages}</span>`
+          const captionHtml = caption ? `<p class="lg-caption">${caption}</p>` : ''
+
+          slides.push({
+            src: `${child.cdnMediaURL}?auto=compress&auto=enhance&auto=format`,
+            thumb: `${child.cdnMediaURL}?auto=compress&auto=enhance&auto=format&fit=clip&w=100&h=100`,
+            // Caption first, then position indicator below
+            subHtml: `<div class="lg-sub-html-inner">${captionHtml}${positionLabel}</div>`,
+            // Custom data for potential thumbnail styling
+            albumIndex: postIndex,
+            imageIndex: childIndex,
+            totalInAlbum: totalImages,
+            isAlbumStart: childIndex === 0,
+            isAlbumEnd: childIndex === totalImages - 1
+          })
+          slideIndex++
+        })
+      } else if (isVideo && post.mediaURL) {
+        // Video slide
+        slides.push({
+          thumb: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format&fit=clip&w=100&h=100`,
+          subHtml: caption ? `<div class="lg-sub-html-inner"><p class="lg-caption">${caption}</p></div>` : '',
+          video: {
+            source: [{ src: post.mediaURL, type: 'video/mp4' }],
+            attributes: { controls: true }
+          },
+          albumIndex: postIndex,
+          imageIndex: 0,
+          totalInAlbum: 1,
+          isAlbumStart: true,
+          isAlbumEnd: true
+        })
+        slideIndex++
+      } else {
+        // Single image slide
+        slides.push({
+          src: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format`,
+          thumb: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format&fit=clip&w=100&h=100`,
+          subHtml: caption ? `<div class="lg-sub-html-inner"><p class="lg-caption">${caption}</p></div>` : '',
+          albumIndex: postIndex,
+          imageIndex: 0,
+          totalInAlbum: 1,
+          isAlbumStart: true,
+          isAlbumEnd: true
+        })
+        slideIndex++
+      }
+    })
+
+    return { dynamicEl: slides, itemIndexToSlideIndex: indexMap }
   }, [media])
+
+  // Create ref to store the index mapping for use in openLightbox callback
+  const indexMapRef = useRef(itemIndexToSlideIndex)
+  indexMapRef.current = itemIndexToSlideIndex
 
   const handleLightGalleryInit = useCallback(ref => {
     lightGalleryRef.current = ref.instance
@@ -263,6 +321,34 @@ export default () => {
   const handleGalleryClose = useCallback(() => {
     isGalleryOpenRef.current = false
   }, [])
+
+  // Apply album boundary data attributes to thumbnails for CSS styling
+  const handleAfterAppendSlide = useCallback(
+    ({ index }) => {
+      // Get the slide data to check album boundaries
+      const slide = dynamicEl[index]
+      if (!slide) return
+
+      // Find the thumbnail element for this slide
+      // LightGallery uses .lg-thumb-item elements inside .lg-thumb-outer
+      const thumbOuter = document.querySelector('.lg-thumb-outer')
+      if (!thumbOuter) return
+
+      const thumbItems = thumbOuter.querySelectorAll('.lg-thumb-item')
+      const thumbItem = thumbItems[index]
+      if (!thumbItem) return
+
+      // Apply data attributes for CSS styling
+      if (slide.isAlbumStart) {
+        thumbItem.setAttribute('data-album-start', 'true')
+      }
+      if (slide.isAlbumEnd) {
+        thumbItem.setAttribute('data-album-end', 'true')
+      }
+      thumbItem.setAttribute('data-album-index', slide.albumIndex)
+    },
+    [dynamicEl]
+  )
 
   return (
     <Widget id='instagram' hasFatalError={hasFatalError}>
@@ -326,6 +412,7 @@ export default () => {
           onInit={handleLightGalleryInit}
           onAfterOpen={handleGalleryOpen}
           onAfterClose={handleGalleryClose}
+          onAfterAppendSlide={handleAfterAppendSlide}
           plugins={lightGalleryPlugins}
           licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}
           download={false}
