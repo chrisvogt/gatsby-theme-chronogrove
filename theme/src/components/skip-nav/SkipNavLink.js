@@ -49,6 +49,7 @@ const SkipNavLink = forwardRef(function SkipNavLink(
       ref={forwardedRef}
       href={`#${contentId}`}
       data-skip-nav-link=''
+      tabIndex={0}
       sx={{
         // Visually hidden by default (accessible hiding technique)
         border: 0,

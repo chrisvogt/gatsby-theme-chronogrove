@@ -42,6 +42,12 @@ describe('SkipNavLink', () => {
     expect(link).toHaveAttribute('data-skip-nav-link')
   })
 
+  it('has tabIndex={0} for Safari compatibility', () => {
+    renderComponent()
+    const link = screen.getByRole('link')
+    expect(link).toHaveAttribute('tabIndex', '0')
+  })
+
   it('forwards ref correctly', () => {
     const ref = React.createRef()
     render(
