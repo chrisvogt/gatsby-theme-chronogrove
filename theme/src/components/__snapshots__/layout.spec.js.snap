@@ -9,6 +9,7 @@ exports[`Layout matches the snapshot 1`] = `
       class="css-pershk"
       data-skip-nav-link=""
       href="#skip-nav-content"
+      tabindex="0"
     >
       Skip to content
     </a>
@@ -142,6 +143,7 @@ exports[`Layout renders with audio player hidden state 1`] = `
       class="css-pershk"
       data-skip-nav-link=""
       href="#skip-nav-content"
+      tabindex="0"
     >
       Skip to content
     </a>
@@ -275,6 +277,7 @@ exports[`Layout renders with audio player visible state 1`] = `
       class="css-pershk"
       data-skip-nav-link=""
       href="#skip-nav-content"
+      tabindex="0"
     >
       Skip to content
     </a>
@@ -408,6 +411,7 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
       class="css-pershk"
       data-skip-nav-link=""
       href="#skip-nav-content"
+      tabindex="0"
     >
       Skip to content
     </a>
@@ -531,6 +535,7 @@ exports[`Layout renders with hideFooter prop 1`] = `
       class="css-pershk"
       data-skip-nav-link=""
       href="#skip-nav-content"
+      tabindex="0"
     >
       Skip to content
     </a>
@@ -605,6 +610,7 @@ exports[`Layout renders with hideHeader prop 1`] = `
       class="css-pershk"
       data-skip-nav-link=""
       href="#skip-nav-content"
+      tabindex="0"
     >
       Skip to content
     </a>

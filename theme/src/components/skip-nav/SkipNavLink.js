@@ -49,6 +49,8 @@ const SkipNavLink = forwardRef(function SkipNavLink(
       ref={forwardedRef}
       href={`#${contentId}`}
       data-skip-nav-link=''
+      // Safari skips links in Tab order by default (only tabs to form elements/buttons).
+      // Explicit tabIndex={0} ensures keyboard navigation works across all browsers.
       tabIndex={0}
       sx={{
         // Visually hidden by default (accessible hiding technique)
