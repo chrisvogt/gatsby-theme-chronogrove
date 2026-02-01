@@ -69,6 +69,7 @@ describe('InstagramWidgetItem', () => {
     expect(mockHandleClick).toHaveBeenCalledTimes(1)
     expect(mockHandleClick).toHaveBeenCalledWith(expect.any(Object), {
       index: defaultProps.index,
+      currentImageIndex: 0,
       photo: {
         caption: defaultProps.post.caption,
         id: defaultProps.post.id,

@@ -41,8 +41,8 @@ const buildImageURL = url =>
   url ? `${url}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format` : ''
 
 // Preload an image by creating a hidden Image object
+// Note: Called with URLs from carouselImages which is already filtered with .filter(Boolean)
 const preloadImage = url => {
-  if (!url) return
   const img = new window.Image()
   img.src = buildImageURL(url)
 }

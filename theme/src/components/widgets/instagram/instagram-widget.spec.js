@@ -25,14 +25,16 @@ const mockLightGalleryInstance = {
 
 let mockLightGalleryCallbacks = {}
 
-let mockLightGalleryOnInit = ({ onInit, onAfterOpen, onAfterClose }) => {
+let mockLightGalleryOnInit = ({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide }) => {
   onInit({ instance: mockLightGalleryInstance })
-  mockLightGalleryCallbacks = { onAfterOpen, onAfterClose }
+  mockLightGalleryCallbacks = { onAfterOpen, onAfterClose, onAfterAppendSlide }
   return <div data-testid='lightgallery-mock' />
 }
 
 jest.mock('lightgallery/react', () =>
-  jest.fn(({ onInit, onAfterOpen, onAfterClose }) => mockLightGalleryOnInit({ onInit, onAfterOpen, onAfterClose }))
+  jest.fn(({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide, dynamicEl }) =>
+    mockLightGalleryOnInit({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide, dynamicEl })
+  )
 )
 
 jest.mock('lightgallery/plugins/thumbnail', () => jest.fn())
@@ -605,6 +607,9 @@ describe('InstagramWidget', () => {
     })
 
     it('clears interval when widget goes out of view', () => {
+      // Spy on clearInterval to verify it's called via cleanup function
+      const clearIntervalSpy = jest.spyOn(global, 'clearInterval')
+
       useWidgetData.mockReturnValue(mockStateWithCarousels)
 
       render(
@@ -613,35 +618,36 @@ describe('InstagramWidget', () => {
         </TestProviderWithQuery>
       )
 
-      // First, widget becomes visible
+      // First, widget becomes visible - this sets isInView = true and effect runs
       act(() => {
-        if (intersectionCallback) {
-          intersectionCallback([{ isIntersecting: true }])
-        }
-        // Advance past startup delay to let interval be set
-        jest.advanceTimersByTime(2500)
+        intersectionCallback?.([{ isIntersecting: true }])
       })
 
-      // Run at least one interval tick to ensure interval is running
+      // Wait for initial startup delay + some buffer to ensure interval is set
       act(() => {
-        jest.advanceTimersByTime(4000)
+        jest.advanceTimersByTime(3000)
       })
 
-      // Now widget goes out of view - this should trigger lines 112-113
+      // Run several rotation intervals to confirm interval is active
       act(() => {
-        if (intersectionCallback) {
-          intersectionCallback([{ isIntersecting: false }])
-        }
-        // The effect should run and clear the interval
+        jest.advanceTimersByTime(7000)
       })
 
-      // Advance time - rotation should have stopped
+      // Reset the spy count before going out of view
+      clearIntervalSpy.mockClear()
+
+      // Now widget goes out of view - effect cleanup should clear interval
       act(() => {
-        jest.advanceTimersByTime(5000)
+        intersectionCallback?.([{ isIntersecting: false }])
       })
+
+      // The effect cleanup should have cleared the interval
+      expect(clearIntervalSpy).toHaveBeenCalled()
 
       // Widget still renders correctly
       expect(screen.getByText('Instagram')).toBeInTheDocument()
+
+      clearIntervalSpy.mockRestore()
     })
 
     it('resets carousel progress when all carousels complete their full cycle', () => {
@@ -781,6 +787,196 @@ describe('InstagramWidget', () => {
 
       // Widget should still render normally
       expect(screen.getByText('Instagram')).toBeInTheDocument()
+    })
+  })
+
+  describe('handleAfterAppendSlide callback', () => {
+    const mockCarouselState = {
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        collections: {
+          media: [
+            {
+              id: 'carousel1',
+              caption: 'Carousel Post',
+              cdnMediaURL: 'https://cdn.example.com/images/carousel-main.jpg',
+              mediaType: 'CAROUSEL_ALBUM',
+              permalink: 'https://instagram.com/p/carousel1',
+              children: [
+                { id: 'c1-1', cdnMediaURL: 'https://cdn.example.com/images/c1-1.jpg' },
+                { id: 'c1-2', cdnMediaURL: 'https://cdn.example.com/images/c1-2.jpg' }
+              ]
+            }
+          ]
+        }
+      }
+    }
+
+    it('handles case when slide data is undefined', () => {
+      useWidgetData.mockReturnValue(mockCarouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      // Call onAfterAppendSlide with an index beyond the slides array
+      if (mockLightGalleryCallbacks.onAfterAppendSlide) {
+        act(() => {
+          mockLightGalleryCallbacks.onAfterAppendSlide({ index: 999 })
+        })
+      }
+
+      // Should not throw, widget still renders
+      expect(screen.getByText('Instagram')).toBeInTheDocument()
+    })
+
+    it('handles case when thumbOuter element is not found', () => {
+      useWidgetData.mockReturnValue(mockCarouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      // Ensure no .lg-thumb-outer in the DOM
+      expect(document.querySelector('.lg-thumb-outer')).toBeNull()
+
+      // Call onAfterAppendSlide
+      if (mockLightGalleryCallbacks.onAfterAppendSlide) {
+        act(() => {
+          mockLightGalleryCallbacks.onAfterAppendSlide({ index: 0 })
+        })
+      }
+
+      // Should not throw, widget still renders
+      expect(screen.getByText('Instagram')).toBeInTheDocument()
+    })
+
+    it('handles case when thumbItem element is not found', () => {
+      useWidgetData.mockReturnValue(mockCarouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      // Create thumbOuter but no thumb items
+      const thumbOuter = document.createElement('div')
+      thumbOuter.className = 'lg-thumb-outer'
+      document.body.appendChild(thumbOuter)
+
+      // Call onAfterAppendSlide
+      if (mockLightGalleryCallbacks.onAfterAppendSlide) {
+        act(() => {
+          mockLightGalleryCallbacks.onAfterAppendSlide({ index: 0 })
+        })
+      }
+
+      // Should not throw, widget still renders
+      expect(screen.getByText('Instagram')).toBeInTheDocument()
+
+      // Cleanup
+      document.body.removeChild(thumbOuter)
+    })
+
+    it('applies data attributes when all elements exist', () => {
+      useWidgetData.mockReturnValue(mockCarouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      // Create thumbOuter with thumb items
+      const thumbOuter = document.createElement('div')
+      thumbOuter.className = 'lg-thumb-outer'
+
+      const thumbItem0 = document.createElement('div')
+      thumbItem0.className = 'lg-thumb-item'
+      const thumbItem1 = document.createElement('div')
+      thumbItem1.className = 'lg-thumb-item'
+
+      thumbOuter.appendChild(thumbItem0)
+      thumbOuter.appendChild(thumbItem1)
+      document.body.appendChild(thumbOuter)
+
+      // Call onAfterAppendSlide for first slide (album start)
+      if (mockLightGalleryCallbacks.onAfterAppendSlide) {
+        act(() => {
+          mockLightGalleryCallbacks.onAfterAppendSlide({ index: 0 })
+        })
+
+        // Check data attributes were applied
+        expect(thumbItem0.getAttribute('data-album-start')).toBe('true')
+        expect(thumbItem0.getAttribute('data-album-index')).toBe('0')
+
+        // Call for second slide (album end)
+        act(() => {
+          mockLightGalleryCallbacks.onAfterAppendSlide({ index: 1 })
+        })
+
+        expect(thumbItem1.getAttribute('data-album-end')).toBe('true')
+        expect(thumbItem1.getAttribute('data-album-index')).toBe('0')
+      }
+
+      // Cleanup
+      document.body.removeChild(thumbOuter)
+    })
+  })
+
+  describe('openLightbox with currentImageIndex', () => {
+    it('opens gallery at correct slide when currentImageIndex is provided', () => {
+      const carouselState = {
+        ...mockSuccessState,
+        data: {
+          ...mockSuccessState.data,
+          collections: {
+            media: [
+              {
+                id: 'carousel1',
+                caption: 'Carousel Post',
+                cdnMediaURL: 'https://cdn.example.com/images/carousel-main.jpg',
+                mediaType: 'CAROUSEL_ALBUM',
+                permalink: 'https://instagram.com/p/carousel1',
+                children: [
+                  { id: 'c1-1', cdnMediaURL: 'https://cdn.example.com/images/c1-1.jpg' },
+                  { id: 'c1-2', cdnMediaURL: 'https://cdn.example.com/images/c1-2.jpg' },
+                  { id: 'c1-3', cdnMediaURL: 'https://cdn.example.com/images/c1-3.jpg' }
+                ]
+              },
+              {
+                id: 'image1',
+                caption: 'Regular Image',
+                cdnMediaURL: 'https://cdn.example.com/images/image1.jpg',
+                mediaType: 'IMAGE',
+                permalink: 'https://instagram.com/p/image1'
+              }
+            ]
+          }
+        }
+      }
+      useWidgetData.mockReturnValue(carouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      // The first post is a carousel with 3 images, so clicking it should pass currentImageIndex
+      // Index 0 = carousel post, base slide index = 0
+      // If user is viewing image 2 of the carousel (currentImageIndex = 2), should open slide 2
+      const buttons = screen.getAllByRole('button')
+      fireEvent.click(buttons[0]) // Click first carousel item
+
+      // Should open at slide 0 (first image of first carousel since currentImageIndex defaults to 0)
+      expect(mockLightGalleryInstance.openGallery).toHaveBeenCalledWith(0)
     })
   })
 })
