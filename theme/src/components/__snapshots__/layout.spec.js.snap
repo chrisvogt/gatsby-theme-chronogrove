@@ -6,9 +6,9 @@ exports[`Layout matches the snapshot 1`] = `
     class="css-e2rbjw"
   >
     <a
-      data-reach-skip-link=""
-      data-reach-skip-nav-link=""
-      href="#reach-skip-nav"
+      class="css-pershk"
+      data-skip-nav-link=""
+      href="#skip-nav-content"
     >
       Skip to content
     </a>
@@ -61,8 +61,10 @@ exports[`Layout matches the snapshot 1`] = `
       role="main"
     >
       <div
-        data-reach-skip-nav-content=""
-        id="reach-skip-nav"
+        data-skip-nav-content=""
+        id="skip-nav-content"
+        style="outline: none;"
+        tabindex="-1"
       />
       <div>
         Test content
@@ -137,9 +139,9 @@ exports[`Layout renders with audio player hidden state 1`] = `
     class="css-e2rbjw"
   >
     <a
-      data-reach-skip-link=""
-      data-reach-skip-nav-link=""
-      href="#reach-skip-nav"
+      class="css-pershk"
+      data-skip-nav-link=""
+      href="#skip-nav-content"
     >
       Skip to content
     </a>
@@ -192,8 +194,10 @@ exports[`Layout renders with audio player hidden state 1`] = `
       role="main"
     >
       <div
-        data-reach-skip-nav-content=""
-        id="reach-skip-nav"
+        data-skip-nav-content=""
+        id="skip-nav-content"
+        style="outline: none;"
+        tabindex="-1"
       />
       <div>
         Test content without audio player
@@ -268,9 +272,9 @@ exports[`Layout renders with audio player visible state 1`] = `
     class="css-e2rbjw"
   >
     <a
-      data-reach-skip-link=""
-      data-reach-skip-nav-link=""
-      href="#reach-skip-nav"
+      class="css-pershk"
+      data-skip-nav-link=""
+      href="#skip-nav-content"
     >
       Skip to content
     </a>
@@ -323,8 +327,10 @@ exports[`Layout renders with audio player visible state 1`] = `
       role="main"
     >
       <div
-        data-reach-skip-nav-content=""
-        id="reach-skip-nav"
+        data-skip-nav-content=""
+        id="skip-nav-content"
+        style="outline: none;"
+        tabindex="-1"
       />
       <div>
         Test content with audio player
@@ -399,9 +405,9 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
     class="css-e2rbjw"
   >
     <a
-      data-reach-skip-link=""
-      data-reach-skip-nav-link=""
-      href="#reach-skip-nav"
+      class="css-pershk"
+      data-skip-nav-link=""
+      href="#skip-nav-content"
     >
       Skip to content
     </a>
@@ -522,9 +528,9 @@ exports[`Layout renders with hideFooter prop 1`] = `
     class="css-e2rbjw"
   >
     <a
-      data-reach-skip-link=""
-      data-reach-skip-nav-link=""
-      href="#reach-skip-nav"
+      class="css-pershk"
+      data-skip-nav-link=""
+      href="#skip-nav-content"
     >
       Skip to content
     </a>
@@ -577,8 +583,10 @@ exports[`Layout renders with hideFooter prop 1`] = `
       role="main"
     >
       <div
-        data-reach-skip-nav-content=""
-        id="reach-skip-nav"
+        data-skip-nav-content=""
+        id="skip-nav-content"
+        style="outline: none;"
+        tabindex="-1"
       />
       <div>
         Test content without footer
@@ -594,9 +602,9 @@ exports[`Layout renders with hideHeader prop 1`] = `
     class="css-e2rbjw"
   >
     <a
-      data-reach-skip-link=""
-      data-reach-skip-nav-link=""
-      href="#reach-skip-nav"
+      class="css-pershk"
+      data-skip-nav-link=""
+      href="#skip-nav-content"
     >
       Skip to content
     </a>
@@ -604,8 +612,10 @@ exports[`Layout renders with hideHeader prop 1`] = `
       role="main"
     >
       <div
-        data-reach-skip-nav-content=""
-        id="reach-skip-nav"
+        data-skip-nav-content=""
+        id="skip-nav-content"
+        style="outline: none;"
+        tabindex="-1"
       />
       <div>
         Test content without header

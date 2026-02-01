@@ -1,7 +1,7 @@
 import { shouldUpdateScroll, onRouteUpdate } from './gatsby-browser'
 
 // Mock document methods
-const mockQuerySelector = jest.fn()
+const mockGetElementById = jest.fn()
 const mockFocus = jest.fn()
 
 // Mock DOM element
@@ -9,16 +9,16 @@ const mockSkipContent = {
   focus: mockFocus
 }
 
-// Setup document mock by overriding the querySelector method
+// Setup document mock by overriding the getElementById method
 beforeEach(() => {
   jest.clearAllMocks()
-  // Mock the querySelector method on the existing document
-  document.querySelector = mockQuerySelector
+  // Mock the getElementById method on the existing document
+  document.getElementById = mockGetElementById
 })
 
-// Restore the original querySelector after tests
+// Restore the original getElementById after tests
 afterEach(() => {
-  delete document.querySelector
+  delete document.getElementById
 })
 
 describe('gatsby-browser', () => {
@@ -73,43 +73,43 @@ describe('gatsby-browser', () => {
   describe('onRouteUpdate', () => {
     it('should not call focus when prevLocation is null', () => {
       onRouteUpdate({ prevLocation: null })
-      expect(mockQuerySelector).not.toHaveBeenCalled()
+      expect(mockGetElementById).not.toHaveBeenCalled()
       expect(mockFocus).not.toHaveBeenCalled()
     })
 
     it('should call focus with preventScroll when prevLocation is undefined', () => {
-      mockQuerySelector.mockReturnValue(mockSkipContent)
+      mockGetElementById.mockReturnValue(mockSkipContent)
 
       onRouteUpdate({ prevLocation: undefined })
 
-      expect(mockQuerySelector).toHaveBeenCalledWith('[data-reach-skip-nav-content]')
+      expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
 
     it('should call focus with preventScroll when skip content element exists', () => {
-      mockQuerySelector.mockReturnValue(mockSkipContent)
+      mockGetElementById.mockReturnValue(mockSkipContent)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
-      expect(mockQuerySelector).toHaveBeenCalledWith('[data-reach-skip-nav-content]')
+      expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
 
     it('should not call focus when skip content element does not exist', () => {
-      mockQuerySelector.mockReturnValue(null)
+      mockGetElementById.mockReturnValue(null)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
-      expect(mockQuerySelector).toHaveBeenCalledWith('[data-reach-skip-nav-content]')
+      expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).not.toHaveBeenCalled()
     })
 
-    it('should handle when querySelector returns undefined', () => {
-      mockQuerySelector.mockReturnValue(undefined)
+    it('should handle when getElementById returns undefined', () => {
+      mockGetElementById.mockReturnValue(undefined)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
-      expect(mockQuerySelector).toHaveBeenCalledWith('[data-reach-skip-nav-content]')
+      expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).not.toHaveBeenCalled()
     })
   })

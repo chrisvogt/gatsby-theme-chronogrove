@@ -2,7 +2,7 @@
 import { jsx } from 'theme-ui'
 import { useSelector } from 'react-redux'
 import React from 'react'
-import { SkipNavLink, SkipNavContent } from '@reach/skip-nav'
+import { SkipNavLink, SkipNavContent } from './skip-nav'
 
 import Footer from './footer'
 import TopNavigation from './top-navigation'
@@ -30,6 +30,7 @@ const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter, transpar
         pb: isVisible ? '140px' : 0
       }}
     >
+      {/* Skip to content link - first in DOM for tab order, visually appears in header when focused */}
       <SkipNavLink />
 
       {/* NOTE(chrisvogt): hide the top navigation on the home and 404 pages */}
