@@ -2,7 +2,7 @@
 import { jsx, Container, Grid } from 'theme-ui'
 import { graphql } from 'gatsby'
 import { Fragment } from 'react'
-import { SkipNavContent } from '@reach/skip-nav'
+import { SkipNavContent } from '../components/skip-nav'
 
 import AnimatedPageBackground from '../components/animated-page-background'
 import Footer from '../components/footer'

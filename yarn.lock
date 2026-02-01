@@ -5297,27 +5297,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reach/polymorphic@npm:0.18.0":
-  version: 0.18.0
-  resolution: "@reach/polymorphic@npm:0.18.0"
-  peerDependencies:
-    react: ^16.8.0 || 17.x
-  checksum: 10c0/dfde6dc901005f92e16f0e3601f0c659b70ee14d91e612cd68c9a918744fd94de30e8065d73663b72964225d3476f377c650daf2ac1e256de61df9ee386aabdc
-  languageName: node
-  linkType: hard
-
-"@reach/skip-nav@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "@reach/skip-nav@npm:0.18.0"
-  dependencies:
-    "@reach/polymorphic": "npm:0.18.0"
-  peerDependencies:
-    react: ^16.8.0 || 17.x
-    react-dom: ^16.8.0 || 17.x
-  checksum: 10c0/30e3d4c568093e170b9e80ee42764a080c0a15ab3f9c7edf78dcc6ebd92f156799dba0f544757b84401806765f60fe527c869ef86d5323c0a7a3bdccf1a68f85
-  languageName: node
-  linkType: hard
-
 "@reduxjs/toolkit@npm:^2.11.2":
   version: 2.11.2
   resolution: "@reduxjs/toolkit@npm:2.11.2"
@@ -12756,7 +12735,6 @@ __metadata:
     "@mdx-js/loader": "npm:^3.1.1"
     "@mdx-js/mdx": "npm:^3.1.1"
     "@mdx-js/react": "npm:^3.1.1"
-    "@reach/skip-nav": "npm:^0.18.0"
     "@reduxjs/toolkit": "npm:^2.11.2"
     "@tanstack/react-query": "npm:^5.90.20"
     "@testing-library/dom": "npm:^10.4.1"
