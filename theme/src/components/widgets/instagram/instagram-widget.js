@@ -3,7 +3,7 @@ import { jsx, useThemeUI } from 'theme-ui'
 
 import { Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useState, useRef, useEffect, useMemo } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
@@ -50,7 +50,156 @@ export default () => {
   const profileURL = data?.profile?.profileURL
 
   const [isShowingMore, setIsShowingMore] = useState(false)
+  const [ambientActiveIndex, setAmbientActiveIndex] = useState(null)
+  const [ambientTrigger, setAmbientTrigger] = useState(0) // Increments to trigger single image advance
+  const [isInView, setIsInView] = useState(false)
+  const isGalleryOpenRef = useRef(false) // Use ref to avoid re-renders when gallery opens/closes
   const lightGalleryRef = useRef(null)
+  const ambientIntervalRef = useRef(null)
+  const widgetRef = useRef(null)
+  const carouselQueueRef = useRef([]) // Shuffled queue of carousel indices
+  const carouselProgressRef = useRef({}) // Track {idx: imagesShownCount}
+  const carouselDataRef = useRef([]) // Store carousel metadata {idx, totalImages}
+
+  // Fisher-Yates shuffle for true randomness without repeats
+  const shuffleArray = array => {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+  }
+
+  // Track widget visibility with Intersection Observer
+  useEffect(() => {
+    // Guard for SSR - IntersectionObserver is browser-only
+    if (typeof window === 'undefined' || !window.IntersectionObserver) {
+      setIsInView(true) // Fallback to always visible
+      return
+    }
+
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.1 } // At least 10% visible
+    )
+
+    const currentRef = widgetRef.current
+    if (currentRef) {
+      observer.observe(currentRef)
+      // Check initial visibility state immediately
+      const rect = currentRef.getBoundingClientRect()
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+      setIsInView(isVisible)
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef)
+      }
+      observer.disconnect()
+    }
+  }, [])
+
+  // Ambient rotation - cycle through carousel items to draw attention
+  useEffect(() => {
+    // Don't run if loading, no media, or widget not in view
+    if (isLoading || !media?.length || !isInView) {
+      // Clear any existing interval when going out of view
+      if (ambientIntervalRef.current) {
+        clearInterval(ambientIntervalRef.current)
+        ambientIntervalRef.current = null
+      }
+      setAmbientActiveIndex(null)
+      return
+    }
+
+    // Build carousel data: {idx, totalImages}
+    const carousels = media
+      .slice(0, isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default)
+      .map((post, idx) => {
+        if (post.mediaType === 'CAROUSEL_ALBUM' && post.children?.length > 1) {
+          return { idx, totalImages: post.children.length }
+        }
+        return null
+      })
+      .filter(Boolean)
+
+    // If no carousel items, don't start ambient rotation
+    if (carousels.length === 0) return
+
+    // Store carousel data for reference
+    carouselDataRef.current = carousels
+
+    // Initialize progress tracking (how many images each carousel has shown)
+    const progressMap = {}
+    carousels.forEach(c => {
+      progressMap[c.idx] = 0
+    })
+    carouselProgressRef.current = progressMap
+
+    // Create initial shuffled queue
+    carouselQueueRef.current = shuffleArray(carousels.map(c => c.idx))
+
+    // Get next carousel from queue, handling completion logic
+    const getNextCarousel = () => {
+      const carousels = carouselDataRef.current
+      const progress = carouselProgressRef.current
+
+      // If queue is empty, rebuild it
+      if (carouselQueueRef.current.length === 0) {
+        // Find carousels that haven't completed their full cycle
+        const incompleteCarousels = carousels.filter(c => progress[c.idx] < c.totalImages)
+
+        if (incompleteCarousels.length === 0) {
+          // All carousels completed their full cycle - reset and start fresh
+          carousels.forEach(c => {
+            progress[c.idx] = 0
+          })
+          carouselQueueRef.current = shuffleArray(carousels.map(c => c.idx))
+        } else {
+          // Reshuffle only the incomplete carousels
+          carouselQueueRef.current = shuffleArray(incompleteCarousels.map(c => c.idx))
+        }
+      }
+
+      // Pop the next index from the queue
+      const nextIdx = carouselQueueRef.current.shift()
+      progress[nextIdx]++
+
+      return nextIdx
+    }
+
+    // Start ambient rotation after a short delay (let user settle on page)
+    const startDelay = setTimeout(() => {
+      // Check ref - don't start if gallery is open
+      if (isGalleryOpenRef.current) return
+
+      const firstIdx = getNextCarousel()
+      setAmbientActiveIndex(firstIdx)
+      setAmbientTrigger(prev => prev + 1)
+
+      // Rotate to a new carousel every 3.5 seconds
+      ambientIntervalRef.current = setInterval(() => {
+        // Skip rotation if gallery is open (check ref, not state)
+        if (isGalleryOpenRef.current) return
+
+        const nextIdx = getNextCarousel()
+        setAmbientActiveIndex(nextIdx)
+        setAmbientTrigger(prev => prev + 1)
+      }, 3500)
+    }, 2000)
+
+    return () => {
+      clearTimeout(startDelay)
+      if (ambientIntervalRef.current) {
+        clearInterval(ambientIntervalRef.current)
+        ambientIntervalRef.current = null
+      }
+    }
+  }, [isLoading, media, isShowingMore, isInView])
 
   const openLightbox = useCallback(
     index => {
@@ -77,6 +226,44 @@ export default () => {
 
   const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
 
+  // Memoize LightGallery props to prevent reinitializing on every render
+  const lightGalleryPlugins = useMemo(() => [lgThumbnail, lgZoom, lgVideo, lgAutoplay], [])
+
+  const dynamicEl = useMemo(() => {
+    if (!media?.length) return []
+    return media.map(post => ({
+      thumb: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format&fit=clip&w=100&h=100`,
+      subHtml: post.caption || '',
+      ...(post.mediaType !== 'VIDEO' ? { src: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format` } : {}),
+      video:
+        post.mediaType === 'VIDEO' && post.mediaURL
+          ? {
+              source: [
+                {
+                  src: post.mediaURL,
+                  type: 'video/mp4'
+                }
+              ],
+              attributes: {
+                controls: true
+              }
+            }
+          : undefined
+    }))
+  }, [media])
+
+  const handleLightGalleryInit = useCallback(ref => {
+    lightGalleryRef.current = ref.instance
+  }, [])
+
+  const handleGalleryOpen = useCallback(() => {
+    isGalleryOpenRef.current = true
+  }, [])
+
+  const handleGalleryClose = useCallback(() => {
+    isGalleryOpenRef.current = false
+  }, [])
+
   return (
     <Widget id='instagram' hasFatalError={hasFatalError}>
       <WidgetHeader aside={callToAction} icon={faInstagram}>
@@ -85,7 +272,7 @@ export default () => {
 
       <ProfileMetricsBadge metrics={metrics} isLoading={isLoading} />
 
-      <div className='gallery'>
+      <div className='gallery' ref={widgetRef}>
         <Grid
           sx={{
             gridGap: [3, 3, 3, 4],
@@ -114,7 +301,13 @@ export default () => {
                 showLoadingAnimation
                 type='rect'
               >
-                <WidgetItem handleClick={() => openLightbox(idx)} index={idx} post={post} />
+                <WidgetItem
+                  handleClick={() => openLightbox(idx)}
+                  index={idx}
+                  post={post}
+                  isAmbientActive={ambientActiveIndex === idx}
+                  ambientTrigger={ambientActiveIndex === idx ? ambientTrigger : 0}
+                />
               </ReactPlaceholder>
             ))}
         </Grid>
@@ -128,37 +321,17 @@ export default () => {
         </div>
       )}
 
-      {media?.length > 0 && (
+      {dynamicEl.length > 0 && (
         <LightGallery
-          onInit={ref => {
-            lightGalleryRef.current = ref.instance
-          }}
-          plugins={[lgThumbnail, lgZoom, lgVideo, lgAutoplay]}
+          onInit={handleLightGalleryInit}
+          onAfterOpen={handleGalleryOpen}
+          onAfterClose={handleGalleryClose}
+          plugins={lightGalleryPlugins}
           licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}
           download={false}
           dynamic
-          dynamicEl={media.map(post => ({
-            thumb: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format&fit=clip&w=100&h=100`,
-            subHtml: post.caption || '',
-            ...(post.mediaType !== 'VIDEO'
-              ? { src: `${post.cdnMediaURL}?auto=compress&auto=enhance&auto=format` }
-              : {}),
-            video:
-              post.mediaType === 'VIDEO' && post.mediaURL
-                ? {
-                    source: [
-                      {
-                        src: post.mediaURL,
-                        type: 'video/mp4'
-                      }
-                    ],
-                    attributes: {
-                      controls: true // Enable controls for the video
-                    }
-                  }
-                : undefined
-          }))}
-          autoplayVideoOnSlide={true} // Add this option
+          dynamicEl={dynamicEl}
+          autoplayVideoOnSlide={true}
           speed={500}
         />
       )}
