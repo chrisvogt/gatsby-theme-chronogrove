@@ -183,7 +183,7 @@ const InstagramWidgetItem = ({
   return (
     <button
       key={id}
-      onClick={event => handleClick(event, { index, photo: { caption, id, src: cdnMediaURL } })}
+      onClick={event => handleClick(event, { index, currentImageIndex, photo: { caption, id, src: cdnMediaURL } })}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
