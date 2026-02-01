@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.68.4
+
+### ♿ Accessibility
+
+- **Replaced deprecated `@reach/skip-nav`**: Created custom skip-nav components to replace the unmaintained dependency
+  - `SkipNavLink`: Visually hidden link that appears on focus, styled to match ActionButton design
+  - `SkipNavContent`: Target element for skip navigation with proper focus handling
+  - Positioned in upper-left corner when focused (standard WCAG 2.4.1 placement)
+  - First focusable element on page for proper keyboard navigation
+  - Supports dark/light mode theming
+
+### 🧹 Dependency Cleanup
+
+- **Removed `@reach/skip-nav`**: Eliminated deprecated dependency that had React 19 peer dependency warnings
+  - Package was unmaintained (last update 2022) and incompatible with React 19
+  - Custom implementation is ~80 lines vs external dependency
+  - No functionality loss - all features preserved
+
+### 🧪 Testing
+
+- Added comprehensive test coverage for skip-nav components
+  - 27 tests covering SkipNavLink and SkipNavContent
+  - 100% statement, branch, function, and line coverage
+  - Tests for ref forwarding, polymorphic `as` prop, dark mode, and accessibility attributes
+
+### 📦 Files Changed
+
+- `theme/src/components/skip-nav/SkipNavLink.js` (new)
+- `theme/src/components/skip-nav/SkipNavLink.spec.js` (new)
+- `theme/src/components/skip-nav/SkipNavContent.js` (new)
+- `theme/src/components/skip-nav/SkipNavContent.spec.js` (new)
+- `theme/src/components/skip-nav/index.js` (new)
+- `theme/src/components/layout.js` (updated import)
+- `theme/src/templates/home.js` (updated import)
+- `theme/gatsby-browser.js` (removed CSS import, updated selector)
+- `theme/gatsby-browser.spec.js` (updated tests)
+- `theme/package.json` (removed @reach/skip-nav)
+
+---
+
 ## 0.68.3
 
 ### 🔍 SEO Improvements

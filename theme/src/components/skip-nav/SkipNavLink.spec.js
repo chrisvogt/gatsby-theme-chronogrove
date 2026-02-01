@@ -1,8 +1,9 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 
-import SkipNavLink from './SkipNavLink'
+import SkipNavLink, { hexToRgb, COLORS } from './SkipNavLink'
 import { TestProvider } from '../../testUtils'
+import * as isDarkModeModule from '../../helpers/isDarkMode'
 
 describe('SkipNavLink', () => {
   const renderComponent = (props = {}) => {
@@ -66,5 +67,42 @@ describe('SkipNavLink', () => {
 
   it('has displayName set for debugging', () => {
     expect(SkipNavLink.displayName).toBe('SkipNavLink')
+  })
+
+  describe('dark mode', () => {
+    it('renders correctly in dark mode', () => {
+      jest.spyOn(isDarkModeModule, 'default').mockReturnValue(true)
+      renderComponent()
+      expect(screen.getByText('Skip to content')).toBeInTheDocument()
+      jest.restoreAllMocks()
+    })
+  })
+})
+
+describe('hexToRgb', () => {
+  it('converts hex with hash to RGB', () => {
+    expect(hexToRgb('#422EA3')).toBe('66, 46, 163')
+  })
+
+  it('converts hex without hash to RGB', () => {
+    expect(hexToRgb('4a9eff')).toBe('74, 158, 255')
+  })
+
+  it('returns fallback for invalid hex', () => {
+    expect(hexToRgb('invalid')).toBe('74, 158, 255')
+  })
+
+  it('returns fallback for empty string', () => {
+    expect(hexToRgb('')).toBe('74, 158, 255')
+  })
+})
+
+describe('COLORS', () => {
+  it('exports light mode color', () => {
+    expect(COLORS.light).toBe('#422EA3')
+  })
+
+  it('exports dark mode color', () => {
+    expect(COLORS.dark).toBe('#4a9eff')
   })
 })

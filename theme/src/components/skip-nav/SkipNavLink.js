@@ -3,14 +3,33 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { forwardRef } from 'react'
 import isDarkMode from '../../helpers/isDarkMode'
 
+// Color constants for light and dark modes
+const COLORS = {
+  light: '#422EA3',
+  dark: '#4a9eff'
+}
+
+/**
+ * Converts a hex color to RGB string for use in rgba()
+ * @param {string} hex - Hex color code (with or without #)
+ * @returns {string} RGB values as comma-separated string
+ */
+const hexToRgb = hex => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) {
+    return '74, 158, 255' // Fallback blue
+  }
+  return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
+}
+
 /**
  * SkipNavLink
  *
  * Renders a link styled as a button to skip to the main content.
  * This is an accessibility feature for keyboard and screen reader users.
  *
- * Placed first in DOM for proper tab order, but visually appears in the
- * header area (near the color toggle) when focused using fixed positioning.
+ * Placed first in DOM for proper tab order. Visually hidden until focused,
+ * then appears in the upper-left corner of the viewport.
  *
  * Styled to match ActionButton for visual consistency.
  *
@@ -22,16 +41,7 @@ const SkipNavLink = forwardRef(function SkipNavLink(
 ) {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
-
-  const primaryColor = darkModeActive ? '#4a9eff' : '#422EA3'
-
-  // Helper function to convert hex to RGB
-  const hexToRgb = hex => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result
-      ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-      : '74, 158, 255'
-  }
+  const primaryColor = darkModeActive ? COLORS.dark : COLORS.light
 
   return (
     <Comp
@@ -95,3 +105,4 @@ const SkipNavLink = forwardRef(function SkipNavLink(
 SkipNavLink.displayName = 'SkipNavLink'
 
 export default SkipNavLink
+export { hexToRgb, COLORS }
