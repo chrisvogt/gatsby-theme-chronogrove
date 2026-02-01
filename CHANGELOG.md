@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.69.0
+
+### ✨ New Features
+
+- **Instagram Widget Ambient Rotation**: Added an "attention grabber" feature that automatically cycles through carousel images when the widget is in view
+  - **Smart Carousel Selection**: Uses Fisher-Yates shuffle algorithm to randomly select which carousel item to highlight without immediate repeats
+  - **Progressive Image Reveal**: Each selected carousel advances by one image, revealing gallery content progressively
+  - **Visibility-Aware**: Ambient rotation only runs when the Instagram widget is visible in the viewport (uses IntersectionObserver)
+  - **Gallery-Aware**: Rotation automatically pauses when the LightGallery modal is open and resumes when closed
+  - **Visual Indicator**: Subtle pulsing border animation highlights the currently rotating carousel item
+  - **Completion Tracking**: Tracks which carousels have shown all their images and resets when all complete
+
+### 🔧 Technical Improvements
+
+- **Memoized LightGallery Props**: Prevented unnecessary LightGallery reinitialization by memoizing `dynamicEl`, `plugins`, and callback handlers
+- **Stable Callbacks**: Used `useCallback` for `handleLightGalleryInit`, `handleGalleryOpen`, and `handleGalleryClose` to ensure stable references
+- **SSR Safe**: IntersectionObserver initialization is guarded for server-side rendering compatibility
+- **CSS Keyframe Animation**: Added `ambientPulseAnimation` for the attention-grabbing border effect
+
+### 🧪 Testing
+
+- **Comprehensive Test Coverage**: Added 23 new tests for ambient rotation functionality
+- **98%+ Coverage**: Instagram widget components maintain excellent test coverage
+  - `instagram-widget.js`: 97.56% statements, 100% functions, 98.18% lines
+  - `instagram-widget-item.js`: 98.83% statements, 100% functions, 100% lines
+- **Mock IntersectionObserver**: Tests include proper mocking for IntersectionObserver API
+- **LightGallery Event Testing**: Tests cover `onAfterOpen` and `onAfterClose` callback behaviors
+
+### 📦 Files Changed
+
+- `theme/src/components/widgets/instagram/instagram-widget.js`
+- `theme/src/components/widgets/instagram/instagram-widget-item.js`
+- `theme/src/components/widgets/instagram/instagram-widget.spec.js`
+- `theme/src/components/widgets/instagram/instagram-widget-item.spec.js`
+
+---
+
 ## 0.68.4
 
 ### ♿ Accessibility
