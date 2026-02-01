@@ -23,18 +23,37 @@ const kenBurnsAnimation = keyframes`
   }
 `
 
+// Subtle border pulse animation for ambient active items
+const ambientPulseAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(225, 48, 108, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(225, 48, 108, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(225, 48, 108, 0);
+  }
+`
+
 // Helper to build image URL with CDN params
 const buildImageURL = url =>
   url ? `${url}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format` : ''
 
 // Preload an image by creating a hidden Image object
+// Note: Called with URLs from carouselImages which is already filtered with .filter(Boolean)
 const preloadImage = url => {
-  if (!url) return
   const img = new window.Image()
   img.src = buildImageURL(url)
 }
 
-const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL, children, id, mediaType } = {} }) => {
+const InstagramWidgetItem = ({
+  handleClick,
+  index,
+  post: { caption, cdnMediaURL, children, id, mediaType } = {},
+  isAmbientActive = false,
+  ambientTrigger = 0
+}) => {
   const isCarousel = mediaType === 'CAROUSEL_ALBUM'
   const isVideo = mediaType === 'VIDEO'
   const hasCarouselImages = isCarousel && children?.length > 0
@@ -47,8 +66,8 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   const timeoutRef = useRef(null)
   const carouselImagesLengthRef = useRef(0)
 
-  // Carousel is active when either hovering OR focused (for accessibility)
-  const isActive = isMouseOver || isFocused
+  // Carousel is active when hovering, focused, OR ambient active (attention grabber)
+  const isActive = isMouseOver || isFocused || isAmbientActive
 
   // Get all carousel image URLs, fallback to main image if no children
   const carouselImages = hasCarouselImages ? children.map(child => child.cdnMediaURL).filter(Boolean) : [cdnMediaURL]
@@ -130,6 +149,25 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
     }
   }, [isMouseOver, stopCarouselRotation])
 
+  // Handle ambient trigger - advance by 1 image when triggered (attention grabber feature)
+  useEffect(() => {
+    // Only advance if this item is ambient active and has carousel images
+    if (ambientTrigger > 0 && isAmbientActive && hasCarouselImages && carouselImages.length > 1) {
+      // Preload the next image
+      const nextIndex = (currentImageIndex + 1) % carouselImages.length
+      preloadImage(carouselImages[nextIndex])
+
+      // Advance by 1 with transition
+      setIsTransitioning(true)
+      const timeout = setTimeout(() => {
+        setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
+        setIsTransitioning(false)
+      }, 300)
+
+      return () => clearTimeout(timeout)
+    }
+  }, [ambientTrigger]) // Only trigger on ambientTrigger change
+
   // Cleanup interval and timeout on unmount
   useEffect(() => {
     return () => {
@@ -145,7 +183,7 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
   return (
     <button
       key={id}
-      onClick={event => handleClick(event, { index, photo: { caption, id, src: cdnMediaURL } })}
+      onClick={event => handleClick(event, { index, currentImageIndex, photo: { caption, id, src: cdnMediaURL } })}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
@@ -154,7 +192,13 @@ const InstagramWidgetItem = ({ handleClick, index, post: { caption, cdnMediaURL,
       sx={{
         variant: 'styles.InstagramItem',
         position: 'relative', // Required for absolutely positioned children (icon, indicators)
-        overflow: 'hidden' // Clip Ken Burns zoom effect
+        overflow: 'hidden', // Clip Ken Burns zoom effect
+        // Subtle pulse animation when ambient active (attention grabber)
+        ...(isAmbientActive &&
+          hasCarouselImages && {
+            animation: `${ambientPulseAnimation} 1.5s ease-in-out infinite`,
+            borderRadius: '8px'
+          })
       }}
     >
       {(isCarousel || isVideo) && (
