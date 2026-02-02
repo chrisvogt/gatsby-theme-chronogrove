@@ -75,6 +75,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
     type MdxFrontmatter {
       excerpt: String
+      thumbnails: [String]
     }
 
     type SiteSiteMetadata implements Node {
