@@ -7,12 +7,14 @@ import { hidePlayer } from '../reducers/audioPlayer'
 import SoundCloud from '../shortcodes/soundcloud'
 import Spotify from '../shortcodes/spotify'
 
-const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
+const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode: colorModeProp }) => {
   const containerRef = useRef(null)
   const widgetRef = useRef(null)
   const dispatch = useDispatch()
-  const [colorMode] = useColorMode()
+  // Use prop if provided (more reliable for portal re-renders), fallback to hook
+  const [colorModeFromHook] = useColorMode()
   const { theme } = useThemeUI()
+  const colorMode = colorModeProp || colorModeFromHook
   const isDark = colorMode === 'dark'
 
   // Compute actual color values from theme based on color mode
