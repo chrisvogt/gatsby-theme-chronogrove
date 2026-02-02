@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.68.5
+## 0.70.1
 
 ### ✨ Features
 
@@ -30,6 +30,7 @@
   - 9 new tests for `ImageThumbnails` component
   - 6 new tests for `PostCard` thumbnail handling
   - 2 new tests for `RecentPostsWidget` thumbnail passing
+  - 1 new test for `useCategorizedPosts` thumbnails pass-through
   - 100% code coverage for all recent-posts components
 
 ### 📦 Files Changed
@@ -41,8 +42,55 @@
 - `theme/src/components/widgets/recent-posts/recent-posts-widget.js` (updated)
 - `theme/src/components/widgets/recent-posts/recent-posts-widget.spec.js` (updated)
 - `theme/src/hooks/use-categorized-posts.js` (added thumbnails to query)
+- `theme/src/hooks/use-categorized-posts.spec.js` (added thumbnails test)
 - `www.chrisvogt.me/src/pages/photography.js` (updated to use thumbnails)
 - Multiple MDX content files (added thumbnails frontmatter)
+
+---
+
+## 0.70.0
+
+### ✨ New Features
+
+- **Instagram Widget Ambient Rotation**: Added an "attention grabber" feature that automatically cycles through carousel images when the widget is in view
+  - **Smart Carousel Selection**: Uses Fisher-Yates shuffle algorithm to randomly select which carousel item to highlight without immediate repeats
+  - **Progressive Image Reveal**: Each selected carousel advances by one image, revealing gallery content progressively
+  - **Visibility-Aware**: Ambient rotation only runs when the Instagram widget is visible in the viewport (uses IntersectionObserver)
+  - **Gallery-Aware**: Rotation automatically pauses when the LightGallery modal is open and resumes when closed
+  - **Visual Indicator**: Subtle pulsing border animation highlights the currently rotating carousel item
+  - **Completion Tracking**: Tracks which carousels have shown all their images and resets when all complete
+
+- **LightGallery Full Carousel Support**: Instagram carousel posts now display all images in the lightbox
+  - **Flattened Gallery**: All images from carousel posts are expanded into individual slides
+  - **Position Indicator**: Shows "📷 2 / 15" badge with FontAwesome icon for carousel images
+  - **Smart Opening**: Clicking a carousel opens at the exact image currently displayed (respects ambient rotation position)
+  - **Album Boundary Styling**: CSS-based visual grouping of carousel thumbnails in the lightbox
+
+### 🔧 Technical Improvements
+
+- **Memoized LightGallery Props**: Prevented unnecessary LightGallery reinitialization by memoizing `dynamicEl`, `plugins`, and callback handlers
+- **Stable Callbacks**: Used `useCallback` for `handleLightGalleryInit`, `handleGalleryOpen`, `handleGalleryClose`, and `handleAfterAppendSlide`
+- **Index Mapping**: Created `itemIndexToSlideIndex` mapping for accurate carousel-to-slide navigation
+- **SSR Safe**: IntersectionObserver initialization is guarded for server-side rendering compatibility
+- **CSS Keyframe Animation**: Added `ambientPulseAnimation` for the attention-grabbing border effect
+
+### 🧪 Testing
+
+- **100% Line Coverage**: Instagram widget components achieve complete line coverage
+  - `instagram-widget.js`: 99.38% statements, 86.81% branches, 100% functions, **100% lines**
+  - `instagram-widget-item.js`: **100%** across all metrics
+- **75 Total Tests**: Comprehensive test suite covering all new functionality
+- **Mock IntersectionObserver**: Tests include proper mocking for IntersectionObserver API
+- **LightGallery Event Testing**: Tests cover `onAfterOpen`, `onAfterClose`, and `onAfterAppendSlide` callbacks
+- **DOM Manipulation Testing**: Tests verify thumbnail data attribute application for album boundaries
+
+### 📦 Files Changed
+
+- `theme/src/components/widgets/instagram/instagram-widget.js`
+- `theme/src/components/widgets/instagram/instagram-widget-item.js`
+- `theme/src/components/widgets/instagram/instagram-widget.spec.js`
+- `theme/src/components/widgets/instagram/instagram-widget-item.spec.js`
+- `theme/src/styles/global.css`
 
 ---
 

@@ -69,6 +69,7 @@ describe('InstagramWidgetItem', () => {
     expect(mockHandleClick).toHaveBeenCalledTimes(1)
     expect(mockHandleClick).toHaveBeenCalledWith(expect.any(Object), {
       index: defaultProps.index,
+      currentImageIndex: 0,
       photo: {
         caption: defaultProps.post.caption,
         id: defaultProps.post.id,
@@ -421,6 +422,117 @@ describe('InstagramWidgetItem', () => {
 
       // Should still show the single valid image
       expect(screen.getByRole('img').src).toContain('only-valid.jpg')
+    })
+  })
+
+  describe('Ambient rotation (attention grabber feature)', () => {
+    it('advances by 1 image when ambientTrigger changes and item is ambient active', () => {
+      const { rerender } = render(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={0} />)
+
+      // Initially shows first image
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+
+      // Trigger ambient advance
+      rerender(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={1} />)
+
+      // Wait for transition
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should now show second image
+      expect(screen.getByRole('img').src).toContain('child2.jpg')
+    })
+
+    it('does not advance when ambientTrigger is 0', () => {
+      render(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={0} />)
+
+      // Should stay on first image
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+
+      act(() => {
+        jest.advanceTimersByTime(1000)
+      })
+
+      // Still on first image
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+    })
+
+    it('does not advance when item is not ambient active', () => {
+      const { rerender } = render(<InstagramWidgetItem {...carouselProps} isAmbientActive={false} ambientTrigger={1} />)
+
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+
+      // Change trigger but keep ambient inactive
+      rerender(<InstagramWidgetItem {...carouselProps} isAmbientActive={false} ambientTrigger={2} />)
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should NOT advance
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+    })
+
+    it('shows carousel indicators when ambient active', () => {
+      render(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={1} />)
+
+      // Indicators should be visible when ambient active
+      expect(screen.getByTestId('carousel-indicators')).toBeInTheDocument()
+    })
+
+    it('applies pulse animation when ambient active on carousel items', () => {
+      const { container } = render(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={1} />)
+
+      const button = container.querySelector('button')
+      // Check that animation styles are applied (borderRadius indicates animation is applied)
+      expect(button).toHaveStyle({ borderRadius: '8px' })
+    })
+
+    it('does not apply pulse animation on non-carousel items', () => {
+      const { container } = render(<InstagramWidgetItem {...defaultProps} isAmbientActive={true} ambientTrigger={1} />)
+
+      const button = container.querySelector('button')
+      // Non-carousel items should not have the borderRadius from animation
+      expect(button).not.toHaveStyle({ borderRadius: '8px' })
+    })
+
+    it('wraps around to first image when advancing past last image', () => {
+      const { rerender } = render(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={0} />)
+
+      // Advance through all 3 images
+      for (let i = 1; i <= 3; i++) {
+        rerender(<InstagramWidgetItem {...carouselProps} isAmbientActive={true} ambientTrigger={i} />)
+        act(() => {
+          jest.advanceTimersByTime(300)
+        })
+      }
+
+      // After 3 advances from child1, should wrap to child1 again (1->2->3->1)
+      expect(screen.getByRole('img').src).toContain('child1.jpg')
+    })
+
+    it('does not advance carousel with only one valid image', () => {
+      const singleImageProps = {
+        ...carouselProps,
+        post: {
+          ...carouselProps.post,
+          children: [{ id: 'child1', cdnMediaURL: 'https://cdn.example.com/images/only.jpg' }]
+        }
+      }
+
+      const { rerender } = render(
+        <InstagramWidgetItem {...singleImageProps} isAmbientActive={true} ambientTrigger={0} />
+      )
+
+      rerender(<InstagramWidgetItem {...singleImageProps} isAmbientActive={true} ambientTrigger={1} />)
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      // Should still show the only image
+      expect(screen.getByRole('img').src).toContain('only.jpg')
     })
   })
 
