@@ -72,11 +72,11 @@ const PhotographyPage = ({ data }) => {
               >
                 {posts.map(post => (
                   <PostCard
-                    banner={post.frontmatter.banner}
                     category={post.fields.category}
                     date={post.frontmatter.date}
                     key={post.fields.id}
                     link={post.fields.path}
+                    thumbnails={post.frontmatter.thumbnails}
                     title={post.frontmatter.title}
                   />
                 ))}
@@ -114,6 +114,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             description
             slug
+            thumbnails
             title
           }
         }
