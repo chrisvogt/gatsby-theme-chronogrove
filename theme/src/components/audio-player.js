@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useColorMode } from 'theme-ui'
+import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,15 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
   const widgetRef = useRef(null)
   const dispatch = useDispatch()
   const [colorMode] = useColorMode()
+  const { theme } = useThemeUI()
   const isDark = colorMode === 'dark'
+
+  // Compute actual color values from theme based on color mode
+  // This ensures portal content gets correct colors regardless of CSS variable availability
+  const panelBackground = isDark
+    ? theme.colors?.modes?.dark?.['panel-background'] || 'rgba(20, 20, 31, 0.45)'
+    : theme.colors?.['panel-background'] || 'rgba(255, 255, 255, 0.45)'
+  const textColor = isDark ? theme.colors?.modes?.dark?.text || '#fff' : theme.colors?.text || '#111'
 
   // Create portal container on mount
   useEffect(() => {
@@ -56,8 +64,9 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
         bottom: 0,
         left: 0,
         right: 0,
-        // Use CSS custom properties directly to ensure color mode works in portals
-        background: 'var(--theme-ui-colors-panel-background)',
+        // Use computed color values from theme to ensure portal gets correct colors
+        // CSS custom properties don't reliably work in portals during SSR/hydration
+        background: panelBackground,
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)', // for Safari
         pt: 2,
@@ -89,8 +98,8 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
           sx={{
             background: 'none',
             border: 'none',
-            // Use CSS custom property directly for color mode support in portals
-            color: 'var(--theme-ui-colors-text)',
+            // Use computed color value from theme for portal color mode support
+            color: textColor,
             cursor: 'pointer',
             p: 1,
             display: 'flex',

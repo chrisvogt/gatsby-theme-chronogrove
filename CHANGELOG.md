@@ -6,13 +6,14 @@
 
 - **Fixed audio player portal not respecting dark mode in production**: The Spotify/SoundCloud audio preview container that renders at the bottom of the page now properly responds to color mode changes in production builds
   - Portal content was rendering outside the Theme UI context, preventing color mode CSS from being applied
-  - Changed to use CSS custom properties directly (`var(--theme-ui-colors-panel-background)`, `var(--theme-ui-colors-text)`) instead of Theme UI color tokens
-  - Added `useColorMode` hook to track color mode for dynamic non-CSS-variable styles (box shadow, hover states)
+  - CSS custom properties don't reliably work in portals during SSR/hydration
+  - Now computes actual color values directly from the theme object using `useThemeUI` hook based on current color mode
+  - Added `useColorMode` hook to track color mode for all dynamic styles
 
 ### 📦 Files Changed
 
-- `theme/src/components/audio-player.js` (use CSS custom properties for portal color mode support)
-- `theme/src/components/audio-player.spec.js` (added useColorMode mock)
+- `theme/src/components/audio-player.js` (compute theme colors directly for portal color mode support)
+- `theme/src/components/audio-player.spec.js` (added useColorMode and useThemeUI mocks)
 
 ---
 
