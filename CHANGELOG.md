@@ -8,12 +8,13 @@
   - Portal content was rendering outside the Theme UI context, preventing color mode CSS from being applied
   - CSS custom properties and `sx` prop styles can be cached and don't reliably update in portals during SSR/hydration
   - Now computes actual color values directly from the theme object using `useThemeUI` hook based on current color mode
-  - Uses inline `style` attribute for color-mode-dependent values (background, boxShadow, color) to ensure they update on toggle
+  - Uses inline `style` attribute for color-mode-dependent values (background, boxShadow, color)
+  - Added `key` prop based on color mode to force React to re-mount portal content when toggling themes
   - Static layout styles remain in `sx` prop for Theme UI scale values (spacing, responsive breakpoints)
 
 ### 📦 Files Changed
 
-- `theme/src/components/audio-player.js` (use inline styles for dynamic colors, compute theme colors directly)
+- `theme/src/components/audio-player.js` (use inline styles, key prop for color mode, compute theme colors directly)
 - `theme/src/components/audio-player.spec.js` (added useColorMode and useThemeUI mocks)
 
 ---

@@ -59,6 +59,8 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
 
   return createPortal(
     <div
+      // Key forces React to re-mount when color mode changes, ensuring fresh styles
+      key={`audio-player-${colorMode}`}
       // Use inline style for color-mode-dependent values to ensure they update on toggle
       // sx prop CSS-in-JS styles can be cached and not update properly in portals
       style={{
