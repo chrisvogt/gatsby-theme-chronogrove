@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useColorMode } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch } from 'react-redux'
@@ -11,6 +11,8 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
   const containerRef = useRef(null)
   const widgetRef = useRef(null)
   const dispatch = useDispatch()
+  const [colorMode] = useColorMode()
+  const isDark = colorMode === 'dark'
 
   // Create portal container on mount
   useEffect(() => {
@@ -54,13 +56,14 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
         bottom: 0,
         left: 0,
         right: 0,
-        background: 'panel-background',
+        // Use CSS custom properties directly to ensure color mode works in portals
+        background: 'var(--theme-ui-colors-panel-background)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)', // for Safari
         pt: 2,
         pb: 3,
         px: 3,
-        boxShadow: '0 -2px 10px rgba(0,0,0,0.1)',
+        boxShadow: isDark ? '0 -2px 10px rgba(0,0,0,0.3)' : '0 -2px 10px rgba(0,0,0,0.1)',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -86,7 +89,8 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
           sx={{
             background: 'none',
             border: 'none',
-            color: 'text',
+            // Use CSS custom property directly for color mode support in portals
+            color: 'var(--theme-ui-colors-text)',
             cursor: 'pointer',
             p: 1,
             display: 'flex',
@@ -98,7 +102,7 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
             transition: 'all 0.2s ease',
             mb: 1,
             '&:hover': {
-              background: 'rgba(0,0,0,0.1)'
+              background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
             }
           }}
           aria-label='Close audio player'
