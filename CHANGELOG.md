@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.70.2
+
+### 🐛 Bug Fixes
+
+- **Fixed GraphQL schema error for thumbnails field**: Added explicit `thumbnails: [String]` type definition to `MdxFrontmatter` in `createSchemaCustomization`
+  - Fixes build failure in workspaces without posts containing thumbnails
+  - Field is now properly optional and won't cause "Cannot query field" errors
+
+### 📦 Files Changed
+
+- `theme/gatsby-node.js` (added thumbnails to MdxFrontmatter schema)
+
+---
+
 ## 0.70.1
 
 ### ✨ Features
