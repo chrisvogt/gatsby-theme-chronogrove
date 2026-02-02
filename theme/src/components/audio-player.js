@@ -59,20 +59,22 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
 
   return createPortal(
     <div
+      // Use inline style for color-mode-dependent values to ensure they update on toggle
+      // sx prop CSS-in-JS styles can be cached and not update properly in portals
+      style={{
+        background: panelBackground,
+        boxShadow: isDark ? '0 -2px 10px rgba(0,0,0,0.3)' : '0 -2px 10px rgba(0,0,0,0.1)'
+      }}
       sx={{
         position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        // Use computed color values from theme to ensure portal gets correct colors
-        // CSS custom properties don't reliably work in portals during SSR/hydration
-        background: panelBackground,
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)', // for Safari
         pt: 2,
         pb: 3,
         px: 3,
-        boxShadow: isDark ? '0 -2px 10px rgba(0,0,0,0.3)' : '0 -2px 10px rgba(0,0,0,0.1)',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -95,11 +97,11 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
       >
         <button
           onClick={() => dispatch(hidePlayer())}
+          // Use inline style for color to ensure it updates on color mode toggle
+          style={{ color: textColor }}
           sx={{
             background: 'none',
             border: 'none',
-            // Use computed color value from theme for portal color mode support
-            color: textColor,
             cursor: 'pointer',
             p: 1,
             display: 'flex',
