@@ -23,7 +23,13 @@ const RootWrapper = ({ children }) => {
   return (
     <>
       {children}
-      <AudioPlayer soundcloudId={soundcloudId} spotifyURL={spotifyURL} isVisible={isVisible} provider={provider} />
+      <AudioPlayer
+        soundcloudId={soundcloudId}
+        spotifyURL={spotifyURL}
+        isVisible={isVisible}
+        provider={provider}
+        colorMode={colorMode}
+      />
     </>
   )
 }

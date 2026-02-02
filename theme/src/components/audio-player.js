@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch } from 'react-redux'
@@ -7,10 +7,22 @@ import { hidePlayer } from '../reducers/audioPlayer'
 import SoundCloud from '../shortcodes/soundcloud'
 import Spotify from '../shortcodes/spotify'
 
-const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
+const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode: colorModeProp }) => {
   const containerRef = useRef(null)
   const widgetRef = useRef(null)
   const dispatch = useDispatch()
+  // Use prop if provided (more reliable for portal re-renders), fallback to hook
+  const [colorModeFromHook] = useColorMode()
+  const { theme } = useThemeUI()
+  const colorMode = colorModeProp || colorModeFromHook
+  const isDark = colorMode === 'dark'
+
+  // Compute actual color values from theme based on color mode
+  // This ensures portal content gets correct colors regardless of CSS variable availability
+  const panelBackground = isDark
+    ? theme.colors?.modes?.dark?.['panel-background'] || 'rgba(20, 20, 31, 0.45)'
+    : theme.colors?.['panel-background'] || 'rgba(255, 255, 255, 0.45)'
+  const textColor = isDark ? theme.colors?.modes?.dark?.text || '#fff' : theme.colors?.text || '#111'
 
   // Create portal container on mount
   useEffect(() => {
@@ -49,18 +61,24 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
 
   return createPortal(
     <div
+      // Key forces React to re-mount when color mode changes, ensuring fresh styles
+      key={`audio-player-${colorMode}`}
+      // Use inline style for color-mode-dependent values to ensure they update on toggle
+      // sx prop CSS-in-JS styles can be cached and not update properly in portals
+      style={{
+        background: panelBackground,
+        boxShadow: isDark ? '0 -2px 10px rgba(0,0,0,0.3)' : '0 -2px 10px rgba(0,0,0,0.1)'
+      }}
       sx={{
         position: 'fixed',
         bottom: 0,
         left: 0,
         right: 0,
-        background: 'panel-background',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)', // for Safari
         pt: 2,
         pb: 3,
         px: 3,
-        boxShadow: '0 -2px 10px rgba(0,0,0,0.1)',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -83,10 +101,11 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
       >
         <button
           onClick={() => dispatch(hidePlayer())}
+          // Use inline style for color to ensure it updates on color mode toggle
+          style={{ color: textColor }}
           sx={{
             background: 'none',
             border: 'none',
-            color: 'text',
             cursor: 'pointer',
             p: 1,
             display: 'flex',
@@ -98,7 +117,7 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider }) => {
             transition: 'all 0.2s ease',
             mb: 1,
             '&:hover': {
-              background: 'rgba(0,0,0,0.1)'
+              background: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'
             }
           }}
           aria-label='Close audio player'
