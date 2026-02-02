@@ -8,7 +8,11 @@ import useCategorizedPosts from '../../../hooks/use-categorized-posts'
 jest.mock('../../../hooks/use-categorized-posts')
 
 // Mock the PostCard component
-jest.mock('./post-card', () => ({ title }) => <div data-testid='post-card'>{title}</div>)
+jest.mock('./post-card', () => ({ title, thumbnails }) => (
+  <div data-testid='post-card' data-has-thumbnails={thumbnails && thumbnails.length > 0}>
+    {title}
+  </div>
+))
 
 // Mock other components
 jest.mock('../call-to-action', () => ({ title, to }) => <a href={to}>{title}</a>)
@@ -238,5 +242,87 @@ describe('RecentPostsWidget', () => {
     // Verify section headers are rendered without count
     expect(screen.getByText('Recaps')).toBeInTheDocument()
     expect(screen.queryByText('(3)')).not.toBeInTheDocument()
+  })
+
+  it('passes thumbnails to recaps and photography sections', () => {
+    useCategorizedPosts.mockReturnValue({
+      posts: [
+        {
+          frontmatter: {
+            banner: 'banner1.jpg',
+            date: '2024-10-01',
+            title: 'October Recap',
+            thumbnails: ['thumb1.jpg', 'thumb2.jpg', 'thumb3.jpg', 'thumb4.jpg']
+          },
+          fields: {
+            category: 'personal',
+            id: '1',
+            path: '/blog/october-recap'
+          },
+          section: 'recaps'
+        },
+        {
+          frontmatter: {
+            banner: 'banner2.jpg',
+            date: '2024-10-02',
+            title: 'Travel Photos',
+            thumbnails: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg']
+          },
+          fields: {
+            category: 'photography/travel',
+            id: '2',
+            path: '/blog/travel-photos'
+          },
+          section: 'photography'
+        }
+      ],
+      recaps: [],
+      music: [],
+      photography: [],
+      other: []
+    })
+
+    render(<RecentPostsWidget />)
+
+    // Verify post cards are rendered with thumbnails
+    const postCards = screen.getAllByTestId('post-card')
+    expect(postCards).toHaveLength(2)
+
+    // Check that thumbnails are being passed (via data attribute)
+    expect(postCards[0]).toHaveAttribute('data-has-thumbnails', 'true')
+    expect(postCards[1]).toHaveAttribute('data-has-thumbnails', 'true')
+  })
+
+  it('handles posts without thumbnails in recaps section', () => {
+    useCategorizedPosts.mockReturnValue({
+      posts: [
+        {
+          frontmatter: {
+            banner: 'banner1.jpg',
+            date: '2024-10-01',
+            title: 'Old Recap',
+            thumbnails: null
+          },
+          fields: {
+            category: 'personal',
+            id: '1',
+            path: '/blog/old-recap'
+          },
+          section: 'recaps'
+        }
+      ],
+      recaps: [],
+      music: [],
+      photography: [],
+      other: []
+    })
+
+    render(<RecentPostsWidget />)
+
+    // Verify post card is rendered (thumbnails prop will be null)
+    const postCard = screen.getByTestId('post-card')
+    expect(postCard).toHaveTextContent('Old Recap')
+    // When thumbnails is null/undefined, the attribute won't be present
+    expect(postCard).not.toHaveAttribute('data-has-thumbnails', 'true')
   })
 })

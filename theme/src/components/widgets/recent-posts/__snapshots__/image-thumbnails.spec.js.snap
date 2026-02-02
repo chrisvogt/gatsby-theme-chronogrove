@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ImageThumbnails matches snapshot with custom maxImages 1`] = `
+<DocumentFragment>
+  <div
+    class="css-nequny"
+  >
+    <div
+      class="css-b3hnub"
+    >
+      <div
+        class="css-1k9k1u6"
+      />
+    </div>
+    <div
+      class="css-tr1clq"
+    >
+      <div
+        class="css-1kao8gg"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ImageThumbnails matches snapshot with default props 1`] = `
+<DocumentFragment>
+  <div
+    class="css-nequny"
+  >
+    <div
+      class="css-b3hnub"
+    >
+      <div
+        class="css-1k9k1u6"
+      />
+    </div>
+    <div
+      class="css-tr1clq"
+    >
+      <div
+        class="css-1kao8gg"
+      />
+    </div>
+    <div
+      class="css-b3hnub"
+    >
+      <div
+        class="css-1rjgnzl"
+      />
+    </div>
+    <div
+      class="css-tr1clq"
+    >
+      <div
+        class="css-13800m5"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
