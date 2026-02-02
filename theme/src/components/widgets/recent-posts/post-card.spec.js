@@ -100,4 +100,90 @@ describe('PostCard', () => {
     const { asFragment } = render(<PostCard {...propsWithRecap} />)
     expect(asFragment()).toMatchSnapshot()
   })
+
+  it('renders thumbnails instead of banner when thumbnails are provided (vertical mode)', () => {
+    const propsWithThumbnails = {
+      ...baseProps,
+      thumbnails: [
+        'https://example.com/thumb1.jpg',
+        'https://example.com/thumb2.jpg',
+        'https://example.com/thumb3.jpg',
+        'https://example.com/thumb4.jpg'
+      ]
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithThumbnails} />)
+
+    // Should render thumbnails container
+    expect(container.querySelector('.card-thumbnails')).toBeInTheDocument()
+
+    // Should not render banner
+    expect(container.querySelector('.card-media')).not.toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders thumbnails inside text area when horizontal mode with thumbnails', () => {
+    const propsWithThumbnailsHorizontal = {
+      ...baseProps,
+      horizontal: true,
+      thumbnails: ['https://example.com/thumb1.jpg', 'https://example.com/thumb2.jpg', 'https://example.com/thumb3.jpg']
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithThumbnailsHorizontal} />)
+
+    // Should render thumbnails container
+    expect(container.querySelector('.card-thumbnails')).toBeInTheDocument()
+
+    // Should not render banner
+    expect(container.querySelector('.card-media')).not.toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders banner when thumbnails array is empty', () => {
+    const propsWithEmptyThumbnails = {
+      ...baseProps,
+      thumbnails: []
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithEmptyThumbnails} />)
+
+    // Should render banner since thumbnails is empty
+    expect(container.querySelector('.card-media')).toBeInTheDocument()
+
+    // Should not render thumbnails
+    expect(container.querySelector('.card-thumbnails')).not.toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders banner when thumbnails is null', () => {
+    const propsWithNullThumbnails = {
+      ...baseProps,
+      thumbnails: null
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithNullThumbnails} />)
+
+    // Should render banner since thumbnails is null
+    expect(container.querySelector('.card-media')).toBeInTheDocument()
+
+    // Should not render thumbnails
+    expect(container.querySelector('.card-thumbnails')).not.toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders neither banner nor thumbnails when both are missing', () => {
+    const propsWithoutMedia = {
+      category: 'personal',
+      date: '1592202624',
+      link: '/blog/article',
+      title: 'My Blog Post'
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithoutMedia} />)
+
+    // Should not render banner or thumbnails
+    expect(container.querySelector('.card-media')).not.toBeInTheDocument()
+    expect(container.querySelector('.card-thumbnails')).not.toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
 })

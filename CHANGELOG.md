@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.70.1
+
+### ✨ Features
+
+- **Thumbnail Previews for Recap and Photography Posts**: Replaced large banner images with small circular thumbnail previews on post cards
+  - New `ImageThumbnails` component displays up to 4 circular image previews
+  - Thumbnails have subtle stagger positioning for visual interest
+  - Recap posts (vertical layout) show thumbnails above text content
+  - Photography posts (horizontal layout) show thumbnails within the text area
+  - Posts without thumbnails gracefully fall back to banner display
+  - Added `thumbnails` frontmatter field support for posts
+
+### 📄 Content Updates
+
+- Added `thumbnails` field to photography and recap posts:
+  - October 2025 Recap
+  - September 2025 Recap
+  - Virgin Southern Caribbean cruise
+  - Virgin Caribbean cruise (Mayan Sol)
+  - Alaska & Victoria cruise
+  - Belize trip
+  - WorldPride NYC 2019
+  - Christmas 2019 in Los Angeles
+
+### 🧪 Testing
+
+- Added comprehensive test coverage for thumbnail feature
+  - 9 new tests for `ImageThumbnails` component
+  - 6 new tests for `PostCard` thumbnail handling
+  - 2 new tests for `RecentPostsWidget` thumbnail passing
+  - 1 new test for `useCategorizedPosts` thumbnails pass-through
+  - 100% code coverage for all recent-posts components
+
+### 📦 Files Changed
+
+- `theme/src/components/widgets/recent-posts/image-thumbnails.js` (new)
+- `theme/src/components/widgets/recent-posts/image-thumbnails.spec.js` (new)
+- `theme/src/components/widgets/recent-posts/post-card.js` (updated)
+- `theme/src/components/widgets/recent-posts/post-card.spec.js` (updated)
+- `theme/src/components/widgets/recent-posts/recent-posts-widget.js` (updated)
+- `theme/src/components/widgets/recent-posts/recent-posts-widget.spec.js` (updated)
+- `theme/src/hooks/use-categorized-posts.js` (added thumbnails to query)
+- `theme/src/hooks/use-categorized-posts.spec.js` (added thumbnails test)
+- `www.chrisvogt.me/src/pages/photography.js` (updated to use thumbnails)
+- Multiple MDX content files (added thumbnails frontmatter)
+
+---
+
 ## 0.70.0
 
 ### ✨ New Features

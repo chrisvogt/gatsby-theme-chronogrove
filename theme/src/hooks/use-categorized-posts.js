@@ -18,6 +18,7 @@ const useCategorizedPosts = () => {
               description
               excerpt
               slug
+              thumbnails
               title
             }
           }

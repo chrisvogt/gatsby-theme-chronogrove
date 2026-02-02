@@ -4,8 +4,9 @@ import { Themed } from '@theme-ui/mdx'
 import { Card } from '@theme-ui/components'
 import { Link } from 'gatsby'
 import Category from '../../category'
+import ImageThumbnails from './image-thumbnails'
 
-export default ({ banner, category, date, excerpt, link, title, horizontal = false }) => {
+export default ({ banner, category, date, excerpt, link, title, horizontal = false, thumbnails = null }) => {
   return (
     <Link
       sx={{
@@ -35,7 +36,15 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
             width: '100%'
           }}
         >
-          {banner && (
+          {/* Show thumbnails above text for vertical cards (Recaps) */}
+          {!horizontal && thumbnails && thumbnails.length > 0 && (
+            <div className='card-thumbnails' sx={{ flexShrink: 0, mb: 2 }}>
+              <ImageThumbnails images={thumbnails} maxImages={4} />
+            </div>
+          )}
+
+          {/* Show banner for posts without thumbnails */}
+          {banner && (!thumbnails || thumbnails.length === 0) && (
             <div className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
               <div
                 sx={{
@@ -53,7 +62,14 @@ export default ({ banner, category, date, excerpt, link, title, horizontal = fal
             </div>
           )}
 
-          <div sx={{ flex: 1, ml: horizontal && banner ? 3 : 0 }}>
+          <div sx={{ flex: 1, ml: horizontal && banner && (!thumbnails || thumbnails.length === 0) ? 3 : 0 }}>
+            {/* Show thumbnails inside text area for horizontal cards (Photography) */}
+            {horizontal && thumbnails && thumbnails.length > 0 && (
+              <div className='card-thumbnails' sx={{ mb: 2 }}>
+                <ImageThumbnails images={thumbnails} maxImages={4} />
+              </div>
+            )}
+
             {category && (
               <div sx={{ mb: 3 }}>
                 <Category type={category} />

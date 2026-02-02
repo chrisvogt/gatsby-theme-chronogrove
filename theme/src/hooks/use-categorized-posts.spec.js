@@ -690,4 +690,72 @@ describe('useCategorizedPosts', () => {
     expect(result.posts[0].section).toBe('recaps')
     expect(result.posts[0].fields.id).toBe('1')
   })
+
+  it('passes through thumbnails field from frontmatter', () => {
+    const mockData = {
+      allMdx: {
+        edges: [
+          {
+            node: {
+              frontmatter: {
+                title: 'October Recap',
+                slug: 'october-recap',
+                date: '2025-10-31',
+                banner: 'banner1.jpg',
+                thumbnails: ['thumb1.jpg', 'thumb2.jpg', 'thumb3.jpg', 'thumb4.jpg']
+              },
+              fields: {
+                category: 'personal',
+                id: '1',
+                path: '/blog/october-recap'
+              }
+            }
+          },
+          {
+            node: {
+              frontmatter: {
+                title: 'Travel Photos',
+                slug: 'travel-photos',
+                date: '2025-10-15',
+                banner: 'banner2.jpg',
+                thumbnails: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg']
+              },
+              fields: {
+                category: 'photography/travel',
+                id: '2',
+                path: '/blog/travel-photos'
+              }
+            }
+          },
+          {
+            node: {
+              frontmatter: {
+                title: 'Old Post Without Thumbnails',
+                slug: 'old-post',
+                date: '2025-10-01',
+                banner: 'banner3.jpg'
+                // No thumbnails field
+              },
+              fields: {
+                category: 'meta',
+                id: '3',
+                path: '/blog/old-post'
+              }
+            }
+          }
+        ]
+      }
+    }
+
+    useStaticQuery.mockReturnValue(mockData)
+
+    const result = useCategorizedPosts()
+
+    // Verify thumbnails are passed through for posts that have them
+    expect(result.recaps[0].frontmatter.thumbnails).toEqual(['thumb1.jpg', 'thumb2.jpg', 'thumb3.jpg', 'thumb4.jpg'])
+    expect(result.photography[0].frontmatter.thumbnails).toEqual(['photo1.jpg', 'photo2.jpg', 'photo3.jpg'])
+
+    // Verify posts without thumbnails work correctly
+    expect(result.other[0].frontmatter.thumbnails).toBeUndefined()
+  })
 })

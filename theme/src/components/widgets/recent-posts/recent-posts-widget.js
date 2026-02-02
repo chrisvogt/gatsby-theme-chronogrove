@@ -90,12 +90,12 @@ export default () => {
             >
               {postsBySection.recaps.map(post => (
                 <PostCard
-                  banner={post.frontmatter.banner}
                   category={post.fields.category}
                   date={post.frontmatter.date}
                   excerpt={post.frontmatter.excerpt}
                   key={post.fields.id}
                   link={post.fields.path}
+                  thumbnails={post.frontmatter.thumbnails}
                   title={post.frontmatter.title}
                 />
               ))}
@@ -148,12 +148,12 @@ export default () => {
                 >
                   {postsBySection.photography.map(post => (
                     <PostCard
-                      banner={null}
                       category={post.fields.category}
                       date={post.frontmatter.date}
                       excerpt={post.frontmatter.excerpt}
                       key={post.fields.id}
                       link={post.fields.path}
+                      thumbnails={post.frontmatter.thumbnails}
                       title={post.frontmatter.title}
                       horizontal={true}
                     />
