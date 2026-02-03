@@ -4,7 +4,7 @@ import { navigate } from 'gatsby'
 // Redirect /now to the latest recap
 const NowPage = () => {
   useEffect(() => {
-    navigate('/personal/october-2025', { replace: true })
+    navigate('/personal/january-2026', { replace: true })
   }, [])
 
   return null

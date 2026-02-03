@@ -17,7 +17,7 @@ describe('NowPage', () => {
   it('redirects to the latest recap on mount', () => {
     render(<NowPage />)
 
-    expect(navigate).toHaveBeenCalledWith('/personal/october-2025', { replace: true })
+    expect(navigate).toHaveBeenCalledWith('/personal/january-2026', { replace: true })
   })
 
   it('uses replace to avoid adding to browser history', () => {
