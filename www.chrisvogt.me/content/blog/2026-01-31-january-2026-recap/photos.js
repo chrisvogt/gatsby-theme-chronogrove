@@ -176,7 +176,7 @@ export const palmSprings = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085927/chrisvogt-me/galleries/now-jan-2026/20260117-IMG_2657.jpg',
-    title: 'A 🏳️‍🌈 rainbow police cruiser in Palm Springs',
+    title: 'A police cruiser with the Progress Pride Flag colors in the Arenas district, Palm Springs',
     width: 4,
     height: 3
   }
