@@ -287,7 +287,7 @@ export const horseRanch = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085921/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2871.jpg',
-    title: 'She waits, she watches',
+    title: 'Hazel (dog) guarding the ranch',
     width: 3,
     height: 4
   },
@@ -305,13 +305,13 @@ export const horseRanch = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085934/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2884.jpg',
-    title: 'Time with horses',
+    title: 'Smoke (horse) watching over human technology',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085918/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2888.jpg',
-    title: 'Posing with horses',
+    title: 'Posing with Smoke',
     width: 3,
     height: 4
   },
@@ -335,7 +335,7 @@ export const horseRanch = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085924/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2913.jpg',
-    title: 'Up close with Fletcher, the horse',
+    title: 'Up close with Smoke, the horse',
     width: 3,
     height: 4
   },
