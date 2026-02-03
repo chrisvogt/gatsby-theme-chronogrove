@@ -2,12 +2,12 @@
 title: 'January 2026 Recap'
 slug: january-2026
 category: personal
-banner: https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-BANNER.jpg
+banner: https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085914/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2623.jpg
 thumbnails:
-  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-1.jpg
-  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-2.jpg
-  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-3.jpg
-  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-4.jpg
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085939/chrisvogt-me/galleries/now-jan-2026/20260102-IMG_2393.jpg
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085941/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2615.jpg
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085921/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2871.jpg
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085924/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2913.jpg
 date: '2026-02-01T20:00:00.000Z'
 description: >
   A personal recap of January 2026 covering New Year celebrations, exploring San Francisco with friends from around the world, a first-time trip to Palm Springs for MLK weekend, and a road trip to Phoenix to visit family and work from the Tempe office.
@@ -34,7 +34,16 @@ keywords:
 ---
 
 import { PhotoGallery } from '../../../components/PhotoGallery'
-import { chinatown, friendsInTheCity, outAndAbout, palmSprings, phoenix } from './photos'
+import {
+  chinatown,
+  friendsInTheCity,
+  outAndAbout,
+  palmSprings,
+  palmSpringsFood,
+  drivingToPhoenix,
+  godaddyTempe,
+  horseRanch
+} from './photos'
 
 Happy New Year! 🎉 January 2026 has been a month of reconnections, new explorations, and quality time with family. Here's a look at what I've been up to.
 
@@ -68,21 +77,43 @@ January started with a series of wonderful reunions in San Francisco. I had the 
 
 On January 15th, we flew to Palm Springs for the MLK weekend — my first time ever visiting or seeing Palm Springs! The desert landscape was stunning, and the food scene didn't disappoint.
 
-{/* TODO: Add details about your Palm Springs experience, what you saw, and the food you enjoyed */}
+{/* TODO: Add details about your Palm Springs experience and what you saw */}
 
 <PhotoGallery key='palm-springs' photos={palmSprings} />
+
+### Palm Springs Food
+
+{/* TODO: Add details about the food you enjoyed in Palm Springs */}
+
+<PhotoGallery key='palm-springs-food' photos={palmSpringsFood} />
 
 ## 🌵 Phoenix Road Trip
 
 Instead of flying home from Palm Springs, I rented a car and drove to Phoenix. There, I worked out of the Tempe, AZ office for a week while visiting my parents, who live in the Phoenix and Scottsdale area.
 
+### Driving to Phoenix
+
+On the drive from Palm Springs to Phoenix, I stopped at the General Patton Memorial Museum and passed through Quartzite.
+
+{/* TODO: Add details about the drive and stops */}
+
+<PhotoGallery key='driving-to-phoenix' photos={drivingToPhoenix} />
+
+### GoDaddy Tempe Office
+
+I spent a week working out of the GoDaddy office on Mill Ave in Tempe.
+
+{/* TODO: Add details about working from the Tempe office */}
+
+<PhotoGallery key='godaddy-tempe' photos={godaddyTempe} />
+
 ### Lindi's Horse Ranch
 
 The highlight of the Phoenix portion of the trip was visiting my friend's horse ranch in North Scottsdale — Lindi's horse ranch.
 
-{/* TODO: Add details about the horse ranch visit and any other Phoenix/Scottsdale activities */}
+{/* TODO: Add details about the horse ranch visit */}
 
-<PhotoGallery key='phoenix' photos={phoenix} />
+<PhotoGallery key='horse-ranch' photos={horseRanch} />
 
 ## 👋 Wrapping Up
 
