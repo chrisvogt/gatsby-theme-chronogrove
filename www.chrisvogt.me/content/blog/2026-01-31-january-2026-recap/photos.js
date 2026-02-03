@@ -119,29 +119,64 @@ export const outAndAbout = [
 ]
 
 export const palmSprings = [
-  // Palm Springs sights
+  // Traveling to Palm Springs
   {
-    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-palmsprings-1.jpg',
-    title: 'Palm Springs - Photo 1',
-    width: 4,
-    height: 3
-  },
-  {
-    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-palmsprings-2.jpg',
-    title: 'Palm Springs - Photo 2',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085912/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2587.jpg',
+    title: 'Traveling to Palm Springs - Photo 1',
     width: 3,
     height: 4
   },
-  // Food photos
   {
-    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-palmsprings-food-1.jpg',
-    title: 'Palm Springs food - Photo 1',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085912/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2593.jpg',
+    title: 'Traveling to Palm Springs - Photo 2',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085911/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2595.jpg',
+    title: 'Traveling to Palm Springs - Photo 3',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085936/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2599.jpg',
+    title: 'Traveling to Palm Springs - Photo 4',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085941/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2615.jpg',
+    title: 'Traveling to Palm Springs - Photo 5',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085914/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2623.jpg',
+    title: 'Traveling to Palm Springs - Photo 6',
     width: 4,
     height: 3
   },
   {
-    src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1/chrisvogt-me/galleries/now-jan-2026/PLACEHOLDER-palmsprings-food-2.jpg',
-    title: 'Palm Springs food - Photo 2',
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085913/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2632.jpg',
+    title: 'Traveling to Palm Springs - Photo 7',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085922/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2641.jpg',
+    title: 'Traveling to Palm Springs - Photo 8',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085928/chrisvogt-me/galleries/now-jan-2026/20260117-IMG_2656.jpg',
+    title: 'Traveling to Palm Springs - Photo 9',
+    width: 3,
+    height: 4
+  },
+  {
+    src: 'https://res.cloudinary.com/chrisvogt/image/upload/v1770085927/chrisvogt-me/galleries/now-jan-2026/20260117-IMG_2657.jpg',
+    title: 'Traveling to Palm Springs - Photo 10',
     width: 4,
     height: 3
   }
