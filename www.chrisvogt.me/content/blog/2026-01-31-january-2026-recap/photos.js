@@ -4,7 +4,7 @@
 export const chinatown = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085939/chrisvogt-me/galleries/now-jan-2026/20260102-IMG_2393.jpg',
-    title: "Ross Alley in San Francisco's Chinatown district",
+    title: 'Ross Alley, Chinatown',
     width: 3,
     height: 4
   },
@@ -43,13 +43,13 @@ export const friendsInTheCity = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085930/chrisvogt-me/galleries/now-jan-2026/20260104-IMG_2456.jpg',
-    title: 'Songhan makes a grand entrance, visiting from NYC',
+    title: 'Songhan visiting from NYC',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085917/chrisvogt-me/galleries/now-jan-2026/20260104-IMG_2458.jpg',
-    title: 'Songhan says hello to Allen',
+    title: 'Songhan says hello to Alan',
     width: 4,
     height: 3
   },
@@ -67,7 +67,7 @@ export const friendsInTheCity = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085943/chrisvogt-me/galleries/now-jan-2026/20260110-IMG_2545.jpg',
-    title: 'San Francisco backyard patio party in the Castro district',
+    title: 'Backyard party in the Castro',
     width: 3,
     height: 4
   }
@@ -106,7 +106,7 @@ export const outAndAbout = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085930/chrisvogt-me/galleries/now-jan-2026/20260110-IMG_2518.jpg',
-    title: 'Trinity Presbyterian Church, a Romanesque-style building in the Mission district',
+    title: 'Trinity Presbyterian Church in the Mission',
     width: 3,
     height: 4
   },
@@ -158,7 +158,7 @@ export const palmSprings = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085913/chrisvogt-me/galleries/now-jan-2026/20260115-IMG_2632.jpg',
-    title: 'Palm Springs VillageFest, a Thursday night street festival downtown',
+    title: 'VillageFest, Palm Springs',
     width: 3,
     height: 4
   },
