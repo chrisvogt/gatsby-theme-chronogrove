@@ -186,4 +186,63 @@ describe('PostCard', () => {
 
     expect(asFragment()).toMatchSnapshot()
   })
+
+  it('renders YouTube embed when youtubeSrc is provided', () => {
+    const propsWithYouTube = {
+      category: 'music',
+      date: '2025-06-19',
+      link: '/music/here-and-now',
+      title: 'Here and Now',
+      youtubeSrc: 'https://www.youtube.com/embed/OMiKQ2XHXYU'
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithYouTube} />)
+
+    // Should render YouTube embed
+    expect(container.querySelector('.card-youtube')).toBeInTheDocument()
+    expect(container.querySelector('iframe')).toBeInTheDocument()
+
+    // Should not render excerpt
+    expect(container.querySelector('.description')).not.toBeInTheDocument()
+
+    // Title should be wrapped in a link
+    expect(container.querySelector('a h3')).toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders YouTube embed instead of excerpt when both are provided', () => {
+    const propsWithBoth = {
+      category: 'music',
+      date: '2025-06-19',
+      link: '/music/here-and-now',
+      title: 'Here and Now',
+      excerpt: 'This excerpt should not be shown',
+      youtubeSrc: 'https://www.youtube.com/embed/OMiKQ2XHXYU'
+    }
+    const { container } = render(<PostCard {...propsWithBoth} />)
+
+    // Should render YouTube embed
+    expect(container.querySelector('.card-youtube')).toBeInTheDocument()
+
+    // Should not render excerpt
+    expect(container.querySelector('.description')).not.toBeInTheDocument()
+  })
+
+  it('does not wrap card in link when YouTube is present', () => {
+    const propsWithYouTube = {
+      category: 'music',
+      date: '2025-06-19',
+      link: '/music/here-and-now',
+      title: 'Here and Now',
+      youtubeSrc: 'https://www.youtube.com/embed/OMiKQ2XHXYU'
+    }
+    const { container } = render(<PostCard {...propsWithYouTube} />)
+
+    // The outer element should be a div, not an anchor
+    const outerElement = container.firstChild
+    expect(outerElement.tagName).toBe('DIV')
+
+    // But the title should still be linked
+    expect(container.querySelector('a')).toBeInTheDocument()
+  })
 })

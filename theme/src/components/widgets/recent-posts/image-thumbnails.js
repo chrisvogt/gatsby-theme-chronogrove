@@ -26,8 +26,8 @@ const ImageThumbnails = ({ images = [], maxImages = 4 }) => {
         <div
           key={index}
           sx={{
-            width: '48px',
-            height: '48px',
+            width: '72px',
+            height: '72px',
             borderRadius: '50%',
             overflow: 'hidden',
             flexShrink: 0,
@@ -35,7 +35,7 @@ const ImageThumbnails = ({ images = [], maxImages = 4 }) => {
             border: '2px solid',
             borderColor: 'background',
             // Stagger the thumbnails slightly for visual interest
-            transform: `translateY(${index % 2 === 0 ? 0 : 4}px)`
+            transform: `translateY(${index % 2 === 0 ? 0 : 6}px)`
           }}
         >
           <div

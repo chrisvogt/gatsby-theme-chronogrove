@@ -1,5 +1,59 @@
 # Changelog
 
+## 0.71.0
+
+### ✨ Features
+
+- **Recent Posts Widget Redesign**: Improved post card layout and content display
+  - **Condensed Metadata**: Category and date now display on a single line below the title with a bullet separator (`Personal • January 31, 2026`)
+  - **YouTube Embed Support**: Music posts with `youtubeSrc` frontmatter now display an embedded YouTube player instead of the description
+  - **Photography Cards Simplified**: Photography post cards no longer display the excerpt, showing only title, category/date, and photo thumbnails
+  - **Aligned YouTube Embeds**: Music cards with different title lengths now have aligned YouTube embeds using flexbox `margin-top: auto`
+
+- **New ThumbnailStrip Component**: Created a reusable vertical thumbnail strip component (available but not currently used)
+  - Compact overlapping vertical layout with zigzag offset
+  - Configurable size and max images
+  - Hover effects for individual thumbnails
+
+### 🐛 Bug Fixes
+
+- **Fixed Scroll-to-Top Navigation**: Pages now properly scroll to top when navigating between routes
+  - **Root Cause**: `shouldUpdateScroll` was incorrectly accessing `prevLocation` from `routerProps` instead of using `prevRouterProps` parameter
+  - **Solution**: Updated to use correct Gatsby API: `routerProps?.location?.pathname` and `prevRouterProps?.location?.pathname`
+  - Navigation from home page to blog posts (and other routes) now correctly scrolls to top
+
+### 🎨 UI Improvements
+
+- **Responsive Grid Breakpoints**: Improved 2-column grid layouts for better tablet experience
+  - Music, Photography, Posts, and Recaps sections now use single-column layout until 1024px
+  - Previously switched to 2 columns at 768px which was too cramped
+  - Better reading experience on tablet devices
+
+### 📦 Dependencies
+
+- Added `youtubeSrc` field to `useCategorizedPosts` GraphQL query for music posts
+
+### 🧪 Testing
+
+- Updated post-card tests with new YouTube embed scenarios (3 new tests)
+- Updated gatsby-browser tests for corrected scroll behavior
+- Updated thumbnail-strip component tests
+- All 41 recent-posts tests passing
+- All snapshot tests updated
+
+### 📦 Files Changed
+
+- `theme/src/components/widgets/recent-posts/post-card.js` (refactored with YouTube support)
+- `theme/src/components/widgets/recent-posts/post-card.spec.js` (new YouTube tests)
+- `theme/src/components/widgets/recent-posts/recent-posts-widget.js` (updated props, breakpoints)
+- `theme/src/components/widgets/recent-posts/thumbnail-strip.js` (new component)
+- `theme/src/components/widgets/recent-posts/thumbnail-strip.spec.js` (new tests)
+- `theme/src/hooks/use-categorized-posts.js` (added youtubeSrc to query)
+- `theme/gatsby-browser.js` (fixed shouldUpdateScroll API usage)
+- `theme/gatsby-browser.spec.js` (updated tests)
+
+---
+
 ## 0.70.3
 
 ### 🐛 Bug Fixes

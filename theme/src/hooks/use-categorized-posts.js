@@ -20,6 +20,7 @@ const useCategorizedPosts = () => {
               slug
               thumbnails
               title
+              youtubeSrc
             }
           }
         }

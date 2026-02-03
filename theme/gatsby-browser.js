@@ -11,18 +11,15 @@ import 'prismjs/themes/prism-solarizedlight.css'
 export { default as wrapRootElement } from './wrapRootElement'
 
 // Prevent scroll restoration when only query parameters change
-export const shouldUpdateScroll = ({ routerProps }) => {
-  // If routerProps is undefined, we're likely in a development environment
-  // or the router hasn't initialized yet
-  if (!routerProps) {
-    return [0, 0]
-  }
+export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
+  const currentPath = routerProps?.location?.pathname
+  const prevPath = prevRouterProps?.location?.pathname
 
-  const { location, prevLocation } = routerProps
-  // If only the query parameters changed, don't update scroll
-  if (prevLocation && location.pathname === prevLocation.pathname) {
+  // If only the query parameters changed (same pathname), don't update scroll
+  if (prevPath && currentPath === prevPath) {
     return false
   }
+
   // For actual page changes, scroll to top
   return [0, 0]
 }
