@@ -281,19 +281,19 @@ export const horseRanch = [
   // Lindi's horse ranch in North Scottsdale
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085931/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2845.jpg',
-    title: 'Nick and the dogs at the horse ranch',
+    title: 'Nick and the pups — Hazel & Bear — at the ranch',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085921/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2871.jpg',
-    title: 'Hazel (dog) guarding the ranch',
+    title: 'Hazel guarding the ranch',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085920/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2877.jpg',
-    title: 'Nick keeping watch over the puppy',
+    title: 'Nick keeping watch over Bear',
     width: 3,
     height: 4
   },
@@ -317,13 +317,13 @@ export const horseRanch = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085923/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2898.jpg',
-    title: 'Nick guarding the puppy; or, the puppy guarding Nick',
+    title: 'Nick guarding Bear; or, Bear guarding Nick',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085916/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2900.jpg',
-    title: 'Lindi and the puppy',
+    title: 'Lindi and Bear',
     width: 3,
     height: 4
   },
@@ -335,19 +335,19 @@ export const horseRanch = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085924/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2913.jpg',
-    title: 'Up close with Smoke, the horse',
+    title: 'Up close with Smoke',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085935/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2926.jpg',
-    title: 'Matt greeting the dogs',
+    title: 'Matt greeting Hazel and Bear',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1770085933/chrisvogt-me/galleries/now-jan-2026/20260124-IMG_2931.jpg',
-    title: 'Matt being pulled around by the puppy',
+    title: 'Matt being pulled around by Bear',
     width: 3,
     height: 4
   },
