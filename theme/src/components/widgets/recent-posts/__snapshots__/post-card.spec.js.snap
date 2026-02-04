@@ -207,9 +207,10 @@ exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
           class="card-youtube css-13c5kb5"
         >
           <iframe
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen=""
             class="css-12umafp"
+            referrerpolicy="strict-origin-when-cross-origin"
             src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
             title="Here and Now"
           />
@@ -268,9 +269,10 @@ exports[`PostCard renders YouTube embed with horizontal layout when both props a
           class="card-youtube css-13c5kb5"
         >
           <iframe
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen=""
             class="css-12umafp"
+            referrerpolicy="strict-origin-when-cross-origin"
             src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
             title="Here and Now"
           />

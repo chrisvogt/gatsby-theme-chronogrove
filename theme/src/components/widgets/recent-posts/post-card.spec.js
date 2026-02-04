@@ -285,4 +285,41 @@ describe('PostCard', () => {
 
     expect(asFragment()).toMatchSnapshot()
   })
+
+  it('correctly handles YouTube URLs with existing query parameters', () => {
+    const propsWithYouTubeParams = {
+      category: 'music',
+      date: '2025-06-19',
+      link: '/music/test-video',
+      title: 'Test Video',
+      youtubeSrc: 'https://www.youtube.com/embed/1gRaucgFLxs?si=OKkbUwi0yWZtlEUL'
+    }
+    const { container } = render(<PostCard {...propsWithYouTubeParams} />)
+
+    // Should render YouTube embed
+    expect(container.querySelector('.card-youtube')).toBeInTheDocument()
+
+    // The iframe src should use & instead of ? when URL already has query params
+    const iframe = container.querySelector('iframe')
+    expect(iframe).toBeInTheDocument()
+    expect(iframe.getAttribute('src')).toBe(
+      'https://www.youtube.com/embed/1gRaucgFLxs?si=OKkbUwi0yWZtlEUL&rel=0&modestbranding=1'
+    )
+  })
+
+  it('correctly handles YouTube URLs without existing query parameters', () => {
+    const propsWithoutParams = {
+      category: 'music',
+      date: '2025-06-19',
+      link: '/music/test-video',
+      title: 'Test Video',
+      youtubeSrc: 'https://www.youtube.com/embed/OMiKQ2XHXYU'
+    }
+    const { container } = render(<PostCard {...propsWithoutParams} />)
+
+    // The iframe src should use ? when URL has no existing query params
+    const iframe = container.querySelector('iframe')
+    expect(iframe).toBeInTheDocument()
+    expect(iframe.getAttribute('src')).toBe('https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1')
+  })
 })

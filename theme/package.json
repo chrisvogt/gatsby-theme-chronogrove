@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.71.0",
+  "version": "0.71.1",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
