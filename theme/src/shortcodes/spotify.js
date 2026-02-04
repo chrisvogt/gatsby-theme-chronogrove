@@ -26,7 +26,9 @@ const Spotify = ({ spotifyURL }) => {
         }
 
         const data = await response.json()
-        setEmbedHtml(data.html)
+        // Remove deprecated allowfullscreen attribute that conflicts with allow attribute
+        const sanitizedHtml = data.html?.replace(/\s*allowfullscreen/gi, '')
+        setEmbedHtml(sanitizedHtml)
       } catch (error) {
         console.error('Failed to fetch Spotify embed:', error)
         setError('Failed to load Spotify embed')

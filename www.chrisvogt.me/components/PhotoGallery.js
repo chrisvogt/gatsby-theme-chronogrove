@@ -42,6 +42,7 @@ const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
         }
       }}
       plugins={[lgThumbnail, lgZoom]}
+      licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}
       download={false}
       dynamic
       dynamicEl={photos.map(photo => ({
