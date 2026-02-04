@@ -12,6 +12,11 @@ describe('ImageThumbnails', () => {
     'https://example.com/image5.jpg'
   ]
 
+  const cloudinaryImages = [
+    'https://res.cloudinary.com/chrisvogt/image/upload/v1234567890/folder/image1.jpg',
+    'https://res.cloudinary.com/chrisvogt/image/upload/v1234567890/folder/image2.jpg'
+  ]
+
   it('renders thumbnails when images are provided', () => {
     const { container } = render(<ImageThumbnails images={sampleImages} />)
 
@@ -72,6 +77,21 @@ describe('ImageThumbnails', () => {
 
   it('matches snapshot with custom maxImages', () => {
     const { asFragment } = render(<ImageThumbnails images={sampleImages} maxImages={2} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders Cloudinary images with correct count', () => {
+    const { container } = render(<ImageThumbnails images={cloudinaryImages} maxImages={2} />)
+
+    // Should render 2 thumbnails
+    const wrapper = container.firstChild
+    expect(wrapper).toBeTruthy()
+    expect(wrapper.children).toHaveLength(2)
+  })
+
+  it('matches snapshot with Cloudinary images (includes transformed URLs)', () => {
+    // Snapshot will capture the transformed Cloudinary URLs with resize parameters
+    const { asFragment } = render(<ImageThumbnails images={cloudinaryImages} maxImages={2} />)
     expect(asFragment()).toMatchSnapshot()
   })
 })
