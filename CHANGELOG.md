@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.71.2
+
+### 🚀 Performance Improvements
+
+- **Conditional Style Guide Plugin**: `gatsby-theme-style-guide` is now only included in development builds
+  - **Root Cause**: The style guide plugin was loading Google Fonts (Roboto) in production, triggering Lighthouse warnings about `font-display` not being set to `swap`
+  - **Solution**: Added conditional plugin inclusion based on `NODE_ENV` - plugin only loads when `NODE_ENV !== 'production'`
+  - **Impact**: Production builds no longer load unnecessary Google Fonts, improving Lighthouse performance scores and reducing network requests
+  - **Development**: Style guide remains available at `/___style-guide` during local development
+
+### 📦 Files Changed
+
+- `theme/gatsby-config.js` (added `isDevelopment` check, conditional plugin spread)
+
+---
+
 ## 0.71.1
 
 ### 🐛 Bug Fixes

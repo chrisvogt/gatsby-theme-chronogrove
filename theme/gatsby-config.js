@@ -39,6 +39,9 @@ const path = require('path')
 // This handles merging default theme options with user-provided options
 const { mergeConfig } = require('./src/data/theme-config')
 
+// Only include development-only plugins when not in production
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
 /**
  * Main theme configuration function
  *
@@ -220,15 +223,18 @@ module.exports = (themeOptions = {}) => {
       'gatsby-plugin-emotion',
 
       /**
-       * Style Guide Plugin
+       * Style Guide Plugin (Development Only)
        *
        * Provides a development style guide page for Theme UI.
        * This is useful during development to see all available
        * theme components and design tokens.
        *
        * Accessible at /___style-guide during development.
+       *
+       * Note: Only included in development to avoid loading Google Fonts
+       * (Roboto) in production, which improves Lighthouse performance scores.
        */
-      'gatsby-theme-style-guide',
+      ...(isDevelopment ? ['gatsby-theme-style-guide'] : []),
 
       /**
        * JSON Transformer
