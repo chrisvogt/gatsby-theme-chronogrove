@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`ImageThumbnails does not transform malicious URLs that contain cloudinary hostname in path/query 1`] = `
+<DocumentFragment>
+  <div
+    class="css-nequny"
+  >
+    <div
+      class="css-2g58l9"
+    >
+      <div
+        class="css-11wscb1"
+      />
+    </div>
+    <div
+      class="css-wmbcu5"
+    >
+      <div
+        class="css-oegz0a"
+      />
+    </div>
+    <div
+      class="css-2g58l9"
+    >
+      <div
+        class="css-1vi207q"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`ImageThumbnails matches snapshot with Cloudinary images (includes transformed URLs) 1`] = `
 <DocumentFragment>
   <div
@@ -77,6 +107,29 @@ exports[`ImageThumbnails matches snapshot with default props 1`] = `
     >
       <div
         class="css-13800m5"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ImageThumbnails replaces existing Cloudinary transformations with optimized thumbnail transforms 1`] = `
+<DocumentFragment>
+  <div
+    class="css-nequny"
+  >
+    <div
+      class="css-2g58l9"
+    >
+      <div
+        class="css-z4f5u"
+      />
+    </div>
+    <div
+      class="css-wmbcu5"
+    >
+      <div
+        class="css-1b1epbr"
       />
     </div>
   </div>

@@ -5,17 +5,38 @@ const THUMBNAIL_SIZE = 64
 const THUMBNAIL_SIZE_2X = THUMBNAIL_SIZE * 2 // 128px for retina displays
 
 /**
+ * Check if URL is a valid Cloudinary URL by parsing the hostname
+ * This prevents substring attacks like "https://evil.com/?url=res.cloudinary.com"
+ */
+const isCloudinaryUrl = src => {
+  try {
+    const url = new URL(src)
+    return url.hostname === 'res.cloudinary.com'
+  } catch {
+    return false
+  }
+}
+
+/**
  * Transform Cloudinary URL to include resize parameters
  * Optimizes images for thumbnail display size with retina support
+ *
+ * Handles URLs with existing transformations by replacing them:
+ * - /upload/f_auto/v123/... → /upload/w_128,h_128,.../v123/...
+ * - /upload/c_scale,h_900,f_auto/v123/... → /upload/w_128,h_128,.../v123/...
+ * - /upload/v123/... → /upload/w_128,h_128,.../v123/...
  */
 const getOptimizedImageUrl = src => {
   if (!src) return src
 
-  // Check if it's a Cloudinary URL
-  if (src.includes('res.cloudinary.com') && src.includes('/upload/')) {
-    // Insert transformation parameters after /upload/
-    // w_128,h_128 = size for 2x retina, c_fill = crop to fill, f_auto = auto format, q_auto = auto quality
-    return src.replace('/upload/', `/upload/w_${THUMBNAIL_SIZE_2X},h_${THUMBNAIL_SIZE_2X},c_fill,f_auto,q_auto/`)
+  // Check if it's a valid Cloudinary URL (hostname must be res.cloudinary.com)
+  if (isCloudinaryUrl(src) && src.includes('/upload/')) {
+    // Transformation string for small thumbnails with retina support
+    const transforms = `w_${THUMBNAIL_SIZE_2X},h_${THUMBNAIL_SIZE_2X},c_fill,f_auto,q_auto`
+
+    // Replace /upload/{optional-transforms}/v{version} with /upload/{our-transforms}/v{version}
+    // This handles URLs with or without existing transformations
+    return src.replace(/\/upload\/(?:[^/]+\/)?v(\d+)/, `/upload/${transforms}/v$1`)
   }
 
   // Return original URL for non-Cloudinary images
