@@ -159,6 +159,70 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
 </DocumentFragment>
 `;
 
+exports[`PostCard renders SoundCloud embed when soundcloudId is provided 1`] = `
+<DocumentFragment>
+  <div
+    class="css-v9vd1q"
+  >
+    <div
+      class="css-11wrqrg"
+    >
+      <div
+        class="card-content css-7ttn8j"
+      >
+        <div
+          class="css-2wrb05"
+        >
+          <a
+            class="css-r3e7ui"
+            href="/music/a-house-is-not-a-home"
+          >
+            <h3
+              class="css-1yjqole"
+            >
+              A House Is Not A Home
+            </h3>
+          </a>
+          <div
+            class="css-1wohmj5"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Music
+            </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              2024-05-12
+            </time>
+          </div>
+        </div>
+        <div
+          class="card-soundcloud css-aheozo"
+        >
+          <iframe
+            allow="autoplay"
+            class="css-1d70iz2"
+            frameborder="no"
+            height="166"
+            scrolling="no"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1820395353&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
+            title="A House Is Not A Home"
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
 <DocumentFragment>
   <div
