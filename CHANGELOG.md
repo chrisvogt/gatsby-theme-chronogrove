@@ -4,23 +4,24 @@
 
 ### 🐛 Bug Fixes
 
-- **YouTube Embed URL Handling**: Fixed YouTube embeds showing "Error 153" on deployed environments
-  - **Root Cause**: PostCard component appended `?rel=0&modestbranding=1` to YouTube URLs without checking for existing query parameters
-  - **Impact**: URLs with existing params (e.g., `?si=...`) became malformed with two `?` characters, causing YouTube player configuration errors
-  - **Solution**: Added `buildYouTubeEmbedUrl()` helper that uses `&` when URL already has query parameters, `?` otherwise
-  - **Affected Component**: `theme/src/components/widgets/recent-posts/post-card.js`
+- **YouTube Embed Error 153 on Deployed Environments**: Fixed YouTube embeds showing "Error 153 - Video player configuration error" in production while working locally
+  - **Root Cause**: PostCard iframe was missing the `referrerPolicy` attribute required by YouTube's embed API
+  - **Solution**: Added `referrerPolicy='strict-origin-when-cross-origin'` to match the working YouTube shortcode used on blog post pages
+  - **Also Fixed**: Added `web-share` to iframe `allow` attribute for feature parity with YouTube shortcode
+  - **Bonus Fix**: Added `buildYouTubeEmbedUrl()` helper to properly handle YouTube URLs that already have query parameters (prevents malformed URLs with double `?`)
 
 ### 🧪 Testing
 
 - Added 2 new tests for YouTube URL parameter handling
   - Test for URLs with existing query parameters (uses `&` separator)
   - Test for URLs without query parameters (uses `?` separator)
+- Updated snapshots to include new iframe attributes
 - All 21 PostCard tests passing
 
 ### 📦 Files Changed
 
-- `theme/src/components/widgets/recent-posts/post-card.js` (added `buildYouTubeEmbedUrl` helper)
-- `theme/src/components/widgets/recent-posts/post-card.spec.js` (added URL parameter tests)
+- `theme/src/components/widgets/recent-posts/post-card.js` (added referrerPolicy, web-share, and URL helper)
+- `theme/src/components/widgets/recent-posts/post-card.spec.js` (added URL parameter tests, updated snapshots)
 
 ---
 

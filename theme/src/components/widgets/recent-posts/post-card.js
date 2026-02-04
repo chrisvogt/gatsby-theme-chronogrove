@@ -210,8 +210,9 @@ export default ({
             <iframe
               src={buildYouTubeEmbedUrl(youtubeSrc)}
               title={title}
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
               allowFullScreen
+              referrerPolicy='strict-origin-when-cross-origin'
               sx={{
                 position: 'absolute',
                 top: 0,
