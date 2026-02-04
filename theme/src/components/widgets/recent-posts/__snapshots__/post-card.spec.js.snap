@@ -220,6 +220,67 @@ exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
 </DocumentFragment>
 `;
 
+exports[`PostCard renders YouTube embed with horizontal layout when both props are provided 1`] = `
+<DocumentFragment>
+  <div
+    class="css-v9vd1q"
+  >
+    <div
+      class="css-11wrqrg"
+    >
+      <div
+        class="card-content css-7ttn8j"
+      >
+        <div
+          class="css-2wrb05"
+        >
+          <a
+            class="css-r3e7ui"
+            href="/music/here-and-now"
+          >
+            <h3
+              class="css-1b5yr0k"
+            >
+              Here and Now
+            </h3>
+          </a>
+          <div
+            class="css-1wohmj5"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Music
+            </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              2025-06-19
+            </time>
+          </div>
+        </div>
+        <div
+          class="card-youtube css-13c5kb5"
+        >
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen=""
+            class="css-12umafp"
+            src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+            title="Here and Now"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
 <DocumentFragment>
   <a
@@ -558,21 +619,21 @@ exports[`PostCard renders thumbnails inside text area when horizontal mode with 
               class="css-nequny"
             >
               <div
-                class="css-763t7a"
+                class="css-2g58l9"
               >
                 <div
                   class="css-dw25a5"
                 />
               </div>
               <div
-                class="css-127ay4a"
+                class="css-wmbcu5"
               >
                 <div
                   class="css-oc1to0"
                 />
               </div>
               <div
-                class="css-763t7a"
+                class="css-2g58l9"
               >
                 <div
                   class="css-18hamqk"
@@ -630,28 +691,28 @@ exports[`PostCard renders thumbnails instead of banner when thumbnails are provi
             class="css-nequny"
           >
             <div
-              class="css-763t7a"
+              class="css-2g58l9"
             >
               <div
                 class="css-dw25a5"
               />
             </div>
             <div
-              class="css-127ay4a"
+              class="css-wmbcu5"
             >
               <div
                 class="css-oc1to0"
               />
             </div>
             <div
-              class="css-763t7a"
+              class="css-2g58l9"
             >
               <div
                 class="css-18hamqk"
               />
             </div>
             <div
-              class="css-127ay4a"
+              class="css-wmbcu5"
             >
               <div
                 class="css-k85nx7"

@@ -245,4 +245,44 @@ describe('PostCard', () => {
     // But the title should still be linked
     expect(container.querySelector('a')).toBeInTheDocument()
   })
+
+  it('renders as standard card when youtubeSrc is an invalid URL (no embed path)', () => {
+    const propsWithInvalidYouTube = {
+      ...baseProps,
+      excerpt: 'This excerpt should be shown',
+      youtubeSrc: 'https://www.youtube.com/watch?v=OMiKQ2XHXYU' // watch URL, not embed URL
+    }
+    const { container } = render(<PostCard {...propsWithInvalidYouTube} />)
+
+    // Should NOT render YouTube embed since URL doesn't match /embed/ pattern
+    expect(container.querySelector('.card-youtube')).not.toBeInTheDocument()
+
+    // Should render excerpt since YouTube is not valid
+    expect(container.querySelector('.description')).toBeInTheDocument()
+
+    // Card should be wrapped in a link (standard behavior)
+    const outerElement = container.firstChild
+    expect(outerElement.tagName).toBe('A')
+  })
+
+  it('renders YouTube embed with horizontal layout when both props are provided', () => {
+    const propsWithYouTubeHorizontal = {
+      category: 'music',
+      date: '2025-06-19',
+      link: '/music/here-and-now',
+      title: 'Here and Now',
+      horizontal: true,
+      youtubeSrc: 'https://www.youtube.com/embed/OMiKQ2XHXYU'
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithYouTubeHorizontal} />)
+
+    // Should render YouTube embed
+    expect(container.querySelector('.card-youtube')).toBeInTheDocument()
+    expect(container.querySelector('iframe')).toBeInTheDocument()
+
+    // Title should be wrapped in a link
+    expect(container.querySelector('a h3')).toBeInTheDocument()
+
+    expect(asFragment()).toMatchSnapshot()
+  })
 })

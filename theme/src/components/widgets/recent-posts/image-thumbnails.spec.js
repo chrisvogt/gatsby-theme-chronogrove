@@ -94,4 +94,14 @@ describe('ImageThumbnails', () => {
     const { asFragment } = render(<ImageThumbnails images={cloudinaryImages} maxImages={2} />)
     expect(asFragment()).toMatchSnapshot()
   })
+
+  it('handles null/undefined values in images array gracefully', () => {
+    const mixedImages = ['https://example.com/image1.jpg', null, 'https://example.com/image2.jpg', undefined]
+    const { container } = render(<ImageThumbnails images={mixedImages} maxImages={4} />)
+
+    // Should still render 4 thumbnails (null/undefined get passed through to backgroundImage)
+    const wrapper = container.firstChild
+    expect(wrapper).toBeTruthy()
+    expect(wrapper.children).toHaveLength(4)
+  })
 })
