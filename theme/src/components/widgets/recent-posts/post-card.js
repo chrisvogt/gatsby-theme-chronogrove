@@ -35,10 +35,13 @@ export default ({
   title,
   horizontal = false,
   thumbnails = null,
-  youtubeSrc = null
+  youtubeSrc = null,
+  soundcloudId = null
 }) => {
   const videoId = getYouTubeVideoId(youtubeSrc)
   const hasYouTube = !!videoId
+  const hasSoundCloud = !!soundcloudId
+  const hasMediaEmbed = hasYouTube || hasSoundCloud
 
   // Card content without wrapper - used when YouTube embed is present
   const CardContent = () => (
@@ -50,7 +53,7 @@ export default ({
         flexDirection: 'column',
         transition: 'transform 0.2s ease-in-out',
         '&:hover': {
-          transform: hasYouTube ? 'none' : 'translateY(-4px)'
+          transform: hasMediaEmbed ? 'none' : 'translateY(-4px)'
         }
       }}
     >
@@ -71,8 +74,8 @@ export default ({
           </div>
         )}
 
-        {/* Show banner for posts without thumbnails and no YouTube */}
-        {banner && (!thumbnails || thumbnails.length === 0) && !hasYouTube && (
+        {/* Show banner for posts without thumbnails and no media embed */}
+        {banner && (!thumbnails || thumbnails.length === 0) && !hasMediaEmbed && (
           <div className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
             <div
               sx={{
@@ -99,8 +102,8 @@ export default ({
             </div>
           )}
 
-          {/* Title - linked when YouTube is present */}
-          {hasYouTube ? (
+          {/* Title - linked when media embed is present */}
+          {hasMediaEmbed ? (
             <Link
               to={link}
               sx={{
@@ -146,7 +149,7 @@ export default ({
                 alignItems: 'center',
                 flexWrap: 'wrap',
                 gap: 2,
-                mb: excerpt || hasYouTube ? 3 : 0
+                mb: excerpt || hasMediaEmbed ? 3 : 0
               }}
             >
               {category && <Category type={category} />}
@@ -176,8 +179,8 @@ export default ({
             </div>
           )}
 
-          {/* Excerpt - only shown when no YouTube */}
-          {excerpt && !hasYouTube && (
+          {/* Excerpt - only shown when no media embed */}
+          {excerpt && !hasMediaEmbed && (
             <p
               className='description'
               sx={{
@@ -224,12 +227,40 @@ export default ({
             />
           </div>
         )}
+
+        {/* SoundCloud embed - pushed to bottom with margin-top: auto */}
+        {hasSoundCloud && (
+          <div
+            className='card-soundcloud'
+            sx={{
+              width: '100%',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+              marginTop: 'auto' // Push to bottom of card
+            }}
+          >
+            <iframe
+              width='100%'
+              height='166'
+              scrolling='no'
+              frameBorder='no'
+              allow='autoplay'
+              src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${soundcloudId}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`}
+              title={title}
+              sx={{
+                display: 'block',
+                border: 'none'
+              }}
+            />
+          </div>
+        )}
       </div>
     </Card>
   )
 
-  // If YouTube is present, don't wrap the whole card in a link
-  if (hasYouTube) {
+  // If media embed is present, don't wrap the whole card in a link
+  if (hasMediaEmbed) {
     return (
       <div
         sx={{
