@@ -20,13 +20,21 @@ export const getCategoryDisplayName = type => {
   return categoryMappings[type] || toTitleCase(type)
 }
 
+// Check if a post is a recap based on title
+export const isRecapPost = (postTitle = '') => {
+  return postTitle?.toLowerCase().includes('recap') || false
+}
+
 // Determine the main category group for a post
 export const getCategoryGroup = (category, postTitle = '') => {
   if (!category && !postTitle) return 'other'
 
   const cat = category || 'other'
 
-  if (cat === 'personal' || postTitle?.toLowerCase().includes('recap')) {
+  // Check for recaps first (separate from personal)
+  if (isRecapPost(postTitle)) {
+    return 'recaps'
+  } else if (cat === 'personal') {
     return 'personal'
   } else if (cat.startsWith('music')) {
     return 'music'

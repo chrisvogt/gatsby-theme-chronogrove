@@ -1,4 +1,4 @@
-import { categoryMappings, toTitleCase, getCategoryDisplayName, getCategoryGroup } from './categoryHelpers'
+import { categoryMappings, toTitleCase, getCategoryDisplayName, getCategoryGroup, isRecapPost } from './categoryHelpers'
 
 describe('categoryHelpers', () => {
   describe('categoryMappings', () => {
@@ -51,14 +51,34 @@ describe('categoryHelpers', () => {
     })
   })
 
+  describe('isRecapPost', () => {
+    it('returns true for posts with "recap" in title', () => {
+      expect(isRecapPost('My 2023 Recap')).toBe(true)
+      expect(isRecapPost('January Recap')).toBe(true)
+      expect(isRecapPost('year-end RECAP')).toBe(true)
+    })
+
+    it('returns false for posts without "recap" in title', () => {
+      expect(isRecapPost('My Blog Post')).toBe(false)
+      expect(isRecapPost('Technology Tips')).toBe(false)
+    })
+
+    it('returns false for null or undefined', () => {
+      expect(isRecapPost(null)).toBe(false)
+      expect(isRecapPost(undefined)).toBe(false)
+      expect(isRecapPost()).toBe(false)
+    })
+  })
+
   describe('getCategoryGroup', () => {
     it('returns "personal" for personal category', () => {
       expect(getCategoryGroup('personal')).toBe('personal')
     })
 
-    it('returns "personal" for posts with "recap" in title', () => {
-      expect(getCategoryGroup('other', 'My 2023 Recap')).toBe('personal')
-      expect(getCategoryGroup('technology', 'Year-End Recap')).toBe('personal')
+    it('returns "recaps" for posts with "recap" in title', () => {
+      expect(getCategoryGroup('other', 'My 2023 Recap')).toBe('recaps')
+      expect(getCategoryGroup('technology', 'Year-End Recap')).toBe('recaps')
+      expect(getCategoryGroup('personal', 'January 2024 Recap')).toBe('recaps')
     })
 
     it('returns "music" for music categories', () => {
