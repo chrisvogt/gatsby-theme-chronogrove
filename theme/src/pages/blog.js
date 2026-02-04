@@ -5,7 +5,7 @@ import { Flex } from '@theme-ui/components'
 import { Fragment } from 'react'
 import { graphql } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLaptopCode, faUser, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faLaptopCode, faUser, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 
 import AnimatedPageBackground from '../components/animated-page-background'
 import { getPosts } from '../hooks/use-recent-posts'
@@ -70,7 +70,8 @@ const BlogIndexPage = ({ data }) => {
 
   // Category metadata (removed music and photography)
   const categoryMeta = {
-    personal: { title: 'Personal & Recaps', icon: faUser },
+    recaps: { title: 'Monthly Recaps', icon: faCalendarAlt },
+    personal: { title: 'Personal', icon: faUser },
     technology: { title: 'Technology', icon: faLaptopCode },
     other: { title: 'All Posts', icon: faNewspaper }
   }
@@ -93,11 +94,11 @@ const BlogIndexPage = ({ data }) => {
               py: 3
             }}
           >
-            <Container sx={{ flexGrow: 1, maxWidth: '1400px', px: [3, 4, 5] }}>
+            <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 75vw)'] }}>
               <PageHeader>Blog</PageHeader>
 
               {/* Category Sections */}
-              {['personal', 'technology', 'other'].map(categoryKey => {
+              {['recaps', 'personal', 'technology', 'other'].map(categoryKey => {
                 const posts = groupedPosts[categoryKey]
                 if (!posts || posts.length === 0) return null
 
@@ -106,6 +107,35 @@ const BlogIndexPage = ({ data }) => {
                 // Get featured post (first with banner, or just first post)
                 const featuredPost = posts.find(p => p.frontmatter.banner) || posts[0]
                 const remainingPosts = posts.filter(p => p.fields.id !== featuredPost.fields.id)
+
+                // Recaps use a simple grid with thumbnails (no featured layout)
+                if (categoryKey === 'recaps') {
+                  return (
+                    <Box key={categoryKey}>
+                      <SectionHeader icon={meta.icon} title={meta.title} count={posts.length} />
+                      <Box
+                        sx={{
+                          display: 'grid',
+                          gridGap: [3, 3, 4],
+                          gridTemplateColumns: ['1fr', 'repeat(2, 1fr)'],
+                          mb: 4
+                        }}
+                      >
+                        {posts.map(post => (
+                          <PostCard
+                            category={post.fields.category}
+                            date={post.frontmatter.date}
+                            excerpt={post.frontmatter.excerpt}
+                            key={post.fields.id}
+                            link={post.fields.path}
+                            thumbnails={post.frontmatter.thumbnails}
+                            title={post.frontmatter.title}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  )
+                }
 
                 return (
                   <Box key={categoryKey}>
@@ -133,12 +163,7 @@ const BlogIndexPage = ({ data }) => {
                         sx={{
                           display: 'grid',
                           gridGap: 4,
-                          gridTemplateColumns: [
-                            '1fr',
-                            'repeat(2, 1fr)',
-                            remainingPosts.length === 1 ? '1fr' : 'repeat(2, 1fr)',
-                            remainingPosts.length >= 3 ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)'
-                          ],
+                          gridTemplateColumns: ['1fr', remainingPosts.length === 1 ? '1fr' : 'repeat(2, 1fr)'],
                           mb: 4
                         }}
                       >
@@ -191,6 +216,7 @@ export const pageQuery = graphql`
             description
             excerpt
             slug
+            thumbnails
             title
           }
         }

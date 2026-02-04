@@ -18,6 +18,7 @@ const useCategorizedPosts = () => {
               description
               excerpt
               slug
+              soundcloudId
               thumbnails
               title
               youtubeSrc

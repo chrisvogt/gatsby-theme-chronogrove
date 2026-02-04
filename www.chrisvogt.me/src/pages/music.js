@@ -32,15 +32,14 @@ const MusicPage = ({ data }) => {
               py: 3
             }}
           >
-            <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 50vw)'] }}>
+            <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 75vw)'] }}>
               <PageHeader>My Music</PageHeader>
 
               <Themed.div
                 sx={{
                   display: 'grid',
-                  gridAutoRows: '1fr',
-                  gridGap: 4,
-                  gridTemplateColumns: '1fr',
+                  gridGap: [3, 3, 4],
+                  gridTemplateColumns: ['1fr', '1fr 1fr'],
                   mt: 4
                 }}
               >
@@ -50,7 +49,9 @@ const MusicPage = ({ data }) => {
                     date={post.frontmatter.date}
                     key={post.fields.id}
                     link={post.fields.path}
+                    soundcloudId={post.frontmatter.soundcloudId}
                     title={post.frontmatter.title}
+                    youtubeSrc={post.frontmatter.youtubeSrc}
                   />
                 ))}
               </Themed.div>
@@ -73,7 +74,7 @@ export const Head = () => (
 )
 
 export const pageQuery = graphql`
-  query QueryRecentPosts {
+  query QueryMusicPosts {
     allMdx(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
@@ -86,7 +87,9 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             description
             slug
+            soundcloudId
             title
+            youtubeSrc
           }
         }
       }

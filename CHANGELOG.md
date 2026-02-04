@@ -1,5 +1,77 @@
 # Changelog
 
+## 0.72.0
+
+### ✨ Features
+
+- **SoundCloud Embed Support in PostCard**: Music posts with `soundcloudId` frontmatter now display an embedded SoundCloud player in post cards
+  - Works on both the Music index page and the Home page widget
+  - Player displays full-width with waveform and play button
+  - Cards with SoundCloud embeds have linked titles instead of full-card links (consistent with YouTube behavior)
+
+- **Unified Index Page Container Widths**: Blog, Music, and Photography index pages now share consistent container breakpoints
+  - All three use `width: ['', '', 'max(95ch, 75vw)']` for responsive sizing
+  - Previously Blog used `maxWidth: 1400px` and Music used `max(95ch, 50vw)`
+  - Photography breakpoints were used as the reference standard
+
+- **Separated Recaps from Personal Posts on Blog Index**: Monthly recaps now appear in their own dedicated section
+  - New "Monthly Recaps" section with calendar icon (`faCalendarAlt`)
+  - Recaps display circular thumbnail images (matching Home page style)
+  - Personal posts appear in separate "Personal" section
+  - Section order: Recaps → Personal → Technology → Other
+
+- **Enhanced Music Index Page**: Music posts now display embedded players directly in the index view
+  - YouTube videos render as embedded players
+  - SoundCloud tracks render as embedded audio players
+  - Responsive 2-column grid layout on larger screens
+
+### 🐛 Bug Fixes
+
+- **Missing Thumbnails in Blog Index**: Added `thumbnails` to GraphQL query for blog posts
+  - Recap posts now display circular thumbnail images on the Blog index
+  - Consistent appearance with Home page recaps widget
+
+### 🎨 UI Improvements
+
+- **Consistent Grid Layouts**: Updated grid configurations across index pages
+  - Blog and Music index pages now use 2-column max at largest breakpoint (was 3)
+  - Removed `gridAutoRows: '1fr'` for pages with media embeds to allow natural card heights
+  - Grid gap patterns aligned with Photography index (`[3, 3, 4]`)
+
+### 📦 Dependencies
+
+- Added `soundcloudId` field to:
+  - `useCategorizedPosts` GraphQL query (theme hook)
+  - Music page GraphQL query (www.chrisvogt.me)
+- Added `isRecapPost` helper function to `categoryHelpers.js`
+
+### 🧪 Testing
+
+- Added 5 new tests for SoundCloud embed functionality in PostCard:
+  - Renders SoundCloud embed when soundcloudId is provided
+  - Does not wrap card in link when SoundCloud is present
+  - Does not render excerpt when SoundCloud is present
+  - Does not render banner when SoundCloud is present
+  - Handles case when both YouTube and SoundCloud are provided
+- Added tests for `isRecapPost` helper function
+- Updated `getCategoryGroup` tests to expect `'recaps'` for recap posts
+- All 1028 tests passing with comprehensive coverage
+
+### 📦 Files Changed
+
+- `theme/src/pages/blog.js` (container width, recaps section, thumbnails query)
+- `theme/src/helpers/categoryHelpers.js` (added `isRecapPost`, updated `getCategoryGroup`)
+- `theme/src/helpers/categoryHelpers.spec.js` (tests for recaps)
+- `theme/src/components/widgets/recent-posts/post-card.js` (SoundCloud embed support)
+- `theme/src/components/widgets/recent-posts/post-card.spec.js` (SoundCloud tests)
+- `theme/src/components/widgets/recent-posts/recent-posts-widget.js` (pass soundcloudId)
+- `theme/src/hooks/use-categorized-posts.js` (added soundcloudId to query)
+- `www.chrisvogt.me/src/pages/music.js` (container width, soundcloudId/youtubeSrc props, query)
+- `www.chrisvogt.me/content/blog/2025-06-30-june-2025-recap/` (added thumbnails)
+- `www.chrisvogt.me/content/blog/2025-07-31-july-2025-recap/` (added thumbnails)
+
+---
+
 ## 0.71.3
 
 ### 🐛 Bug Fixes

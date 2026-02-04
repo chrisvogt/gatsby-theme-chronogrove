@@ -118,7 +118,6 @@ export default () => {
                 <Grid
                   sx={{
                     display: 'grid',
-                    gridAutoRows: '1fr',
                     gridGap: [2, 2, 3, 3],
                     gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
                   }}
@@ -129,6 +128,7 @@ export default () => {
                       category={post.fields.category}
                       date={post.frontmatter.date}
                       link={post.fields.path}
+                      soundcloudId={post.frontmatter.soundcloudId}
                       title={post.frontmatter.title}
                       youtubeSrc={post.frontmatter.youtubeSrc}
                     />

@@ -322,4 +322,104 @@ describe('PostCard', () => {
     expect(iframe).toBeInTheDocument()
     expect(iframe.getAttribute('src')).toBe('https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1')
   })
+
+  it('renders SoundCloud embed when soundcloudId is provided', () => {
+    const propsWithSoundCloud = {
+      category: 'music',
+      date: '2024-05-12',
+      link: '/music/a-house-is-not-a-home',
+      title: 'A House Is Not A Home',
+      soundcloudId: '1820395353'
+    }
+    const { container, asFragment } = render(<PostCard {...propsWithSoundCloud} />)
+
+    // Should render SoundCloud embed
+    expect(container.querySelector('.card-soundcloud')).toBeInTheDocument()
+    expect(container.querySelector('iframe')).toBeInTheDocument()
+
+    // Should not render excerpt
+    expect(container.querySelector('.description')).not.toBeInTheDocument()
+
+    // Title should be wrapped in a link
+    expect(container.querySelector('a h3')).toBeInTheDocument()
+
+    // Verify the SoundCloud URL
+    const iframe = container.querySelector('iframe')
+    expect(iframe.getAttribute('src')).toContain('soundcloud.com/player')
+    expect(iframe.getAttribute('src')).toContain('1820395353')
+
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('does not wrap card in link when SoundCloud is present', () => {
+    const propsWithSoundCloud = {
+      category: 'music',
+      date: '2024-05-12',
+      link: '/music/a-house-is-not-a-home',
+      title: 'A House Is Not A Home',
+      soundcloudId: '1820395353'
+    }
+    const { container } = render(<PostCard {...propsWithSoundCloud} />)
+
+    // The outer element should be a div, not an anchor
+    const outerElement = container.firstChild
+    expect(outerElement.tagName).toBe('DIV')
+
+    // But the title should still be linked
+    expect(container.querySelector('a')).toBeInTheDocument()
+  })
+
+  it('does not render excerpt when SoundCloud is present', () => {
+    const propsWithBoth = {
+      category: 'music',
+      date: '2024-05-12',
+      link: '/music/a-house-is-not-a-home',
+      title: 'A House Is Not A Home',
+      excerpt: 'This excerpt should not be shown',
+      soundcloudId: '1820395353'
+    }
+    const { container } = render(<PostCard {...propsWithBoth} />)
+
+    // Should render SoundCloud embed
+    expect(container.querySelector('.card-soundcloud')).toBeInTheDocument()
+
+    // Should not render excerpt
+    expect(container.querySelector('.description')).not.toBeInTheDocument()
+  })
+
+  it('does not render banner when SoundCloud is present', () => {
+    const propsWithBannerAndSoundCloud = {
+      banner: 'https://example.com/banner.jpg',
+      category: 'music',
+      date: '2024-05-12',
+      link: '/music/a-house-is-not-a-home',
+      title: 'A House Is Not A Home',
+      soundcloudId: '1820395353'
+    }
+    const { container } = render(<PostCard {...propsWithBannerAndSoundCloud} />)
+
+    // Should render SoundCloud embed
+    expect(container.querySelector('.card-soundcloud')).toBeInTheDocument()
+
+    // Should not render banner
+    expect(container.querySelector('.card-media')).not.toBeInTheDocument()
+  })
+
+  it('prefers YouTube over SoundCloud when both are provided', () => {
+    const propsWithBothMedia = {
+      category: 'music',
+      date: '2024-05-12',
+      link: '/music/test',
+      title: 'Test Post',
+      youtubeSrc: 'https://www.youtube.com/embed/OMiKQ2XHXYU',
+      soundcloudId: '1820395353'
+    }
+    const { container } = render(<PostCard {...propsWithBothMedia} />)
+
+    // Should render YouTube embed (first in the render order)
+    expect(container.querySelector('.card-youtube')).toBeInTheDocument()
+
+    // Should also render SoundCloud embed (both are rendered when both provided)
+    expect(container.querySelector('.card-soundcloud')).toBeInTheDocument()
+  })
 })
