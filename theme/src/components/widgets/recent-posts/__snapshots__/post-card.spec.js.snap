@@ -10,7 +10,7 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -20,27 +20,32 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -58,7 +63,7 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -68,27 +73,32 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -106,7 +116,7 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -116,31 +126,158 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
   </a>
+</DocumentFragment>
+`;
+
+exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
+<DocumentFragment>
+  <div
+    class="css-v9vd1q"
+  >
+    <div
+      class="css-11wrqrg"
+    >
+      <div
+        class="card-content css-7ttn8j"
+      >
+        <div
+          class="css-2wrb05"
+        >
+          <a
+            class="css-r3e7ui"
+            href="/music/here-and-now"
+          >
+            <h3
+              class="css-1yjqole"
+            >
+              Here and Now
+            </h3>
+          </a>
+          <div
+            class="css-1wohmj5"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Music
+            </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              2025-06-19
+            </time>
+          </div>
+        </div>
+        <div
+          class="card-youtube css-13c5kb5"
+        >
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen=""
+            class="css-12umafp"
+            src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+            title="Here and Now"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PostCard renders YouTube embed with horizontal layout when both props are provided 1`] = `
+<DocumentFragment>
+  <div
+    class="css-v9vd1q"
+  >
+    <div
+      class="css-11wrqrg"
+    >
+      <div
+        class="card-content css-7ttn8j"
+      >
+        <div
+          class="css-2wrb05"
+        >
+          <a
+            class="css-r3e7ui"
+            href="/music/here-and-now"
+          >
+            <h3
+              class="css-1b5yr0k"
+            >
+              Here and Now
+            </h3>
+          </a>
+          <div
+            class="css-1wohmj5"
+          >
+            <div
+              class="css-1wualeq"
+            >
+              Music
+            </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              2025-06-19
+            </time>
+          </div>
+        </div>
+        <div
+          class="card-youtube css-13c5kb5"
+        >
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen=""
+            class="css-12umafp"
+            src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+            title="Here and Now"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;
 
@@ -154,7 +291,7 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -164,27 +301,32 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -202,7 +344,7 @@ exports[`PostCard renders banner when thumbnails array is empty 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -212,27 +354,32 @@ exports[`PostCard renders banner when thumbnails array is empty 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -250,7 +397,7 @@ exports[`PostCard renders banner when thumbnails is null 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -260,27 +407,32 @@ exports[`PostCard renders banner when thumbnails is null 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -298,7 +450,7 @@ exports[`PostCard renders excerpt when provided 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -308,27 +460,32 @@ exports[`PostCard renders excerpt when provided 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1wohmj5"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-x6ddoz"
-          >
-            1592202624
-          </time>
           <p
             class="description css-1w28v9e"
           >
@@ -348,10 +505,10 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
     href="/blog/article"
   >
     <div
-      class="css-8wyef3"
+      class="css-139dwiw"
     >
       <div
-        class="card-content css-1taqpx2"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -361,27 +518,32 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
           />
         </div>
         <div
-          class="css-p08ytg"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-zzhc1o"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-zzhc1o"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -399,30 +561,35 @@ exports[`PostCard renders neither banner nor thumbnails when both are missing 1`
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -437,13 +604,13 @@ exports[`PostCard renders thumbnails inside text area when horizontal mode with 
     href="/blog/article"
   >
     <div
-      class="css-8wyef3"
+      class="css-139dwiw"
     >
       <div
-        class="card-content css-1taqpx2"
+        class="card-content css-7ttn8j"
       >
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
           <div
             class="card-thumbnails css-1h9yah9"
@@ -452,21 +619,21 @@ exports[`PostCard renders thumbnails inside text area when horizontal mode with 
               class="css-nequny"
             >
               <div
-                class="css-b3hnub"
+                class="css-2g58l9"
               >
                 <div
                   class="css-dw25a5"
                 />
               </div>
               <div
-                class="css-tr1clq"
+                class="css-wmbcu5"
               >
                 <div
                   class="css-oc1to0"
                 />
               </div>
               <div
-                class="css-b3hnub"
+                class="css-2g58l9"
               >
                 <div
                   class="css-18hamqk"
@@ -474,25 +641,30 @@ exports[`PostCard renders thumbnails inside text area when horizontal mode with 
               </div>
             </div>
           </div>
+          <h3
+            class="css-zzhc1o"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-zzhc1o"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -510,7 +682,7 @@ exports[`PostCard renders thumbnails instead of banner when thumbnails are provi
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-thumbnails css-1usooy4"
@@ -519,28 +691,28 @@ exports[`PostCard renders thumbnails instead of banner when thumbnails are provi
             class="css-nequny"
           >
             <div
-              class="css-b3hnub"
+              class="css-2g58l9"
             >
               <div
                 class="css-dw25a5"
               />
             </div>
             <div
-              class="css-tr1clq"
+              class="css-wmbcu5"
             >
               <div
                 class="css-oc1to0"
               />
             </div>
             <div
-              class="css-b3hnub"
+              class="css-2g58l9"
             >
               <div
                 class="css-18hamqk"
               />
             </div>
             <div
-              class="css-tr1clq"
+              class="css-wmbcu5"
             >
               <div
                 class="css-k85nx7"
@@ -549,27 +721,32 @@ exports[`PostCard renders thumbnails instead of banner when thumbnails are provi
           </div>
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -587,30 +764,35 @@ exports[`PostCard renders without banner when not provided 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
+          <h3
+            class="css-10lfs8r"
+          >
+            My Blog Post
+          </h3>
           <div
-            class="css-1mjogk7"
+            class="css-1c1541m"
           >
             <div
               class="css-1wualeq"
             >
               Personal
             </div>
+            <span
+              class="css-1vjle4a"
+            >
+              •
+            </span>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
           </div>
-          <h3
-            class="css-10lfs8r"
-          >
-            My Blog Post
-          </h3>
-          <time
-            class="created css-68op3f"
-          >
-            1592202624
-          </time>
         </div>
       </div>
     </div>
@@ -628,7 +810,7 @@ exports[`PostCard renders without category when not provided 1`] = `
       class="css-139dwiw"
     >
       <div
-        class="card-content css-ihz6y5"
+        class="card-content css-7ttn8j"
       >
         <div
           class="card-media css-1usooy4"
@@ -638,18 +820,22 @@ exports[`PostCard renders without category when not provided 1`] = `
           />
         </div>
         <div
-          class="css-iiqpqc"
+          class="css-2wrb05"
         >
           <h3
             class="css-10lfs8r"
           >
             My Blog Post
           </h3>
-          <time
-            class="created css-68op3f"
+          <div
+            class="css-1c1541m"
           >
-            1592202624
-          </time>
+            <time
+              class="created css-4np19s"
+            >
+              1592202624
+            </time>
+          </div>
         </div>
       </div>
     </div>

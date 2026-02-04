@@ -84,16 +84,21 @@ export default () => {
             <Grid
               sx={{
                 display: 'grid',
-                gridGap: [3, 3, 4],
-                gridTemplateColumns: ['', '', `repeat(${getColumnCount(postsBySection.recaps.length)}, 1fr)`]
+                gridGap: [3, 3, 3, 4],
+                gridTemplateColumns: [
+                  '1fr',
+                  '1fr',
+                  '1fr',
+                  `repeat(${getColumnCount(postsBySection.recaps.length)}, 1fr)`
+                ]
               }}
             >
               {postsBySection.recaps.map(post => (
                 <PostCard
+                  key={post.fields.id}
                   category={post.fields.category}
                   date={post.frontmatter.date}
                   excerpt={post.frontmatter.excerpt}
-                  key={post.fields.id}
                   link={post.fields.path}
                   thumbnails={post.frontmatter.thumbnails}
                   title={post.frontmatter.title}
@@ -114,20 +119,18 @@ export default () => {
                   sx={{
                     display: 'grid',
                     gridAutoRows: '1fr',
-                    gridGap: [2, 2, 3],
-                    gridTemplateColumns: ['1fr', '1fr', 'repeat(2, 1fr)']
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
                   }}
                 >
                   {postsBySection.music.map(post => (
                     <PostCard
-                      banner={null}
+                      key={post.fields.id}
                       category={post.fields.category}
                       date={post.frontmatter.date}
-                      excerpt={post.frontmatter.excerpt}
-                      key={post.fields.id}
                       link={post.fields.path}
                       title={post.frontmatter.title}
-                      horizontal={true}
+                      youtubeSrc={post.frontmatter.youtubeSrc}
                     />
                   ))}
                 </Grid>
@@ -142,20 +145,19 @@ export default () => {
                   sx={{
                     display: 'grid',
                     gridAutoRows: '1fr',
-                    gridGap: [2, 2, 3],
-                    gridTemplateColumns: ['1fr', '1fr', 'repeat(2, 1fr)']
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
                   }}
                 >
                   {postsBySection.photography.map(post => (
                     <PostCard
+                      key={post.fields.id}
                       category={post.fields.category}
                       date={post.frontmatter.date}
-                      excerpt={post.frontmatter.excerpt}
-                      key={post.fields.id}
                       link={post.fields.path}
                       thumbnails={post.frontmatter.thumbnails}
                       title={post.frontmatter.title}
-                      horizontal={true}
+                      horizontal
                     />
                   ))}
                 </Grid>
@@ -170,20 +172,19 @@ export default () => {
                   sx={{
                     display: 'grid',
                     gridAutoRows: '1fr',
-                    gridGap: [2, 2, 3],
-                    gridTemplateColumns: ['1fr', '1fr', 'repeat(2, 1fr)']
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
                   }}
                 >
                   {postsBySection.other.map(post => (
                     <PostCard
-                      banner={null}
+                      key={post.fields.id}
                       category={post.fields.category}
                       date={post.frontmatter.date}
                       excerpt={post.frontmatter.excerpt}
-                      key={post.fields.id}
                       link={post.fields.path}
                       title={post.frontmatter.title}
-                      horizontal={true}
+                      horizontal
                     />
                   ))}
                 </Grid>

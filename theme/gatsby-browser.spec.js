@@ -35,37 +35,39 @@ describe('gatsby-browser', () => {
 
     it('should return false when only query parameters change', () => {
       const routerProps = {
-        location: { pathname: '/blog', search: '?page=2' },
-        prevLocation: { pathname: '/blog', search: '?page=1' }
+        location: { pathname: '/blog', search: '?page=2' }
       }
-      const result = shouldUpdateScroll({ routerProps })
+      const prevRouterProps = {
+        location: { pathname: '/blog', search: '?page=1' }
+      }
+      const result = shouldUpdateScroll({ routerProps, prevRouterProps })
       expect(result).toBe(false)
     })
 
     it('should return [0, 0] when pathname changes', () => {
       const routerProps = {
-        location: { pathname: '/about', search: '' },
-        prevLocation: { pathname: '/blog', search: '' }
+        location: { pathname: '/about', search: '' }
       }
-      const result = shouldUpdateScroll({ routerProps })
+      const prevRouterProps = {
+        location: { pathname: '/blog', search: '' }
+      }
+      const result = shouldUpdateScroll({ routerProps, prevRouterProps })
       expect(result).toEqual([0, 0])
     })
 
-    it('should return [0, 0] when prevLocation is null', () => {
+    it('should return [0, 0] when prevRouterProps is null', () => {
       const routerProps = {
-        location: { pathname: '/blog', search: '' },
-        prevLocation: null
+        location: { pathname: '/blog', search: '' }
       }
-      const result = shouldUpdateScroll({ routerProps })
+      const result = shouldUpdateScroll({ routerProps, prevRouterProps: null })
       expect(result).toEqual([0, 0])
     })
 
-    it('should return [0, 0] when prevLocation is undefined', () => {
+    it('should return [0, 0] when prevRouterProps is undefined', () => {
       const routerProps = {
-        location: { pathname: '/blog', search: '' },
-        prevLocation: undefined
+        location: { pathname: '/blog', search: '' }
       }
-      const result = shouldUpdateScroll({ routerProps })
+      const result = shouldUpdateScroll({ routerProps, prevRouterProps: undefined })
       expect(result).toEqual([0, 0])
     })
   })
