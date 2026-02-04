@@ -394,4 +394,107 @@ describe('BlogIndexPage', () => {
     // Check for section with count
     expect(container.textContent).toMatch(/\d+ posts?/)
   })
+
+  it('renders recap posts in their own section with thumbnails layout', () => {
+    const recapPosts = [
+      {
+        id: 'recap-1',
+        frontmatter: {
+          title: 'January 2025 Recap',
+          date: '2025-02-01',
+          slug: 'january-2025',
+          banner: null,
+          excerpt: 'Monthly recap',
+          thumbnails: ['https://example.com/thumb1.jpg', 'https://example.com/thumb2.jpg']
+        },
+        fields: {
+          category: 'personal',
+          id: 'recap-1',
+          path: '/blog/january-2025'
+        }
+      },
+      {
+        id: 'recap-2',
+        frontmatter: {
+          title: 'February 2025 Recap',
+          date: '2025-03-01',
+          slug: 'february-2025',
+          banner: null,
+          excerpt: 'Another monthly recap',
+          thumbnails: ['https://example.com/thumb3.jpg', 'https://example.com/thumb4.jpg']
+        },
+        fields: {
+          category: 'personal',
+          id: 'recap-2',
+          path: '/blog/february-2025'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(recapPosts)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Should render both recap posts
+    expect(screen.getByText('January 2025 Recap')).toBeInTheDocument()
+    expect(screen.getByText('February 2025 Recap')).toBeInTheDocument()
+
+    // Should render 2 post cards for the recaps
+    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+  })
+
+  it('renders recap posts separately from personal posts', () => {
+    const mixedPosts = [
+      {
+        id: 'recap-1',
+        frontmatter: {
+          title: 'March 2025 Recap',
+          date: '2025-04-01',
+          slug: 'march-2025',
+          banner: null,
+          excerpt: 'Monthly recap',
+          thumbnails: ['https://example.com/thumb1.jpg']
+        },
+        fields: {
+          category: 'personal',
+          id: 'recap-1',
+          path: '/blog/march-2025'
+        }
+      },
+      {
+        id: 'personal-1',
+        frontmatter: {
+          title: 'Personal Story',
+          date: '2025-03-15',
+          slug: 'personal-story',
+          banner: 'https://example.com/banner.jpg',
+          excerpt: 'A personal story'
+        },
+        fields: {
+          category: 'personal',
+          id: 'personal-1',
+          path: '/blog/personal-story'
+        }
+      }
+    ]
+
+    getPosts.mockReturnValue(mixedPosts)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    // Both posts should be rendered
+    expect(screen.getByText('March 2025 Recap')).toBeInTheDocument()
+    expect(screen.getByText('Personal Story')).toBeInTheDocument()
+
+    // Should have 2 total post cards
+    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+  })
 })
