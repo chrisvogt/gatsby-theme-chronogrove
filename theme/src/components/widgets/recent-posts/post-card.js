@@ -16,6 +16,16 @@ const getYouTubeVideoId = url => {
   return match ? match[1] : null
 }
 
+/**
+ * Build YouTube embed URL with additional parameters
+ * Handles URLs that may already have query parameters (e.g., ?si=...)
+ */
+const buildYouTubeEmbedUrl = url => {
+  if (!url) return url
+  const separator = url.includes('?') ? '&' : '?'
+  return `${url}${separator}rel=0&modestbranding=1`
+}
+
 export default ({
   banner,
   category,
@@ -198,7 +208,7 @@ export default ({
             }}
           >
             <iframe
-              src={`${youtubeSrc}?rel=0&modestbranding=1`}
+              src={buildYouTubeEmbedUrl(youtubeSrc)}
               title={title}
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
               allowFullScreen
