@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.71.3
+
+### 🐛 Bug Fixes
+
+- **Spotify Embed Warning**: Fixed browser warning "Allow attribute will take precedence over 'allowfullscreen'"
+  - **Root Cause**: Spotify's oEmbed API returns iframe HTML with both the deprecated `allowfullscreen` attribute and the modern `allow` attribute
+  - **Solution**: Sanitize the embed HTML to remove the deprecated `allowfullscreen` attribute before rendering
+  - **Impact**: Eliminates console warning when clicking Spotify items on the Home page
+
+- **lightGallery License Key on Blog Pages**: Fixed "license key is not valid for production use" error on blog photo galleries
+  - **Root Cause**: The `PhotoGallery` component in `www.chrisvogt.me/components/` was missing the `licenseKey` prop that home page widgets already use
+  - **Solution**: Added `licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}` to the LightGallery component
+  - **Impact**: Blog photography posts no longer show license validation errors in production
+
+### 📦 Files Changed
+
+- `theme/src/shortcodes/spotify.js` (sanitize oEmbed HTML to remove deprecated attribute)
+- `www.chrisvogt.me/components/PhotoGallery.js` (add licenseKey prop)
+
+---
+
 ## 0.71.2
 
 ### 🚀 Performance Improvements

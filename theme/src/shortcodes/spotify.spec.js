@@ -60,6 +60,46 @@ describe('Spotify', () => {
     })
   })
 
+  it('removes deprecated allowfullscreen attribute from embed HTML', async () => {
+    const mockResponse = {
+      html: '<iframe src="https://open.spotify.com/embed/track/123" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+    }
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse
+    })
+
+    const { container } = render(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+
+    await waitFor(() => {
+      expect(container.innerHTML).toContain('iframe')
+    })
+
+    // Verify allowfullscreen attribute was removed
+    expect(container.innerHTML).not.toContain('allowfullscreen')
+    // Verify the allow attribute is still present
+    expect(container.innerHTML).toContain('allow=')
+  })
+
+  it('handles case-insensitive allowFullScreen attribute removal', async () => {
+    const mockResponse = {
+      html: '<iframe src="https://open.spotify.com/embed/track/123" allowFullScreen allow="fullscreen"></iframe>'
+    }
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse
+    })
+
+    const { container } = render(<Spotify spotifyURL='https://open.spotify.com/track/123' />)
+
+    await waitFor(() => {
+      expect(container.innerHTML).toContain('iframe')
+    })
+
+    // Verify allowFullScreen (camelCase) was also removed
+    expect(container.innerHTML.toLowerCase()).not.toContain('allowfullscreen')
+  })
+
   it('does not render when no spotifyURL is provided', () => {
     const { container } = render(<Spotify />)
     expect(container.firstChild).toBeNull()
