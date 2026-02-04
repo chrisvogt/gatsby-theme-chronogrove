@@ -4,7 +4,7 @@
     "resourceSizes": [
       {
         "resourceType": "document",
-        "budget": 75
+        "budget": 300
       },
       {
         "resourceType": "script",
@@ -12,7 +12,7 @@
       },
       {
         "resourceType": "stylesheet",
-        "budget": 20
+        "budget": 120
       },
       {
         "resourceType": "total",
