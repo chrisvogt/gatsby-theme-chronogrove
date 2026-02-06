@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useCallback } from 'react'
 import { Box, Flex, useThemeUI } from 'theme-ui'
 import { useInView } from 'react-intersection-observer'
 import careerData from '../src/data/career-path.json'
@@ -8,6 +8,10 @@ import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
 const NUM_SAMPLES = 200
 const CIRCLE_R = 20
 const STROKE_WIDTH = 4
+const TIME_MIN = 2003
+const TIME_MAX = 2026
+const TIMELINE_HEIGHT = 25
+const MARGIN = CIRCLE_R + STROKE_WIDTH + 8
 
 /**
  * Optional logo images for career avatars. Add files to static/images/career-logos/
@@ -46,11 +50,10 @@ function bezierPoint(t, P0, P1, P2, P3) {
  * Returns array of { x, y } in 0..width, 0..height.
  */
 function sampleSCurve(width, height, numSamples) {
-  const margin = CIRCLE_R + STROKE_WIDTH + 8
-  const w = width - 2 * margin
-  const h = height - 2 * margin
-  const ox = margin
-  const oy = margin
+  const w = width - 2 * MARGIN
+  const h = height - 2 * MARGIN
+  const ox = MARGIN
+  const oy = MARGIN
 
   // Tilted S: start top-left, dip to center, end bottom-right
   // Segment 1: (0, 0.2h) -> (0.5w, 0.5h)
@@ -112,6 +115,32 @@ const CareerPathCurve = () => {
     const pts = sampleSCurve(width, height, NUM_SAMPLES)
     return { points: pts, width, height }
   }, [])
+
+  // Map years to x positions (reversed: most recent on left, oldest on right, matching logo order)
+  const yearToX = useCallback(
+    year => {
+      const t = (year - TIME_MIN) / (TIME_MAX - TIME_MIN)
+      // Reverse: 1-t so TIME_MAX maps to left (MARGIN), TIME_MIN maps to right (width-MARGIN)
+      return MARGIN + (1 - t) * (width - 2 * MARGIN)
+    },
+    [width]
+  )
+
+  // Calculate date ranges for each company
+  const companyDateRanges = useMemo(() => {
+    const ranges = {}
+    rows.forEach(row => {
+      const starts = row.segments.map(s => s.startYear)
+      const ends = row.segments.map(s => s.endYear)
+      ranges[row.company] = {
+        startYear: Math.min(...starts),
+        endYear: Math.max(...ends),
+        xStart: yearToX(Math.min(...starts)),
+        xEnd: yearToX(Math.max(...ends))
+      }
+    })
+    return ranges
+  }, [rows, yearToX])
 
   const N = rowsOrdered.length
   const pathSegments = useMemo(() => {
@@ -186,28 +215,7 @@ const CareerPathCurve = () => {
       {/* Full-width graph container; detail panel in upper-right when a company is selected */}
       <Box sx={{ position: 'relative', width: '100%' }}>
         <Box sx={{ width: '100%' }}>
-          {/* Legend and hint at top center */}
-          <Flex
-            sx={{
-              justifyContent: 'center',
-              gap: [4, 5],
-              mb: 2,
-              flexWrap: 'wrap'
-            }}
-          >
-            {[
-              { name: 'Design', color: '#ed8936' },
-              { name: 'IT', color: '#4299e1' },
-              { name: 'Engineering', color: '#48bb78' }
-            ].map(({ name, color }) => (
-              <Flex key={name} sx={{ alignItems: 'center', gap: 1 }}>
-                <Box sx={{ width: 14, height: 14, borderRadius: 2, bg: color }} />
-                <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
-                  {name}
-                </Box>
-              </Flex>
-            ))}
-          </Flex>
+          {/* Hint text at top */}
           <Box sx={{ mb: 3, fontSize: 1, color: 'textMuted', fontStyle: 'italic', textAlign: 'center' }}>
             Click a circle to see details.
           </Box>
@@ -231,6 +239,66 @@ const CareerPathCurve = () => {
                 <feDropShadow dx='0' dy='2' stdDeviation='3' floodOpacity={darkModeActive ? 0.4 : 0.25} />
               </filter>
             </defs>
+
+            {/* Timeline nodes at bottom: date ranges aligned with each company's circle position */}
+            <g>
+              {/* Timeline baseline */}
+              <line
+                x1={MARGIN}
+                y1={height - TIMELINE_HEIGHT}
+                x2={width - MARGIN}
+                y2={height - TIMELINE_HEIGHT}
+                stroke={darkModeActive ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)'}
+                strokeWidth={1}
+                opacity={selectedCompany ? 0.3 : 0.15}
+              />
+
+              {/* Date range nodes: one per company, aligned with circle positions */}
+              {circlePositions.map(({ x, y, company, row }) => {
+                const range = companyDateRanges[company]
+                if (!range) return null
+                const isSelected = selectedCompany === company
+                const pathColor = row.segments[0].pathColor
+                const dateText = `${range.startYear}–${range.endYear === 2026 ? 'Present' : range.endYear}`
+                const timelineY = height - TIMELINE_HEIGHT
+                return (
+                  <g key={`timeline-${company}`}>
+                    {/* Connecting line from circle to timeline */}
+                    <line
+                      x1={x}
+                      y1={y + CIRCLE_R}
+                      x2={x}
+                      y2={timelineY}
+                      stroke={pathColor}
+                      strokeWidth={isSelected ? 2 : 1}
+                      strokeDasharray={isSelected ? 'none' : '2,2'}
+                      opacity={isSelected ? 0.4 : 0.15}
+                    />
+                    {/* Date range node */}
+                    <circle
+                      cx={x}
+                      cy={timelineY}
+                      r={isSelected ? 4 : 3}
+                      fill={pathColor}
+                      opacity={isSelected ? 0.8 : 0.4}
+                    />
+                    <text
+                      x={x}
+                      y={timelineY + 14}
+                      textAnchor='middle'
+                      fontSize={isSelected ? 9 : 8}
+                      fontWeight={isSelected ? '600' : '400'}
+                      fill={pathColor}
+                      opacity={isSelected ? 1 : 0.5}
+                      style={{ userSelect: 'none', pointerEvents: 'none' }}
+                    >
+                      {dateText}
+                    </text>
+                  </g>
+                )
+              })}
+            </g>
+
             {/* Line segments: paint in sequence (stroke-dashoffset), then circles reveal */}
             {pathSegments.map((seg, i) => (
               <path
@@ -334,6 +402,44 @@ const CareerPathCurve = () => {
               )
             })}
           </svg>
+
+          {/* Legend at bottom: colored lines to show path colors (matches graph order: Engineering → IT → Design) */}
+          <Flex
+            sx={{
+              justifyContent: 'center',
+              gap: [4, 5],
+              mt: 3,
+              flexWrap: 'wrap'
+            }}
+          >
+            {[
+              { name: 'Engineering', color: '#48bb78' },
+              { name: 'IT', color: '#4299e1' },
+              { name: 'Design', color: '#ed8936' }
+            ].map(({ name, color }) => (
+              <Flex key={name} sx={{ alignItems: 'center', gap: 1 }}>
+                <Box
+                  as='svg'
+                  sx={{ width: 20, height: 3, flexShrink: 0 }}
+                  viewBox='0 0 20 3'
+                  preserveAspectRatio='none'
+                >
+                  <line
+                    x1={0}
+                    y1={1.5}
+                    x2={20}
+                    y2={1.5}
+                    stroke={color}
+                    strokeWidth={STROKE_WIDTH}
+                    strokeLinecap='round'
+                  />
+                </Box>
+                <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
+                  {name}
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
 
           {/* Detail panel in upper-right (over the graph) when a company is selected */}
           {selectedSegment && (
