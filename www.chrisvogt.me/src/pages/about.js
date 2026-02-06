@@ -3,7 +3,7 @@ import { Container, Flex } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import Layout from 'gatsby-theme-chronogrove/src/components/layout'
 import Seo from 'gatsby-theme-chronogrove/src/components/seo'
-import CareerPathVisualization from '../../components/CareerPathVisualization'
+import CareerPathCurve from '../../components/CareerPathCurve'
 
 const AboutPage = () => {
   return (
@@ -20,9 +20,10 @@ const AboutPage = () => {
           <Themed.h1>About Me</Themed.h1>
 
           <Themed.p>
-            By day, I work as a software engineer at GoDaddy, creating tools that help small businesses build, grow, and
-            understand their online presence. But this site isn't about work — it's where I follow my curiosity,
-            experiment with ideas, and write code just for fun.
+            By day, I'm a Principal Software Engineer at GoDaddy. I've been there since 2017 — nearly nine years — and I
+            work on the Airo-Growth-Innovation (AGI) team. We build intelligent customer dashboards, the recommendations
+            you see across GoDaddy, and GoDaddy Airo™. This site isn't about work, though. It's where I follow my
+            curiosity, experiment with ideas, and write code just for fun.
           </Themed.p>
 
           <Themed.p>
@@ -35,17 +36,14 @@ const AboutPage = () => {
           <Themed.h2 sx={{ mt: 5 }}>Career Journey</Themed.h2>
 
           <Themed.p>
-            My career has evolved through three main paths: starting in print and design, contract and then full-time
-            jobs in IT, and ultimately growing into software engineering.
-          </Themed.p>
-
-          <Themed.p sx={{ fontSize: 1, color: 'textMuted', fontStyle: 'italic', mb: 4 }}>
-            Click on any node below to learn more about that role or transition.
+            The chart below shows how my career has actually played out: print and design first (OfficeMax, FedEx
+            Kinko's, then creative and freelance work), then IT and systems (contract roles, then Apogee Physicians and
+            Encore Discovery Solutions), and finally a shift into software engineering that led to web and front-end
+            roles and, in 2017, to GoDaddy, where I've been ever since.
           </Themed.p>
         </Container>
 
-        {/* Career visualization outside container for full width */}
-        <CareerPathVisualization />
+        <CareerPathCurve />
       </Flex>
     </Layout>
   )

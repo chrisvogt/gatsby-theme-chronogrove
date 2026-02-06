@@ -199,4 +199,83 @@ describe('Pagination', () => {
 
     expect(defaultProps.onPageChange).toHaveBeenCalledWith(10)
   })
+
+  describe('Simple mode', () => {
+    it('renders only prev/next buttons in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} />)
+
+      expect(screen.getByLabelText('Previous page')).toBeInTheDocument()
+      expect(screen.getByLabelText('Next page')).toBeInTheDocument()
+      // Should not render page number buttons
+      expect(screen.queryByText('1')).not.toBeInTheDocument()
+      expect(screen.queryByText('2')).not.toBeInTheDocument()
+    })
+
+    it('shows page counter in simple mode when showPageInfo is true', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} showPageInfo={true} />)
+
+      expect(screen.getByText('1/5')).toBeInTheDocument()
+    })
+
+    it('hides page counter in simple mode when showPageInfo is false', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} showPageInfo={false} />)
+
+      expect(screen.queryByText('1/5')).not.toBeInTheDocument()
+      // Buttons should still be present
+      expect(screen.getByLabelText('Previous page')).toBeInTheDocument()
+      expect(screen.getByLabelText('Next page')).toBeInTheDocument()
+    })
+
+    it('handles previous button click in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} currentPage={2} />)
+
+      const prevButton = screen.getByLabelText('Previous page')
+      fireEvent.click(prevButton)
+
+      expect(defaultProps.onPageChange).toHaveBeenCalledWith(1)
+    })
+
+    it('handles next button click in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} />)
+
+      const nextButton = screen.getByLabelText('Next page')
+      fireEvent.click(nextButton)
+
+      expect(defaultProps.onPageChange).toHaveBeenCalledWith(2)
+    })
+
+    it('disables previous button on first page in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} currentPage={1} />)
+
+      const prevButton = screen.getByLabelText('Previous page')
+      expect(prevButton).toBeDisabled()
+    })
+
+    it('disables next button on last page in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} currentPage={5} />)
+
+      const nextButton = screen.getByLabelText('Next page')
+      expect(nextButton).toBeDisabled()
+    })
+
+    it('applies custom variant in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} variant='secondary' />)
+
+      // Buttons should render with secondary variant
+      expect(screen.getByLabelText('Previous page')).toBeInTheDocument()
+      expect(screen.getByLabelText('Next page')).toBeInTheDocument()
+    })
+
+    it('applies custom size in simple mode', () => {
+      renderWithProviders(<Pagination {...defaultProps} simple={true} size='small' />)
+
+      // Buttons should render with small size
+      const prevButton = screen.getByLabelText('Previous page')
+      expect(prevButton).toHaveStyle({
+        fontSize: '10px',
+        minWidth: '24px',
+        height: '24px'
+      })
+    })
+  })
 })
