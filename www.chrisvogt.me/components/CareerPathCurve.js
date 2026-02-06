@@ -105,7 +105,14 @@ const CareerPathCurve = () => {
     setSegmentIndex(0)
   }
 
-  const rows = useMemo(() => groupCareerByCompany(careerData), [])
+  const rows = useMemo(() => {
+    const grouped = groupCareerByCompany(careerData)
+    // Reverse segments within each company so most recent role is first
+    return grouped.map(row => ({
+      ...row,
+      segments: [...row.segments].reverse()
+    }))
+  }, [])
   // Reverse so most recent (GoDaddy) is on the left; readers care more about recent roles
   const rowsOrdered = useMemo(() => [...rows].reverse(), [rows])
 
@@ -189,18 +196,77 @@ const CareerPathCurve = () => {
   const canPrev = hasMultipleRoles && safeIndex > 0
   const canNext = hasMultipleRoles && safeIndex < selectedRow.segments.length - 1
 
+  // Calculate panel position - always above circles with extra spacing for Pan Am, Kinkos, and OfficeMax
+  const panelPosition = useMemo(() => {
+    if (!selectedCompany) return null
+
+    const selectedCircle = circlePositions.find(cp => cp.company === selectedCompany)
+    if (!selectedCircle) return null
+
+    const baseSpacing = CIRCLE_R + 20
+    const panelMaxWidth = 240 // Reduced width for more condensed content
+    const paddingPercent = 1 // Minimum padding from viewport edges (1%)
+    
+    // Extra spacing for Kinkos and OfficeMax (Pan Am and Encore need less)
+    const isPanAm = selectedCompany === 'Pan Am Education'
+    const isEncore = selectedCompany === 'Encore Discovery Solutions'
+    const isKinkos = selectedCompany === "FedEx Kinko's"
+    const isOfficeMax = selectedCompany === 'OfficeMax Print & Document Services'
+    const isRobertHalf = selectedCompany === 'Robert Half & TEKsystems'
+    const needsFullExtraSpacing = isKinkos || isOfficeMax
+    const needsModerateSpacing = isPanAm || isEncore
+    
+    // Last 3 jobs (Robert Half, Kinkos, OfficeMax) should be right-justified
+    const shouldRightAlign = isRobertHalf || isKinkos || isOfficeMax
+    
+    const extraSpacing = needsFullExtraSpacing ? 40 : needsModerateSpacing ? 15 : 0
+
+    // Convert SVG coordinates to percentages
+    const circleXPercent = (selectedCircle.x / width) * 100
+    const circleYPercent = (selectedCircle.y / height) * 100
+    const panelMaxWidthPercent = (panelMaxWidth / width) * 100
+    const spacingPercentY = ((baseSpacing + extraSpacing) / height) * 100
+
+    // Always position above circles with extra spacing for specific companies
+    const topOffset = needsFullExtraSpacing ? 20 : needsModerateSpacing ? 14 : 12 // Extra vertical offset
+    const topPercent = Math.max(paddingPercent, circleYPercent - spacingPercentY - topOffset)
+    
+    // Position panels aligned with circle centers
+    let position = {}
+    if (shouldRightAlign) {
+      // Right-justified: right edge of panel aligns with circle center
+      const rightPercent = 100 - circleXPercent
+      // Ensure panel doesn't go off-screen
+      const maxRight = Math.min(rightPercent, 100 - paddingPercent)
+      position = {
+        right: `${maxRight}%`,
+        top: `${topPercent}%`,
+        maxWidth: `${Math.min(panelMaxWidthPercent, circleXPercent - paddingPercent)}%`,
+        textAlign: 'right'
+      }
+    } else {
+      // Left-justified: left edge of panel aligns with circle center
+      // Ensure panel doesn't go off-screen
+      const maxLeft = Math.max(circleXPercent, paddingPercent)
+      position = {
+        left: `${maxLeft}%`,
+        top: `${topPercent}%`,
+        maxWidth: `${Math.min(panelMaxWidthPercent, 100 - circleXPercent - paddingPercent)}%`,
+        textAlign: 'left'
+      }
+    }
+
+    return position
+  }, [selectedCompany, circlePositions, width, height])
+
   const detailPanelStyles = {
     position: 'absolute',
-    top: [2, 3],
-    right: [2, 3],
-    background: 'panel-background',
-    borderRadius: 12,
-    boxShadow: darkModeActive ? '0 8px 32px rgba(0,0,0,0.4)' : '0 8px 24px rgba(0,0,0,0.12)',
-    border: '1px solid rgba(255, 255, 255, 0.12)',
-    padding: [2, 3],
-    maxWidth: '320px',
-    maxHeight: '85%',
-    overflow: 'auto'
+    ...(panelPosition || {}),
+    maxWidth: panelPosition?.maxWidth || '240px',
+    width: ['calc(100% - 16px)', 'auto'],
+    zIndex: 10,
+    pointerEvents: 'auto',
+    textAlign: panelPosition?.textAlign || 'center'
   }
 
   const getInitials = company => {
@@ -254,13 +320,18 @@ const CareerPathCurve = () => {
               />
 
               {/* Date range nodes: one per company, aligned with circle positions */}
-              {circlePositions.map(({ x, y, company, row }) => {
+              {circlePositions.map(({ x, y, company, row }, index) => {
                 const range = companyDateRanges[company]
                 if (!range) return null
                 const isSelected = selectedCompany === company
                 const pathColor = row.segments[0].pathColor
                 const dateText = `${range.startYear}–${range.endYear === 2026 ? 'Present' : range.endYear}`
                 const timelineY = height - TIMELINE_HEIGHT
+                
+                // Last two circles (oldest companies) position text higher to avoid overlap
+                const isLastTwo = index >= circlePositions.length - 2
+                const textY = isLastTwo ? timelineY - 8 : timelineY + 14
+                
                 return (
                   <g key={`timeline-${company}`}>
                     {/* Connecting line from circle to timeline */}
@@ -284,7 +355,7 @@ const CareerPathCurve = () => {
                     />
                     <text
                       x={x}
-                      y={timelineY + 14}
+                      y={textY}
                       textAnchor='middle'
                       fontSize={isSelected ? 9 : 8}
                       fontWeight={isSelected ? '600' : '400'}
@@ -441,79 +512,44 @@ const CareerPathCurve = () => {
             ))}
           </Flex>
 
-          {/* Detail panel in upper-right (over the graph) when a company is selected */}
+          {/* Minimal info panel above selected circle (text only, no container) */}
           {selectedSegment && (
-            <Box sx={detailPanelStyles} role='region' aria-labelledby='career-detail-title'>
-              <Flex
+            <Box
+              sx={{
+                ...detailPanelStyles,
+                color: 'text'
+              }}
+              role='region'
+              aria-labelledby='career-detail-title'
+              onClick={e => e.stopPropagation()}
+            >
+              <Box
+                id='career-detail-title'
                 sx={{
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  mb: 2,
-                  pb: 2,
-                  borderBottom: '1px solid',
-                  borderColor: darkModeActive ? 'rgba(74, 158, 255, 0.25)' : 'rgba(66, 46, 163, 0.25)'
+                  fontSize: [0, 1],
+                  fontWeight: 'bold',
+                  color: selectedSegment.pathColor,
+                  mb: 0.5
                 }}
               >
-                <Flex sx={{ alignItems: 'center' }}>
-                  <Box
-                    sx={{
-                      width: '4px',
-                      height: '24px',
-                      borderRadius: '2px',
-                      mr: 2,
-                      bg: selectedSegment.pathColor
-                    }}
-                  />
-                  <Box>
-                    <Box sx={{ fontSize: 0, color: darkModeActive ? '#888' : '#666', fontWeight: 'medium', mb: 1 }}>
-                      {selectedSegment.company}
-                    </Box>
-                    <Box
-                      id='career-detail-title'
-                      sx={{
-                        fontSize: 2,
-                        fontWeight: 'bold',
-                        color: darkModeActive ? '#4a9eff' : '#422EA3',
-                        lineHeight: 'tight'
-                      }}
-                    >
-                      {selectedSegment.title}
-                    </Box>
-                  </Box>
-                </Flex>
-                <Box
-                  onClick={() => {
-                    setSelectedCompany(null)
-                    setSegmentIndex(0)
-                  }}
-                  sx={{
-                    cursor: 'pointer',
-                    width: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: darkModeActive ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)',
-                    color: darkModeActive ? '#e2e8f0' : '#4a5568',
-                    fontSize: '16px',
-                    fontWeight: 'bold',
-                    flexShrink: 0,
-                    '&:hover': { backgroundColor: darkModeActive ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.15)' }
-                  }}
-                >
-                  ×
+                {selectedSegment.title}
+              </Box>
+              {(selectedSegment.company || selectedSegment.dates) && (
+                <Box sx={{ fontSize: 0, color: 'textMuted', mb: hasMultipleRoles ? 0.5 : 1 }}>
+                  {selectedSegment.company && selectedSegment.dates
+                    ? `${selectedSegment.company} • ${selectedSegment.dates}`
+                    : selectedSegment.company || selectedSegment.dates}
                 </Box>
-              </Flex>
+              )}
               {hasMultipleRoles && (
-                <Flex sx={{ alignItems: 'center', gap: 2, mb: 2 }}>
+                <Flex sx={{ justifyContent: detailPanelStyles.textAlign === 'right' ? 'flex-end' : detailPanelStyles.textAlign === 'left' ? 'flex-start' : 'center', alignItems: 'center', gap: 1.5, mb: 1 }}>
                   <Box
                     as='button'
                     type='button'
                     onClick={() => setSegmentIndex(i => Math.max(0, i - 1))}
                     disabled={!canPrev}
                     sx={{
-                      padding: 1,
+                      padding: '2px 6px',
                       border: 'none',
                       borderRadius: 1,
                       bg: darkModeActive ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
@@ -526,7 +562,7 @@ const CareerPathCurve = () => {
                     ←
                   </Box>
                   <Box sx={{ fontSize: 0, color: 'textMuted' }}>
-                    {safeIndex + 1} of {selectedRow.segments.length}
+                    {safeIndex + 1}/{selectedRow.segments.length}
                   </Box>
                   <Box
                     as='button'
@@ -534,7 +570,7 @@ const CareerPathCurve = () => {
                     onClick={() => setSegmentIndex(i => Math.min(selectedRow.segments.length - 1, i + 1))}
                     disabled={!canNext}
                     sx={{
-                      padding: 1,
+                      padding: '2px 6px',
                       border: 'none',
                       borderRadius: 1,
                       bg: darkModeActive ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
@@ -548,34 +584,8 @@ const CareerPathCurve = () => {
                   </Box>
                 </Flex>
               )}
-              {selectedSegment.dates && (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    mb: 2,
-                    fontSize: 0,
-                    color: darkModeActive ? '#aaa' : '#777',
-                    fontWeight: 'medium'
-                  }}
-                >
-                  <Box sx={{ mr: 2 }}>📅</Box>
-                  {selectedSegment.dates}
-                </Box>
-              )}
               {selectedSegment.description && (
-                <Box
-                  sx={{
-                    fontSize: 0,
-                    color: 'textMuted',
-                    lineHeight: 'relaxed',
-                    fontStyle: 'italic',
-                    background: darkModeActive ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.8)',
-                    borderRadius: 2,
-                    padding: 2,
-                    border: darkModeActive ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.08)'
-                  }}
-                >
+                <Box sx={{ fontSize: 0, color: 'textMuted', fontStyle: 'italic', lineHeight: 1.4 }}>
                   {selectedSegment.description}
                 </Box>
               )}
