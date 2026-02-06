@@ -95,6 +95,8 @@ const CareerPathCurve = () => {
   }
 
   const rows = useMemo(() => groupCareerByCompany(careerData), [])
+  // Reverse so most recent (GoDaddy) is on the left; readers care more about recent roles
+  const rowsOrdered = useMemo(() => [...rows].reverse(), [rows])
 
   const { points, width, height } = useMemo(() => {
     const width = 700
@@ -103,7 +105,7 @@ const CareerPathCurve = () => {
     return { points: pts, width, height }
   }, [])
 
-  const N = rows.length
+  const N = rowsOrdered.length
   const pathSegments = useMemo(() => {
     const segs = []
     const len = points.length
@@ -112,7 +114,7 @@ const CareerPathCurve = () => {
       const endIdx = j === N - 1 ? len : Math.floor(((j + 1) * len) / N)
       const segmentPoints = points.slice(startIdx, endIdx + 1)
       if (segmentPoints.length < 2) continue
-      const row = rows[j]
+      const row = rowsOrdered[j]
       const pathColor = row.segments[0].pathColor
       segs.push({
         d: segmentPoints.reduce((acc, p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`), ''),
@@ -123,16 +125,16 @@ const CareerPathCurve = () => {
       })
     }
     return segs
-  }, [points, N, rows])
+  }, [points, N, rowsOrdered])
 
   const circlePositions = useMemo(() => {
     const len = points.length
-    return rows.map((row, j) => {
+    return rowsOrdered.map((row, j) => {
       const idx = Math.floor(((j + 0.5) * len) / N)
       const p = points[Math.min(idx, len - 1)]
       return { x: p.x, y: p.y, company: row.company, row }
     })
-  }, [points, N, rows])
+  }, [points, N, rowsOrdered])
 
   const selectedRow = selectedCompany ? rows.find(r => r.company === selectedCompany) : null
   const safeIndex = selectedRow ? Math.min(segmentIndex, selectedRow.segments.length - 1) : 0
@@ -170,6 +172,32 @@ const CareerPathCurve = () => {
       {/* Full-width graph container; detail panel in upper-right when a company is selected */}
       <Box sx={{ position: 'relative', width: '100%' }}>
         <Box sx={{ width: '100%' }}>
+          {/* Legend and hint at top center */}
+          <Flex
+            sx={{
+              justifyContent: 'center',
+              gap: [4, 5],
+              mb: 2,
+              flexWrap: 'wrap'
+            }}
+          >
+            {[
+              { name: 'Design', color: '#ed8936' },
+              { name: 'IT', color: '#4299e1' },
+              { name: 'Engineering', color: '#48bb78' }
+            ].map(({ name, color }) => (
+              <Flex key={name} sx={{ alignItems: 'center', gap: 1 }}>
+                <Box sx={{ width: 14, height: 14, borderRadius: 2, bg: color }} />
+                <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
+                  {name}
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
+          <Box sx={{ mb: 3, fontSize: 1, color: 'textMuted', fontStyle: 'italic', textAlign: 'center' }}>
+            Click a circle to see details.
+          </Box>
+
           <svg
             viewBox={`0 0 ${width} ${height}`}
             preserveAspectRatio='xMidYMid meet'
@@ -263,33 +291,6 @@ const CareerPathCurve = () => {
               )
             })}
           </svg>
-
-          {/* Legend: path colors */}
-          <Flex
-            sx={{
-              justifyContent: 'center',
-              gap: [4, 5],
-              mt: 3,
-              flexWrap: 'wrap'
-            }}
-          >
-            {[
-              { name: 'Design', color: '#ed8936' },
-              { name: 'IT', color: '#4299e1' },
-              { name: 'Engineering', color: '#48bb78' }
-            ].map(({ name, color }) => (
-              <Flex key={name} sx={{ alignItems: 'center', gap: 1 }}>
-                <Box sx={{ width: 14, height: 14, borderRadius: 2, bg: color }} />
-                <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
-                  {name}
-                </Box>
-              </Flex>
-            ))}
-          </Flex>
-
-          <Box sx={{ mt: 2, fontSize: 1, color: 'textMuted', fontStyle: 'italic', textAlign: 'center' }}>
-            Click a circle to see details.
-          </Box>
 
           {/* Detail panel in upper-right (over the graph) when a company is selected */}
           {selectedSegment && (
