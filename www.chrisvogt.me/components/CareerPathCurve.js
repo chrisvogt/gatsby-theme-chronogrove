@@ -331,7 +331,7 @@ const CareerPathCurve = () => {
               />
 
               {/* Date range nodes: one per company, aligned with circle positions */}
-              {circlePositions.map(({ x, y, company, row }, index) => {
+              {circlePositions.map(({ x, y, company, row }) => {
                 const range = companyDateRanges[company]
                 if (!range) return null
                 const isSelected = selectedCompany === company
@@ -339,9 +339,8 @@ const CareerPathCurve = () => {
                 const dateText = `${range.startYear}–${range.endYear === 2026 ? 'Present' : range.endYear}`
                 const timelineY = height - TIMELINE_HEIGHT
 
-                // Last two circles (oldest companies) position text higher to avoid overlap
-                const isLastTwo = index >= circlePositions.length - 2
-                const textY = isLastTwo ? timelineY - 8 : timelineY + 14
+                // Position all timeline text consistently below the timeline
+                const textY = timelineY + 14
 
                 return (
                   <g key={`timeline-${company}`}>

@@ -8,6 +8,7 @@ module.exports = {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     'src/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))',
+    '../www.chrisvogt.me/components/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))',
     'gatsby-browser.js',
     'gatsby-node.js',
     'gatsby-ssr.js',
