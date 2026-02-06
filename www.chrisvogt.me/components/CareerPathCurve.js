@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import careerData from '../src/data/career-path.json'
 import { groupCareerByCompany } from '../src/utils/flattenCareerPath'
 import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
+import Pagination from 'gatsby-theme-chronogrove/src/components/pagination'
 
 const NUM_SAMPLES = 200
 const CIRCLE_R = 20
@@ -193,8 +194,6 @@ const CareerPathCurve = () => {
       ? { company: selectedRow.company, ...selectedRow.segments[safeIndex] }
       : null
   const hasMultipleRoles = selectedRow && selectedRow.segments.length > 1
-  const canPrev = hasMultipleRoles && safeIndex > 0
-  const canNext = hasMultipleRoles && safeIndex < selectedRow.segments.length - 1
 
   const getInitials = company => {
     if (company === 'GoDaddy') return 'GD'
@@ -220,7 +219,10 @@ const CareerPathCurve = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'flex-start',
-              mb: [-4, -4, -6]
+              mb: [-4, -4, -6],
+              position: 'relative',
+              zIndex: 1,
+              pointerEvents: 'auto'
             }}
           >
             {selectedSegment ? (
@@ -249,47 +251,23 @@ const CareerPathCurve = () => {
                   </Box>
                 )}
                 {hasMultipleRoles && (
-                  <Flex sx={{ justifyContent: 'center', alignItems: 'center', gap: 1.5 }}>
-                    <Box
-                      as='button'
-                      type='button'
-                      onClick={() => setSegmentIndex(i => Math.max(0, i - 1))}
-                      disabled={!canPrev}
-                      sx={{
-                        padding: '2px 6px',
-                        border: 'none',
-                        borderRadius: 1,
-                        bg: darkModeActive ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
-                        color: canPrev ? 'text' : 'textMuted',
-                        cursor: canPrev ? 'pointer' : 'not-allowed',
-                        fontSize: 0
-                      }}
-                      aria-label='Previous role'
-                    >
-                      ←
-                    </Box>
-                    <Box sx={{ fontSize: 0, color: 'textMuted' }}>
-                      {safeIndex + 1}/{selectedRow.segments.length}
-                    </Box>
-                    <Box
-                      as='button'
-                      type='button'
-                      onClick={() => setSegmentIndex(i => Math.min(selectedRow.segments.length - 1, i + 1))}
-                      disabled={!canNext}
-                      sx={{
-                        padding: '2px 6px',
-                        border: 'none',
-                        borderRadius: 1,
-                        bg: darkModeActive ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
-                        color: canNext ? 'text' : 'textMuted',
-                        cursor: canNext ? 'pointer' : 'not-allowed',
-                        fontSize: 0
-                      }}
-                      aria-label='Next role'
-                    >
-                      →
-                    </Box>
-                  </Flex>
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      zIndex: 2,
+                      pointerEvents: 'auto'
+                    }}
+                  >
+                    <Pagination
+                      currentPage={safeIndex + 1}
+                      totalPages={selectedRow.segments.length}
+                      onPageChange={page => setSegmentIndex(page - 1)}
+                      size='small'
+                      variant='primary'
+                      simple={true}
+                      showPageInfo={true}
+                    />
+                  </Box>
                 )}
               </>
             ) : (
@@ -309,7 +287,14 @@ const CareerPathCurve = () => {
           <svg
             viewBox={`0 0 ${width} ${height}`}
             preserveAspectRatio='xMidYMid meet'
-            sx={{ width: '100%', height: 'auto', display: 'block', mt: [-3, -2, -4] }}
+            sx={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              mt: [-3, -2, -4],
+              position: 'relative',
+              zIndex: 0
+            }}
           >
             <defs>
               <filter id='career-avatar-shadow' x='-50%' y='-50%' width='200%' height='200%'>

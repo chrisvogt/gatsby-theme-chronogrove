@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react'
-import { jsx } from 'theme-ui'
+import { jsx, Box } from 'theme-ui'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PaginationButton from './pagination-button'
@@ -12,7 +12,8 @@ const Pagination = ({
   variant = 'primary',
   size = 'medium',
   showPageInfo = true,
-  maxVisiblePages = 5
+  maxVisiblePages = 5,
+  simple = false
 }) => {
   const goToPage = page => {
     if (page >= 1 && page <= totalPages && page !== currentPage) {
@@ -54,6 +55,44 @@ const Pagination = ({
   }
 
   const visiblePages = getVisiblePages()
+
+  // Simple mode: just prev/next buttons with optional page counter
+  if (simple) {
+    return (
+      <div sx={{ width: '100%' }}>
+        <div
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 1.5
+          }}
+        >
+          <PaginationButton
+            onClick={goToPrevious}
+            disabled={currentPage === 1}
+            variant={variant}
+            size={size}
+            icon={<FontAwesomeIcon icon={faChevronLeft} />}
+            aria-label='Previous page'
+          />
+          {showPageInfo && (
+            <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
+              {currentPage}/{totalPages}
+            </Box>
+          )}
+          <PaginationButton
+            onClick={goToNext}
+            disabled={currentPage === totalPages}
+            variant={variant}
+            size={size}
+            icon={<FontAwesomeIcon icon={faChevronRight} />}
+            aria-label='Next page'
+          />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div sx={{ width: '100%' }}>
