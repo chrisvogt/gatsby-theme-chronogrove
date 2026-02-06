@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.72.1
+
+### 🐛 Bug Fixes
+
+- **Header/nav font FOUC in production**: Fixed flash of unstyled content (FOUC) on hard reload where the header, skip link, and home left navigation briefly rendered as plain links before applying theme fonts
+  - **Root cause**: A custom Emotion cache in `wrapRootElement` was used for layout/header/nav styles, while `gatsby-plugin-emotion` extracts critical CSS using the default cache during SSR, so those styles were never inlined in the initial HTML
+  - **Fix**: Removed the custom `CacheProvider`/`createCache` so the app uses Emotion’s default cache; production builds now inline critical CSS for the header and nav correctly
+  - Only reproducible in production (e.g. after excluding `gatsby-theme-style-guide` in prod in 0.72.0); dev was unaffected
+
+### 📦 Files Changed
+
+- `theme/wrapRootElement.js` (removed custom Emotion cache)
+- `theme/wrapRootElement.spec.js` (removed CacheProvider test)
+
+---
+
 ## 0.72.0
 
 ### ✨ Features
