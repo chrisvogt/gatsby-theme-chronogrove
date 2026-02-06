@@ -1,6 +1,5 @@
 /** @jsx jsx */
-import { Global, CacheProvider } from '@emotion/react'
-import createCache from '@emotion/cache'
+import { Global } from '@emotion/react'
 import { jsx, useColorMode } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 import { Provider as ReduxProvider } from 'react-redux'
@@ -13,9 +12,6 @@ import RootWrapper from './src/components/root-wrapper'
 import store from './src/store'
 import theme from './src/gatsby-plugin-theme-ui'
 import YouTube from './src/shortcodes/youtube'
-
-// Create an Emotion cache
-const cache = createCache({ key: 'css', prepend: true })
 
 // Create a TanStack Query client with optimized defaults for Gatsby
 const queryClient = new QueryClient({
@@ -58,16 +54,14 @@ const components = {
 
 const WrapRootElement = ({ element }) => (
   <QueryClientProvider client={queryClient}>
-    <CacheProvider value={cache}>
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>
-          <Global styles={theme.global} />
-          <MDXProvider components={components}>
-            <RootWrapper>{element}</RootWrapper>
-          </MDXProvider>
-        </ThemeUIProvider>
-      </ReduxProvider>
-    </CacheProvider>
+    <ReduxProvider store={store}>
+      <ThemeUIProvider theme={theme}>
+        <Global styles={theme.global} />
+        <MDXProvider components={components}>
+          <RootWrapper>{element}</RootWrapper>
+        </MDXProvider>
+      </ThemeUIProvider>
+    </ReduxProvider>
   </QueryClientProvider>
 )
 

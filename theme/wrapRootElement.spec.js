@@ -41,11 +41,6 @@ describe('wrapRootElement', () => {
     expect(container).toBeDefined()
   })
 
-  it('renders CacheProvider wrapper', () => {
-    const { container } = render(<WrapRootElement element={<span>Cache Test</span>} />)
-    expect(container).toBeDefined()
-  })
-
   it('renders ReduxProvider wrapper', () => {
     const { container } = render(<WrapRootElement element={<span>Redux Test</span>} />)
     expect(container).toBeDefined()
