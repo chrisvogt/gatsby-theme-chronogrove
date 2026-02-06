@@ -41,10 +41,6 @@ const AboutPage = () => {
             Encore Discovery Solutions), and finally a shift into software engineering that led to web and front-end
             roles and, in 2017, to GoDaddy, where I've been ever since.
           </Themed.p>
-
-          <Themed.p sx={{ fontSize: 1, color: 'textMuted', fontStyle: 'italic', mb: 4 }}>
-            Click a circle on the curve to see details. Line opacity reflects time at each role.
-          </Themed.p>
         </Container>
 
         <CareerPathCurve />

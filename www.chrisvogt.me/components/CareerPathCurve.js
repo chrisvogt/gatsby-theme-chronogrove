@@ -85,6 +85,7 @@ function sampleSCurve(width, height, numSamples) {
 const CareerPathCurve = () => {
   const [selectedCompany, setSelectedCompany] = useState(null)
   const [segmentIndex, setSegmentIndex] = useState(0)
+  const [hoveredCompany, setHoveredCompany] = useState(null)
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
 
@@ -103,22 +104,6 @@ const CareerPathCurve = () => {
   }, [])
 
   const N = rows.length
-  const segmentOpacity = useMemo(() => {
-    const maxYears = Math.max(
-      ...rows.map(row => {
-        const starts = row.segments.map(s => s.startYear)
-        const ends = row.segments.map(s => s.endYear)
-        return Math.max(...ends) - Math.min(...starts)
-      })
-    )
-    return row => {
-      const starts = row.segments.map(s => s.startYear)
-      const ends = row.segments.map(s => s.endYear)
-      const years = Math.max(...ends) - Math.min(...starts)
-      return 0.5 + 0.5 * (years / Math.max(maxYears, 1))
-    }
-  }, [rows])
-
   const pathSegments = useMemo(() => {
     const segs = []
     const len = points.length
@@ -129,17 +114,16 @@ const CareerPathCurve = () => {
       if (segmentPoints.length < 2) continue
       const row = rows[j]
       const pathColor = row.segments[0].pathColor
-      const opacity = segmentOpacity(row)
       segs.push({
         d: segmentPoints.reduce((acc, p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`), ''),
         color: pathColor,
-        opacity,
+        opacity: 0.9,
         company: row.company,
         row
       })
     }
     return segs
-  }, [points, N, rows, segmentOpacity])
+  }, [points, N, rows])
 
   const circlePositions = useMemo(() => {
     const len = points.length
@@ -191,6 +175,11 @@ const CareerPathCurve = () => {
             preserveAspectRatio='xMidYMid meet'
             style={{ width: '100%', height: 'auto', display: 'block' }}
           >
+            <defs>
+              <filter id='career-avatar-shadow' x='-50%' y='-50%' width='200%' height='200%'>
+                <feDropShadow dx='0' dy='2' stdDeviation='3' floodOpacity={darkModeActive ? 0.4 : 0.25} />
+              </filter>
+            </defs>
             {/* Line segments: color = path, opacity = tenure */}
             {pathSegments.map((seg, i) => (
               <path
@@ -205,25 +194,38 @@ const CareerPathCurve = () => {
               />
             ))}
 
-            {/* Circles (company avatars): logo image if in CAREER_LOGOS, else initials */}
+            {/* Circles (company avatars): logo if in CAREER_LOGOS, else initials. Hover/selected = scale + shadow (theme floatOnHover). */}
             {circlePositions.map(({ x, y, company, row }, i) => {
               const pathColor = row.segments[0].pathColor
               const isSelected = selectedCompany === company
+              const isHovered = hoveredCompany === company
+              const isLifted = isSelected || isHovered
               const logoSrc = CAREER_LOGOS[company]
               const clipId = `career-avatar-clip-${i}`
               return (
-                <g key={company} style={{ cursor: 'pointer' }} onClick={() => handleSelectCompany(company)}>
+                <g
+                  key={company}
+                  transform={`translate(${x}, ${y})${isLifted ? ' scale(1.05)' : ''}`}
+                  style={{
+                    cursor: 'pointer',
+                    transition: 'transform 200ms ease-in-out'
+                  }}
+                  onClick={() => handleSelectCompany(company)}
+                  onMouseEnter={() => setHoveredCompany(company)}
+                  onMouseLeave={() => setHoveredCompany(null)}
+                >
                   <circle
-                    cx={x}
-                    cy={y}
+                    cx={0}
+                    cy={0}
                     r={CIRCLE_R}
                     fill='#ffffff'
                     stroke={pathColor}
                     strokeWidth={isSelected ? 4 : 2}
                     opacity={1}
+                    filter={isLifted ? 'url(#career-avatar-shadow)' : undefined}
                   />
                   {logoSrc ? (
-                    <g transform={`translate(${x}, ${y})`}>
+                    <g>
                       <defs>
                         <clipPath id={clipId}>
                           <circle r={CIRCLE_R - 2} cx={0} cy={0} />
@@ -242,8 +244,8 @@ const CareerPathCurve = () => {
                     </g>
                   ) : (
                     <text
-                      x={x}
-                      y={y}
+                      x={0}
+                      y={0}
                       textAnchor='middle'
                       dominantBaseline='central'
                       style={{
@@ -262,8 +264,31 @@ const CareerPathCurve = () => {
             })}
           </svg>
 
-          <Box sx={{ mt: 3, fontSize: 1, color: 'textMuted', fontStyle: 'italic', textAlign: 'center' }}>
-            Click a circle to see details. Line opacity reflects time at each role.
+          {/* Legend: path colors */}
+          <Flex
+            sx={{
+              justifyContent: 'center',
+              gap: [4, 5],
+              mt: 3,
+              flexWrap: 'wrap'
+            }}
+          >
+            {[
+              { name: 'Design', color: '#ed8936' },
+              { name: 'IT', color: '#4299e1' },
+              { name: 'Engineering', color: '#48bb78' }
+            ].map(({ name, color }) => (
+              <Flex key={name} sx={{ alignItems: 'center', gap: 1 }}>
+                <Box sx={{ width: 14, height: 14, borderRadius: 2, bg: color }} />
+                <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
+                  {name}
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
+
+          <Box sx={{ mt: 2, fontSize: 1, color: 'textMuted', fontStyle: 'italic', textAlign: 'center' }}>
+            Click a circle to see details.
           </Box>
 
           {/* Detail panel in upper-right (over the graph) when a company is selected */}
