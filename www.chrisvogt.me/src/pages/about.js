@@ -3,7 +3,7 @@ import { Container, Flex } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import Layout from 'gatsby-theme-chronogrove/src/components/layout'
 import Seo from 'gatsby-theme-chronogrove/src/components/seo'
-import CareerPathVisualization from '../../components/CareerPathVisualization'
+import CareerPathCurve from '../../components/CareerPathCurve'
 
 const AboutPage = () => {
   return (
@@ -43,12 +43,11 @@ const AboutPage = () => {
           </Themed.p>
 
           <Themed.p sx={{ fontSize: 1, color: 'textMuted', fontStyle: 'italic', mb: 4 }}>
-            Click on any node below to learn more about that role or transition.
+            Click a circle on the curve to see details. Line opacity reflects time at each role.
           </Themed.p>
         </Container>
 
-        {/* Career visualization outside container for full width */}
-        <CareerPathVisualization />
+        <CareerPathCurve />
       </Flex>
     </Layout>
   )
