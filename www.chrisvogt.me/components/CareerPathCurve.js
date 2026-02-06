@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Box, Flex, useThemeUI } from 'theme-ui'
+import { useInView } from 'react-intersection-observer'
 import careerData from '../src/data/career-path.json'
 import { groupCareerByCompany } from '../src/utils/flattenCareerPath'
 import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
@@ -89,6 +90,13 @@ const CareerPathCurve = () => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
 
+  // Wait until component is in view before starting animations
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: '50px'
+  })
+
   const handleSelectCompany = company => {
     setSelectedCompany(prev => (prev === company ? null : company))
     setSegmentIndex(0)
@@ -116,12 +124,18 @@ const CareerPathCurve = () => {
       if (segmentPoints.length < 2) continue
       const row = rowsOrdered[j]
       const pathColor = row.segments[0].pathColor
+      const pathD = segmentPoints.reduce((acc, p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`), '')
+      const pathLength = segmentPoints.reduce(
+        (acc, p, i) => (i === 0 ? 0 : acc + Math.hypot(p.x - segmentPoints[i - 1].x, p.y - segmentPoints[i - 1].y)),
+        0
+      )
       segs.push({
-        d: segmentPoints.reduce((acc, p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`), ''),
+        d: pathD,
         color: pathColor,
         opacity: 0.9,
         company: row.company,
-        row
+        row,
+        length: pathLength
       })
     }
     return segs
@@ -168,7 +182,7 @@ const CareerPathCurve = () => {
   }
 
   return (
-    <Box sx={{ width: '100%', py: 4 }}>
+    <Box sx={{ width: '100%', py: 4 }} ref={ref}>
       {/* Full-width graph container; detail panel in upper-right when a company is selected */}
       <Box sx={{ position: 'relative', width: '100%' }}>
         <Box sx={{ width: '100%' }}>
@@ -198,6 +212,15 @@ const CareerPathCurve = () => {
             Click a circle to see details.
           </Box>
 
+          <style>{`
+            @keyframes career-draw-path {
+              to { stroke-dashoffset: 0; }
+            }
+            @keyframes career-reveal-circle {
+              from { opacity: 0; transform: scale(0.5); }
+              to { opacity: 1; transform: scale(1); }
+            }
+          `}</style>
           <svg
             viewBox={`0 0 ${width} ${height}`}
             preserveAspectRatio='xMidYMid meet'
@@ -208,7 +231,7 @@ const CareerPathCurve = () => {
                 <feDropShadow dx='0' dy='2' stdDeviation='3' floodOpacity={darkModeActive ? 0.4 : 0.25} />
               </filter>
             </defs>
-            {/* Line segments: color = path, opacity = tenure */}
+            {/* Line segments: paint in sequence (stroke-dashoffset), then circles reveal */}
             {pathSegments.map((seg, i) => (
               <path
                 key={i}
@@ -219,10 +242,18 @@ const CareerPathCurve = () => {
                 strokeLinecap='round'
                 strokeLinejoin='round'
                 opacity={seg.opacity}
+                strokeDasharray={seg.length}
+                strokeDashoffset={seg.length}
+                style={{
+                  ...(inView && {
+                    animation: 'career-draw-path 0.55s ease-out forwards',
+                    animationDelay: `${i * 0.4}s`
+                  })
+                }}
               />
             ))}
 
-            {/* Circles (company avatars): logo if in CAREER_LOGOS, else initials. Hover/selected = scale + shadow (theme floatOnHover). */}
+            {/* Circles: reveal (fade + scale) as each segment finishes painting */}
             {circlePositions.map(({ x, y, company, row }, i) => {
               const pathColor = row.segments[0].pathColor
               const isSelected = selectedCompany === company
@@ -230,6 +261,7 @@ const CareerPathCurve = () => {
               const isLifted = isSelected || isHovered
               const logoSrc = CAREER_LOGOS[company]
               const clipId = `career-avatar-clip-${i}`
+              const revealDelay = i * 0.4 + 0.28
               return (
                 <g
                   key={company}
@@ -242,51 +274,62 @@ const CareerPathCurve = () => {
                   onMouseEnter={() => setHoveredCompany(company)}
                   onMouseLeave={() => setHoveredCompany(null)}
                 >
-                  <circle
-                    cx={0}
-                    cy={0}
-                    r={CIRCLE_R}
-                    fill='#ffffff'
-                    stroke={pathColor}
-                    strokeWidth={isSelected ? 4 : 2}
-                    opacity={1}
-                    filter={isLifted ? 'url(#career-avatar-shadow)' : undefined}
-                  />
-                  {logoSrc ? (
-                    <g>
-                      <defs>
-                        <clipPath id={clipId}>
-                          <circle r={CIRCLE_R - 2} cx={0} cy={0} />
-                        </clipPath>
-                      </defs>
-                      <image
-                        href={logoSrc}
-                        x={-CIRCLE_R + 2}
-                        y={-CIRCLE_R + 2}
-                        width={(CIRCLE_R - 2) * 2}
-                        height={(CIRCLE_R - 2) * 2}
-                        clipPath={`url(#${clipId})`}
-                        preserveAspectRatio='xMidYMid meet'
-                        style={{ pointerEvents: 'none' }}
-                      />
-                    </g>
-                  ) : (
-                    <text
-                      x={0}
-                      y={0}
-                      textAnchor='middle'
-                      dominantBaseline='central'
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        fill: pathColor,
-                        pointerEvents: 'none',
-                        userSelect: 'none'
-                      }}
-                    >
-                      {getInitials(company)}
-                    </text>
-                  )}
+                  <g
+                    style={{
+                      ...(inView && {
+                        animation: 'career-reveal-circle 0.4s ease-out forwards',
+                        animationDelay: `${revealDelay}s`
+                      }),
+                      opacity: 0,
+                      transformOrigin: '0 0'
+                    }}
+                  >
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={CIRCLE_R}
+                      fill='#ffffff'
+                      stroke={pathColor}
+                      strokeWidth={isSelected ? 4 : 2}
+                      opacity={1}
+                      filter={isLifted ? 'url(#career-avatar-shadow)' : undefined}
+                    />
+                    {logoSrc ? (
+                      <g>
+                        <defs>
+                          <clipPath id={clipId}>
+                            <circle r={CIRCLE_R - 2} cx={0} cy={0} />
+                          </clipPath>
+                        </defs>
+                        <image
+                          href={logoSrc}
+                          x={-CIRCLE_R + 2}
+                          y={-CIRCLE_R + 2}
+                          width={(CIRCLE_R - 2) * 2}
+                          height={(CIRCLE_R - 2) * 2}
+                          clipPath={`url(#${clipId})`}
+                          preserveAspectRatio='xMidYMid meet'
+                          style={{ pointerEvents: 'none' }}
+                        />
+                      </g>
+                    ) : (
+                      <text
+                        x={0}
+                        y={0}
+                        textAnchor='middle'
+                        dominantBaseline='central'
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          fill: pathColor,
+                          pointerEvents: 'none',
+                          userSelect: 'none'
+                        }}
+                      >
+                        {getInitials(company)}
+                      </text>
+                    )}
+                  </g>
                 </g>
               )
             })}
