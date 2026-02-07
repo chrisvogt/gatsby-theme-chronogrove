@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.72.3
+
+### 🐛 Bug Fixes
+
+- **Home navigation icon vertical alignment**: Icons in the home left nav now align vertically with the link text
+  - Link uses inline `display: flex` and `alignItems: center` so icon and text are centered from first paint
+
+### 📦 Files Changed
+
+- `theme/src/components/home-navigation.js` (flex alignment on nav link)
+
+---
+
 ## 0.72.2
 
 ### 🐛 Bug Fixes
