@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.72.5
+
+### ✨ Features
+
+- **Goodreads book link tilt interaction**: Book links in the Goodreads widget now respond with a subtle tilt effect on hover/focus for improved interactivity feedback
+
+### 📦 Files Changed
+
+- `theme/src/components/widgets/goodreads/book-link.js` (tilt response on book interactions)
+
+---
+
 ## 0.72.4
 
 ### 🐛 Bug Fixes
