@@ -24,7 +24,7 @@ const CAREER_LOGOS = {
   "FedEx Kinko's": '/images/career-logos/fedex-kinkos.gif',
   'Robert Half & TEKsystems': '/images/career-logos/robert-half.png',
   'Apogee Physicians': '/images/career-logos/apogee-physicians.jpg',
-  'Encore Discovery Solutions': '/images/career-logos/encore-discovery-solutions.svg',
+  'Encore Discovery Solutions': '/images/career-logos/encore-discovery.png',
   'Salucro Healthcare Solutions': '/images/career-logos/salucro.svg',
   GoDaddy: '/images/career-logos/godaddy-logo.webp',
   'Art In Reality, LLC': '/images/career-logos/artinreality.png',
