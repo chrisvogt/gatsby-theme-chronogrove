@@ -24,19 +24,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const graphRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  // Render tracking for debugging (can be removed after investigation)
-  const renderCount = useRef(0)
-  useEffect(() => {
-    renderCount.current += 1
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`ContributionGraph rendered ${renderCount.current} times`, {
-        isLoading,
-        hasData: !!contributionCalendar?.weeks?.length,
-        colorMode
-      })
-    }
-  })
-
   // Intersection Observer to trigger animation when component comes into view
   useEffect(() => {
     if (!graphRef.current || isLoading || !contributionCalendar?.weeks?.length) return
