@@ -97,6 +97,15 @@ jest.mock(
             startYear: 2003,
             endYear: 2005,
             description: 'Print and design work'
+          },
+          {
+            name: 'Apogee Physicians',
+            type: 'job',
+            title: 'Creative Director',
+            dates: '2010 – 2012',
+            startYear: 2010,
+            endYear: 2012,
+            description: 'Design and branding'
           }
         ]
       }
@@ -163,6 +172,17 @@ describe('CareerPathCurve', () => {
       const svg = container.querySelector('svg')
       const paths = svg.querySelectorAll('path')
       expect(paths.length).toBeGreaterThan(0)
+    })
+
+    it('renders gradient for path segments that transition between paths', () => {
+      const { container } = renderWithTheme(<CareerPathCurve />)
+      const svg = container.querySelector('svg')
+      const gradients = svg.querySelectorAll('linearGradient')
+      expect(gradients.length).toBeGreaterThan(0)
+      const pathWithGradient = Array.from(svg.querySelectorAll('path')).find(p =>
+        p.getAttribute('stroke')?.startsWith('url(#career-segment-gradient-')
+      )
+      expect(pathWithGradient).toBeInTheDocument()
     })
 
     it('renders circles for each company', () => {

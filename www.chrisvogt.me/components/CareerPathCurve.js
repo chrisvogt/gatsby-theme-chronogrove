@@ -160,19 +160,27 @@ const CareerPathCurve = () => {
       const segmentPoints = points.slice(startIdx, endIdx + 1)
       if (segmentPoints.length < 2) continue
       const row = rowsOrdered[j]
-      const pathColor = row.segments[0].pathColor
+      const firstColor = row.segments[0].pathColor
+      const lastColor = row.segments[row.segments.length - 1].pathColor
+      const isTransition = row.segments.length > 1 && firstColor !== lastColor
       const pathD = segmentPoints.reduce((acc, p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `${acc} L ${p.x} ${p.y}`), '')
       const pathLength = segmentPoints.reduce(
         (acc, p, i) => (i === 0 ? 0 : acc + Math.hypot(p.x - segmentPoints[i - 1].x, p.y - segmentPoints[i - 1].y)),
         0
       )
+      const startPt = segmentPoints[0]
+      const endPt = segmentPoints[segmentPoints.length - 1]
       segs.push({
         d: pathD,
-        color: pathColor,
+        color: firstColor,
         opacity: 0.9,
         company: row.company,
         row,
-        length: pathLength
+        length: pathLength,
+        isTransition,
+        gradient: isTransition
+          ? { colorFrom: firstColor, colorTo: lastColor, x1: startPt.x, y1: startPt.y, x2: endPt.x, y2: endPt.y }
+          : null
       })
     }
     return segs
@@ -306,6 +314,23 @@ const CareerPathCurve = () => {
                 <filter id='career-avatar-shadow' x='-50%' y='-50%' width='200%' height='200%'>
                   <feDropShadow dx='0' dy='2' stdDeviation='3' floodOpacity={darkModeActive ? 0.4 : 0.25} />
                 </filter>
+                {pathSegments.map(
+                  (seg, i) =>
+                    seg.gradient && (
+                      <linearGradient
+                        key={`gradient-${i}`}
+                        id={`career-segment-gradient-${i}`}
+                        gradientUnits='userSpaceOnUse'
+                        x1={seg.gradient.x1}
+                        y1={seg.gradient.y1}
+                        x2={seg.gradient.x2}
+                        y2={seg.gradient.y2}
+                      >
+                        <stop offset='0%' stopColor={seg.gradient.colorFrom} />
+                        <stop offset='100%' stopColor={seg.gradient.colorTo} />
+                      </linearGradient>
+                    )
+                )}
               </defs>
 
               {/* Timeline nodes at bottom: date ranges aligned with each company's circle position */}
@@ -377,7 +402,7 @@ const CareerPathCurve = () => {
                   key={i}
                   d={seg.d}
                   fill='none'
-                  stroke={seg.color}
+                  stroke={seg.isTransition ? `url(#career-segment-gradient-${i})` : seg.color}
                   strokeWidth={STROKE_WIDTH}
                   strokeLinecap='round'
                   strokeLinejoin='round'
