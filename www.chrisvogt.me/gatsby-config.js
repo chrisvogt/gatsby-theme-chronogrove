@@ -33,9 +33,7 @@ module.exports = {
     },
     imageURL: '/images/og-image.png',
     languageCode: 'en',
-    social: {
-      twitterUsername: '@c1v0'
-    },
+    social: {},
     subhead: 'Code, Music & Photography',
     title: 'chrisvogt.me',
     titleTemplate: '%s — Chris Vogt, Software Engineer in San Francisco',
@@ -92,9 +90,7 @@ module.exports = {
             category: 'Software Developer',
             photoURL: 'https://chrisvogt.imgix.net/ig/17948822426064646.jpg'
           },
-          social: {
-            twitterUsername: '@c1v0'
-          },
+          social: {},
           footerText: 'Made with ❤️ in San Francisco',
           titleTemplate: '%s — Chris Vogt, Software Engineer in San Francisco',
           socialProfiles: [
@@ -128,17 +124,6 @@ module.exports = {
                 class: 'fab fa-linkedin',
                 name: 'linkedin',
                 reactIcon: 'faLinkedin',
-                set: 'fab'
-              }
-            },
-            {
-              displayName: 'Twitter',
-              slug: 'twitter',
-              href: 'https://twitter.com/c1v0',
-              icon: {
-                class: 'fab fa-x-twitter',
-                name: 'twitter',
-                reactIcon: 'faXTwitter',
                 set: 'fab'
               }
             },

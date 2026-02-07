@@ -28,8 +28,6 @@ export default function HomeHead() {
         sameAs: [
           'https://linkedin.com/in/cjvogt',
           'https://github.com/chrisvogt',
-          'https://x.com/c1v0',
-          'https://twitter.com/c1v0',
           'https://www.instagram.com/c1v0',
           'https://stackoverflow.com/users/1391826/chris-vogt',
           'https://bsky.app/profile/chrisvogt.me',
