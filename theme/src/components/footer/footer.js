@@ -31,7 +31,14 @@ export default () => {
             </span>
             {' | '}
             <span>
-              <Link to='https://github.com/chrisvogt/gatsby-theme-chronogrove'>View Source</Link>
+              <ThemedLink
+                href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
+                target='_blank'
+                rel='noopener noreferrer'
+                sx={{ textDecoration: 'underline' }}
+              >
+                View Source
+              </ThemedLink>
             </span>
           </div>
         </div>
