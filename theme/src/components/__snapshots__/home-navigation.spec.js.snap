@@ -12,6 +12,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -37,6 +38,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -76,6 +78,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -101,6 +104,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -125,6 +129,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
       </a>
       <a
         class="css-14xb3ys"
+        style="display: flex; align-items: center;"
       >
         Test
       </a>
@@ -145,6 +150,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -170,6 +176,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -195,6 +202,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
       <a
         class="css-14xb3ys"
         href="/test"
+        style="display: flex; align-items: center;"
       />
     </nav>
   </div>
@@ -213,6 +221,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -238,6 +247,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -263,12 +273,14 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
       <a
         class="css-14xb3ys"
         href="/about"
+        style="display: flex; align-items: center;"
       >
         About
       </a>
       <a
         class="css-14xb3ys"
         href="/blog"
+        style="display: flex; align-items: center;"
       >
         Blog
       </a>
@@ -289,6 +301,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -314,6 +327,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -353,6 +367,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -378,6 +393,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -417,6 +433,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -442,6 +459,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -481,6 +499,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -506,6 +525,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -531,6 +551,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
       <a
         class="css-14xb3ys"
         href="/complex-slug"
+        style="display: flex; align-items: center;"
       >
         Complex Slug
       </a>
@@ -551,6 +572,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -576,6 +598,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -601,6 +624,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
       <a
         class="css-14xb3ys"
         href="/discogs"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -640,6 +664,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -665,6 +690,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -690,6 +716,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
       <a
         class="css-14xb3ys"
         href="/test"
+        style="display: flex; align-items: center;"
       >
         Test
       </a>
@@ -710,6 +737,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
       <a
         class="active css-14xb3ys"
         href="#top"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -735,6 +763,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
       <a
         class="css-14xb3ys"
         href="#posts"
+        style="display: flex; align-items: center;"
       >
         <span
           aria-hidden="true"
@@ -760,12 +789,14 @@ exports[`HomeNavigation matches the snapshot 1`] = `
       <a
         class="css-14xb3ys"
         href="/about"
+        style="display: flex; align-items: center;"
       >
         About
       </a>
       <a
         class="css-14xb3ys"
         href="/blog"
+        style="display: flex; align-items: center;"
       >
         Blog
       </a>
