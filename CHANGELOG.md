@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.4
+
+### 🐛 Bug Fixes
+
+- **Home navigation icon alignment in production**: Icons in the home left nav now vertically align with text in production (previously only in dev/preview)
+  - Moved `display: flex` and `alignItems: center` into the theme `homeNavigation` link variant so they are in critical CSS and apply from first paint; inline styles were overridden by the variant in prod
+
+### 📦 Files Changed
+
+- `theme/src/gatsby-plugin-theme-ui/theme.js` (homeNavigation variant: flex + alignItems)
+- `theme/src/components/home-navigation.js` (removed redundant inline style)
+
+---
+
 ## 0.72.3
 
 ### 🐛 Bug Fixes

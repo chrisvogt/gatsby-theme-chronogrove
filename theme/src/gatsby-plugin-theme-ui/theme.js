@@ -386,7 +386,8 @@ export default merge(tailwind, {
   links: {
     homeNavigation: {
       color: 'primary',
-      display: 'block',
+      display: 'flex',
+      alignItems: 'center',
       py: 2,
       textDecoration: 'none',
       '&:not(:last-of-type)': {

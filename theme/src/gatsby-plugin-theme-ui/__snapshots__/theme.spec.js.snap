@@ -517,8 +517,9 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "&:not(:last-of-type)": {
         "borderBottom": "var(--theme-ui-colors-panel-divider)",
       },
+      "alignItems": "center",
       "color": "primary",
-      "display": "block",
+      "display": "flex",
       "py": 2,
       "textDecoration": "none",
     },
