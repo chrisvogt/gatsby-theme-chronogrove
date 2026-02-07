@@ -215,12 +215,13 @@ const CareerPathCurve = () => {
               textAlign: 'center',
               maxWidth: '600px',
               mx: 'auto',
-              minHeight: '180px',
+              minHeight: '220px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'flex-start',
               mb: [-4, -4, -6],
               position: 'relative',
+              top: [2, 3, 4],
               zIndex: 1,
               pointerEvents: 'auto'
             }}
@@ -284,190 +285,196 @@ const CareerPathCurve = () => {
               to { opacity: 1; transform: scale(1); }
             }
           `}</style>
-          <svg
-            viewBox={`0 0 ${width} ${height}`}
-            preserveAspectRatio='xMidYMid meet'
+          <Box
             sx={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              mt: [-3, -2, -4],
               position: 'relative',
-              zIndex: 0
+              zIndex: 0,
+              mt: [-3, -2, -4],
+              transform: ['translateY(-24px)', 'translateY(-32px)', 'translateY(-40px)']
             }}
           >
-            <defs>
-              <filter id='career-avatar-shadow' x='-50%' y='-50%' width='200%' height='200%'>
-                <feDropShadow dx='0' dy='2' stdDeviation='3' floodOpacity={darkModeActive ? 0.4 : 0.25} />
-              </filter>
-            </defs>
+            <svg
+              viewBox={`0 0 ${width} ${height}`}
+              preserveAspectRatio='xMidYMid meet'
+              sx={{
+                width: '100%',
+                height: 'auto',
+                display: 'block'
+              }}
+            >
+              <defs>
+                <filter id='career-avatar-shadow' x='-50%' y='-50%' width='200%' height='200%'>
+                  <feDropShadow dx='0' dy='2' stdDeviation='3' floodOpacity={darkModeActive ? 0.4 : 0.25} />
+                </filter>
+              </defs>
 
-            {/* Timeline nodes at bottom: date ranges aligned with each company's circle position */}
-            <g>
-              {/* Timeline baseline */}
-              <line
-                x1={MARGIN}
-                y1={height - TIMELINE_HEIGHT}
-                x2={width - MARGIN}
-                y2={height - TIMELINE_HEIGHT}
-                stroke={darkModeActive ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)'}
-                strokeWidth={1}
-                opacity={selectedCompany ? 0.3 : 0.15}
-              />
+              {/* Timeline nodes at bottom: date ranges aligned with each company's circle position */}
+              <g>
+                {/* Timeline baseline */}
+                <line
+                  x1={MARGIN}
+                  y1={height - TIMELINE_HEIGHT}
+                  x2={width - MARGIN}
+                  y2={height - TIMELINE_HEIGHT}
+                  stroke={darkModeActive ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.1)'}
+                  strokeWidth={1}
+                  opacity={selectedCompany ? 0.3 : 0.15}
+                />
 
-              {/* Date range nodes: one per company, aligned with circle positions */}
-              {circlePositions.map(({ x, y, company, row }) => {
-                const range = companyDateRanges[company]
-                if (!range) return null
-                const isSelected = selectedCompany === company
+                {/* Date range nodes: one per company, aligned with circle positions */}
+                {circlePositions.map(({ x, y, company, row }) => {
+                  const range = companyDateRanges[company]
+                  if (!range) return null
+                  const isSelected = selectedCompany === company
+                  const pathColor = row.segments[0].pathColor
+                  const dateText = `${range.startYear}–${range.endYear === 2026 ? 'Present' : range.endYear}`
+                  const timelineY = height - TIMELINE_HEIGHT
+
+                  // Position all timeline text consistently below the timeline
+                  const textY = timelineY + 14
+
+                  return (
+                    <g key={`timeline-${company}`}>
+                      {/* Connecting line from circle to timeline */}
+                      <line
+                        x1={x}
+                        y1={y + CIRCLE_R}
+                        x2={x}
+                        y2={timelineY}
+                        stroke={pathColor}
+                        strokeWidth={isSelected ? 2 : 1}
+                        strokeDasharray={isSelected ? 'none' : '2,2'}
+                        opacity={isSelected ? 0.4 : 0.15}
+                      />
+                      {/* Date range node */}
+                      <circle
+                        cx={x}
+                        cy={timelineY}
+                        r={isSelected ? 4 : 3}
+                        fill={pathColor}
+                        opacity={isSelected ? 0.8 : 0.4}
+                      />
+                      <text
+                        x={x}
+                        y={textY}
+                        textAnchor='middle'
+                        fontSize={isSelected ? 9 : 8}
+                        fontWeight={isSelected ? '600' : '400'}
+                        fill={pathColor}
+                        opacity={isSelected ? 1 : 0.5}
+                        style={{ userSelect: 'none', pointerEvents: 'none' }}
+                      >
+                        {dateText}
+                      </text>
+                    </g>
+                  )
+                })}
+              </g>
+
+              {/* Line segments: paint in sequence (stroke-dashoffset), then circles reveal */}
+              {pathSegments.map((seg, i) => (
+                <path
+                  key={i}
+                  d={seg.d}
+                  fill='none'
+                  stroke={seg.color}
+                  strokeWidth={STROKE_WIDTH}
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  opacity={seg.opacity}
+                  strokeDasharray={seg.length}
+                  strokeDashoffset={seg.length}
+                  style={{
+                    ...(inView && {
+                      animation: 'career-draw-path 0.55s ease-out forwards',
+                      animationDelay: `${i * 0.4}s`
+                    })
+                  }}
+                />
+              ))}
+
+              {/* Circles: reveal (fade + scale) as each segment finishes painting */}
+              {circlePositions.map(({ x, y, company, row }, i) => {
                 const pathColor = row.segments[0].pathColor
-                const dateText = `${range.startYear}–${range.endYear === 2026 ? 'Present' : range.endYear}`
-                const timelineY = height - TIMELINE_HEIGHT
-
-                // Position all timeline text consistently below the timeline
-                const textY = timelineY + 14
-
+                const isSelected = selectedCompany === company
+                const isHovered = hoveredCompany === company
+                const isLifted = isSelected || isHovered
+                const logoSrc = CAREER_LOGOS[company]
+                const clipId = `career-avatar-clip-${i}`
+                const revealDelay = i * 0.4 + 0.28
                 return (
-                  <g key={`timeline-${company}`}>
-                    {/* Connecting line from circle to timeline */}
-                    <line
-                      x1={x}
-                      y1={y + CIRCLE_R}
-                      x2={x}
-                      y2={timelineY}
-                      stroke={pathColor}
-                      strokeWidth={isSelected ? 2 : 1}
-                      strokeDasharray={isSelected ? 'none' : '2,2'}
-                      opacity={isSelected ? 0.4 : 0.15}
-                    />
-                    {/* Date range node */}
-                    <circle
-                      cx={x}
-                      cy={timelineY}
-                      r={isSelected ? 4 : 3}
-                      fill={pathColor}
-                      opacity={isSelected ? 0.8 : 0.4}
-                    />
-                    <text
-                      x={x}
-                      y={textY}
-                      textAnchor='middle'
-                      fontSize={isSelected ? 9 : 8}
-                      fontWeight={isSelected ? '600' : '400'}
-                      fill={pathColor}
-                      opacity={isSelected ? 1 : 0.5}
-                      style={{ userSelect: 'none', pointerEvents: 'none' }}
+                  <g
+                    key={company}
+                    transform={`translate(${x}, ${y})${isLifted ? ' scale(1.05)' : ''}`}
+                    style={{
+                      cursor: 'pointer',
+                      transition: 'transform 200ms ease-in-out'
+                    }}
+                    onClick={() => handleSelectCompany(company)}
+                    onMouseEnter={() => setHoveredCompany(company)}
+                    onMouseLeave={() => setHoveredCompany(null)}
+                  >
+                    <g
+                      style={{
+                        ...(inView && {
+                          animation: 'career-reveal-circle 0.4s ease-out forwards',
+                          animationDelay: `${revealDelay}s`
+                        }),
+                        opacity: 0,
+                        transformOrigin: '0 0'
+                      }}
                     >
-                      {dateText}
-                    </text>
+                      <circle
+                        cx={0}
+                        cy={0}
+                        r={CIRCLE_R}
+                        fill='#ffffff'
+                        stroke={pathColor}
+                        strokeWidth={isSelected ? 4 : 2}
+                        opacity={1}
+                        filter={isLifted ? 'url(#career-avatar-shadow)' : undefined}
+                      />
+                      {logoSrc ? (
+                        <g>
+                          <defs>
+                            <clipPath id={clipId}>
+                              <circle r={CIRCLE_R - 2} cx={0} cy={0} />
+                            </clipPath>
+                          </defs>
+                          <image
+                            href={logoSrc}
+                            x={-CIRCLE_R + 2}
+                            y={-CIRCLE_R + 2}
+                            width={(CIRCLE_R - 2) * 2}
+                            height={(CIRCLE_R - 2) * 2}
+                            clipPath={`url(#${clipId})`}
+                            preserveAspectRatio='xMidYMid meet'
+                            style={{ pointerEvents: 'none' }}
+                          />
+                        </g>
+                      ) : (
+                        <text
+                          x={0}
+                          y={0}
+                          textAnchor='middle'
+                          dominantBaseline='central'
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 700,
+                            fill: pathColor,
+                            pointerEvents: 'none',
+                            userSelect: 'none'
+                          }}
+                        >
+                          {getInitials(company)}
+                        </text>
+                      )}
+                    </g>
                   </g>
                 )
               })}
-            </g>
-
-            {/* Line segments: paint in sequence (stroke-dashoffset), then circles reveal */}
-            {pathSegments.map((seg, i) => (
-              <path
-                key={i}
-                d={seg.d}
-                fill='none'
-                stroke={seg.color}
-                strokeWidth={STROKE_WIDTH}
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                opacity={seg.opacity}
-                strokeDasharray={seg.length}
-                strokeDashoffset={seg.length}
-                style={{
-                  ...(inView && {
-                    animation: 'career-draw-path 0.55s ease-out forwards',
-                    animationDelay: `${i * 0.4}s`
-                  })
-                }}
-              />
-            ))}
-
-            {/* Circles: reveal (fade + scale) as each segment finishes painting */}
-            {circlePositions.map(({ x, y, company, row }, i) => {
-              const pathColor = row.segments[0].pathColor
-              const isSelected = selectedCompany === company
-              const isHovered = hoveredCompany === company
-              const isLifted = isSelected || isHovered
-              const logoSrc = CAREER_LOGOS[company]
-              const clipId = `career-avatar-clip-${i}`
-              const revealDelay = i * 0.4 + 0.28
-              return (
-                <g
-                  key={company}
-                  transform={`translate(${x}, ${y})${isLifted ? ' scale(1.05)' : ''}`}
-                  style={{
-                    cursor: 'pointer',
-                    transition: 'transform 200ms ease-in-out'
-                  }}
-                  onClick={() => handleSelectCompany(company)}
-                  onMouseEnter={() => setHoveredCompany(company)}
-                  onMouseLeave={() => setHoveredCompany(null)}
-                >
-                  <g
-                    style={{
-                      ...(inView && {
-                        animation: 'career-reveal-circle 0.4s ease-out forwards',
-                        animationDelay: `${revealDelay}s`
-                      }),
-                      opacity: 0,
-                      transformOrigin: '0 0'
-                    }}
-                  >
-                    <circle
-                      cx={0}
-                      cy={0}
-                      r={CIRCLE_R}
-                      fill='#ffffff'
-                      stroke={pathColor}
-                      strokeWidth={isSelected ? 4 : 2}
-                      opacity={1}
-                      filter={isLifted ? 'url(#career-avatar-shadow)' : undefined}
-                    />
-                    {logoSrc ? (
-                      <g>
-                        <defs>
-                          <clipPath id={clipId}>
-                            <circle r={CIRCLE_R - 2} cx={0} cy={0} />
-                          </clipPath>
-                        </defs>
-                        <image
-                          href={logoSrc}
-                          x={-CIRCLE_R + 2}
-                          y={-CIRCLE_R + 2}
-                          width={(CIRCLE_R - 2) * 2}
-                          height={(CIRCLE_R - 2) * 2}
-                          clipPath={`url(#${clipId})`}
-                          preserveAspectRatio='xMidYMid meet'
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      </g>
-                    ) : (
-                      <text
-                        x={0}
-                        y={0}
-                        textAnchor='middle'
-                        dominantBaseline='central'
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 700,
-                          fill: pathColor,
-                          pointerEvents: 'none',
-                          userSelect: 'none'
-                        }}
-                      >
-                        {getInitials(company)}
-                      </text>
-                    )}
-                  </g>
-                </g>
-              )
-            })}
-          </svg>
+            </svg>
+          </Box>
 
           {/* Legend at bottom: colored lines to show path colors (matches graph order: Engineering → IT → Design) */}
           <Flex
