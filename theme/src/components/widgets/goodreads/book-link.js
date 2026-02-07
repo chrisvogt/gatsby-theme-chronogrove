@@ -107,6 +107,7 @@ const BookLink = ({ id, thumbnailURL, title }) => {
         >
           <div
             ref={bookContainerRef}
+            data-testid='book-link-tilt-container'
             sx={{
               width: '100%',
               perspective: '400px',
@@ -114,6 +115,7 @@ const BookLink = ({ id, thumbnailURL, title }) => {
             }}
           >
             <div
+              data-testid='book-link-tilt-inner'
               sx={{
                 width: '100%',
                 transition: 'transform 0.15s ease-out',
