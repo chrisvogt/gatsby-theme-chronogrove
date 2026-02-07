@@ -111,7 +111,19 @@ const HomeNavigation = () => {
                 }}
               >
                 {IconComponent ? (
-                  <FontAwesomeIcon icon={IconComponent} style={{ height: '18px' }} sx={{ mr: 2 }} />
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 18,
+                      height: 18,
+                      marginRight: 8
+                    }}
+                    aria-hidden
+                  >
+                    <FontAwesomeIcon icon={IconComponent} style={{ width: 18, height: 18 }} />
+                  </span>
                 ) : null}
                 {text}
               </Link>

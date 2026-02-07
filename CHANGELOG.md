@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.2
+
+### 🐛 Bug Fixes
+
+- **Home navigation icon layout shift**: Fixed icons in the home left nav briefly rendering shifted up/left then snapping into place
+  - Icons now render in a fixed-size slot (18×18px) with inline styles so dimensions and spacing are correct on first paint
+  - Wrapper span uses `display: inline-flex`, `alignItems: center`, `justifyContent: center`, and explicit `marginRight` so layout doesn’t depend on Emotion/Theme UI hydration
+
+### 📦 Files Changed
+
+- `theme/src/components/home-navigation.js` (icon wrapper with stable dimensions; snapshots updated)
+
+---
+
 ## 0.72.1
 
 ### 🐛 Bug Fixes
