@@ -101,7 +101,6 @@ const HomeNavigation = () => {
                 key={id}
                 variant='homeNavigation'
                 className={activeSection === id ? 'active' : ''}
-                style={{ display: 'flex', alignItems: 'center' }}
                 sx={{
                   fontFamily: 'sans',
                   color: 'text',
