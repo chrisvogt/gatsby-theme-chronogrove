@@ -4,6 +4,8 @@ import { Themed } from '@theme-ui/mdx'
 import Layout from 'gatsby-theme-chronogrove/src/components/layout'
 import Seo from 'gatsby-theme-chronogrove/src/components/seo'
 import CareerPathCurve from '../../components/CareerPathCurve'
+import { PhotoGallery } from '../../components/PhotoGallery'
+import { godaddyPhotos } from '../data/godaddy-photos'
 
 const AboutPage = () => {
   return (
@@ -32,6 +34,8 @@ const AboutPage = () => {
             music. I also spend a lot of time with friends in the city and love connecting with people who are
             passionate about what they do.
           </Themed.p>
+
+          <PhotoGallery photos={godaddyPhotos} />
 
           <Themed.h2 sx={{ mt: 5 }}>Career Journey</Themed.h2>
 
