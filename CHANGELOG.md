@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.72.6
+
+### 🐛 Bug Fixes
+
+- **Navigation to About (and other pages) scrolling to bottom**: Fixed issue where clicking "About" from the Home page would land at the bottom of the About page instead of the top
+  - **Root cause**: `gatsby-react-router-scroll` restores scroll position from session storage; our `shouldUpdateScroll` return value was only used as a boolean. Returning `[0, 0]` did not set the scroll target—it still used the saved position, so a previously scrolled-to-bottom visit was restored
+  - **Fix**: `shouldUpdateScroll` now returns `false` on pathname change so the scroll handler does not restore saved position; `onRouteUpdate` explicitly calls `window.scrollTo(0, 0)` so every route change scrolls to top, then focuses skip-nav with `preventScroll: true`
+
+### 📦 Files Changed
+
+- `theme/gatsby-browser.js` (shouldUpdateScroll returns false; onRouteUpdate scrolls to top)
+- `theme/gatsby-browser.spec.js` (tests updated for new behavior and window.scrollTo mock)
+
+---
+
 ## 0.72.5
 
 ### ✨ Features
