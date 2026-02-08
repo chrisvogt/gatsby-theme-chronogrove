@@ -1,36 +1,38 @@
 import { shouldUpdateScroll, onRouteUpdate } from './gatsby-browser'
 
-// Mock document methods
+// Mock document and window methods
 const mockGetElementById = jest.fn()
 const mockFocus = jest.fn()
+const mockScrollTo = jest.fn()
 
 // Mock DOM element
 const mockSkipContent = {
   focus: mockFocus
 }
 
-// Setup document mock by overriding the getElementById method
+// Setup document and window mocks
 beforeEach(() => {
   jest.clearAllMocks()
-  // Mock the getElementById method on the existing document
   document.getElementById = mockGetElementById
+  window.scrollTo = mockScrollTo
 })
 
-// Restore the original getElementById after tests
+// Restore originals after tests
 afterEach(() => {
   delete document.getElementById
+  delete window.scrollTo
 })
 
 describe('gatsby-browser', () => {
   describe('shouldUpdateScroll', () => {
-    it('should return [0, 0] when routerProps is undefined', () => {
+    it('should return false when routerProps is undefined', () => {
       const result = shouldUpdateScroll({})
-      expect(result).toEqual([0, 0])
+      expect(result).toBe(false)
     })
 
-    it('should return [0, 0] when routerProps is null', () => {
+    it('should return false when routerProps is null', () => {
       const result = shouldUpdateScroll({ routerProps: null })
-      expect(result).toEqual([0, 0])
+      expect(result).toBe(false)
     })
 
     it('should return false when only query parameters change', () => {
@@ -44,7 +46,7 @@ describe('gatsby-browser', () => {
       expect(result).toBe(false)
     })
 
-    it('should return [0, 0] when pathname changes', () => {
+    it('should return false when pathname changes (scroll to top handled in onRouteUpdate)', () => {
       const routerProps = {
         location: { pathname: '/about', search: '' }
       }
@@ -52,65 +54,70 @@ describe('gatsby-browser', () => {
         location: { pathname: '/blog', search: '' }
       }
       const result = shouldUpdateScroll({ routerProps, prevRouterProps })
-      expect(result).toEqual([0, 0])
+      expect(result).toBe(false)
     })
 
-    it('should return [0, 0] when prevRouterProps is null', () => {
+    it('should return false when prevRouterProps is null', () => {
       const routerProps = {
         location: { pathname: '/blog', search: '' }
       }
       const result = shouldUpdateScroll({ routerProps, prevRouterProps: null })
-      expect(result).toEqual([0, 0])
+      expect(result).toBe(false)
     })
 
-    it('should return [0, 0] when prevRouterProps is undefined', () => {
+    it('should return false when prevRouterProps is undefined', () => {
       const routerProps = {
         location: { pathname: '/blog', search: '' }
       }
       const result = shouldUpdateScroll({ routerProps, prevRouterProps: undefined })
-      expect(result).toEqual([0, 0])
+      expect(result).toBe(false)
     })
   })
 
   describe('onRouteUpdate', () => {
-    it('should not call focus when prevLocation is null', () => {
+    it('should not call scrollTo or focus when prevLocation is null', () => {
       onRouteUpdate({ prevLocation: null })
+      expect(mockScrollTo).not.toHaveBeenCalled()
       expect(mockGetElementById).not.toHaveBeenCalled()
       expect(mockFocus).not.toHaveBeenCalled()
     })
 
-    it('should call focus with preventScroll when prevLocation is undefined', () => {
+    it('should scroll to top and call focus with preventScroll when prevLocation is undefined', () => {
       mockGetElementById.mockReturnValue(mockSkipContent)
 
       onRouteUpdate({ prevLocation: undefined })
 
+      expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
 
-    it('should call focus with preventScroll when skip content element exists', () => {
+    it('should scroll to top and call focus with preventScroll when skip content element exists', () => {
       mockGetElementById.mockReturnValue(mockSkipContent)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
+      expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
 
-    it('should not call focus when skip content element does not exist', () => {
+    it('should scroll to top but not call focus when skip content element does not exist', () => {
       mockGetElementById.mockReturnValue(null)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
+      expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).not.toHaveBeenCalled()
     })
 
-    it('should handle when getElementById returns undefined', () => {
+    it('should scroll to top but not call focus when getElementById returns undefined', () => {
       mockGetElementById.mockReturnValue(undefined)
 
       onRouteUpdate({ prevLocation: { pathname: '/previous' } })
 
+      expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).not.toHaveBeenCalled()
     })
