@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.72.7
+
+### 📦 Dependencies
+
+- **react-intersection-observer**: Upgraded from ^9.15.1 to ^10.0.2
+  - v10 ignores the initial `inView === false` emission for `onChange`; existing usage (`useInView` with `ref`/`inView` and `triggerOnce`) is unchanged
+  - Used by theme LazyLoad and site components (CareerPathCurve, PhotoGallery)
+
+### 📦 Files Changed
+
+- `theme/package.json` (react-intersection-observer ^10.0.2)
+- `yarn.lock` (lockfile updated)
+
+---
+
 ## 0.72.6
 
 ### 🐛 Bug Fixes
