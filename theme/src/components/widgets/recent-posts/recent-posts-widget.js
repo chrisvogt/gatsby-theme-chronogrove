@@ -3,7 +3,7 @@ import { jsx } from 'theme-ui'
 import { Grid, Box, Text } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faCalendarAlt, faMusic, faCamera, faFileAlt, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faMusic, faMapMarkedAlt, faFileAlt, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 
 import useCategorizedPosts from '../../../hooks/use-categorized-posts'
 
@@ -108,10 +108,37 @@ export default () => {
           </Box>
         )}
 
-        {/* Single Post Sections - Stacked Vertically */}
-        {(postsBySection.music || postsBySection.photography || postsBySection.other) && (
+        {/* Single Post Sections - Order matches nav: Recaps, Posts, Music, Travel */}
+        {(postsBySection.other || postsBySection.music || postsBySection.travel) && (
           <Box>
-            {/* Latest Music Section */}
+            {/* Posts */}
+            {postsBySection.other && postsBySection.other.length > 0 && (
+              <Box sx={{ mb: 4 }}>
+                <SectionHeader icon={faFileAlt} title='Posts' />
+                <Grid
+                  sx={{
+                    display: 'grid',
+                    gridAutoRows: '1fr',
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
+                  }}
+                >
+                  {postsBySection.other.map(post => (
+                    <PostCard
+                      key={post.fields.id}
+                      category={post.fields.category}
+                      date={post.frontmatter.date}
+                      excerpt={post.frontmatter.excerpt}
+                      link={post.fields.path}
+                      title={post.frontmatter.title}
+                      horizontal
+                    />
+                  ))}
+                </Grid>
+              </Box>
+            )}
+
+            {/* Music */}
             {postsBySection.music && postsBySection.music.length > 0 && (
               <Box sx={{ mb: 4 }}>
                 <SectionHeader icon={faMusic} title='Music' />
@@ -137,10 +164,10 @@ export default () => {
               </Box>
             )}
 
-            {/* Latest Photography Section */}
-            {postsBySection.photography && postsBySection.photography.length > 0 && (
+            {/* Travel */}
+            {postsBySection.travel && postsBySection.travel.length > 0 && (
               <Box sx={{ mb: 4 }}>
-                <SectionHeader icon={faCamera} title='Photography' />
+                <SectionHeader icon={faMapMarkedAlt} title='Travel' />
                 <Grid
                   sx={{
                     display: 'grid',
@@ -149,40 +176,13 @@ export default () => {
                     gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
                   }}
                 >
-                  {postsBySection.photography.map(post => (
+                  {postsBySection.travel.map(post => (
                     <PostCard
                       key={post.fields.id}
                       category={post.fields.category}
                       date={post.frontmatter.date}
                       link={post.fields.path}
                       thumbnails={post.frontmatter.thumbnails}
-                      title={post.frontmatter.title}
-                      horizontal
-                    />
-                  ))}
-                </Grid>
-              </Box>
-            )}
-
-            {/* Latest Other Section */}
-            {postsBySection.other && postsBySection.other.length > 0 && (
-              <Box>
-                <SectionHeader icon={faFileAlt} title='Posts' />
-                <Grid
-                  sx={{
-                    display: 'grid',
-                    gridAutoRows: '1fr',
-                    gridGap: [2, 2, 3, 3],
-                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
-                  }}
-                >
-                  {postsBySection.other.map(post => (
-                    <PostCard
-                      key={post.fields.id}
-                      category={post.fields.category}
-                      date={post.frontmatter.date}
-                      excerpt={post.frontmatter.excerpt}
-                      link={post.fields.path}
                       title={post.frontmatter.title}
                       horizontal
                     />

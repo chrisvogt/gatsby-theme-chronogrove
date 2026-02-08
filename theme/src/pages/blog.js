@@ -55,8 +55,8 @@ const BlogIndexPage = ({ data }) => {
     const category = post.fields.category || 'other'
     const group = getCategoryGroup(category, post.frontmatter.title)
 
-    // Skip music and photography posts - they have dedicated pages
-    if (group === 'music' || group === 'photography') {
+    // Skip music, photography, and travel posts - they have dedicated pages
+    if (group === 'music' || group === 'photography' || group === 'travel') {
       return acc
     }
 

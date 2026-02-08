@@ -66,11 +66,11 @@ describe('RecentPostsWidget', () => {
             title: 'Travel Photos'
           },
           fields: {
-            category: 'photography/travel',
+            category: 'travel',
             id: '3',
-            path: '/blog/travel-photos'
+            path: '/travel/travel-photos'
           },
-          section: 'photography'
+          section: 'travel'
         },
         {
           frontmatter: {
@@ -88,25 +88,25 @@ describe('RecentPostsWidget', () => {
       ],
       recaps: [],
       music: [],
-      photography: [],
+      travel: [],
       other: []
     })
 
     render(<RecentPostsWidget />)
 
-    // Verify section headers are rendered
+    // Verify section headers are rendered (order: Recaps, Posts, Music, Travel)
     expect(screen.getByText('Recaps')).toBeInTheDocument()
-    expect(screen.getByText('Music')).toBeInTheDocument()
-    expect(screen.getByText('Photography')).toBeInTheDocument()
     expect(screen.getByText('Posts')).toBeInTheDocument()
+    expect(screen.getByText('Music')).toBeInTheDocument()
+    expect(screen.getByText('Travel')).toBeInTheDocument()
 
     // Verify all post cards are rendered
     const postCards = screen.getAllByTestId('post-card')
     expect(postCards).toHaveLength(4)
     expect(postCards[0]).toHaveTextContent('September Recap')
-    expect(postCards[1]).toHaveTextContent('Piano Practice')
-    expect(postCards[2]).toHaveTextContent('Travel Photos')
-    expect(postCards[3]).toHaveTextContent('Blog Evolution')
+    expect(postCards[1]).toHaveTextContent('Blog Evolution')
+    expect(postCards[2]).toHaveTextContent('Piano Practice')
+    expect(postCards[3]).toHaveTextContent('Travel Photos')
 
     // Verify the call-to-action is rendered
     expect(screen.getByText(/Browse all published content/i)).toBeInTheDocument()
@@ -145,7 +145,7 @@ describe('RecentPostsWidget', () => {
       ],
       recaps: [],
       music: [],
-      photography: [],
+      travel: [],
       other: []
     })
 
@@ -154,7 +154,7 @@ describe('RecentPostsWidget', () => {
     // Verify only recaps section is rendered
     expect(screen.getByText('Recaps')).toBeInTheDocument()
     expect(screen.queryByText('Music')).not.toBeInTheDocument()
-    expect(screen.queryByText('Photography')).not.toBeInTheDocument()
+    expect(screen.queryByText('Travel')).not.toBeInTheDocument()
     expect(screen.queryByText('Posts')).not.toBeInTheDocument()
 
     // Verify post cards are rendered
@@ -169,7 +169,7 @@ describe('RecentPostsWidget', () => {
       posts: [],
       recaps: [],
       music: [],
-      photography: [],
+      travel: [],
       other: []
     })
 
@@ -178,7 +178,7 @@ describe('RecentPostsWidget', () => {
     // Verify no section headers are rendered
     expect(screen.queryByText('Recaps')).not.toBeInTheDocument()
     expect(screen.queryByText('Music')).not.toBeInTheDocument()
-    expect(screen.queryByText('Photography')).not.toBeInTheDocument()
+    expect(screen.queryByText('Travel')).not.toBeInTheDocument()
     expect(screen.queryByText('Posts')).not.toBeInTheDocument()
 
     // Verify no post cards are rendered
@@ -233,7 +233,7 @@ describe('RecentPostsWidget', () => {
       ],
       recaps: [],
       music: [],
-      photography: [],
+      travel: [],
       other: []
     })
 
@@ -244,7 +244,7 @@ describe('RecentPostsWidget', () => {
     expect(screen.queryByText('(3)')).not.toBeInTheDocument()
   })
 
-  it('passes thumbnails to recaps and photography sections', () => {
+  it('passes thumbnails to recaps and travel sections', () => {
     useCategorizedPosts.mockReturnValue({
       posts: [
         {
@@ -269,16 +269,16 @@ describe('RecentPostsWidget', () => {
             thumbnails: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg']
           },
           fields: {
-            category: 'photography/travel',
+            category: 'travel',
             id: '2',
-            path: '/blog/travel-photos'
+            path: '/travel/travel-photos'
           },
-          section: 'photography'
+          section: 'travel'
         }
       ],
       recaps: [],
       music: [],
-      photography: [],
+      travel: [],
       other: []
     })
 
@@ -313,7 +313,7 @@ describe('RecentPostsWidget', () => {
       ],
       recaps: [],
       music: [],
-      photography: [],
+      travel: [],
       other: []
     })
 

@@ -139,6 +139,8 @@ describe('useCategorizedPosts', () => {
     expect(result.photography).toHaveLength(1)
     expect(result.photography[0].frontmatter.title).toBe('Belize Travel Photos')
 
+    expect(result.travel).toHaveLength(0)
+
     expect(result.other).toHaveLength(1)
     expect(result.other[0].frontmatter.title).toBe('Evolution of My Blog')
 
@@ -164,6 +166,7 @@ describe('useCategorizedPosts', () => {
     expect(result.recaps).toHaveLength(0)
     expect(result.music).toHaveLength(0)
     expect(result.photography).toHaveLength(0)
+    expect(result.travel).toHaveLength(0)
     expect(result.other).toHaveLength(0)
     expect(result.posts).toHaveLength(0)
   })
@@ -176,6 +179,7 @@ describe('useCategorizedPosts', () => {
     expect(result.recaps).toHaveLength(0)
     expect(result.music).toHaveLength(0)
     expect(result.photography).toHaveLength(0)
+    expect(result.travel).toHaveLength(0)
     expect(result.other).toHaveLength(0)
     expect(result.posts).toHaveLength(0)
   })

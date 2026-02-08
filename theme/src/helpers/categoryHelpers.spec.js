@@ -6,6 +6,7 @@ describe('categoryHelpers', () => {
       expect(categoryMappings).toEqual({
         'photography/travel': 'Travel Photography',
         'photography/events': 'Event Photography',
+        travel: 'Travel',
         'music/piano-covers': 'Piano Covers',
         'videos/bike-rides': 'Cycling Videos'
       })
@@ -37,6 +38,7 @@ describe('categoryHelpers', () => {
   describe('getCategoryDisplayName', () => {
     it('returns mapped name for known categories', () => {
       expect(getCategoryDisplayName('photography/travel')).toBe('Travel Photography')
+      expect(getCategoryDisplayName('travel')).toBe('Travel')
       expect(getCategoryDisplayName('music/piano-covers')).toBe('Piano Covers')
     })
 
@@ -89,6 +91,12 @@ describe('categoryHelpers', () => {
     it('returns "photography" for photography categories', () => {
       expect(getCategoryGroup('photography')).toBe('photography')
       expect(getCategoryGroup('photography/travel')).toBe('photography')
+      expect(getCategoryGroup('photography/events')).toBe('photography')
+    })
+
+    it('returns "travel" for travel category', () => {
+      expect(getCategoryGroup('travel')).toBe('travel')
+      expect(getCategoryGroup('travel/destinations')).toBe('travel')
     })
 
     it('returns "technology" for technology categories', () => {
