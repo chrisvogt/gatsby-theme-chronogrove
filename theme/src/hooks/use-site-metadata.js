@@ -6,6 +6,7 @@ const useSiteMetadata = () => {
       site {
         siteMetadata {
           baseURL
+          siteUrl
           description
           footerText
           headline

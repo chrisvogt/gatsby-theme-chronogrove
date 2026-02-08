@@ -101,7 +101,7 @@ export const Head = ({ data: { mdx } }) => {
   }
 
   return (
-    <Seo article={true} description={description} image={banner} title={title}>
+    <Seo article={true} canonicalPath={mdx.fields.path} description={description} image={banner} title={title}>
       <script type='application/ld+json'>{JSON.stringify(breadcrumbData)}</script>
     </Seo>
   )

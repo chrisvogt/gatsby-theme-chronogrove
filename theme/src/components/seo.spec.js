@@ -164,4 +164,30 @@ describe('Seo', () => {
     )
     expect(asFragment()).toMatchSnapshot()
   })
+
+  it('renders canonical link when canonicalPath is provided', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      baseURL: 'https://www.example.com'
+    }))
+
+    render(
+      <TestProvider>
+        <Seo title='Page' canonicalPath='/travel/belize' />
+      </TestProvider>
+    )
+
+    const canonical = document.querySelector('link[rel="canonical"]')
+    expect(canonical).toBeInTheDocument()
+    expect(canonical).toHaveAttribute('href', 'https://www.example.com/travel/belize')
+  })
+
+  it('does not render canonical link when canonicalPath is omitted', () => {
+    render(
+      <TestProvider>
+        <Seo title='Page' />
+      </TestProvider>
+    )
+    expect(document.querySelector('link[rel="canonical"]')).not.toBeInTheDocument()
+  })
 })
