@@ -48,6 +48,7 @@ function bezierPoint(t, P0, P1, P2, P3) {
 
 /**
  * Sample points along a tilted S-curve (two cubic beziers).
+ * Inverted vertically so the line starts low (older/left) and ends high (recent/right).
  * Returns array of { x, y } in 0..width, 0..height.
  */
 function sampleSCurve(width, height, numSamples) {
@@ -56,7 +57,7 @@ function sampleSCurve(width, height, numSamples) {
   const ox = MARGIN
   const oy = MARGIN
 
-  // Tilted S: start top-left, dip to center, end bottom-right
+  // Tilted S: start top-left, dip to center, end bottom-right (before inversion)
   // Segment 1: (0, 0.2h) -> (0.5w, 0.5h)
   const P0 = { x: 0, y: 0.2 * h }
   const P1 = { x: 0.25 * w, y: 0.2 * h }
@@ -73,12 +74,12 @@ function sampleSCurve(width, height, numSamples) {
   for (let i = 0; i <= half; i++) {
     const t = i / half
     const p = bezierPoint(t, P0, P1, P2, P3)
-    points.push({ x: ox + p.x, y: oy + p.y })
+    points.push({ x: ox + p.x, y: oy + (h - p.y) })
   }
   for (let i = 1; i <= half; i++) {
     const t = i / half
     const p = bezierPoint(t, P4, P5, P6, P7)
-    points.push({ x: ox + p.x, y: oy + p.y })
+    points.push({ x: ox + p.x, y: oy + (h - p.y) })
   }
   return points
 }
@@ -114,8 +115,8 @@ const CareerPathCurve = () => {
       segments: [...row.segments].reverse()
     }))
   }, [])
-  // Reverse so most recent (GoDaddy) is on the left; readers care more about recent roles
-  const rowsOrdered = useMemo(() => [...rows].reverse(), [rows])
+  // Chronological order: oldest on the left, most recent on the right (conventional timeline)
+  const rowsOrdered = useMemo(() => rows, [rows])
 
   const { points, width, height } = useMemo(() => {
     const width = 700
@@ -124,12 +125,11 @@ const CareerPathCurve = () => {
     return { points: pts, width, height }
   }, [])
 
-  // Map years to x positions (reversed: most recent on left, oldest on right, matching logo order)
+  // Map years to x positions: oldest on left, most recent on right (conventional timeline)
   const yearToX = useCallback(
     year => {
       const t = (year - TIME_MIN) / (TIME_MAX - TIME_MIN)
-      // Reverse: 1-t so TIME_MAX maps to left (MARGIN), TIME_MIN maps to right (width-MARGIN)
-      return MARGIN + (1 - t) * (width - 2 * MARGIN)
+      return MARGIN + t * (width - 2 * MARGIN)
     },
     [width]
   )
@@ -501,35 +501,34 @@ const CareerPathCurve = () => {
             </svg>
           </Box>
 
-          {/* Legend at bottom: colored lines to show path colors (matches graph order: Engineering → IT → Design) */}
+          {/* Legend: same path + stroke attributes as graph so rounded ends match */}
           <Flex
             sx={{
               justifyContent: 'center',
-              gap: [4, 5],
+              gap: [3, 4],
               mt: 3,
               flexWrap: 'wrap'
             }}
           >
             {[
-              { name: 'Engineering', color: '#48bb78' },
+              { name: 'Design', color: '#ed8936' },
               { name: 'IT', color: '#4299e1' },
-              { name: 'Design', color: '#ed8936' }
+              { name: 'Engineering', color: '#48bb78' }
             ].map(({ name, color }) => (
-              <Flex key={name} sx={{ alignItems: 'center', gap: 1 }}>
+              <Flex key={name} sx={{ alignItems: 'center', gap: 1, flexShrink: 0 }}>
                 <Box
                   as='svg'
-                  sx={{ width: 20, height: 3, flexShrink: 0 }}
-                  viewBox='0 0 20 3'
-                  preserveAspectRatio='none'
+                  sx={{ width: 12, height: 6, flexShrink: 0 }}
+                  viewBox='0 0 12 6'
+                  preserveAspectRatio='xMidYMid meet'
                 >
-                  <line
-                    x1={0}
-                    y1={1.5}
-                    x2={20}
-                    y2={1.5}
+                  <path
+                    d='M 2 3 L 10 3'
+                    fill='none'
                     stroke={color}
-                    strokeWidth={STROKE_WIDTH}
+                    strokeWidth={2}
                     strokeLinecap='round'
+                    strokeLinejoin='round'
                   />
                 </Box>
                 <Box as='span' sx={{ fontSize: 0, color: 'textMuted' }}>
