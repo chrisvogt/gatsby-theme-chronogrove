@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.72.8
+
+### 🐛 Bug Fixes
+
+- **Spotify audio player stopping on page navigation**: Spotify playback no longer stops when navigating away from the Home page
+  - **Root cause**: The Spotify shortcode used oEmbed fetch + state and re-rendered a new iframe on navigation; the SoundCloud shortcode uses a simple iframe with a stable `src`, so React preserved it and playback continued
+  - **Fix**: Refactored Spotify shortcode to build the embed URL directly (like SoundCloud) and render a single iframe with no async state; added stable keys per track in the audio player (`key={spotifyURL}` / `key={soundcloudId}`) so React preserves the same embed instance across re-renders
+- **Spotify embed border**: Removed default iframe border on Spotify embeds via `border: none` in the shortcode and in the audio player’s shared iframe styles
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.8)
+- `theme/src/components/audio-player.js` (stable keys for embeds; `border: none` on iframes)
+- `theme/src/shortcodes/spotify.js` (direct iframe URL, no oEmbed; `border: none`)
+- `theme/src/shortcodes/spotify.spec.js` (tests updated for direct-iframe implementation)
+
+---
+
 ## 0.72.7
 
 ### 📦 Dependencies
