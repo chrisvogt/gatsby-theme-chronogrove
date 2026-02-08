@@ -27,8 +27,10 @@ const getColumnCount = postsCount => {
   return columnCount
 }
 
-const PhotographyPage = ({ data }) => {
-  const posts = getPosts(data)?.filter(post => post.fields.category?.startsWith('photography'))
+const TravelPage = ({ data }) => {
+  const posts =
+    getPosts(data)?.filter(post => post.fields.category === 'travel' || post.fields.category?.startsWith('travel/')) ||
+    []
 
   return (
     <Fragment>
@@ -49,11 +51,9 @@ const PhotographyPage = ({ data }) => {
             }}
           >
             <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 75vw)'] }}>
-              <PageHeader>My Photo Galleries</PageHeader>
+              <PageHeader>Travel</PageHeader>
 
-              <Themed.p>
-                These galleries are blog posts with photos and videos I've captured while traveling or at events.
-              </Themed.p>
+              <Themed.p>Narrative posts and photo galleries from trips and destinations.</Themed.p>
 
               <Themed.div
                 sx={{
@@ -91,16 +91,16 @@ const PhotographyPage = ({ data }) => {
 
 export const Head = () => (
   <Seo
-    title="Chris Vogt's Photo Galleries - Street & Travel Photography"
-    description="Explore Chris Vogt's photo galleries featuring street and travel photography. Each gallery showcases unique perspectives and moments captured with a Sony Alpha camera on chrisvogt.me."
+    title='Travel — Chris Vogt'
+    description='Travel posts and photo galleries from trips and destinations. Narrative stories and photos from Belize, Alaska, the Caribbean, and more.'
   >
-    <meta property='og:url' content='https://www.chrisvogt.me/photography/' />
+    <meta property='og:url' content='https://www.chrisvogt.me/travel/' />
     <meta property='og:type' content='website' />
   </Seo>
 )
 
 export const pageQuery = graphql`
-  query QueryRecentPosts {
+  query TravelPagePosts {
     allMdx(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
@@ -123,4 +123,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default PhotographyPage
+export default TravelPage

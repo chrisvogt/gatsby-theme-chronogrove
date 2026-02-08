@@ -9,8 +9,9 @@ import { getTitle, getTitleTemplate, getTwitterUsername } from '../selectors/met
  * SEO
  *
  * Updates <head> tags.
+ * @param {string} [canonicalPath] - Path (e.g. /travel/belize) for the canonical URL. When set, outputs <link rel="canonical"> so search engines treat this as the preferred URL (important after redirects).
  */
-const Seo = ({ article, children, description, image: imageURL, keywords, title: pageTitle }) => {
+const Seo = ({ article, canonicalPath, children, description, image: imageURL, keywords, title: pageTitle }) => {
   const metadata = useSiteMetadata()
   const { theme } = useThemeUI()
 
@@ -20,10 +21,13 @@ const Seo = ({ article, children, description, image: imageURL, keywords, title:
 
   const title = titleTemplate ? titleTemplate.replace(/%s/g, pageTitle) : siteTitle
   const webmentionUrl = metadata.webmentionUrl
+  const origin = metadata?.baseURL || metadata?.siteUrl || ''
+  const canonicalUrl = canonicalPath ? `${origin.replace(/\/$/, '')}${canonicalPath}` : null
 
   return (
     <>
       <title>{title}</title>
+      {canonicalUrl && <link rel='canonical' href={canonicalUrl} />}
       {description && <meta name='description' content={description} />}
       {imageURL && <meta name='image' content={imageURL} />}
       <meta name='theme-color' content={theme.colors.background} />

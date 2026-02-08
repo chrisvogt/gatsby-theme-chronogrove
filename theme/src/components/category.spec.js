@@ -38,6 +38,11 @@ describe('Category Component', () => {
       render(<Category type='videos/bike-rides' />)
       expect(screen.getByText('Cycling Videos')).toBeInTheDocument()
     })
+
+    it('renders "Travel" when type is "travel"', () => {
+      render(<Category type='travel' />)
+      expect(screen.getByText('Travel')).toBeInTheDocument()
+    })
   })
 
   describe('Title Case Transformation', () => {

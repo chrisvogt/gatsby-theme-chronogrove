@@ -50,6 +50,11 @@ const useCategorizedPosts = () => {
     return post.fields.category?.startsWith('photography')
   }
 
+  // Helper function to check if a post is travel-related
+  const isTravelPost = post => {
+    return post.fields.category === 'travel' || post.fields.category?.startsWith('travel/')
+  }
+
   // Helper function to check if a post is personal category
   const isPersonalPost = post => {
     return post.fields.category === 'personal'
@@ -64,13 +69,17 @@ const useCategorizedPosts = () => {
   // Get latest photography posts (2 posts)
   const latestPhotographyPosts = allPosts.filter(post => isPhotographyPost(post)).slice(0, 2)
 
-  // Get latest non-personal posts (2 posts, excluding recaps, music, photography, and personal)
+  // Get latest travel posts (2 posts)
+  const latestTravelPosts = allPosts.filter(post => isTravelPost(post)).slice(0, 2)
+
+  // Get latest non-personal posts (2 posts, excluding recaps, music, photography, travel, and personal)
   const latestOtherPosts = allPosts
     .filter(
       post =>
         !isRecapPost(post) &&
         !isMusicPost(post) &&
         !isPhotographyPost(post) &&
+        !isTravelPost(post) &&
         !isPersonalPost(post) &&
         post.frontmatter.slug !== 'now'
     )
@@ -104,6 +113,14 @@ const useCategorizedPosts = () => {
     }
   })
 
+  // Add travel posts if not already included
+  latestTravelPosts.forEach(post => {
+    if (!usedPostIds.has(post.fields.id)) {
+      deduplicatedPosts.push({ ...post, section: 'travel' })
+      usedPostIds.add(post.fields.id)
+    }
+  })
+
   // Add other posts if not already included
   latestOtherPosts.forEach(post => {
     if (!usedPostIds.has(post.fields.id)) {
@@ -117,6 +134,7 @@ const useCategorizedPosts = () => {
     recaps: latestRecaps,
     music: latestMusicPosts,
     photography: latestPhotographyPosts,
+    travel: latestTravelPosts,
     other: latestOtherPosts
   }
 }

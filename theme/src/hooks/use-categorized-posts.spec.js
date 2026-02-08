@@ -139,6 +139,8 @@ describe('useCategorizedPosts', () => {
     expect(result.photography).toHaveLength(1)
     expect(result.photography[0].frontmatter.title).toBe('Belize Travel Photos')
 
+    expect(result.travel).toHaveLength(0)
+
     expect(result.other).toHaveLength(1)
     expect(result.other[0].frontmatter.title).toBe('Evolution of My Blog')
 
@@ -164,6 +166,7 @@ describe('useCategorizedPosts', () => {
     expect(result.recaps).toHaveLength(0)
     expect(result.music).toHaveLength(0)
     expect(result.photography).toHaveLength(0)
+    expect(result.travel).toHaveLength(0)
     expect(result.other).toHaveLength(0)
     expect(result.posts).toHaveLength(0)
   })
@@ -176,6 +179,7 @@ describe('useCategorizedPosts', () => {
     expect(result.recaps).toHaveLength(0)
     expect(result.music).toHaveLength(0)
     expect(result.photography).toHaveLength(0)
+    expect(result.travel).toHaveLength(0)
     expect(result.other).toHaveLength(0)
     expect(result.posts).toHaveLength(0)
   })
@@ -318,6 +322,55 @@ describe('useCategorizedPosts', () => {
     expect(result.photography).toHaveLength(2)
     expect(result.photography[0].frontmatter.title).toBe('Travel Photos')
     expect(result.photography[1].frontmatter.title).toBe('Event Photos')
+  })
+
+  it('correctly identifies travel posts and includes them in deduplicated posts', () => {
+    const mockData = {
+      allMdx: {
+        edges: [
+          {
+            node: {
+              frontmatter: {
+                title: 'Belize Trip',
+                slug: 'belize',
+                date: '2025-01-01',
+                banner: 'banner.jpg'
+              },
+              fields: {
+                category: 'travel',
+                id: '1',
+                path: '/travel/belize'
+              }
+            }
+          },
+          {
+            node: {
+              frontmatter: {
+                title: 'Alaska Trip',
+                slug: 'alaska',
+                date: '2025-01-02',
+                banner: 'banner2.jpg'
+              },
+              fields: {
+                category: 'travel/destinations',
+                id: '2',
+                path: '/travel/alaska'
+              }
+            }
+          }
+        ]
+      }
+    }
+
+    useStaticQuery.mockReturnValue(mockData)
+
+    const result = useCategorizedPosts()
+
+    expect(result.travel).toHaveLength(2)
+    expect(result.travel[0].frontmatter.title).toBe('Belize Trip')
+    expect(result.travel[1].frontmatter.title).toBe('Alaska Trip')
+    expect(result.posts).toHaveLength(2)
+    expect(result.posts.every(post => post.section === 'travel')).toBe(true)
   })
 
   it('handles deduplication when posts appear in multiple categories', () => {

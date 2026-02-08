@@ -157,6 +157,60 @@ describe('HomeNavigation', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
+  it('handles navigation items with travel slug for icon mapping', () => {
+    const navigationWithTravel = {
+      header: {
+        home: [
+          {
+            path: '/travel',
+            slug: 'travel',
+            text: 'Travel'
+          }
+        ]
+      }
+    }
+    useNavigationData.mockImplementation(() => navigationWithTravel)
+
+    const { container } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+
+    const links = container.querySelectorAll('a')
+    expect(links).toHaveLength(3) // home, posts, travel
+    expect(links[2].getAttribute('href')).toBe('/travel')
+    expect(links[2].textContent).toContain('Travel')
+    expect(links[2].querySelector('svg')).toBeTruthy()
+  })
+
+  it('handles navigation items with photography slug for icon mapping', () => {
+    const navigationWithPhotography = {
+      header: {
+        home: [
+          {
+            path: '/photography',
+            slug: 'photography',
+            text: 'Photography'
+          }
+        ]
+      }
+    }
+    useNavigationData.mockImplementation(() => navigationWithPhotography)
+
+    const { container } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+
+    const links = container.querySelectorAll('a')
+    expect(links).toHaveLength(3) // home, posts, photography
+    expect(links[2].getAttribute('href')).toBe('/photography')
+    expect(links[2].textContent).toContain('Photography')
+    expect(links[2].querySelector('svg')).toBeTruthy()
+  })
+
   it('handles navigation items with complex slug names', () => {
     const navigationWithComplexSlugs = {
       header: {

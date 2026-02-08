@@ -5,7 +5,15 @@ import { Link } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRef, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
-import { faHome, faNewspaper, faUser, faMusic, faCamera, faRecordVinyl } from '@fortawesome/free-solid-svg-icons'
+import {
+  faHome,
+  faNewspaper,
+  faUser,
+  faMusic,
+  faCamera,
+  faMapMarkedAlt,
+  faRecordVinyl
+} from '@fortawesome/free-solid-svg-icons'
 import { faFlickr, faGithub, faGoodreads, faInstagram, faSpotify, faSteam } from '@fortawesome/free-brands-svg-icons'
 
 const icons = {
@@ -14,6 +22,7 @@ const icons = {
   faUser,
   faMusic,
   faCamera,
+  faMapMarkedAlt,
   faRecordVinyl,
   faFlickr,
   faGithub,
@@ -55,7 +64,13 @@ const HomeNavigation = () => {
       icon: {
         name: item.slug,
         reactIcon:
-          item.slug === 'discogs' ? 'faRecordVinyl' : `fa${item.slug.charAt(0).toUpperCase() + item.slug.slice(1)}`
+          item.slug === 'discogs'
+            ? 'faRecordVinyl'
+            : item.slug === 'travel'
+              ? 'faMapMarkedAlt'
+              : item.slug === 'photography'
+                ? 'faCamera'
+                : `fa${item.slug.charAt(0).toUpperCase() + item.slug.slice(1)}`
       },
       id: item.slug,
       text: item.text

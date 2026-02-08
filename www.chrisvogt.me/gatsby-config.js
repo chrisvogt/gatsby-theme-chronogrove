@@ -190,10 +190,10 @@ module.exports = {
                 title: 'My music'
               },
               {
-                path: '/photography',
-                slug: 'photography',
-                text: 'Photography',
-                title: 'My photo galleries'
+                path: '/travel',
+                slug: 'travel',
+                text: 'Travel',
+                title: 'Travel posts and galleries'
               }
             ],
             home: [

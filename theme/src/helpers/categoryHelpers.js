@@ -2,6 +2,7 @@
 export const categoryMappings = {
   'photography/travel': 'Travel Photography',
   'photography/events': 'Event Photography',
+  travel: 'Travel',
   'music/piano-covers': 'Piano Covers',
   'videos/bike-rides': 'Cycling Videos'
 }
@@ -40,6 +41,8 @@ export const getCategoryGroup = (category, postTitle = '') => {
     return 'music'
   } else if (cat.startsWith('photography')) {
     return 'photography'
+  } else if (cat === 'travel' || cat.startsWith('travel/')) {
+    return 'travel'
   } else if (cat.startsWith('technology') || cat.includes('tech')) {
     return 'technology'
   }
