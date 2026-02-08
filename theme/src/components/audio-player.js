@@ -47,12 +47,14 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode:
     }
   }, [soundcloudId])
 
+  // Stable key per track so React preserves the same embed instance across re-renders
+  // (e.g. on page navigation). Without this, Spotify remounts and playback stops.
   const renderEmbed = () => {
     if (provider === 'soundcloud' && soundcloudId) {
-      return <SoundCloud soundcloudId={soundcloudId} />
+      return <SoundCloud key={soundcloudId} soundcloudId={soundcloudId} />
     }
     if (provider === 'spotify' && spotifyURL) {
-      return <Spotify spotifyURL={spotifyURL} />
+      return <Spotify key={spotifyURL} spotifyURL={spotifyURL} />
     }
     return null
   }
@@ -137,6 +139,7 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode:
           sx={{
             width: '100%',
             '& iframe': {
+              border: 'none',
               width: '100% !important',
               height: '100px !important', // fixed compact height
               maxHeight: '100px !important'
