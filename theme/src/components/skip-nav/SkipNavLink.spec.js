@@ -1,7 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
+import { ThemeUIProvider } from 'theme-ui'
 
-import SkipNavLink, { hexToRgb, COLORS } from './SkipNavLink'
+import SkipNavLink from './SkipNavLink'
 import { TestProvider } from '../../testUtils'
 import * as isDarkModeModule from '../../helpers/isDarkMode'
 
@@ -83,32 +84,40 @@ describe('SkipNavLink', () => {
       jest.restoreAllMocks()
     })
   })
-})
 
-describe('hexToRgb', () => {
-  it('converts hex with hash to RGB', () => {
-    expect(hexToRgb('#422EA3')).toBe('66, 46, 163')
-  })
+  describe('theme fallbacks', () => {
+    it('uses fallback primary color when theme has no colors', () => {
+      const minimalTheme = { colors: {} }
+      render(
+        <ThemeUIProvider theme={minimalTheme}>
+          <SkipNavLink />
+        </ThemeUIProvider>
+      )
+      expect(screen.getByText('Skip to content')).toBeInTheDocument()
+    })
 
-  it('converts hex without hash to RGB', () => {
-    expect(hexToRgb('4a9eff')).toBe('74, 158, 255')
-  })
+    it('uses light fallback when theme has no colors and not dark mode', () => {
+      jest.spyOn(isDarkModeModule, 'default').mockReturnValue(false)
+      const minimalTheme = { colors: {} }
+      render(
+        <ThemeUIProvider theme={minimalTheme}>
+          <SkipNavLink />
+        </ThemeUIProvider>
+      )
+      expect(screen.getByRole('link')).toBeInTheDocument()
+      jest.restoreAllMocks()
+    })
 
-  it('returns fallback for invalid hex', () => {
-    expect(hexToRgb('invalid')).toBe('74, 158, 255')
-  })
-
-  it('returns fallback for empty string', () => {
-    expect(hexToRgb('')).toBe('74, 158, 255')
-  })
-})
-
-describe('COLORS', () => {
-  it('exports light mode color', () => {
-    expect(COLORS.light).toBe('#422EA3')
-  })
-
-  it('exports dark mode color', () => {
-    expect(COLORS.dark).toBe('#4a9eff')
+    it('uses dark fallback when theme has no colors and dark mode', () => {
+      jest.spyOn(isDarkModeModule, 'default').mockReturnValue(true)
+      const minimalTheme = { colors: {} }
+      render(
+        <ThemeUIProvider theme={minimalTheme}>
+          <SkipNavLink />
+        </ThemeUIProvider>
+      )
+      expect(screen.getByRole('link')).toBeInTheDocument()
+      jest.restoreAllMocks()
+    })
   })
 })

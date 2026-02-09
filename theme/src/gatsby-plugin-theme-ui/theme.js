@@ -155,6 +155,27 @@ export default merge(tailwind, {
       color: 'background',
       bg: 'gray'
     },
+    /** Ghost/outline style used by ActionButton, PaginationButton, SkipNavLink, CTAs */
+    action: {
+      color: 'primary',
+      bg: 'transparent',
+      border: '1px solid',
+      borderColor: 'primary',
+      borderRadius: '6px',
+      fontWeight: 'medium',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      '&:hover': {
+        bg: theme => `rgba(${theme.colors.primaryRgb}, 0.2)`
+      },
+      '&:focus': {
+        outline: 'none',
+        boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
+      },
+      '&:active': {
+        transform: 'scale(0.98)'
+      }
+    },
     readMore: {
       color: 'primary',
       bg: 'transparent',
@@ -341,7 +362,8 @@ export default merge(tailwind, {
         'panel-background': 'rgba(20, 20, 31, 0.45)',
         'panel-divider': theme => `1px solid ${theme.colors.gray[8]}`,
         'panel-highlight': theme => theme.colors.gray[8],
-        primary: '#1E90FF',
+        primary: '#4a9eff',
+        primaryRgb: '74, 158, 255',
         text: '#fff',
         textMuted: '#d8d8d8',
         tableText: '#fff',
@@ -353,6 +375,7 @@ export default merge(tailwind, {
       }
     },
     primary: '#422EA3',
+    primaryRgb: '66, 46, 163',
     secondary: '#711E9B',
     secondaryGradient: 'linear-gradient(45deg, #4527a0 0%, #711e9b 100%)',
     tableText: '#111',

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { faRobot, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Heading, Button } from '@theme-ui/components'
@@ -35,6 +35,11 @@ const ProgressiveReveal = ({ children, delay = 0, isInView = false }) => {
 }
 
 const AiSummary = React.memo(({ aiSummary }) => {
+  const { theme } = useThemeUI()
+  const primary = theme?.colors?.primary ?? '#422EA3'
+  const secondary = theme?.colors?.secondary ?? '#711E9B'
+  const primaryRgb = theme?.colors?.primaryRgb ?? '66, 46, 163'
+
   const [isVisible, setIsVisible] = useState(false)
   const [showContent, setShowContent] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -127,7 +132,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
             fontSize: [2, 3],
             mr: 2,
             animation: 'pulse 2s infinite, gentleGlow 4s ease-in-out infinite alternate',
-            filter: 'drop-shadow(0 0 12px rgba(66, 46, 163, 0.4))'
+            filter: `drop-shadow(0 0 12px rgba(${primaryRgb}, 0.4))`
           }}
         />
         <Heading
@@ -135,7 +140,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
           sx={{
             fontSize: [3, 4],
             mb: 0,
-            background: 'linear-gradient(45deg, #422EA3, #711E9B)',
+            background: `linear-gradient(45deg, ${primary}, ${secondary})`,
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -148,7 +153,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
               left: 0,
               width: '0%',
               height: '2px',
-              background: 'linear-gradient(90deg, #422EA3, #711E9B)',
+              background: `linear-gradient(90deg, ${primary}, ${secondary})`,
               animation: isVisible ? 'expandWidth 1.2s ease-out 0.8s forwards' : 'none'
             }
           }}
@@ -248,7 +253,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
             left: 0,
             width: '0%',
             height: '1px',
-            background: 'linear-gradient(90deg, #422EA3, #711E9B)',
+            background: `linear-gradient(90deg, ${primary}, ${secondary})`,
             animation: showContent ? 'expandWidth 1s ease-out 1.5s forwards' : 'none'
           }
         }}

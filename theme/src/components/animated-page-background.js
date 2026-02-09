@@ -2,6 +2,7 @@
 import React, { useMemo, useEffect, useState } from 'react'
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import ColorBends from './home-backgrounds/color-bends'
+import { hexToRgba } from '../utils/colors'
 
 // Based on Starry Banner SVG colors: purple #800080 and gold #FFD700
 const COLOR_BENDS_COLORS = ['#800080', '#6B2F6B', '#FFD700', '#A855A8']
@@ -117,29 +118,16 @@ const AnimatedPageBackground = ({
     return null
   }
 
-  // Convert hex color to rgba for gradient stops
-  const hexToRgba = (hex, alpha) => {
-    // Handle CSS variables by returning a fallback
-    if (typeof hex === 'string' && hex.startsWith('var(')) {
-      // Return the CSS variable as-is for solid colors, but we can't do alpha on CSS vars easily
-      // So return a sensible fallback based on mode
+  // Convert color to rgba for gradient stops (handles CSS vars for theme background)
+  const toRgba = (color, alpha) => {
+    if (typeof color === 'string' && color.startsWith('var(')) {
       const fallbackHex = isDark ? '#14141F' : '#fdf8f5'
-      const h = fallbackHex.replace('#', '')
-      const r = parseInt(h.substring(0, 2), 16)
-      const g = parseInt(h.substring(2, 4), 16)
-      const b = parseInt(h.substring(4, 6), 16)
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`
+      return hexToRgba(fallbackHex, alpha)
     }
-
-    const h = hex.replace('#', '')
-    const r = parseInt(h.substring(0, 2), 16)
-    const g = parseInt(h.substring(2, 4), 16)
-    const b = parseInt(h.substring(4, 6), 16)
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+    return hexToRgba(color, alpha)
   }
 
-  // Build gradient using theme background color
-  const gradientOverlay = `linear-gradient(to bottom, ${bgColorRaw} 0%, ${bgColorRaw} 30%, ${hexToRgba(bgColorRaw, 0.6)} 65%, ${hexToRgba(bgColorRaw, 0.2)} 85%, transparent 100%)`
+  const gradientOverlay = `linear-gradient(to bottom, ${bgColorRaw} 0%, ${bgColorRaw} 30%, ${toRgba(bgColorRaw, 0.6)} 65%, ${toRgba(bgColorRaw, 0.2)} 85%, transparent 100%)`
 
   return (
     <>

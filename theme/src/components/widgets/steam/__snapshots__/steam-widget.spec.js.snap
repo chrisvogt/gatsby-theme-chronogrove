@@ -23,7 +23,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="svg-inline--fa fa-robot css-14exhd0"
+          class="svg-inline--fa fa-robot css-1yck3jj"
           data-icon="robot"
           data-prefix="fas"
           role="img"
@@ -35,7 +35,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
           />
         </svg>
         <h3
-          class="css-1il66aq"
+          class="css-1xnmqx7"
         >
           AI Summary
         </h3>
@@ -44,7 +44,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         class="css-108zvm"
       />
       <p
-        class="css-1qkzl1r"
+        class="css-1240581"
       >
         <svg
           aria-hidden="true"
@@ -239,7 +239,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         >
           Total Hours: 
           <span
-            class="css-xdug5y"
+            class="css-1eduwqk"
           >
             1035.2h
           </span>
@@ -249,7 +249,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         >
           Average: 
           <span
-            class="css-xdug5y"
+            class="css-1eduwqk"
           >
             517.6h per game
           </span>
@@ -259,7 +259,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         class="css-1gnkw3u"
       >
         <a
-          class="css-ve6dld"
+          class="css-4buc8m"
           href="https://steamcommunity.com/id/themeuser/games/?tab=all"
         >
           View complete gaming library
@@ -477,7 +477,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         >
           Total Hours: 
           <span
-            class="css-xdug5y"
+            class="css-1eduwqk"
           >
             1035.2h
           </span>
@@ -487,7 +487,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         >
           Average: 
           <span
-            class="css-xdug5y"
+            class="css-1eduwqk"
           >
             517.6h per game
           </span>
@@ -497,7 +497,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         class="css-1gnkw3u"
       >
         <a
-          class="css-ve6dld"
+          class="css-4buc8m"
           href="https://steamcommunity.com/id/themeuser/games/?tab=all"
         >
           View complete gaming library
@@ -635,10 +635,10 @@ exports[`SteamWidget renders loading state 1`] = `
         class="css-nyc2gr"
       >
         <div
-          class="css-1omu3y4"
+          class="css-17cb55"
         />
         <p
-          class="css-1ylq8j3"
+          class="css-gej412"
         >
           Loading Gaming Library...
         </p>
@@ -840,7 +840,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         >
           Total Hours: 
           <span
-            class="css-xdug5y"
+            class="css-1eduwqk"
           >
             1035.2h
           </span>
@@ -850,7 +850,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         >
           Average: 
           <span
-            class="css-xdug5y"
+            class="css-1eduwqk"
           >
             517.6h per game
           </span>
@@ -860,7 +860,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         class="css-1gnkw3u"
       >
         <a
-          class="css-ve6dld"
+          class="css-4buc8m"
           href="https://steamcommunity.com/id/themeuser/games/?tab=all"
         >
           View complete gaming library

@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.72.9
+
+### ♻️ Refactor
+
+- **Shared button styles and color utilities**: Extracted duplicated hex-to-RGB logic and primary button colors into a single source of truth for consistent pagination, CTAs, and skip-nav
+  - **`theme/src/utils/colors.js`**: New module with `hexToRgb`, `hexToRgba`, and `BUTTON_PRIMARY_COLORS` (light/dark)
+  - **Theme**: Added `primaryRgb` and aligned dark mode primary to `#4a9eff`; added `buttons.action` variant for ghost/outline buttons
+  - **Components**: ActionButton, PaginationButton, SkipNavLink, AnimatedPageBackground, PlayTimeChart, and AiSummary now use shared utils and/or theme colors
+  - **Tests**: New `utils/colors.spec.js`; theme fallback tests for SkipNavLink, PlayTimeChart, AiSummary; theme.spec coverage for `buttons.action` theme functions
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.9)
+- `theme/src/utils/colors.js` (new)
+- `theme/src/utils/colors.spec.js` (new)
+- `theme/src/gatsby-plugin-theme-ui/theme.js` (primaryRgb, dark.primary, buttons.action)
+- `theme/src/components/action-button.js`
+- `theme/src/components/pagination-button.js`
+- `theme/src/components/skip-nav/SkipNavLink.js`
+- `theme/src/components/animated-page-background.js`
+- `theme/src/components/widgets/steam/play-time-chart.js`
+- `theme/src/components/widgets/steam/ai-summary.js`
+- `theme/src/gatsby-plugin-theme-ui/theme.spec.js`
+- `theme/src/components/skip-nav/SkipNavLink.spec.js`
+- `theme/src/components/action-button.spec.js`
+- `theme/src/components/pagination-button.spec.js`
+- `theme/src/components/widgets/steam/play-time-chart.spec.js`
+- `theme/src/components/widgets/steam/ai-summary.spec.js`
+
+---
+
 ## 0.72.8
 
 ### 🐛 Bug Fixes

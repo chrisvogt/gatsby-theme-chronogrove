@@ -128,7 +128,8 @@ describe('Theme Configuration', () => {
     it('defines dark mode background colors', () => {
       const darkMode = theme.colors.modes.dark
       expect(darkMode).toHaveProperty('background', '#14141F')
-      expect(darkMode).toHaveProperty('primary', '#1E90FF')
+      expect(darkMode).toHaveProperty('primary', '#4a9eff')
+      expect(darkMode).toHaveProperty('primaryRgb', '74, 158, 255')
       expect(darkMode).toHaveProperty('text', '#fff')
     })
   })
@@ -147,6 +148,19 @@ describe('Theme Configuration', () => {
       expect(theme.buttons.primary).toHaveProperty('bg', 'primary')
       expect(theme.buttons.secondary).toHaveProperty('bg', 'secondary')
       expect(theme.buttons.gray).toHaveProperty('bg', 'gray')
+      expect(theme.buttons.action).toHaveProperty('color', 'primary')
+      expect(theme.buttons.action).toHaveProperty('borderColor', 'primary')
+      expect(theme.buttons.action).toHaveProperty('bg', 'transparent')
+    })
+
+    it('buttons.action hover and focus use theme color functions', () => {
+      const mockTheme = {
+        colors: { primary: '#422EA3', primaryRgb: '66, 46, 163' }
+      }
+      const hoverBg = theme.buttons.action['&:hover'].bg(mockTheme)
+      const focusBoxShadow = theme.buttons.action['&:focus'].boxShadow(mockTheme)
+      expect(hoverBg).toBe('rgba(66, 46, 163, 0.2)')
+      expect(focusBoxShadow).toBe('0 0 0 2px #422EA340')
     })
 
     it('defines badge variants', () => {

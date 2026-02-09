@@ -3,25 +3,6 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { forwardRef } from 'react'
 import isDarkMode from '../../helpers/isDarkMode'
 
-// Color constants for light and dark modes
-const COLORS = {
-  light: '#422EA3',
-  dark: '#4a9eff'
-}
-
-/**
- * Converts a hex color to RGB string for use in rgba()
- * @param {string} hex - Hex color code (with or without #)
- * @returns {string} RGB values as comma-separated string
- */
-const hexToRgb = hex => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  if (!result) {
-    return '74, 158, 255' // Fallback blue
-  }
-  return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-}
-
 /**
  * SkipNavLink
  *
@@ -39,9 +20,10 @@ const SkipNavLink = forwardRef(function SkipNavLink(
   { as: Comp = 'a', children = 'Skip to content', contentId = 'skip-nav-content', ...props },
   forwardedRef
 ) {
-  const { colorMode } = useThemeUI()
+  const { colorMode, theme } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
-  const primaryColor = darkModeActive ? COLORS.dark : COLORS.light
+  const primaryColor = theme?.colors?.primary ?? (darkModeActive ? '#4a9eff' : '#422EA3')
+  const primaryRgb = theme?.colors?.primaryRgb ?? (darkModeActive ? '74, 158, 255' : '66, 46, 163')
 
   return (
     <Comp
@@ -78,7 +60,7 @@ const SkipNavLink = forwardRef(function SkipNavLink(
           top: 3,
           left: 3,
           zIndex: 9999,
-          // ActionButton styles
+          // ActionButton styles (aligned with theme buttons.action)
           color: primaryColor,
           textDecoration: 'none',
           fontWeight: 'medium',
@@ -87,14 +69,14 @@ const SkipNavLink = forwardRef(function SkipNavLink(
           alignItems: 'center',
           padding: '8px 12px',
           borderRadius: '6px',
-          background: `rgba(${hexToRgb(primaryColor)}, 0.15)`,
-          border: `1px solid rgba(${hexToRgb(primaryColor)}, 0.3)`,
+          background: `rgba(${primaryRgb}, 0.15)`,
+          border: `1px solid rgba(${primaryRgb}, 0.3)`,
           cursor: 'pointer',
           outline: 'none',
           boxShadow: `0 0 0 2px ${primaryColor}40`,
           backdropFilter: 'blur(8px)',
           '&:hover': {
-            background: `rgba(${hexToRgb(primaryColor)}, 0.25)`,
+            background: `rgba(${primaryRgb}, 0.25)`,
             textDecoration: 'none'
           }
         }
@@ -108,4 +90,3 @@ const SkipNavLink = forwardRef(function SkipNavLink(
 SkipNavLink.displayName = 'SkipNavLink'
 
 export default SkipNavLink
-export { hexToRgb, COLORS }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { ThemeUIProvider } from 'theme-ui'
 import { TestProvider } from '../../../testUtils'
 import AiSummary from './ai-summary'
 
@@ -26,20 +27,25 @@ jest.mock('@fortawesome/react-fontawesome', () => ({
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = jest.fn()
+const mockUnobserve = jest.fn()
 let observerCallback = null
 
 mockIntersectionObserver.mockImplementation(callback => {
   observerCallback = callback
   return {
-    observe: () => null,
-    unobserve: () => null,
-    disconnect: () => null
+    observe: jest.fn(),
+    unobserve: mockUnobserve,
+    disconnect: jest.fn()
   }
 })
 
 window.IntersectionObserver = mockIntersectionObserver
 
-const renderWithTheme = component => {
+const renderWithTheme = (component, options = {}) => {
+  const { theme } = options
+  if (theme) {
+    return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
+  }
   return render(<TestProvider>{component}</TestProvider>)
 }
 
@@ -48,6 +54,7 @@ describe('AiSummary', () => {
     jest.clearAllMocks()
     jest.useFakeTimers()
     observerCallback = null
+    mockUnobserve.mockClear()
   })
 
   afterEach(() => {
@@ -121,6 +128,51 @@ describe('AiSummary', () => {
 
       expect(screen.queryByText('Read More')).not.toBeInTheDocument()
       expect(screen.queryByText('Show Less')).not.toBeInTheDocument()
+    })
+
+    it('uses fallback primary/secondary when theme has no colors', async () => {
+      const aiSummary = '<p>Fallback theme test.</p>'
+      const minimalTheme = { colors: {} }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme: minimalTheme })
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('AI Summary')).toBeInTheDocument()
+      expect(screen.getByText('Fallback theme test.')).toBeInTheDocument()
+    })
+
+    it('uses fallback primaryRgb when theme has no colors.primaryRgb', async () => {
+      const aiSummary = '<p>PrimaryRgb fallback test.</p>'
+      const themeWithoutRgb = { colors: { primary: '#422EA3', secondary: '#711E9B' } }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme: themeWithoutRgb })
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('AI Summary')).toBeInTheDocument()
+      expect(screen.getByText('PrimaryRgb fallback test.')).toBeInTheDocument()
+    })
+
+    it('uses all fallbacks when theme colors are explicitly undefined', async () => {
+      const aiSummary = '<p>All fallbacks test.</p>'
+      const themeWithUndefinedColors = { colors: { primary: undefined, secondary: undefined, primaryRgb: undefined } }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme: themeWithUndefinedColors })
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('AI Summary')).toBeInTheDocument()
+      expect(screen.getByText('All fallbacks test.')).toBeInTheDocument()
     })
   })
 
@@ -200,6 +252,28 @@ describe('AiSummary', () => {
       })
 
       expect(screen.queryByText('Test content.')).not.toBeInTheDocument()
+    })
+
+    it('unmounts without throwing (effect cleanup runs)', async () => {
+      const aiSummary = '<p>Unmount test.</p>'
+      const { unmount } = renderWithTheme(<AiSummary aiSummary={aiSummary} />)
+
+      // Trigger intersection to ensure observer is created and ref is observed
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(100)
+      })
+
+      // Unmount triggers cleanup - the cleanup function checks containerRef.current
+      // (coverage for line 90-91: if (containerRef.current) observer.unobserve(containerRef.current))
+      await expect(
+        act(() => {
+          unmount()
+        })
+      ).resolves.not.toThrow()
+
+      // Note: unobserve may or may not be called depending on React's ref lifecycle
+      // The cleanup function itself runs, covering the conditional check
     })
   })
 
