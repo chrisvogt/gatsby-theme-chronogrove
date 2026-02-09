@@ -29,10 +29,11 @@ const mockStore = configureStore({
   }
 })
 
-const renderWithProviders = component => {
+const renderWithProviders = (component, customTheme = null) => {
+  const themeToUse = customTheme ?? mockTheme
   return render(
     <Provider store={mockStore}>
-      <ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>
+      <ThemeUIProvider theme={themeToUse}>{component}</ThemeUIProvider>
     </Provider>
   )
 }
@@ -141,5 +142,34 @@ describe('PaginationButton', () => {
 
     const button = screen.getByRole('button', { name: /1/i })
     expect(button).toHaveAttribute('type', 'button')
+  })
+
+  describe('theme fallbacks', () => {
+    it('uses fallback primary color when theme has no colors.primary', () => {
+      // Use Object.create(null) to ensure no prototype properties interfere
+      const themeWithoutPrimary = Object.create(null)
+      themeWithoutPrimary.colors = Object.create(null)
+      renderWithProviders(<PaginationButton>1</PaginationButton>, themeWithoutPrimary)
+
+      const button = screen.getByRole('button', { name: /1/i })
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveStyle({ fontWeight: 'medium' })
+    })
+
+    it('uses fallback primaryRgb when theme has no colors.primaryRgb', () => {
+      // Theme with primary but explicitly no primaryRgb property
+      const themeWithoutRgb = { colors: { primary: '#422EA3' } }
+      // Ensure primaryRgb is not defined
+      Object.defineProperty(themeWithoutRgb.colors, 'primaryRgb', {
+        value: undefined,
+        configurable: true,
+        enumerable: false,
+        writable: true
+      })
+      renderWithProviders(<PaginationButton>1</PaginationButton>, themeWithoutRgb)
+
+      const button = screen.getByRole('button', { name: /1/i })
+      expect(button).toBeInTheDocument()
+    })
   })
 })

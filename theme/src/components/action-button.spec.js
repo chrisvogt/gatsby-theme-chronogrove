@@ -29,10 +29,11 @@ const mockStore = configureStore({
   }
 })
 
-const renderWithProviders = component => {
+const renderWithProviders = (component, customTheme = null) => {
+  const themeToUse = customTheme ?? mockTheme
   return render(
     <Provider store={mockStore}>
-      <ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>
+      <ThemeUIProvider theme={themeToUse}>{component}</ThemeUIProvider>
     </Provider>
   )
 }
@@ -146,6 +147,35 @@ describe('ActionButton', () => {
     expect(button).toHaveStyle({
       fontSize: '12px',
       padding: '8px 12px'
+    })
+  })
+
+  describe('theme fallbacks', () => {
+    it('uses fallback primary color when theme has no colors.primary', () => {
+      // Use Object.create(null) to ensure no prototype properties interfere
+      const themeWithoutPrimary = Object.create(null)
+      themeWithoutPrimary.colors = Object.create(null)
+      renderWithProviders(<ActionButton>Fallback Test</ActionButton>, themeWithoutPrimary)
+
+      const button = screen.getByRole('button', { name: /fallback test/i })
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveStyle({ fontWeight: 'medium' })
+    })
+
+    it('uses fallback primaryRgb when theme has no colors.primaryRgb', () => {
+      // Theme with primary but explicitly no primaryRgb property
+      const themeWithoutRgb = { colors: { primary: '#422EA3' } }
+      // Ensure primaryRgb is not defined
+      Object.defineProperty(themeWithoutRgb.colors, 'primaryRgb', {
+        value: undefined,
+        configurable: true,
+        enumerable: false,
+        writable: true
+      })
+      renderWithProviders(<ActionButton>Fallback RGB Test</ActionButton>, themeWithoutRgb)
+
+      const button = screen.getByRole('button', { name: /fallback rgb test/i })
+      expect(button).toBeInTheDocument()
     })
   })
 })
