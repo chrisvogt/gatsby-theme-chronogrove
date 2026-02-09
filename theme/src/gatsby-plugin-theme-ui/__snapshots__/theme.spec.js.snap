@@ -29,6 +29,26 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "1536px",
   ],
   "buttons": {
+    "action": {
+      "&:active": {
+        "transform": "scale(0.98)",
+      },
+      "&:focus": {
+        "boxShadow": [Function],
+        "outline": "none",
+      },
+      "&:hover": {
+        "bg": [Function],
+      },
+      "bg": "transparent",
+      "border": "1px solid",
+      "borderColor": "primary",
+      "borderRadius": "6px",
+      "color": "primary",
+      "cursor": "pointer",
+      "fontWeight": "medium",
+      "transition": "all 0.2s ease",
+    },
     "gray": {
       "bg": "gray",
       "color": "background",
@@ -319,7 +339,8 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
         "panel-background": "rgba(20, 20, 31, 0.45)",
         "panel-divider": [Function],
         "panel-highlight": [Function],
-        "primary": "#1E90FF",
+        "primary": "#4a9eff",
+        "primaryRgb": "74, 158, 255",
         "tableBackground": "rgba(30, 30, 47, 0.45)",
         "tableBorder": "rgba(255, 255, 255, 0.1)",
         "tableHeaderBackground": "rgba(30, 37, 48, 0.8)",
@@ -334,6 +355,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "panel-divider": [Function],
     "panel-highlight": [Function],
     "primary": "#422EA3",
+    "primaryRgb": "66, 46, 163",
     "secondary": "#711E9B",
     "secondaryGradient": "linear-gradient(45deg, #4527a0 0%, #711e9b 100%)",
     "tableBackground": "light",

@@ -122,7 +122,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -132,7 +132,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -264,7 +264,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -274,7 +274,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -406,7 +406,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -416,7 +416,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -548,7 +548,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -558,7 +558,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -620,7 +620,7 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           757.4h
         </span>
@@ -630,7 +630,7 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           757.4h per game
         </span>
@@ -816,7 +816,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -826,7 +826,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -958,7 +958,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -968,7 +968,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -987,10 +987,10 @@ exports[`PlayTimeChart Loading State renders loading state correctly 1`] = `
       class="css-nyc2gr"
     >
       <div
-        class="css-1omu3y4"
+        class="css-17cb55"
       />
       <p
-        class="css-1ylq8j3"
+        class="css-gej412"
       >
         Loading Gaming Library...
       </p>
@@ -1121,7 +1121,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -1131,7 +1131,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>
@@ -1263,7 +1263,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
       >
         Total Hours: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           1235.2h
         </span>
@@ -1273,7 +1273,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
       >
         Average: 
         <span
-          class="css-xdug5y"
+          class="css-1eduwqk"
         >
           411.7h per game
         </span>

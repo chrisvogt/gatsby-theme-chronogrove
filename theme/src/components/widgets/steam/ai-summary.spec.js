@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { ThemeUIProvider } from 'theme-ui'
 import { TestProvider } from '../../../testUtils'
 import AiSummary from './ai-summary'
 
@@ -39,7 +40,11 @@ mockIntersectionObserver.mockImplementation(callback => {
 
 window.IntersectionObserver = mockIntersectionObserver
 
-const renderWithTheme = component => {
+const renderWithTheme = (component, options = {}) => {
+  const { theme } = options
+  if (theme) {
+    return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
+  }
   return render(<TestProvider>{component}</TestProvider>)
 }
 
@@ -122,6 +127,21 @@ describe('AiSummary', () => {
       expect(screen.queryByText('Read More')).not.toBeInTheDocument()
       expect(screen.queryByText('Show Less')).not.toBeInTheDocument()
     })
+
+    it('uses fallback primary/secondary when theme has no colors', async () => {
+      const aiSummary = '<p>Fallback theme test.</p>'
+      const minimalTheme = { colors: {} }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme: minimalTheme })
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('AI Summary')).toBeInTheDocument()
+      expect(screen.getByText('Fallback theme test.')).toBeInTheDocument()
+    })
   })
 
   describe('Expand/Collapse functionality', () => {
@@ -200,6 +220,22 @@ describe('AiSummary', () => {
       })
 
       expect(screen.queryByText('Test content.')).not.toBeInTheDocument()
+    })
+
+    it('unmounts without throwing (effect cleanup runs)', async () => {
+      const aiSummary = '<p>Unmount test.</p>'
+      const { unmount } = renderWithTheme(<AiSummary aiSummary={aiSummary} />)
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(100)
+      })
+
+      await expect(
+        act(() => {
+          unmount()
+        })
+      ).resolves.not.toThrow()
     })
   })
 

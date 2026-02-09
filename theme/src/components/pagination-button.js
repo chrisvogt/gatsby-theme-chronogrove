@@ -2,6 +2,7 @@
 import React from 'react'
 import { jsx, useThemeUI } from 'theme-ui'
 import isDarkMode from '../helpers/isDarkMode'
+import { hexToRgb } from '../utils/colors'
 
 const PaginationButton = ({
   children,
@@ -13,34 +14,23 @@ const PaginationButton = ({
   icon,
   ...props
 }) => {
-  const { colorMode } = useThemeUI()
+  const { colorMode, theme } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
 
-  // Color variants - same as ActionButton
   const colorVariants = {
-    primary: {
-      light: '#422EA3',
-      dark: '#4a9eff'
-    },
-    secondary: {
-      light: '#666',
-      dark: '#888'
-    },
-    success: {
-      light: '#28a745',
-      dark: '#4CAF50'
-    },
-    warning: {
-      light: '#ffc107',
-      dark: '#FF9800'
-    },
-    danger: {
-      light: '#dc3545',
-      dark: '#f44336'
-    }
+    secondary: { light: '#666', dark: '#888' },
+    success: { light: '#28a745', dark: '#4CAF50' },
+    warning: { light: '#ffc107', dark: '#FF9800' },
+    danger: { light: '#dc3545', dark: '#f44336' }
   }
+  const isPrimary = variant === 'primary' || !colorVariants[variant]
+  const primaryColor = isPrimary
+    ? (theme?.colors?.primary ?? '#422EA3')
+    : darkModeActive
+      ? colorVariants[variant].dark
+      : colorVariants[variant].light
+  const rgb = isPrimary ? (theme?.colors?.primaryRgb ?? '66, 46, 163') : hexToRgb(primaryColor)
 
-  // Size variants - adapted for pagination
   const sizeVariants = {
     small: {
       fontSize: ['10px', '11px'],
@@ -64,18 +54,7 @@ const PaginationButton = ({
       gap: 2
     }
   }
-
-  const selectedColor = colorVariants[variant] || colorVariants.primary
-  const primaryColor = darkModeActive ? selectedColor.dark : selectedColor.light
   const sizeStyles = sizeVariants[size] || sizeVariants.medium
-
-  // Helper function to convert hex to RGB
-  function hexToRgb(hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    return result
-      ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-      : '74, 158, 255' // fallback to blue
-  }
 
   const baseStyles = {
     color: active ? 'white' : primaryColor,
@@ -90,26 +69,14 @@ const PaginationButton = ({
     minWidth: sizeStyles.minWidth,
     height: sizeStyles.height,
     borderRadius: '6px',
-    background: active
-      ? primaryColor
-      : darkModeActive
-        ? `rgba(${hexToRgb(primaryColor)}, 0.1)`
-        : `rgba(${hexToRgb(primaryColor)}, 0.1)`,
-    border: active
-      ? `1px solid ${primaryColor}`
-      : darkModeActive
-        ? `1px solid rgba(${hexToRgb(primaryColor)}, 0.2)`
-        : `1px solid rgba(${hexToRgb(primaryColor)}, 0.2)`,
+    background: active ? primaryColor : `rgba(${rgb}, 0.1)`,
+    border: active ? `1px solid ${primaryColor}` : `1px solid rgba(${rgb}, 0.2)`,
     transition: 'all 0.2s ease',
     cursor: disabled ? 'not-allowed' : 'pointer',
     outline: 'none',
     opacity: disabled ? 0.5 : 1,
     '&:hover:not(:disabled)': {
-      background: active
-        ? primaryColor
-        : darkModeActive
-          ? `rgba(${hexToRgb(primaryColor)}, 0.2)`
-          : `rgba(${hexToRgb(primaryColor)}, 0.2)`,
+      background: active ? primaryColor : `rgba(${rgb}, 0.2)`,
       textDecoration: 'none',
       transform: 'scale(1.02)'
     },

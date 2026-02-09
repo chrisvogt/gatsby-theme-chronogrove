@@ -5,8 +5,9 @@ import { ThemeUIProvider } from 'theme-ui'
 import theme from '../../../gatsby-plugin-theme-ui'
 import PlayTimeChart from './play-time-chart'
 
-const renderWithTheme = component => {
-  return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
+const renderWithTheme = (component, customTheme = null) => {
+  const themeToUse = customTheme ?? theme
+  return render(<ThemeUIProvider theme={themeToUse}>{component}</ThemeUIProvider>)
 }
 
 // Mock external dependencies
@@ -306,6 +307,15 @@ describe('PlayTimeChart', () => {
       // Default theme mode
       const { asFragment } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
       expect(asFragment()).toMatchSnapshot()
+    })
+
+    it('uses fallback primary colors when theme has no colors.primary', () => {
+      const minimalTheme = { colors: {} }
+      const { getByText } = renderWithTheme(
+        <PlayTimeChart games={sampleGames} profileURL='https://steamcommunity.com/id/fallback' />,
+        minimalTheme
+      )
+      expect(getByText('View complete gaming library')).toBeInTheDocument()
     })
 
     it('adapts to dark mode styling', () => {

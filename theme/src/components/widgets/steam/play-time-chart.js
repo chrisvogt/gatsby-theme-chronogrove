@@ -9,8 +9,11 @@ import SteamGameCard from './steam-game-card'
 
 // Accept profileURL as a prop
 const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
-  const { colorMode } = useThemeUI()
+  const { colorMode, theme } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
+  const primaryColor = theme?.colors?.primary ?? (darkModeActive ? '#4a9eff' : '#422EA3')
+  const primaryRgb = theme?.colors?.primaryRgb ?? (darkModeActive ? '74, 158, 255' : '66, 46, 163')
+  const mutedTextColor = darkModeActive ? '#888' : '#666'
 
   // Prepare data - top 10 games by playtime
   const topGames = (games || [])
@@ -22,9 +25,6 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
       hoursPlayed: Math.round(((game.playTimeForever || 0) / 60) * 100) / 100,
       rank: index + 1
     }))
-
-  const primaryColor = darkModeActive ? '#4a9eff' : '#422EA3'
-  const mutedTextColor = darkModeActive ? '#888' : '#666'
 
   // Loading state
   if (isLoading) {
@@ -159,11 +159,11 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
               gap: 1,
               padding: '8px 12px',
               borderRadius: '6px',
-              background: darkModeActive ? 'rgba(74, 158, 255, 0.1)' : 'rgba(66, 46, 163, 0.1)',
-              border: darkModeActive ? '1px solid rgba(74, 158, 255, 0.2)' : '1px solid rgba(66, 46, 163, 0.2)',
+              background: `rgba(${primaryRgb}, 0.1)`,
+              border: `1px solid rgba(${primaryRgb}, 0.2)`,
               transition: 'all 0.2s ease',
               '&:hover': {
-                background: darkModeActive ? 'rgba(74, 158, 255, 0.2)' : 'rgba(66, 46, 163, 0.2)',
+                background: `rgba(${primaryRgb}, 0.2)`,
                 textDecoration: 'none',
                 transform: 'scale(1.02)'
               }
