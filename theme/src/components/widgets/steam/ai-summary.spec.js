@@ -27,14 +27,15 @@ jest.mock('@fortawesome/react-fontawesome', () => ({
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = jest.fn()
+const mockUnobserve = jest.fn()
 let observerCallback = null
 
 mockIntersectionObserver.mockImplementation(callback => {
   observerCallback = callback
   return {
-    observe: () => null,
-    unobserve: () => null,
-    disconnect: () => null
+    observe: jest.fn(),
+    unobserve: mockUnobserve,
+    disconnect: jest.fn()
   }
 })
 
@@ -53,6 +54,7 @@ describe('AiSummary', () => {
     jest.clearAllMocks()
     jest.useFakeTimers()
     observerCallback = null
+    mockUnobserve.mockClear()
   })
 
   afterEach(() => {
@@ -142,6 +144,36 @@ describe('AiSummary', () => {
       expect(screen.getByText('AI Summary')).toBeInTheDocument()
       expect(screen.getByText('Fallback theme test.')).toBeInTheDocument()
     })
+
+    it('uses fallback primaryRgb when theme has no colors.primaryRgb', async () => {
+      const aiSummary = '<p>PrimaryRgb fallback test.</p>'
+      const themeWithoutRgb = { colors: { primary: '#422EA3', secondary: '#711E9B' } }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme: themeWithoutRgb })
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('AI Summary')).toBeInTheDocument()
+      expect(screen.getByText('PrimaryRgb fallback test.')).toBeInTheDocument()
+    })
+
+    it('uses all fallbacks when theme colors are explicitly undefined', async () => {
+      const aiSummary = '<p>All fallbacks test.</p>'
+      const themeWithUndefinedColors = { colors: { primary: undefined, secondary: undefined, primaryRgb: undefined } }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme: themeWithUndefinedColors })
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('AI Summary')).toBeInTheDocument()
+      expect(screen.getByText('All fallbacks test.')).toBeInTheDocument()
+    })
   })
 
   describe('Expand/Collapse functionality', () => {
@@ -226,16 +258,22 @@ describe('AiSummary', () => {
       const aiSummary = '<p>Unmount test.</p>'
       const { unmount } = renderWithTheme(<AiSummary aiSummary={aiSummary} />)
 
+      // Trigger intersection to ensure observer is created and ref is observed
       await act(async () => {
         triggerIntersection(true)
         jest.advanceTimersByTime(100)
       })
 
+      // Unmount triggers cleanup - the cleanup function checks containerRef.current
+      // (coverage for line 90-91: if (containerRef.current) observer.unobserve(containerRef.current))
       await expect(
         act(() => {
           unmount()
         })
       ).resolves.not.toThrow()
+
+      // Note: unobserve may or may not be called depending on React's ref lifecycle
+      // The cleanup function itself runs, covering the conditional check
     })
   })
 

@@ -22,7 +22,7 @@ A modern, feature-rich Gatsby theme for personal websites and blogs with social 
 
 ## 📋 Prerequisites
 
-- **Node.js**: >= 20.0.0
+- **Node.js**: >= 24.0.0
 - **Yarn**: >= 4.0.0
 - **Git**: For version control
 
