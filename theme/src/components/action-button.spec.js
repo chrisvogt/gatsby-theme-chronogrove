@@ -8,20 +8,21 @@ import { ThemeUIProvider } from 'theme-ui'
 import ActionButton from './action-button'
 import { BUTTON_PRIMARY_COLORS } from '../utils/colors'
 
-// Mock useThemeUI for fallback tests - store return value in object accessible to hoisted mock
-const mockThemeUIConfig = { returnValue: null }
-jest.mock('theme-ui', () => {
-  const actual = jest.requireActual('theme-ui')
-  return {
-    ...actual,
-    useThemeUI: (...args) => {
-      if (mockThemeUIConfig.returnValue !== null) {
-        return mockThemeUIConfig.returnValue
-      }
-      return actual.useThemeUI(...args)
+// Mock useThemeUI for fallback tests - mutable mock like root-wrapper.spec.js
+const mockUseThemeUI = jest.fn(() => ({
+  colorMode: 'default',
+  theme: {
+    colors: {
+      primary: BUTTON_PRIMARY_COLORS.light,
+      primaryRgb: '66, 46, 163'
     }
   }
-})
+}))
+
+jest.mock('theme-ui', () => ({
+  ...jest.requireActual('theme-ui'),
+  useThemeUI: () => mockUseThemeUI()
+}))
 
 // Mock theme (primary/primaryRgb so components use theme colors)
 const mockTheme = {
@@ -167,19 +168,24 @@ describe('ActionButton', () => {
 
   describe('theme fallbacks', () => {
     beforeEach(() => {
-      mockThemeUIConfig.returnValue = null
-    })
-
-    afterEach(() => {
-      mockThemeUIConfig.returnValue = null
+      // Reset to default mock
+      mockUseThemeUI.mockReturnValue({
+        colorMode: 'default',
+        theme: {
+          colors: {
+            primary: BUTTON_PRIMARY_COLORS.light,
+            primaryRgb: '66, 46, 163'
+          }
+        }
+      })
     })
 
     it('uses fallback primary color when theme.colors.primary is undefined', () => {
       // Mock useThemeUI to return theme without primary to hit fallback branch (line 20)
-      mockThemeUIConfig.returnValue = {
+      mockUseThemeUI.mockReturnValueOnce({
         colorMode: 'default',
         theme: { colors: {} } // No primary property - triggers fallback '#422EA3'
-      }
+      })
 
       renderWithProviders(<ActionButton>Fallback Test</ActionButton>)
 
@@ -190,10 +196,10 @@ describe('ActionButton', () => {
 
     it('uses fallback primaryRgb when theme.colors.primaryRgb is undefined', () => {
       // Mock useThemeUI to return theme with primary but no primaryRgb (line 24)
-      mockThemeUIConfig.returnValue = {
+      mockUseThemeUI.mockReturnValueOnce({
         colorMode: 'default',
         theme: { colors: { primary: '#422EA3' } } // Has primary, no primaryRgb - triggers fallback '66, 46, 163'
-      }
+      })
 
       renderWithProviders(<ActionButton>Fallback RGB Test</ActionButton>)
 
@@ -203,10 +209,10 @@ describe('ActionButton', () => {
 
     it('uses fallback when theme itself is undefined', () => {
       // Mock useThemeUI to return undefined theme (line 20)
-      mockThemeUIConfig.returnValue = {
+      mockUseThemeUI.mockReturnValueOnce({
         colorMode: 'default',
         theme: undefined // theme is undefined - triggers fallback '#422EA3'
-      }
+      })
 
       renderWithProviders(<ActionButton>Undefined Theme Test</ActionButton>)
 
