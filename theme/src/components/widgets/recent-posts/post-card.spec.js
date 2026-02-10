@@ -3,6 +3,15 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import PostCard from './post-card'
 
+// Mock the YouTube shortcode component
+jest.mock('../../../shortcodes/youtube', () => {
+  return ({ url, title, compact, sx }) => (
+    <div className='youtube-mock' data-compact={compact} data-title={title} data-url={url} style={sx}>
+      <iframe src={url} title={title} />
+    </div>
+  )
+})
+
 describe('PostCard', () => {
   const baseProps = {
     banner: 'https://cdn.example.com/images/article-og-banner.jpg',

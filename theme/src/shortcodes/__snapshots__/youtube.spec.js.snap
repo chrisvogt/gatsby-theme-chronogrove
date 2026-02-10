@@ -1,20 +1,121 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`YouTube Shortcode accepts custom sx styles 1`] = `
+<DocumentFragment>
+  <div
+    class="css-e2ajp9"
+  >
+    <div
+      class="css-j7kvgs"
+    >
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="css-cbkwco"
+        frameborder="0"
+        height="315"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube-nocookie.com/embed/XJashBvI17A"
+        title="Styled Video"
+        width="560"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`YouTube Shortcode matches the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="css-zezy6m"
   >
-    <iframe
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
-      allowfullscreen=""
-      class="VideoFrame"
-      height="315"
-      referrerpolicy="strict-origin-when-cross-origin"
-      src="https://www.youtube-nocookie.com/embed/XJashBvI17A"
-      title="Here, There And Everywhere (Piano Cover) by Theme User"
-      width="560"
-    />
+    <div
+      class="css-j7kvgs"
+    >
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="css-cbkwco"
+        frameborder="0"
+        height="315"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube-nocookie.com/embed/XJashBvI17A"
+        title="Here, There And Everywhere (Piano Cover) by Theme User"
+        width="560"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`YouTube Shortcode renders with compact mode when compact prop is true 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1youo7t"
+  >
+    <div
+      class="css-j7kvgs"
+    >
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="css-cbkwco"
+        frameborder="0"
+        height="315"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube-nocookie.com/embed/XJashBvI17A"
+        title="Compact Video"
+        width="560"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`YouTube Shortcode renders with default mode when compact prop is false or omitted 1`] = `
+<DocumentFragment>
+  <div
+    class="css-zezy6m"
+  >
+    <div
+      class="css-j7kvgs"
+    >
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="css-cbkwco"
+        frameborder="0"
+        height="315"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube-nocookie.com/embed/XJashBvI17A"
+        title="Normal Video"
+        width="560"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`YouTube Shortcode renders with default mode when compact prop is false or omitted 2`] = `
+<DocumentFragment>
+  <div
+    class="css-zezy6m"
+  >
+    <div
+      class="css-j7kvgs"
+    >
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="css-cbkwco"
+        frameborder="0"
+        height="315"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube-nocookie.com/embed/XJashBvI17A"
+        title="Normal Video"
+        width="560"
+      />
+    </div>
   </div>
 </DocumentFragment>
 `;
