@@ -145,6 +145,7 @@ export default () => {
                 <Grid
                   sx={{
                     display: 'grid',
+                    gridAutoRows: '1fr',
                     gridGap: [2, 2, 3, 3],
                     gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
                   }}
