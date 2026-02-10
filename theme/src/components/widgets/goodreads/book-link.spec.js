@@ -5,6 +5,7 @@ import { navigate as gatsbyNavigate } from 'gatsby'
 
 import BookLink from './book-link'
 import { useThemeUI } from 'theme-ui'
+import { trackWidgetInteraction } from '../../../utils/analytics'
 
 // Mock gatsby's navigate function
 jest.mock('gatsby', () => ({
@@ -19,6 +20,11 @@ jest.mock('theme-ui', () => ({
 
 // Mock LazyLoad component
 jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
+
+// Mock analytics tracking
+jest.mock('../../../utils/analytics', () => ({
+  trackWidgetInteraction: jest.fn()
+}))
 
 describe('Widget/Goodreads/BookLink', () => {
   const mockProps = {
@@ -71,6 +77,16 @@ describe('Widget/Goodreads/BookLink', () => {
         noScroll: true,
         scrollPosition: 200
       }
+    })
+  })
+
+  it('tracks analytics event when book is clicked', () => {
+    render(<BookLink {...mockProps} />)
+    const link = screen.getByTestId('book-link')
+    fireEvent.click(link)
+    expect(trackWidgetInteraction).toHaveBeenCalledWith('goodreads', 'book_click', {
+      book_id: '123',
+      book_title: 'Test Book'
     })
   })
 

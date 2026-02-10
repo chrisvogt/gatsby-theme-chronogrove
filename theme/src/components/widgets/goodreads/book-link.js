@@ -7,6 +7,7 @@ import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
 import Book from '../../artwork/book'
 import LazyLoad from '../../lazy-load'
+import { trackWidgetInteraction } from '../../../utils/analytics'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
@@ -46,6 +47,13 @@ const BookLink = ({ id, thumbnailURL, title }) => {
   const handleClick = e => {
     e.preventDefault()
     e.stopPropagation() // Prevent event bubbling
+
+    // Track the book click event
+    trackWidgetInteraction('goodreads', 'book_click', {
+      book_id: id,
+      book_title: title
+    })
+
     // Store current scroll position
     const currentScroll = window.scrollY
     // Use a small timeout to ensure the scroll position is preserved
