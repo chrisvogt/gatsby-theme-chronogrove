@@ -25,15 +25,26 @@ const mockLightGalleryInstance = {
 
 let mockLightGalleryCallbacks = {}
 
-let mockLightGalleryOnInit = ({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide }) => {
+let mockLightGalleryOnInit = ({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide, onAfterSlide }) => {
   onInit({ instance: mockLightGalleryInstance })
-  mockLightGalleryCallbacks = { onAfterOpen, onAfterClose, onAfterAppendSlide }
+  mockLightGalleryCallbacks = {
+    onAfterOpen,
+    onAfterClose,
+    onAfterAppendSlide,
+    onAfterSlide
+  }
   return <div data-testid='lightgallery-mock' />
 }
 
 jest.mock('lightgallery/react', () =>
-  jest.fn(({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide, dynamicEl }) =>
-    mockLightGalleryOnInit({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide, dynamicEl })
+  jest.fn(({ onInit, onAfterOpen, onAfterClose, onAfterAppendSlide, onAfterSlide }) =>
+    mockLightGalleryOnInit({
+      onInit,
+      onAfterOpen,
+      onAfterClose,
+      onAfterAppendSlide,
+      onAfterSlide
+    })
   )
 )
 
@@ -927,6 +938,238 @@ describe('InstagramWidget', () => {
 
       // Cleanup
       document.body.removeChild(thumbOuter)
+    })
+  })
+
+  describe('View on Instagram button and gallery callbacks', () => {
+    it('calls onInit with detail fallback when instance is missing', () => {
+      const initSpy = jest.fn()
+      const originalOnInit = mockLightGalleryOnInit
+      mockLightGalleryOnInit = ({ onInit }) => {
+        initSpy(onInit)
+        onInit({ index: 0 })
+        mockLightGalleryCallbacks = {}
+        return <div data-testid='lightgallery-mock' />
+      }
+
+      useWidgetData.mockReturnValue(mockSuccessState)
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      expect(initSpy).toHaveBeenCalled()
+      mockLightGalleryOnInit = originalOnInit
+    })
+
+    it('calls onAfterSlide and updates tracked index', () => {
+      useWidgetData.mockReturnValue(mockSuccessState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      if (mockLightGalleryCallbacks.onAfterSlide) {
+        act(() => {
+          mockLightGalleryCallbacks.onAfterSlide({ index: 1 })
+        })
+        act(() => {
+          jest.runAllTimers()
+        })
+      }
+      expect(screen.getByText('Instagram')).toBeInTheDocument()
+    })
+
+    it('handles onAfterSlide with detail.detail.index', () => {
+      useWidgetData.mockReturnValue(mockSuccessState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      if (mockLightGalleryCallbacks.onAfterSlide) {
+        act(() => {
+          mockLightGalleryCallbacks.onAfterSlide({ detail: { index: 2 } })
+        })
+        act(() => {
+          jest.runAllTimers()
+        })
+      }
+      expect(screen.getByText('Instagram')).toBeInTheDocument()
+    })
+
+    it('injects View on Instagram button when toolbar exists and opens permalink on click', () => {
+      const toolbar = document.createElement('div')
+      toolbar.className = 'lg-toolbar lg-group'
+      document.body.appendChild(toolbar)
+
+      useWidgetData.mockReturnValue(mockSuccessState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null)
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      const viewBtn = document.getElementById('lg-view-on-instagram')
+      expect(viewBtn).toBeInTheDocument()
+      fireEvent.click(viewBtn)
+      expect(openSpy).toHaveBeenCalledWith('https://instagram.com/p/test', '_blank', 'noopener')
+
+      openSpy.mockRestore()
+      document.body.removeChild(toolbar)
+    })
+
+    it('appends img_index to permalink when current slide is carousel image', () => {
+      const carouselState = {
+        ...mockSuccessState,
+        data: {
+          ...mockSuccessState.data,
+          collections: {
+            media: [
+              {
+                id: 'carousel1',
+                caption: 'Carousel',
+                cdnMediaURL: 'https://cdn.example.com/images/c1.jpg',
+                mediaType: 'CAROUSEL_ALBUM',
+                permalink: 'https://instagram.com/p/carousel1',
+                children: [
+                  { id: 'c1-1', cdnMediaURL: 'https://cdn.example.com/images/c1-1.jpg' },
+                  { id: 'c1-2', cdnMediaURL: 'https://cdn.example.com/images/c1-2.jpg' }
+                ]
+              }
+            ]
+          }
+        }
+      }
+
+      const toolbar = document.createElement('div')
+      toolbar.className = 'lg-toolbar lg-group'
+      document.body.appendChild(toolbar)
+
+      useWidgetData.mockReturnValue(carouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterSlide({ index: 1 })
+      })
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null)
+      const viewBtn = document.getElementById('lg-view-on-instagram')
+      expect(viewBtn).toBeInTheDocument()
+      fireEvent.click(viewBtn)
+      expect(openSpy).toHaveBeenCalledWith(expect.stringContaining('img_index=2'), '_blank', 'noopener')
+
+      openSpy.mockRestore()
+      document.body.removeChild(toolbar)
+    })
+
+    it('uses fallback URL when URL constructor throws (carousel slide)', () => {
+      const carouselState = {
+        ...mockSuccessState,
+        data: {
+          ...mockSuccessState.data,
+          collections: {
+            media: [
+              {
+                id: 'carousel1',
+                caption: 'Carousel',
+                cdnMediaURL: 'https://cdn.example.com/images/c1.jpg',
+                mediaType: 'CAROUSEL_ALBUM',
+                permalink: 'https://instagram.com/p/carousel1',
+                children: [
+                  { id: 'c1-1', cdnMediaURL: 'https://cdn.example.com/images/c1-1.jpg' },
+                  { id: 'c1-2', cdnMediaURL: 'https://cdn.example.com/images/c1-2.jpg' }
+                ]
+              }
+            ]
+          }
+        }
+      }
+
+      const toolbar = document.createElement('div')
+      toolbar.className = 'lg-toolbar lg-group'
+      document.body.appendChild(toolbar)
+
+      useWidgetData.mockReturnValue(carouselState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterSlide({ index: 1 })
+      })
+
+      const OriginalURL = global.URL
+      jest.spyOn(global, 'URL').mockImplementationOnce(() => {
+        throw new Error('Invalid URL')
+      })
+
+      const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null)
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      const viewBtn = document.getElementById('lg-view-on-instagram')
+      fireEvent.click(viewBtn)
+      expect(openSpy).toHaveBeenCalled()
+      const calledUrl = openSpy.mock.calls[0][0]
+      expect(calledUrl).toMatch(/\?img_index=\d+|&img_index=\d+/)
+
+      openSpy.mockRestore()
+      global.URL = OriginalURL
+      document.body.removeChild(toolbar)
+    })
+
+    it('addInstagramButton returns early when toolbar is missing', () => {
+      useWidgetData.mockReturnValue(mockSuccessState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      expect(document.querySelector('.lg-toolbar.lg-group')).toBeNull()
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+      expect(document.getElementById('lg-view-on-instagram')).toBeNull()
     })
   })
 
