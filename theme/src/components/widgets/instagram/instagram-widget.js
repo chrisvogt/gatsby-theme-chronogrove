@@ -55,6 +55,9 @@ export default () => {
   const [isInView, setIsInView] = useState(false)
   const isGalleryOpenRef = useRef(false) // Use ref to avoid re-renders when gallery opens/closes
   const lightGalleryRef = useRef(null)
+  const mediaRef = useRef(null)
+  const dynamicElRef = useRef(null)
+  const currentSlideIndexRef = useRef(0)
   const ambientIntervalRef = useRef(null)
   const widgetRef = useRef(null)
   const carouselQueueRef = useRef([]) // Shuffled queue of carousel indices
@@ -202,9 +205,9 @@ export default () => {
       const instance = lightGalleryRef.current
       if (instance) {
         // Map widget item index to the correct LightGallery slide index
-        // Then add the current image index to open at the exact image being shown
         const baseSlideIndex = indexMapRef.current[widgetItemIndex] ?? widgetItemIndex
         const slideIndex = baseSlideIndex + currentImageIndex
+        currentSlideIndexRef.current = slideIndex
         instance.openGallery(slideIndex)
       } else {
         console.error('LightGallery instance is not initialized')
@@ -226,16 +229,14 @@ export default () => {
 
   const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
 
-  // View on Instagram: inject toolbar button that links to the current post's permalink
-  const addInstagramButton = (slideIndex, mediaItems, slides) => {
+  // View on Instagram: inject toolbar button. We track current slide in currentSlideIndexRef
+  // (set when opening and in onAfterSlide) so the click handler always opens the correct post.
+  const addInstagramButton = () => {
     const existingBtn = document.getElementById('lg-view-on-instagram')
     if (existingBtn) existingBtn.remove()
 
-    const slide = slides[slideIndex]
-    const postIndex = slide?.albumIndex ?? 0
-    const post = mediaItems?.[postIndex]
-    const permalink = post?.permalink
-    if (!permalink) return
+    const toolbar = document.querySelector('.lg-toolbar.lg-group')
+    if (!toolbar) return
 
     const btn = document.createElement('button')
     btn.id = 'lg-view-on-instagram'
@@ -246,11 +247,29 @@ export default () => {
     btn.style.float = 'right'
     btn.onclick = e => {
       e.stopPropagation()
+      const slideIndex = currentSlideIndexRef.current
+      const slides = dynamicElRef.current || []
+      const slide = slides[slideIndex]
+      const postIndex = slide?.albumIndex ?? 0
+      const mediaItems = mediaRef.current || []
+      const post = mediaItems[postIndex]
+      let permalink = post?.permalink
+      if (!permalink) return
+      // Instagram carousel: add img_index so the post opens on the current image (1-based)
+      if (slide && slide.totalInAlbum > 1 && typeof slide.imageIndex === 'number') {
+        try {
+          const url = new URL(permalink)
+          url.searchParams.set('img_index', String(slide.imageIndex + 1))
+          permalink = url.toString()
+        } catch {
+          // fallback if URL parsing fails
+          permalink = `${permalink}${permalink.includes('?') ? '&' : '?'}img_index=${slide.imageIndex + 1}`
+        }
+      }
       window.open(permalink, '_blank', 'noopener')
     }
 
-    const toolbar = document.querySelector('.lg-toolbar.lg-group')
-    if (toolbar) toolbar.appendChild(btn)
+    toolbar.appendChild(btn)
   }
 
   // Memoize LightGallery props to prevent reinitializing on every render
@@ -338,23 +357,32 @@ export default () => {
   const indexMapRef = useRef(itemIndexToSlideIndex)
   indexMapRef.current = itemIndexToSlideIndex
 
-  const handleLightGalleryInit = useCallback(
-    ref => {
-      lightGalleryRef.current = ref.instance
-      addInstagramButton(0, media, dynamicEl)
-    },
-    [media, dynamicEl]
-  )
+  // Keep refs updated so the toolbar button's click handler can read current slide at click time
+  mediaRef.current = media
+  dynamicElRef.current = dynamicEl
 
-  const handleAfterSlide = useCallback(
-    ({ index }) => {
-      addInstagramButton(index, media, dynamicEl)
-    },
-    [media, dynamicEl]
-  )
+  const handleLightGalleryInit = useCallback(detail => {
+    lightGalleryRef.current = detail?.instance ?? detail
+    // Toolbar may not exist yet; button is added in onAfterOpen
+  }, [])
 
+  // Add button when gallery opens (toolbar DOM is ready) and when slide changes
   const handleGalleryOpen = useCallback(() => {
     isGalleryOpenRef.current = true
+    requestAnimationFrame(() => {
+      addInstagramButton()
+    })
+  }, [])
+
+  // Keep our tracked index in sync and re-inject button so it stays in the DOM
+  const handleAfterSlide = useCallback(detail => {
+    const nextIndex = typeof detail?.index === 'number' ? detail.index : detail?.detail?.index
+    if (typeof nextIndex === 'number') {
+      currentSlideIndexRef.current = nextIndex
+    }
+    requestAnimationFrame(() => {
+      addInstagramButton()
+    })
   }, [])
 
   const handleGalleryClose = useCallback(() => {
