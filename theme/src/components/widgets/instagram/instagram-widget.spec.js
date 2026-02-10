@@ -1171,6 +1171,173 @@ describe('InstagramWidget', () => {
       })
       expect(document.getElementById('lg-view-on-instagram')).toBeNull()
     })
+
+    it('removes existing View on Instagram button before re-adding on slide change', () => {
+      const toolbar = document.createElement('div')
+      toolbar.className = 'lg-toolbar lg-group'
+      document.body.appendChild(toolbar)
+
+      useWidgetData.mockReturnValue(mockSuccessState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+      const firstBtn = document.getElementById('lg-view-on-instagram')
+      expect(firstBtn).toBeInTheDocument()
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterSlide({ index: 0 })
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+      const afterSlideBtn = document.getElementById('lg-view-on-instagram')
+      expect(afterSlideBtn).toBeInTheDocument()
+      expect(document.querySelectorAll('#lg-view-on-instagram')).toHaveLength(1)
+
+      document.body.removeChild(toolbar)
+    })
+
+    it('does not call window.open when current post has no permalink', () => {
+      const stateNoPermalink = {
+        ...mockSuccessState,
+        data: {
+          ...mockSuccessState.data,
+          collections: {
+            media: [
+              {
+                id: '123',
+                caption: 'No link',
+                cdnMediaURL: 'https://cdn.example.com/img.jpg',
+                mediaType: 'IMAGE',
+                permalink: undefined
+              }
+            ]
+          }
+        }
+      }
+
+      const toolbar = document.createElement('div')
+      toolbar.className = 'lg-toolbar lg-group'
+      document.body.appendChild(toolbar)
+
+      useWidgetData.mockReturnValue(stateNoPermalink)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null)
+      const viewBtn = document.getElementById('lg-view-on-instagram')
+      expect(viewBtn).toBeInTheDocument()
+      fireEvent.click(viewBtn)
+      expect(openSpy).not.toHaveBeenCalled()
+
+      openSpy.mockRestore()
+      document.body.removeChild(toolbar)
+    })
+
+    it('fallback URL uses & when permalink already contains query string', () => {
+      const carouselWithQueryPermalink = {
+        ...mockSuccessState,
+        data: {
+          ...mockSuccessState.data,
+          collections: {
+            media: [
+              {
+                id: 'carousel1',
+                caption: 'Carousel',
+                cdnMediaURL: 'https://cdn.example.com/images/c1.jpg',
+                mediaType: 'CAROUSEL_ALBUM',
+                permalink: 'https://instagram.com/p/c1?utm_source=web',
+                children: [
+                  { id: 'c1-1', cdnMediaURL: 'https://cdn.example.com/images/c1-1.jpg' },
+                  { id: 'c1-2', cdnMediaURL: 'https://cdn.example.com/images/c1-2.jpg' }
+                ]
+              }
+            ]
+          }
+        }
+      }
+
+      const toolbar = document.createElement('div')
+      toolbar.className = 'lg-toolbar lg-group'
+      document.body.appendChild(toolbar)
+
+      useWidgetData.mockReturnValue(carouselWithQueryPermalink)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterSlide({ index: 1 })
+      })
+
+      jest.spyOn(global, 'URL').mockImplementationOnce(() => {
+        throw new Error('Invalid URL')
+      })
+
+      const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null)
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterOpen()
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      const viewBtn = document.getElementById('lg-view-on-instagram')
+      fireEvent.click(viewBtn)
+      expect(openSpy).toHaveBeenCalled()
+      const calledUrl = openSpy.mock.calls[0][0]
+      expect(calledUrl).toMatch(/&img_index=2/)
+
+      openSpy.mockRestore()
+      document.body.removeChild(toolbar)
+    })
+
+    it('handleAfterSlide does not set index when detail has no index', () => {
+      useWidgetData.mockReturnValue(mockSuccessState)
+
+      render(
+        <TestProviderWithQuery>
+          <InstagramWidget />
+        </TestProviderWithQuery>
+      )
+
+      act(() => {
+        mockLightGalleryCallbacks.onAfterSlide({})
+      })
+      act(() => {
+        mockLightGalleryCallbacks.onAfterSlide({ detail: {} })
+      })
+      act(() => {
+        jest.runAllTimers()
+      })
+
+      expect(screen.getByText('Instagram')).toBeInTheDocument()
+    })
   })
 
   describe('openLightbox with currentImageIndex', () => {
