@@ -16,18 +16,18 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 - Code is at https://github.com/chrisvogt/metrics
 
 ## Key Technologies
-- **Gatsby 5.x**: Static site generator
-- **React 18.x**: UI framework
+- **Gatsby 5.x**: Static site generator (v5.16.0 with patches)
+- **React 19.x**: UI framework (supports React 18 and 19 via peer dependencies)
 - **Theme UI**: Design system and styling (CSS-in-JS)
-- **Redux Toolkit**: State management
-- **Jest**: Testing framework with comprehensive setup
-- **Yarn v4 Workspaces**: Monorepo management
-- **MDX**: Content authoring with React components
-- **FontAwesome**: Icon library
+- **Redux Toolkit**: State management (v2.x)
+- **Jest 30.x**: Testing framework with comprehensive setup
+- **Yarn 4.x**: Monorepo management with workspaces (v4.9.2)
+- **MDX 3.x**: Content authoring with React components
+- **FontAwesome 7.x**: Icon library
 
 ## Development Setup
-- **Node.js**: >=20 (see `.node_version` and `.nvmrc`)
-- **Yarn**: >=4.0.0 (see `packageManager` in package.json)
+- **Node.js**: 24 (see `.nvmrc` and `engines` in theme/package.json)
+- **Yarn**: 4.9.2 (see `packageManager` in root package.json)
 - **HTTPS**: Local development requires HTTPS (see `develop:https` script)
 - **Workspace Commands**: Use `yarn workspace [package] [command]` for package-specific operations
 
