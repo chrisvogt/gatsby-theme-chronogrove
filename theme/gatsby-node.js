@@ -68,6 +68,82 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   })
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+
+  // Define custom types for siteMetadata and MDX frontmatter
+  const typeDefs = `
+    type MdxFrontmatter {
+      excerpt: String
+      thumbnails: [String]
+    }
+
+    type SiteSiteMetadata implements Node {
+      navigation: SiteSiteMetadataNavigation
+      widgets: SiteSiteMetadataWidgets
+      socialProfiles: [SiteSiteMetadataSocialProfile]
+    }
+
+    type SiteSiteMetadataNavigation {
+      header: SiteSiteMetadataNavigationHeader
+    }
+
+    type SiteSiteMetadataNavigationHeader {
+      left: [SiteSiteMetadataNavigationItem]
+      home: [SiteSiteMetadataNavigationItem]
+    }
+
+    type SiteSiteMetadataNavigationItem {
+      path: String!
+      slug: String!
+      text: String!
+      title: String!
+    }
+
+    type SiteSiteMetadataWidgets {
+      github: SiteSiteMetadataWidgetConfig
+      instagram: SiteSiteMetadataWidgetConfig
+      goodreads: SiteSiteMetadataWidgetConfig
+      spotify: SiteSiteMetadataWidgetConfig
+      steam: SiteSiteMetadataWidgetConfig
+      flickr: SiteSiteMetadataWidgetConfig
+      discogs: SiteSiteMetadataWidgetConfig
+    }
+
+    type SiteSiteMetadataWidgetConfig {
+      username: String
+      widgetDataSource: String
+    }
+
+    type SiteSiteMetadataHCard {
+      email: String
+      givenName: String
+      familyName: String
+      locality: String
+      region: String
+      countryName: String
+      category: String
+      photoURL: String
+    }
+
+    type SiteSiteMetadataSocialProfile {
+      displayName: String!
+      slug: String!
+      href: String!
+      icon: SiteSiteMetadataSocialProfileIcon!
+    }
+
+    type SiteSiteMetadataSocialProfileIcon {
+      class: String!
+      name: String!
+      reactIcon: String!
+      set: String!
+    }
+  `
+
+  createTypes(typeDefs)
+}
+
 exports.onCreateNode = ({ node, getNode, actions, reporter }) => {
   const { createNodeField } = actions
 

@@ -1,39 +1,64 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useStaticQuery } from 'gatsby'
 import useNavigationData from './use-navigation-data'
 
 const data = {
-  allDataJson: {
-    edges: [
-      {
-        node: {
-          payload: {
-            left: {
-              path: '/',
-              slug: 'home',
-              text: 'Home',
-              title: 'Home'
+  site: {
+    siteMetadata: {
+      navigation: {
+        header: {
+          left: [
+            {
+              path: '/about',
+              slug: 'about',
+              text: 'About',
+              title: 'About Me'
+            },
+            {
+              path: '/blog',
+              slug: 'blog',
+              text: 'Blog',
+              title: 'Latest posts from the blog'
             }
-          }
+          ],
+          home: [
+            {
+              path: '#github',
+              slug: 'github',
+              text: 'GitHub',
+              title: 'GitHub'
+            }
+          ]
         }
       }
-    ]
+    }
   }
 }
 
 jest.mock('gatsby')
 
 describe('useNavigationData', () => {
-  beforeEach(() => {
+  it('returns navigation data from site metadata', () => {
     useStaticQuery.mockImplementation(() => data)
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-
-  it('returns data used to render the top bar navigation links', () => {
     const { result } = renderHook(() => useNavigationData())
-    expect(result.current).toEqual(data.allDataJson.edges[0].node.payload)
+    expect(result.current).toEqual(data.site.siteMetadata.navigation)
+  })
+
+  it('handles missing navigation data', () => {
+    useStaticQuery.mockImplementation(() => ({ site: { siteMetadata: {} } }))
+    const { result } = renderHook(() => useNavigationData())
+    expect(result.current).toEqual({})
+  })
+
+  it('handles missing site metadata', () => {
+    useStaticQuery.mockImplementation(() => ({ site: {} }))
+    const { result } = renderHook(() => useNavigationData())
+    expect(result.current).toEqual({})
+  })
+
+  it('handles missing site', () => {
+    useStaticQuery.mockImplementation(() => ({}))
+    const { result } = renderHook(() => useNavigationData())
+    expect(result.current).toEqual({})
   })
 })

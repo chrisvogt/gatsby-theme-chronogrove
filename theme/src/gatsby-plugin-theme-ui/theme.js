@@ -4,7 +4,7 @@ import { merge } from 'theme-ui'
 const fonts = {
   sans: '-apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif',
   serif:
-    'Crimson Text, Georgia, Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
+    'Iowan Old Style, Apple Garamond, Georgia, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
   mono: 'Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace'
 }
 
@@ -57,6 +57,21 @@ export const glassmorhismPanel = {
   border: '1px solid rgba(255, 255, 255, 0.15)'
 }
 
+export const backdropBlurStrong = {
+  backdropFilter: 'blur(20px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(20px) saturate(180%)'
+}
+
+export const backdropBlurMedium = {
+  backdropFilter: 'blur(12px) saturate(150%)',
+  WebkitBackdropFilter: 'blur(12px) saturate(150%)'
+}
+
+export const backdropBlurLight = {
+  backdropFilter: 'blur(8px) saturate(120%)',
+  WebkitBackdropFilter: 'blur(8px) saturate(120%)'
+}
+
 export const card = {
   borderRadius: 'card',
   background: 'var(--theme-ui-colors-panel-background)',
@@ -65,7 +80,9 @@ export const card = {
   flexGrow: 1,
   padding: 3,
   fontSize: [1, 2],
-  textDecoration: 'none'
+  textDecoration: 'none',
+  backdropFilter: 'blur(12px) saturate(150%)',
+  WebkitBackdropFilter: 'blur(12px) saturate(150%)'
 }
 
 export const metricCard = {
@@ -90,7 +107,6 @@ export const PostCard = {
   flexDirection: 'column',
   '.card-media': {
     mb: 2,
-    height: '100%',
     overflow: 'hidden'
   },
   '.read-more-icon': {
@@ -138,6 +154,64 @@ export default merge(tailwind, {
     gray: {
       color: 'background',
       bg: 'gray'
+    },
+    /** Ghost/outline style used by ActionButton, PaginationButton, SkipNavLink, CTAs */
+    action: {
+      color: 'primary',
+      bg: 'transparent',
+      border: '1px solid',
+      borderColor: 'primary',
+      borderRadius: '6px',
+      fontWeight: 'medium',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      '&:hover': {
+        bg: theme => `rgba(${theme.colors.primaryRgb}, 0.2)`
+      },
+      '&:focus': {
+        outline: 'none',
+        boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
+      },
+      '&:active': {
+        transform: 'scale(0.98)'
+      }
+    },
+    readMore: {
+      color: 'primary',
+      bg: 'transparent',
+      border: theme => `1px solid ${theme.colors.primary}`,
+      borderRadius: 'card',
+      px: 3,
+      py: 2,
+      fontSize: [1, 2],
+      fontWeight: 'medium',
+      cursor: 'pointer',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      position: 'relative',
+      overflow: 'hidden',
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: '-100%',
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(90deg, transparent, rgba(66, 46, 163, 0.1), transparent)',
+        transition: 'left 0.5s ease-in-out'
+      },
+      '&:hover, &:focus': {
+        bg: 'primary',
+        color: 'background',
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 12px rgba(66, 46, 163, 0.3)',
+        '&::before': {
+          left: '100%'
+        }
+      },
+      '&:active': {
+        transform: 'translateY(0)',
+        boxShadow: '0 2px 8px rgba(66, 46, 163, 0.2)'
+      }
     }
   },
 
@@ -184,30 +258,132 @@ export default merge(tailwind, {
       backgroundColor: '#1e2530'
     },
 
-    PostCard
+    PostCard,
+
+    aiSummary: {
+      ...card,
+      ...glassmorhismPanel,
+      borderLeft: theme => `2px solid ${theme.colors.primary}`,
+      '@keyframes pulse': {
+        '0%, 100%': {
+          opacity: 1
+        },
+        '50%': {
+          opacity: 0.7
+        }
+      },
+      '@keyframes gentleGlow': {
+        '0%': {
+          filter: 'drop-shadow(0 0 12px rgba(66, 46, 163, 0.4))'
+        },
+        '100%': {
+          filter: 'drop-shadow(0 0 20px rgba(66, 46, 163, 0.7))'
+        }
+      },
+      '@keyframes gentleFloat': {
+        '0%, 100%': {
+          transform: 'translateY(0px)'
+        },
+        '50%': {
+          transform: 'translateY(-4px)'
+        }
+      },
+      '@keyframes slideInFromLeft': {
+        '0%': {
+          opacity: 0,
+          transform: 'translateX(-30px)'
+        },
+        '100%': {
+          opacity: 1,
+          transform: 'translateX(0)'
+        }
+      },
+      '@keyframes expandWidth': {
+        '0%': {
+          width: '0%'
+        },
+        '100%': {
+          width: '100%'
+        }
+      },
+      '@keyframes gentleBounce': {
+        '0%, 20%, 50%, 80%, 100%': {
+          transform: 'translateY(0)'
+        },
+        '40%': {
+          transform: 'translateY(-4px)'
+        },
+        '60%': {
+          transform: 'translateY(-2px)'
+        }
+      },
+      '@keyframes blink': {
+        '0%, 50%': {
+          opacity: 1
+        },
+        '51%, 100%': {
+          opacity: 0
+        }
+      },
+      '@keyframes fadeInUp': {
+        '0%': {
+          opacity: 0,
+          transform: 'translateY(20px)'
+        },
+        '100%': {
+          opacity: 1,
+          transform: 'translateY(0)'
+        }
+      },
+      '@keyframes slideDown': {
+        '0%': {
+          opacity: 0,
+          maxHeight: '0px',
+          overflow: 'hidden'
+        },
+        '100%': {
+          opacity: 1,
+          maxHeight: '1000px',
+          overflow: 'visible'
+        }
+      }
+    }
   },
 
   colors: {
     accent: 'deeppink',
     background: '#fdf8f5',
-    'panel-background': 'rgba(255, 255, 255, 0.35)',
+    'panel-background': 'rgba(255, 255, 255, 0.45)',
     'panel-divider': () => '1px solid rgba(255, 229, 224, 0.17)',
     'panel-highlight': theme => theme.colors.gray[1],
     modes: {
       dark: {
-        background: '#1e1e2f',
-        'panel-background': 'rgba(1, 1, 1, 0.30)',
+        background: '#14141F',
+        'panel-background': 'rgba(20, 20, 31, 0.45)',
         'panel-divider': theme => `1px solid ${theme.colors.gray[8]}`,
         'panel-highlight': theme => theme.colors.gray[8],
-        primary: '#1E90FF',
+        primary: '#4a9eff',
+        primaryRgb: '74, 158, 255',
         text: '#fff',
-        textMuted: '#d8d8d8'
+        textMuted: '#d8d8d8',
+        tableText: '#fff',
+        tableBackground: 'rgba(30, 30, 47, 0.45)',
+        tableHeaderBackground: 'rgba(30, 37, 48, 0.8)',
+        tableRowBackground: 'rgba(30, 30, 47, 0.25)',
+        tableRowAlternateBackground: 'rgba(30, 37, 48, 0.5)',
+        tableBorder: 'rgba(255, 255, 255, 0.1)'
       }
     },
     primary: '#422EA3',
+    primaryRgb: '66, 46, 163',
     secondary: '#711E9B',
     secondaryGradient: 'linear-gradient(45deg, #4527a0 0%, #711e9b 100%)',
     tableText: '#111',
+    tableBackground: 'light',
+    tableHeaderBackground: '#f4f4f9',
+    tableRowBackground: 'transparent',
+    tableRowAlternateBackground: '#fafafa',
+    tableBorder: 'muted',
     text: '#111',
     textMuted: '#333'
   },
@@ -233,7 +409,8 @@ export default merge(tailwind, {
   links: {
     homeNavigation: {
       color: 'primary',
-      display: 'block',
+      display: 'flex',
+      alignItems: 'center',
       py: 2,
       textDecoration: 'none',
       '&:not(:last-of-type)': {
@@ -291,7 +468,7 @@ export default merge(tailwind, {
     },
 
     table: {
-      backgroundColor: 'light',
+      backgroundColor: 'rgba(255, 255, 255, 0.35)',
       color: 'tableText',
       width: '100%',
       borderCollapse: 'collapse',
@@ -303,20 +480,49 @@ export default merge(tailwind, {
       'th, td': {
         fontSize: '1.125em',
         textAlign: 'left',
-        padding: '12px 15px',
-        borderBottom: '1px solid',
-        borderColor: 'muted'
+        padding: '12px 15px'
       },
       th: {
-        backgroundColor: '#f4f4f9',
+        backgroundColor: 'tableHeaderBackground',
         fontWeight: 'bold',
         textTransform: 'uppercase',
-        letterSpacing: '0.05em',
-        borderTop: '2px solid',
-        borderColor: 'muted'
+        letterSpacing: '0.05em'
       },
       'tbody tr:nth-of-type(odd)': {
-        backgroundColor: '#fafafa'
+        backgroundColor: 'tableRowAlternateBackground'
+      },
+      'tbody tr:nth-of-type(even)': {
+        backgroundColor: 'tableRowBackground'
+      }
+    },
+
+    tableDark: {
+      ...glassmorhismPanel,
+      backgroundColor: 'rgba(30, 30, 47, 0.35)',
+      color: 'tableText',
+      width: '100%',
+      borderCollapse: 'collapse',
+      borderSpacing: 0,
+      marginBottom: '1.5rem',
+      overflow: 'hidden',
+      borderRadius: '10px',
+      boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
+      'th, td': {
+        fontSize: '1.125em',
+        textAlign: 'left',
+        padding: '12px 15px'
+      },
+      th: {
+        backgroundColor: 'tableHeaderBackground',
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em'
+      },
+      'tbody tr:nth-of-type(odd)': {
+        backgroundColor: 'tableRowAlternateBackground'
+      },
+      'tbody tr:nth-of-type(even)': {
+        backgroundColor: 'tableRowBackground'
       }
     },
 

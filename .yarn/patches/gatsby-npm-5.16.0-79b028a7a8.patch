@@ -1,0 +1,48 @@
+diff --git a/cache-dir/head/utils.js b/cache-dir/head/utils.js
+index f3f48087fd9cf448c21aa2621e87e4acb2554372..7c9029730b5c59579f54e9ecfb8d9f634af254ca 100644
+--- a/cache-dir/head/utils.js
++++ b/cache-dir/head/utils.js
+@@ -153,13 +153,13 @@ export function getValidHeadNodesAndAttributes(
+           }
+         }
+       } else {
+-        let clonedNode = node.cloneNode(true)
++        // With React 19, elements may be created in the SVG namespace due to the
++        // SVG wrapper workaround. Using cloneNode(true) preserves the incorrect namespace.
++        // We must recreate them in the HTML namespace so they work correctly (e.g.,
++        // HTMLMetaElement.name returns a string instead of undefined).
++        let clonedNode = cloneNodeWithoutNS(node)
+         clonedNode.setAttribute(`data-gatsby-head`, true)
+ 
+-        // // This is hack to make script tags work
+-        if (clonedNode.nodeName.toLowerCase() === `script`) {
+-          clonedNode = massageScript(clonedNode)
+-        }
+         // Duplicate ids are not allowed in the head, so we need to dedupe them
+         if (id) {
+           if (!seenIds.has(id)) {
+@@ -195,14 +195,19 @@ export function getValidHeadNodesAndAttributes(
+   return { validHeadNodes, htmlAndBodyAttributes }
+ }
+ 
+-function massageScript(node) {
+-  const script = document.createElement(`script`)
++/**
++ * Clone a node and ensure it's created in the HTML namespace.
++ * This fixes React 19's SVG wrapper workaround which causes elements
++ * to be created in the SVG namespace instead of HTML namespace.
++ */
++function cloneNodeWithoutNS(node) {
++  const clonedNode = document.createElement(node.nodeName.toLowerCase())
+   for (const attr of node.attributes) {
+-    script.setAttribute(attr.name, attr.value)
++    clonedNode.setAttribute(attr.name, attr.value)
+   }
+-  script.innerHTML = node.innerHTML
++  clonedNode.innerHTML = node.innerHTML
+ 
+-  return script
++  return clonedNode
+ }
+ 
+ export function isValidNodeName(nodeName) {

@@ -6,13 +6,35 @@ const useSiteMetadata = () => {
       site {
         siteMetadata {
           baseURL
+          siteUrl
           description
           footerText
           headline
+          hCard {
+            email
+            givenName
+            familyName
+            locality
+            region
+            countryName
+            category
+            photoURL
+          }
           imageURL
           languageCode
           social {
             twitterUsername
+          }
+          socialProfiles {
+            displayName
+            href
+            slug
+            icon {
+              class
+              name
+              reactIcon
+              set
+            }
           }
           subhead
           title
@@ -42,7 +64,12 @@ const useSiteMetadata = () => {
               username
               widgetDataSource
             }
+            discogs {
+              username
+              widgetDataSource
+            }
           }
+          webmentionUrl
         }
       }
     }

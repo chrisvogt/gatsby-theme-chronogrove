@@ -1,28 +1,27 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
 const useSocialProfiles = () => {
-  const { allSocialProfilesJson: { edges = [] } = {} } = useStaticQuery(graphql`
-    query AllSocialProfiles {
-      allSocialProfilesJson {
-        edges {
-          node {
+  const { site: { siteMetadata: { socialProfiles = [] } = {} } = {} } = useStaticQuery(graphql`
+    query SocialProfiles {
+      site {
+        siteMetadata {
+          socialProfiles {
             displayName
             href
+            slug
             icon {
               class
               name
               reactIcon
               set
             }
-            id
-            slug
           }
         }
       }
     }
   `)
 
-  return edges.map(({ node }) => node).filter(Boolean)
+  return socialProfiles.filter(Boolean)
 }
 
 export default useSocialProfiles

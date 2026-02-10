@@ -1,18 +1,43 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { Grid } from '@theme-ui/components'
+import { Grid, Box, Text } from '@theme-ui/components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faMusic, faMapMarkedAlt, faFileAlt, faNewspaper } from '@fortawesome/free-solid-svg-icons'
 
-import useRecentPosts from '../../../hooks/use-recent-posts'
+import useCategorizedPosts from '../../../hooks/use-categorized-posts'
 
 import CallToAction from '../call-to-action'
 import PostCard from './post-card'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 
+const SectionHeader = ({ icon, title }) => (
+  <Box sx={{ mb: 3 }}>
+    <Text
+      sx={{
+        fontSize: 2,
+        fontWeight: 'bold',
+        color: 'text',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2
+      }}
+    >
+      <FontAwesomeIcon
+        icon={icon}
+        sx={{
+          width: '20px',
+          height: '20px'
+        }}
+      />
+      {title}
+    </Text>
+  </Box>
+)
+
 export default () => {
-  const posts = useRecentPosts()
+  const { posts } = useCategorizedPosts()
 
   const getColumnCount = postsCount => {
     let columnCount
@@ -36,6 +61,15 @@ export default () => {
     </CallToAction>
   )
 
+  // Group posts by section for display
+  const postsBySection = posts.reduce((acc, post) => {
+    if (!acc[post.section]) {
+      acc[post.section] = []
+    }
+    acc[post.section].push(post)
+    return acc
+  }, {})
+
   return (
     <Widget id='posts' styleOverrides={{ pt: 0 }}>
       <WidgetHeader aside={callToAction} icon={faNewspaper}>
@@ -43,25 +77,121 @@ export default () => {
       </WidgetHeader>
 
       <div sx={{ width: '100%', mt: 4 }}>
-        <Grid
-          sx={{
-            display: 'grid',
-            gridAutoRows: '1fr',
-            gridGap: [3, 3, 4],
-            gridTemplateColumns: ['', '', `repeat(${getColumnCount(posts.length)}, 1fr)`]
-          }}
-        >
-          {posts.map(post => (
-            <PostCard
-              banner={post.frontmatter.banner}
-              category={post.fields.category}
-              date={post.frontmatter.date}
-              key={post.fields.id}
-              link={post.fields.path}
-              title={post.frontmatter.title}
-            />
-          ))}
-        </Grid>
+        {/* Latest Recaps Section */}
+        {postsBySection.recaps && postsBySection.recaps.length > 0 && (
+          <Box sx={{ mb: 4 }}>
+            <SectionHeader icon={faCalendarAlt} title='Recaps' />
+            <Grid
+              sx={{
+                display: 'grid',
+                gridGap: [3, 3, 3, 4],
+                gridTemplateColumns: [
+                  '1fr',
+                  '1fr',
+                  '1fr',
+                  `repeat(${getColumnCount(postsBySection.recaps.length)}, 1fr)`
+                ]
+              }}
+            >
+              {postsBySection.recaps.map(post => (
+                <PostCard
+                  key={post.fields.id}
+                  category={post.fields.category}
+                  date={post.frontmatter.date}
+                  excerpt={post.frontmatter.excerpt}
+                  link={post.fields.path}
+                  thumbnails={post.frontmatter.thumbnails}
+                  title={post.frontmatter.title}
+                />
+              ))}
+            </Grid>
+          </Box>
+        )}
+
+        {/* Single Post Sections - Order matches nav: Recaps, Posts, Music, Travel */}
+        {(postsBySection.other || postsBySection.music || postsBySection.travel) && (
+          <Box>
+            {/* Posts */}
+            {postsBySection.other && postsBySection.other.length > 0 && (
+              <Box sx={{ mb: 4 }}>
+                <SectionHeader icon={faFileAlt} title='Posts' />
+                <Grid
+                  sx={{
+                    display: 'grid',
+                    gridAutoRows: '1fr',
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
+                  }}
+                >
+                  {postsBySection.other.map(post => (
+                    <PostCard
+                      key={post.fields.id}
+                      category={post.fields.category}
+                      date={post.frontmatter.date}
+                      excerpt={post.frontmatter.excerpt}
+                      link={post.fields.path}
+                      title={post.frontmatter.title}
+                      horizontal
+                    />
+                  ))}
+                </Grid>
+              </Box>
+            )}
+
+            {/* Music */}
+            {postsBySection.music && postsBySection.music.length > 0 && (
+              <Box sx={{ mb: 4 }}>
+                <SectionHeader icon={faMusic} title='Music' />
+                <Grid
+                  sx={{
+                    display: 'grid',
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
+                  }}
+                >
+                  {postsBySection.music.map(post => (
+                    <PostCard
+                      key={post.fields.id}
+                      category={post.fields.category}
+                      date={post.frontmatter.date}
+                      link={post.fields.path}
+                      soundcloudId={post.frontmatter.soundcloudId}
+                      title={post.frontmatter.title}
+                      youtubeSrc={post.frontmatter.youtubeSrc}
+                    />
+                  ))}
+                </Grid>
+              </Box>
+            )}
+
+            {/* Travel */}
+            {postsBySection.travel && postsBySection.travel.length > 0 && (
+              <Box sx={{ mb: 4 }}>
+                <SectionHeader icon={faMapMarkedAlt} title='Travel' />
+                <Grid
+                  sx={{
+                    display: 'grid',
+                    gridAutoRows: '1fr',
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
+                  }}
+                >
+                  {postsBySection.travel.map(post => (
+                    <PostCard
+                      key={post.fields.id}
+                      category={post.fields.category}
+                      date={post.frontmatter.date}
+                      link={post.fields.path}
+                      thumbnails={post.frontmatter.thumbnails}
+                      title={post.frontmatter.title}
+                      horizontal
+                    />
+                  ))}
+                </Grid>
+              </Box>
+            )}
+          </Box>
+        )}
       </div>
     </Widget>
   )

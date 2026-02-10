@@ -10,19 +10,32 @@ import 'prismjs/themes/prism-solarizedlight.css'
 
 export { default as wrapRootElement } from './wrapRootElement'
 
-// Prevent scroll restoration when only query parameters change
-export const shouldUpdateScroll = ({ routerProps }) => {
-  // If routerProps is undefined, we're likely in a development environment
-  // or the router hasn't initialized yet
-  if (!routerProps) {
-    return true
-  }
+// Prevent scroll restoration when only query parameters change.
+// Returning false prevents gatsby-react-router-scroll from restoring a previously
+// saved scroll position (e.g. bottom of About). We scroll to top in onRouteUpdate instead.
+export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
+  const currentPath = routerProps?.location?.pathname
+  const prevPath = prevRouterProps?.location?.pathname
 
-  const { location, prevLocation } = routerProps
-  // If only the query parameters changed, don't update scroll
-  if (prevLocation && location.pathname === prevLocation.pathname) {
+  // If only the query parameters changed (same pathname), don't update scroll
+  if (prevPath && currentPath === prevPath) {
     return false
   }
-  // For actual page changes, use default scroll behavior
-  return true
+
+  // For pathname changes: don't let the scroll handler restore saved position.
+  // It only uses our return as a boolean; the Y position comes from session storage,
+  // so returning [0,0] would still restore the saved Y. We scroll to top in onRouteUpdate.
+  return false
+}
+
+// Scroll to top and focus main content after route changes (accessibility).
+// See https://webaim.org/techniques/skipnav/
+export const onRouteUpdate = ({ prevLocation }) => {
+  if (prevLocation !== null) {
+    window.scrollTo(0, 0)
+    const skipContent = document.getElementById('skip-nav-content')
+    if (skipContent) {
+      skipContent.focus({ preventScroll: true })
+    }
+  }
 }

@@ -19,10 +19,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: yarn
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Run Prettier check
         run: yarn prettier --check .
@@ -43,13 +43,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: yarn
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Run tests and collect coverage
-        run: yarn workspace gatsby-theme-chrisvogt test:coverage --maxWorkers=2
+        run: yarn workspace gatsby-theme-chronogrove test:coverage --maxWorkers=2
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -59,7 +59,7 @@ jobs:
           fail_ci_if_error: true
 
       - name: Run tests for Codecov analytics
-        run: yarn workspace gatsby-theme-chrisvogt test:codecov
+        run: yarn workspace gatsby-theme-chronogrove test:codecov
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
@@ -79,10 +79,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: yarn
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Load env vars from .env.template
         run: |

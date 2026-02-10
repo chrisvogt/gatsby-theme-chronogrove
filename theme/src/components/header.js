@@ -11,7 +11,6 @@ const Header = ({ children, styles }) => {
     <header
       role='banner'
       sx={{
-        position: 'relative',
         variant: 'styles.Header'
       }}
     >

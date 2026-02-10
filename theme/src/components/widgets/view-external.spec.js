@@ -1,11 +1,12 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import ViewExternal from './view-external'
 
 describe('ViewExternal', () => {
   it('matches the snapshot', () => {
     const platform = 'GitHub'
-    const tree = renderer.create(<ViewExternal platform={platform}>{platform}</ViewExternal>).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(<ViewExternal platform={platform}>{platform}</ViewExternal>)
+    expect(asFragment()).toMatchSnapshot()
   })
 })

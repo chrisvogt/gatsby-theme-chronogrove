@@ -12,6 +12,7 @@ const TrackPreview = ({ link, name, thumbnailURL }) => (
   >
     <img
       alt='album cover'
+      loading='lazy'
       crossOrigin='anonymous'
       src={thumbnailURL}
       sx={{

@@ -17,10 +17,8 @@ keywords:
     career growth,
     tech blog
   ]
-description: >
-  Explore the 12-year evolution of Chris Vogt's personal website, detailing its transformation from a basic PHP site to a sophisticated GatsbyJS and React application.
-excerpt: >
-  Explore the 12-year evolution of Chris Vogt's website, from its early days as a PHP site to its current state powered by GatsbyJS and React
+description: Explore the 12-year evolution of Chris Vogt's personal website, detailing its transformation from a basic PHP site to a sophisticated GatsbyJS and React application.
+excerpt: Explore the 12-year evolution of Chris Vogt's website, from its early days as a PHP site to its current state powered by GatsbyJS and React.
 ---
 
 Building this website has been a personal hobby project of mine for the last 12 years. Over time, the code behind this app has grown in both features and complexity, as most software projects do. This post covers how I got here, how this site works today, and what I plan to do with it.
@@ -56,6 +54,7 @@ So I rewrote my personal website to better match the tech I used at work. I want
 To handle API rate limits and server-side calls, I created a [Personal Stats API](https://github.com/chrisvogt/stats) using CakePHP, tracking time spent coding and visualizing the data on my stats subdomain. For a while it was also the backend behind my home page widgets.
 
 <img
+  loading='lazy'
   className='solid-background'
   alt='Data flow diagram for my personal website v1.x.'
   src='https://res.cloudinary.com/chrisvogt/image/upload/v1718781949/posts/2019-data-diagram.webp'
@@ -76,6 +75,7 @@ This experience led me to rewrite my front end using GatsbyJS + React with the i
 After replacing the front end, I replaced my Personal Stats API with [metrics.chrisvogt.me](https://github.com/chrisvogt/metrics), an API and collection of Node.js scripts deployed to Google Cloud Platform with Firebase that run on scheduled jobs and update a Firestore database. The current version of my website still uses these technologies.
 
 <img
+  loading='lazy'
   className='solid-background'
   alt="My website's architecture as of June 2024."
   src='https://res.cloudinary.com/chrisvogt/image/upload/v1718782557/posts/2024-data-diagram.webp'
@@ -85,7 +85,7 @@ After replacing the front end, I replaced my Personal Stats API with [metrics.ch
 
 Today, my site is powered by GatsbyJS + React + Firebase Functions + Firestore. The key repositories include:
 
-- [gatsby-theme-chrisvogt](https://github.com/chrisvogt/gatsby-theme-chrisvogt) – an open-source GatsbyJS theme for the front end.
+- [gatsby-theme-chronogrove](https://github.com/chrisvogt/gatsby-theme-chronogrove) – an open-source GatsbyJS theme for the front end.
 - [metrics](https://github.com/chrisvogt/metrics) – a collection of Firebase Functions serving data for the dashboard page.
 
 My design system and UI components are homemade and built on [Theme UI](https://theme-ui.com/), and I’m working on translating my site into Figma for rapid prototyping.

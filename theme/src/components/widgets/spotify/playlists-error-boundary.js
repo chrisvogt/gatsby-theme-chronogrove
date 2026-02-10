@@ -1,31 +1,25 @@
-import { Component } from 'react'
+import React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 
 // This component is a temporary solution for an issue I've been observing the last month or two
 // where the Spotify Widget response data is missing images for the playlists. This causes a fatal
 // error in the component which takes down the entire Home page.
-class PlaylistsErrorBoundary extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false }
-  }
+const PlaylistsErrorBoundaryFallback = () => {
+  // Don't render anything if there's an error. Most visitors, if not all, won't realize
+  // this is missing.
+  return null
+}
 
-  static getDerivedStateFromError() {
-    return { hasError: true }
-  }
-
-  componentDidCatch(error, errorInfo) {
+const PlaylistsErrorBoundary = ({ children }) => {
+  const handleError = (error, errorInfo) => {
     console.error('Error in Playlists component:', error, errorInfo)
   }
 
-  render() {
-    if (this.state.hasError) {
-      // Don't render anything if there's an error. Most visitors, if not all, won't realize
-      // this is missing.
-      return null
-    }
-
-    return this.props.children
-  }
+  return (
+    <ErrorBoundary onError={handleError} FallbackComponent={PlaylistsErrorBoundaryFallback}>
+      {children}
+    </ErrorBoundary>
+  )
 }
 
 export default PlaylistsErrorBoundary

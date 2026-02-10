@@ -1,0 +1,173 @@
+---
+title: 'June 2025 Recap'
+category: personal
+slug: june-2025
+banner: https://res.cloudinary.com/chrisvogt/image/upload/v1754292181/chrisvogt-me/thumbnails/june-2025-banner.webp
+thumbnails:
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1751355494/chrisvogt-me/galleries/now-june-2025/castro-on-pride-2025.avif
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1751355451/chrisvogt-me/galleries/now-june-2025/daft-punk-vinyl.avif
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1751355485/chrisvogt-me/galleries/now-june-2025/beer-up-close.avif
+  - https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1751355485/chrisvogt-me/galleries/now-june-2025/mission-mural.avif
+date: '2025-06-30T14:00:00.000Z'
+description: >
+  A personal recap of what I've been working on, exploring, and thinking about in June 2025.
+excerpt: >
+  A roundup of June 2025—projects, travel, thoughts, and the little things in between.
+keywords: [june 2025, personal blog, monthly recap, chris vogt, software projects, music practice, travel highlights]
+---
+
+import { PhotoGallery } from '../../../components/PhotoGallery'
+import { brewing, favoritePhotos, gardening, pridePhotos, vinylCollection } from './photos'
+
+This is my first _now_ page update — a look back at what I've been up to this month.
+
+## 🎯 June Overview
+
+June has been all about revisiting old projects, leveling up personal hobbies, and making space for community and creativity. I even dusted off a few things I hadn't touched in eight years.
+
+## 🤖 AI at Work
+
+AI continues to be front and center at work. All of my June projects tied into logged-in customer navigation and building AI-powered experiences. I'm lucky to be at a company that's embracing AI tools for developers and integrating them meaningfully into products.
+
+## 💻 Development Tools
+
+At home (and now at work too), I've switched from VS Code to [Cursor](https://www.cursor.com/), and have been using it to improve test coverage on this site and its API. I'm using it to polish and fill my content too, but have reservations and that may change in the near future.
+
+## 🌴 Upcoming Travel
+
+And — I'm prepping for a short July getaway! I'll be spending five days in Puerto Vallarta, Mexico 🌴
+
+---
+
+## 🛠️ What I Worked On
+
+### Reviving teachersalary.info
+
+At the beginning of the month, I noticed that [teachersalary.info](https://teachersalary.info) was quietly receiving more traffic than my blog — which surprised me! I hadn't touched it in 8 years, so I spent some time refreshing the project and published [a blog post](/personal/teacher-salary-info/) about the work.
+
+### New Steam Widget
+
+In June, I launched a [Steam widget](/) on my home page. It pulls in my top ten most-played games (by hours logged) using the Steam API. I'd had the code staged in a PR for a while — and finally shipped it!
+
+I've been chatting with others about ways to evolve it — maybe including additional visualizations and expanding the dataset. If you have ideas or feedback, I'd love to hear them.
+
+### Migrated CI to GitHub Actions
+
+Across all of my projects, I've replaced CircleCI and TravisCI with GitHub Actions. It simplified my pipelines a lot — I no longer need the extra tooling, and everything runs through GitHub now.
+
+### Personal API Upgrades
+
+My [personal API](https://github.com/chrisvogt/metrics), which powers this site, got some love this month:
+
+- ✅ [Added first unit tests](https://github.com/chrisvogt/metrics/pull/61) (using Vitest)
+- 🚀 [Migrated from Firebase Functions v1 → v2](https://github.com/chrisvogt/metrics/pull/58)
+- ⚡ [Optimized API responses](https://github.com/chrisvogt/metrics/pull/59) to improve site performance
+
+---
+
+## 🎉 Pride Events
+
+I went to six Pride and birthday parties in June — all coordinated through [Partiful](https://partiful.com), which has become the most-used app among my friends for organizing events the last couple years. (I also used it for my birthday party.)
+
+<PhotoGallery photos={pridePhotos} />
+
+---
+
+## 💿 I've Started Collecting Vinyl
+
+Vinyl has taken over my friend group — everyone's talking about new records they're spinning, and I've caught the bug too.
+
+I haven't bought a record player yet (holding out for a sale), but I've started collecting LPs anyway. I usually bring them over to my neighbor's place when we hang out and listen together.
+
+I also discovered [Discogs](https://www.discogs.com/) and started tinkering with their API. I plan to build a widget to display my vinyl collection on my home page soon.
+
+<PhotoGallery photos={vinylCollection} />
+
+---
+
+## 🍺 Brewing Beer
+
+Over my birthday weekend in May, I brewed my first-ever batch of beer — a single-hop Cascade IPA. By June 28, it was bottled and ready to drink: a Pride beer! 🏳️‍🌈🍻
+
+<PhotoGallery photos={brewing} />
+
+---
+
+## 🌱 Indoor Gardening Experiments
+
+I've been experimenting with indoor gardening lately, mostly to learn how to keep things alive and growing in a smaller space.
+
+It all started with an AeroGarden I picked up on sale — then I accidentally propagated a philodendron! I left a clipping in a vase, and before I knew it, roots had formed. Now it's a whole new plant.
+
+<PhotoGallery photos={gardening} />
+
+---
+
+## 🎹 Music & Creativity
+
+I added several new songs to my practice rotation this month and updated [repertoire.chrisvogt.me](https://repertoire.chrisvogt.me) with the latest additions:
+
+<Table>
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Artist</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Twilight Zone</td>
+      <td>Ariana Grande</td>
+    </tr>
+    <tr>
+      <td>The Way We Were</td>
+      <td>Barbara Streisand</td>
+    </tr>
+    <tr>
+      <td>Broken</td>
+      <td>Lovelytheband</td>
+    </tr>
+    <tr>
+      <td>Touch</td>
+      <td>Daft Punk</td>
+    </tr>
+    <tr>
+      <td>I Think They Call This Love</td>
+      <td>Elliot James Reay</td>
+    </tr>
+    <tr>
+      <td>Golden Hour</td>
+      <td>JVKE</td>
+    </tr>
+    <tr>
+      <td>Pink Pony Club</td>
+      <td>Chappell Roan</td>
+    </tr>
+    <tr>
+      <td>Till Forever Falls Apart</td>
+      <td>Ashe & FINNEAS</td>
+    </tr>
+  </tbody>
+</Table>
+
+---
+
+## 📚 What I Read
+
+I made progress on [_Flowers for Algernon_](https://www.goodreads.com/user_status/show/1076801541) this month — I’m now on page 226 of 311 (about 73%). I still do most of my reading while traveling, but I’ve been trying to carve out more quiet time at home to read.
+
+---
+
+## 📸 Favorite Photos from June
+
+Here are a few of my favorite shots from June.
+
+<PhotoGallery photos={favoritePhotos} />
+
+---
+
+## 💭 Final Thoughts
+
+This is my first time using the _now page_ format ([what's a now page?](https://nownownow.com/about)), and I really like it. Once I publish my July update, I'll archive this one and keep the flow going.
+
+Thanks for reading. ✌️

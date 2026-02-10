@@ -1,86 +1,193 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+
+import { TestProvider } from '../testUtils'
 import Seo from './seo'
 import useSiteMetadata from '../hooks/use-site-metadata'
-import { useThemeUI } from 'theme-ui'
-import { getLanguageCode, getTitle, getTitleTemplate, getTwitterUsername } from '../selectors/metadata'
 
-// Mocking the necessary hooks and selectors
 jest.mock('../hooks/use-site-metadata')
-jest.mock('theme-ui', () => ({
-  useThemeUI: jest.fn()
-}))
-jest.mock('../selectors/metadata', () => ({
-  getLanguageCode: jest.fn(),
-  getTitle: jest.fn(),
-  getTitleTemplate: jest.fn(),
-  getTwitterUsername: jest.fn()
-}))
 
-describe('Seo Component', () => {
+const mockSiteMetadata = {
+  title: 'Test Site',
+  titleTemplate: '%s | Test Site',
+  twitterUsername: '@testuser',
+  webmentionUrl: 'https://webmention.io/test.com/webmention'
+}
+
+describe('Seo', () => {
   beforeEach(() => {
-    // Mock the default metadata and theme values
-    useSiteMetadata.mockReturnValue({
-      title: 'Default Site Title'
-    })
-    useThemeUI.mockReturnValue({
-      theme: { colors: { background: '#ffffff' } }
-    })
-    getLanguageCode.mockReturnValue('en')
-    getTitle.mockReturnValue('Default Site Title')
-    getTitleTemplate.mockReturnValue('%s | My Site')
-    getTwitterUsername.mockReturnValue('@example')
+    useSiteMetadata.mockImplementation(() => mockSiteMetadata)
   })
 
-  it('renders default SEO metadata tags', () => {
-    render(<Seo title='Home' description='This is the homepage' keywords='home,seo' />)
-
-    // Check if <title> tag is rendered correctly
-    expect(document.title).toBe('Home | My Site')
-
-    // Check if description meta tag is present
-    const descriptionMeta = document.querySelector('meta[name="description"]')
-    expect(descriptionMeta).toHaveAttribute('content', 'This is the homepage')
-
-    // Check if keywords meta tag is present
-    const keywordsMeta = document.querySelector('meta[name="keywords"]')
-    expect(keywordsMeta).toHaveAttribute('content', 'home,seo')
-
-    // Check if theme-color meta tag is present
-    const themeColorMeta = document.querySelector('meta[name="theme-color"]')
-    expect(themeColorMeta).toHaveAttribute('content', '#ffffff')
-
-    // Check if og:title meta tag is present
-    const ogTitleMeta = document.querySelector('meta[property="og:title"]')
-    expect(ogTitleMeta).toHaveAttribute('content', 'Home | My Site')
-
-    // Check if twitter:title meta tag is present
-    const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]')
-    expect(twitterTitleMeta).toHaveAttribute('content', 'Home | My Site')
-
-    // Check if twitter:creator meta tag is present
-    const twitterCreatorMeta = document.querySelector('meta[name="twitter:creator"]')
-    expect(twitterCreatorMeta).toHaveAttribute('content', '@example')
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
-  it('renders article-specific meta tags when article prop is true', () => {
-    render(<Seo title='Article Title' article />)
-
-    // Check if og:type meta tag is set to article
-    const ogTypeMeta = document.querySelector('meta[property="og:type"]')
-    expect(ogTypeMeta).toHaveAttribute('content', 'article')
+  it('matches the snapshot with basic props', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
-  it('renders image meta tags when image URL is provided', () => {
-    render(<Seo title='Image Post' image='https://example.com/image.jpg' />)
+  it('renders with all optional props', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo
+          title='Test Page'
+          description='Test description'
+          image='https://example.com/image.jpg'
+          keywords='test, keywords'
+          article={true}
+        />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
 
-    // Check if og:image meta tag is present
-    const ogImageMeta = document.querySelector('meta[property="og:image"]')
-    expect(ogImageMeta).toHaveAttribute('content', 'https://example.com/image.jpg')
+  it('renders without description', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
 
-    // Check if twitter:image meta tag is present
-    const twitterImageMeta = document.querySelector('meta[name="twitter:image"]')
-    expect(twitterImageMeta).toHaveAttribute('content', 'https://example.com/image.jpg')
+  it('renders without image', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders without keywords', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders without article prop', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders without twitter username', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      twitterUsername: null
+    }))
+
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders with twitter username', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      twitterUsername: '@testuser'
+    }))
+
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders without webmention URL', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      webmentionUrl: null
+    }))
+
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page' description='Test description' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders with children', () => {
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Test Page'>
+          <meta name='custom' content='value' />
+        </Seo>
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('handles title template replacement', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      titleTemplate: 'Custom %s Template'
+    }))
+
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Page Title' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('handles missing title template', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      titleTemplate: null
+    }))
+
+    const { asFragment } = render(
+      <TestProvider>
+        <Seo title='Page Title' />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders canonical link when canonicalPath is provided', () => {
+    useSiteMetadata.mockImplementation(() => ({
+      ...mockSiteMetadata,
+      baseURL: 'https://www.example.com'
+    }))
+
+    render(
+      <TestProvider>
+        <Seo title='Page' canonicalPath='/travel/belize' />
+      </TestProvider>
+    )
+
+    const canonical = document.querySelector('link[rel="canonical"]')
+    expect(canonical).toBeInTheDocument()
+    expect(canonical).toHaveAttribute('href', 'https://www.example.com/travel/belize')
+  })
+
+  it('does not render canonical link when canonicalPath is omitted', () => {
+    render(
+      <TestProvider>
+        <Seo title='Page' />
+      </TestProvider>
+    )
+    expect(document.querySelector('link[rel="canonical"]')).not.toBeInTheDocument()
   })
 })

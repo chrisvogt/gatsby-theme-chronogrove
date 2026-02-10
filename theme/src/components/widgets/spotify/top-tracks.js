@@ -2,10 +2,18 @@
 import { jsx } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
+import { useDispatch } from 'react-redux'
 
+import { setSpotifyTrack } from '../../../reducers/audioPlayer'
 import MediaItemGrid from './media-item-grid'
 
 const TopTracks = ({ isLoading, tracks = [] }) => {
+  const dispatch = useDispatch()
+
+  const handleTrackClick = spotifyURL => {
+    dispatch(setSpotifyTrack(spotifyURL))
+  }
+
   const items = tracks.map(track => {
     const { artists = [], albumImages = [], id, name, spotifyURL } = track
 
@@ -31,7 +39,7 @@ const TopTracks = ({ isLoading, tracks = [] }) => {
 
       <Themed.p>My 12 most-played tracks over the last 4 weeks.</Themed.p>
 
-      <MediaItemGrid isLoading={isLoading} items={items} />
+      <MediaItemGrid isLoading={isLoading} items={items} onTrackClick={handleTrackClick} />
     </div>
   )
 }

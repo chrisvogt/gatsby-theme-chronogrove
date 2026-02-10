@@ -42,33 +42,22 @@ const HomeHeaderContent = () => {
           }
         }}
       >
-        Hi!{' '}
+        Welcome!{' '}
         <span className='emoji' ref={emojiRef} onAnimationEnd={handleAnimationEnd}>
           👋
         </span>{' '}
-        I'm Chris Vogt.
+        I'm Your Name.
       </Themed.h1>
 
       <Themed.p>
-        This is my personal blog and digital garden: a place where I share what I’m building, exploring, and learning
-        over time.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
       </Themed.p>
 
       <Themed.p>
-        By day, I work as a software engineer at GoDaddy, creating tools that help small businesses build, grow, and
-        understand their online presence. But this site isn’t about work — it’s where I follow my curiosity, experiment
-        with ideas, and write code just for fun.
-      </Themed.p>
-
-      <Themed.p>
-        Most evenings, you’ll find me at the piano — practicing, recording, or just playing around with sound. I’ve been
-        slowly teaching myself music, and I’m figuring out how to bring what I know from tech into making music. I also
-        spend a lot of time with friends in the city and love connecting with people who are passionate about what they
-        do.
-      </Themed.p>
-
-      <Themed.p>
-        This space is always evolving — part notebook, part playground — and I’m glad you found your way here.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </Themed.p>
     </div>
   )

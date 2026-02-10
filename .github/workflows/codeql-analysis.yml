@@ -35,7 +35,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Load env vars from .env.template
         run: |

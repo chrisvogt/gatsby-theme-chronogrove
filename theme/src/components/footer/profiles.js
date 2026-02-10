@@ -10,6 +10,7 @@ import {
   faGithub,
   faInstagram,
   faLinkedin,
+  faMastodon,
   faStackOverflow,
   faXTwitter
 } from '@fortawesome/free-brands-svg-icons'
@@ -19,7 +20,7 @@ import useSocialProfiles from '../../hooks/use-social-profiles'
 /**
  * icons is a library containing all of the social icons available for this theme.
  * This is to prevent the entire font awesome library from being included in the
- * bundle. See chrisvogt/gatsby-theme-chrisvogt#31 for to learn more.
+ * bundle. See chrisvogt/gatsby-theme-chronogrove#31 for to learn more.
  */
 const icons = {
   faBehance,
@@ -29,6 +30,7 @@ const icons = {
   faGithub,
   faInstagram,
   faLinkedin,
+  faMastodon,
   faStackOverflow,
   faXTwitter
 }

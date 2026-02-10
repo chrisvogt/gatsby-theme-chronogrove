@@ -9,7 +9,7 @@ const YouTube = ({ title, url, sx = {} }) => (
       allowFullScreen
       className='VideoFrame'
       height='315'
-      referrerpolicy='strict-origin-when-cross-origin'
+      referrerPolicy='strict-origin-when-cross-origin'
       src={url}
       title={title || 'Video on YouTube'}
       width='560'

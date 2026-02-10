@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`FlickrWidgetItem matches the snapshot 1`] = `
 <DocumentFragment>
@@ -11,7 +11,7 @@ exports[`FlickrWidgetItem matches the snapshot 1`] = `
       crossorigin="anonymous"
       height="280"
       loading="lazy"
-      src="https://cdn.chrisvogt.me/images/fake-flickr-image.jpg"
+      src="https://cdn.example.com/images/fake-flickr-image.jpg"
       width="280"
     />
   </button>

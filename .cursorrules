@@ -1,0 +1,174 @@
+# Cursor Rules for gatsby-theme-chronogrove
+
+## Project Overview
+This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal website and blog with a social dashboard home page. The project uses Yarn workspaces to separate the theme code from the content.
+
+**Current Goal**: Decouple all personal information and www.chrisvogt.me content from the `/theme` directory to make the theme more generic and reusable.
+
+## Architecture
+- **Root**: Contains workspace configuration and shared tooling
+- **`theme/`**: The Gatsby theme package (`gatsby-theme-chronogrove`)
+- **`www.chrisvogt.me/`**: The actual website content and configuration
+
+## Back-end API
+
+- **`metrics.chrisvogt.me/`**: Backend API for widgets, uses Firebase, Firestore and scheduled Firebase Functions to sync and cache third-party data
+- Code is at https://github.com/chrisvogt/metrics
+
+## Key Technologies
+- **Gatsby 5.x**: Static site generator
+- **React 18.x**: UI framework
+- **Theme UI**: Design system and styling (CSS-in-JS)
+- **Redux Toolkit**: State management
+- **Jest**: Testing framework with comprehensive setup
+- **Yarn v4 Workspaces**: Monorepo management
+- **MDX**: Content authoring with React components
+- **FontAwesome**: Icon library
+
+## Development Setup
+- **Node.js**: >=20 (see `.node_version` and `.nvmrc`)
+- **Yarn**: >=4.0.0 (see `packageManager` in package.json)
+- **HTTPS**: Local development requires HTTPS (see `develop:https` script)
+- **Workspace Commands**: Use `yarn workspace [package] [command]` for package-specific operations
+
+## Available Scripts
+- `yarn develop` - Start development server with HTTPS
+- `yarn test` - Run all tests
+- `yarn test:watch` - Run tests in watch mode
+- `yarn test:coverage` - Run tests with coverage report
+- `yarn format` - Format code with Prettier
+- `yarn lint` - Lint code with ESLint
+
+## Widget System
+The theme includes a sophisticated widget system for the home page dashboard:
+- **Recent Posts**: Latest blog posts
+- **GitHub**: GitHub profile data, pinned repos, PRs
+- **Goodreads**: Reading activity and book lists
+- **Instagram**: Instagram posts and metrics
+- **Spotify**: Music playlists and top tracks
+- **Steam**: Gaming activity
+- **Flickr**: Photo galleries and image collections
+
+## Data Flow
+1. **Data Sources**: Metrics API at `metrics.chrisvogt.me` (backed by chrisvogt/metrics GitHub repo)
+2. **Actions**: `fetchDataSource.js` handles API calls with deduplication
+3. **Reducers**: Process and store data with loading states (INIT, SUCCESS, FAILURE)
+4. **Selectors**: Transform data for components
+5. **Components**: Display data with loading states and error handling
+
+## Environment Variables
+The following environment variables may be required for full functionality:
+- `GATSBY_METRICS_API_URL` - Metrics API endpoint (defaults to metrics.chrisvogt.me)
+- `GATSBY_GITHUB_TOKEN` - GitHub API token for enhanced rate limits
+- `GATSBY_SPOTIFY_CLIENT_ID` - Spotify API client ID
+- `GATSBY_INSTAGRAM_ACCESS_TOKEN` - Instagram API access token
+- `GATSBY_GOODREADS_API_KEY` - Goodreads API key
+- `GATSBY_STEAM_API_KEY` - Steam API key
+
+## Personal Information to Decouple
+The following files contain hardcoded personal information that needs to be made configurable:
+
+### High Priority (Core Theme Files)
+- `theme/src/components/h-card.js` - Personal details, email, location
+- `theme/src/components/home-header-content.js` - Name, personal description
+- `theme/src/data/social-profiles.json` - Social media links and usernames
+- `theme/gatsby-config.js` - Default site metadata with personal info
+
+### Medium Priority (Configuration)
+- `theme/src/templates/home.js` - SEO metadata with personal details
+- `theme/src/components/footer/footer.js` - GitHub source link
+- `scripts/postinstall-banner.js` - Personal branding (root level)
+- `index.js` - Personal branding (root level)
+
+### Low Priority (Content)
+- `www.chrisvogt.me/` directory - All content should remain as-is
+
+## Testing Strategy
+- **Jest**: Unit testing framework with comprehensive configuration
+- **React Testing Library**: Component testing with DOM queries and user interactions
+- **React Test Renderer**: Snapshot testing for visual regression testing
+- **Redux Mock Store**: Mock Redux store for testing components with state
+- **Jest Canvas Mock**: Canvas API mocking for visual components
+- **Identity Object Proxy**: CSS/SCSS module mocking
+- **File Mock**: Static asset mocking (images, fonts, etc.)
+- **Mock Data**: Comprehensive mocks for external APIs in `__mocks__/` directory
+
+## Development Patterns
+- Functional components with hooks
+- Consistent prop interfaces
+- Loading and error states
+- Accessibility considerations
+- Responsive design
+- Redux actions for API calls
+- Error handling and retry logic
+- Theme UI components with dark/light mode support
+- MDX for content with React component integration
+- Lazy loading for performance optimization
+
+## External Dependencies
+- **Backing Service**: Metrics API at metrics.chrisvogt.me
+- **Image Hosting**: Cloudinary and Imagix for external CDNs
+- **Static Assets**: Local images in `static/` directory
+- **Font Loading**: Google Fonts and FontAwesome
+- **Analytics**: (Configured in site-specific gatsby-config.js)
+
+## Code Quality
+- **ESLint**: Code linting with React and accessibility rules
+- **Prettier**: Code formatting with consistent configuration
+- **Husky**: Git hooks for pre-commit linting and formatting
+- **TypeScript-like**: JSDoc comments for type safety
+- **EditorConfig**: Consistent editor settings
+
+## Recent Development Priorities (Based on Git History)
+- **Performance**: Lazy loading, font optimization, bundle size reduction
+- **Accessibility**: Skip links, contrast improvements, keyboard navigation
+- **Widget Features**: New Steam AI summary, Spotify iframe support
+- **Testing**: Jest upgrades, improved test coverage, warning resolution
+- **Content Management**: Better SEO, structured data, content organization
+
+## Common Development Tasks
+When adding new widgets:
+1. Create widget component in `src/components/widgets/[name]/`
+2. Add Redux actions and reducers
+3. Create selectors for data access
+4. Add mock data
+5. Write comprehensive tests
+6. Update documentation
+
+When decoupling personal information:
+1. Move hardcoded values to site metadata configuration
+2. Create selectors for accessing personal data
+3. Update components to use selectors instead of hardcoded values
+4. Provide sensible defaults in theme configuration
+5. Update tests to use mock data
+6. Document configuration options
+
+## Configuration Strategy
+The theme should support configuration through:
+- **Site Metadata**: Core site information (title, description, etc.)
+- **Widget Configuration**: API endpoints and usernames for each widget
+- **Social Profiles**: Configurable social media links
+- **Personal Information**: Name, location, bio, etc.
+- **Theme Options**: Customizable styling and behavior
+- **Gatsby Plugins**: Configurable plugin options for content sources
+
+## Build and Deployment
+- **Static Generation**: Gatsby builds static files for deployment
+- **Image Optimization**: Sharp plugin for responsive images
+- **SEO**: Structured data and meta tags
+- **Performance**: Code splitting and lazy loading
+- **CDN Ready**: Optimized for CDN deployment
+
+## Important Notes
+- Follow existing patterns and maintain backward compatibility
+- Update tests and mocks when modifying existing widgets
+- Consider performance implications
+- Use HTTPS for local development
+- Store API keys in environment variables
+- Regular security updates for dependencies
+- Prioritize accessibility in all new features
+- Maintain comprehensive test coverage
+- Use semantic HTML and ARIA attributes
+- Follow responsive design principles
+- Test with multiple browsers and devices
+- Consider bundle size impact when adding dependencies 

@@ -2,8 +2,8 @@
 import { jsx } from 'theme-ui'
 import { useSelector } from 'react-redux'
 import React from 'react'
+import { SkipNavLink, SkipNavContent } from './skip-nav'
 
-import BackgroundPattern from './animated-background'
 import Footer from './footer'
 import TopNavigation from './top-navigation'
 
@@ -14,14 +14,13 @@ import TopNavigation from './top-navigation'
  * the default navigation, theme styles, and any important providers. Use shadowing
  * to extend this component and attach additional contexts and providers.
  */
-const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter }) => {
+const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter, transparentBackground }) => {
   const { isVisible } = useSelector(state => state.audioPlayer)
 
   return (
     <div
       sx={{
-        backgroundColor: 'background',
-        position: 'relative', // stretch to full height
+        backgroundColor: transparentBackground ? 'transparent' : 'background',
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
@@ -31,16 +30,24 @@ const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter }) => {
         pb: isVisible ? '140px' : 0
       }}
     >
-      <BackgroundPattern />
+      {/* Skip to content link - first in DOM for tab order, visually appears in header when focused */}
+      <SkipNavLink />
 
       {/* NOTE(chrisvogt): hide the top navigation on the home and 404 pages */}
       {!hideHeader && (
-        <header role='banner' sx={{ position: 'relative' }}>
+        <header role='banner'>
           <TopNavigation />
         </header>
       )}
 
-      {disableMainWrapper ? children : <main role='main'>{children}</main>}
+      {disableMainWrapper ? (
+        children
+      ) : (
+        <main role='main'>
+          <SkipNavContent />
+          {children}
+        </main>
+      )}
 
       {!hideFooter && <Footer />}
     </div>

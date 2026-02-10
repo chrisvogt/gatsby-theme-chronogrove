@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { useState } from 'react'
-import VisibilitySensor from 'react-visibility-sensor'
+import { useState, useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 const DefaultPlaceholder = ({ height = '100%', width = '100%' }) => (
   <div
@@ -24,18 +24,18 @@ const DefaultPlaceholder = ({ height = '100%', width = '100%' }) => (
  */
 const LazyLoad = ({ children, placeholder = <DefaultPlaceholder /> }) => {
   const [hasBeenVisible, setHasBeenVisible] = useState(false)
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0
+  })
 
-  const onChange = isVisible => {
-    if (!hasBeenVisible && isVisible) {
+  useEffect(() => {
+    if (inView && !hasBeenVisible) {
       setHasBeenVisible(true)
     }
-  }
+  }, [inView, hasBeenVisible])
 
-  return (
-    <VisibilitySensor onChange={onChange} partialVisibility={true}>
-      {hasBeenVisible ? children : placeholder}
-    </VisibilitySensor>
-  )
+  return <div ref={ref}>{hasBeenVisible ? children : placeholder}</div>
 }
 
 export default LazyLoad

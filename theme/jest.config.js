@@ -6,7 +6,15 @@ module.exports = {
   clearMocks: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ['src/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))'],
+  collectCoverageFrom: [
+    'src/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))',
+    '../www.chrisvogt.me/components/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))',
+    'gatsby-browser.js',
+    'gatsby-node.js',
+    'gatsby-ssr.js',
+    'wrapPageElement.js',
+    'wrapRootElement.js'
+  ],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
@@ -22,11 +30,15 @@ module.exports = {
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/__mocks__/file-mock.js'
+      '<rootDir>/__mocks__/file-mock.js',
+    '^@theme-toggles/react$': '<rootDir>/__mocks__/theme-toggles-react-mock.js'
   },
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: ['<rootDir>/jest-shim.js', 'jest-canvas-mock'],
+
+  // A list of paths to modules that run some code to configure or set up the testing framework before each test
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
 
   // The test environment that will be used for testing
   testEnvironment: 'jsdom',
@@ -48,7 +60,7 @@ module.exports = {
   },
 
   // Allow specific ESM packages in node_modules to be transformed
-  transformIgnorePatterns: ['node_modules/(?!(gatsby|@mdx-js/react)/)'],
+  transformIgnorePatterns: ['node_modules/(?!(gatsby|@mdx-js/react|react-error-boundary)/)'],
 
   // Indicates whether each individual test should be reported during the run
   verbose: false

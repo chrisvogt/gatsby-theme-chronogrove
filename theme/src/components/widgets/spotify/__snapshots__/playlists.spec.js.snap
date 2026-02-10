@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Playlists Component matches snapshot with various playlist scenarios 1`] = `
 <DocumentFragment>
@@ -7,13 +7,13 @@ exports[`Playlists Component matches snapshot with various playlist scenarios 1`
       class="css-ccroti"
     >
       <h3
-        class="css-1pgqsji"
+        class="css-9nh3l5"
       >
         Playlists
       </h3>
     </div>
     <p
-      class="css-1avyp1d"
+      class="css-1qwovgy"
     >
       My 12 favorite playlists.
     </p>

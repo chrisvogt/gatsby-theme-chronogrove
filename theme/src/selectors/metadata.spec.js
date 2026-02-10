@@ -31,19 +31,19 @@ const metadata = {
   titleTemplate: '%s | My Cool Website',
   widgets: {
     github: {
-      username: 'chrisvogt-theme',
-      widgetDataSource: 'https://metrics.chrisvogt.me/api/widget-content?widget=github'
+      username: 'themeuser',
+      widgetDataSource: 'https://api.example.com/api/widget-content?widget=github'
     },
     goodreads: {
-      username: 'chrisvogt-theme',
-      widgetDataSource: 'https://metrics.chrisvogt.me/api/widget-content?widget=goodreads'
+      username: 'themeuser',
+      widgetDataSource: 'https://api.example.com/api/widget-content?widget=goodreads'
     },
     instagram: {
-      username: 'chrisvogt-theme',
-      widgetDataSource: 'https://metrics.chrisvogt.me/api/widget-content?widget=instagram'
+      username: 'themeuser',
+      widgetDataSource: 'https://api.example.com/api/widget-content?widget=instagram'
     },
     spotify: {
-      widgetDataSource: 'https://metrics.chrisvogt.me/api/widget-content?widget=spotify'
+      widgetDataSource: 'https://api.example.com/api/widget-content?widget=spotify'
     }
   }
 }

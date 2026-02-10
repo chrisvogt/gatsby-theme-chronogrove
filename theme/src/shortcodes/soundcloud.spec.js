@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import SoundCloud from './soundcloud'
 
@@ -17,7 +18,7 @@ const mockTheme = {
 
 // Helper function to render with theme
 const renderWithTheme = (ui, colorMode = 'default') => {
-  return renderer.create(<ThemeUIProvider theme={{ ...mockTheme, initialColorMode: colorMode }}>{ui}</ThemeUIProvider>)
+  return render(<ThemeUIProvider theme={{ ...mockTheme, initialColorMode: colorMode }}>{ui}</ThemeUIProvider>)
 }
 
 // Mock the useColorMode hook
@@ -36,42 +37,39 @@ describe('SoundCloud Shortcode', () => {
   })
 
   it('matches the snapshot in light mode', () => {
-    const tree = renderWithTheme(<SoundCloud soundcloudId='880888540' />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('matches the snapshot in dark mode', () => {
     require('theme-ui').useColorMode.mockReturnValue(['dark', () => {}])
-    const tree = renderWithTheme(<SoundCloud soundcloudId='880888540' />, 'dark').toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<SoundCloud soundcloudId='880888540' />, 'dark')
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders a default title if one is not provided', () => {
-    const testRenderer = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
-    const testInstance = testRenderer.root
-    expect(testInstance.findByType('iframe').props.title).toEqual('Song on SoundCloud')
+    const { container } = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
+    const iframe = container.querySelector('iframe')
+    expect(iframe).toHaveAttribute('title', 'Song on SoundCloud')
   })
 
   it('includes the correct accent color in light mode', () => {
     require('theme-ui').useColorMode.mockReturnValue(['default', () => {}])
-    const testRenderer = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
-    const testInstance = testRenderer.root
-    const iframeSrc = testInstance.findByType('iframe').props.src
-    expect(iframeSrc).toContain('color=%23ff5500') // orange for light mode
+    const { container } = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
+    const iframe = container.querySelector('iframe')
+    expect(iframe.src).toContain('color=%23ff5500') // orange for light mode
   })
 
   it('includes the correct accent color in dark mode', () => {
     require('theme-ui').useColorMode.mockReturnValue(['dark', () => {}])
-    const testRenderer = renderWithTheme(<SoundCloud soundcloudId='880888540' />, 'dark')
-    const testInstance = testRenderer.root
-    const iframeSrc = testInstance.findByType('iframe').props.src
-    expect(iframeSrc).toContain('color=%23800080') // purple for dark mode
+    const { container } = renderWithTheme(<SoundCloud soundcloudId='880888540' />, 'dark')
+    const iframe = container.querySelector('iframe')
+    expect(iframe.src).toContain('color=%23800080') // purple for dark mode
   })
 
   it('includes the correct track ID in the URL', () => {
-    const testRenderer = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
-    const testInstance = testRenderer.root
-    const iframeSrc = testInstance.findByType('iframe').props.src
-    expect(iframeSrc).toContain('tracks/880888540')
+    const { container } = renderWithTheme(<SoundCloud soundcloudId='880888540' />)
+    const iframe = container.querySelector('iframe')
+    expect(iframe.src).toContain('tracks/880888540')
   })
 })

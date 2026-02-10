@@ -32,6 +32,8 @@ export const getSpotifyWidgetDataSource = metadata => metadata?.widgets?.spotify
 
 export const getSteamWidgetDataSource = metadata => metadata?.widgets?.steam?.widgetDataSource
 
+export const getDiscogsWidgetDataSource = metadata => metadata?.widgets?.discogs?.widgetDataSource
+
 export const getSubhead = metadata => metadata?.subhead
 
 export const getTitle = metadata => metadata?.title

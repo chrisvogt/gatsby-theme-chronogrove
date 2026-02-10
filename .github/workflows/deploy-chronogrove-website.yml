@@ -1,0 +1,52 @@
+name: Deploy www.chronogrove.com to cPanel via SFTP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'www.chronogrove.com/**'
+      - 'theme/**'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'main'
+        type: string
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: www.chronogrove.com
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch || github.ref }}
+          submodules: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build site
+        run: yarn workspace www.chronogrove.com build
+
+      - name: Deploy to cPanel via SFTP
+        uses: pressidium/lftp-mirror-action@v1
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          port: 22
+          user: ${{ secrets.CPANEL_USER }}
+          pass: ${{ secrets.CPANEL_PASSWORD }}
+          localDir: www.chronogrove.com/public/
+          remoteDir: public_html/

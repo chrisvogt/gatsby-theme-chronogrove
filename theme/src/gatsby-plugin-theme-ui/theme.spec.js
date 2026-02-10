@@ -32,7 +32,7 @@ describe('Theme Configuration', () => {
     })
 
     it('defines serif fonts correctly', () => {
-      expect(theme.fonts.serif).toContain('Crimson Text')
+      expect(theme.fonts.serif).toContain('Iowan Old Style')
     })
 
     it('defines monospace fonts correctly', () => {
@@ -122,13 +122,14 @@ describe('Theme Configuration', () => {
   describe('color mode configurations', () => {
     it('defines light mode background colors', () => {
       expect(theme.colors.background).toBe('#fdf8f5')
-      expect(theme.colors['panel-background']).toContain('rgba(255, 255, 255, 0.35)')
+      expect(theme.colors['panel-background']).toContain('rgba(255, 255, 255, 0.45)')
     })
 
     it('defines dark mode background colors', () => {
       const darkMode = theme.colors.modes.dark
-      expect(darkMode).toHaveProperty('background', '#1e1e2f')
-      expect(darkMode).toHaveProperty('primary', '#1E90FF')
+      expect(darkMode).toHaveProperty('background', '#14141F')
+      expect(darkMode).toHaveProperty('primary', '#4a9eff')
+      expect(darkMode).toHaveProperty('primaryRgb', '74, 158, 255')
       expect(darkMode).toHaveProperty('text', '#fff')
     })
   })
@@ -147,6 +148,19 @@ describe('Theme Configuration', () => {
       expect(theme.buttons.primary).toHaveProperty('bg', 'primary')
       expect(theme.buttons.secondary).toHaveProperty('bg', 'secondary')
       expect(theme.buttons.gray).toHaveProperty('bg', 'gray')
+      expect(theme.buttons.action).toHaveProperty('color', 'primary')
+      expect(theme.buttons.action).toHaveProperty('borderColor', 'primary')
+      expect(theme.buttons.action).toHaveProperty('bg', 'transparent')
+    })
+
+    it('buttons.action hover and focus use theme color functions', () => {
+      const mockTheme = {
+        colors: { primary: '#422EA3', primaryRgb: '66, 46, 163' }
+      }
+      const hoverBg = theme.buttons.action['&:hover'].bg(mockTheme)
+      const focusBoxShadow = theme.buttons.action['&:focus'].boxShadow(mockTheme)
+      expect(hoverBg).toBe('rgba(66, 46, 163, 0.2)')
+      expect(focusBoxShadow).toBe('0 0 0 2px #422EA340')
     })
 
     it('defines badge variants', () => {
@@ -169,6 +183,101 @@ describe('Theme Configuration', () => {
       expect(videoWrapperStyles).toHaveProperty('position', 'relative')
       expect(videoWrapperStyles).toHaveProperty('paddingBottom', '56.25%')
       expect(videoWrapperStyles.iframe).toHaveProperty('position', 'absolute')
+    })
+  })
+
+  describe('UserProfileDark styles', () => {
+    it('applies dynamic padding function', () => {
+      const userProfileDark = theme.cards.UserProfileDark
+      const padding = userProfileDark.padding(theme)
+      expect(padding).toEqual(['none', `0 ${theme.space[3]} 0 0`])
+    })
+  })
+
+  describe('Book styles', () => {
+    it('applies dynamic filter function', () => {
+      const bookStyles = theme.styles.Book
+      const filter = bookStyles.filter(theme)
+      expect(filter).toBe(`drop-shadow(${theme.shadows.default})`)
+    })
+
+    it('applies hover filter function', () => {
+      const bookStyles = theme.styles.Book
+      const hoverFilter = bookStyles['&:hover, &:focus'].filter(theme)
+      expect(hoverFilter).toBe(`drop-shadow(${theme.shadows.xl})`)
+    })
+  })
+
+  describe('Container styles', () => {
+    it('defines Container padding and spacing', () => {
+      const containerStyles = theme.styles.Container
+      expect(containerStyles).toHaveProperty('py', [2, 3])
+      expect(containerStyles).toHaveProperty('px', [3, 4])
+    })
+  })
+
+  describe('GradientBannerDark styles', () => {
+    it('extends GradientBanner with dark mode gradient', () => {
+      const gradientBannerDark = theme.styles.GradientBannerDark
+      expect(gradientBannerDark.backgroundImage).toContain('linear-gradient')
+      expect(gradientBannerDark).toHaveProperty('color', 'light')
+    })
+  })
+
+  describe('IntroExperienceSlide styles', () => {
+    it('defines initial hidden state', () => {
+      const slideStyles = theme.styles.IntroExperienceSlide
+      expect(slideStyles).toHaveProperty('opacity', 0)
+      expect(slideStyles).toHaveProperty('height', 0)
+      expect(slideStyles).toHaveProperty('visibility', 'hidden')
+    })
+
+    it('defines active slide state', () => {
+      const slideStyles = theme.styles.IntroExperienceSlide
+      expect(slideStyles['&.active-slide']).toHaveProperty('opacity', 1)
+      expect(slideStyles['&.active-slide']).toHaveProperty('visibility', 'initial')
+    })
+  })
+
+  describe('Header styles', () => {
+    it('defines header layout properties', () => {
+      const headerStyles = theme.styles.Header
+      expect(headerStyles).toHaveProperty('alignItems', 'center')
+      expect(headerStyles).toHaveProperty('display', 'block')
+      expect(headerStyles).toHaveProperty('transition', 'all 0.3s ease-in-out')
+    })
+  })
+
+  describe('InstagramItem styles', () => {
+    it('integrates floatOnHover mixin', () => {
+      const instagramItem = theme.styles.InstagramItem
+      expect(instagramItem).toMatchObject(floatOnHover)
+      expect(instagramItem).toHaveProperty('cursor', 'pointer')
+      expect(instagramItem).toHaveProperty('borderRadius', '8px')
+    })
+  })
+
+  describe('TopNavigation styles', () => {
+    it('defines navigation color', () => {
+      const topNavStyles = theme.styles.TopNavigation
+      expect(topNavStyles).toHaveProperty('color', 'white')
+    })
+  })
+
+  describe('WidgetFooter styles', () => {
+    it('defines footer typography and alignment', () => {
+      const footerStyles = theme.styles.WidgetFooter
+      expect(footerStyles).toHaveProperty('color', 'text')
+      expect(footerStyles).toHaveProperty('fontFamily', 'heading')
+      expect(footerStyles).toHaveProperty('textAlign', ['center', 'right'])
+    })
+  })
+
+  describe('Footnotes styles', () => {
+    it('applies dynamic fontSize function', () => {
+      const footnotesStyles = theme.styles['.footnotes']
+      const fontSize = footnotesStyles.fontSize(theme)
+      expect(fontSize).toBe(theme.fontSizes[1])
     })
   })
 })

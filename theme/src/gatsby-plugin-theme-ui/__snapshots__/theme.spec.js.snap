@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Theme Configuration a snapshot of the configuration matches the snapshot 1`] = `
 {
@@ -29,6 +29,26 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "1536px",
   ],
   "buttons": {
+    "action": {
+      "&:active": {
+        "transform": "scale(0.98)",
+      },
+      "&:focus": {
+        "boxShadow": [Function],
+        "outline": "none",
+      },
+      "&:hover": {
+        "bg": [Function],
+      },
+      "bg": "transparent",
+      "border": "1px solid",
+      "borderColor": "primary",
+      "borderRadius": "6px",
+      "color": "primary",
+      "cursor": "pointer",
+      "fontWeight": "medium",
+      "transition": "all 0.2s ease",
+    },
     "gray": {
       "bg": "gray",
       "color": "background",
@@ -36,6 +56,46 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "primary": {
       "bg": "primary",
       "color": "background",
+    },
+    "readMore": {
+      "&::before": {
+        "background": "linear-gradient(90deg, transparent, rgba(66, 46, 163, 0.1), transparent)",
+        "content": """",
+        "height": "100%",
+        "left": "-100%",
+        "position": "absolute",
+        "top": 0,
+        "transition": "left 0.5s ease-in-out",
+        "width": "100%",
+      },
+      "&:active": {
+        "boxShadow": "0 2px 8px rgba(66, 46, 163, 0.2)",
+        "transform": "translateY(0)",
+      },
+      "&:hover, &:focus": {
+        "&::before": {
+          "left": "100%",
+        },
+        "bg": "primary",
+        "boxShadow": "0 4px 12px rgba(66, 46, 163, 0.3)",
+        "color": "background",
+        "transform": "translateY(-2px)",
+      },
+      "bg": "transparent",
+      "border": [Function],
+      "borderRadius": "card",
+      "color": "primary",
+      "cursor": "pointer",
+      "fontSize": [
+        1,
+        2,
+      ],
+      "fontWeight": "medium",
+      "overflow": "hidden",
+      "position": "relative",
+      "px": 3,
+      "py": 2,
+      "transition": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     },
     "secondary": {
       "bg": "secondary",
@@ -53,7 +113,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
         "transform": "scale(1.015)",
       },
       ".card-media": {
-        "height": "100%",
         "mb": 2,
         "overflow": "hidden",
       },
@@ -93,6 +152,8 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "padding": [Function],
     },
     "UserProfileDark": {
+      "WebkitBackdropFilter": "blur(12px) saturate(150%)",
+      "backdropFilter": "blur(12px) saturate(150%)",
       "background": "var(--theme-ui-colors-panel-background)",
       "backgroundColor": "none",
       "borderBottom": "none",
@@ -132,7 +193,109 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "textDecoration": "none",
       "transition": "all 200ms ease-in-out",
     },
+    "aiSummary": {
+      "@keyframes blink": {
+        "0%, 50%": {
+          "opacity": 1,
+        },
+        "51%, 100%": {
+          "opacity": 0,
+        },
+      },
+      "@keyframes expandWidth": {
+        "0%": {
+          "width": "0%",
+        },
+        "100%": {
+          "width": "100%",
+        },
+      },
+      "@keyframes fadeInUp": {
+        "0%": {
+          "opacity": 0,
+          "transform": "translateY(20px)",
+        },
+        "100%": {
+          "opacity": 1,
+          "transform": "translateY(0)",
+        },
+      },
+      "@keyframes gentleBounce": {
+        "0%, 20%, 50%, 80%, 100%": {
+          "transform": "translateY(0)",
+        },
+        "40%": {
+          "transform": "translateY(-4px)",
+        },
+        "60%": {
+          "transform": "translateY(-2px)",
+        },
+      },
+      "@keyframes gentleFloat": {
+        "0%, 100%": {
+          "transform": "translateY(0px)",
+        },
+        "50%": {
+          "transform": "translateY(-4px)",
+        },
+      },
+      "@keyframes gentleGlow": {
+        "0%": {
+          "filter": "drop-shadow(0 0 12px rgba(66, 46, 163, 0.4))",
+        },
+        "100%": {
+          "filter": "drop-shadow(0 0 20px rgba(66, 46, 163, 0.7))",
+        },
+      },
+      "@keyframes pulse": {
+        "0%, 100%": {
+          "opacity": 1,
+        },
+        "50%": {
+          "opacity": 0.7,
+        },
+      },
+      "@keyframes slideDown": {
+        "0%": {
+          "maxHeight": "0px",
+          "opacity": 0,
+          "overflow": "hidden",
+        },
+        "100%": {
+          "maxHeight": "1000px",
+          "opacity": 1,
+          "overflow": "visible",
+        },
+      },
+      "@keyframes slideInFromLeft": {
+        "0%": {
+          "opacity": 0,
+          "transform": "translateX(-30px)",
+        },
+        "100%": {
+          "opacity": 1,
+          "transform": "translateX(0)",
+        },
+      },
+      "WebkitBackdropFilter": "blur(10px)",
+      "backdropFilter": "blur(10px)",
+      "background": "var(--theme-ui-colors-panel-background)",
+      "border": "1px solid rgba(255, 255, 255, 0.15)",
+      "borderLeft": [Function],
+      "borderRadius": "10px",
+      "boxShadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
+      "color": "var(--theme-ui-colors-panel-text)",
+      "flexGrow": 1,
+      "fontSize": [
+        1,
+        2,
+      ],
+      "padding": 3,
+      "textDecoration": "none",
+    },
     "metricCard": {
+      "WebkitBackdropFilter": "blur(12px) saturate(150%)",
+      "backdropFilter": "blur(12px) saturate(150%)",
       "background": "var(--theme-ui-colors-panel-background)",
       "backgroundColor": "var(--theme-ui-colors-panel-background)",
       "borderRadius": "card",
@@ -152,6 +315,8 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "textDecoration": "none",
     },
     "primary": {
+      "WebkitBackdropFilter": "blur(12px) saturate(150%)",
+      "backdropFilter": "blur(12px) saturate(150%)",
       "background": "var(--theme-ui-colors-panel-background)",
       "borderRadius": "card",
       "boxShadow": "default",
@@ -170,21 +335,34 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "background": "#fdf8f5",
     "modes": {
       "dark": {
-        "background": "#1e1e2f",
-        "panel-background": "rgba(1, 1, 1, 0.30)",
+        "background": "#14141F",
+        "panel-background": "rgba(20, 20, 31, 0.45)",
         "panel-divider": [Function],
         "panel-highlight": [Function],
-        "primary": "#1E90FF",
+        "primary": "#4a9eff",
+        "primaryRgb": "74, 158, 255",
+        "tableBackground": "rgba(30, 30, 47, 0.45)",
+        "tableBorder": "rgba(255, 255, 255, 0.1)",
+        "tableHeaderBackground": "rgba(30, 37, 48, 0.8)",
+        "tableRowAlternateBackground": "rgba(30, 37, 48, 0.5)",
+        "tableRowBackground": "rgba(30, 30, 47, 0.25)",
+        "tableText": "#fff",
         "text": "#fff",
         "textMuted": "#d8d8d8",
       },
     },
-    "panel-background": "rgba(255, 255, 255, 0.35)",
+    "panel-background": "rgba(255, 255, 255, 0.45)",
     "panel-divider": [Function],
     "panel-highlight": [Function],
     "primary": "#422EA3",
+    "primaryRgb": "66, 46, 163",
     "secondary": "#711E9B",
     "secondaryGradient": "linear-gradient(45deg, #4527a0 0%, #711e9b 100%)",
+    "tableBackground": "light",
+    "tableBorder": "muted",
+    "tableHeaderBackground": "#f4f4f9",
+    "tableRowAlternateBackground": "#fafafa",
+    "tableRowBackground": "transparent",
     "tableText": "#111",
     "text": "#111",
     "textMuted": "#333",
@@ -221,11 +399,11 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "thin": 200,
   },
   "fonts": {
-    "body": "Crimson Text, Georgia, Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
+    "body": "Iowan Old Style, Apple Garamond, Georgia, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
     "heading": "-apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif",
     "monospace": "Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace",
     "sans": "-apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif",
-    "serif": "Crimson Text, Georgia, Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
+    "serif": "Iowan Old Style, Apple Garamond, Georgia, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol",
   },
   "global": {
     "@keyframes wobble": {
@@ -361,8 +539,9 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "&:not(:last-of-type)": {
         "borderBottom": "var(--theme-ui-colors-panel-divider)",
       },
+      "alignItems": "center",
       "color": "primary",
-      "display": "block",
+      "display": "flex",
       "py": 2,
       "textDecoration": "none",
     },
@@ -617,7 +796,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "minHeight": "100vh",
     },
     "table": {
-      "backgroundColor": "light",
+      "backgroundColor": "rgba(255, 255, 255, 0.35)",
       "borderCollapse": "collapse",
       "borderRadius": "10px",
       "borderSpacing": 0,
@@ -625,20 +804,50 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "color": "tableText",
       "marginBottom": "1.5rem",
       "overflow": "hidden",
+      "tbody tr:nth-of-type(even)": {
+        "backgroundColor": "tableRowBackground",
+      },
       "tbody tr:nth-of-type(odd)": {
-        "backgroundColor": "#fafafa",
+        "backgroundColor": "tableRowAlternateBackground",
       },
       "th": {
-        "backgroundColor": "#f4f4f9",
-        "borderColor": "muted",
-        "borderTop": "2px solid",
+        "backgroundColor": "tableHeaderBackground",
         "fontWeight": "bold",
         "letterSpacing": "0.05em",
         "textTransform": "uppercase",
       },
       "th, td": {
-        "borderBottom": "1px solid",
-        "borderColor": "muted",
+        "fontSize": "1.125em",
+        "padding": "12px 15px",
+        "textAlign": "left",
+      },
+      "width": "100%",
+    },
+    "tableDark": {
+      "WebkitBackdropFilter": "blur(10px)",
+      "backdropFilter": "blur(10px)",
+      "backgroundColor": "rgba(30, 30, 47, 0.35)",
+      "border": "1px solid rgba(255, 255, 255, 0.15)",
+      "borderCollapse": "collapse",
+      "borderRadius": "10px",
+      "borderSpacing": 0,
+      "boxShadow": "0 0 20px rgba(0, 0, 0, 0.3)",
+      "color": "tableText",
+      "marginBottom": "1.5rem",
+      "overflow": "hidden",
+      "tbody tr:nth-of-type(even)": {
+        "backgroundColor": "tableRowBackground",
+      },
+      "tbody tr:nth-of-type(odd)": {
+        "backgroundColor": "tableRowAlternateBackground",
+      },
+      "th": {
+        "backgroundColor": "tableHeaderBackground",
+        "fontWeight": "bold",
+        "letterSpacing": "0.05em",
+        "textTransform": "uppercase",
+      },
+      "th, td": {
         "fontSize": "1.125em",
         "padding": "12px 15px",
         "textAlign": "left",

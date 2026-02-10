@@ -21,4 +21,4 @@ const banner = boxen(`${chalk.bold('www.chrisvogt.me')}\nMy Personal Website\nv$
 
 console.log(banner)
 
-console.log(`✅  Installation succeeded: ${chalk.bold('gatsby-theme-chrisvogt')}`)
+console.log(`✅  Installation succeeded: ${chalk.bold('gatsby-theme-chronogrove')}`)

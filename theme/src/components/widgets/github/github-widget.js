@@ -1,47 +1,54 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import CallToAction from '../call-to-action'
+import ContributionGraph from './contribution-graph'
+import LazyLoad from '../../lazy-load'
 import LastPullRequest from './last-pull-request'
 import PinnedItems from './pinned-items'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 
-import fetchDataSource from '../../../actions/fetchDataSource'
 import { getGithubUsername, getGithubWidgetDataSource } from '../../../selectors/metadata'
-import { getMetrics } from '../../../selectors/github'
-import { SUCCESS, FAILURE, getGitHubWidget } from '../../../reducers/widgets'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
+import useWidgetData from '../../../hooks/use-widget-data'
 
-const getHasFatalError = state => getGitHubWidget(state).state === FAILURE
-const getIsLoading = state => getGitHubWidget(state).state !== SUCCESS
-const getLastPullRequest = state => getGitHubWidget(state).data?.user?.pullRequests?.nodes?.[0]
-const getPinnedItems = state => getGitHubWidget(state).data?.user?.pinnedItems?.nodes
+/**
+ * Extract metrics from GitHub user data
+ * @param {Object} user - GitHub user object
+ * @returns {Array} Array of metric objects
+ */
+const getMetrics = user => {
+  const metrics = []
+  const totalFollowersCount = user?.followers?.totalCount
+  const totalFollowingCount = user?.following?.totalCount
+
+  if (totalFollowersCount) {
+    metrics.push({ displayName: 'Followers', id: 'followers', value: totalFollowersCount })
+  }
+
+  if (totalFollowingCount) {
+    metrics.push({ displayName: 'Following', id: 'following', value: totalFollowingCount })
+  }
+
+  return metrics
+}
 
 const GitHubWidget = () => {
-  const dispatch = useDispatch()
-
   const metadata = useSiteMetadata()
   const githubUsername = getGithubUsername(metadata)
   const githubDataSource = getGithubWidgetDataSource(metadata)
 
-  const hasFatalError = useSelector(getHasFatalError)
-  const isLoading = useSelector(getIsLoading)
-  const lastPullRequest = useSelector(getLastPullRequest)
-  const metrics = useSelector(getMetrics)
-  const pinnedItems = useSelector(getPinnedItems)
+  const { data, isLoading, hasFatalError } = useWidgetData('github', githubDataSource)
 
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchDataSource('github', githubDataSource))
-    }
-  }, [dispatch, githubDataSource, isLoading])
+  // Extract data from the query result
+  const user = data?.user
+  const metrics = getMetrics(user)
+  const lastPullRequest = user?.pullRequests?.nodes?.[0]
+  const pinnedItems = user?.pinnedItems?.nodes
+  const contributionCalendar = user?.contributionsCollection?.contributionCalendar
 
   const callToAction = (
     <CallToAction
@@ -64,6 +71,11 @@ const GitHubWidget = () => {
 
       <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={2} />
       <LastPullRequest isLoading={isLoading} pullRequest={lastPullRequest} />
+
+      {/* Lazy load the contribution graph to prevent FOUC and improve initial render performance */}
+      <LazyLoad placeholder={<div style={{ minHeight: '200px' }} />}>
+        <ContributionGraph isLoading={isLoading} contributionCalendar={contributionCalendar} />
+      </LazyLoad>
     </Widget>
   )
 }

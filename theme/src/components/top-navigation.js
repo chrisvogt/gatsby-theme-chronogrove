@@ -14,7 +14,7 @@ import useSiteMetadata from '../hooks/use-site-metadata'
  *
  * Top navigation component for the page.
  */
-const TopNavigation = ({ hideBrandLink, hideMenuItems }) => {
+const TopNavigation = () => {
   const metadata = useSiteMetadata()
 
   const navigation = useNavigationData()
@@ -25,52 +25,78 @@ const TopNavigation = ({ hideBrandLink, hideMenuItems }) => {
     <Themed.div
       sx={{
         variant: 'styles.TopNavigation',
-        minHeight: '64px'
+        minHeight: '64px',
+        color: 'text'
       }}
     >
       <Container
         sx={{
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: ['column', '', 'row'],
+          alignItems: ['flex-start', '', 'center'],
+          justifyContent: 'space-between',
           py: 3
         }}
       >
-        <Themed.div sx={{ flexGrow: 1 }}>
-          <nav role='navigation'>
-            {!hideBrandLink && (
-              <Link
-                to='/'
-                sx={{
-                  variant: 'styles.a',
-                  color: 'text',
-                  display: ['block', '', 'inline'],
-                  fontFamily: 'heading',
-                  fontSize: [2, 3],
-                  fontWeight: 'bold',
-                  letterSpacing: '1.1px',
-                  marginRight: 3,
-                  textDecoration: 'none'
-                }}
-              >
-                {title}
-              </Link>
-            )}
+        {/* Left side: Brand link and color toggle */}
+        <Themed.div
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            mb: [2, '', 0],
+            width: ['100%', '', 'auto']
+          }}
+        >
+          <Link
+            to='/'
+            sx={{
+              variant: 'styles.a',
+              color: 'text',
+              display: 'inline',
+              fontFamily: 'heading',
+              fontSize: [2, 3],
+              fontWeight: 'bold',
+              letterSpacing: '1.1px',
+              marginRight: 2,
+              textDecoration: 'none'
+            }}
+          >
+            {title}
+          </Link>
 
-            {!hideMenuItems &&
-              menuItems.map(({ slug, path, title, text }) => (
-                <Link
-                  key={slug}
-                  sx={{ fontSize: 2, variant: 'styles.a', color: 'text', mr: 3 }}
-                  title={title}
-                  to={path}
-                >
-                  {text}
-                </Link>
-              ))}
-          </nav>
+          <Themed.div sx={{ display: 'flex', alignItems: 'center' }}>
+            <ColorToggle />
+          </Themed.div>
         </Themed.div>
 
-        <ColorToggle />
+        {/* Right side: Menu items */}
+        <Themed.div
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: ['flex-start', '', 'flex-end'],
+            width: ['100%', '', 'auto']
+          }}
+        >
+          <nav role='navigation'>
+            {menuItems.map(({ slug, path, title, text }) => (
+              <Link
+                key={slug}
+                sx={{
+                  fontSize: 2,
+                  variant: 'styles.a',
+                  color: 'text',
+                  mr: 3,
+                  mb: [1, '', 0]
+                }}
+                title={title}
+                to={path}
+              >
+                {text}
+              </Link>
+            ))}
+          </nav>
+        </Themed.div>
       </Container>
     </Themed.div>
   )

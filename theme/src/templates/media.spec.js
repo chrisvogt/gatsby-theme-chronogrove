@@ -1,17 +1,21 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import { useStaticQuery } from 'gatsby'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
 import Media, { Head } from './media'
+import * as useSiteMetadataModule from '../hooks/use-site-metadata'
 
 // Mocked Data
 const data = {
   mdx: {
+    id: 'mock-media-id',
     fields: {
-      category: 'Mock Category'
+      category: 'Mock Category',
+      path: '/music/mock-media'
     },
     frontmatter: {
       title: 'A Mock Blog Post',
@@ -19,7 +23,8 @@ const data = {
       soundcloudId: null,
       youtubeSrc: null,
       banner: 'mock-banner.jpg',
-      description: 'Mock Description'
+      description: 'Mock Description',
+      keywords: ['mock', 'test', 'music']
     }
   }
 }
@@ -62,15 +67,19 @@ const MediaPostContent = <div>Lorum ipsum dolor sit amet.</div>
 describe('Media Post', () => {
   beforeEach(() => {
     useStaticQuery.mockImplementation(() => data)
+    jest
+      .spyOn(useSiteMetadataModule, 'default')
+      .mockReturnValue({ siteUrl: 'https://example.com', baseURL: 'https://example.com' })
   })
 
   afterEach(() => {
     jest.clearAllMocks()
+    jest.restoreAllMocks()
   })
 
   // Helper function to wrap components in the ThemeUIProvider and Redux Provider
   const renderWithTheme = component =>
-    renderer.create(
+    render(
       <Provider store={store}>
         <ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>
       </Provider>
@@ -78,8 +87,8 @@ describe('Media Post', () => {
 
   // Test with no media sources
   it('renders correctly with no media sources', () => {
-    const tree = renderWithTheme(<Media data={data} children={MediaPostContent} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Media data={data} children={MediaPostContent} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   // Test with YouTube source
@@ -91,8 +100,8 @@ describe('Media Post', () => {
         frontmatter: { ...data.mdx.frontmatter, youtubeSrc: 'mockYoutubeSrc' }
       }
     }
-    const tree = renderWithTheme(<Media data={youtubeData} children={MediaPostContent} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Media data={youtubeData} children={MediaPostContent} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   // Test with SoundCloud source
@@ -104,13 +113,37 @@ describe('Media Post', () => {
         frontmatter: { ...data.mdx.frontmatter, soundcloudId: 'mockSoundCloudId' }
       }
     }
-    const tree = renderWithTheme(<Media data={soundcloudData} children={MediaPostContent} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Media data={soundcloudData} children={MediaPostContent} />)
+    expect(asFragment()).toMatchSnapshot()
   })
 
   // Test the SEO Head component
   it('renders the Head component with SEO data', () => {
-    const seoTree = renderWithTheme(<Head data={data} />).toJSON()
-    expect(seoTree).toMatchSnapshot()
+    const { asFragment } = renderWithTheme(<Head data={data} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders breadcrumb structured data', () => {
+    const { container } = renderWithTheme(<Head data={data} />)
+    const script = container.querySelector('script[type="application/ld+json"]')
+
+    expect(script).toBeInTheDocument()
+    const breadcrumbData = JSON.parse(script.textContent)
+
+    expect(breadcrumbData['@context']).toBe('https://schema.org')
+    expect(breadcrumbData['@type']).toBe('BreadcrumbList')
+    expect(breadcrumbData.itemListElement).toHaveLength(3)
+
+    // Check Home breadcrumb
+    expect(breadcrumbData.itemListElement[0].name).toBe('Home')
+    expect(breadcrumbData.itemListElement[0].position).toBe(1)
+
+    // Check Category breadcrumb
+    expect(breadcrumbData.itemListElement[1].name).toBe('Mock Category')
+    expect(breadcrumbData.itemListElement[1].position).toBe(2)
+
+    // Check Media title breadcrumb
+    expect(breadcrumbData.itemListElement[2].name).toBe('A Mock Blog Post')
+    expect(breadcrumbData.itemListElement[2].position).toBe(3)
   })
 })

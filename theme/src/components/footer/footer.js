@@ -13,7 +13,7 @@ export default () => {
   const footerText = getFooterText(metadata)
 
   return (
-    <footer role='contentinfo' id='footer' sx={{ position: 'relative', variant: 'styles.PageFooter' }}>
+    <footer role='contentinfo' id='footer' sx={{ variant: 'styles.PageFooter' }}>
       <Container sx={{ textAlign: 'center' }}>
         <div sx={{ mb: 3, py: [2, 3] }}>
           <Profiles />
@@ -31,7 +31,14 @@ export default () => {
             </span>
             {' | '}
             <span>
-              <Link to='https://github.com/chrisvogt/gatsby-theme-chrisvogt'>View Source</Link>
+              <ThemedLink
+                href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
+                target='_blank'
+                rel='noopener noreferrer'
+                sx={{ textDecoration: 'underline' }}
+              >
+                View Source
+              </ThemedLink>
             </span>
           </div>
         </div>

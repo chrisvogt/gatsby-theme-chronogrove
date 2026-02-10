@@ -1,14 +1,13 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useStaticQuery } from 'gatsby'
 import useSocialProfiles from './use-social-profiles'
 
 const data = {
-  allSocialProfilesJson: {
-    edges: [
-      {
-        node: {
+  site: {
+    siteMetadata: {
+      socialProfiles: [
+        {
           href: 'https://twitter.com/c1v0',
-          id: '123-456-789',
           slug: 'twitter',
           displayName: 'Twitter',
           icon: {
@@ -18,11 +17,8 @@ const data = {
             set: 'fab'
           }
         }
-      },
-      {
-        invalid: 'I should be filtered out'
-      }
-    ]
+      ]
+    }
   }
 }
 
@@ -42,8 +38,32 @@ describe('useSocialProfiles', () => {
     expect(result.current).toHaveLength(1)
   })
 
-  it('selects data inside the `node` child', () => {
+  it('returns the social profiles from site metadata', () => {
     const { result } = renderHook(() => useSocialProfiles())
-    expect(result.current[0]).toEqual(data.allSocialProfilesJson.edges[0].node)
+    expect(result.current[0]).toEqual(data.site.siteMetadata.socialProfiles[0])
+  })
+
+  it('handles missing site', () => {
+    useStaticQuery.mockImplementation(() => ({}))
+    const { result } = renderHook(() => useSocialProfiles())
+    expect(result.current).toEqual([])
+  })
+
+  it('handles missing siteMetadata', () => {
+    useStaticQuery.mockImplementation(() => ({ site: {} }))
+    const { result } = renderHook(() => useSocialProfiles())
+    expect(result.current).toEqual([])
+  })
+
+  it('handles missing socialProfiles', () => {
+    useStaticQuery.mockImplementation(() => ({ site: { siteMetadata: {} } }))
+    const { result } = renderHook(() => useSocialProfiles())
+    expect(result.current).toEqual([])
+  })
+
+  it('handles empty socialProfiles array', () => {
+    useStaticQuery.mockImplementation(() => ({ site: { siteMetadata: { socialProfiles: [] } } }))
+    const { result } = renderHook(() => useSocialProfiles())
+    expect(result.current).toEqual([])
   })
 })

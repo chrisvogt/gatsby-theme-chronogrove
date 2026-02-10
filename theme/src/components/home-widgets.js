@@ -7,6 +7,7 @@ import Flickr from '../components/widgets/flickr'
 import RecentPosts from '../components/widgets/recent-posts'
 import Spotify from '../components/widgets/spotify'
 import Steam from '../components/widgets/steam'
+import Discogs from '../components/widgets/discogs'
 
 import useSiteMetadata from '../hooks/use-site-metadata'
 import {
@@ -15,7 +16,8 @@ import {
   getInstagramWidgetDataSource,
   getFlickrWidgetDataSource,
   getSpotifyWidgetDataSource,
-  getSteamWidgetDataSource
+  getSteamWidgetDataSource,
+  getDiscogsWidgetDataSource
 } from '../selectors/metadata'
 
 /**
@@ -25,9 +27,9 @@ import {
  * shadowing to add or remove widgets onto the home page.
  *
  * For example, if you are using this as a parent theme, create a new file at
- * /src/gatsby-theme-chrisvogt/components/home-widgets.js to use GatsbyJS
+ * /src/gatsby-theme-chronogrove/components/home-widgets.js to use GatsbyJS
  * theme shadowing to override this file. The import path for theme widgets
- * is: 'gatsby-theme-chrisvogt/src/components/widgets/recent-posts'
+ * is: 'gatsby-theme-chronogrove/src/components/widgets/recent-posts'
  */
 const HomeWidgets = () => {
   const metadata = useSiteMetadata()
@@ -38,6 +40,7 @@ const HomeWidgets = () => {
   const flickrDataSource = getFlickrWidgetDataSource(metadata)
   const spotifyDataSource = getSpotifyWidgetDataSource(metadata)
   const steamDataSource = getSteamWidgetDataSource(metadata)
+  const discogsDataSource = getDiscogsWidgetDataSource(metadata)
 
   return (
     <>
@@ -48,6 +51,7 @@ const HomeWidgets = () => {
       {githubDataSource && <GitHub />}
       {goodreadsDataSource && <Goodreads />}
       {spotifyDataSource && <Spotify />}
+      {discogsDataSource && <Discogs />}
       {steamDataSource && <Steam />}
     </>
   )

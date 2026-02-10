@@ -1,5 +1,6 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import { TestProvider } from '../testUtils'
 import TopNavigation from './top-navigation'
@@ -30,13 +31,11 @@ describe('TopNavigation', () => {
   useNavigationData.mockImplementation(() => mockNavigationData)
   useSiteMetadata.mockImplementation(() => mockSiteMetadata)
   it('matches the snapshot', () => {
-    const tree = renderer
-      .create(
-        <TestProvider>
-          <TopNavigation />
-        </TestProvider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProvider>
+        <TopNavigation />
+      </TestProvider>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 })

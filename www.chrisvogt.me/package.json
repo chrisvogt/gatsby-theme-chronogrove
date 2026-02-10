@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "www.chrisvogt.me",
-  "version": "1.5.1",
+  "version": "1.14.0",
   "license": "GPL",
   "scripts": {
     "build": "gatsby build",
@@ -12,17 +12,18 @@
   },
   "dependencies": {
     "boxen": "^8.0.1",
-    "gatsby": "^5.14.3",
-    "gatsby-plugin-google-analytics": "^5.13.1",
+    "d3": "^7.9.0",
+    "gatsby": "patch:gatsby@npm%3A5.16.0#~/.yarn/patches/gatsby-npm-5.16.0-79b028a7a8.patch",
+    "gatsby-plugin-google-analytics": "^5.16.0",
     "gatsby-plugin-newrelic": "^2.9.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
-    "gatsby-plugin-sitemap": "^6.13.1",
-    "gatsby-theme-chrisvogt": "*",
-    "prettier": "3.5.3",
-    "react": "^18",
-    "react-dom": "^18"
+    "gatsby-plugin-sitemap": "^6.16.0",
+    "gatsby-theme-chronogrove": "*",
+    "prettier": "3.8.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.27"
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.32"
   }
 }

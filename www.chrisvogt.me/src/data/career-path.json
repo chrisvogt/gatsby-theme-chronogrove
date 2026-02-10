@@ -1,0 +1,155 @@
+{
+  "name": "Career Journey",
+  "startYear": 2003,
+  "children": [
+    {
+      "name": "IT Path",
+      "type": "path",
+      "color": "#4299e1",
+      "startYear": 2005,
+      "description": "Started career in IT support and systems",
+      "children": [
+        {
+          "name": "Robert Half & TEKsystems",
+          "title": "Contract Desktop Support & IT Technician (1099)",
+          "dates": "July 2006 – Feb 2007",
+          "startYear": 2006,
+          "endYear": 2007,
+          "type": "job",
+          "description": "Short to long-term contracts in IT help desk and field technician roles—Washington Elementary School District (WESD), Walmart, Dell Inc., and DR Horton."
+        },
+        {
+          "name": "Apogee Physicians",
+          "title": "Systems Administrator",
+          "dates": "Feb 2007 – Aug 2007",
+          "startYear": 2007,
+          "endYear": 2007,
+          "type": "job",
+          "description": "Sysadmin and field tech for a Linux-based, nationwide physician staffing company; redesigned and skinned internal apps, proposed a new company logo to the CEO—promoted to Creative Director."
+        },
+        {
+          "name": "Encore Discovery Solutions",
+          "title": "IT Engineer",
+          "dates": "May 2008 – December 2008",
+          "startYear": 2008,
+          "endYear": 2008,
+          "type": "job",
+          "description": "Sysadmin: help desk in a Windows environment, data center cleanups and hardware management, and forensic acquisitions (clone and image business devices)."
+        }
+      ]
+    },
+    {
+      "name": "Design Path",
+      "type": "path",
+      "color": "#ed8936",
+      "startYear": 2003,
+      "description": "Explored creative design and visual communication",
+      "children": [
+        {
+          "name": "OfficeMax Print & Document Services",
+          "title": "Desktop Publisher",
+          "dates": "May 2003 – May 2005",
+          "startYear": 2003,
+          "endYear": 2005,
+          "type": "job",
+          "description": "Customer design and print support—laser and large-format production (in-house and outsourced), file prep and pre-press, redesign and rebuild of customer projects for print."
+        },
+        {
+          "name": "FedEx Kinko's",
+          "title": "Signs & Banners Specialist",
+          "dates": "May 2005 – May 2006",
+          "startYear": 2005,
+          "endYear": 2006,
+          "type": "job",
+          "description": "One of two Sign & Banner Specialists: large-format design and production (in-house and outsourced), material ordering and inventory, prototypes and special materials—large-format print, lamination and vinyl jobs."
+        },
+        {
+          "name": "Apogee Physicians",
+          "title": "Creative Director",
+          "dates": "Aug 2007 – April 2008",
+          "startYear": 2007,
+          "endYear": 2008,
+          "type": "job",
+          "description": "Partnered with Marketing and Recruiting to define company brand—designed and built the logo, print and online marketing, and recruiting and training materials; branding still in use today."
+        },
+        {
+          "name": "Art In Reality, LLC",
+          "title": "Freelance Designer & Developer",
+          "dates": "Jan 2011 – Feb 2012",
+          "startYear": 2011,
+          "endYear": 2012,
+          "type": "job",
+          "description": "Freelance design services and 1099 contract work—print and web design/development for Arizona Humane Society, National Laser Institute, and JK Realty."
+        }
+      ]
+    },
+    {
+      "name": "Engineering Path",
+      "type": "path",
+      "color": "#48bb78",
+      "startYear": 2008,
+      "description": "Transitioned into software development and engineering",
+      "children": [
+        {
+          "name": "Encore Discovery Solutions",
+          "title": "Web Developer",
+          "dates": "December 2008 – December 2010",
+          "startYear": 2008,
+          "endYear": 2010,
+          "type": "job",
+          "description": "UI and front-end work for the logged-in electronic discovery platform (DotNetNuke, C#, AJAX)—status reporting for in-house forensic search and discovery jobs for clients."
+        },
+        {
+          "name": "Pan Am Education",
+          "title": "PHP Engineer",
+          "dates": "Nov 2012 – May 2013",
+          "startYear": 2012,
+          "endYear": 2013,
+          "type": "job",
+          "description": "VC-funded EdTech startup: video platform connecting TOEFL/TOEIC students with US English teachers—student portal, teacher portal, and sole developer (including outsourcing)."
+        },
+        {
+          "name": "Salucro Healthcare Solutions",
+          "title": "Front End Developer",
+          "dates": "Feb 2016 – Aug 2017",
+          "startYear": 2016,
+          "endYear": 2017,
+          "type": "job",
+          "description": "PatientPortal.me team: SOX- and HIPAA-compliant medical billing and payment platform for patients—mobile web app, Epic EMR/EHR integration, and POS terminals."
+        },
+        {
+          "name": "GoDaddy",
+          "type": "job",
+          "startYear": 2017,
+          "endYear": 2026,
+          "children": [
+            {
+              "title": "Senior Software Engineer (III)",
+              "dates": "Aug 2017 – June 2021",
+              "startYear": 2017,
+              "endYear": 2021,
+              "type": "role",
+              "description": "Presence & Commerce team: website and business dashboards, website insights and recommendations, and GoDaddy's initial social integrations—Facebook, Twitter, and Instagram."
+            },
+            {
+              "title": "Senior Software Engineer (IV)",
+              "dates": "June 2021 – Feb 2025",
+              "startYear": 2021,
+              "endYear": 2025,
+              "type": "role",
+              "description": "United States Independents (USI) team: intelligent customer dashboards, management portals for websites and products, in-app navigation, and recommendations across GoDaddy."
+            },
+            {
+              "title": "Principal Software Engineer (V)",
+              "dates": "Feb 2025 – Present",
+              "startYear": 2025,
+              "endYear": 2026,
+              "type": "role",
+              "description": "Airo-Growth-Innovation (AGI) team: intelligent customer dashboards, unified product portals, business and product recommendations, and GoDaddy Airo™."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

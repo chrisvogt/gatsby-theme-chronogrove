@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Flex, Link } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
-import Layout from 'gatsby-theme-chrisvogt/src/components/layout'
-import Seo from 'gatsby-theme-chrisvogt/src/components/seo'
+import Layout from 'gatsby-theme-chronogrove/src/components/layout'
+import Seo from 'gatsby-theme-chronogrove/src/components/seo'
 
 const PrivacyPolicy = () => {
   return (

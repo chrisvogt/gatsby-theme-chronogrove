@@ -34,7 +34,7 @@ const renderWithRouter = ui =>
 describe('Widget/Goodreads/BookExplorer', () => {
   const mockBook = {
     authors: ['Test Author'],
-    cdnMediaURL: 'https://chrisvogt.imgix.net/book.jpg',
+    cdnMediaURL: 'https://images.imgix.net/book.jpg',
     description: 'Test description',
     infoLink: 'https://books.google.com/test',
     rating: '4',
@@ -61,7 +61,7 @@ describe('Widget/Goodreads/BookExplorer', () => {
   it('renders book image with webp format for CDN URLs', () => {
     renderWithRouter(<BookExplorer book={mockBook} onClose={() => {}} default />)
     const image = screen.getByTestId('book-preview-thumbnail')
-    expect(image).toHaveAttribute('xlink:href', 'https://chrisvogt.imgix.net/book.jpg?auto=compress&auto=format')
+    expect(image).toHaveAttribute('xlink:href', 'https://images.imgix.net/book.jpg?auto=compress&auto=format')
   })
 
   it('renders rating stars correctly', () => {
@@ -88,14 +88,51 @@ describe('Widget/Goodreads/BookExplorer', () => {
     expect(onClose).toHaveBeenCalled()
   })
 
-  it('logs book details for debugging', () => {
-    renderWithRouter(<BookExplorer book={mockBook} onClose={() => {}} default />)
-    expect(console.log).toHaveBeenCalledWith('BookExplorer rendered with book:', mockBook)
-  })
-
   it('renders external link without target="_blank"', () => {
     renderWithRouter(<BookExplorer book={mockBook} onClose={() => {}} default />)
     const link = screen.getByText('Learn more on Google Books')
     expect(link).not.toHaveAttribute('target')
+  })
+
+  it('renders HTML entities in description correctly', () => {
+    const bookWithHtml = {
+      ...mockBook,
+      description: 'This is <b>bold</b> text with a <br /> line break and <i>italic</i> content'
+    }
+    renderWithRouter(<BookExplorer book={bookWithHtml} onClose={() => {}} default />)
+
+    // Check that the HTML is properly rendered as elements
+    const descriptionElement = screen.getByText(/This is/).closest('p')
+    expect(descriptionElement.innerHTML).toContain('<b>bold</b>')
+    expect(descriptionElement.innerHTML).toContain('<br>')
+    expect(descriptionElement.innerHTML).toContain('<i>italic</i>')
+    expect(descriptionElement.textContent).toBe('This is bold text with a  line break and italic content')
+  })
+
+  it('ignores unsupported HTML tags in description', () => {
+    const bookWithUnsupportedHtml = {
+      ...mockBook,
+      description: 'This has <div>unsupported</div> and <span>tags</span>'
+    }
+    renderWithRouter(<BookExplorer book={bookWithUnsupportedHtml} onClose={() => {}} default />)
+
+    // Should render the content without the unsupported tags
+    expect(
+      screen.getByText((content, node) => node.textContent === 'This has unsupported and tags')
+    ).toBeInTheDocument()
+  })
+
+  it('renders em tags and anchor tags in description correctly', () => {
+    const bookWithAdvancedHtml = {
+      ...mockBook,
+      description: 'This is <em>emphasized</em> text with a <a href="https://example.com">link</a>'
+    }
+    renderWithRouter(<BookExplorer book={bookWithAdvancedHtml} onClose={() => {}} default />)
+
+    // Check that the HTML is properly rendered as elements
+    const descriptionElement = screen.getByText(/This is/).closest('p')
+    expect(descriptionElement.innerHTML).toContain('<em>emphasized</em>')
+    expect(descriptionElement.innerHTML).toContain('<a href="https://example.com"')
+    expect(descriptionElement.textContent).toBe('This is emphasized text with a link')
   })
 })

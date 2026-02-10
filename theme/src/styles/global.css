@@ -1,9 +1,9 @@
 html {
   min-height: 100%;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 
   @media (prefers-reduced-motion) {
-    scroll-behavior: unset;
+    scroll-behavior: auto;
   }
 }
 
@@ -107,14 +107,10 @@ article.c1v0-blog-post img.solid-background {
 
 /**
  * Light Gallery Instagram Button Styles
- * 
+ *
  * These styles target the "View on Instagram" button that gets injected into the
  * Light Gallery toolbar. The button is dynamically added via JavaScript in
  * instagram-widget.js.
- * 
- * TODO: Consider moving these styles to a component-specific stylesheet once we
- * have a better understanding of Light Gallery's DOM structure and component
- * organization.
  */
 .lg-toolbar .lg-group {
   display: flex;
@@ -203,4 +199,77 @@ article.c1v0-blog-post img.solid-background {
   text-align: center;
   transition: all 0.3s ease;
   line-height: 1;
+}
+
+@import '@theme-toggles/react/css/Expand.css';
+
+.theme-toggle,
+.theme-toggle svg {
+  color: inherit;
+  fill: currentColor;
+  width: 16px;
+  height: 16px;
+}
+
+/* LightGallery Instagram Album Styling */
+.lg-sub-html .lg-sub-html-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lg-sub-html .lg-caption {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ccc;
+  max-width: 600px;
+  text-align: center;
+}
+
+.lg-sub-html .lg-post-position {
+  display: inline-block;
+  background: linear-gradient(135deg, #e1306c 0%, #fd1d1d 50%, #f77737 100%);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+}
+
+/* Album boundary indicators in LightGallery thumbnails */
+.lg-thumb-item[data-album-start='true'] {
+  border-left: 3px solid #e1306c !important;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.lg-thumb-item[data-album-end='true'] {
+  border-right: 3px solid #e1306c !important;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* Subtle background for album groups */
+.lg-thumb-item[data-album-start='true']:not([data-album-end='true']),
+.lg-thumb-item:not([data-album-start='true']):not([data-album-end='true']),
+.lg-thumb-item[data-album-end='true']:not([data-album-start='true']) {
+  position: relative;
+}
+
+.lg-thumb-item[data-album-start='true']::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -3px;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #e1306c, transparent);
+  border-top-left-radius: 4px;
 }

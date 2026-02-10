@@ -36,7 +36,7 @@ describe('PlaylistsErrorBoundary', () => {
         <ErrorChild />
       </PlaylistsErrorBoundary>
     )
-    // When an error is caught, the boundary renders null,
+    // When an error is caught, the boundary renders null via FallbackComponent,
     // so container.firstChild should be null.
     expect(container.firstChild).toBeNull()
   })

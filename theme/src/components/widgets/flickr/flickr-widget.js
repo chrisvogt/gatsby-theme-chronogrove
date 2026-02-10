@@ -1,10 +1,10 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 
 import { Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import isDarkMode from '../../../helpers/isDarkMode'
 import ReactPlaceholder from 'react-placeholder'
 import VanillaTilt from 'vanilla-tilt'
 import lgAutoplay from 'lightgallery/plugins/autoplay'
@@ -19,12 +19,11 @@ import 'lightgallery/css/lg-zoom.css'
 import 'lightgallery/css/lg-video.css'
 import 'lightgallery/css/lg-autoplay.css'
 
-import fetchDataSource from '../../../actions/fetchDataSource'
 import { getFlickrUsername, getFlickrWidgetDataSource } from '../../../selectors/metadata'
-import { SUCCESS, FAILURE, getFlickrWidget } from '../../../reducers/widgets'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
+import useWidgetData from '../../../hooks/use-widget-data'
 
-import Button from '../../button'
+import ActionButton from '../../action-button'
 import CallToAction from '../call-to-action'
 import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
@@ -38,23 +37,20 @@ const MAX_IMAGES = {
   showMore: 16
 }
 
-const getPhotos = state => getFlickrWidget(state).data?.collections?.photos
-const getHasFatalError = state => getFlickrWidget(state).state === FAILURE
-const getIsLoading = state => getFlickrWidget(state).state !== SUCCESS
-const getMetrics = state => getFlickrWidget(state).data?.metrics
-
 export default () => {
-  const dispatch = useDispatch()
+  const { colorMode } = useThemeUI()
+  const darkModeActive = isDarkMode(colorMode)
   const lightGalleryRef = useRef(null)
 
   const metadata = useSiteMetadata()
   const flickrUsername = getFlickrUsername(metadata)
   const flickrDataSource = getFlickrWidgetDataSource(metadata)
 
-  const hasFatalError = useSelector(getHasFatalError)
-  const isLoading = useSelector(getIsLoading)
-  const photos = useSelector(getPhotos)
-  const metrics = useSelector(getMetrics)
+  const { data, isLoading, hasFatalError } = useWidgetData('flickr', flickrDataSource)
+
+  // Extract data from the query result
+  const photos = data?.collections?.photos
+  const metrics = data?.metrics
 
   const [isShowingMore, setIsShowingMore] = useState(false)
 
@@ -69,12 +65,6 @@ export default () => {
     },
     [lightGalleryRef]
   )
-
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(fetchDataSource('flickr', flickrDataSource))
-    }
-  }, [dispatch, flickrDataSource, isLoading])
 
   useEffect(() => {
     if (isShowingMore || !isLoading) {
@@ -115,34 +105,38 @@ export default () => {
             gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', '', 'repeat(4, 1fr)']
           }}
         >
-          {(isLoading ? Array(countItemsToRender).fill({}) : photos).slice(0, countItemsToRender).map((photo, idx) => (
-            <ReactPlaceholder
-              customPlaceholder={
-                <div className='image-placeholder'>
-                  <RectShape
-                    color='#efefef'
-                    sx={{
-                      borderRadius: '8px',
-                      boxShadow: 'md',
-                      width: '100%',
-                      paddingBottom: '100%'
-                    }}
-                    showLoadingAnimation
-                  />
-                </div>
-              }
-              key={photo.id || idx}
-              ready={!isLoading}
-            >
-              <FlickrWidgetItem photo={photo} index={idx} handleClick={() => openLightbox(idx)} />
-            </ReactPlaceholder>
-          ))}
+          {(isLoading ? Array(countItemsToRender).fill({}) : photos || [])
+            .slice(0, countItemsToRender)
+            .map((photo, idx) => (
+              <ReactPlaceholder
+                customPlaceholder={
+                  <div className='image-placeholder'>
+                    <RectShape
+                      color={darkModeActive ? '#3a3a4a' : '#efefef'}
+                      sx={{
+                        borderRadius: '8px',
+                        boxShadow: 'md',
+                        width: '100%',
+                        paddingBottom: '100%'
+                      }}
+                      showLoadingAnimation
+                    />
+                  </div>
+                }
+                key={photo.id || idx}
+                ready={!isLoading}
+              >
+                <FlickrWidgetItem photo={photo} index={idx} handleClick={() => openLightbox(idx)} />
+              </ReactPlaceholder>
+            ))}
         </Grid>
       </div>
 
       {!isLoading && (
         <div sx={{ my: 4, textAlign: 'center' }}>
-          <Button onClick={() => setIsShowingMore(!isShowingMore)}>{isShowingMore ? 'Show Less' : 'Show More'}</Button>
+          <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
+            {isShowingMore ? 'Show Less' : 'Show More'}
+          </ActionButton>
         </div>
       )}
 

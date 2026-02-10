@@ -3,6 +3,8 @@ import { jsx } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import MediaItemGrid from './media-item-grid'
 import { Themed } from '@theme-ui/mdx'
+import { useDispatch } from 'react-redux'
+import { setSpotifyTrack } from '../../../reducers/audioPlayer'
 
 const transformPlaylist = playlist => {
   if (!playlist) {
@@ -35,6 +37,12 @@ const transformPlaylist = playlist => {
 }
 
 const Playlists = ({ isLoading, playlists = [] }) => {
+  const dispatch = useDispatch()
+
+  const handlePlaylistClick = spotifyURL => {
+    dispatch(setSpotifyTrack(spotifyURL))
+  }
+
   const items = playlists
     .map(transformPlaylist)
     // Since this UI is image-centric, we want to skip any playlists that don't have an image, which is an edge
@@ -52,7 +60,7 @@ const Playlists = ({ isLoading, playlists = [] }) => {
 
       <Themed.p>My 12 favorite playlists.</Themed.p>
 
-      <MediaItemGrid isLoading={isLoading} items={items} />
+      <MediaItemGrid isLoading={isLoading} items={items} onTrackClick={handlePlaylistClick} />
     </div>
   )
 }

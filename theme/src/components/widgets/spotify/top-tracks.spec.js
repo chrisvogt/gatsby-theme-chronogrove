@@ -1,9 +1,23 @@
 /** @jsx jsx */
-import renderer from 'react-test-renderer'
+import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { jsx } from 'theme-ui'
 import TopTracks from './top-tracks'
+import { TestProviderWithState } from '../../../testUtils'
+import { setSpotifyTrack } from '../../../reducers/audioPlayer'
+import { Provider as ReduxProvider } from 'react-redux'
+import { ThemeUIProvider } from 'theme-ui'
+import theme from '../../../gatsby-plugin-theme-ui/theme'
+
+jest.mock('./media-item-grid', () => jest.fn(() => <div data-testid='media-item-grid' />))
+import MediaItemGrid from './media-item-grid'
 
 describe('TopTracks Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   const mockTracks = [
     {
       id: '1',
@@ -29,13 +43,21 @@ describe('TopTracks Component', () => {
   ]
 
   it('renders correctly with tracks', () => {
-    const tree = renderer.create(<TopTracks isLoading={false} tracks={mockTracks} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={mockTracks} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders correctly when loading', () => {
-    const tree = renderer.create(<TopTracks isLoading={true} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={true} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('handles tracks without a 300px image gracefully', () => {
@@ -48,12 +70,51 @@ describe('TopTracks Component', () => {
         spotifyURL: 'http://spotify.com/track3'
       }
     ]
-    const tree = renderer.create(<TopTracks isLoading={false} tracks={incompleteTracks} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={incompleteTracks} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
   })
 
   it('renders correctly with no tracks', () => {
-    const tree = renderer.create(<TopTracks isLoading={false} tracks={[]} />).toJSON()
-    expect(tree).toMatchSnapshot()
+    const { asFragment } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={[]} />
+      </TestProviderWithState>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('dispatches setSpotifyTrack action when track is clicked', () => {
+    const mockDispatch = jest.fn()
+    const mockStore = {
+      getState: () => ({}),
+      subscribe: jest.fn(),
+      dispatch: mockDispatch
+    }
+
+    const TestProviderWithMockStore = ({ children }) => (
+      <ReduxProvider store={mockStore}>
+        <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
+      </ReduxProvider>
+    )
+
+    // Render the component
+    render(
+      <TestProviderWithMockStore>
+        <TopTracks isLoading={false} tracks={mockTracks} />
+      </TestProviderWithMockStore>
+    )
+
+    // Get the onTrackClick function that was passed to MediaItemGrid
+    const onTrackClick = MediaItemGrid.mock.calls[0][0].onTrackClick
+
+    // Call the click handler with a Spotify URL
+    onTrackClick('http://spotify.com/track1')
+
+    // Verify that dispatch was called with the correct action
+    expect(mockDispatch).toHaveBeenCalledWith(setSpotifyTrack('http://spotify.com/track1'))
   })
 })

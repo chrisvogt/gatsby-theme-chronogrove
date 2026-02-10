@@ -1,18 +1,17 @@
 import { useStaticQuery, graphql } from 'gatsby'
 
-export const getPosts = queryResult => {
+export const getPosts = (queryResult, limit = null) => {
   const { allMdx: { edges = [] } = {} } = queryResult
   const recentPosts = edges.map(({ node }) => node)
-  return recentPosts
+  return limit ? recentPosts.slice(0, limit) : recentPosts
 }
 
-const useRecentPosts = () => {
+const useRecentPosts = (limit = null) => {
   const queryResult = useStaticQuery(graphql`
     query RecentPosts {
-      allMdx(limit: 2, sort: { frontmatter: { date: DESC } }) {
+      allMdx(limit: 3, sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
-            excerpt(pruneLength: 255)
             fields {
               category
               id
@@ -23,6 +22,7 @@ const useRecentPosts = () => {
               banner
               date(formatString: "MMMM DD, YYYY")
               description
+              excerpt
               slug
               title
             }
@@ -32,7 +32,7 @@ const useRecentPosts = () => {
     }
   `)
 
-  const recentPosts = getPosts(queryResult)
+  const recentPosts = getPosts(queryResult, limit)
   return recentPosts
 }
 
