@@ -74,7 +74,7 @@ export const trackEvent = (eventName, eventParams = {}) => {
     }
     // Development mode - log to console
     else if (process.env.NODE_ENV === 'development') {
-      console.log('📊 Analytics Event (No tracker found):', {
+      console.log('📊 Analytics Event (Dev Mode):', {
         eventName,
         category,
         label,
