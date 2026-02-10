@@ -29,7 +29,12 @@ const SpotifyWidget = () => {
   const topTracks = data?.collections?.topTracks
 
   const callToAction = (
-    <CallToAction title={`${profileDisplayName} on ${providerDisplayName}`} url={profileURL} isLoading={isLoading}>
+    <CallToAction
+      title={`${profileDisplayName} on ${providerDisplayName}`}
+      url={profileURL}
+      isLoading={isLoading}
+      widgetName='spotify'
+    >
       Browse Playlists
       <span className='read-more-icon'>&rarr;</span>
     </CallToAction>

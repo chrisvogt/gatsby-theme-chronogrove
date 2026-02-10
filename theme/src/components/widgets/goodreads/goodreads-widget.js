@@ -49,6 +49,7 @@ export default () => {
       title={`${goodreadsUsername} on Goodreads`}
       url={`https://www.goodreads.com/${goodreadsUsername}`}
       isLoading={isLoading}
+      widgetName='goodreads'
     >
       Visit Profile
       <span className='read-more-icon'>&rarr;</span>

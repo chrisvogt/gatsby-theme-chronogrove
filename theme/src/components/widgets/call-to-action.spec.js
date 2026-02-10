@@ -1,10 +1,23 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import CallToAction from './call-to-action'
+import { trackEvent, trackExternalLink, trackNavigation } from '../../utils/analytics'
+
+jest.mock('../../utils/analytics', () => ({
+  trackEvent: jest.fn(),
+  trackExternalLink: jest.fn(),
+  trackNavigation: jest.fn()
+}))
 
 describe('CallToAction', () => {
   const title = 'Example Widget Title'
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+    // Mock Gatsby's navigate function for Link component
+    global.___navigate = jest.fn()
+  })
 
   it('matches the snapshot', () => {
     const { asFragment } = render(
@@ -45,7 +58,6 @@ describe('CallToAction', () => {
         </CallToAction>
       )
       const link = screen.getByRole('link')
-      expect(link).not.toHaveAttribute('onClick')
       expect(link).toHaveAttribute('href', href)
     })
 
@@ -58,6 +70,76 @@ describe('CallToAction', () => {
       )
       const link = screen.getByRole('link')
       expect(link).toHaveAttribute('href', route)
+    })
+  })
+
+  describe('analytics tracking', () => {
+    it('tracks external link click', () => {
+      const href = 'https://fake-link.com/my-profile'
+      render(
+        <CallToAction title='My Profile' url={href} widgetName='test'>
+          Visit profile
+        </CallToAction>
+      )
+      const link = screen.getByRole('link')
+      fireEvent.click(link)
+
+      expect(trackExternalLink).toHaveBeenCalledWith(href, 'My Profile')
+      expect(trackEvent).toHaveBeenCalledWith('cta_click', {
+        category: 'Widget',
+        label: 'test',
+        customParams: {
+          widget_name: 'test',
+          cta_text: 'Visit profile',
+          destination: href,
+          link_type: 'external'
+        }
+      })
+    })
+
+    it('tracks internal navigation click', () => {
+      const route = '/about-me'
+      render(
+        <CallToAction title={title} to={route} widgetName='posts'>
+          Learn more
+        </CallToAction>
+      )
+      const link = screen.getByRole('link')
+      fireEvent.click(link)
+
+      expect(trackNavigation).toHaveBeenCalledWith(route, 'posts_widget_cta')
+      expect(trackEvent).toHaveBeenCalledWith('cta_click', {
+        category: 'Widget',
+        label: 'posts',
+        customParams: {
+          widget_name: 'posts',
+          cta_text: 'Learn more',
+          destination: route,
+          link_type: 'internal'
+        }
+      })
+    })
+
+    it('tracks click without widgetName', () => {
+      const href = 'https://example.com'
+      render(
+        <CallToAction title='Test' url={href}>
+          Click me
+        </CallToAction>
+      )
+      const link = screen.getByRole('link')
+      fireEvent.click(link)
+
+      expect(trackEvent).toHaveBeenCalledWith('cta_click', {
+        category: 'Widget',
+        label: 'unknown',
+        customParams: {
+          widget_name: undefined,
+          cta_text: 'Click me',
+          destination: href,
+          link_type: 'external'
+        }
+      })
     })
   })
 })

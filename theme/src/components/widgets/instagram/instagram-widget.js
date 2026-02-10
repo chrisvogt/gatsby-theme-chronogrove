@@ -218,6 +218,7 @@ export default () => {
       title={`${profileDisplayName || 'Instagram'} on Instagram`}
       url={profileURL || `https://www.instagram.com/${metadata?.widgets?.instagram?.username || 'instagram'}`}
       isLoading={isLoading}
+      widgetName='instagram'
     >
       Visit Profile
       <span className='read-more-icon'>&rarr;</span>

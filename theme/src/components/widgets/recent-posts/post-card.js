@@ -6,6 +6,7 @@ import { Link } from 'gatsby'
 import Category from '../../category'
 import ImageThumbnails from './image-thumbnails'
 import YouTube from '../../../shortcodes/youtube'
+import { trackWidgetInteraction } from '../../../utils/analytics'
 
 /**
  * Extract YouTube video ID from embed URL
@@ -43,6 +44,16 @@ export default ({
   const hasYouTube = !!videoId
   const hasSoundCloud = !!soundcloudId
   const hasMediaEmbed = hasYouTube || hasSoundCloud
+
+  const handlePostClick = () => {
+    trackWidgetInteraction('posts', 'post_click', {
+      post_title: title,
+      post_category: category,
+      post_link: link,
+      has_media: hasMediaEmbed,
+      media_type: hasYouTube ? 'youtube' : hasSoundCloud ? 'soundcloud' : 'none'
+    })
+  }
 
   // Card content without wrapper - used when YouTube embed is present
   const CardContent = () => (
@@ -107,6 +118,7 @@ export default ({
           {hasMediaEmbed ? (
             <Link
               to={link}
+              onClick={handlePostClick}
               sx={{
                 textDecoration: 'none',
                 color: 'inherit',
@@ -276,6 +288,7 @@ export default ({
         textDecoration: 'none'
       }}
       to={link}
+      onClick={handlePostClick}
     >
       <CardContent />
     </Link>

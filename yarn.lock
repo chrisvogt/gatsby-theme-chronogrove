@@ -12388,6 +12388,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-google-gtag@npm:^5.16.0":
+  version: 5.16.0
+  resolution: "gatsby-plugin-google-gtag@npm:5.16.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.20.13"
+    minimatch: "npm:^3.1.2"
+  peerDependencies:
+    gatsby: ^5.0.0-next
+    react: ^18.0.0 || ^19.0.0 || ^0.0.0
+    react-dom: ^18.0.0 || ^19.0.0 || ^0.0.0
+  checksum: 10c0/d129a952f9a355c0818e43be887995ccbca788ea51531a09426907486544d0f2169ed0db1c422230101e8ef438c6a91b784727d604eff9d8fd09d4143e15437b
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-manifest@npm:^5.16.0":
   version: 5.16.0
   resolution: "gatsby-plugin-manifest@npm:5.16.0"
@@ -24511,6 +24525,7 @@ __metadata:
     d3: "npm:^7.9.0"
     gatsby: "patch:gatsby@npm%3A5.16.0#~/.yarn/patches/gatsby-npm-5.16.0-79b028a7a8.patch"
     gatsby-plugin-google-analytics: "npm:^5.16.0"
+    gatsby-plugin-google-gtag: "npm:^5.16.0"
     gatsby-plugin-newrelic: "npm:^2.9.0"
     gatsby-plugin-robots-txt: "npm:^1.8.0"
     gatsby-plugin-sitemap: "npm:^6.16.0"

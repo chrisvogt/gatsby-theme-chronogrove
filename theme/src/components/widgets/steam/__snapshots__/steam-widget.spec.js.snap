@@ -16,7 +16,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       [{"label":"Games Played","value":5}]
     </div>
     <div
-      class="css-12nc55l"
+      class="css-ayn01n"
     >
       <div
         class="css-10qk8di"
@@ -35,7 +35,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
           />
         </svg>
         <h3
-          class="css-1xnmqx7"
+          class="css-1ke62e9"
         >
           AI Summary
         </h3>

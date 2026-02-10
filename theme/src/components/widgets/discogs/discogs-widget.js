@@ -33,7 +33,7 @@ const DiscogsWidget = () => {
   const releases = data?.collections?.releases
 
   const callToAction = (
-    <CallToAction title='Collection on Discogs' url={profileURL} isLoading={isLoading}>
+    <CallToAction title='Collection on Discogs' url={profileURL} isLoading={isLoading} widgetName='discogs'>
       Browse Collection
       <span className='read-more-icon'>&rarr;</span>
     </CallToAction>

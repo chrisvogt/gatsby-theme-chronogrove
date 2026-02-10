@@ -523,7 +523,11 @@ describe('InstagramWidget', () => {
     })
 
     it('falls back to visible when IntersectionObserver is not available', () => {
+      // Save and delete global IntersectionObserver
+      const originalIntersectionObserver = global.IntersectionObserver
+      delete global.IntersectionObserver
       delete window.IntersectionObserver
+
       useWidgetData.mockReturnValue(mockStateWithCarousels)
 
       render(
@@ -534,6 +538,9 @@ describe('InstagramWidget', () => {
 
       // Should still render without errors
       expect(screen.getByText('Instagram')).toBeInTheDocument()
+
+      // Restore IntersectionObserver
+      global.IntersectionObserver = originalIntersectionObserver
     })
 
     it('does not start ambient rotation when there are no carousel items', () => {
@@ -587,8 +594,9 @@ describe('InstagramWidget', () => {
     })
 
     it('handles SSR environment without IntersectionObserver', () => {
-      // Simulate SSR by removing window reference
-      const originalWindow = global.window
+      // Save and delete global IntersectionObserver
+      const originalIntersectionObserver = global.IntersectionObserver
+      delete global.IntersectionObserver
       delete window.IntersectionObserver
 
       useWidgetData.mockReturnValue(mockStateWithCarousels)
@@ -602,8 +610,8 @@ describe('InstagramWidget', () => {
       // Should render without errors in SSR-like environment
       expect(screen.getByText('Instagram')).toBeInTheDocument()
 
-      // Restore
-      global.window = originalWindow
+      // Restore IntersectionObserver
+      global.IntersectionObserver = originalIntersectionObserver
     })
 
     it('clears interval when widget goes out of view', () => {

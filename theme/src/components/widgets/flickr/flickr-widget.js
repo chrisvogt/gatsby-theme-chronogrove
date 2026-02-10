@@ -82,6 +82,7 @@ export default () => {
       title={`${flickrUsername} on Flickr`}
       url={`https://www.flickr.com/photos/${flickrUsername}`}
       isLoading={isLoading}
+      widgetName='flickr'
     >
       Visit Profile
       <span className='read-more-icon'>&rarr;</span>

@@ -55,7 +55,7 @@ export default () => {
   }
 
   const callToAction = (
-    <CallToAction title='Browse all published content' to='/blog'>
+    <CallToAction title='Browse all published content' to='/blog' widgetName='posts'>
       Browse All
       <span className='read-more-icon'>&rarr;</span>
     </CallToAction>

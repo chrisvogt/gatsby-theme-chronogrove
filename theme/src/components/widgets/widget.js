@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
+import { useEffect, useRef, useState } from 'react'
 import isDarkMode from '../../helpers/isDarkMode'
+import { trackWidgetInteraction } from '../../utils/analytics'
 
 const widgetStyles = {
   mb: 4,
@@ -11,9 +13,47 @@ const widgetStyles = {
 const Widget = ({ children, hasFatalError, id, styleOverrides = {} }) => {
   const { colorMode } = useThemeUI()
   const darkMode = isDarkMode(colorMode)
+  const widgetRef = useRef(null)
+  const [hasTrackedImpression, setHasTrackedImpression] = useState(false)
+
+  // Track widget impressions when they become visible
+  useEffect(() => {
+    if (!id || hasTrackedImpression || typeof window === 'undefined' || !window.IntersectionObserver) {
+      return
+    }
+
+    // eslint-disable-next-line no-undef
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          // Track impression when widget is at least 50% visible
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            trackWidgetInteraction(id, 'impression', {
+              visibility_ratio: entry.intersectionRatio,
+              fatal_error: hasFatalError
+            })
+            setHasTrackedImpression(true)
+            // Stop observing after tracking impression once
+            observer.disconnect()
+          }
+        })
+      },
+      {
+        threshold: [0.5, 0.75, 1.0], // Track at 50%, 75%, and 100% visibility
+        rootMargin: '0px'
+      }
+    )
+
+    if (widgetRef.current) {
+      observer.observe(widgetRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [id, hasTrackedImpression, hasFatalError])
 
   return (
     <section
+      ref={widgetRef}
       sx={{
         ...widgetStyles,
         ...styleOverrides,

@@ -33,7 +33,7 @@ const SteamWidget = React.memo(() => {
   const recentlyPlayedGames = data?.collections?.recentlyPlayedGames || []
 
   const callToAction = (
-    <CallToAction title={`${profileDisplayName} on Steam`} url={profileURL} isLoading={isLoading}>
+    <CallToAction title={`${profileDisplayName} on Steam`} url={profileURL} isLoading={isLoading} widgetName='steam'>
       Visit Profile
       <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
