@@ -3,7 +3,7 @@
 exports[`PostCard does not render excerpt when explicitly null 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -56,7 +56,7 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
 exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -109,7 +109,7 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
 exports[`PostCard matches the snapshot without excerpt 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -162,7 +162,7 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
 exports[`PostCard renders SoundCloud embed when soundcloudId is provided 1`] = `
 <DocumentFragment>
   <div
-    class="css-v9vd1q"
+    class="css-19u1k6h"
   >
     <div
       class="css-11wrqrg"
@@ -226,7 +226,7 @@ exports[`PostCard renders SoundCloud embed when soundcloudId is provided 1`] = `
 exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
 <DocumentFragment>
   <div
-    class="css-v9vd1q"
+    class="css-19u1k6h"
   >
     <div
       class="css-11wrqrg"
@@ -268,16 +268,19 @@ exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
           </div>
         </div>
         <div
-          class="card-youtube css-13c5kb5"
+          class="card-youtube css-tncxj7"
         >
-          <iframe
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen=""
-            class="css-12umafp"
-            referrerpolicy="strict-origin-when-cross-origin"
-            src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
-            title="Here and Now"
-          />
+          <div
+            class="youtube-mock"
+            data-compact="true"
+            data-title="Here and Now"
+            data-url="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+          >
+            <iframe
+              src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+              title="Here and Now"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -288,7 +291,7 @@ exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
 exports[`PostCard renders YouTube embed with horizontal layout when both props are provided 1`] = `
 <DocumentFragment>
   <div
-    class="css-v9vd1q"
+    class="css-19u1k6h"
   >
     <div
       class="css-11wrqrg"
@@ -330,16 +333,19 @@ exports[`PostCard renders YouTube embed with horizontal layout when both props a
           </div>
         </div>
         <div
-          class="card-youtube css-13c5kb5"
+          class="card-youtube css-tncxj7"
         >
-          <iframe
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen=""
-            class="css-12umafp"
-            referrerpolicy="strict-origin-when-cross-origin"
-            src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
-            title="Here and Now"
-          />
+          <div
+            class="youtube-mock"
+            data-compact="true"
+            data-title="Here and Now"
+            data-url="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+          >
+            <iframe
+              src="https://www.youtube.com/embed/OMiKQ2XHXYU?rel=0&modestbranding=1"
+              title="Here and Now"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -350,7 +356,7 @@ exports[`PostCard renders YouTube embed with horizontal layout when both props a
 exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -403,7 +409,7 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
 exports[`PostCard renders banner when thumbnails array is empty 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -456,7 +462,7 @@ exports[`PostCard renders banner when thumbnails array is empty 1`] = `
 exports[`PostCard renders banner when thumbnails is null 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -509,7 +515,7 @@ exports[`PostCard renders banner when thumbnails is null 1`] = `
 exports[`PostCard renders excerpt when provided 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -567,7 +573,7 @@ exports[`PostCard renders excerpt when provided 1`] = `
 exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -620,7 +626,7 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
 exports[`PostCard renders neither banner nor thumbnails when both are missing 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -666,7 +672,7 @@ exports[`PostCard renders neither banner nor thumbnails when both are missing 1`
 exports[`PostCard renders thumbnails inside text area when horizontal mode with thumbnails 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -741,7 +747,7 @@ exports[`PostCard renders thumbnails inside text area when horizontal mode with 
 exports[`PostCard renders thumbnails instead of banner when thumbnails are provided (vertical mode) 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -823,7 +829,7 @@ exports[`PostCard renders thumbnails instead of banner when thumbnails are provi
 exports[`PostCard renders without banner when not provided 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div
@@ -869,7 +875,7 @@ exports[`PostCard renders without banner when not provided 1`] = `
 exports[`PostCard renders without category when not provided 1`] = `
 <DocumentFragment>
   <a
-    class="css-1355rc8"
+    class="css-13uc2z5"
     href="/blog/article"
   >
     <div

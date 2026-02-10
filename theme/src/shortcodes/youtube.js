@@ -1,19 +1,34 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
+import { Embed } from '@theme-ui/components'
 
-const YouTube = ({ title, url, sx = {} }) => (
-  <Themed.div sx={{ variant: 'styles.VideoWrapper', ...sx }}>
-    <iframe
-      allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;'
+const YOUTUBE_IFRAME_ALLOW =
+  'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+
+const YouTube = ({ title, url, sx = {}, compact = false }) => (
+  <Themed.div
+    sx={{
+      variant: 'styles.VideoWrapper',
+      ...(compact && { paddingTop: 0 }), // Remove legacy padding for compact/card usage
+      ...sx
+    }}
+  >
+    <Embed
+      allow={YOUTUBE_IFRAME_ALLOW}
       allowFullScreen
-      className='VideoFrame'
-      height='315'
       referrerPolicy='strict-origin-when-cross-origin'
       src={url}
+      sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        border: 0
+      }}
       title={title || 'Video on YouTube'}
-      width='560'
-    ></iframe>
+    />
   </Themed.div>
 )
 

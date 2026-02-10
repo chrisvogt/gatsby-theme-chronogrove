@@ -5,6 +5,7 @@ import { Card } from '@theme-ui/components'
 import { Link } from 'gatsby'
 import Category from '../../category'
 import ImageThumbnails from './image-thumbnails'
+import YouTube from '../../../shortcodes/youtube'
 
 /**
  * Extract YouTube video ID from embed URL
@@ -196,33 +197,24 @@ export default ({
           )}
         </div>
 
-        {/* YouTube embed - pushed to bottom with margin-top: auto */}
+        {/* YouTube embed - marginTop: auto aligns to bottom, mt: 3 adds fixed spacing */}
         {hasYouTube && (
           <div
             className='card-youtube'
             sx={{
-              position: 'relative',
-              width: '100%',
-              paddingBottom: '56.25%', // 16:9 aspect ratio
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-              marginTop: 'auto' // Push to bottom of card
+              marginTop: 'auto',
+              width: '100%'
             }}
           >
-            <iframe
-              src={buildYouTubeEmbedUrl(youtubeSrc)}
+            <YouTube
+              compact
               title={title}
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-              allowFullScreen
-              referrerPolicy='strict-origin-when-cross-origin'
+              url={buildYouTubeEmbedUrl(youtubeSrc)}
               sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                border: 'none'
+                mt: 3,
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
               }}
             />
           </div>
@@ -265,6 +257,7 @@ export default ({
       <div
         sx={{
           display: 'flex',
+          height: '100%',
           color: 'var(--theme-ui-colors-panel-text)'
         }}
       >
@@ -278,6 +271,7 @@ export default ({
     <Link
       sx={{
         display: 'flex',
+        height: '100%',
         color: 'var(--theme-ui-colors-panel-text)',
         textDecoration: 'none'
       }}

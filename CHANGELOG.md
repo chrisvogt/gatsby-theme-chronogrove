@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.72.10
+
+### ♻️ Refactor
+
+- **YouTube embeds now use Theme UI's Embed component**: Migrated all YouTube video embeds from custom iframe implementations to Theme UI's built-in `Embed` component for better consistency and maintainability
+  - **YouTube shortcode**: Refactored to use `@theme-ui/components` `Embed` wrapped in `Themed.div` with `VideoWrapper` variant; added `compact` prop to remove legacy `paddingTop: 25px` for tight layouts (card embeds)
+  - **Post cards**: Now import and use the YouTube shortcode component instead of inline Embed/iframe; wrapper div with `marginTop: 'auto'` for flex alignment; `compact` mode removes extra spacing
+  - **Music section grid**: Added `gridAutoRows: '1fr'` for equal-height cards so videos align at the bottom across cards with different headline lengths
+  - **Single source of truth**: All YouTube embeds (MDX, media template, post cards) now use the same component
+  - **Helpers preserved**: `getYouTubeVideoId()` and `buildYouTubeEmbedUrl()` utility functions remain in post-card for URL validation and query param injection
+
+### ✨ Enhancements
+
+- **Improved card spacing**: Fixed metadata row margin logic to only add `mb: 3` when excerpt is present and no media embed, improving visual balance for cards with YouTube/SoundCloud embeds
+
+### 🧪 Tests
+
+- **YouTube shortcode**: Added 3 new tests for `compact` mode, default mode, and custom `sx` styling
+- **Post card**: Added Jest mock for YouTube shortcode component to ensure existing tests work with the new import
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.10)
+- `theme/src/shortcodes/youtube.js` (uses Embed from @theme-ui/components; added compact prop)
+- `theme/src/shortcodes/youtube.spec.js` (added compact, default, and sx tests)
+- `theme/src/components/widgets/recent-posts/post-card.js` (imports YouTube shortcode; compact mode; improved spacing)
+- `theme/src/components/widgets/recent-posts/post-card.spec.js` (added YouTube mock)
+- `theme/src/components/widgets/recent-posts/recent-posts-widget.js` (gridAutoRows: '1fr' for Music grid)
+
+---
+
 ## 0.72.9
 
 ### ♻️ Refactor
