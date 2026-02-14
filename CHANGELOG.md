@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.72.12
+
+### ✨ Enhancements
+
+- **Goodreads Last Update**: Last Update card now shows the book cover when the update includes `cdnMediaURL`, using the same 3D book SVG and tilt interaction as the Recently Read grid. The card link uses `update.link` and opens in a new tab with `target="_blank"` and `rel="noopener noreferrer"`.
+
+### 🧪 Tests
+
+- **UserStatus**: Added tests for `cdnMediaURL` (imgix and non-imgix URLs, invalid URL passthrough), 3D tilt (mouse move/leave, zero-width container, ref-not-set early return), and update link attributes (`target="_blank"`, `rel="noopener noreferrer"`). Coverage: 100% lines and functions for `user-status.js`.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.12)
+- `theme/src/components/widgets/goodreads/user-status.js` (book cover + tilt, explicit update link, external link attributes)
+- `theme/src/components/widgets/goodreads/user-status.spec.js` (tests for cdnMediaURL, link, tilt, coverage)
+
+---
+
 ## 0.72.11
 
 ### 🐛 Bug Fixes
