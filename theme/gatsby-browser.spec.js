@@ -85,7 +85,10 @@ describe('gatsby-browser', () => {
     it('should scroll to top and call focus with preventScroll when prevLocation is undefined', () => {
       mockGetElementById.mockReturnValue(mockSkipContent)
 
-      onRouteUpdate({ prevLocation: undefined })
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: undefined
+      })
 
       expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
@@ -95,7 +98,10 @@ describe('gatsby-browser', () => {
     it('should scroll to top and call focus with preventScroll when skip content element exists', () => {
       mockGetElementById.mockReturnValue(mockSkipContent)
 
-      onRouteUpdate({ prevLocation: { pathname: '/previous' } })
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: { pathname: '/previous' }
+      })
 
       expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
@@ -105,7 +111,10 @@ describe('gatsby-browser', () => {
     it('should scroll to top but not call focus when skip content element does not exist', () => {
       mockGetElementById.mockReturnValue(null)
 
-      onRouteUpdate({ prevLocation: { pathname: '/previous' } })
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: { pathname: '/previous' }
+      })
 
       expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
@@ -115,11 +124,49 @@ describe('gatsby-browser', () => {
     it('should scroll to top but not call focus when getElementById returns undefined', () => {
       mockGetElementById.mockReturnValue(undefined)
 
-      onRouteUpdate({ prevLocation: { pathname: '/previous' } })
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: { pathname: '/previous' }
+      })
 
       expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).not.toHaveBeenCalled()
+    })
+
+    it('should not scroll to top when navigating to a hash on the same page', () => {
+      onRouteUpdate({
+        location: { pathname: '/', hash: '#posts' },
+        prevLocation: { pathname: '/' }
+      })
+
+      expect(mockScrollTo).not.toHaveBeenCalled()
+      expect(mockGetElementById).not.toHaveBeenCalled()
+      expect(mockFocus).not.toHaveBeenCalled()
+    })
+
+    it('should not scroll to top when changing hash on the same page', () => {
+      onRouteUpdate({
+        location: { pathname: '/', hash: '#github' },
+        prevLocation: { pathname: '/', hash: '#posts' }
+      })
+
+      expect(mockScrollTo).not.toHaveBeenCalled()
+      expect(mockGetElementById).not.toHaveBeenCalled()
+      expect(mockFocus).not.toHaveBeenCalled()
+    })
+
+    it('should scroll to top when changing pathname even with a hash', () => {
+      mockGetElementById.mockReturnValue(mockSkipContent)
+
+      onRouteUpdate({
+        location: { pathname: '/about', hash: '#section' },
+        prevLocation: { pathname: '/' }
+      })
+
+      expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
+      expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
+      expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
   })
 })
