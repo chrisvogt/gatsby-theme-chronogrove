@@ -114,6 +114,31 @@ describe('UserStatus', () => {
     expect(container).toHaveTextContent('Posted')
   })
 
+  it('renders book cover with 3D tilt when update has cdnMediaURL', () => {
+    const statusWithCover = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'https://images.imgix.net/cover.jpg'
+    }
+
+    const { container, getByTestId } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithCover} actorName='John Doe' />
+    )
+
+    expect(container).toHaveTextContent('John Doe rated The Great Gatsby 4 out of 5 stars')
+    const tiltContainer = getByTestId('user-status-book-tilt-container')
+    expect(tiltContainer).toBeInTheDocument()
+    const image = container.querySelector('[data-testid="book-preview-thumbnail"]')
+    expect(image).toHaveAttribute('xlink:href', 'https://images.imgix.net/cover.jpg?auto=compress&auto=format')
+  })
+
+  it('does not render book cover when cdnMediaURL is absent', () => {
+    const { queryByTestId } = renderWithTheme(
+      <UserStatus isLoading={false} status={mockReviewStatus} actorName='John Doe' />
+    )
+
+    expect(queryByTestId('user-status-book-tilt-container')).not.toBeInTheDocument()
+  })
+
   it('matches snapshot', () => {
     const { asFragment } = renderWithTheme(
       <UserStatus isLoading={false} status={mockReviewStatus} actorName='Snapshot User' />

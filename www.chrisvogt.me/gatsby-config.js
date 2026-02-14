@@ -52,11 +52,11 @@ module.exports = {
       },
       goodreads: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/goodreads'
+        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/goodreads?t=1771095932'
       },
       instagram: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram?t=1760771195'
+        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram'
       },
       spotify: {
         username: 'chrisvogt',
