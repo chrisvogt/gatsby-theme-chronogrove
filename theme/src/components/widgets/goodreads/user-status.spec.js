@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import UserStatus from './user-status'
@@ -137,6 +137,145 @@ describe('UserStatus', () => {
     )
 
     expect(queryByTestId('user-status-book-tilt-container')).not.toBeInTheDocument()
+  })
+
+  it('passes through non-imgix and invalid URLs in buildBookImageUrl', () => {
+    const statusWithPlainUrl = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'https://example.com/cover.jpg'
+    }
+    const { container } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithPlainUrl} actorName='John Doe' />
+    )
+    const image = container.querySelector('[data-testid="book-preview-thumbnail"]')
+    expect(image).toHaveAttribute('xlink:href', 'https://example.com/cover.jpg')
+  })
+
+  it('uses cdnMediaURL as-is when URL constructor throws', () => {
+    const statusWithInvalidUrl = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'not-a-valid-url'
+    }
+    const { container } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithInvalidUrl} actorName='John Doe' />
+    )
+    const image = container.querySelector('[data-testid="book-preview-thumbnail"]')
+    expect(image).toHaveAttribute('xlink:href', 'not-a-valid-url')
+  })
+
+  it('applies tilt on mouse move when update has cdnMediaURL', () => {
+    const statusWithCover = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'https://images.imgix.net/cover.jpg'
+    }
+    const { container, getByTestId } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithCover} actorName='John Doe' />
+    )
+    const tiltContainer = getByTestId('user-status-book-tilt-container')
+    const link = container.querySelector('a[href="https://goodreads.com/review/123"]')
+
+    // Mock getBoundingClientRect so tilt calculation runs (jsdom returns zeros)
+    tiltContainer.getBoundingClientRect = () => ({
+      left: 0,
+      width: 200,
+      top: 0,
+      right: 200,
+      bottom: 80,
+      height: 80,
+      x: 0,
+      y: 0,
+      toJSON: () => {}
+    })
+
+    fireEvent.mouseMove(link, { clientX: 200 })
+    const tiltInner = getByTestId('user-status-book-tilt-inner')
+    expect(tiltInner).toHaveStyle({ transform: 'rotateY(18deg)' })
+  })
+
+  it('resets tilt on mouse leave when update has cdnMediaURL', () => {
+    const statusWithCover = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'https://images.imgix.net/cover.jpg'
+    }
+    const { container, getByTestId } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithCover} actorName='John Doe' />
+    )
+    const tiltContainer = getByTestId('user-status-book-tilt-container')
+    const link = container.querySelector('a[href="https://goodreads.com/review/123"]')
+    tiltContainer.getBoundingClientRect = () => ({
+      left: 0,
+      width: 200,
+      top: 0,
+      right: 200,
+      bottom: 80,
+      height: 80,
+      x: 0,
+      y: 0,
+      toJSON: () => {}
+    })
+
+    fireEvent.mouseMove(link, { clientX: 200 })
+    fireEvent.mouseLeave(link)
+    const tiltInner = getByTestId('user-status-book-tilt-inner')
+    expect(tiltInner).toHaveStyle({ transform: 'rotateY(0deg)' })
+  })
+
+  it('handles mouse move when book container ref is not set (early return)', () => {
+    const statusWithCover = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'https://images.imgix.net/cover.jpg'
+    }
+    const nullRef = { current: null }
+    const useRefSpy = jest
+      .spyOn(React, 'useRef')
+      .mockImplementation(initial => (initial === null ? nullRef : { current: initial }))
+
+    const { container, getByTestId } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithCover} actorName='John Doe' />
+    )
+    const link = container.querySelector('a[href="https://goodreads.com/review/123"]')
+    fireEvent.mouseMove(link, { clientX: 100 })
+
+    const tiltInner = getByTestId('user-status-book-tilt-inner')
+    expect(tiltInner).toHaveStyle({ transform: 'rotateY(0deg)' })
+
+    useRefSpy.mockRestore()
+  })
+
+  it('does not apply tilt when container has zero width (branch coverage)', () => {
+    const statusWithCover = {
+      ...mockReviewStatus,
+      cdnMediaURL: 'https://images.imgix.net/cover.jpg'
+    }
+    const { container, getByTestId } = renderWithTheme(
+      <UserStatus isLoading={false} status={statusWithCover} actorName='John Doe' />
+    )
+    const tiltContainer = getByTestId('user-status-book-tilt-container')
+    const link = container.querySelector('a[href="https://goodreads.com/review/123"]')
+    tiltContainer.getBoundingClientRect = () => ({
+      left: 0,
+      width: 0,
+      top: 0,
+      right: 0,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {}
+    })
+
+    fireEvent.mouseMove(link, { clientX: 100 })
+    const tiltInner = getByTestId('user-status-book-tilt-inner')
+    expect(tiltInner).toHaveStyle({ transform: 'rotateY(0deg)' })
+  })
+
+  it('renders update link with target _blank and noopener noreferrer', () => {
+    const { container } = renderWithTheme(
+      <UserStatus isLoading={false} status={mockReviewStatus} actorName='John Doe' />
+    )
+    const link = container.querySelector('a[href="https://goodreads.com/review/123"]')
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
   it('matches snapshot', () => {
