@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.72.11
+
+### 🐛 Bug Fixes
+
+- **Home navigation widget scrolls to correct section on first click**: Fixed issue where clicking navigation items (Latest Posts, GitHub, etc.) would jump to the top of the page on first click, requiring a second click to navigate to the target section
+  - **Root cause**: The `onRouteUpdate` function in `gatsby-browser.js` was calling `window.scrollTo(0, 0)` on every route update, including hash changes on the same page
+  - **Fix**: Added logic to detect hash navigation on the same page and skip the scroll-to-top behavior, allowing the browser's native anchor link handling to work correctly
+  - **Preserved behavior**: Page navigation (pathname changes) still scrolls to top and focuses main content for accessibility
+
+### 🧪 Tests
+
+- **gatsby-browser**: Added comprehensive test coverage for hash navigation scenarios, including same-page hash changes and cross-page navigation with hashes
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.11)
+- `theme/gatsby-browser.js` (added hash navigation detection)
+- `theme/gatsby-browser.spec.js` (added hash navigation test cases)
+
+---
+
 ## 0.72.10
 
 ### ♻️ Refactor
