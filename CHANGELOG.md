@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.13
+
+### 📦 Dependencies
+
+- **Gatsby**: Removed the local Yarn patch for `gatsby@5.16.0`. The theme now depends on upstream `^5.16.0`; the issue that required the patch has been fixed upstream, so consumers get the unpatched Gatsby version.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.13, gatsby dependency)
+- `www.chrisvogt.me/package.json` (gatsby dependency)
+- `www.chronogrove.com/package.json` (gatsby dependency)
+
+---
+
 ## 0.72.12
 
 ### ✨ Enhancements
