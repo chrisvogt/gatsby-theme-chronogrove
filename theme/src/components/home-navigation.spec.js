@@ -3,7 +3,7 @@ import { render, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import { TestProvider } from '../testUtils'
-import HomeNavigation from './home-navigation'
+import HomeNavigation, { sideShadowGradientFromTheme } from './home-navigation'
 import useNavigationData from '../hooks/use-navigation-data'
 
 jest.mock('../hooks/use-navigation-data')
@@ -74,6 +74,11 @@ describe('HomeNavigation', () => {
       </TestProvider>
     )
     expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('accepts undefined props (default parameters)', () => {
+    const { container } = render(<TestProvider>{React.createElement(HomeNavigation, undefined)}</TestProvider>)
+    expect(container.querySelector('nav')).toBeInTheDocument()
   })
 
   it('handles navigation data with empty home items', () => {
@@ -555,10 +560,7 @@ describe('HomeNavigation', () => {
     })
 
     it('handles server-side rendering when document is not available', () => {
-      // Store original document
       const originalDocument = global.document
-
-      // Temporarily remove document
       delete global.document
 
       const { asFragment } = render(
@@ -569,8 +571,16 @@ describe('HomeNavigation', () => {
 
       expect(asFragment()).toMatchSnapshot()
 
-      // Restore document
       global.document = originalDocument
+    })
+
+    it('does not add scroll listener when scrollSyncDisabled is true', () => {
+      render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      expect(mockAddEventListener).not.toHaveBeenCalled()
     })
 
     it('handles navigation items with missing path', () => {
@@ -613,6 +623,74 @@ describe('HomeNavigation', () => {
         </TestProvider>
       )
       expect(asFragment()).toMatchSnapshot()
+    })
+  })
+
+  describe('sideShadowGradientFromTheme', () => {
+    it('returns fallback gradient when theme has no gray or textMuted', () => {
+      const result = sideShadowGradientFromTheme({}, 'default')
+      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
+    })
+
+    it('returns fallback gradient when theme.colors is empty', () => {
+      const result = sideShadowGradientFromTheme({ colors: {} }, 'dark')
+      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
+    })
+
+    it('returns light-mode gradient using gray[5] when theme provides it', () => {
+      const theme = { colors: { gray: { 5: '#6b7280' }, textMuted: '#333' } }
+      const result = sideShadowGradientFromTheme(theme, 'default')
+      expect(result).toContain('color-mix(in srgb, #6b7280 50%, transparent)')
+      expect(result).toContain('26%')
+      expect(result).toContain('8%')
+    })
+
+    it('returns dark-mode gradient using gray[7] when theme provides it', () => {
+      const theme = { colors: { gray: { 7: '#374151' }, textMuted: '#d8d8d8' } }
+      const result = sideShadowGradientFromTheme(theme, 'dark')
+      expect(result).toContain('color-mix(in srgb, #374151 58%, transparent)')
+      expect(result).toContain('32%')
+      expect(result).toContain('10%')
+    })
+
+    it('falls back to textMuted when gray index is missing', () => {
+      const theme = { colors: { textMuted: '#9ca3af' } }
+      const result = sideShadowGradientFromTheme(theme, 'default')
+      expect(result).toContain('#9ca3af')
+      expect(result).toContain('50%')
+    })
+
+    it('returns fallback when theme is null', () => {
+      const result = sideShadowGradientFromTheme(null, 'default')
+      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
+    })
+
+    it('returns fallback when theme is undefined', () => {
+      const result = sideShadowGradientFromTheme(undefined, 'dark')
+      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
+    })
+  })
+
+  describe('Dark mode', () => {
+    it('renders with dark panel when theme initial color mode is dark', () => {
+      const theme = require('../gatsby-plugin-theme-ui/theme').default
+      const darkTheme = {
+        ...theme,
+        config: {
+          ...theme.config,
+          initialColorModeName: 'dark',
+          useColorSchemeMediaQuery: false
+        }
+      }
+      const { ThemeUIProvider } = require('theme-ui')
+      const { container } = render(
+        <ThemeUIProvider theme={darkTheme}>
+          <HomeNavigation scrollSyncDisabled />
+        </ThemeUIProvider>
+      )
+      const nav = container.querySelector('nav')
+      expect(nav).toBeInTheDocument()
+      expect(nav.querySelectorAll('a').length).toBeGreaterThan(0)
     })
   })
 })

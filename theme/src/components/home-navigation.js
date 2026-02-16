@@ -90,8 +90,11 @@ const sideShadowGradientFromTheme = (theme, colorMode) => {
  * Sidebar navigation for the home page: on-page links (Home, Latest Posts) plus
  * configurable items from site metadata. Renders in a retro 3D panel (resting vs
  * hover/focus-within), with scroll-based active section and full keyboard support.
+ *
+ * @param {Object} props
+ * @param {boolean} [props.scrollSyncDisabled] - If true, scroll-based active section is disabled (e.g. SSR). Used internally for testing.
  */
-const HomeNavigation = () => {
+const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   const [activeSection, setActiveSection] = useState('home')
   const [colorMode] = useColorMode()
   const colors = retroPanelThemes[colorMode] || retroPanelThemes.default
@@ -134,7 +137,7 @@ const HomeNavigation = () => {
   )
 
   useEffect(() => {
-    if (!document) {
+    if (scrollSyncDisabled || typeof document === 'undefined') {
       return
     }
     const handleScroll = () => {
@@ -152,7 +155,7 @@ const HomeNavigation = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [links])
+  }, [links, scrollSyncDisabled])
 
   return (
     <Fragment>
@@ -401,4 +404,5 @@ const HomeNavigation = () => {
   )
 }
 
+export { sideShadowGradientFromTheme }
 export default HomeNavigation

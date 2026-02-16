@@ -28,12 +28,8 @@ const emotionInsertBeforePatch = `
 })();
 `
 
-export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
+export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
   setHtmlAttributes({ lang: 'en' })
-
-  setHeadComponents([
-    <script key='emotion-insertbefore-patch' dangerouslySetInnerHTML={{ __html: emotionInsertBeforePatch }} />
-  ])
 
   const colorModeScript = `
     (function() {
@@ -42,6 +38,7 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
         if (!mode) {
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
+          localStorage.setItem('theme-ui-color-mode', mode);
         }
         document.documentElement.setAttribute('data-theme-ui-color-mode', mode);
       } catch (e) {}
@@ -55,16 +52,32 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
         if (!mode) {
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
+          localStorage.setItem('theme-ui-color-mode', mode);
         }
-        // Set HTML background color to match theme to prevent light background showing through semi-transparent animation
         var bgColor = mode === 'dark' ? '#14141F' : '#fdf8f5';
         document.documentElement.style.backgroundColor = bgColor;
       } catch (e) {}
     })();
   `
 
-  setPreBodyComponents([
+  setHeadComponents([
     <script key='theme-ui-no-flash' dangerouslySetInnerHTML={{ __html: colorModeScript }} />,
-    <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />
+    <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />,
+    <script key='emotion-insertbefore-patch' dangerouslySetInnerHTML={{ __html: emotionInsertBeforePatch }} />
   ])
+}
+
+const COLOR_MODE_HEAD_KEYS = ['theme-ui-no-flash', 'html-bg-color']
+
+export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+  const headComponents = getHeadComponents()
+  const sorted = [...headComponents].sort((a, b) => {
+    const aKey = a?.key ?? ''
+    const bKey = b?.key ?? ''
+    const aFirst = COLOR_MODE_HEAD_KEYS.includes(aKey) ? -1 : 0
+    const bFirst = COLOR_MODE_HEAD_KEYS.includes(bKey) ? -1 : 0
+    if (aFirst !== bFirst) return aFirst - bFirst
+    return 0
+  })
+  replaceHeadComponents(sorted)
 }
