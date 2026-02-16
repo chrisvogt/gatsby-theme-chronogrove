@@ -23,7 +23,7 @@ A modern, feature-rich Gatsby theme for personal websites and blogs with social 
 ## 📋 Prerequisites
 
 - **Node.js**: >= 24.0.0
-- **pnpm**: >= 9.0.0
+- **pnpm**: >= 10.0.0
 - **Git**: For version control
 
 > **Migrating from Yarn?** Remove `node_modules` and `yarn.lock`, then run `pnpm install`. The repo uses pnpm workspaces and Turborepo; all `yarn` commands are now `pnpm` (e.g. `pnpm develop`, `pnpm test`).

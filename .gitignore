@@ -6,6 +6,7 @@ coverage
 launch.json
 node_modules
 public
+.turbo
 yarn-error.log
 www.chrisvogt.me/certs/*
 !www.chrisvogt.me/certs/empty

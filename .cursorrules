@@ -21,14 +21,14 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 - **Theme UI**: Design system and styling (CSS-in-JS)
 - **Redux Toolkit**: State management (v2.x)
 - **Jest 30.x**: Testing framework with comprehensive setup
-- **pnpm 9.x**: Monorepo management with workspaces (v9.15.0)
+- **pnpm 10.x**: Monorepo management with workspaces (v10.15.0)
 - **Turborepo**: Build orchestration and caching
 - **MDX 3.x**: Content authoring with React components
 - **FontAwesome 7.x**: Icon library
 
 ## Development Setup
 - **Node.js**: 24 (see `.nvmrc` and `engines` in theme/package.json)
-- **pnpm**: 9.15.0 (see `packageManager` in root package.json)
+- **pnpm**: 10.15.0 (see `packageManager` in root package.json)
 - **HTTPS**: Local development requires HTTPS (see `develop:https` script)
 - **Workspace Commands**: Use `pnpm --filter [package] [command]` for package-specific operations
 

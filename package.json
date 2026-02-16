@@ -32,7 +32,7 @@
     "only-allow": "^1.1.1",
     "prettier": "^3.8.1",
     "pretty-quick": "^4.2.2",
-    "turbo": "^2.3.3"
+    "turbo": "^2.8.9"
   },
   "dependencies": {
     "boxen": "^8.0.1",
@@ -42,7 +42,13 @@
   "pnpm": {
     "overrides": {
       "lodash": "^4.17.23"
-    }
+    },
+    "publicHoistPattern": [
+      "*"
+    ],
+    "onlyBuiltDependencies": [
+      "gatsby"
+    ]
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@10.15.0"
 }

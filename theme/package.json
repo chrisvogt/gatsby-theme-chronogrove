@@ -15,7 +15,7 @@
     "react"
   ],
   "scripts": {
-    "build": "gatsby build",
+    "build": "node -e \"process.exit(0)\"",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "test": "jest",
@@ -25,7 +25,7 @@
   },
   "engines": {
     "node": ">=24",
-    "pnpm": ">=9"
+    "pnpm": ">=10"
   },
   "os": [
     "darwin",

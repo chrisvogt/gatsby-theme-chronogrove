@@ -69,7 +69,7 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(prettier@3.8.1)
       turbo:
-        specifier: ^2.3.3
+        specifier: ^2.8.9
         version: 2.8.9
 
   theme:
@@ -320,19 +320,19 @@ importers:
         version: 7.9.0
       gatsby:
         specifier: ^5.16.1
-        version: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+        version: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       gatsby-plugin-google-analytics:
         specifier: ^5.16.0
-        version: 5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       gatsby-plugin-newrelic:
         specifier: ^2.9.0
-        version: 2.9.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 2.9.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       gatsby-plugin-robots-txt:
         specifier: ^1.8.0
-        version: 1.8.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))
+        version: 1.8.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))
       gatsby-plugin-sitemap:
         specifier: ^6.16.0
-        version: 6.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       gatsby-theme-chronogrove:
         specifier: workspace:*
         version: link:../theme
@@ -360,13 +360,22 @@ importers:
     devDependencies:
       gatsby-plugin-webpack-bundle-analyser-v2:
         specifier: ^1.1.32
-        version: 1.1.32(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))
+        version: 1.1.32(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))
 
   www.chronogrove.com:
     dependencies:
+      '@emotion/react':
+        specifier: ^11.14.0
+        version: 11.14.0(@types/react@19.2.14)(react@19.2.4)
+      '@theme-ui/components':
+        specifier: ^0.17.4
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@theme-ui/theme-provider@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(react@19.2.4))(react@19.2.4)
+      '@theme-ui/mdx':
+        specifier: ^0.17.4
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/mdx@2.0.13)(react@19.2.4)
       gatsby:
         specifier: ^5.16.1
-        version: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+        version: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       gatsby-theme-chronogrove:
         specifier: workspace:*
         version: link:../theme
@@ -376,6 +385,9 @@ importers:
       react-dom:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
+      theme-ui:
+        specifier: ^0.17.4
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(react@19.2.4)
     devDependencies:
       '@babel/core':
         specifier: ^7.28.6
@@ -14905,7 +14917,7 @@ snapshots:
   camel-case@4.1.2:
     dependencies:
       pascal-case: 3.1.2
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   camelcase-keys@6.2.2:
     dependencies:
@@ -14931,7 +14943,7 @@ snapshots:
   capital-case@1.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
       upper-case-first: 2.0.2
 
   ccount@1.1.0: {}
@@ -15203,7 +15215,7 @@ snapshots:
   constant-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
       upper-case: 2.0.2
 
   content-disposition@0.5.4:
@@ -15740,7 +15752,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   dot-prop@5.3.0:
     dependencies:
@@ -16897,10 +16909,10 @@ snapshots:
       - graphql
       - react-native-b4a
 
-  gatsby-plugin-google-analytics@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  gatsby-plugin-google-analytics@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@babel/runtime': 7.28.6
-      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       minimatch: 3.1.2
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
@@ -16953,10 +16965,10 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  gatsby-plugin-newrelic@2.9.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  gatsby-plugin-newrelic@2.9.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@babel/runtime': 7.28.6
-      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
@@ -17002,10 +17014,10 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  gatsby-plugin-robots-txt@1.8.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)):
+  gatsby-plugin-robots-txt@1.8.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)):
     dependencies:
       '@babel/runtime': 7.28.6
-      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       generate-robotstxt: 8.0.3
 
   gatsby-plugin-sharp@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(graphql@16.12.0):
@@ -17030,11 +17042,11 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  gatsby-plugin-sitemap@6.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  gatsby-plugin-sitemap@6.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@babel/runtime': 7.28.6
       common-tags: 1.8.2
-      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       minimatch: 3.1.2
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
@@ -17112,10 +17124,10 @@ snapshots:
       - bare-buffer
       - react-native-b4a
 
-  gatsby-plugin-webpack-bundle-analyser-v2@1.1.32(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)):
+  gatsby-plugin-webpack-bundle-analyser-v2@1.1.32(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)):
     dependencies:
       '@babel/runtime': 7.28.6
-      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
+      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       webpack-bundle-analyzer: 4.10.2
     transitivePeerDependencies:
       - bufferutil
@@ -18095,7 +18107,7 @@ snapshots:
   header-case@2.0.4:
     dependencies:
       capital-case: 1.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   hermes-estree@0.25.1: {}
 
@@ -20243,7 +20255,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   node-abi@3.87.0:
     dependencies:
@@ -20464,7 +20476,7 @@ snapshots:
   param-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   parent-module@1.0.1:
     dependencies:
@@ -20535,12 +20547,12 @@ snapshots:
   pascal-case@3.1.2:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   path-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   path-exists@3.0.0: {}
 
@@ -21569,7 +21581,7 @@ snapshots:
   sentence-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
       upper-case-first: 2.0.2
 
   serialize-javascript@5.0.1:
@@ -21725,7 +21737,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.8.1
 
   socket.io-adapter@2.5.6:
     dependencies:

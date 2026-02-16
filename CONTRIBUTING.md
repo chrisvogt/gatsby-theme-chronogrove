@@ -24,7 +24,7 @@ We welcome contributions of all kinds:
 ### Prerequisites
 
 - Node.js >= 20.0.0
-- pnpm >= 9.0.0
+- pnpm >= 10.0.0
 - Git
 
 ### Development Setup
