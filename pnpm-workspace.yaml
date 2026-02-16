@@ -2,3 +2,20 @@ packages:
   - 'theme'
   - 'www.chrisvogt.me'
   - 'www.chronogrove.com'
+
+# Shared dependency versions for the two site packages only. Reference in package.json with "catalog:".
+# Keep these in sync with the theme's package.json versions when you bump deps in the theme.
+catalog:
+  '@emotion/react': ^11.14.0
+  '@mdx-js/react': ^3.1.1
+  '@theme-ui/components': ^0.17.4
+  '@theme-ui/mdx': ^0.17.4
+  boxen: ^8.0.1
+  gatsby: ^5.16.1
+  lightgallery: ^2.9.0
+  prettier: 3.8.1
+  react: ^19.2.4
+  react-dom: ^19.2.4
+  react-intersection-observer: ^10.0.2
+  react-photo-gallery: ^8.0.0
+  theme-ui: ^0.17.4
