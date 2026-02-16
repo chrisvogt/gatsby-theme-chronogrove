@@ -12,7 +12,7 @@ build/
 
 # Dependencies
 node_modules/
-.yarn/
+.turbo/
 
 # Environment files (security)
 .env*
@@ -29,8 +29,6 @@ static/admin/
 # Logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Runtime data
 pids
@@ -65,9 +63,6 @@ jspm_packages/
 
 # Output of 'npm pack'
 *.tgz
-
-# Yarn Integrity file
-.yarn-integrity
 
 # parcel-bundler cache (https://parceljs.org/)
 .parcel-cache

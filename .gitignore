@@ -10,18 +10,9 @@ public
 .turbo
 **/.turbo
 
-yarn-error.log
 www.chrisvogt.me/certs/*
 !www.chrisvogt.me/certs/empty
 *.pem
 .env*
 !.env.template
-
-# Yarn v4
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 .pnp.*

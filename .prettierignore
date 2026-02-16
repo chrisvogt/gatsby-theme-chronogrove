@@ -10,4 +10,3 @@ public
 # Lockfiles are generated; do not format
 pnpm-lock.yaml
 package-lock.json
-yarn.lock
