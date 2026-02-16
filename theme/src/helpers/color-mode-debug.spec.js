@@ -1,4 +1,10 @@
-import { isColorModeDebugEnabled, logColorModeState, logColorModeDebugBanner } from './color-mode-debug'
+import {
+  isColorModeDebugEnabled,
+  logColorModeState,
+  logColorModeDebugBanner,
+  logWhereTextVarIsSet,
+  logColorModeMismatch
+} from './color-mode-debug'
 
 describe('color-mode-debug', () => {
   beforeEach(() => {
@@ -71,6 +77,21 @@ describe('color-mode-debug', () => {
       expect(console.groupCollapsed).toHaveBeenCalled()
       expect(console.log).toHaveBeenCalled()
       expect(console.groupEnd).toHaveBeenCalled()
+    })
+  })
+
+  describe('logWhereTextVarIsSet', () => {
+    it('does not throw when debug is disabled', () => {
+      expect(() => logWhereTextVarIsSet()).not.toThrow()
+    })
+  })
+
+  describe('logColorModeMismatch', () => {
+    it('does not log when debug is disabled', () => {
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
+      logColorModeMismatch('test', 'default', '#fff')
+      expect(console.warn).not.toHaveBeenCalled()
+      console.warn.mockRestore()
     })
   })
 })

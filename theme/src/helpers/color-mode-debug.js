@@ -68,3 +68,46 @@ export function logColorModeState(colorMode, theme, source = '') {
     console.warn('[chronogrove color-mode] debug log failed', e)
   }
 }
+
+/**
+ * Log where --theme-ui-colors-text is coming from (documentElement vs body vs first child).
+ * Helps determine if Theme UI sets vars on a wrapper and our fallback targets the wrong element.
+ */
+export function logWhereTextVarIsSet() {
+  if (!isColorModeDebugEnabled() || typeof document === 'undefined') return
+  try {
+    const getText = el => {
+      if (!el || typeof window.getComputedStyle !== 'function') return null
+      return window.getComputedStyle(el).getPropertyValue('--theme-ui-colors-text')?.trim() || null
+    }
+    const html = getText(document.documentElement)
+    const body = getText(document.body)
+    const first = document.body?.firstElementChild ? getText(document.body.firstElementChild) : null
+    console.log(
+      '[chronogrove color-mode] --theme-ui-colors-text: documentElement=%s body=%s firstChild=%s',
+      html ?? '(unset)',
+      body ?? '(unset)',
+      first ?? '(unset)'
+    )
+  } catch (e) {
+    console.warn('[chronogrove color-mode] logWhereTextVarIsSet failed', e)
+  }
+}
+
+/**
+ * Log when we detect a mismatch and are applying the fallback (so we can see it in console when debug is on).
+ */
+export function logColorModeMismatch(reason, colorMode, computedTextValue) {
+  if (!isColorModeDebugEnabled()) return
+  try {
+    console.warn(
+      '[chronogrove color-mode] MISMATCH:',
+      reason,
+      '| colorMode=%s | computed --theme-ui-colors-text=%s',
+      colorMode,
+      computedTextValue ?? '(unset)'
+    )
+  } catch {
+    // ignore
+  }
+}
