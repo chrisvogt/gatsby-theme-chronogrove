@@ -47,7 +47,8 @@
       "*"
     ],
     "onlyBuiltDependencies": [
-      "gatsby"
+      "gatsby",
+      "sharp"
     ]
   },
   "packageManager": "pnpm@10.15.0",
