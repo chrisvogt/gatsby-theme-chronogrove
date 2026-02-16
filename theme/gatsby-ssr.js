@@ -60,9 +60,18 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
     })();
   `
 
+  // Force correct text vars when *the root* has data-theme-ui-color-mode so we win over Theme UI.
+  // Use :root[...] only so a child with a different attribute (e.g. Theme UI's wrapper with "default")
+  // doesn't get our light rule and force #111 on the main content when we intend dark.
+  const colorModeFallbackCSS = `
+:root[data-theme-ui-color-mode="default"], :root[data-theme-ui-color-mode="default"] * { --theme-ui-colors-text: #111 !important; --theme-ui-colors-text-muted: #333 !important; }
+:root[data-theme-ui-color-mode="dark"], :root[data-theme-ui-color-mode="dark"] * { --theme-ui-colors-text: #fff !important; --theme-ui-colors-text-muted: #d8d8d8 !important; }
+  `.trim()
+
   setHeadComponents([
     <script key='theme-ui-no-flash' dangerouslySetInnerHTML={{ __html: colorModeScript }} />,
     <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />,
+    <style key='chronogrove-color-mode-fallback' dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />,
     <script key='emotion-insertbefore-patch' dangerouslySetInnerHTML={{ __html: emotionInsertBeforePatch }} />
   ])
 }

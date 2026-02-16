@@ -11,9 +11,7 @@ jest.mock('./audio-player', () => jest.fn(() => <div data-testid='mock-audio-pla
 jest.mock('../helpers/color-mode-debug', () => ({
   logColorModeState: jest.fn(),
   logColorModeDebugBanner: jest.fn(),
-  isColorModeDebugEnabled: jest.fn(() => false),
-  logWhereTextVarIsSet: jest.fn(),
-  logColorModeMismatch: jest.fn()
+  isColorModeDebugEnabled: jest.fn(() => false)
 }))
 
 // Mock theme-ui hooks with mutable return values

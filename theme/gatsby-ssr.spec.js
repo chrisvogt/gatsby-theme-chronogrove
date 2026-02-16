@@ -18,7 +18,7 @@ describe('gatsby-ssr', () => {
 
     expect(setHeadComponents).toHaveBeenCalledTimes(1)
     const headComponents = setHeadComponents.mock.calls[0][0]
-    expect(headComponents).toHaveLength(3)
+    expect(headComponents).toHaveLength(4)
 
     const { container: colorModeScriptContainer } = render(headComponents[0])
     const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
@@ -37,7 +37,15 @@ describe('gatsby-ssr', () => {
     expect(htmlBgScriptTag).toHaveTextContent(/#14141F/)
     expect(htmlBgScriptTag).toHaveTextContent(/#fdf8f5/)
 
-    const { container: patchContainer } = render(headComponents[2])
+    const { container: fallbackStyleContainer } = render(headComponents[2])
+    const fallbackStyle = fallbackStyleContainer.querySelector('style')
+    expect(fallbackStyle).toBeInTheDocument()
+    expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="default"\]/)
+    expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #111 !important/)
+    expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="dark"\]/)
+    expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #fff !important/)
+
+    const { container: patchContainer } = render(headComponents[3])
     const patchScript = patchContainer.querySelector('script')
     expect(patchScript).toBeInTheDocument()
     expect(patchScript).toHaveTextContent(/head\.insertBefore/)
