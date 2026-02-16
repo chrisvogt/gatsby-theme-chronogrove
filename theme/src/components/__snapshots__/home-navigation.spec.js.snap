@@ -36,7 +36,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -61,7 +61,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -132,7 +132,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -157,7 +157,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -182,7 +182,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
           >
             Test
           </a>
@@ -233,7 +233,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -258,7 +258,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -283,7 +283,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/test"
           />
         </nav>
@@ -333,7 +333,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -358,7 +358,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -383,13 +383,13 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/about"
           >
             About
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/blog"
           >
             Blog
@@ -441,7 +441,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -466,7 +466,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -537,7 +537,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -562,7 +562,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -633,7 +633,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -658,7 +658,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -729,7 +729,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -754,7 +754,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -779,7 +779,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/complex-slug"
           >
             Complex Slug
@@ -831,7 +831,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -856,7 +856,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -881,7 +881,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/discogs"
           >
             <span
@@ -952,7 +952,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -977,7 +977,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -1002,7 +1002,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/test"
           >
             Test
@@ -1054,7 +1054,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
           role="navigation"
         >
           <a
-            class="active css-6vxo01"
+            class="active css-15vm6gr"
             href="#top"
           >
             <span
@@ -1079,7 +1079,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
             Home
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="#posts"
           >
             <span
@@ -1104,13 +1104,13 @@ exports[`HomeNavigation matches the snapshot 1`] = `
             Latest Posts
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/about"
           >
             About
           </a>
           <a
-            class="css-6vxo01"
+            class="css-15vm6gr"
             href="/blog"
           >
             Blog

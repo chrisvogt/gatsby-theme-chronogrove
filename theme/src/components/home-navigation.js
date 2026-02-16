@@ -3,7 +3,7 @@ import { jsx, useColorMode } from 'theme-ui'
 import { Fragment } from 'react'
 import { Link } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
 import {
   faHome,
@@ -86,8 +86,12 @@ const sideShadowGradientFromTheme = (theme, colorMode) => {
   return `linear-gradient(to right, color-mix(in srgb, ${gray} ${pctStart}%, transparent) 0%, color-mix(in srgb, ${gray} ${pctMid}%, transparent) 45%, color-mix(in srgb, ${gray} ${pctEnd}%, transparent) 85%, transparent 100%)`
 }
 
+/**
+ * Sidebar navigation for the home page: on-page links (Home, Latest Posts) plus
+ * configurable items from site metadata. Renders in a retro 3D panel (resting vs
+ * hover/focus-within), with scroll-based active section and full keyboard support.
+ */
 const HomeNavigation = () => {
-  const navItemsRef = useRef()
   const [activeSection, setActiveSection] = useState('home')
   const [colorMode] = useColorMode()
   const colors = retroPanelThemes[colorMode] || retroPanelThemes.default
@@ -95,42 +99,39 @@ const HomeNavigation = () => {
   const navigation = useNavigationData()
   const homeItems = navigation?.header?.home || []
 
-  const links = [
-    {
-      href: '#top',
-      icon: {
-        name: 'home',
-        reactIcon: 'faHome'
+  const links = useMemo(
+    () => [
+      {
+        href: '#top',
+        icon: { name: 'home', reactIcon: 'faHome' },
+        id: 'home',
+        text: 'Home'
       },
-      id: 'home',
-      text: 'Home'
-    },
-    {
-      href: '#posts',
-      icon: {
-        name: 'newspaper',
-        reactIcon: 'faNewspaper'
+      {
+        href: '#posts',
+        icon: { name: 'newspaper', reactIcon: 'faNewspaper' },
+        id: 'posts',
+        text: 'Latest Posts'
       },
-      id: 'posts',
-      text: 'Latest Posts'
-    },
-    ...homeItems.map(item => ({
-      href: item.path,
-      icon: {
-        name: item.slug,
-        reactIcon:
-          item.slug === 'discogs'
-            ? 'faRecordVinyl'
-            : item.slug === 'travel'
-              ? 'faMapMarkedAlt'
-              : item.slug === 'photography'
-                ? 'faCamera'
-                : `fa${item.slug.charAt(0).toUpperCase() + item.slug.slice(1)}`
-      },
-      id: item.slug,
-      text: item.text
-    }))
-  ]
+      ...homeItems.map(item => ({
+        href: item.path,
+        icon: {
+          name: item.slug,
+          reactIcon:
+            item.slug === 'discogs'
+              ? 'faRecordVinyl'
+              : item.slug === 'travel'
+                ? 'faMapMarkedAlt'
+                : item.slug === 'photography'
+                  ? 'faCamera'
+                  : `fa${item.slug.charAt(0).toUpperCase() + item.slug.slice(1)}`
+        },
+        id: item.slug,
+        text: item.text
+      }))
+    ],
+    [homeItems]
+  )
 
   useEffect(() => {
     if (!document) {
@@ -306,7 +307,7 @@ const HomeNavigation = () => {
               aria-hidden='true'
             />
 
-            <nav role='navigation' aria-label='On-page navigation' ref={navItemsRef}>
+            <nav role='navigation' aria-label='On-page navigation'>
               {links.map(({ href, icon, id, text }) => {
                 const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
                 return (
@@ -333,6 +334,10 @@ const HomeNavigation = () => {
                       '&:hover, &:focus': {
                         backgroundColor: colors.hoverBg,
                         outline: 'none'
+                      },
+                      '&:focus-visible': {
+                        outline: 'none',
+                        boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
                       },
                       '&.active': {
                         color: colors.active,
