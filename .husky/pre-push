@@ -1,2 +1,2 @@
-pnpm test --passWithNoTests || exit 1
+pnpm test || exit 1
 pnpm run lint || exit 1
