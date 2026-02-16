@@ -2,6 +2,7 @@
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useSelector } from 'react-redux'
 import React, { useEffect, useRef } from 'react'
+import { useLocation } from '@gatsbyjs/reach-router'
 
 import AudioPlayer from './audio-player'
 import { logColorModeState, logColorModeDebugBanner, isColorModeDebugEnabled } from '../helpers/color-mode-debug'
@@ -17,6 +18,7 @@ const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
+  const location = useLocation()
   const prevModeRef = useRef(colorMode)
   const bannerLoggedRef = useRef(false)
 
@@ -73,7 +75,8 @@ const RootWrapper = ({ children }) => {
     }
 
     return () => cancelAnimationFrame(rafId)
-  }, [colorMode, theme])
+    // Re-run when location (e.g. hash) changes so in-page nav doesn't leave background/text out of sync
+  }, [colorMode, theme, location?.pathname, location?.hash])
 
   return (
     <>
