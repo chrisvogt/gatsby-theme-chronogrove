@@ -11,8 +11,7 @@ exports[`ContributionGraph Component matches the empty state snapshot 1`] = `
       Contribution Graph
     </h3>
     <div
-      class="css-zl6176"
-      style="overflow: hidden;"
+      class="css-1359vi5"
     >
       <p
         class="css-1qwovgy"
@@ -1134,8 +1133,7 @@ exports[`ContributionGraph Component matches the loading state snapshot 1`] = `
       Contribution Graph
     </h3>
     <div
-      class="css-zl6176"
-      style="overflow: hidden;"
+      class="css-1359vi5"
     >
       <p
         class="css-1qwovgy"
@@ -2257,7 +2255,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
       Contribution Graph
     </h3>
     <div
-      class="css-zl6176"
+      class="css-1359vi5"
     >
       <p
         class="css-nfwjx8"
@@ -2299,35 +2297,35 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
               class="css-1zugrk"
             />
             <div
-              class="css-1czhpwf"
+              class="css-xn8io8"
             >
               <div
-                class="cell-hidden css-1t1y3sj"
-                title="0 contributions on Saturday, November 9, 2024"
+                class="cell-hidden css-11va98h"
+                title="No contributions on Saturday, November 9, 2024"
               />
               <div
-                class="cell-hidden css-1yxd6ga"
-                title="0 contributions on Sunday, November 3, 2024"
+                class="cell-hidden css-xouyp0"
+                title="No contributions on Sunday, November 3, 2024"
               />
               <div
-                class="cell-hidden css-gejhmy"
+                class="cell-hidden css-10yu6s"
                 title="1 contribution on Monday, November 4, 2024"
               />
               <div
-                class="cell-hidden css-kgnrat"
+                class="cell-hidden css-16j158j"
                 title="5 contributions on Tuesday, November 5, 2024"
               />
               <div
-                class="cell-hidden css-xxyli9"
-                title="0 contributions on Wednesday, November 6, 2024"
+                class="cell-hidden css-ebcvn8"
+                title="No contributions on Wednesday, November 6, 2024"
               />
               <div
-                class="cell-hidden css-1xg28zv"
-                title="0 contributions on Thursday, November 7, 2024"
+                class="cell-hidden css-5zzvf3"
+                title="No contributions on Thursday, November 7, 2024"
               />
               <div
-                class="cell-hidden css-jzgn88"
-                title="0 contributions on Friday, November 8, 2024"
+                class="cell-hidden css-5yi8tl"
+                title="No contributions on Friday, November 8, 2024"
               />
             </div>
           </div>

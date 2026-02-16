@@ -7,8 +7,9 @@ import { Link } from 'gatsby'
 /**
  * Call To Action
  *
- * Each widget contains a call to action next to its headline. Can optionally render
- * a loading indicator when `isLoading` is set.
+ * Each widget contains a call to action next to its headline. Styled as plain text
+ * on the page (color: text) for good contrast; reads as a link on hover. Can optionally
+ * render a loading indicator when `isLoading` is set.
  */
 const CallToAction = ({ children, isLoading = false, title, to, url }) => {
   const LinkComponent = to ? Link : Themed.a
@@ -18,22 +19,14 @@ const CallToAction = ({ children, isLoading = false, title, to, url }) => {
     <LinkComponent
       href={url}
       sx={{
-        variant: 'styles.a',
-        fontSize: 1,
-        fontFamily: 'heading',
-        lineHeight: '1.25', // synced with widget header
-        verticalAlign: 'bottom',
+        variant: 'links.widgetCta',
         '.read-more-icon': {
           opacity: 0,
-          transition: 'all .3s ease'
-        },
-        '&:hover, &:focus': {
-          textDecoration: 'none',
-          transform: 'translateX(150px)'
+          transition: 'all .3s ease',
+          ml: 1
         },
         '&:hover .read-more-icon, &:focus .read-more-icon': {
-          opacity: 1,
-          ml: 2
+          opacity: 1
         }
       }}
       title={title}

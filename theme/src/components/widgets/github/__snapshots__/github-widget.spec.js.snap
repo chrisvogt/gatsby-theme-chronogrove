@@ -24,10 +24,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
       />
     </div>
     <header
-      class="css-x6ikgs"
+      class="css-1ct1gk6"
     >
       <h2
-        class="css-1s4ek1q"
+        class="css-l0ulyq"
       >
         <svg
           aria-hidden="true"
@@ -45,10 +45,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
         GitHub
       </h2>
       <div
-        class="css-1rgtmy6"
+        class="css-1brhn2f"
       >
         <a
-          class="css-1u2ig8x"
+          class="css-16rlyb2"
           href="https://www.github.com/mockusername"
           title="mockusername on GitHub"
         >
@@ -1363,10 +1363,10 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
     id="github"
   >
     <header
-      class="css-x6ikgs"
+      class="css-1ct1gk6"
     >
       <h2
-        class="css-1s4ek1q"
+        class="css-l0ulyq"
       >
         <svg
           aria-hidden="true"
@@ -1384,10 +1384,28 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
         GitHub
       </h2>
       <div
-        class="css-1rgtmy6"
+        class="css-iydney"
+      >
+        <div
+          class="css-6ad07s"
+        >
+          <div
+            class="css-1giak3r"
+          >
+            100 Followers
+          </div>
+          <div
+            class="css-zcaudb"
+          >
+            50 Following
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-1brhn2f"
       >
         <a
-          class="css-1u2ig8x"
+          class="css-16rlyb2"
           href="https://www.github.com/mockusername"
           title="mockusername on GitHub"
         >
@@ -1400,20 +1418,6 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
         </a>
       </div>
     </header>
-    <div
-      class="css-1hw7zrq"
-    >
-      <div
-        class="css-1giak3r"
-      >
-        100 Followers
-      </div>
-      <div
-        class="css-zcaudb"
-      >
-        50 Following
-      </div>
-    </div>
     <div
       class="css-lnnjou"
     >
@@ -2662,10 +2666,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
     id="github"
   >
     <header
-      class="css-x6ikgs"
+      class="css-1ct1gk6"
     >
       <h2
-        class="css-1s4ek1q"
+        class="css-l0ulyq"
       >
         <svg
           aria-hidden="true"
@@ -2683,7 +2687,25 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         GitHub
       </h2>
       <div
-        class="css-1rgtmy6"
+        class="css-iydney"
+      >
+        <div
+          class="css-6ad07s"
+        >
+          <div
+            class="css-1giak3r"
+          >
+             
+          </div>
+          <div
+            class="css-zcaudb"
+          >
+             
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-1brhn2f"
       >
         <svg
           class="svg-loaders-svg css-ao632c"
@@ -2813,9 +2835,6 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         </svg>
       </div>
     </header>
-    <div
-      class="css-1hw7zrq"
-    />
     <div
       class="css-lnnjou"
     >

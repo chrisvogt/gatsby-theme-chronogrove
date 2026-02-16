@@ -2,7 +2,8 @@
 import { jsx, useThemeUI } from 'theme-ui'
 import { faRobot, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Heading, Button } from '@theme-ui/components'
+import { Heading } from '@theme-ui/components'
+import ActionButton from '../../action-button'
 import { Themed } from '@theme-ui/mdx'
 import React, { useEffect, useState, useRef } from 'react'
 
@@ -117,6 +118,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
       ref={containerRef}
       sx={{
         variant: 'cards.aiSummary',
+        mt: 4,
         mb: 4,
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -124,93 +126,102 @@ const AiSummary = React.memo(({ aiSummary }) => {
         animation: isVisible ? 'gentleFloat 8s ease-in-out infinite' : 'none'
       }}
     >
-      <div sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-        <FontAwesomeIcon
-          icon={faRobot}
-          sx={{
-            color: 'primary',
-            fontSize: [2, 3],
-            mr: 2,
-            animation: 'pulse 2s infinite, gentleGlow 4s ease-in-out infinite alternate',
-            filter: `drop-shadow(0 0 12px rgba(${primaryRgb}, 0.4))`
-          }}
-        />
-        <Heading
-          as='h3'
-          sx={{
-            fontSize: [3, 4],
-            mb: 0,
-            background: `linear-gradient(45deg, ${primary}, ${secondary})`,
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            animation: isVisible ? 'slideInFromLeft 0.8s ease-out' : 'none',
-            position: 'relative',
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: '-4px',
-              left: 0,
-              width: '0%',
-              height: '2px',
-              background: `linear-gradient(90deg, ${primary}, ${secondary})`,
-              animation: isVisible ? 'expandWidth 1.2s ease-out 0.8s forwards' : 'none'
-            }
-          }}
-        >
-          AI Summary
-        </Heading>
-      </div>
-
+      {/* Two-column layout on larger breakpoints: content left, Read More right (vertically centered) */}
       <div
         sx={{
-          mb: 3,
-          '& p': {
-            mb: 2,
-            lineHeight: 1.6
-          }
+          display: 'flex',
+          flexDirection: ['column', 'row'],
+          alignItems: ['stretch', 'center'],
+          gap: [3, 4],
+          mb: 3
         }}
       >
-        {showContent && (
-          <ProgressiveReveal delay={200} isInView={isInView}>
-            {parseSafeHtml(parsedContent.firstParagraph)}
-          </ProgressiveReveal>
-        )}
-      </div>
-
-      {/* Read More Button */}
-      {parsedContent.remainingParagraphs.length > 0 && showContent && (
-        <div
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            mb: 3,
-            opacity: showContent ? 1 : 0,
-            transform: showContent ? 'translateY(0)' : 'translateY(10px)',
-            transition: 'all 0.8s ease-out 0.8s'
-          }}
-        >
-          <Button
-            variant='readMore'
-            onClick={handleToggleExpanded}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2
-            }}
-          >
-            {isExpanded ? 'Show Less' : 'Read More'}
+        <div sx={{ flex: 1, minWidth: 0 }}>
+          <div sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
             <FontAwesomeIcon
-              icon={isExpanded ? faChevronUp : faChevronDown}
+              icon={faRobot}
               sx={{
-                fontSize: 1,
-                transition: 'transform 0.3s ease-in-out',
-                transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
+                color: 'primary',
+                fontSize: [2, 3],
+                mr: 2,
+                animation: 'pulse 2s infinite, gentleGlow 4s ease-in-out infinite alternate',
+                filter: `drop-shadow(0 0 12px rgba(${primaryRgb}, 0.4))`
               }}
             />
-          </Button>
+            <Heading
+              as='h3'
+              sx={{
+                fontSize: [3, 4],
+                mb: 0,
+                background: `linear-gradient(45deg, ${primary}, ${secondary})`,
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                animation: isVisible ? 'slideInFromLeft 0.8s ease-out' : 'none',
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: '-4px',
+                  left: 0,
+                  width: '0%',
+                  height: '2px',
+                  background: `linear-gradient(90deg, ${primary}, ${secondary})`,
+                  animation: isVisible ? 'expandWidth 1.2s ease-out 0.8s forwards' : 'none'
+                }
+              }}
+            >
+              AI Summary
+            </Heading>
+          </div>
+
+          <div
+            sx={{
+              '& p': {
+                mb: 2,
+                lineHeight: 1.6
+              }
+            }}
+          >
+            {showContent && (
+              <ProgressiveReveal delay={200} isInView={isInView}>
+                {parseSafeHtml(parsedContent.firstParagraph)}
+              </ProgressiveReveal>
+            )}
+          </div>
         </div>
-      )}
+
+        {/* Read More: right column on desktop (vertically centered), below content on mobile; matches Show More / pagination (ActionButton) */}
+        {parsedContent.remainingParagraphs.length > 0 && showContent && (
+          <div
+            sx={{
+              display: 'flex',
+              justifyContent: ['center', 'flex-end'],
+              flexShrink: 0,
+              opacity: showContent ? 1 : 0,
+              transform: showContent ? 'translateY(0)' : 'translateY(10px)',
+              transition: 'all 0.8s ease-out 0.8s'
+            }}
+          >
+            <ActionButton
+              size='large'
+              onClick={handleToggleExpanded}
+              icon={
+                <FontAwesomeIcon
+                  icon={isExpanded ? faChevronUp : faChevronDown}
+                  sx={{
+                    fontSize: 1,
+                    transition: 'transform 0.3s ease-in-out',
+                    transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
+                  }}
+                />
+              }
+            >
+              {isExpanded ? 'Show Less' : 'Show More'}
+            </ActionButton>
+          </div>
+        )}
+      </div>
 
       {/* Expanded Content */}
       {isExpanded && parsedContent.remainingParagraphs.length > 0 && (

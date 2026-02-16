@@ -7,7 +7,6 @@ import ContributionGraph from './contribution-graph'
 import LazyLoad from '../../lazy-load'
 import LastPullRequest from './last-pull-request'
 import PinnedItems from './pinned-items'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 
@@ -63,11 +62,14 @@ const GitHubWidget = () => {
 
   return (
     <Widget id='github' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faGithub}>
+      <WidgetHeader
+        aside={callToAction}
+        icon={faGithub}
+        metrics={!hasFatalError ? metrics : undefined}
+        metricsLoading={isLoading}
+      >
         GitHub
       </WidgetHeader>
-
-      {!hasFatalError && <ProfileMetricsBadge metrics={metrics} />}
 
       <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={2} />
       <LastPullRequest isLoading={isLoading} pullRequest={lastPullRequest} />

@@ -24,10 +24,10 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       />
     </div>
     <header
-      class="css-x6ikgs"
+      class="css-1ct1gk6"
     >
       <h2
-        class="css-1s4ek1q"
+        class="css-l0ulyq"
       >
         <svg
           aria-hidden="true"
@@ -45,10 +45,10 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
         Discogs
       </h2>
       <div
-        class="css-1rgtmy6"
+        class="css-1brhn2f"
       >
         <a
-          class="css-1u2ig8x"
+          class="css-16rlyb2"
           href="https://www.discogs.com"
           title="Collection on Discogs"
         >
@@ -61,9 +61,6 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
         </a>
       </div>
     </header>
-    <div
-      class="css-1hw7zrq"
-    />
     <div
       class="css-18bjwv1"
     >
@@ -101,10 +98,10 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
     id="discogs"
   >
     <header
-      class="css-x6ikgs"
+      class="css-1ct1gk6"
     >
       <h2
-        class="css-1s4ek1q"
+        class="css-l0ulyq"
       >
         <svg
           aria-hidden="true"
@@ -122,10 +119,23 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         Discogs
       </h2>
       <div
-        class="css-1rgtmy6"
+        class="css-iydney"
+      >
+        <div
+          class="css-6ad07s"
+        >
+          <div
+            class="css-1giak3r"
+          >
+            37 Vinyls Owned
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-1brhn2f"
       >
         <a
-          class="css-1u2ig8x"
+          class="css-16rlyb2"
           href="https://www.discogs.com/user/chrisvogt/collection"
           title="Collection on Discogs"
         >
@@ -138,15 +148,6 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         </a>
       </div>
     </header>
-    <div
-      class="css-1hw7zrq"
-    >
-      <div
-        class="css-1giak3r"
-      >
-        37 Vinyls Owned
-      </div>
-    </div>
     <div
       class="css-18bjwv1"
     >
@@ -265,10 +266,10 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
     id="discogs"
   >
     <header
-      class="css-x6ikgs"
+      class="css-1ct1gk6"
     >
       <h2
-        class="css-1s4ek1q"
+        class="css-l0ulyq"
       >
         <svg
           aria-hidden="true"
@@ -286,7 +287,25 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         Discogs
       </h2>
       <div
-        class="css-1rgtmy6"
+        class="css-iydney"
+      >
+        <div
+          class="css-6ad07s"
+        >
+          <div
+            class="css-1giak3r"
+          >
+             
+          </div>
+          <div
+            class="css-zcaudb"
+          >
+             
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-1brhn2f"
       >
         <svg
           class="svg-loaders-svg css-ao632c"
@@ -416,20 +435,6 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         </svg>
       </div>
     </header>
-    <div
-      class="css-1hw7zrq"
-    >
-      <div
-        class="css-1giak3r"
-      >
-         
-      </div>
-      <div
-        class="css-zcaudb"
-      >
-         
-      </div>
-    </div>
     <div
       class="css-18bjwv1"
     >

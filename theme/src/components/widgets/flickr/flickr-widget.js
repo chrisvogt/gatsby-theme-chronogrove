@@ -25,7 +25,6 @@ import useWidgetData from '../../../hooks/use-widget-data'
 
 import ActionButton from '../../action-button'
 import CallToAction from '../call-to-action'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 import { faFlickr } from '@fortawesome/free-brands-svg-icons'
@@ -92,11 +91,9 @@ export default () => {
 
   return (
     <Widget id='flickr' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faFlickr}>
+      <WidgetHeader aside={callToAction} icon={faFlickr} metrics={metrics} metricsLoading={isLoading}>
         Flickr
       </WidgetHeader>
-
-      <ProfileMetricsBadge metrics={metrics} isLoading={isLoading} />
 
       <div className='gallery'>
         <Grid
