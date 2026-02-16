@@ -14,10 +14,6 @@ jest.mock('../helpers/color-mode-debug', () => ({
   isColorModeDebugEnabled: jest.fn(() => false)
 }))
 
-jest.mock('@gatsbyjs/reach-router', () => ({
-  useLocation: () => ({ pathname: '/', hash: '' })
-}))
-
 // Mock theme-ui hooks with mutable return values
 const mockUseColorMode = jest.fn(() => ['light', jest.fn()])
 const mockUseThemeUI = jest.fn(() => ({

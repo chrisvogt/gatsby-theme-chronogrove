@@ -2,7 +2,6 @@
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useSelector } from 'react-redux'
 import React, { useEffect, useRef } from 'react'
-import { useLocation } from '@gatsbyjs/reach-router'
 
 import AudioPlayer from './audio-player'
 import { logColorModeState, logColorModeDebugBanner, isColorModeDebugEnabled } from '../helpers/color-mode-debug'
@@ -18,7 +17,6 @@ const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
-  const location = useLocation()
   const prevModeRef = useRef(colorMode)
   const bannerLoggedRef = useRef(false)
 
@@ -36,21 +34,7 @@ const RootWrapper = ({ children }) => {
     const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
     const htmlElement = document.documentElement
 
-    const apply = () => {
-      htmlElement.setAttribute('data-theme-ui-color-mode', colorMode)
-      htmlElement.style.backgroundColor = bgColorRaw
-    }
-
-    apply()
-
-    // Re-apply on next frame so we run after Theme UI's effect that updates CSS variables
-    const rafId = requestAnimationFrame(() => {
-      const nextBg =
-        theme?.rawColors?.background || theme?.colors?.background || (colorMode === 'dark' ? DARK_BG : LIGHT_BG)
-      htmlElement.setAttribute('data-theme-ui-color-mode', colorMode)
-      htmlElement.style.backgroundColor = nextBg
-
-      // Fallback: if mode and computed text color disagree, force vars (fixes "works every other reload" stuck text)
+    const runFallbackVars = () => {
       const computed = typeof window.getComputedStyle === 'function' ? window.getComputedStyle(htmlElement) : null
       const textVar = computed?.getPropertyValue('--theme-ui-colors-text')?.trim() ?? ''
       const looksLikeWhite = /^#fff(f)?$/i.test(textVar) || /rgba?\(\s*255\s*,\s*255\s*,\s*255/i.test(textVar)
@@ -62,7 +46,27 @@ const RootWrapper = ({ children }) => {
         htmlElement.style.setProperty('--theme-ui-colors-text', DARK_TEXT)
         htmlElement.style.setProperty('--theme-ui-colors-text-muted', DARK_TEXT_MUTED)
       }
-    })
+    }
+
+    const apply = () => {
+      htmlElement.setAttribute('data-theme-ui-color-mode', colorMode)
+      htmlElement.style.backgroundColor = bgColorRaw
+    }
+
+    const applyWithFallback = () => {
+      const nextBg =
+        theme?.rawColors?.background || theme?.colors?.background || (colorMode === 'dark' ? DARK_BG : LIGHT_BG)
+      htmlElement.setAttribute('data-theme-ui-color-mode', colorMode)
+      htmlElement.style.backgroundColor = nextBg
+      runFallbackVars()
+    }
+
+    apply()
+    const rafId = requestAnimationFrame(applyWithFallback)
+
+    const onNav = () => requestAnimationFrame(applyWithFallback)
+    window.addEventListener('hashchange', onNav)
+    window.addEventListener('popstate', onNav)
 
     if (isColorModeDebugEnabled()) {
       logColorModeState(colorMode, theme, 'RootWrapper')
@@ -74,9 +78,12 @@ const RootWrapper = ({ children }) => {
       prevModeRef.current = colorMode
     }
 
-    return () => cancelAnimationFrame(rafId)
-    // Re-run when location (e.g. hash) changes so in-page nav doesn't leave background/text out of sync
-  }, [colorMode, theme, location?.pathname, location?.hash])
+    return () => {
+      cancelAnimationFrame(rafId)
+      window.removeEventListener('hashchange', onNav)
+      window.removeEventListener('popstate', onNav)
+    }
+  }, [colorMode, theme])
 
   return (
     <>
