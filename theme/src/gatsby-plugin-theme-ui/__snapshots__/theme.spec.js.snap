@@ -392,7 +392,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
   },
   "config": {
     "initialColorModeName": "default",
-    "useColorSchemeMediaQuery": true,
+    "useColorSchemeMediaQuery": false,
     "useCustomProperties": true,
     "useLocalStorage": true,
   },
