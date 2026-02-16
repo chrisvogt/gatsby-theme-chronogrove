@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.72.14
+
+### ✨ Enhancements
+
+- **Home Navigation: retro 3D panel and folding shadow**
+  - Sidebar nav (2-column breakpoints) now renders inside a **retro 1960s/70s-style panel** aligned with the theme palette: primary/secondary purple (light) and primary blue (dark) with glassmorphism and backdrop blur.
+  - **Resting vs active state:** Panel is muted and shallow by default; on hover or keyboard focus (TAB) it transitions to full vibrancy, deeper shadow, and an expanded **folding shadow** on the right (top and bottom “fold out,” middle stays fixed). Exit transition is gentler (0.5s) than enter (0.3s).
+  - **3D shadow:** Curved “waist” shape built with CSS `clip-path` (polygon); dark grey gradient from theme palette (`gray[5]` / `gray[7]`, fallback `textMuted`) via `color-mix()` so it works with theme CSS variables. Shadow is flush with the panel edge and includes a soft blur.
+  - **Accessibility:** `:focus-within` on the container for keyboard users; `:focus-visible` ring on links; `prefers-reduced-motion` shows full panel with no transitions. Nav keeps `role="navigation"`, `aria-label`, and scroll-based active section.
+
+### ♻️ Refactor
+
+- **Home Navigation:** Memoized `links` (stable scroll listener), removed unused `navItemsRef`, added JSDoc. Shadow gradient uses theme palette only (no hardcoded hex).
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.14)
+- `theme/src/components/home-navigation.js` (retro panel, folding shadow, theme-driven gradient, focus-visible, useMemo, JSDoc)
+- `theme/src/components/home-navigation.spec.js` (snapshots updated)
+
+---
+
 ## 0.72.13
 
 ### 📦 Dependencies
