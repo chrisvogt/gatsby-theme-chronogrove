@@ -53,7 +53,7 @@ const AboutPage = () => {
           </Themed.p>
 
           <Themed.p>
-            Built as a monorepo with Yarn workspaces, Chronogrove separates theme code from content, making it easy to
+            Built as a monorepo with pnpm workspaces, Chronogrove separates theme code from content, making it easy to
             maintain and customize while keeping your personal data separate from the reusable theme components.
           </Themed.p>
 
