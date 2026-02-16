@@ -24,31 +24,31 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       />
     </div>
     <header
-      class="css-1ct1gk6"
+      class="css-f8y2ki"
     >
-      <h2
-        class="css-l0ulyq"
-      >
-        <svg
-          aria-hidden="true"
-          class="svg-inline--fa fa-record-vinyl css-1f4q58s"
-          data-icon="record-vinyl"
-          data-prefix="fas"
-          role="img"
-          viewBox="0 0 512 512"
-        >
-          <path
-            d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-            fill="currentColor"
-          />
-        </svg>
-        Discogs
-      </h2>
       <div
-        class="css-1brhn2f"
+        class="css-x7xacr"
       >
+        <h2
+          class="css-16f4ihe"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-record-vinyl css-1f4q58s"
+            data-icon="record-vinyl"
+            data-prefix="fas"
+            role="img"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+              fill="currentColor"
+            />
+          </svg>
+          Discogs
+        </h2>
         <a
-          class="css-16rlyb2"
+          class="css-1hh4m8m"
           href="https://www.discogs.com"
           title="Collection on Discogs"
         >
@@ -98,44 +98,31 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
     id="discogs"
   >
     <header
-      class="css-1ct1gk6"
+      class="css-zvwfan"
     >
-      <h2
-        class="css-l0ulyq"
-      >
-        <svg
-          aria-hidden="true"
-          class="svg-inline--fa fa-record-vinyl css-1f4q58s"
-          data-icon="record-vinyl"
-          data-prefix="fas"
-          role="img"
-          viewBox="0 0 512 512"
-        >
-          <path
-            d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-            fill="currentColor"
-          />
-        </svg>
-        Discogs
-      </h2>
       <div
-        class="css-iydney"
+        class="css-x7xacr"
       >
-        <div
-          class="css-6ad07s"
+        <h2
+          class="css-16f4ihe"
         >
-          <div
-            class="css-1giak3r"
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-record-vinyl css-1f4q58s"
+            data-icon="record-vinyl"
+            data-prefix="fas"
+            role="img"
+            viewBox="0 0 512 512"
           >
-            37 Vinyls Owned
-          </div>
-        </div>
-      </div>
-      <div
-        class="css-1brhn2f"
-      >
+            <path
+              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+              fill="currentColor"
+            />
+          </svg>
+          Discogs
+        </h2>
         <a
-          class="css-16rlyb2"
+          class="css-1hh4m8m"
           href="https://www.discogs.com/user/chrisvogt/collection"
           title="Collection on Discogs"
         >
@@ -146,6 +133,19 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
             →
           </span>
         </a>
+      </div>
+      <div
+        class="css-iydney"
+      >
+        <div
+          class="css-6ad07s"
+        >
+          <div
+            class="css-1njnxko"
+          >
+            37 Vinyls Owned
+          </div>
+        </div>
       </div>
     </header>
     <div
@@ -266,47 +266,29 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
     id="discogs"
   >
     <header
-      class="css-1ct1gk6"
+      class="css-zvwfan"
     >
-      <h2
-        class="css-l0ulyq"
-      >
-        <svg
-          aria-hidden="true"
-          class="svg-inline--fa fa-record-vinyl css-1f4q58s"
-          data-icon="record-vinyl"
-          data-prefix="fas"
-          role="img"
-          viewBox="0 0 512 512"
-        >
-          <path
-            d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-            fill="currentColor"
-          />
-        </svg>
-        Discogs
-      </h2>
       <div
-        class="css-iydney"
+        class="css-x7xacr"
       >
-        <div
-          class="css-6ad07s"
+        <h2
+          class="css-16f4ihe"
         >
-          <div
-            class="css-1giak3r"
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-record-vinyl css-1f4q58s"
+            data-icon="record-vinyl"
+            data-prefix="fas"
+            role="img"
+            viewBox="0 0 512 512"
           >
-             
-          </div>
-          <div
-            class="css-zcaudb"
-          >
-             
-          </div>
-        </div>
-      </div>
-      <div
-        class="css-1brhn2f"
-      >
+            <path
+              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+              fill="currentColor"
+            />
+          </svg>
+          Discogs
+        </h2>
         <svg
           class="svg-loaders-svg css-ao632c"
           fill="#1E90FF"
@@ -433,6 +415,24 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
             />
           </rect>
         </svg>
+      </div>
+      <div
+        class="css-iydney"
+      >
+        <div
+          class="css-6ad07s"
+        >
+          <div
+            class="css-1njnxko"
+          >
+             
+          </div>
+          <div
+            class="css-137c6l"
+          >
+             
+          </div>
+        </div>
       </div>
     </header>
     <div

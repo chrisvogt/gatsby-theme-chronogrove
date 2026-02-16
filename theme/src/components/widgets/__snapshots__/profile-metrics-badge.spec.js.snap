@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ProfileMetricsBadge matches the snapshot with metrics 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1hw7zrq"
+  >
+    <div
+      class="css-1njnxko"
+    >
+      10 Followers
+    </div>
+    <div
+      class="css-137c6l"
+    >
+      20 Following
+    </div>
+  </div>
+</DocumentFragment>
+`;

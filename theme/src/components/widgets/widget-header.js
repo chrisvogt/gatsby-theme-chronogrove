@@ -14,7 +14,7 @@ const baseHeaderStyles = {
   pb: 2,
   // Soft separator: visible but not harsh (gray[4] in theme scale; fallback ~12% black)
   borderBottom: '1px solid',
-  borderColor: theme => theme.colors.gray?.[4] ?? 'rgba(0,0,0,0.12)'
+  borderColor: theme => theme?.colors?.gray?.[4] ?? 'rgba(0,0,0,0.12)'
 }
 
 /**

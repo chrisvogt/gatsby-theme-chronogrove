@@ -264,16 +264,32 @@ describe('AiSummary', () => {
         jest.advanceTimersByTime(100)
       })
 
-      // Unmount triggers cleanup - the cleanup function checks containerRef.current
-      // (coverage for line 90-91: if (containerRef.current) observer.unobserve(containerRef.current))
+      // Unmount triggers cleanup - the cleanup function runs (covers return () => { ... } and unobserve branch when ref is set)
       await expect(
         act(() => {
           unmount()
         })
       ).resolves.not.toThrow()
+    })
 
-      // Note: unobserve may or may not be called depending on React's ref lifecycle
-      // The cleanup function itself runs, covering the conditional check
+    it('ProgressiveReveal becomes visible after delay when in view', async () => {
+      const aiSummary = '<p>First paragraph.</p><p>Second paragraph.</p>'
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />)
+
+      await act(async () => {
+        triggerIntersection(true)
+        jest.advanceTimersByTime(600)
+      })
+
+      expect(screen.getByText('First paragraph.')).toBeInTheDocument()
+
+      await act(async () => {
+        jest.advanceTimersByTime(200)
+      })
+
+      expect(screen.getByText('First paragraph.')).toBeInTheDocument()
+      expect(screen.getByText('Show More')).toBeInTheDocument()
     })
   })
 

@@ -3,13 +3,13 @@
 exports[`WidgetHeader matches the snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="css-1m9ypuk"
+    class="css-15sdamp"
   >
     <div
-      class="css-1fes9xt"
+      class="css-na0jhk"
     >
       <h2
-        class="css-3756x7"
+        class="css-1w2ddu7"
       >
         Neat & Interesting Widget
       </h2>

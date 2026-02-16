@@ -163,6 +163,13 @@ describe('Theme Configuration', () => {
       expect(focusBoxShadow).toBe('0 0 0 2px #422EA340')
     })
 
+    it('defines readMore button variant with theme function for border', () => {
+      expect(theme.buttons.readMore).toHaveProperty('color', 'primary')
+      expect(theme.buttons.readMore).toHaveProperty('bg', 'transparent')
+      const border = theme.buttons.readMore.border(theme)
+      expect(border).toBe(`1px solid ${theme.colors.primary}`)
+    })
+
     it('defines badge variants', () => {
       expect(theme.badges.primary).toHaveProperty('bg', 'primary')
       expect(theme.badges.outline).toHaveProperty('boxShadow', 'inset 0 0 0 1px')
