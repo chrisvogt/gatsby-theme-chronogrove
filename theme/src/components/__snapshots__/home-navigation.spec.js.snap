@@ -6,10 +6,10 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -89,7 +89,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -102,10 +102,10 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -190,7 +190,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -203,10 +203,10 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -290,7 +290,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -303,10 +303,10 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -398,7 +398,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -411,10 +411,10 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -494,7 +494,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -507,10 +507,10 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -590,7 +590,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -603,10 +603,10 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -686,7 +686,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -699,10 +699,10 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -788,7 +788,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -801,10 +801,10 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -909,7 +909,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -922,10 +922,10 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -1011,7 +1011,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
@@ -1024,10 +1024,10 @@ exports[`HomeNavigation matches the snapshot 1`] = `
     class="css-h0d98v"
   >
     <div
-      class="css-1nv7ckf"
+      class="css-3w4egu"
     >
       <div
-        class="css-1bnterq"
+        class="css-mpwvo5"
       >
         <div
           aria-hidden="true"
@@ -1119,7 +1119,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-1hwuww3"
+        class="css-ffkh8x"
       />
     </div>
   </div>
