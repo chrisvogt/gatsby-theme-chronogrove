@@ -1,22 +1,40 @@
 /**
- * Color mode debug logging. Enable by setting localStorage or window flag:
- *   localStorage.setItem('chronogrove-debug-color-mode', '1')
- *   window.__CHRONOGROVE_DEBUG_COLOR_MODE__ = true
- * Disable by removing the key or setting the flag to false.
+ * Color mode debug logging. Enable by:
+ *   - URL: add ?chronogrove-color-debug (works after load; no localStorage needed)
+ *   - localStorage: setItem('chronogrove-debug-color-mode', '1')
+ *   - window: __CHRONOGROVE_DEBUG_COLOR_MODE__ = true
  *
  * Logs color mode, theme colors, and computed CSS variables to help troubleshoot
  * stuck text (e.g. white text on light background when switching to light mode).
  */
 
 const DEBUG_KEY = 'chronogrove-debug-color-mode'
+const DEBUG_URL_PARAM = 'chronogrove-color-debug'
 
 export function isColorModeDebugEnabled() {
   if (typeof window === 'undefined') return false
   try {
     if (window.__CHRONOGROVE_DEBUG_COLOR_MODE__ === true) return true
+    const params = new URLSearchParams(window.location.search)
+    if (params.get(DEBUG_URL_PARAM) !== null) return true
     return localStorage.getItem(DEBUG_KEY) === '1' || localStorage.getItem(DEBUG_KEY) === 'true'
   } catch {
     return false
+  }
+}
+
+/** Call once on load when URL param is present so user sees debug is active. */
+export function logColorModeDebugBanner() {
+  if (typeof window === 'undefined') return
+  try {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get(DEBUG_URL_PARAM) !== null) {
+      console.log(
+        '[chronogrove] Color mode debug enabled via ?chronogrove-color-debug. Toggle theme and check console for [chronogrove color-mode] logs.'
+      )
+    }
+  } catch {
+    return void 0
   }
 }
 

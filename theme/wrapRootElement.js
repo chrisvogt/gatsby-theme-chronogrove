@@ -5,7 +5,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Themed } from '@theme-ui/mdx'
-import { ThemeUIProvider } from 'theme-ui'
+import { ThemeUIProvider, InitializeColorMode } from 'theme-ui'
 
 import Emoji from './src/shortcodes/emoji'
 import RootWrapper from './src/components/root-wrapper'
@@ -56,6 +56,7 @@ const WrapRootElement = ({ element }) => (
   <QueryClientProvider client={queryClient}>
     <ReduxProvider store={store}>
       <ThemeUIProvider theme={theme}>
+        <InitializeColorMode />
         <Global styles={theme.global} />
         <MDXProvider components={components}>
           <RootWrapper>{element}</RootWrapper>

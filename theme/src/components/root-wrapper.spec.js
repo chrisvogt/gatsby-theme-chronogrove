@@ -8,7 +8,11 @@ import RootWrapper from './root-wrapper'
 // Mock AudioPlayer component
 jest.mock('./audio-player', () => jest.fn(() => <div data-testid='mock-audio-player'>MockAudioPlayer</div>))
 
-jest.mock('../helpers/color-mode-debug', () => ({ logColorModeState: jest.fn() }))
+jest.mock('../helpers/color-mode-debug', () => ({
+  logColorModeState: jest.fn(),
+  logColorModeDebugBanner: jest.fn(),
+  isColorModeDebugEnabled: jest.fn(() => false)
+}))
 
 // Mock theme-ui hooks with mutable return values
 const mockUseColorMode = jest.fn(() => ['light', jest.fn()])

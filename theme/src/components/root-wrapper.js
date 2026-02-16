@@ -4,16 +4,28 @@ import { useSelector } from 'react-redux'
 import React, { useEffect, useRef } from 'react'
 
 import AudioPlayer from './audio-player'
-import { logColorModeState } from '../helpers/color-mode-debug'
+import { logColorModeState, logColorModeDebugBanner, isColorModeDebugEnabled } from '../helpers/color-mode-debug'
 
 const LIGHT_BG = '#fdf8f5'
 const DARK_BG = '#14141F'
+const LIGHT_TEXT = '#111'
+const LIGHT_TEXT_MUTED = '#333'
+const DARK_TEXT = '#fff'
+const DARK_TEXT_MUTED = '#d8d8d8'
 
 const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
   const prevModeRef = useRef(colorMode)
+  const bannerLoggedRef = useRef(false)
+
+  useEffect(() => {
+    if (!bannerLoggedRef.current && typeof document !== 'undefined') {
+      logColorModeDebugBanner()
+      bannerLoggedRef.current = true
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof document === 'undefined') return
@@ -30,18 +42,34 @@ const RootWrapper = ({ children }) => {
     apply()
 
     // Re-apply on next frame so we run after Theme UI's effect that updates CSS variables
-    // (avoids stuck text: white-on-white when switching dark -> light)
     const rafId = requestAnimationFrame(() => {
       const nextBg =
         theme?.rawColors?.background || theme?.colors?.background || (colorMode === 'dark' ? DARK_BG : LIGHT_BG)
       htmlElement.setAttribute('data-theme-ui-color-mode', colorMode)
       htmlElement.style.backgroundColor = nextBg
+
+      // Fallback: if mode and computed text color disagree, force vars (fixes "works every other reload" stuck text)
+      const computed = typeof window.getComputedStyle === 'function' ? window.getComputedStyle(htmlElement) : null
+      const textVar = computed?.getPropertyValue('--theme-ui-colors-text')?.trim() ?? ''
+      const looksLikeWhite = /^#fff(f)?$/i.test(textVar) || /rgba?\(\s*255\s*,\s*255\s*,\s*255/i.test(textVar)
+      const looksLikeDarkText = /^#111/i.test(textVar) || /rgb\(\s*17\s*,\s*17\s*,\s*17\s*\)/i.test(textVar)
+      if (!isDark && looksLikeWhite) {
+        htmlElement.style.setProperty('--theme-ui-colors-text', LIGHT_TEXT)
+        htmlElement.style.setProperty('--theme-ui-colors-text-muted', LIGHT_TEXT_MUTED)
+      } else if (isDark && looksLikeDarkText) {
+        htmlElement.style.setProperty('--theme-ui-colors-text', DARK_TEXT)
+        htmlElement.style.setProperty('--theme-ui-colors-text-muted', DARK_TEXT_MUTED)
+      }
     })
 
-    logColorModeState(colorMode, theme, 'RootWrapper')
-    if (prevModeRef.current !== colorMode) {
+    if (isColorModeDebugEnabled()) {
+      logColorModeState(colorMode, theme, 'RootWrapper')
+      if (prevModeRef.current !== colorMode) {
+        prevModeRef.current = colorMode
+        logColorModeState(colorMode, theme, 'RootWrapper (mode changed)')
+      }
+    } else {
       prevModeRef.current = colorMode
-      logColorModeState(colorMode, theme, 'RootWrapper (mode changed)')
     }
 
     return () => cancelAnimationFrame(rafId)

@@ -1,4 +1,4 @@
-import { isColorModeDebugEnabled, logColorModeState } from './color-mode-debug'
+import { isColorModeDebugEnabled, logColorModeState, logColorModeDebugBanner } from './color-mode-debug'
 
 describe('color-mode-debug', () => {
   beforeEach(() => {
@@ -46,6 +46,12 @@ describe('color-mode-debug', () => {
       delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
       localStorage.removeItem('chronogrove-debug-color-mode')
       expect(isColorModeDebugEnabled()).toBe(false)
+    })
+  })
+
+  describe('logColorModeDebugBanner', () => {
+    it('does not throw', () => {
+      expect(() => logColorModeDebugBanner()).not.toThrow()
     })
   })
 
