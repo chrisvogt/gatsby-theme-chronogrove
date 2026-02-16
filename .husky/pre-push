@@ -1,2 +1,3 @@
 pnpm test || exit 1
 pnpm run lint || exit 1
+pnpm run prettier || exit 1
