@@ -50,5 +50,9 @@
       "gatsby"
     ]
   },
-  "packageManager": "pnpm@10.15.0"
+  "packageManager": "pnpm@10.15.0",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md,mdx}": "prettier --write",
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
+  }
 }

@@ -1,3 +1,2 @@
-# Run tests and lint the full codebase
-yarn test --passWithNoTests || exit 1
-npx eslint . || exit 1
+pnpm test --passWithNoTests || exit 1
+pnpm run lint || exit 1
