@@ -44,7 +44,7 @@ describe('ContributionGraph Component (dark mode)', () => {
     )
 
     // Find grid cells by title; target zero-contribution cell(s)
-    const zeroCells = container.querySelectorAll('[title^="0 contributions"]')
+    const zeroCells = container.querySelectorAll('[title^="No contributions"]')
     expect(zeroCells.length).toBeGreaterThan(0)
   })
 })

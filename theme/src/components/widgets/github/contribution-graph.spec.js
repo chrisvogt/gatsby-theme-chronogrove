@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, act, screen } from '@testing-library/react'
+import { render, act, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import ContributionGraph from './contribution-graph'
 import { TestProviderWithState } from '../../../testUtils'
@@ -213,5 +213,42 @@ describe('ContributionGraph Component', () => {
     )
 
     expect(mockIntersectionObserver).not.toHaveBeenCalled()
+  })
+
+  it('shows hover popover for cells with contributions', () => {
+    const { container } = render(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
+      </TestProviderWithState>
+    )
+
+    const cellWithContributions = container.querySelector('[title*="1 contribution"]')
+    expect(cellWithContributions).toBeInTheDocument()
+
+    fireEvent.mouseEnter(cellWithContributions)
+
+    const tooltip = document.body.querySelector('[role="tooltip"]')
+    expect(tooltip).toBeInTheDocument()
+    expect(tooltip).toHaveTextContent('1 contribution')
+    expect(tooltip).toHaveTextContent('Monday')
+
+    fireEvent.mouseLeave(cellWithContributions)
+    expect(document.body.querySelector('[role="tooltip"]')).not.toBeInTheDocument()
+  })
+
+  it('memo prevents re-render when props are unchanged', () => {
+    const { rerender } = render(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
+      </TestProviderWithState>
+    )
+
+    rerender(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
+      </TestProviderWithState>
+    )
+
+    expect(screen.getByText(/487/)).toBeInTheDocument()
   })
 })

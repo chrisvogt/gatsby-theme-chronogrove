@@ -24,7 +24,6 @@ import useWidgetData from '../../../hooks/use-widget-data'
 
 import ActionButton from '../../action-button'
 import CallToAction from '../call-to-action'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 import WidgetItem from './instagram-widget-item'
@@ -353,11 +352,9 @@ export default () => {
 
   return (
     <Widget id='instagram' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faInstagram}>
+      <WidgetHeader aside={callToAction} icon={faInstagram} metrics={metrics} metricsLoading={isLoading}>
         Instagram
       </WidgetHeader>
-
-      <ProfileMetricsBadge metrics={metrics} isLoading={isLoading} />
 
       <div className='gallery' ref={widgetRef}>
         <Grid

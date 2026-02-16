@@ -8,7 +8,6 @@ import useWidgetData from '../../../hooks/use-widget-data'
 
 import AiSummary from '../steam/ai-summary'
 import CallToAction from '../call-to-action'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import RecentlyReadBooks from './recently-read-books'
 import UserStatus from './user-status'
 import Widget from '../widget'
@@ -57,17 +56,15 @@ export default () => {
 
   return (
     <Widget id='goodreads' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faGoodreads}>
+      <WidgetHeader aside={callToAction} icon={faGoodreads} metrics={metrics} metricsLoading={isLoading}>
         Goodreads
       </WidgetHeader>
-
-      <ProfileMetricsBadge isLoading={isLoading} metrics={metrics} />
-
-      {aiSummary && <AiSummary aiSummary={aiSummary} />}
 
       <RecentlyReadBooks isLoading={isLoading} books={books} />
 
       <UserStatus actorName={profileDisplayName} isLoading={isLoading} status={status} />
+
+      {aiSummary && <AiSummary aiSummary={aiSummary} />}
     </Widget>
   )
 }

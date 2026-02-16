@@ -6,7 +6,6 @@ import { Themed } from '@theme-ui/mdx'
 import React from 'react'
 
 import CallToAction from '../call-to-action'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
 import AiSummary from './ai-summary'
@@ -41,13 +40,9 @@ const SteamWidget = React.memo(() => {
 
   return (
     <Widget id='steam' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faSteam} isLoading={isLoading}>
+      <WidgetHeader aside={callToAction} icon={faSteam} metrics={metrics} metricsLoading={isLoading}>
         Steam
       </WidgetHeader>
-
-      <ProfileMetricsBadge isLoading={isLoading} metrics={metrics} />
-
-      {aiSummary && <AiSummary aiSummary={aiSummary} />}
 
       <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
@@ -84,6 +79,8 @@ const SteamWidget = React.memo(() => {
       <Themed.p sx={{ mb: 4 }}>My top 10 most played games.</Themed.p>
 
       <PlayTimeChart games={ownedGames} isLoading={isLoading} profileURL={profileURL} />
+
+      {aiSummary && <AiSummary aiSummary={aiSummary} />}
     </Widget>
   )
 })

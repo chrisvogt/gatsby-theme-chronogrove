@@ -3,7 +3,6 @@ import { jsx } from 'theme-ui'
 import { faRecordVinyl } from '@fortawesome/free-solid-svg-icons'
 
 import CallToAction from '../call-to-action'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import VinylCollection from './vinyl-collection'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
@@ -41,11 +40,9 @@ const DiscogsWidget = () => {
 
   return (
     <Widget id='discogs' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faRecordVinyl} isLoading={isLoading}>
+      <WidgetHeader aside={callToAction} icon={faRecordVinyl} metrics={metrics} metricsLoading={isLoading}>
         Discogs
       </WidgetHeader>
-
-      <ProfileMetricsBadge isLoading={isLoading} metrics={metrics} />
 
       <VinylCollection isLoading={isLoading} releases={releases} />
     </Widget>

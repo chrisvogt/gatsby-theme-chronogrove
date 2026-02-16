@@ -3,6 +3,12 @@
 exports[`Theme Configuration a snapshot of the configuration matches the snapshot 1`] = `
 {
   "badges": {
+    "metrics": {
+      "bg": "transparent",
+      "boxShadow": [Function],
+      "color": "text",
+      "fontSize": 1,
+    },
     "outline": {
       "bg": "transparent",
       "boxShadow": "inset 0 0 0 1px",
@@ -314,6 +320,23 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       },
       "textDecoration": "none",
     },
+    "presentationalCard": {
+      "WebkitBackdropFilter": "blur(10px)",
+      "backdropFilter": "blur(10px)",
+      "background": "var(--theme-ui-colors-panel-background)",
+      "border": "1px solid rgba(255, 255, 255, 0.15)",
+      "borderLeft": [Function],
+      "borderRadius": "10px",
+      "boxShadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
+      "color": "var(--theme-ui-colors-panel-text)",
+      "flexGrow": 1,
+      "fontSize": [
+        1,
+        2,
+      ],
+      "padding": 3,
+      "textDecoration": "none",
+    },
     "primary": {
       "WebkitBackdropFilter": "blur(12px) saturate(150%)",
       "backdropFilter": "blur(12px) saturate(150%)",
@@ -544,6 +567,25 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "display": "flex",
       "py": 2,
       "textDecoration": "none",
+    },
+    "widgetCta": {
+      "&:focus": {
+        "boxShadow": [Function],
+        "outline": "none",
+      },
+      "&:hover, &:focus": {
+        "color": "primary",
+        "textDecoration": "none",
+      },
+      "alignItems": "center",
+      "color": "text",
+      "display": "inline-flex",
+      "fontFamily": "heading",
+      "fontSize": 1,
+      "lineHeight": 1.25,
+      "textDecoration": "none",
+      "transform": "translateY(-1px)",
+      "transition": "color 0.2s ease",
     },
   },
   "radii": {

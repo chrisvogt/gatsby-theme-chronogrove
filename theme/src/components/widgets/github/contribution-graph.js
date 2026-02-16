@@ -3,6 +3,7 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Box, Card, Heading } from '@theme-ui/components'
 import React, { useMemo, useRef, useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import isDarkMode from '../../../helpers/isDarkMode'
 
 /**
@@ -23,6 +24,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const containerRef = useRef(null)
   const graphRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [hoveredCell, setHoveredCell] = useState(null)
 
   // Intersection Observer to trigger animation when component comes into view
   useEffect(() => {
@@ -177,7 +179,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
         >
           Contribution Graph
         </Heading>
-        <Card variant='actionCard' style={{ overflow: 'hidden' }}>
+        <Card variant='presentationalCard' sx={{ overflow: 'hidden' }}>
           <Themed.p>Loading contribution data...</Themed.p>
           <Box
             sx={{
@@ -220,7 +222,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
         Contribution Graph
       </Heading>
 
-      <Card variant='actionCard'>
+      <Card variant='presentationalCard' sx={{ overflow: 'hidden' }}>
         <Themed.p sx={{ mb: 3 }}>{totalContributions} contributions in the last year</Themed.p>
 
         {/* Outer wrapper with explicit width constraint - inline styles prevent FOUC */}
@@ -346,16 +348,15 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                 ))}
               </Box>
 
-              {/* Contribution grid */}
-              {/* GitHub layout: columns = weeks, rows = days of week (Sat=1, Sun=2, Mon=3, ..., Fri=7) */}
+              {/* Contribution grid: fixed row heights + top alignment so last (partial) column has no gap above it (GitHub behavior) */}
               <Box
                 sx={{
                   display: 'grid',
                   gridTemplateColumns: `repeat(${weeksCount}, ${cellSize}px)`,
-                  gridTemplateRows: 'repeat(7, 1fr)',
+                  gridTemplateRows: `repeat(7, ${cellSize}px)`,
                   gap: 1,
-                  minWidth: 'max-content'
-                  // No width property - let it size naturally, parent handles overflow
+                  minWidth: 'max-content',
+                  alignItems: 'start'
                 }}
               >
                 {gridItems.map(({ key, weekIndex, dayOfWeek, day }) => {
@@ -365,7 +366,10 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                         key={key}
                         sx={{
                           gridColumn: weekIndex + 1,
-                          gridRow: dayOfWeek + 1
+                          gridRow: dayOfWeek + 1,
+                          width: `${cellSize}px`,
+                          height: `${cellSize}px`,
+                          minHeight: `${cellSize}px`
                         }}
                       />
                     )
@@ -390,38 +394,74 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   // Calculate staggered animation delay based on position
                   // Animate from left to right, with a slight diagonal effect
                   const animationDelay = isVisible ? `${weekIndex * 0.015 + dayOfWeek * 0.01}s` : '0s'
+                  const hasContributions = day.contributionCount > 0
+                  const contributionText = hasContributions
+                    ? `${day.contributionCount} contribution${day.contributionCount !== 1 ? 's' : ''}`
+                    : 'No contributions'
 
                   return (
                     <Box
                       key={key}
-                      title={`${day.contributionCount} contribution${day.contributionCount !== 1 ? 's' : ''} on ${formattedDate}`}
+                      title={`${contributionText} on ${formattedDate}`}
                       className={isVisible ? 'cell-visible' : 'cell-hidden'}
+                      onMouseEnter={e => {
+                        if (hasContributions) {
+                          setHoveredCell({
+                            contributionText,
+                            formattedDate,
+                            x: e.clientX,
+                            y: e.clientY
+                          })
+                        }
+                      }}
+                      onMouseLeave={() => setHoveredCell(null)}
                       sx={{
                         gridColumn: weekIndex + 1,
                         gridRow: gridRow, // Saturday=1, Sunday=2, Monday=3, ..., Friday=7
+                        alignSelf: 'start',
                         width: `${cellSize}px`,
                         height: `${cellSize}px`,
                         borderRadius: '2px',
                         bg: day.contributionCount === 0 ? (darkModeActive ? '#161b22' : '#ebedf0') : day.color,
-                        cursor: 'pointer',
                         position: 'relative',
+                        cursor: hasContributions ? 'pointer' : 'default',
+                        overflow: 'hidden',
                         // Animation styles
                         opacity: isVisible ? 1 : 0,
                         transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(10px)',
-                        transition: `opacity 0.4s ease-out ${animationDelay}, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${animationDelay}`,
+                        transition: `opacity 0.4s ease-out ${animationDelay}, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${animationDelay}, box-shadow 0.2s ease, transform 0.2s ease`,
                         willChange: isVisible ? 'auto' : 'opacity, transform',
-                        '&:hover': {
-                          transform: 'scale(1.3)',
-                          zIndex: 10,
-                          boxShadow: darkModeActive ? '0 0 8px rgba(255, 255, 255, 0.3)' : '0 0 8px rgba(0, 0, 0, 0.2)',
-                          borderRadius: '4px',
-                          transition: 'all 0.2s ease' // Override animation transition on hover
-                        },
-                        ...(day.contributionCount > 0 &&
-                          isVisible && {
+                        // Shimmer + hover effect only for cells with contributions
+                        ...(hasContributions && {
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            inset: 0,
+                            borderRadius: '2px',
+                            background:
+                              'linear-gradient(105deg, transparent 0%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.15) 55%, transparent 100%)',
+                            backgroundSize: '200% 100%',
+                            backgroundPosition: '200% 0',
+                            opacity: 0,
+                            transition: 'opacity 0.25s ease, background-position 0.6s ease',
+                            pointerEvents: 'none'
+                          },
+                          '&:hover': {
+                            boxShadow: darkModeActive
+                              ? '0 0 0 2px rgba(255,255,255,0.25), 0 0 12px rgba(255,255,255,0.08)'
+                              : '0 0 0 2px rgba(0,0,0,0.12), 0 0 12px rgba(0,0,0,0.08)',
+                            transform: 'scale(1.12)',
+                            zIndex: 5,
+                            '&::after': {
+                              opacity: 1,
+                              backgroundPosition: '-100% 0'
+                            }
+                          },
+                          ...(isVisible && {
                             animation: 'pulse 2s ease-in-out infinite',
-                            animationDelay: `${(weekIndex * 7 + dayOfWeek) * 0.01 + 1}s` // Start pulse after fade-in
+                            animationDelay: `${(weekIndex * 7 + dayOfWeek) * 0.01 + 1}s`
                           })
+                        })
                       }}
                     />
                   )
@@ -507,6 +547,39 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
           }
         `}
       </style>
+
+      {/* Hover popover: only for cells with contributions; theme-matched panel */}
+      {hoveredCell &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <Box
+            role='tooltip'
+            sx={{
+              position: 'fixed',
+              left: hoveredCell.x + 12,
+              top: hoveredCell.y + 12,
+              zIndex: 1000,
+              pointerEvents: 'none',
+              px: 2,
+              py: 2,
+              fontSize: 1,
+              whiteSpace: 'nowrap',
+              color: 'text',
+              bg: 'var(--theme-ui-colors-panel-background)',
+              backdropFilter: 'blur(12px) saturate(150%)',
+              WebkitBackdropFilter: 'blur(12px) saturate(150%)',
+              border: '1px solid',
+              borderColor: 'var(--theme-ui-colors-panel-divider)',
+              borderRadius: 'card',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0,0,0,0.04)'
+            }}
+          >
+            <strong>{hoveredCell.contributionText}</strong>
+            <br />
+            {hoveredCell.formattedDate}
+          </Box>,
+          document.body
+        )}
     </Box>
   )
 }

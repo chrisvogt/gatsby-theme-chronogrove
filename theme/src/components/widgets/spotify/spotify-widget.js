@@ -5,7 +5,6 @@ import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 import CallToAction from '../call-to-action'
 import Playlists from './playlists'
 import PlaylistsErrorBoundary from './playlists-error-boundary'
-import ProfileMetricsBadge from '../profile-metrics-badge'
 import TopTracks from './top-tracks'
 import Widget from '../widget'
 import WidgetHeader from '../widget-header'
@@ -37,11 +36,9 @@ const SpotifyWidget = () => {
 
   return (
     <Widget id='spotify' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faSpotify} isLoading={isLoading}>
+      <WidgetHeader aside={callToAction} icon={faSpotify} metrics={metrics} metricsLoading={isLoading}>
         Spotify
       </WidgetHeader>
-
-      <ProfileMetricsBadge isLoading={isLoading} metrics={metrics} />
 
       <TopTracks isLoading={isLoading} tracks={topTracks} />
       <PlaylistsErrorBoundary>

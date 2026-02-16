@@ -139,6 +139,13 @@ export default merge(tailwind, {
       bg: 'transparent',
       boxShadow: 'inset 0 0 0 1px',
       fontSize: 1
+    },
+    /** Non-interactive metrics in widget headers: match text, not primary */
+    metrics: {
+      color: 'text',
+      bg: 'transparent',
+      boxShadow: theme => `inset 0 0 0 1px ${theme.colors.text}`,
+      fontSize: 1
     }
   },
 
@@ -231,6 +238,13 @@ export default merge(tailwind, {
       }
     },
 
+    /** Non-interactive content (AI Summary, Contribution Graph): same look as card + glass, neutral left border, no hover */
+    presentationalCard: {
+      ...card,
+      ...glassmorhismPanel,
+      borderLeft: theme => `2px solid ${theme.colors.gray?.[6] ?? '#9ca3af'}`
+    },
+
     metricCard: {
       ...card,
       ...metricCard
@@ -263,7 +277,7 @@ export default merge(tailwind, {
     aiSummary: {
       ...card,
       ...glassmorhismPanel,
-      borderLeft: theme => `2px solid ${theme.colors.primary}`,
+      borderLeft: theme => `2px solid ${theme.colors.gray?.[6] ?? '#9ca3af'}`,
       '@keyframes pulse': {
         '0%, 100%': {
           opacity: 1
@@ -418,6 +432,27 @@ export default merge(tailwind, {
       },
       '&:hover, &:focus': {
         backgroundColor: 'var(--theme-ui-colors-panel-background)'
+      }
+    },
+    /** Widget "Browse" / "Visit Profile" CTAs: plain text on page, high contrast (WCAG compliant) */
+    widgetCta: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      fontSize: 1,
+      fontFamily: 'heading',
+      lineHeight: 1.25,
+      color: 'text',
+      textDecoration: 'none',
+      transition: 'color 0.2s ease',
+      // Nudge CTAs up 1px for visual alignment with widget headline (does not affect layout)
+      transform: 'translateY(-1px)',
+      '&:hover, &:focus': {
+        color: 'primary',
+        textDecoration: 'none'
+      },
+      '&:focus': {
+        outline: 'none',
+        boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
       }
     }
   },
