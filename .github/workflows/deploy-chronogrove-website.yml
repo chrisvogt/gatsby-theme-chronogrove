@@ -18,10 +18,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: www.chronogrove.com
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -29,17 +25,22 @@ jobs:
           ref: ${{ github.event.inputs.branch || github.ref }}
           submodules: true
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Build site
-        run: yarn workspace www.chronogrove.com build
+        run: pnpm --filter www.chronogrove.com build
 
       - name: Deploy to cPanel via SFTP
         uses: pressidium/lftp-mirror-action@v1

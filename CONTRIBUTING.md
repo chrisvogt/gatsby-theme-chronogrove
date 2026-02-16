@@ -24,7 +24,7 @@ We welcome contributions of all kinds:
 ### Prerequisites
 
 - Node.js >= 20.0.0
-- Yarn >= 4.0.0
+- pnpm >= 9.0.0
 - Git
 
 ### Development Setup
@@ -40,7 +40,7 @@ We welcome contributions of all kinds:
 2. **Install dependencies**
 
    ```bash
-   yarn
+   pnpm install
    ```
 
 3. **Set up HTTPS development** (optional but recommended)
@@ -62,7 +62,7 @@ We welcome contributions of all kinds:
 
 4. **Start development server**
    ```bash
-   yarn develop
+   pnpm develop
    ```
 
 ## 📋 Development Guidelines
@@ -80,8 +80,8 @@ We welcome contributions of all kinds:
 - **Update tests** when modifying existing functionality
 - **Run tests** before submitting PRs:
   ```bash
-  yarn test
-  yarn test:coverage
+  pnpm test
+  pnpm test:coverage
   ```
 
 ### Commit Messages
@@ -130,8 +130,8 @@ Types:
 3. **Test your changes**
 
    ```bash
-   yarn test
-   yarn build
+   pnpm test
+   pnpm build
    ```
 
 4. **Commit your changes**
@@ -191,7 +191,7 @@ When reporting bugs, please include:
 4. **Environment details**:
    - Operating system
    - Node.js version
-   - Yarn version
+   - pnpm version
    - Browser (if applicable)
 5. **Screenshots** (if visual issue)
 6. **Error messages** (if any)

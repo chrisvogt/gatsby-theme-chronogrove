@@ -1,0 +1,32 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["public/**", "dist/**"]
+    },
+    "test": {
+      "outputs": ["coverage/**"]
+    },
+    "test:coverage": {
+      "outputs": ["coverage/**"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:codecov": {
+      "outputs": ["**/junit.xml"]
+    },
+    "lint": {},
+    "prettier": {},
+    "develop": {
+      "cache": false,
+      "persistent": true
+    },
+    "develop:https": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

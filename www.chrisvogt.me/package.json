@@ -11,6 +11,9 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@theme-ui/components": "^0.17.4",
+    "@theme-ui/mdx": "^0.17.4",
     "boxen": "^8.0.1",
     "d3": "^7.9.0",
     "gatsby": "^5.16.1",
@@ -18,10 +21,14 @@
     "gatsby-plugin-newrelic": "^2.9.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sitemap": "^6.16.0",
-    "gatsby-theme-chronogrove": "*",
+    "gatsby-theme-chronogrove": "workspace:*",
+    "lightgallery": "^2.9.0",
     "prettier": "3.8.1",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "react-intersection-observer": "^10.0.2",
+    "react-photo-gallery": "^8.0.0",
+    "theme-ui": "^0.17.4"
   },
   "devDependencies": {
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.32"

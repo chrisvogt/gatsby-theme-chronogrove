@@ -1,22 +1,19 @@
 {
   "private": true,
-  "workspaces": [
-    "theme",
-    "www.chrisvogt.me",
-    "www.chronogrove.com"
-  ],
   "scripts": {
-    "develop": "yarn develop:website",
-    "develop:theme": "yarn workspace www.chronogrove.com develop",
-    "develop:website": "yarn workspace www.chrisvogt.me develop:https",
+    "develop": "pnpm run develop:website",
+    "develop:theme": "pnpm --filter www.chronogrove.com develop",
+    "develop:website": "pnpm --filter www.chrisvogt.me develop:https",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,mdx}\"",
-    "lint": "eslint",
+    "lint": "eslint .",
+    "preinstall": "npx only-allow pnpm",
     "postinstall": "node ./scripts/postinstall-banner.js",
     "prepare": "husky",
-    "prettier": "prettier",
-    "test:coverage": "yarn workspace gatsby-theme-chronogrove test --coverage",
-    "test:watch": "yarn workspace gatsby-theme-chronogrove test:watch",
-    "test": "yarn workspace gatsby-theme-chronogrove test"
+    "prettier": "prettier --check .",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "test:watch": "pnpm --filter gatsby-theme-chronogrove test:watch",
+    "build": "turbo run build"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.1",
@@ -32,15 +29,20 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "only-allow": "^1.1.1",
     "prettier": "^3.8.1",
-    "pretty-quick": "^4.2.2"
+    "pretty-quick": "^4.2.2",
+    "turbo": "^2.3.3"
   },
   "dependencies": {
     "boxen": "^8.0.1",
+    "chalk": "^4.1.2",
     "lodash": "^4.17.23"
   },
-  "resolutions": {
-    "lodash": "^4.17.23"
+  "pnpm": {
+    "overrides": {
+      "lodash": "^4.17.23"
+    }
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "pnpm@9.15.0"
 }

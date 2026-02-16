@@ -25,7 +25,7 @@
   },
   "engines": {
     "node": ">=24",
-    "yarn": ">=4"
+    "pnpm": ">=9"
   },
   "os": [
     "darwin",
@@ -50,6 +50,7 @@
     "redux-mock-store": "^1.5.5"
   },
   "dependencies": {
+    "@gatsbyjs/reach-router": "^2.0.1",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",

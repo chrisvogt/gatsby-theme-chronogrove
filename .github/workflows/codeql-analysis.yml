@@ -29,13 +29,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Load env vars from .env.template
         run: |
@@ -49,7 +55,7 @@ jobs:
           languages: ${{ matrix.language }}
 
       - name: Build website
-        run: yarn workspace www.chrisvogt.me build
+        run: pnpm --filter www.chrisvogt.me build
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
