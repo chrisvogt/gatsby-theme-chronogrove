@@ -8,6 +8,8 @@ import RootWrapper from './root-wrapper'
 // Mock AudioPlayer component
 jest.mock('./audio-player', () => jest.fn(() => <div data-testid='mock-audio-player'>MockAudioPlayer</div>))
 
+jest.mock('../helpers/color-mode-debug', () => ({ logColorModeState: jest.fn() }))
+
 // Mock theme-ui hooks with mutable return values
 const mockUseColorMode = jest.fn(() => ['light', jest.fn()])
 const mockUseThemeUI = jest.fn(() => ({
@@ -71,7 +73,8 @@ describe('RootWrapper', () => {
     expect(callArgs.isVisible).toBe(true)
   })
 
-  it('sets HTML background color from rawColors', () => {
+  it('sets data-theme-ui-color-mode and HTML background color from rawColors', () => {
+    mockUseColorMode.mockReturnValue(['default', jest.fn()])
     mockUseThemeUI.mockReturnValue({
       theme: {
         rawColors: {
@@ -88,6 +91,7 @@ describe('RootWrapper', () => {
       </Provider>
     )
 
+    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
     expect(document.documentElement.style.backgroundColor).toMatch(/red|rgb\(255,\s*0,\s*0\)|#ff0000/i)
   })
