@@ -3,8 +3,8 @@ packages:
   - 'www.chrisvogt.me'
   - 'www.chronogrove.com'
 
-# Shared dependency versions (theme + sites). Reference in package.json with "catalog:".
-# When the theme is published to npm, pnpm resolves catalog: to these versions.
+# Shared dependency versions for the two site packages only. Reference in package.json with "catalog:".
+# Keep these in sync with the theme's package.json versions when you bump deps in the theme.
 catalog:
   '@emotion/react': ^11.14.0
   '@mdx-js/react': ^3.1.1
