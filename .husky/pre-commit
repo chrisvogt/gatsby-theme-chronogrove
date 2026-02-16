@@ -1,3 +1,1 @@
-# Run Prettier and ESLint on staged files
-npx pretty-quick --staged
-npx eslint --fix $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|jsx|ts|tsx)$') || exit 1
+pnpm exec pretty-quick --staged && pnpm exec lint-staged

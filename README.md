@@ -23,12 +23,14 @@ A modern, feature-rich Gatsby theme for personal websites and blogs with social 
 ## 📋 Prerequisites
 
 - **Node.js**: >= 24.0.0
-- **Yarn**: >= 4.0.0
+- **pnpm**: >= 10.0.0
 - **Git**: For version control
+
+> **Migrating from Yarn?** Remove `node_modules` and `yarn.lock`, then run `pnpm install`. The repo uses pnpm workspaces and Turborepo; all `yarn` commands are now `pnpm` (e.g. `pnpm develop`, `pnpm test`).
 
 ## 🏗️ Project Structure
 
-This is a monorepo using Yarn workspaces:
+This is a monorepo using pnpm workspaces and Turborepo:
 
 ```
 gatsby-theme-chronogrove/
@@ -62,7 +64,7 @@ gatsby-theme-chronogrove/
 2. **Install dependencies**
 
    ```bash
-   yarn
+   pnpm install
    ```
 
 3. **HTTPS Development Setup**
@@ -109,7 +111,7 @@ gatsby-theme-chronogrove/
 5. **Start development server**
 
    ```bash
-   yarn develop
+   pnpm develop
    ```
 
 6. **Open your browser**
@@ -121,14 +123,14 @@ gatsby-theme-chronogrove/
 
 | Command              | Description                            |
 | -------------------- | -------------------------------------- |
-| `yarn develop`       | Start personal site (www.chrisvogt.me) |
-| `yarn develop:theme` | Start demo site (www.chronogrove.com)  |
-| `yarn test`          | Run test suite                         |
-| `yarn test:watch`    | Run tests in watch mode                |
-| `yarn test:coverage` | Generate coverage report               |
-| `yarn build`         | Build for production                   |
-| `yarn format`        | Format code with Prettier              |
-| `yarn lint`          | Run ESLint                             |
+| `pnpm develop`       | Start personal site (www.chrisvogt.me) |
+| `pnpm develop:theme` | Start demo site (www.chronogrove.com)  |
+| `pnpm test`          | Run test suite                         |
+| `pnpm test:watch`    | Run tests in watch mode                |
+| `pnpm test:coverage` | Generate coverage report               |
+| `pnpm build`         | Build for production                   |
+| `pnpm format`        | Format code with Prettier              |
+| `pnpm lint`          | Run ESLint                             |
 
 ### Development Workflow
 
@@ -136,7 +138,7 @@ gatsby-theme-chronogrove/
 
 The theme code is located in the `/theme` directory. To work on theme components:
 
-1. Start the demo site: `yarn develop:theme`
+1. Start the demo site: `pnpm develop:theme`
 2. Make your changes to components in `theme/src/components/`
 3. The changes will be reflected in the demo site at `http://localhost:8000`
 
@@ -156,7 +158,7 @@ The theme code is located in the `/theme` directory. To work on theme components
 
 4. **Start HTTPS development**:
    ```bash
-   yarn develop
+   pnpm develop
    ```
 
 ### Demo Site Development
@@ -165,7 +167,7 @@ For theme development and testing, use the demo site:
 
 ```bash
 # Start the demo site
-yarn develop:theme
+pnpm develop:theme
 
 # Open your browser to http://localhost:8000
 ```
@@ -224,13 +226,13 @@ The project includes comprehensive testing with **459 passing tests**:
 
 ```bash
 # Run all tests
-yarn test
+pnpm test
 
 # Run tests in watch mode
-yarn test:watch
+pnpm test:watch
 
 # Generate coverage report
-yarn test:coverage
+pnpm test:coverage
 ```
 
 ## 🚀 Production Build
@@ -240,13 +242,13 @@ yarn test:coverage
 **Personal Site:**
 
 ```bash
-yarn workspace www.chrisvogt.me build
+pnpm --filter www.chrisvogt.me build
 ```
 
 **Demo Site:**
 
 ```bash
-yarn workspace www.chronogrove.com build
+pnpm --filter www.chronogrove.com build
 ```
 
 The build outputs will be in `/www.chrisvogt.me/public` and `/www.chronogrove.com/public` respectively.
@@ -272,7 +274,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Make your changes
-4. Run tests: `yarn test`
+4. Run tests: `pnpm test`
 5. Commit your changes: `git commit -m 'Add amazing feature'`
 6. Push to the branch: `git push origin feature/amazing-feature`
 7. Open a Pull Request
@@ -297,9 +299,9 @@ lsof -ti:8000 | xargs kill -9
 
 **Demo site not loading**
 
-- Ensure you're using `yarn develop:theme` for the demo site
+- Ensure you're using `pnpm develop:theme` for the demo site
 - Check that the workspace is properly configured
-- Verify all dependencies are installed: `yarn install`
+- Verify all dependencies are installed: `pnpm install`
 
 **SSL certificate errors**
 

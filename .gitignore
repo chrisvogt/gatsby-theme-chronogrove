@@ -6,6 +6,10 @@ coverage
 launch.json
 node_modules
 public
+# Turborepo local cache (do not commit)
+.turbo
+**/.turbo
+
 yarn-error.log
 www.chrisvogt.me/certs/*
 !www.chrisvogt.me/certs/empty

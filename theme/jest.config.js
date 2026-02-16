@@ -59,8 +59,11 @@ module.exports = {
     '^.+\\.[jt]sx?$': 'babel-jest'
   },
 
-  // Allow specific ESM packages in node_modules to be transformed
-  transformIgnorePatterns: ['node_modules/(?!(gatsby|@mdx-js/react|react-error-boundary)/)'],
+  // Allow specific ESM packages in node_modules to be transformed (pnpm uses .pnpm store)
+  transformIgnorePatterns: [
+    'node_modules/(?!(gatsby|@mdx-js|react-error-boundary|\\.pnpm)(/|$))',
+    '\\.pnpm/[^/]+/node_modules/(?!(gatsby|@mdx-js|react-error-boundary)/)'
+  ],
 
   // Indicates whether each individual test should be reported during the run
   verbose: false

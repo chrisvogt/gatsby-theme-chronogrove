@@ -270,14 +270,18 @@ module.exports = {
         }
       }
     },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: process.env.GA_PROPERTY_ID,
-        head: false,
-        respectDNT: true
-      }
-    },
+    ...(process.env.GA_PROPERTY_ID
+      ? [
+          {
+            resolve: 'gatsby-plugin-google-analytics',
+            options: {
+              trackingId: process.env.GA_PROPERTY_ID,
+              head: false,
+              respectDNT: true
+            }
+          }
+        ]
+      : []),
     gatsbyPluginFeedConfig,
     {
       resolve: 'gatsby-plugin-robots-txt',

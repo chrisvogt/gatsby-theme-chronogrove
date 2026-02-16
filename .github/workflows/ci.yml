@@ -15,20 +15,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: 'yarn'
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Run Prettier check
-        run: yarn prettier --check .
+        run: pnpm run prettier
 
       - name: Run ESLint
-        run: yarn lint
+        run: pnpm run lint
 
   test:
     name: Unit Tests with Coverage
@@ -39,17 +42,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: 'yarn'
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests and collect coverage
-        run: yarn workspace gatsby-theme-chronogrove test:coverage --maxWorkers=2
+        run: pnpm exec turbo run test:coverage -- --maxWorkers=2
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -59,7 +65,7 @@ jobs:
           fail_ci_if_error: true
 
       - name: Run tests for Codecov analytics
-        run: yarn workspace gatsby-theme-chronogrove test:codecov
+        run: pnpm exec turbo run test:codecov
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
@@ -75,14 +81,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: 'yarn'
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Load env vars from .env.template
         run: |
@@ -91,4 +100,4 @@ jobs:
           echo "✅ Environment variables loaded from .env.template"
 
       - name: Build project
-        run: yarn workspace www.chrisvogt.me build
+        run: pnpm exec turbo run build --filter=www.chrisvogt.me

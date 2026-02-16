@@ -17,11 +17,11 @@ From the root of the monorepo:
 
 ```bash
 # Start the demo site for theme development
-yarn develop:theme
+pnpm develop:theme
 
 # Or run directly from this directory
 cd www.chronogrove.com
-yarn develop
+pnpm develop
 ```
 
 ## Content Structure

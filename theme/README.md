@@ -27,7 +27,7 @@ A beautiful Gatsby theme for personal websites and blogs with built-in social me
 ```bash
 npm install gatsby-theme-chronogrove
 # or
-yarn add gatsby-theme-chronogrove
+pnpm add gatsby-theme-chronogrove
 ```
 
 ### Basic Configuration
@@ -291,10 +291,10 @@ git clone https://github.com/chrisvogt/gatsby-theme-chronogrove.git
 cd gatsby-theme-chronogrove
 
 # Install dependencies
-yarn install
+pnpm install
 
 # Start development server
-yarn workspace www.chrisvogt.me develop
+pnpm --filter www.chrisvogt.me develop
 ```
 
 ### Testing
@@ -303,13 +303,13 @@ The theme includes comprehensive testing with **459 passing tests**:
 
 ```bash
 # Run all tests
-yarn test
+pnpm test
 
 # Run tests in watch mode
-yarn test:watch
+pnpm test:watch
 
 # Generate coverage report
-yarn test:coverage
+pnpm test:coverage
 ```
 
 **Test Coverage:**

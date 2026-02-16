@@ -1,7 +1,7 @@
 # Cursor Rules for gatsby-theme-chronogrove
 
 ## Project Overview
-This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal website and blog with a social dashboard home page. The project uses Yarn workspaces to separate the theme code from the content.
+This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal website and blog with a social dashboard home page. The project uses pnpm workspaces and Turborepo to separate the theme code from the content.
 
 **Current Goal**: Decouple all personal information and www.chrisvogt.me content from the `/theme` directory to make the theme more generic and reusable.
 
@@ -21,23 +21,24 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 - **Theme UI**: Design system and styling (CSS-in-JS)
 - **Redux Toolkit**: State management (v2.x)
 - **Jest 30.x**: Testing framework with comprehensive setup
-- **Yarn 4.x**: Monorepo management with workspaces (v4.9.2)
+- **pnpm 10.x**: Monorepo management with workspaces (v10.15.0)
+- **Turborepo**: Build orchestration and caching
 - **MDX 3.x**: Content authoring with React components
 - **FontAwesome 7.x**: Icon library
 
 ## Development Setup
 - **Node.js**: 24 (see `.nvmrc` and `engines` in theme/package.json)
-- **Yarn**: 4.9.2 (see `packageManager` in root package.json)
+- **pnpm**: 10.15.0 (see `packageManager` in root package.json)
 - **HTTPS**: Local development requires HTTPS (see `develop:https` script)
-- **Workspace Commands**: Use `yarn workspace [package] [command]` for package-specific operations
+- **Workspace Commands**: Use `pnpm --filter [package] [command]` for package-specific operations
 
 ## Available Scripts
-- `yarn develop` - Start development server with HTTPS
-- `yarn test` - Run all tests
-- `yarn test:watch` - Run tests in watch mode
-- `yarn test:coverage` - Run tests with coverage report
-- `yarn format` - Format code with Prettier
-- `yarn lint` - Lint code with ESLint
+- `pnpm develop` - Start development server with HTTPS
+- `pnpm test` - Run all tests (via Turborepo)
+- `pnpm test:watch` - Run tests in watch mode
+- `pnpm test:coverage` - Run tests with coverage report
+- `pnpm format` - Format code with Prettier
+- `pnpm lint` - Lint code with ESLint
 
 ## Widget System
 The theme includes a sophisticated widget system for the home page dashboard:
