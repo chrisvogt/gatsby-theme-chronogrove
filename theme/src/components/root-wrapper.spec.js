@@ -54,6 +54,11 @@ describe('RootWrapper', () => {
     document.documentElement.className = ''
     document.documentElement.removeAttribute('data-theme-ui-color-mode')
     document.documentElement.style.backgroundColor = ''
+    try {
+      window.localStorage.removeItem('theme-ui-color-mode')
+    } catch {
+      // ignore
+    }
   })
 
   it('renders children and AudioPlayer', () => {

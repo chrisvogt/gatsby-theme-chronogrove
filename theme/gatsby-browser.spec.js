@@ -112,7 +112,8 @@ describe('gatsby-browser', () => {
   })
 
   describe('onRouteUpdate', () => {
-    it('uses existing theme-ui-dark class as source of truth', () => {
+    it('prefers localStorage over DOM so route transitions do not perpetuate wrong paint', () => {
+      document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
       document.documentElement.classList.add('theme-ui-dark')
       window.localStorage.setItem('theme-ui-color-mode', 'default')
 
@@ -121,28 +122,15 @@ describe('gatsby-browser', () => {
         prevLocation: null
       })
 
-      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-      expect(document.documentElement.classList.contains('theme-ui-default')).toBe(false)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
-    })
-
-    it('uses existing theme-ui-light class as default source of truth', () => {
-      document.documentElement.classList.add('theme-ui-light')
-      window.localStorage.setItem('theme-ui-color-mode', 'dark')
-
-      onRouteUpdate({
-        location: { pathname: '/current', hash: '' },
-        prevLocation: null
-      })
-
       expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
-      expect(document.documentElement.classList.contains('theme-ui-light')).toBe(false)
+      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(false)
       expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
     })
 
-    it('prefers DOM mode over stale localStorage mode', () => {
+    it('falls back to DOM when localStorage is empty', () => {
+      window.localStorage.removeItem('theme-ui-color-mode')
       document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
-      window.localStorage.setItem('theme-ui-color-mode', 'default')
+      document.documentElement.classList.add('theme-ui-dark')
 
       onRouteUpdate({
         location: { pathname: '/current', hash: '' },
@@ -150,7 +138,20 @@ describe('gatsby-browser', () => {
       })
 
       expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-      expect(document.documentElement.classList.contains('theme-ui-default')).toBe(false)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    })
+
+    it('falls back to theme-ui-* class when localStorage and data attribute are empty', () => {
+      window.localStorage.removeItem('theme-ui-color-mode')
+      document.documentElement.removeAttribute('data-theme-ui-color-mode')
+      document.documentElement.classList.add('theme-ui-dark')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
       expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
     })
 
@@ -201,8 +202,9 @@ describe('gatsby-browser', () => {
     })
 
     it('removes stale theme-ui classes before applying the resolved mode', () => {
+      window.localStorage.setItem('theme-ui-color-mode', 'default')
       document.documentElement.className = 'theme-ui-dark theme-ui-default app-shell'
-      document.documentElement.setAttribute('data-theme-ui-color-mode', 'default')
+      document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
 
       onRouteUpdate({
         location: { pathname: '/current', hash: '' },
