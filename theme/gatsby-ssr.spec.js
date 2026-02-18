@@ -8,7 +8,7 @@ describe('gatsby-ssr', () => {
     expect(gatsbySSR.wrapRootElement).toBeDefined()
   })
 
-  it('sets html lang attribute and injects color mode and HTML background scripts in head', () => {
+  it('sets html lang attribute and injects Emotion insertion point, color mode, and HTML background scripts in head', () => {
     const setHtmlAttributes = jest.fn()
     const setHeadComponents = jest.fn()
 
@@ -20,7 +20,10 @@ describe('gatsby-ssr', () => {
     const headComponents = setHeadComponents.mock.calls[0][0]
     expect(headComponents).toHaveLength(4)
 
-    const { container: colorModeScriptContainer } = render(headComponents[0])
+    expect(headComponents[0].type).toBe('meta')
+    expect(headComponents[0].props.name).toBe('emotion-insertion-point')
+
+    const { container: colorModeScriptContainer } = render(headComponents[1])
     const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
     expect(colorModeScriptTag).toBeInTheDocument()
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
@@ -28,7 +31,7 @@ describe('gatsby-ssr', () => {
     expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
     expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
 
-    const { container: htmlBgScriptContainer } = render(headComponents[1])
+    const { container: htmlBgScriptContainer } = render(headComponents[2])
     const htmlBgScriptTag = htmlBgScriptContainer.querySelector('script')
     expect(htmlBgScriptTag).toBeInTheDocument()
     expect(htmlBgScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
@@ -37,24 +40,18 @@ describe('gatsby-ssr', () => {
     expect(htmlBgScriptTag).toHaveTextContent(/#14141F/)
     expect(htmlBgScriptTag).toHaveTextContent(/#fdf8f5/)
 
-    const { container: fallbackStyleContainer } = render(headComponents[2])
+    const { container: fallbackStyleContainer } = render(headComponents[3])
     const fallbackStyle = fallbackStyleContainer.querySelector('style')
     expect(fallbackStyle).toBeInTheDocument()
     expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="default"\]/)
     expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #111 !important/)
     expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="dark"\]/)
     expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #fff !important/)
-
-    const { container: patchContainer } = render(headComponents[3])
-    const patchScript = patchContainer.querySelector('script')
-    expect(patchScript).toBeInTheDocument()
-    expect(patchScript).toHaveTextContent(/head\.insertBefore/)
-    expect(patchScript).toHaveTextContent(/head\.contains/)
   })
 
   it('onPreRenderHTML puts color-mode scripts first in head', () => {
     const getHeadComponents = jest.fn(() => [
-      { key: 'emotion-insertbefore-patch', type: 'script' },
+      { key: 'emotion-insertion-point', type: 'meta' },
       { key: 'theme-ui-no-flash', type: 'script' },
       { key: 'html-bg-color', type: 'script' }
     ])
@@ -67,6 +64,6 @@ describe('gatsby-ssr', () => {
     const sorted = replaceHeadComponents.mock.calls[0][0]
     expect(sorted[0].key).toBe('theme-ui-no-flash')
     expect(sorted[1].key).toBe('html-bg-color')
-    expect(sorted[2].key).toBe('emotion-insertbefore-patch')
+    expect(sorted[2].key).toBe('emotion-insertion-point')
   })
 })

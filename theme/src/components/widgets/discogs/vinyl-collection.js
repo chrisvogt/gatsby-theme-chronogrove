@@ -137,7 +137,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     setDragDistance(elasticDistance)
   }
 
-  const handleMouseUp = () => {
+  const handleDragEnd = () => {
     if (!isDragging || isTransitioning) return
 
     const threshold = 80
@@ -153,16 +153,20 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     setDragDistance(0)
   }
 
-  const handleTouchStart = e => {
-    if (isTransitioning) return
+  const handleMouseUp = () => {
+    handleDragEnd()
+  }
+
+  const handlePointerDown = e => {
+    if (e.pointerType === 'mouse' || isTransitioning) return
     setIsDragging(true)
-    setStartX(e.touches[0].pageX)
+    setStartX(e.pageX)
     setDragDistance(0)
   }
 
-  const handleTouchMove = e => {
-    if (!isDragging || isTransitioning) return
-    const distance = e.touches[0].pageX - startX
+  const handlePointerMove = e => {
+    if (e.pointerType === 'mouse' || !isDragging || isTransitioning) return
+    const distance = e.pageX - startX
 
     let elasticDistance = distance
     if (distance > 0 && currentPage === 1) {
@@ -174,8 +178,9 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     setDragDistance(elasticDistance)
   }
 
-  const handleTouchEnd = () => {
-    handleMouseUp()
+  const handlePointerUp = e => {
+    if (e.pointerType === 'mouse') return
+    handleDragEnd()
   }
 
   const handlePageChange = page => {
@@ -265,15 +270,17 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
             transform: getTransform(),
             transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             cursor: isDragging ? 'grabbing' : 'grab',
-            userSelect: 'none'
+            userSelect: 'none',
+            touchAction: 'pan-y'
           }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
         >
           {pages.map((pageItems, pageIndex) => (
             <div
