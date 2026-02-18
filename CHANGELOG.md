@@ -1,5 +1,45 @@
 # Changelog
 
+## 0.72.16
+
+### ✨ Features
+
+- **CSS Extraction to External Files**: Extracts Emotion-generated inline CSS to external stylesheet files in production builds, significantly reducing `<head>` tag size.
+  - **Problem**: Inline CSS was bloating the `<head>` tag to ~87KB (81KB of CSS), making it difficult to copy or analyze.
+  - **Solution**: Implemented CSS extraction in `gatsby-ssr.js` that moves Emotion styles to external `.css` files during production builds.
+  - **Impact**: Reduces `<head>` size from ~87KB to ~6KB (estimated), with CSS cached separately by browsers.
+  - **Development**: Keeps inline CSS in development mode for faster hot reload.
+  - **Implementation**: Uses content-based hashing for consistent filenames across pages.
+
+### ⚡ Performance
+
+- **Optimized Emotion Plugin Configuration**: Configured `gatsby-plugin-emotion` for better production performance.
+  - Disabled source maps in production (reduces CSS size by 20-40%).
+  - Enabled `cssPropOptimization` for optimized `sx` prop usage.
+  - Set `autoLabel` to `'dev-only'` to remove labels in production builds.
+
+### 🛠️ Developer Experience
+
+- **Added CSS Measurement Script**: Created `theme/scripts/measure-head-size.js` to analyze and measure `<head>` tag size.
+  - Shows total `<head>` size, inline CSS size, and style tag count.
+  - Provides recommendations based on size thresholds.
+  - Usage: `node theme/scripts/measure-head-size.js public/index.html`
+
+### 🐛 Bug Fixes
+
+- Fixed ESLint errors in `gatsby-ssr.js` (unused variables).
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.16)
+- `theme/gatsby-config.js` (Emotion plugin optimization)
+- `theme/gatsby-ssr.js` (CSS extraction implementation)
+- `theme/gatsby-ssr.spec.js` (updated tests for CSS extraction)
+- `theme/scripts/measure-head-size.js` (new measurement script)
+- `theme/CSS_INLINE_AUDIT.md` (new audit documentation)
+
+---
+
 ## 0.72.15
 
 ### 🐛 Bug Fixes
