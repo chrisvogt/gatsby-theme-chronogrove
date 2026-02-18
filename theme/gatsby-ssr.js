@@ -33,21 +33,8 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
         }
         htmlElement.classList.add('theme-ui-' + mode);
         htmlElement.setAttribute('data-theme-ui-color-mode', mode);
-      } catch (e) {}
-    })();
-  `
-
-  const htmlBackgroundScript = `
-    (function() {
-      try {
-        var mode = localStorage.getItem('theme-ui-color-mode');
-        if (!mode) {
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          mode = prefersDark ? 'dark' : 'default';
-          localStorage.setItem('theme-ui-color-mode', mode);
-        }
         var bgColor = mode === 'dark' ? '#14141F' : '#fdf8f5';
-        document.documentElement.style.backgroundColor = bgColor;
+        htmlElement.style.backgroundColor = bgColor;
       } catch (e) {}
     })();
   `
@@ -63,12 +50,11 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
   setHeadComponents([
     <meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />,
     <script key='theme-ui-no-flash' dangerouslySetInnerHTML={{ __html: colorModeScript }} />,
-    <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />,
     <style key='chronogrove-color-mode-fallback' dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
   ])
 }
 
-const COLOR_MODE_HEAD_KEYS = ['theme-ui-no-flash', 'html-bg-color']
+const COLOR_MODE_HEAD_KEYS = ['theme-ui-no-flash']
 
 /**
  * Extracts inline CSS from style tags and moves them to external stylesheet files.
