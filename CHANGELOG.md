@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.72.14
+
+### 🐛 Bug Fixes
+
+- **Harden Emotion style insertion against `<head>` mutations**: Removed the runtime `document.head.insertBefore` monkey patch and switched to a stable Emotion insertion-point strategy.
+  - **Root cause**: Third-party scripts mutating `<head>` could invalidate insertion references and trigger `insertBefore` `NotFoundError` crashes.
+  - **Fix**: Added a dedicated SSR insertion point (`<meta name="emotion-insertion-point" />`) and configured a browser Emotion cache to insert styles at that anchor.
+  - **Result**: Prevents this crash class without patching native DOM methods.
+
+### ♻️ Refactor
+
+- **Removed New Relic browser/APM integration from the personal site app** while this issue is being mitigated.
+  - Removed `gatsby-plugin-newrelic` plugin configuration and dependency.
+  - Removed New Relic environment variables from `.env.template`.
+  - Updated privacy policy copy to remove the New Relic section.
+
+### 🧪 Tests
+
+- Updated SSR tests to assert the Emotion insertion-point meta tag.
+- Added/updated browser tests to verify `wrapRootElement` with Emotion cache provider wiring.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.14)
+- `theme/gatsby-ssr.js` (removed `insertBefore` patch, added Emotion insertion point meta)
+- `theme/gatsby-ssr.spec.js` (updated SSR head assertions)
+- `theme/gatsby-browser.js` (Emotion cache + `CacheProvider` wired to insertion point)
+- `theme/gatsby-browser.spec.js` (wrapRootElement coverage for Emotion provider)
+- `www.chrisvogt.me/gatsby-config.js` (removed `gatsby-plugin-newrelic`)
+- `www.chrisvogt.me/package.json` (removed `gatsby-plugin-newrelic` dependency)
+- `pnpm-lock.yaml` (removed `gatsby-plugin-newrelic` entries)
+- `.env.template` (removed New Relic env vars)
+- `www.chrisvogt.me/src/pages/privacy.js` (removed New Relic policy section)
+
+---
+
 ## 0.72.13
 
 ### 📦 Dependencies

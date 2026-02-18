@@ -1,14 +1,43 @@
-import 'prismjs/themes/prism-solarizedlight.css'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+import React from 'react'
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
 
 import './src/styles/global.css'
 
 import 'lightgallery/css/lightgallery.css'
 import 'lightgallery/css/lg-thumbnail.css'
 import 'lightgallery/css/lg-zoom.css'
-import 'prismjs/themes/prism-solarizedlight.css'
 
-export { default as wrapRootElement } from './wrapRootElement'
+import 'prismjs/themes/prism-solarizedlight.css'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+
+import WrapRootElement from './wrapRootElement'
+
+let emotionCache
+
+const createEmotionCache = () => {
+  const insertionPoint =
+    typeof document !== 'undefined' ? document.querySelector('meta[name="emotion-insertion-point"]') : undefined
+
+  return createCache({
+    key: 'css',
+    insertionPoint: insertionPoint || undefined
+  })
+}
+
+const getEmotionCache = () => {
+  if (!emotionCache) {
+    emotionCache = createEmotionCache()
+  }
+
+  return emotionCache
+}
+
+export const wrapRootElement = ({ element }) => (
+  <CacheProvider value={getEmotionCache()}>
+    <WrapRootElement element={element} />
+  </CacheProvider>
+)
 
 // Prevent scroll restoration when only query parameters change.
 // Returning false prevents gatsby-react-router-scroll from restoring a previously

@@ -1,4 +1,7 @@
-import { shouldUpdateScroll, onRouteUpdate } from './gatsby-browser'
+import React from 'react'
+import { render } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { shouldUpdateScroll, onRouteUpdate, wrapRootElement } from './gatsby-browser'
 
 // Mock document and window methods
 const mockGetElementById = jest.fn()
@@ -24,6 +27,15 @@ afterEach(() => {
 })
 
 describe('gatsby-browser', () => {
+  describe('wrapRootElement', () => {
+    it('wraps the root element with Emotion cache provider without crashing', () => {
+      const wrapped = wrapRootElement({ element: <div>Root content</div> })
+      const { getByText } = render(wrapped)
+
+      expect(getByText('Root content')).toBeInTheDocument()
+    })
+  })
+
   describe('shouldUpdateScroll', () => {
     it('should return false when routerProps is undefined', () => {
       const result = shouldUpdateScroll({})
