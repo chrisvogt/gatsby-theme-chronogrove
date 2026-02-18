@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.72.15
+
+### 🐛 Bug Fixes
+
+- **Reduce browser `[Violation]` warnings from non-passive touch listeners in the Discogs carousel**.
+  - **Root cause**: React touch handlers (`onTouchStart/onTouchMove/onTouchEnd`) can cause root-level non-passive touch listener warnings in Chrome when used on interactive swipe areas.
+  - **Fix**: Replaced touch handlers with pointer handlers (`onPointerDown/onPointerMove/onPointerUp/onPointerCancel`) for touch/pen input and added `touchAction: 'pan-y'` on the carousel surface.
+  - **Result**: Removes the touch-listener warning source while preserving horizontal swipe/drag behavior and vertical scrolling.
+
+### 🧪 Tests
+
+- Updated Discogs carousel interaction tests from touch events to pointer events (`pointerType: 'touch'`).
+- Updated affected Discogs snapshots after interaction/sx changes.
+- Verified Discogs widget test suite passes end-to-end.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.15)
+- `theme/src/components/widgets/discogs/vinyl-collection.js` (pointer events + `touchAction: 'pan-y'`)
+- `theme/src/components/widgets/discogs/vinyl-collection.spec.js` (pointer event tests)
+- `theme/src/components/widgets/discogs/__snapshots__/vinyl-collection.spec.js.snap` (updated snapshots)
+- `theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap` (updated snapshots)
+
+---
+
 ## 0.72.14
 
 ### 🐛 Bug Fixes
