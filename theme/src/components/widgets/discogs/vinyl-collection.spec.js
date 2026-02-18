@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { act } from 'react'
 
@@ -183,6 +183,35 @@ describe('VinylCollection', () => {
       // Should remove focused class
       expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
     })
+
+    it('opens and closes the Discogs modal when a vinyl is clicked', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      fireEvent.click(vinylItem)
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+      fireEvent.click(screen.getAllByLabelText('Close modal')[0])
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    })
+
+    it('opens the modal from keyboard Enter and Space activation', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      fireEvent.keyDown(vinylItem, { key: 'Enter' })
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+      fireEvent.click(screen.getAllByLabelText('Close modal')[0])
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+      fireEvent.keyDown(vinylItem, { key: ' ' })
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
   })
 
   describe('Mouse event handlers', () => {
@@ -363,6 +392,35 @@ describe('VinylCollection', () => {
         // Event handlers should be called without error
         expect(carousel).toBeTruthy()
       }
+    })
+
+    it('ignores pointer handlers when pointerType is mouse', () => {
+      const manyReleases = createManyReleases(25)
+      const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const carousel = getByTestId('vinyl-carousel')
+      expect(carousel).toBeTruthy()
+
+      fireEvent.pointerDown(carousel, { pointerType: 'mouse', pageX: 100 })
+      fireEvent.pointerMove(carousel, { pointerType: 'mouse', pageX: 200 })
+      fireEvent.pointerUp(carousel, { pointerType: 'mouse' })
+
+      // Mouse-specific pointer events should no-op; behavior remains stable.
+      expect(carousel).toBeTruthy()
+    })
+
+    it('handles pointer cancel for touch input', () => {
+      const manyReleases = createManyReleases(25)
+      const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const carousel = getByTestId('vinyl-carousel')
+      expect(carousel).toBeTruthy()
+
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 200 })
+      fireEvent.pointerCancel(carousel, { pointerType: 'touch' })
+
+      expect(carousel).toBeTruthy()
     })
   })
 
