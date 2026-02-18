@@ -14,6 +14,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 import WrapRootElement from './wrapRootElement'
 
 let emotionCache
+const THEME_UI_COLOR_MODE_KEY = 'theme-ui-color-mode'
 
 const createEmotionCache = () => {
   const insertionPoint =
@@ -31,6 +32,55 @@ const getEmotionCache = () => {
   }
 
   return emotionCache
+}
+
+const resolveThemeUiColorMode = () => {
+  let mode
+
+  try {
+    mode = window.localStorage.getItem(THEME_UI_COLOR_MODE_KEY)
+  } catch {
+    mode = null
+  }
+
+  if (!mode) {
+    const prefersDark =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    mode = prefersDark ? 'dark' : 'default'
+  }
+
+  if (mode === 'light') {
+    mode = 'default'
+  }
+
+  if (mode !== 'dark' && mode !== 'default') {
+    mode = 'default'
+  }
+
+  return mode
+}
+
+const syncThemeUiColorMode = () => {
+  if (typeof document === 'undefined') {
+    return
+  }
+
+  const htmlElement = document.documentElement
+  if (!htmlElement) {
+    return
+  }
+
+  const mode = resolveThemeUiColorMode()
+
+  Array.from(htmlElement.classList)
+    .filter(className => className.startsWith('theme-ui-'))
+    .forEach(className => htmlElement.classList.remove(className))
+
+  htmlElement.classList.add(`theme-ui-${mode}`)
+  htmlElement.setAttribute('data-theme-ui-color-mode', mode)
 }
 
 export const wrapRootElement = ({ element }) => (
@@ -60,6 +110,8 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
 // Scroll to top and focus main content after route changes (accessibility).
 // See https://webaim.org/techniques/skipnav/
 export const onRouteUpdate = ({ location, prevLocation }) => {
+  syncThemeUiColorMode()
+
   if (prevLocation !== null) {
     // Don't scroll to top if it's just a hash change on the same page
     const currentPath = location?.pathname

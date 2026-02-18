@@ -7,6 +7,7 @@ import { shouldUpdateScroll, onRouteUpdate, wrapRootElement } from './gatsby-bro
 const mockGetElementById = jest.fn()
 const mockFocus = jest.fn()
 const mockScrollTo = jest.fn()
+const mockMatchMedia = jest.fn()
 
 // Mock DOM element
 const mockSkipContent = {
@@ -18,6 +19,14 @@ beforeEach(() => {
   jest.clearAllMocks()
   document.getElementById = mockGetElementById
   window.scrollTo = mockScrollTo
+  window.matchMedia = mockMatchMedia.mockReturnValue({
+    matches: false,
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn()
+  })
+  window.localStorage.removeItem('theme-ui-color-mode')
+  document.documentElement.className = ''
+  document.documentElement.removeAttribute('data-theme-ui-color-mode')
 })
 
 // Restore originals after tests
@@ -87,6 +96,31 @@ describe('gatsby-browser', () => {
   })
 
   describe('onRouteUpdate', () => {
+    it('syncs Theme UI mode class and data attribute from localStorage', () => {
+      window.localStorage.setItem('theme-ui-color-mode', 'dark')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    })
+
+    it('normalizes light mode to default when syncing Theme UI mode', () => {
+      window.localStorage.setItem('theme-ui-color-mode', 'light')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
+      expect(document.documentElement.classList.contains('theme-ui-light')).toBe(false)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    })
+
     it('should not call scrollTo or focus when prevLocation is null', () => {
       onRouteUpdate({ prevLocation: null })
       expect(mockScrollTo).not.toHaveBeenCalled()
