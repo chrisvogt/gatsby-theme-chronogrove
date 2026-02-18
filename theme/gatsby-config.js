@@ -219,8 +219,25 @@ module.exports = (themeOptions = {}) => {
        * - CSS-in-JS styling
        * - Dynamic theme switching
        * - Server-side rendering support
+       *
+       * Configuration:
+       * - sourceMap: false in production to reduce CSS size
+       * - cssPropOptimization: true to optimize sx prop usage
+       * - autoLabel: 'dev-only' to reduce production CSS
        */
-      'gatsby-plugin-emotion',
+      {
+        resolve: 'gatsby-plugin-emotion',
+        options: {
+          // Disable source maps in production to reduce CSS size
+          sourceMap: process.env.NODE_ENV === 'development',
+          // Optimize css prop (sx) usage - assumes jsx pragma is used
+          cssPropOptimization: true,
+          // Only add labels in development for easier debugging
+          autoLabel: 'dev-only',
+          // Label format for development
+          labelFormat: '[local]'
+        }
+      },
 
       /**
        * Style Guide Plugin (Development Only)

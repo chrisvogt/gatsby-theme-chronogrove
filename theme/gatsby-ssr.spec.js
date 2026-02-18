@@ -49,21 +49,79 @@ describe('gatsby-ssr', () => {
     expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #fff !important/)
   })
 
-  it('onPreRenderHTML puts color-mode scripts first in head', () => {
-    const getHeadComponents = jest.fn(() => [
-      { key: 'emotion-insertion-point', type: 'meta' },
-      { key: 'theme-ui-no-flash', type: 'script' },
-      { key: 'html-bg-color', type: 'script' }
-    ])
-    const replaceHeadComponents = jest.fn()
+  describe('onPreRenderHTML', () => {
+    const originalEnv = process.env.NODE_ENV
 
-    gatsbySSR.onPreRenderHTML({ getHeadComponents, replaceHeadComponents })
+    afterEach(() => {
+      process.env.NODE_ENV = originalEnv
+    })
 
-    expect(getHeadComponents).toHaveBeenCalled()
-    expect(replaceHeadComponents).toHaveBeenCalledTimes(1)
-    const sorted = replaceHeadComponents.mock.calls[0][0]
-    expect(sorted[0].key).toBe('theme-ui-no-flash')
-    expect(sorted[1].key).toBe('html-bg-color')
-    expect(sorted[2].key).toBe('emotion-insertion-point')
+    it('puts color-mode scripts first in head in development', () => {
+      process.env.NODE_ENV = 'development'
+      const getHeadComponents = jest.fn(() => [
+        { key: 'emotion-insertion-point', type: 'meta' },
+        { key: 'theme-ui-no-flash', type: 'script' },
+        { key: 'html-bg-color', type: 'script' }
+      ])
+      const replaceHeadComponents = jest.fn()
+
+      gatsbySSR.onPreRenderHTML({ getHeadComponents, replaceHeadComponents })
+
+      expect(getHeadComponents).toHaveBeenCalled()
+      expect(replaceHeadComponents).toHaveBeenCalledTimes(1)
+      const sorted = replaceHeadComponents.mock.calls[0][0]
+      expect(sorted[0].key).toBe('theme-ui-no-flash')
+      expect(sorted[1].key).toBe('html-bg-color')
+      expect(sorted[2].key).toBe('emotion-insertion-point')
+    })
+
+    it('extracts CSS to external file in production', () => {
+      process.env.NODE_ENV = 'production'
+      const fs = require('fs')
+      const path = require('path')
+      const publicDir = path.join(process.cwd(), 'public')
+
+      // Ensure public directory exists
+      if (!fs.existsSync(publicDir)) {
+        fs.mkdirSync(publicDir, { recursive: true })
+      }
+
+      const styleContent = '.test-class { color: red; }'
+      const getHeadComponents = jest.fn(() => [
+        { key: 'emotion-insertion-point', type: 'meta' },
+        { key: 'theme-ui-no-flash', type: 'script' },
+        { key: 'html-bg-color', type: 'script' },
+        {
+          type: 'style',
+          props: {
+            dangerouslySetInnerHTML: { __html: styleContent }
+          }
+        }
+      ])
+      const replaceHeadComponents = jest.fn()
+
+      gatsbySSR.onPreRenderHTML({ getHeadComponents, replaceHeadComponents })
+
+      expect(getHeadComponents).toHaveBeenCalled()
+      expect(replaceHeadComponents).toHaveBeenCalledTimes(1)
+      const sorted = replaceHeadComponents.mock.calls[0][0]
+
+      // Should have color mode scripts first
+      expect(sorted[0].key).toBe('theme-ui-no-flash')
+      expect(sorted[1].key).toBe('html-bg-color')
+
+      // Should have CSS link instead of style tag
+      const cssLink = sorted.find(c => c?.props?.rel === 'stylesheet')
+      expect(cssLink).toBeDefined()
+      expect(cssLink?.props?.href).toMatch(/^\/emotion-styles-.*\.css$/)
+
+      // Clean up test CSS file
+      if (cssLink?.props?.href) {
+        const cssPath = path.join(publicDir, cssLink.props.href.replace(/^\//, ''))
+        if (fs.existsSync(cssPath)) {
+          fs.unlinkSync(cssPath)
+        }
+      }
+    })
   })
 })
