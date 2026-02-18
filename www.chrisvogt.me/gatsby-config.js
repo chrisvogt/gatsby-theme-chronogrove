@@ -308,32 +308,6 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {}
-    },
-    {
-      resolve: 'gatsby-plugin-newrelic',
-      options: {
-        config: {
-          accountId: process.env.NEW_RELIC_ACCOUNT_ID,
-          agentID: process.env.NEW_RELIC_AGENT_ID,
-          applicationID: process.env.NEW_RELIC_APPLICATION_ID,
-          beacon: 'bam.nr-data.net',
-          errorBeacon: 'bam.nr-data.net',
-          instrumentationType: 'proAndSPA',
-          licenseKey: process.env.NEW_RELIC_LICENSE_KEY,
-          settings: {
-            distributed_tracing: {
-              enabled: true
-            },
-            privacy: {
-              cookies_enabled: true
-            },
-            ajax: {
-              deny_list: ['bam-cell.nr-data.net']
-            }
-          },
-          trustKey: process.env.NEW_RELIC_TRUST_KEY
-        }
-      }
     }
   ]
 }

@@ -47,13 +47,6 @@ const PrivacyPolicy = () => {
             for more details on how Google Analytics collects and processes data.
           </Themed.p>
 
-          <Themed.h2>New Relic</Themed.h2>
-
-          <Themed.p>
-            I use New Relic for both browser tracking and Application Performance Management (APM). This data helps me
-            measure the performance of my site and the services it depends on.
-          </Themed.p>
-
           <Themed.h2>Data Usage</Themed.h2>
 
           <Themed.p>

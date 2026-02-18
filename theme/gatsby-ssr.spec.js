@@ -8,7 +8,7 @@ describe('gatsby-ssr', () => {
     expect(gatsbySSR.wrapRootElement).toBeDefined()
   })
 
-  it('sets html lang attribute and injects the color mode and HTML background scripts', () => {
+  it('sets html lang attribute and injects Emotion insertion point plus pre-body scripts', () => {
     const setHtmlAttributes = jest.fn()
     const setHeadComponents = jest.fn()
     const setPreBodyComponents = jest.fn()
@@ -18,15 +18,12 @@ describe('gatsby-ssr', () => {
     // Assert the HTML lang attribute
     expect(setHtmlAttributes).toHaveBeenCalledWith({ lang: 'en' })
 
-    // Test that the Emotion insertBefore patch is in the head
+    // Test that the Emotion insertion point meta tag is in the head
     expect(setHeadComponents).toHaveBeenCalledTimes(1)
     const headComponents = setHeadComponents.mock.calls[0][0]
     expect(headComponents).toHaveLength(1)
-    const { container: patchContainer } = render(headComponents[0])
-    const patchScript = patchContainer.querySelector('script')
-    expect(patchScript).toBeInTheDocument()
-    expect(patchScript).toHaveTextContent(/head\.insertBefore/)
-    expect(patchScript).toHaveTextContent(/head\.contains/)
+    expect(headComponents[0].type).toBe('meta')
+    expect(headComponents[0].props.name).toBe('emotion-insertion-point')
 
     // Test that both pre-body scripts are injected
     expect(setPreBodyComponents).toHaveBeenCalledTimes(1)
@@ -39,6 +36,8 @@ describe('gatsby-ssr', () => {
     expect(colorModeScriptTag).toBeInTheDocument()
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
     expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
+    expect(colorModeScriptTag).toHaveTextContent(/classList\.add/)
+    expect(colorModeScriptTag).toHaveTextContent(/theme-ui-/)
     expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
 
     // Test the HTML background script (second script)

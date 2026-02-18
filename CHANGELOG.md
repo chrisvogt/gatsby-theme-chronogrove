@@ -1,5 +1,54 @@
 # Changelog
 
+## 0.72.14
+
+### 🐛 Bug Fixes
+
+- **Harden Emotion style insertion against `<head>` mutations**: Removed the runtime `document.head.insertBefore` monkey patch and switched to a stable Emotion insertion-point strategy.
+  - **Root cause**: Third-party scripts mutating `<head>` could invalidate insertion references and trigger `insertBefore` `NotFoundError` crashes.
+  - **Fix**: Added a dedicated SSR insertion point (`<meta name="emotion-insertion-point" />`) and configured a browser Emotion cache to insert styles at that anchor.
+  - **Result**: Prevents this crash class without patching native DOM methods.
+- **Fix Theme UI color-mode desync after client navigation (especially in production/Netlify builds)**.
+  - **Root cause**: Color mode state could drift between `data-theme-ui-color-mode`, `theme-ui-*` classes, and localStorage during hydration and route transitions.
+  - **Fix**: Normalized `light -> default`, reconciled `theme-ui-*` classes + `data-theme-ui-color-mode` in SSR no-flash script, `onRouteUpdate`, and `RootWrapper`, and added a scheduled re-sync on route updates (`requestAnimationFrame` + timeout fallback).
+  - **Result**: Color mode remains consistent after toggling and navigating between pages repeatedly.
+- **Restore `rawColors` precedence for HTML background color in `RootWrapper`**.
+  - **Root cause**: A follow-up refactor accidentally flipped fallback order to prefer `theme.colors.background` before `theme.rawColors.background`.
+  - **Fix**: Switched `RootWrapper` back to `rawColors -> colors -> hardcoded fallback`, matching `animated-page-background` and the intent of using raw color values for transition flash prevention.
+  - **Result**: Avoids assigning CSS variable references where raw hex color is available and keeps behavior consistent across sibling components.
+
+### ♻️ Refactor
+
+- **Removed New Relic browser/APM integration from the personal site app** while this issue is being mitigated.
+  - Removed `gatsby-plugin-newrelic` plugin configuration and dependency.
+  - Removed New Relic environment variables from `.env.template`.
+  - Updated privacy policy copy to remove the New Relic section.
+
+### 🧪 Tests
+
+- Updated SSR tests to assert the Emotion insertion-point meta tag.
+- Expanded browser tests for Emotion cache reuse and Theme UI route-sync edge cases (DOM attribute/class precedence, stale class cleanup, localStorage fallback, RAF timeout fallback, documentElement guard).
+- Updated `RootWrapper` tests to assert class/attribute reconciliation and background updates.
+- Added a `RootWrapper` regression test to lock `rawColors` precedence when `colors.background` is a CSS variable.
+- Coverage for `theme/gatsby-browser.js` is 100% statements/branches/functions/lines in focused coverage run.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.14)
+- `theme/gatsby-ssr.js` (removed `insertBefore` patch, added Emotion insertion point meta)
+- `theme/gatsby-ssr.spec.js` (updated SSR head assertions)
+- `theme/gatsby-browser.js` (Emotion cache + `CacheProvider`, Theme UI route-sync hardening)
+- `theme/gatsby-browser.spec.js` (Emotion + Theme UI route-sync coverage)
+- `theme/src/components/root-wrapper.js` (Theme UI class/attribute reconciliation on render/effect)
+- `theme/src/components/root-wrapper.spec.js` (RootWrapper color-mode synchronization assertions)
+- `www.chrisvogt.me/gatsby-config.js` (removed `gatsby-plugin-newrelic`)
+- `www.chrisvogt.me/package.json` (removed `gatsby-plugin-newrelic` dependency)
+- `pnpm-lock.yaml` (removed `gatsby-plugin-newrelic` entries)
+- `.env.template` (removed New Relic env vars)
+- `www.chrisvogt.me/src/pages/privacy.js` (removed New Relic policy section)
+
+---
+
 ## 0.72.13
 
 ### 📦 Dependencies

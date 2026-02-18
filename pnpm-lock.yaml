@@ -368,9 +368,6 @@ importers:
       gatsby-plugin-google-analytics:
         specifier: ^5.16.0
         version: 5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      gatsby-plugin-newrelic:
-        specifier: ^2.9.0
-        version: 2.9.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       gatsby-plugin-robots-txt:
         specifier: ^1.8.0
         version: 1.8.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))
@@ -4822,14 +4819,6 @@ packages:
       gatsby-source-filesystem: ^5.0.0-next
       react: ^18.0.0 || ^19.0.0 || ^0.0.0
       react-dom: ^18.0.0 || ^19.0.0 || ^0.0.0
-
-  gatsby-plugin-newrelic@2.9.0:
-    resolution: {integrity: sha512-8cSq2I5eXm9U9TPUIzWgowobB4DgRJPCRmQEqL+AnBNG9o2aC5phHDJPIJ6/rN/sKDAQ0/PtLVgKh0iMWIokUQ==}
-    engines: {node: '>=16.3.1'}
-    peerDependencies:
-      gatsby: 3.x - 5.x
-      react: 17 - 18
-      react-dom: 17 - 18
 
   gatsby-plugin-page-creator@5.16.0:
     resolution: {integrity: sha512-SkKb7X/8A+C1bhhw/tEDPSTr8AcsTc526OisIu8fHlxLKUQ2jY7ppsvY2PimwtSCdX6euNdDafWWlfpy5XSSFA==}
@@ -14873,13 +14862,6 @@ snapshots:
       - graphql
       - react-native-b4a
       - supports-color
-
-  gatsby-plugin-newrelic@2.9.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
-    dependencies:
-      '@babel/runtime': 7.28.6
-      gatsby: 5.16.1(babel-eslint@10.1.0(eslint@9.39.2))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
 
   gatsby-plugin-page-creator@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@9.39.2)(jest@30.2.0(@types/node@25.2.3)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(graphql@16.12.0):
     dependencies:

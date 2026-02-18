@@ -19,7 +19,6 @@
     "d3": "^7.9.0",
     "gatsby": "catalog:",
     "gatsby-plugin-google-analytics": "^5.16.0",
-    "gatsby-plugin-newrelic": "^2.9.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sitemap": "^6.16.0",
     "gatsby-theme-chronogrove": "workspace:*",

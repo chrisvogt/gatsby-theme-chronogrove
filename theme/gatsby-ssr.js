@@ -1,39 +1,10 @@
 import React from 'react'
 export { default as wrapRootElement } from './wrapRootElement'
 
-// Patches document.head.insertBefore to avoid NotFoundError when the reference
-// node is no longer a child of head (e.g. after third-party scripts like New
-// Relic mutate the head). Emotion and other libs can then insert style tags
-// without throwing. Injected early so it runs before other head scripts.
-const emotionInsertBeforePatch = `
-(function() {
-  try {
-    var head = document.head;
-    if (!head) return;
-    var orig = head.insertBefore;
-    head.insertBefore = function(newNode, refNode) {
-      try {
-        if (refNode && !head.contains(refNode)) refNode = null;
-        return orig.call(head, newNode, refNode);
-      } catch (e) {
-        try {
-          return orig.call(head, newNode, null);
-        } catch (e2) {
-          head.appendChild(newNode);
-          return newNode;
-        }
-      }
-    };
-  } catch (e) {}
-})();
-`
-
 export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
   setHtmlAttributes({ lang: 'en' })
 
-  setHeadComponents([
-    <script key='emotion-insertbefore-patch' dangerouslySetInnerHTML={{ __html: emotionInsertBeforePatch }} />
-  ])
+  setHeadComponents([<meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />])
 
   const colorModeScript = `
     (function() {
@@ -43,7 +14,22 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
         }
-        document.documentElement.setAttribute('data-theme-ui-color-mode', mode);
+        if (mode === 'light') {
+          mode = 'default';
+        }
+        var htmlElement = document.documentElement;
+        var classesToRemove = [];
+        for (var i = 0; i < htmlElement.classList.length; i++) {
+          var className = htmlElement.classList[i];
+          if (className.indexOf('theme-ui-') === 0) {
+            classesToRemove.push(className);
+          }
+        }
+        for (var j = 0; j < classesToRemove.length; j++) {
+          htmlElement.classList.remove(classesToRemove[j]);
+        }
+        htmlElement.classList.add('theme-ui-' + mode);
+        htmlElement.setAttribute('data-theme-ui-color-mode', mode);
       } catch (e) {}
     })();
   `
