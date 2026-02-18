@@ -9,6 +9,7 @@ import AudioPlayer from './audio-player'
 const LIGHT_BG = '#fdf8f5'
 const DARK_BG = '#14141F'
 const THEME_UI_COLOR_MODE_KEY = 'theme-ui-color-mode'
+const RECONCILE_COLOR_MODE_EVENT = 'chronogrove-reconcile-color-mode'
 
 const normalizeStored = mode => (mode === 'light' ? 'default' : mode || null)
 
@@ -23,7 +24,7 @@ const getStoredColorMode = () => {
 
 const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
-  const [colorMode] = useColorMode()
+  const [colorMode, setColorMode] = useColorMode()
   const { theme } = useThemeUI()
 
   const normalizedColorMode = colorMode === 'light' ? 'default' : colorMode || 'default'
@@ -33,16 +34,26 @@ const RootWrapper = ({ children }) => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
   }, [])
 
-  // Sync DOM (classes, data-attr, background) from localStorage when set, else from context.
-  // Preferring localStorage fixes wrong first paint on Blog/Music/Travel/Home without calling
-  // setColorMode here (which caused an infinite toggle loop with Theme UI).
+  // On route change, reconcile Theme UI context with localStorage (fixes wrong context on
+  // Blog/Music/Travel/Home after navigation). Only runs when the event is dispatched from
+  // gatsby-browser onRouteUpdate, so toggling the theme never triggers this and avoids a loop.
+  useEffect(() => {
+    const handler = () => {
+      const stored = getStoredColorMode()
+      if (stored && stored !== normalizedColorMode) {
+        setColorMode(stored)
+      }
+    }
+    window.addEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
+    return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
+  }, [normalizedColorMode, setColorMode])
+
+  // Sync DOM from context so toggles update immediately. Do not prefer localStorage here or
+  // the DOM can lag (Theme UI may write localStorage after updating context).
   useEffect(() => {
     if (typeof document === 'undefined') return
 
-    const storedMode = getStoredColorMode()
-    const sourceOfTruth = storedMode || normalizedColorMode
-
-    const isDark = sourceOfTruth === 'dark'
+    const isDark = normalizedColorMode === 'dark'
     const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
     const htmlElement = document.documentElement
 
@@ -50,11 +61,11 @@ const RootWrapper = ({ children }) => {
       .filter(className => className.startsWith('theme-ui-'))
       .forEach(className => htmlElement.classList.remove(className))
 
-    htmlElement.classList.add(`theme-ui-${sourceOfTruth}`)
-    htmlElement.setAttribute('data-theme-ui-color-mode', sourceOfTruth)
+    htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
+    htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
     htmlElement.style.backgroundColor = bgColorRaw
 
-    logColorModeState(sourceOfTruth, theme, 'RootWrapper')
+    logColorModeState(normalizedColorMode, theme, 'RootWrapper')
   }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme])
 
   return (

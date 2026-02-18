@@ -147,6 +147,9 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
 // See https://webaim.org/techniques/skipnav/
 export const onRouteUpdate = ({ location, prevLocation }) => {
   scheduleThemeUiColorModeSync()
+  if (typeof window !== 'undefined' && typeof window.CustomEvent === 'function') {
+    window.dispatchEvent(new window.CustomEvent('chronogrove-reconcile-color-mode'))
+  }
 
   if (prevLocation !== null) {
     // Don't scroll to top if it's just a hash change on the same page
