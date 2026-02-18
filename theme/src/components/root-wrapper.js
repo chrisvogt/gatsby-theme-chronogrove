@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useSelector } from 'react-redux'
-import { useLocation } from '@gatsbyjs/reach-router'
 import React, { useEffect } from 'react'
 
 import AudioPlayer from './audio-player'
@@ -10,7 +9,6 @@ const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
-  const location = useLocation()
 
   const normalizedColorMode = colorMode === 'light' ? 'default' : colorMode || 'default'
 
@@ -29,7 +27,7 @@ const RootWrapper = ({ children }) => {
       htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
       htmlElement.style.backgroundColor = bgColorRaw
     }
-  }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, location?.pathname])
+  }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background])
 
   return (
     <>
