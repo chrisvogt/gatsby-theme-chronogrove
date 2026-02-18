@@ -16,6 +16,18 @@ import WrapRootElement from './wrapRootElement'
 let emotionCache
 const THEME_UI_COLOR_MODE_KEY = 'theme-ui-color-mode'
 
+const normalizeThemeUiColorMode = mode => {
+  if (mode === 'light') {
+    return 'default'
+  }
+
+  if (mode === 'dark' || mode === 'default') {
+    return mode
+  }
+
+  return null
+}
+
 const createEmotionCache = () => {
   const insertionPoint =
     typeof document !== 'undefined' ? document.querySelector('meta[name="emotion-insertion-point"]') : undefined
@@ -35,6 +47,23 @@ const getEmotionCache = () => {
 }
 
 const resolveThemeUiColorMode = () => {
+  if (typeof document !== 'undefined') {
+    const htmlElement = document.documentElement
+
+    const domAttributeMode = normalizeThemeUiColorMode(htmlElement?.getAttribute('data-theme-ui-color-mode'))
+    if (domAttributeMode) {
+      return domAttributeMode
+    }
+
+    if (htmlElement?.classList?.contains('theme-ui-dark')) {
+      return 'dark'
+    }
+
+    if (htmlElement?.classList?.contains('theme-ui-default') || htmlElement?.classList?.contains('theme-ui-light')) {
+      return 'default'
+    }
+  }
+
   let mode
 
   try {
@@ -43,6 +72,8 @@ const resolveThemeUiColorMode = () => {
     mode = null
   }
 
+  mode = normalizeThemeUiColorMode(mode)
+
   if (!mode) {
     const prefersDark =
       typeof window !== 'undefined' &&
@@ -50,14 +81,6 @@ const resolveThemeUiColorMode = () => {
       window.matchMedia('(prefers-color-scheme: dark)').matches
 
     mode = prefersDark ? 'dark' : 'default'
-  }
-
-  if (mode === 'light') {
-    mode = 'default'
-  }
-
-  if (mode !== 'dark' && mode !== 'default') {
-    mode = 'default'
   }
 
   return mode

@@ -96,6 +96,20 @@ describe('gatsby-browser', () => {
   })
 
   describe('onRouteUpdate', () => {
+    it('prefers DOM mode over stale localStorage mode', () => {
+      document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
+      window.localStorage.setItem('theme-ui-color-mode', 'default')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
+      expect(document.documentElement.classList.contains('theme-ui-default')).toBe(false)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    })
+
     it('syncs Theme UI mode class and data attribute from localStorage', () => {
       window.localStorage.setItem('theme-ui-color-mode', 'dark')
 
