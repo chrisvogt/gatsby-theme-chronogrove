@@ -40,6 +40,9 @@ describe('RootWrapper', () => {
       }
     })
     store.dispatch = jest.fn()
+    document.documentElement.className = ''
+    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    document.documentElement.style.backgroundColor = ''
   })
 
   it('renders children and AudioPlayer', () => {
@@ -114,6 +117,7 @@ describe('RootWrapper', () => {
   })
 
   it('handles dark mode with default background color', () => {
+    document.documentElement.classList.add('theme-ui-default')
     mockUseColorMode.mockReturnValue(['dark', jest.fn()])
     mockUseThemeUI.mockReturnValue({
       theme: {}
@@ -131,6 +135,9 @@ describe('RootWrapper', () => {
     // Check that background color is set (browser may convert hex to rgb)
     const bgColor = document.documentElement.style.backgroundColor
     expect(bgColor).toMatch(/rgb\(20,\s*20,\s*31\)|#14141F/i)
+    expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
+    expect(document.documentElement.classList.contains('theme-ui-default')).toBe(false)
+    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
   })
 
   it('handles light mode with default background color', () => {
@@ -151,5 +158,7 @@ describe('RootWrapper', () => {
     // Check that background color is set (browser may convert hex to rgb)
     const bgColor = document.documentElement.style.backgroundColor
     expect(bgColor).toMatch(/rgb\(253,\s*248,\s*245\)|#fdf8f5/i)
+    expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
+    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
   })
 })

@@ -14,7 +14,22 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
         }
-        document.documentElement.setAttribute('data-theme-ui-color-mode', mode);
+        if (mode === 'light') {
+          mode = 'default';
+        }
+        var htmlElement = document.documentElement;
+        var classesToRemove = [];
+        for (var i = 0; i < htmlElement.classList.length; i++) {
+          var className = htmlElement.classList[i];
+          if (className.indexOf('theme-ui-') === 0) {
+            classesToRemove.push(className);
+          }
+        }
+        for (var j = 0; j < classesToRemove.length; j++) {
+          htmlElement.classList.remove(classesToRemove[j]);
+        }
+        htmlElement.classList.add('theme-ui-' + mode);
+        htmlElement.setAttribute('data-theme-ui-color-mode', mode);
       } catch (e) {}
     })();
   `

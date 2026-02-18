@@ -36,6 +36,8 @@ describe('gatsby-ssr', () => {
     expect(colorModeScriptTag).toBeInTheDocument()
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
     expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
+    expect(colorModeScriptTag).toHaveTextContent(/classList\.add/)
+    expect(colorModeScriptTag).toHaveTextContent(/theme-ui-/)
     expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
 
     // Test the HTML background script (second script)

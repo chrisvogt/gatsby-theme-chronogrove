@@ -10,15 +10,24 @@ const RootWrapper = ({ children }) => {
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
 
+  const normalizedColorMode = colorMode === 'light' ? 'default' : colorMode || 'default'
+
   // Set HTML background color to match theme to prevent white flash during page transitions
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      const isDark = colorMode === 'dark'
+      const isDark = normalizedColorMode === 'dark'
       const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
       const htmlElement = document.documentElement
+
+      Array.from(htmlElement.classList)
+        .filter(className => className.startsWith('theme-ui-'))
+        .forEach(className => htmlElement.classList.remove(className))
+
+      htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
+      htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
       htmlElement.style.backgroundColor = bgColorRaw
     }
-  }, [colorMode, theme])
+  }, [normalizedColorMode, theme])
 
   return (
     <>
