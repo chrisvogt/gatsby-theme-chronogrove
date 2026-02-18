@@ -1,8 +1,30 @@
 # Changelog
 
-## 0.72.15
+## 0.72.16
 
 ### 🐛 Bug Fixes
+
+- **Theme UI color mode: fix wrong theme on Blog/Music/Travel after navigation and fix toggle not updating text**.
+  - **Root cause**: On pages using `AnimatedPageBackground` (Home, Blog, Music, Travel), client-side navigation could leave Theme UI’s color mode context stale (e.g. `default` while the user had chosen `dark`). Syncing the DOM from localStorage in `RootWrapper` then caused the theme toggle to stop updating text (Theme UI updates context first and may write localStorage later, so we were overwriting the DOM with the old value). Calling `setColorMode` from `RootWrapper` to fix context caused an infinite toggle loop (strobe).
+  - **Fix**: (1) In `gatsby-browser.js`, `resolveThemeUiColorMode()` now prefers **localStorage over DOM** so route sync doesn’t perpetuate a wrong value. (2) **RootWrapper** syncs the DOM from **context only** so toggles update immediately. (3) On route change, `onRouteUpdate` dispatches a custom event; RootWrapper listens and calls `setColorMode(storedMode)` once to reconcile context with localStorage, fixing the wrong theme on Blog/Music/Travel/Home without affecting the toggle.
+  - **Result**: Theme toggle updates all text and UI immediately; color mode stays correct when navigating between Home, Blog, Music, Travel, About, and Now.
+
+### 🧪 Tests
+
+- **gatsby-browser.spec.js**: Updated Theme UI sync tests to reflect localStorage-as-source-of-truth (prefer localStorage over DOM, fallbacks when localStorage is empty).
+- **root-wrapper.spec.js**: Clear `theme-ui-color-mode` from localStorage in `beforeEach` to avoid cross-test leakage.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.16)
+- `theme/gatsby-browser.js` (resolveThemeUiColorMode prefers localStorage; onRouteUpdate dispatches reconcile event)
+- `theme/gatsby-browser.spec.js` (updated sync tests)
+- `theme/src/components/root-wrapper.js` (DOM from context; reconcile listener for route-only setColorMode)
+- `theme/src/components/root-wrapper.spec.js` (localStorage cleanup in beforeEach)
+
+---
+
+## 0.72.15
 
 ### 🐛 Bug Fixes
 
