@@ -106,6 +106,16 @@ const syncThemeUiColorMode = () => {
   htmlElement.setAttribute('data-theme-ui-color-mode', mode)
 }
 
+const scheduleThemeUiColorModeSync = () => {
+  syncThemeUiColorMode()
+
+  if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(syncThemeUiColorMode)
+  } else {
+    setTimeout(syncThemeUiColorMode, 0)
+  }
+}
+
 export const wrapRootElement = ({ element }) => (
   <CacheProvider value={getEmotionCache()}>
     <WrapRootElement element={element} />
@@ -133,7 +143,7 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
 // Scroll to top and focus main content after route changes (accessibility).
 // See https://webaim.org/techniques/skipnav/
 export const onRouteUpdate = ({ location, prevLocation }) => {
-  syncThemeUiColorMode()
+  scheduleThemeUiColorModeSync()
 
   if (prevLocation !== null) {
     // Don't scroll to top if it's just a hash change on the same page

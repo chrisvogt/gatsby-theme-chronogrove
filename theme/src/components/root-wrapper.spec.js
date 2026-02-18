@@ -27,6 +27,11 @@ jest.mock('theme-ui', () => ({
   useThemeUI: () => mockUseThemeUI()
 }))
 
+jest.mock('@gatsbyjs/reach-router', () => ({
+  ...jest.requireActual('@gatsbyjs/reach-router'),
+  useLocation: jest.fn(() => ({ pathname: '/' }))
+}))
+
 const mockStore = configureStore([])
 
 describe('RootWrapper', () => {

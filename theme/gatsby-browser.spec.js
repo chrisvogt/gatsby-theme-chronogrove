@@ -3,6 +3,11 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { shouldUpdateScroll, onRouteUpdate, wrapRootElement } from './gatsby-browser'
 
+jest.mock('@gatsbyjs/reach-router', () => ({
+  ...jest.requireActual('@gatsbyjs/reach-router'),
+  useLocation: jest.fn(() => ({ pathname: '/' }))
+}))
+
 // Mock document and window methods
 const mockGetElementById = jest.fn()
 const mockFocus = jest.fn()
