@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { act } from 'react'
 
@@ -183,6 +183,35 @@ describe('VinylCollection', () => {
       // Should remove focused class
       expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
     })
+
+    it('opens and closes the Discogs modal when a vinyl is clicked', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      fireEvent.click(vinylItem)
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+      fireEvent.click(screen.getAllByLabelText('Close modal')[0])
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    })
+
+    it('opens the modal from keyboard Enter and Space activation', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+      const vinylItem = container.querySelector('.vinyl-record')
+      expect(vinylItem).toBeTruthy()
+
+      fireEvent.keyDown(vinylItem, { key: 'Enter' })
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+      fireEvent.click(screen.getAllByLabelText('Close modal')[0])
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+      fireEvent.keyDown(vinylItem, { key: ' ' })
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
   })
 
   describe('Mouse event handlers', () => {
@@ -294,68 +323,58 @@ describe('VinylCollection', () => {
     })
   })
 
-  describe('Touch event handlers', () => {
-    it('handles touch start event', () => {
+  describe('Pointer event handlers', () => {
+    it('handles pointer down event', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
       const carousel = getByTestId('vinyl-carousel')
       expect(carousel).toBeTruthy()
 
-      fireEvent.touchStart(carousel, {
-        touches: [{ pageX: 100 }]
-      })
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
 
       // Event handler should be called without error
       expect(carousel).toBeTruthy()
     })
 
-    it('handles touch move event', () => {
+    it('handles pointer move event', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
       const carousel = getByTestId('vinyl-carousel')
       expect(carousel).toBeTruthy()
 
-      // Start touching
-      fireEvent.touchStart(carousel, {
-        touches: [{ pageX: 100 }]
-      })
+      // Start touch pointer drag
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
 
-      // Move touch
-      fireEvent.touchMove(carousel, {
-        touches: [{ pageX: 200 }]
-      })
+      // Move pointer
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 200 })
 
       // Event handlers should be called without error
       expect(carousel).toBeTruthy()
     })
 
-    it('handles touch end event', () => {
+    it('handles pointer up event', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
       const carousel = getByTestId('vinyl-carousel')
       expect(carousel).toBeTruthy()
 
-      // Start touching
-      fireEvent.touchStart(carousel, {
-        touches: [{ pageX: 100 }]
-      })
+      // Start touch pointer drag
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
 
-      // Move touch beyond threshold
-      fireEvent.touchMove(carousel, {
-        touches: [{ pageX: 200 }]
-      })
+      // Move pointer beyond threshold
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 200 })
 
-      // End touch
-      fireEvent.touchEnd(carousel)
+      // End pointer
+      fireEvent.pointerUp(carousel, { pointerType: 'touch' })
 
       // Event handlers should be called without error
       expect(carousel).toBeTruthy()
     })
 
-    it('prevents touch events when transitioning', () => {
+    it('prevents pointer events when transitioning', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
@@ -367,14 +386,41 @@ describe('VinylCollection', () => {
       if (secondPageButton) {
         fireEvent.click(secondPageButton)
 
-        // Try to start touching while transitioning
-        fireEvent.touchStart(carousel, {
-          touches: [{ pageX: 100 }]
-        })
+        // Try to start touch pointer drag while transitioning
+        fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
 
         // Event handlers should be called without error
         expect(carousel).toBeTruthy()
       }
+    })
+
+    it('ignores pointer handlers when pointerType is mouse', () => {
+      const manyReleases = createManyReleases(25)
+      const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const carousel = getByTestId('vinyl-carousel')
+      expect(carousel).toBeTruthy()
+
+      fireEvent.pointerDown(carousel, { pointerType: 'mouse', pageX: 100 })
+      fireEvent.pointerMove(carousel, { pointerType: 'mouse', pageX: 200 })
+      fireEvent.pointerUp(carousel, { pointerType: 'mouse' })
+
+      // Mouse-specific pointer events should no-op; behavior remains stable.
+      expect(carousel).toBeTruthy()
+    })
+
+    it('handles pointer cancel for touch input', () => {
+      const manyReleases = createManyReleases(25)
+      const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      const carousel = getByTestId('vinyl-carousel')
+      expect(carousel).toBeTruthy()
+
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 200 })
+      fireEvent.pointerCancel(carousel, { pointerType: 'touch' })
+
+      expect(carousel).toBeTruthy()
     })
   })
 
@@ -420,22 +466,22 @@ describe('VinylCollection', () => {
       }
     })
 
-    it('applies elastic resistance for touch events at first page', () => {
+    it('applies elastic resistance for pointer events at first page', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
       const carousel = getByTestId('vinyl-carousel')
       expect(carousel).toBeTruthy()
 
-      // Start touching right from first page
-      fireEvent.touchStart(carousel, { touches: [{ pageX: 100 }] })
-      fireEvent.touchMove(carousel, { touches: [{ pageX: 200 }] })
+      // Start touch pointer drag right from first page
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 200 })
 
       // Event handlers should be called without error
       expect(carousel).toBeTruthy()
     })
 
-    it('applies elastic resistance for touch events at last page', () => {
+    it('applies elastic resistance for pointer events at last page', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
@@ -452,9 +498,9 @@ describe('VinylCollection', () => {
         const carousel = getByTestId('vinyl-carousel')
         expect(carousel).toBeTruthy()
 
-        // Start touching left from last page
-        fireEvent.touchStart(carousel, { touches: [{ pageX: 200 }] })
-        fireEvent.touchMove(carousel, { touches: [{ pageX: 100 }] })
+        // Start touch pointer drag left from last page
+        fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 200 })
+        fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 100 })
 
         // Event handlers should be called without error
         expect(carousel).toBeTruthy()
@@ -473,9 +519,9 @@ describe('VinylCollection', () => {
       fireEvent.mouseDown(carousel, { pageX: 50 })
       fireEvent.mouseMove(carousel, { pageX: 150 }) // Positive distance, first page
 
-      // Also test touch events with the same conditions
-      fireEvent.touchStart(carousel, { touches: [{ pageX: 50 }] })
-      fireEvent.touchMove(carousel, { touches: [{ pageX: 150 }] })
+      // Also test pointer events with the same conditions
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 50 })
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 150 })
 
       // Event handlers should be called without error
       expect(carousel).toBeTruthy()
@@ -893,7 +939,7 @@ describe('VinylCollection', () => {
       expect(true).toBe(true)
     })
 
-    it('calls touch event handlers', () => {
+    it('calls pointer event handlers', () => {
       const manyReleases = createManyReleases(25)
       const { getByTestId } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
@@ -901,9 +947,9 @@ describe('VinylCollection', () => {
       expect(carousel).toBeTruthy()
 
       // Try to trigger events on the carousel
-      fireEvent.touchStart(carousel, { touches: [{ pageX: 100 }] })
-      fireEvent.touchMove(carousel, { touches: [{ pageX: 200 }] })
-      fireEvent.touchEnd(carousel)
+      fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 100 })
+      fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 200 })
+      fireEvent.pointerUp(carousel, { pointerType: 'touch' })
 
       // The test passes if no errors are thrown
       expect(true).toBe(true)

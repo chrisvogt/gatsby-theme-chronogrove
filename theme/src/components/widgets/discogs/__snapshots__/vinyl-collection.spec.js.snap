@@ -23,7 +23,7 @@ exports[`VinylCollection Edge cases handles releases with empty artist name 1`] 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -127,7 +127,7 @@ exports[`VinylCollection Edge cases handles releases with empty artists array 1`
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -231,7 +231,7 @@ exports[`VinylCollection Edge cases handles releases with empty cdnThumbUrl 1`] 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -335,7 +335,7 @@ exports[`VinylCollection Edge cases handles releases with empty resourceUrl 1`] 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -447,7 +447,7 @@ exports[`VinylCollection Edge cases handles releases with missing artist name 1`
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -551,7 +551,7 @@ exports[`VinylCollection Edge cases handles releases with missing basicInformati
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -655,7 +655,7 @@ exports[`VinylCollection Edge cases handles releases with missing cdnThumbUrl pr
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -759,7 +759,7 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl 1`
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -871,7 +871,7 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl pr
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -983,7 +983,7 @@ exports[`VinylCollection Edge cases handles releases with missing title 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1087,7 +1087,7 @@ exports[`VinylCollection Edge cases handles releases with missing year 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1191,7 +1191,7 @@ exports[`VinylCollection Edge cases handles releases with null artists 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1295,7 +1295,7 @@ exports[`VinylCollection Edge cases handles releases with undefined artist name 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1399,7 +1399,7 @@ exports[`VinylCollection Edge cases handles releases with undefined artists 1`] 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1503,7 +1503,7 @@ exports[`VinylCollection Edge cases handles releases with undefined cdnThumbUrl 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1607,7 +1607,7 @@ exports[`VinylCollection Edge cases handles releases with undefined resourceUrl 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1719,7 +1719,7 @@ exports[`VinylCollection handles releases with missing artist information 1`] = 
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1823,7 +1823,7 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -1991,7 +1991,7 @@ exports[`VinylCollection handles releases with multiple artists 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -2095,7 +2095,7 @@ exports[`VinylCollection handles releases without CDN thumb URL 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
@@ -2199,7 +2199,7 @@ exports[`VinylCollection renders empty state when no releases 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-ngfim1"
+        class="css-1opls24"
         data-testid="vinyl-carousel"
       />
     </div>
@@ -2230,7 +2230,7 @@ exports[`VinylCollection renders loading state 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-ngfim1"
+        class="css-1opls24"
         data-testid="vinyl-carousel"
       />
     </div>
@@ -2261,7 +2261,7 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       class="css-1719y60"
     >
       <div
-        class="css-1wkhxkl"
+        class="css-7zqrxy"
         data-testid="vinyl-carousel"
       >
         <div
@@ -4180,7 +4180,7 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
       class="css-1719y60"
     >
       <div
-        class="css-itz9zd"
+        class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
