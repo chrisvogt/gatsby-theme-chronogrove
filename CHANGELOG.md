@@ -4,6 +4,8 @@
 
 ### 🐛 Bug Fixes
 
+### 🐛 Bug Fixes
+
 - **Reduce browser `[Violation]` warnings from non-passive touch listeners in the Discogs carousel**.
   - **Root cause**: React touch handlers (`onTouchStart/onTouchMove/onTouchEnd`) can cause root-level non-passive touch listener warnings in Chrome when used on interactive swipe areas.
   - **Fix**: Replaced touch handlers with pointer handlers (`onPointerDown/onPointerMove/onPointerUp/onPointerCancel`) for touch/pen input and added `touchAction: 'pan-y'` on the carousel surface.
@@ -57,6 +59,18 @@
 - Added a `RootWrapper` regression test to lock `rawColors` precedence when `colors.background` is a CSS variable.
 - Coverage for `theme/gatsby-browser.js` is 100% statements/branches/functions/lines in focused coverage run.
 
+### ✨ Enhancements
+
+- **Home Navigation: retro 3D panel and folding shadow**
+  - Sidebar nav (2-column breakpoints) now renders inside a **retro 1960s/70s-style panel** aligned with the theme palette: primary/secondary purple (light) and primary blue (dark) with glassmorphism and backdrop blur.
+  - **Resting vs active state:** Panel is muted and shallow by default; on hover or keyboard focus (TAB) it transitions to full vibrancy, deeper shadow, and an expanded **folding shadow** on the right (top and bottom "fold out," middle stays fixed). Exit transition is gentler (0.5s) than enter (0.3s).
+  - **3D shadow:** Curved "waist" shape built with CSS `clip-path` (polygon); dark grey gradient from theme palette (`gray[5]` / `gray[7]`, fallback `textMuted`) via `color-mix()` so it works with theme CSS variables. Shadow is flush with the panel edge and includes a soft blur.
+  - **Accessibility:** `:focus-within` on the container for keyboard users; `:focus-visible` ring on links; `prefers-reduced-motion` shows full panel with no transitions. Nav keeps `role="navigation"`, `aria-label`, and scroll-based active section.
+
+### ♻️ Refactor
+
+- **Home Navigation:** Memoized `links` (stable scroll listener), removed unused `navItemsRef`, added JSDoc. Shadow gradient uses theme palette only (no hardcoded hex).
+
 ### 📦 Files Changed
 
 - `theme/package.json` (version 0.72.14)
@@ -66,6 +80,8 @@
 - `theme/gatsby-browser.spec.js` (Emotion + Theme UI route-sync coverage)
 - `theme/src/components/root-wrapper.js` (Theme UI class/attribute reconciliation on render/effect)
 - `theme/src/components/root-wrapper.spec.js` (RootWrapper color-mode synchronization assertions)
+- `theme/src/components/home-navigation.js` (retro panel, folding shadow, theme-driven gradient, focus-visible, useMemo, JSDoc)
+- `theme/src/components/home-navigation.spec.js` (snapshots updated)
 - `www.chrisvogt.me/gatsby-config.js` (removed `gatsby-plugin-newrelic`)
 - `www.chrisvogt.me/package.json` (removed `gatsby-plugin-newrelic` dependency)
 - `pnpm-lock.yaml` (removed `gatsby-plugin-newrelic` entries)

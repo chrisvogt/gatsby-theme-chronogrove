@@ -392,7 +392,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
   },
   "config": {
     "initialColorModeName": "default",
-    "useColorSchemeMediaQuery": true,
+    "useColorSchemeMediaQuery": false,
     "useCustomProperties": true,
     "useLocalStorage": true,
   },
@@ -555,19 +555,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "tight": "1.25",
   },
   "links": {
-    "homeNavigation": {
-      "&:hover, &:focus": {
-        "backgroundColor": "var(--theme-ui-colors-panel-background)",
-      },
-      "&:not(:last-of-type)": {
-        "borderBottom": "var(--theme-ui-colors-panel-divider)",
-      },
-      "alignItems": "center",
-      "color": "primary",
-      "display": "flex",
-      "py": 2,
-      "textDecoration": "none",
-    },
     "widgetCta": {
       "&:focus": {
         "boxShadow": [Function],

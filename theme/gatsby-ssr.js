@@ -1,10 +1,8 @@
 import React from 'react'
 export { default as wrapRootElement } from './wrapRootElement'
 
-export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
+export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
   setHtmlAttributes({ lang: 'en' })
-
-  setHeadComponents([<meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />])
 
   const colorModeScript = `
     (function() {
@@ -13,6 +11,7 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
         if (!mode) {
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
+          localStorage.setItem('theme-ui-color-mode', mode);
         }
         if (mode === 'light') {
           mode = 'default';
@@ -41,16 +40,41 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyC
         if (!mode) {
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
+          localStorage.setItem('theme-ui-color-mode', mode);
         }
-        // Set HTML background color to match theme to prevent light background showing through semi-transparent animation
         var bgColor = mode === 'dark' ? '#14141F' : '#fdf8f5';
         document.documentElement.style.backgroundColor = bgColor;
       } catch (e) {}
     })();
   `
 
-  setPreBodyComponents([
+  // Force correct text vars when *the root* has data-theme-ui-color-mode so we win over Theme UI.
+  // Use :root[...] only so a child with a different attribute (e.g. Theme UI's wrapper with "default")
+  // doesn't get our light rule and force #111 on the main content when we intend dark.
+  const colorModeFallbackCSS = `
+:root[data-theme-ui-color-mode="default"], :root[data-theme-ui-color-mode="default"] * { --theme-ui-colors-text: #111 !important; --theme-ui-colors-text-muted: #333 !important; }
+:root[data-theme-ui-color-mode="dark"], :root[data-theme-ui-color-mode="dark"] * { --theme-ui-colors-text: #fff !important; --theme-ui-colors-text-muted: #d8d8d8 !important; }
+  `.trim()
+
+  setHeadComponents([
+    <meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />,
     <script key='theme-ui-no-flash' dangerouslySetInnerHTML={{ __html: colorModeScript }} />,
-    <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />
+    <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />,
+    <style key='chronogrove-color-mode-fallback' dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
   ])
+}
+
+const COLOR_MODE_HEAD_KEYS = ['theme-ui-no-flash', 'html-bg-color']
+
+export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+  const headComponents = getHeadComponents()
+  const sorted = [...headComponents].sort((a, b) => {
+    const aKey = a?.key ?? ''
+    const bKey = b?.key ?? ''
+    const aFirst = COLOR_MODE_HEAD_KEYS.includes(aKey) ? -1 : 0
+    const bFirst = COLOR_MODE_HEAD_KEYS.includes(bKey) ? -1 : 0
+    if (aFirst !== bFirst) return aFirst - bFirst
+    return 0
+  })
+  replaceHeadComponents(sorted)
 }

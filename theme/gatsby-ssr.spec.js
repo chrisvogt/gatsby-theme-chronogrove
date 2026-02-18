@@ -8,46 +8,62 @@ describe('gatsby-ssr', () => {
     expect(gatsbySSR.wrapRootElement).toBeDefined()
   })
 
-  it('sets html lang attribute and injects Emotion insertion point plus pre-body scripts', () => {
+  it('sets html lang attribute and injects Emotion insertion point, color mode, and HTML background scripts in head', () => {
     const setHtmlAttributes = jest.fn()
     const setHeadComponents = jest.fn()
-    const setPreBodyComponents = jest.fn()
 
-    gatsbySSR.onRenderBody({ setHtmlAttributes, setHeadComponents, setPreBodyComponents })
+    gatsbySSR.onRenderBody({ setHtmlAttributes, setHeadComponents })
 
-    // Assert the HTML lang attribute
     expect(setHtmlAttributes).toHaveBeenCalledWith({ lang: 'en' })
 
-    // Test that the Emotion insertion point meta tag is in the head
     expect(setHeadComponents).toHaveBeenCalledTimes(1)
     const headComponents = setHeadComponents.mock.calls[0][0]
-    expect(headComponents).toHaveLength(1)
+    expect(headComponents).toHaveLength(4)
+
     expect(headComponents[0].type).toBe('meta')
     expect(headComponents[0].props.name).toBe('emotion-insertion-point')
 
-    // Test that both pre-body scripts are injected
-    expect(setPreBodyComponents).toHaveBeenCalledTimes(1)
-    const scriptComponents = setPreBodyComponents.mock.calls[0][0]
-    expect(scriptComponents).toHaveLength(2)
-
-    // Test the color mode script (first script)
-    const { container: colorModeScriptContainer } = render(scriptComponents[0])
+    const { container: colorModeScriptContainer } = render(headComponents[1])
     const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
     expect(colorModeScriptTag).toBeInTheDocument()
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
+    expect(colorModeScriptTag).toHaveTextContent(/localStorage\.setItem\(['"]theme-ui-color-mode['"],/)
     expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
-    expect(colorModeScriptTag).toHaveTextContent(/classList\.add/)
-    expect(colorModeScriptTag).toHaveTextContent(/theme-ui-/)
     expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
 
-    // Test the HTML background script (second script)
-    const { container: htmlBgScriptContainer } = render(scriptComponents[1])
+    const { container: htmlBgScriptContainer } = render(headComponents[2])
     const htmlBgScriptTag = htmlBgScriptContainer.querySelector('script')
     expect(htmlBgScriptTag).toBeInTheDocument()
     expect(htmlBgScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
+    expect(htmlBgScriptTag).toHaveTextContent(/localStorage\.setItem\(['"]theme-ui-color-mode['"],/)
     expect(htmlBgScriptTag).toHaveTextContent(/prefers-color-scheme/)
-    expect(htmlBgScriptTag).toHaveTextContent(/backgroundColor/)
     expect(htmlBgScriptTag).toHaveTextContent(/#14141F/)
     expect(htmlBgScriptTag).toHaveTextContent(/#fdf8f5/)
+
+    const { container: fallbackStyleContainer } = render(headComponents[3])
+    const fallbackStyle = fallbackStyleContainer.querySelector('style')
+    expect(fallbackStyle).toBeInTheDocument()
+    expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="default"\]/)
+    expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #111 !important/)
+    expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="dark"\]/)
+    expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #fff !important/)
+  })
+
+  it('onPreRenderHTML puts color-mode scripts first in head', () => {
+    const getHeadComponents = jest.fn(() => [
+      { key: 'emotion-insertion-point', type: 'meta' },
+      { key: 'theme-ui-no-flash', type: 'script' },
+      { key: 'html-bg-color', type: 'script' }
+    ])
+    const replaceHeadComponents = jest.fn()
+
+    gatsbySSR.onPreRenderHTML({ getHeadComponents, replaceHeadComponents })
+
+    expect(getHeadComponents).toHaveBeenCalled()
+    expect(replaceHeadComponents).toHaveBeenCalledTimes(1)
+    const sorted = replaceHeadComponents.mock.calls[0][0]
+    expect(sorted[0].key).toBe('theme-ui-no-flash')
+    expect(sorted[1].key).toBe('html-bg-color')
+    expect(sorted[2].key).toBe('emotion-insertion-point')
   })
 })

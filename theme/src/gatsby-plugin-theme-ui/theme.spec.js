@@ -19,8 +19,9 @@ describe('Theme Configuration', () => {
       expect(mergedTheme).toBeTruthy()
     })
 
-    it('defaults the color mode to dark', () => {
-      expect(theme.config.useColorSchemeMediaQuery).toBe(true)
+    it('configures color mode with localStorage and no media-query override', () => {
+      expect(theme.config.initialColorModeName).toBe('default')
+      expect(theme.config.useColorSchemeMediaQuery).toBe(false)
       expect(theme.config.useCustomProperties).toBe(true)
       expect(theme.config.useLocalStorage).toBe(true)
     })

@@ -123,8 +123,11 @@ export const PostCard = {
 
 export default merge(tailwind, {
   config: {
-    initialColorModeName: 'default', // or 'light', but default is fine
-    useColorSchemeMediaQuery: true, // enables respecting system preference
+    initialColorModeName: 'default',
+    // Disabled: SSR no-flash script already sets initial mode from prefers-color-scheme when
+    // localStorage is empty. When true, Theme UI can overwrite the user's explicit choice with
+    // system preference and cause mode to flip (dark ↔ default) and light text on dark background.
+    useColorSchemeMediaQuery: false,
     useCustomProperties: true,
     useLocalStorage: true
   },
@@ -421,19 +424,6 @@ export default merge(tailwind, {
   },
 
   links: {
-    homeNavigation: {
-      color: 'primary',
-      display: 'flex',
-      alignItems: 'center',
-      py: 2,
-      textDecoration: 'none',
-      '&:not(:last-of-type)': {
-        borderBottom: 'var(--theme-ui-colors-panel-divider)'
-      },
-      '&:hover, &:focus': {
-        backgroundColor: 'var(--theme-ui-colors-panel-background)'
-      }
-    },
     /** Widget "Browse" / "Visit Profile" CTAs: plain text on page, high contrast (WCAG compliant) */
     widgetCta: {
       display: 'inline-flex',
