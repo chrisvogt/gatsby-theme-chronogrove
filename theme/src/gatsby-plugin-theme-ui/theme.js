@@ -424,19 +424,6 @@ export default merge(tailwind, {
   },
 
   links: {
-    homeNavigation: {
-      color: 'primary',
-      display: 'flex',
-      alignItems: 'center',
-      py: 2,
-      textDecoration: 'none',
-      '&:not(:last-of-type)': {
-        borderBottom: 'var(--theme-ui-colors-panel-divider)'
-      },
-      '&:hover, &:focus': {
-        backgroundColor: 'var(--theme-ui-colors-panel-background)'
-      }
-    },
     /** Widget "Browse" / "Visit Profile" CTAs: plain text on page, high contrast (WCAG compliant) */
     widgetCta: {
       display: 'inline-flex',
