@@ -23,7 +23,7 @@ const getStoredColorMode = () => {
 
 const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
-  const [colorMode, setColorMode] = useColorMode()
+  const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
 
   const normalizedColorMode = colorMode === 'light' ? 'default' : colorMode || 'default'
@@ -33,18 +33,14 @@ const RootWrapper = ({ children }) => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
   }, [])
 
-  // Use localStorage as source of truth so we don't overwrite with stale Theme UI context
-  // (e.g. on Blog/Music/Travel/Home where AnimatedPageBackground can cause a wrong first paint).
-  // Reconcile DOM and context with stored preference.
+  // Sync DOM (classes, data-attr, background) from localStorage when set, else from context.
+  // Preferring localStorage fixes wrong first paint on Blog/Music/Travel/Home without calling
+  // setColorMode here (which caused an infinite toggle loop with Theme UI).
   useEffect(() => {
     if (typeof document === 'undefined') return
 
     const storedMode = getStoredColorMode()
     const sourceOfTruth = storedMode || normalizedColorMode
-
-    if (storedMode && storedMode !== normalizedColorMode) {
-      setColorMode(storedMode)
-    }
 
     const isDark = sourceOfTruth === 'dark'
     const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
@@ -59,7 +55,7 @@ const RootWrapper = ({ children }) => {
     htmlElement.style.backgroundColor = bgColorRaw
 
     logColorModeState(sourceOfTruth, theme, 'RootWrapper')
-  }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme, setColorMode])
+  }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme])
 
   return (
     <>
