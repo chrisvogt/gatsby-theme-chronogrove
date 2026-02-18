@@ -48,6 +48,20 @@ const getEmotionCache = () => {
 }
 
 const resolveThemeUiColorMode = () => {
+  // Prefer localStorage (user's explicit choice) over DOM so route transitions
+  // don't perpetuate a wrong value when React paints with stale context (e.g.
+  // pages that use AnimatedPageBackground and trigger a brief wrong paint).
+  let mode
+  try {
+    mode = typeof window !== 'undefined' ? window.localStorage.getItem(THEME_UI_COLOR_MODE_KEY) : null
+  } catch {
+    mode = null
+  }
+  mode = normalizeThemeUiColorMode(mode)
+  if (mode) {
+    return mode
+  }
+
   /* istanbul ignore next -- document guard for non-DOM runtimes */
   if (typeof document !== 'undefined') {
     const htmlElement = document.documentElement
@@ -66,26 +80,12 @@ const resolveThemeUiColorMode = () => {
     }
   }
 
-  let mode
+  const prefersDark =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
 
-  try {
-    mode = window.localStorage.getItem(THEME_UI_COLOR_MODE_KEY)
-  } catch {
-    mode = null
-  }
-
-  mode = normalizeThemeUiColorMode(mode)
-
-  if (!mode) {
-    const prefersDark =
-      typeof window !== 'undefined' &&
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    mode = prefersDark ? 'dark' : 'default'
-  }
-
-  return mode
+  return prefersDark ? 'dark' : 'default'
 }
 
 const syncThemeUiColorMode = () => {
@@ -147,6 +147,9 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
 // See https://webaim.org/techniques/skipnav/
 export const onRouteUpdate = ({ location, prevLocation }) => {
   scheduleThemeUiColorModeSync()
+  if (typeof window !== 'undefined' && typeof window.CustomEvent === 'function') {
+    window.dispatchEvent(new window.CustomEvent('chronogrove-reconcile-color-mode'))
+  }
 
   if (prevLocation !== null) {
     // Don't scroll to top if it's just a hash change on the same page

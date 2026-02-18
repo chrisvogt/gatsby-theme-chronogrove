@@ -8,10 +8,23 @@ import AudioPlayer from './audio-player'
 
 const LIGHT_BG = '#fdf8f5'
 const DARK_BG = '#14141F'
+const THEME_UI_COLOR_MODE_KEY = 'theme-ui-color-mode'
+const RECONCILE_COLOR_MODE_EVENT = 'chronogrove-reconcile-color-mode'
+
+const normalizeStored = mode => (mode === 'light' ? 'default' : mode || null)
+
+const getStoredColorMode = () => {
+  if (typeof window === 'undefined') return null
+  try {
+    return normalizeStored(window.localStorage.getItem(THEME_UI_COLOR_MODE_KEY))
+  } catch {
+    return null
+  }
+}
 
 const RootWrapper = ({ children }) => {
   const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
-  const [colorMode] = useColorMode()
+  const [colorMode, setColorMode] = useColorMode()
   const { theme } = useThemeUI()
 
   const normalizedColorMode = colorMode === 'light' ? 'default' : colorMode || 'default'
@@ -21,23 +34,38 @@ const RootWrapper = ({ children }) => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
   }, [])
 
-  // Set HTML background color to match theme to prevent white flash during page transitions
+  // On route change, reconcile Theme UI context with localStorage (fixes wrong context on
+  // Blog/Music/Travel/Home after navigation). Only runs when the event is dispatched from
+  // gatsby-browser onRouteUpdate, so toggling the theme never triggers this and avoids a loop.
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      const isDark = normalizedColorMode === 'dark'
-      const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
-      const htmlElement = document.documentElement
-
-      Array.from(htmlElement.classList)
-        .filter(className => className.startsWith('theme-ui-'))
-        .forEach(className => htmlElement.classList.remove(className))
-
-      htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
-      htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
-      htmlElement.style.backgroundColor = bgColorRaw
-
-      logColorModeState(normalizedColorMode, theme, 'RootWrapper')
+    const handler = () => {
+      const stored = getStoredColorMode()
+      if (stored && stored !== normalizedColorMode) {
+        setColorMode(stored)
+      }
     }
+    window.addEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
+    return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
+  }, [normalizedColorMode, setColorMode])
+
+  // Sync DOM from context so toggles update immediately. Do not prefer localStorage here or
+  // the DOM can lag (Theme UI may write localStorage after updating context).
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+
+    const isDark = normalizedColorMode === 'dark'
+    const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
+    const htmlElement = document.documentElement
+
+    Array.from(htmlElement.classList)
+      .filter(className => className.startsWith('theme-ui-'))
+      .forEach(className => htmlElement.classList.remove(className))
+
+    htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
+    htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
+    htmlElement.style.backgroundColor = bgColorRaw
+
+    logColorModeState(normalizedColorMode, theme, 'RootWrapper')
   }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme])
 
   return (
