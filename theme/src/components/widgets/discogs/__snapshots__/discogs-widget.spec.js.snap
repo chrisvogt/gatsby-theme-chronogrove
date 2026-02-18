@@ -82,7 +82,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
         class="css-1719y60"
       >
         <div
-          class="css-ngfim1"
+          class="css-1opls24"
           data-testid="vinyl-carousel"
         />
       </div>
@@ -169,7 +169,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         class="css-1719y60"
       >
         <div
-          class="css-itz9zd"
+          class="css-nlq8f0"
           data-testid="vinyl-carousel"
         >
           <div
@@ -456,7 +456,7 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         class="css-1719y60"
       >
         <div
-          class="css-ngfim1"
+          class="css-1opls24"
           data-testid="vinyl-carousel"
         />
       </div>
