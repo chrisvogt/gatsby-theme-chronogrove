@@ -48,6 +48,17 @@ describe('gatsby-browser', () => {
 
       expect(getByText('Root content')).toBeInTheDocument()
     })
+
+    it('reuses existing Emotion cache across wrapper calls', () => {
+      const firstWrapped = wrapRootElement({ element: <div>First Root</div> })
+      const secondWrapped = wrapRootElement({ element: <div>Second Root</div> })
+
+      const { getByText: getByTextFirst } = render(firstWrapped)
+      const { getByText: getByTextSecond } = render(secondWrapped)
+
+      expect(getByTextFirst('First Root')).toBeInTheDocument()
+      expect(getByTextSecond('Second Root')).toBeInTheDocument()
+    })
   })
 
   describe('shouldUpdateScroll', () => {
@@ -101,6 +112,34 @@ describe('gatsby-browser', () => {
   })
 
   describe('onRouteUpdate', () => {
+    it('uses existing theme-ui-dark class as source of truth', () => {
+      document.documentElement.classList.add('theme-ui-dark')
+      window.localStorage.setItem('theme-ui-color-mode', 'default')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
+      expect(document.documentElement.classList.contains('theme-ui-default')).toBe(false)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    })
+
+    it('uses existing theme-ui-light class as default source of truth', () => {
+      document.documentElement.classList.add('theme-ui-light')
+      window.localStorage.setItem('theme-ui-color-mode', 'dark')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
+      expect(document.documentElement.classList.contains('theme-ui-light')).toBe(false)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    })
+
     it('prefers DOM mode over stale localStorage mode', () => {
       document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
       window.localStorage.setItem('theme-ui-color-mode', 'default')
@@ -138,6 +177,86 @@ describe('gatsby-browser', () => {
       expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
       expect(document.documentElement.classList.contains('theme-ui-light')).toBe(false)
       expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    })
+
+    it('falls back to system preference when localStorage is unavailable', () => {
+      const getItemSpy = jest.spyOn(Object.getPrototypeOf(window.localStorage), 'getItem').mockImplementation(() => {
+        throw new Error('blocked')
+      })
+      window.matchMedia = mockMatchMedia.mockReturnValue({
+        matches: true,
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn()
+      })
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+
+      getItemSpy.mockRestore()
+    })
+
+    it('removes stale theme-ui classes before applying the resolved mode', () => {
+      document.documentElement.className = 'theme-ui-dark theme-ui-default app-shell'
+      document.documentElement.setAttribute('data-theme-ui-color-mode', 'default')
+
+      onRouteUpdate({
+        location: { pathname: '/current', hash: '' },
+        prevLocation: null
+      })
+
+      const htmlClasses = Array.from(document.documentElement.classList)
+      expect(htmlClasses).toEqual(expect.arrayContaining(['theme-ui-default', 'app-shell']))
+      expect(htmlClasses).not.toContain('theme-ui-dark')
+    })
+
+    it('uses timeout fallback when requestAnimationFrame is unavailable', () => {
+      const originalRaf = window.requestAnimationFrame
+      jest.useFakeTimers()
+      const timeoutSpy = jest.spyOn(global, 'setTimeout')
+      try {
+        window.requestAnimationFrame = undefined
+        window.localStorage.setItem('theme-ui-color-mode', 'dark')
+
+        onRouteUpdate({
+          location: { pathname: '/current', hash: '' },
+          prevLocation: null
+        })
+
+        expect(timeoutSpy).toHaveBeenCalled()
+        jest.runOnlyPendingTimers()
+        expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
+      } finally {
+        timeoutSpy.mockRestore()
+        window.requestAnimationFrame = originalRaf
+        jest.useRealTimers()
+      }
+    })
+
+    it('returns safely when documentElement is unavailable', () => {
+      const originalDocumentElement = document.documentElement
+      try {
+        Object.defineProperty(document, 'documentElement', {
+          configurable: true,
+          value: null
+        })
+
+        expect(() =>
+          onRouteUpdate({
+            location: { pathname: '/current', hash: '' },
+            prevLocation: null
+          })
+        ).not.toThrow()
+      } finally {
+        Object.defineProperty(document, 'documentElement', {
+          configurable: true,
+          value: originalDocumentElement
+        })
+      }
     })
 
     it('should not call scrollTo or focus when prevLocation is null', () => {

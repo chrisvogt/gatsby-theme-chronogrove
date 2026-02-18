@@ -29,6 +29,7 @@ const normalizeThemeUiColorMode = mode => {
 }
 
 const createEmotionCache = () => {
+  /* istanbul ignore next -- document is unavailable only in non-DOM runtimes */
   const insertionPoint =
     typeof document !== 'undefined' ? document.querySelector('meta[name="emotion-insertion-point"]') : undefined
 
@@ -47,6 +48,7 @@ const getEmotionCache = () => {
 }
 
 const resolveThemeUiColorMode = () => {
+  /* istanbul ignore next -- document guard for non-DOM runtimes */
   if (typeof document !== 'undefined') {
     const htmlElement = document.documentElement
 
@@ -87,6 +89,7 @@ const resolveThemeUiColorMode = () => {
 }
 
 const syncThemeUiColorMode = () => {
+  /* istanbul ignore next -- browser global guard for non-DOM runtimes */
   if (typeof document === 'undefined') {
     return
   }
