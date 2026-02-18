@@ -16,7 +16,7 @@ const RootWrapper = ({ children }) => {
   useEffect(() => {
     if (typeof document !== 'undefined') {
       const isDark = normalizedColorMode === 'dark'
-      const bgColorRaw = theme?.colors?.background || theme?.rawColors?.background || (isDark ? '#14141F' : '#fdf8f5')
+      const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
       const htmlElement = document.documentElement
 
       Array.from(htmlElement.classList)

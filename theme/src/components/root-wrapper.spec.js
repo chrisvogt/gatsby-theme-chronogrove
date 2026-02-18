@@ -121,6 +121,30 @@ describe('RootWrapper', () => {
     expect(document.documentElement.style.backgroundColor).toMatch(/green|rgb\(0,\s*255,\s*0\)|#00ff00/i)
   })
 
+  it('prefers rawColors.background when colors.background is a CSS variable', () => {
+    mockUseThemeUI.mockReturnValue({
+      theme: {
+        rawColors: {
+          background: '#112233'
+        },
+        colors: {
+          background: 'var(--theme-ui-colors-background)'
+        }
+      }
+    })
+
+    render(
+      <Provider store={store}>
+        <RootWrapper>
+          <div>Test Child</div>
+        </RootWrapper>
+      </Provider>
+    )
+
+    expect(document.documentElement.style.backgroundColor).toMatch(/rgb\(17,\s*34,\s*51\)|#112233/i)
+    expect(document.documentElement.style.backgroundColor).not.toMatch(/var\(/i)
+  })
+
   it('handles dark mode with default background color', () => {
     document.documentElement.classList.add('theme-ui-default')
     mockUseColorMode.mockReturnValue(['dark', jest.fn()])
