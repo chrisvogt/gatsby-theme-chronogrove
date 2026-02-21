@@ -1,20 +1,20 @@
 /**
  * Color mode debug logging. Enable by:
- *   - URL: add ?chronogrove-color-debug (works after load; no localStorage needed)
- *   - localStorage: setItem('chronogrove-debug-color-mode', '1')
- *   - window: __CHRONOGROVE_DEBUG_COLOR_MODE__ = true
+ *   - URL: add ?theme-ui-color-mode-debug (works after load; no localStorage needed)
+ *   - localStorage: setItem('theme-ui-color-mode-debug', '1')
+ *   - window: __THEME_UI_COLOR_MODE_DEBUG__ = true
  *
  * Logs color mode, theme colors, and computed CSS variables to help troubleshoot
  * stuck text (e.g. white text on light background when switching to light mode).
  */
 
-const DEBUG_KEY = 'chronogrove-debug-color-mode'
-const DEBUG_URL_PARAM = 'chronogrove-color-debug'
+const DEBUG_KEY = 'theme-ui-color-mode-debug'
+const DEBUG_URL_PARAM = 'theme-ui-color-mode-debug'
 
 export function isColorModeDebugEnabled() {
   if (typeof window === 'undefined') return false
   try {
-    if (window.__CHRONOGROVE_DEBUG_COLOR_MODE__ === true) return true
+    if (window.__THEME_UI_COLOR_MODE_DEBUG__ === true) return true
     const params = new URLSearchParams(window.location.search)
     if (params.get(DEBUG_URL_PARAM) !== null) return true
     return localStorage.getItem(DEBUG_KEY) === '1' || localStorage.getItem(DEBUG_KEY) === 'true'
@@ -30,7 +30,7 @@ export function logColorModeDebugBanner() {
     const params = new URLSearchParams(window.location.search)
     if (params.get(DEBUG_URL_PARAM) !== null) {
       console.log(
-        '[chronogrove] Color mode debug enabled via ?chronogrove-color-debug. Toggle theme and check console for [chronogrove color-mode] logs.'
+        '[theme-ui] Color mode debug enabled via ?theme-ui-color-mode-debug. Toggle theme and check console for [theme-ui color-mode] logs.'
       )
     }
   } catch {
@@ -55,7 +55,7 @@ export function logColorModeState(colorMode, theme, source = '') {
     const bgVar = computed?.getPropertyValue('--theme-ui-colors-background')?.trim()
     const dataAttr = root?.getAttribute('data-theme-ui-color-mode')
 
-    console.groupCollapsed(`[chronogrove color-mode] ${source} | mode=${colorMode} | data-attr=${dataAttr ?? 'none'}`)
+    console.groupCollapsed(`[theme-ui color-mode] ${source} | mode=${colorMode} | data-attr=${dataAttr ?? 'none'}`)
     console.log('colorMode', colorMode)
     console.log('theme.colors.text', theme?.colors?.text)
     console.log('theme.colors.background', theme?.colors?.background)
@@ -65,6 +65,6 @@ export function logColorModeState(colorMode, theme, source = '') {
     console.log('documentElement.style.backgroundColor', root?.style?.backgroundColor || '(not set)')
     console.groupEnd()
   } catch (e) {
-    console.warn('[chronogrove color-mode] debug log failed', e)
+    console.warn('[theme-ui color-mode] debug log failed', e)
   }
 }

@@ -9,7 +9,7 @@ import AudioPlayer from './audio-player'
 const LIGHT_BG = '#fdf8f5'
 const DARK_BG = '#14141F'
 const THEME_UI_COLOR_MODE_KEY = 'theme-ui-color-mode'
-const RECONCILE_COLOR_MODE_EVENT = 'chronogrove-reconcile-color-mode'
+const RECONCILE_COLOR_MODE_EVENT = 'theme-ui-reconcile-color-mode'
 
 const normalizeStored = mode => (mode === 'light' ? 'default' : mode || null)
 
