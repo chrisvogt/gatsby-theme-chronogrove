@@ -1,13 +1,12 @@
 /**
- * Re-export the theme's browser APIs so color-mode sync and route reconciliation
- * run on this site. When the theme is used as a workspace dependency, the
- * theme's gatsby-browser.js may not be applied; this ensures the same
- * behavior as www.chrisvogt.me (theme toggle and navigation keep dark/light
- * mode in sync). We re-export wrapRootElement so the theme's root (and thus
- * RootWrapper + color-mode sync) is guaranteed to run from the site entry point.
+ * Re-export only the theme's route hooks so color-mode stays in sync on
+ * navigation. We do NOT re-export wrapRootElement or add gatsby-ssr.js:
+ * the theme's APIs already run when the theme is a plugin. Re-exporting
+ * them caused duplicate head (two emotion-insertion-point, duplicate
+ * no-flash scripts) and double-wrapping (two RootWrappers fighting over
+ * the DOM), which broke theme switching in production.
  */
 const themeBrowser = require('gatsby-theme-chronogrove/gatsby-browser')
 
-exports.wrapRootElement = themeBrowser.wrapRootElement
 exports.onRouteUpdate = themeBrowser.onRouteUpdate
 exports.shouldUpdateScroll = themeBrowser.shouldUpdateScroll
