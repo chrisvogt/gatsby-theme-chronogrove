@@ -379,6 +379,34 @@ pnpm test:coverage
 - Improved error handling in navigation data hooks
 - Better separation of concerns between theme and site-specific configuration
 
+## 🔍 Troubleshooting
+
+### Dark/light mode not updating (workspace or local dependency)
+
+If you use the theme as a **workspace** or **local** dependency (e.g. `"gatsby-theme-chronogrove": "workspace:*"` or `file:../theme`) and the theme toggle or navigation doesn’t update colors correctly, Gatsby may not be applying the theme’s browser/SSR APIs. Re-export them from your site so color-mode sync runs:
+
+**`gatsby-browser.js`** (in your site root):
+
+```javascript
+const themeBrowser = require('gatsby-theme-chronogrove/gatsby-browser')
+exports.wrapRootElement = themeBrowser.wrapRootElement
+exports.onRouteUpdate = themeBrowser.onRouteUpdate
+exports.shouldUpdateScroll = themeBrowser.shouldUpdateScroll
+```
+
+**`gatsby-ssr.js`** (in your site root):
+
+```javascript
+const themeSSR = require('gatsby-theme-chronogrove/gatsby-ssr')
+exports.wrapRootElement = themeSSR.wrapRootElement
+exports.onRenderBody = themeSSR.onRenderBody
+exports.onPreRenderHTML = themeSSR.onPreRenderHTML
+```
+
+If theme switching was working and then breaks after pulling theme changes, try clearing the cache: `gatsby clean` then `gatsby develop`.
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the repository

@@ -24,6 +24,20 @@ cd www.chronogrove.com
 pnpm develop
 ```
 
+### Theme switching (dark/light mode)
+
+If dark/light mode doesn’t update correctly after changing the theme, clear the cache and restart:
+
+```bash
+cd www.chronogrove.com
+pnpm run clean
+pnpm develop
+# or in one step:
+pnpm run develop:clean
+```
+
+This site re-exports the theme’s `gatsby-browser.js` and `gatsby-ssr.js` so color-mode behavior matches www.chrisvogt.me when the theme is used as a workspace dependency.
+
 ## Content Structure
 
 - `content/blog/` - Blog posts in MDX format
