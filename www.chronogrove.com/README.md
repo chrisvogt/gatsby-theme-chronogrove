@@ -36,7 +36,7 @@ pnpm develop
 pnpm run develop:clean
 ```
 
-This site re-exports the theme’s `gatsby-browser.js` and `gatsby-ssr.js` so color-mode behavior matches www.chrisvogt.me when the theme is used as a workspace dependency.
+This site adds a minimal `gatsby-browser.js` that re-exports only the theme’s `onRouteUpdate` and `shouldUpdateScroll` (not `wrapRootElement`) so route-based color-mode reconciliation runs without duplicating head or double-wrapping the root.
 
 ## Content Structure
 
