@@ -18,12 +18,16 @@ describe('gatsby-ssr', () => {
 
     expect(setHeadComponents).toHaveBeenCalledTimes(1)
     const headComponents = setHeadComponents.mock.calls[0][0]
-    expect(headComponents).toHaveLength(4)
+    expect(headComponents).toHaveLength(5)
 
     expect(headComponents[0].type).toBe('meta')
     expect(headComponents[0].props.name).toBe('emotion-insertion-point')
 
-    const { container: colorModeScriptContainer } = render(headComponents[1])
+    expect(headComponents[1].type).toBe('meta')
+    expect(headComponents[1].props.name).toBe('gatsby-theme-chronogrove-version')
+    expect(headComponents[1].props.content).toMatch(/^\d+\.\d+\.\d+$/)
+
+    const { container: colorModeScriptContainer } = render(headComponents[2])
     const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
     expect(colorModeScriptTag).toBeInTheDocument()
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
@@ -31,7 +35,7 @@ describe('gatsby-ssr', () => {
     expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
     expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
 
-    const { container: htmlBgScriptContainer } = render(headComponents[2])
+    const { container: htmlBgScriptContainer } = render(headComponents[3])
     const htmlBgScriptTag = htmlBgScriptContainer.querySelector('script')
     expect(htmlBgScriptTag).toBeInTheDocument()
     expect(htmlBgScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
@@ -40,7 +44,7 @@ describe('gatsby-ssr', () => {
     expect(htmlBgScriptTag).toHaveTextContent(/#14141F/)
     expect(htmlBgScriptTag).toHaveTextContent(/#fdf8f5/)
 
-    const { container: fallbackStyleContainer } = render(headComponents[3])
+    const { container: fallbackStyleContainer } = render(headComponents[4])
     const fallbackStyle = fallbackStyleContainer.querySelector('style')
     expect(fallbackStyle).toBeInTheDocument()
     expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="default"\]/)
