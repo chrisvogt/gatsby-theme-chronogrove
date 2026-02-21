@@ -49,11 +49,12 @@ describe('gatsby-ssr', () => {
     expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #fff !important/)
   })
 
-  it('onPreRenderHTML puts color-mode scripts first in head', () => {
+  it('onPreRenderHTML puts color-mode scripts and fallback style first in head', () => {
     const getHeadComponents = jest.fn(() => [
       { key: 'emotion-insertion-point', type: 'meta' },
       { key: 'theme-ui-no-flash', type: 'script' },
-      { key: 'html-bg-color', type: 'script' }
+      { key: 'html-bg-color', type: 'script' },
+      { key: 'theme-ui-color-mode-fallback', type: 'style' }
     ])
     const replaceHeadComponents = jest.fn()
 
@@ -62,8 +63,9 @@ describe('gatsby-ssr', () => {
     expect(getHeadComponents).toHaveBeenCalled()
     expect(replaceHeadComponents).toHaveBeenCalledTimes(1)
     const sorted = replaceHeadComponents.mock.calls[0][0]
-    expect(sorted[0].key).toBe('theme-ui-no-flash')
-    expect(sorted[1].key).toBe('html-bg-color')
-    expect(sorted[2].key).toBe('emotion-insertion-point')
+    const colorModeKeys = ['theme-ui-no-flash', 'html-bg-color', 'theme-ui-color-mode-fallback']
+    const firstThree = sorted.slice(0, 3).map(c => c.key)
+    colorModeKeys.forEach(key => expect(firstThree).toContain(key))
+    expect(sorted[3].key).toBe('emotion-insertion-point')
   })
 })

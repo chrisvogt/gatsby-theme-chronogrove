@@ -148,7 +148,7 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
 export const onRouteUpdate = ({ location, prevLocation }) => {
   scheduleThemeUiColorModeSync()
   if (typeof window !== 'undefined' && typeof window.CustomEvent === 'function') {
-    window.dispatchEvent(new window.CustomEvent('chronogrove-reconcile-color-mode'))
+    window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
   }
 
   if (prevLocation !== null) {

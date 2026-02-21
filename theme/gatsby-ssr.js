@@ -60,11 +60,11 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
     <meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />,
     <script key='theme-ui-no-flash' dangerouslySetInnerHTML={{ __html: colorModeScript }} />,
     <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />,
-    <style key='chronogrove-color-mode-fallback' dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
+    <style key='theme-ui-color-mode-fallback' dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
   ])
 }
 
-const COLOR_MODE_HEAD_KEYS = ['theme-ui-no-flash', 'html-bg-color']
+const COLOR_MODE_HEAD_KEYS = ['theme-ui-no-flash', 'html-bg-color', 'theme-ui-color-mode-fallback']
 
 export const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
   const headComponents = getHeadComponents()

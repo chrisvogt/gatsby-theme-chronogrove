@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.72.17
+
+### ♻️ Refactor
+
+- **Use theme-generic keys for color mode so the theme scales for multiple sites**.
+  - **Context**: Theme switching works on www.chrisvogt.me; the same theme was broken on the chronogrove demo site (and would affect any future sites). Color-mode logic used `chronogrove-*` keys (style, custom event, debug), which don’t scale for a multitenant theme.
+  - **Change**: Renamed all color-mode identifiers to the same namespace as Theme UI: `theme-ui-color-mode-fallback` (head style key), `theme-ui-reconcile-color-mode` (route-reconcile event), `theme-ui-color-mode-debug` (URL param and localStorage), `__THEME_UI_COLOR_MODE_DEBUG__` (window flag). Console debug labels now use `[theme-ui]` / `[theme-ui color-mode]`.
+  - **Result**: Every site using the theme (chrisvogt.me, chronogrove demo, and future sites) uses the same keys; no site-specific overrides needed. Debug is still enabled via **`?theme-ui-color-mode-debug`** (replacing `?chronogrove-color-debug`).
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.17)
+- `theme/gatsby-ssr.js` (style key and head order)
+- `theme/gatsby-browser.js` (reconcile event name)
+- `theme/src/components/root-wrapper.js` (reconcile event constant)
+- `theme/src/helpers/color-mode-debug.js` (debug keys, URL param, console labels)
+- `theme/gatsby-ssr.spec.js`, `theme/src/helpers/color-mode-debug.spec.js` (updated expectations)
+
+---
+
 ## 0.72.16
 
 ### 🐛 Bug Fixes

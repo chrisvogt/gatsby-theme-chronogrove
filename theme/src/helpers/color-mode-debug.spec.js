@@ -14,50 +14,50 @@ describe('color-mode-debug', () => {
     console.groupEnd.mockRestore()
     console.warn.mockRestore()
     if (global.window) {
-      delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
+      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
     }
   })
 
   describe('isColorModeDebugEnabled', () => {
-    it('returns true when window.__CHRONOGROVE_DEBUG_COLOR_MODE__ is true', () => {
-      global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__ = true
+    it('returns true when window.__THEME_UI_COLOR_MODE_DEBUG__ is true', () => {
+      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
       expect(isColorModeDebugEnabled()).toBe(true)
     })
 
-    it('returns true when localStorage chronogrove-debug-color-mode is "1"', () => {
-      delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
+    it('returns true when localStorage theme-ui-color-mode-debug is "1"', () => {
+      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
       try {
-        localStorage.setItem('chronogrove-debug-color-mode', '1')
+        localStorage.setItem('theme-ui-color-mode-debug', '1')
         expect(isColorModeDebugEnabled()).toBe(true)
       } finally {
-        localStorage.removeItem('chronogrove-debug-color-mode')
+        localStorage.removeItem('theme-ui-color-mode-debug')
       }
     })
 
-    it('returns true when localStorage chronogrove-debug-color-mode is "true"', () => {
-      delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
+    it('returns true when localStorage theme-ui-color-mode-debug is "true"', () => {
+      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
       try {
-        localStorage.setItem('chronogrove-debug-color-mode', 'true')
+        localStorage.setItem('theme-ui-color-mode-debug', 'true')
         expect(isColorModeDebugEnabled()).toBe(true)
       } finally {
-        localStorage.removeItem('chronogrove-debug-color-mode')
+        localStorage.removeItem('theme-ui-color-mode-debug')
       }
     })
 
     it('returns false when debug flag is not set', () => {
-      delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
-      localStorage.removeItem('chronogrove-debug-color-mode')
+      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      localStorage.removeItem('theme-ui-color-mode-debug')
       expect(isColorModeDebugEnabled()).toBe(false)
     })
 
-    it('returns true when URL has ?chronogrove-color-debug', () => {
-      delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
-      localStorage.removeItem('chronogrove-debug-color-mode')
+    it('returns true when URL has ?theme-ui-color-mode-debug', () => {
+      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      localStorage.removeItem('theme-ui-color-mode-debug')
       const OriginalURLSearchParams = window.URLSearchParams
       window.URLSearchParams = class MockURLSearchParams {
         constructor() {}
         get(key) {
-          return key === 'chronogrove-color-debug' ? '' : null
+          return key === 'theme-ui-color-mode-debug' ? '' : null
         }
       }
       expect(isColorModeDebugEnabled()).toBe(true)
@@ -65,7 +65,7 @@ describe('color-mode-debug', () => {
     })
 
     it('returns false when localStorage.getItem throws', () => {
-      delete global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__
+      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
       const getItem = jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
         throw new Error('Storage unavailable')
       })
@@ -79,17 +79,17 @@ describe('color-mode-debug', () => {
       expect(() => logColorModeDebugBanner()).not.toThrow()
     })
 
-    it('logs banner when URL has ?chronogrove-color-debug', () => {
+    it('logs banner when URL has ?theme-ui-color-mode-debug', () => {
       const OriginalURLSearchParams = window.URLSearchParams
       window.URLSearchParams = class MockURLSearchParams {
         constructor() {}
         get(key) {
-          return key === 'chronogrove-color-debug' ? '' : null
+          return key === 'theme-ui-color-mode-debug' ? '' : null
         }
       }
       logColorModeDebugBanner()
       expect(console.log).toHaveBeenCalledWith(
-        expect.stringContaining('[chronogrove] Color mode debug enabled via ?chronogrove-color-debug')
+        expect.stringContaining('[theme-ui] Color mode debug enabled via ?theme-ui-color-mode-debug')
       )
       window.URLSearchParams = OriginalURLSearchParams
     })
@@ -114,7 +114,7 @@ describe('color-mode-debug', () => {
     })
 
     it('logs when debug is enabled', () => {
-      global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__ = true
+      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
       document.documentElement.setAttribute('data-theme-ui-color-mode', 'default')
 
       logColorModeState('default', { colors: { text: '#111', background: '#fdf8f5' } }, 'Test')
@@ -125,14 +125,14 @@ describe('color-mode-debug', () => {
     })
 
     it('calls console.warn when debug log throws', () => {
-      global.window.__CHRONOGROVE_DEBUG_COLOR_MODE__ = true
+      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
       const getComputedStyle = jest.spyOn(window, 'getComputedStyle').mockImplementation(() => {
         throw new Error('getComputedStyle failed')
       })
 
       logColorModeState('default', {}, 'Test')
 
-      expect(console.warn).toHaveBeenCalledWith('[chronogrove color-mode] debug log failed', expect.any(Error))
+      expect(console.warn).toHaveBeenCalledWith('[theme-ui color-mode] debug log failed', expect.any(Error))
       getComputedStyle.mockRestore()
     })
   })
