@@ -1,4 +1,6 @@
 import React from 'react'
+import { version as themeVersion } from './package.json'
+
 export { default as wrapRootElement } from './wrapRootElement'
 
 export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
@@ -58,6 +60,7 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
 
   setHeadComponents([
     <meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />,
+    <meta key='gatsby-theme-chronogrove-version' name='gatsby-theme-chronogrove-version' content={themeVersion} />,
     <script key='theme-ui-no-flash' dangerouslySetInnerHTML={{ __html: colorModeScript }} />,
     <script key='html-bg-color' dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />,
     <style key='theme-ui-color-mode-fallback' dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
