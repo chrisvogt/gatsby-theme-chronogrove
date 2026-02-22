@@ -146,23 +146,17 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
 // Scroll to top and focus main content after route changes (accessibility).
 // See https://webaim.org/techniques/skipnav/
 export const onRouteUpdate = ({ location, prevLocation }) => {
-  const currentPath = location?.pathname
-  const prevPath = prevLocation?.pathname
-  const currentHash = location?.hash
-  const isHashOnlyChange = prevPath != null && currentPath === prevPath && currentHash
-
-  // For hash-only changes (e.g. home nav #instagram), skip scheduleThemeUiColorModeSync so we
-  // don't race with gatsby-plugin-theme-ui; RootWrapper's reconcile handler will re-sync the DOM.
-  if (!isHashOnlyChange) {
-    scheduleThemeUiColorModeSync()
-  }
+  scheduleThemeUiColorModeSync()
   if (typeof window !== 'undefined' && typeof window.CustomEvent === 'function') {
     window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
   }
 
   if (prevLocation !== null) {
     // Don't scroll to top if it's just a hash change on the same page
-    if (isHashOnlyChange) {
+    const currentPath = location?.pathname
+    const prevPath = prevLocation?.pathname
+    const currentHash = location?.hash
+    if (currentPath === prevPath && currentHash) {
       return
     }
 

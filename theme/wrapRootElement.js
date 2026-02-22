@@ -13,6 +13,9 @@ import store from './src/store'
 import theme from './src/gatsby-plugin-theme-ui'
 import YouTube from './src/shortcodes/youtube'
 
+// Single source of truth: theme from src/gatsby-plugin-theme-ui. We provide exactly one
+// ThemeUIProvider here (do not add gatsby-plugin-theme-ui to gatsby-config or you get two providers and broken color-mode toggling).
+
 // Create a TanStack Query client with optimized defaults for Gatsby
 const queryClient = new QueryClient({
   defaultOptions: {

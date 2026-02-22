@@ -245,22 +245,14 @@ module.exports = (themeOptions = {}) => {
        *
        * Used for configuration files, mock data, and other JSON content.
        */
-      'gatsby-transformer-json',
+      'gatsby-transformer-json'
 
       /**
-       * Theme UI Plugin
-       *
-       * Integrates Theme UI with Gatsby for the design system.
-       * Provides theme context, color mode support, and design tokens
-       * throughout your site.
-       *
-       * Features:
-       * - Design system integration
-       * - Dark/light mode support
-       * - Theme customization
-       * - Responsive design tokens
+       * Theme UI: We provide a single ThemeUIProvider in wrapRootElement (see wrapRootElement.js)
+       * using the theme from src/gatsby-plugin-theme-ui. Do NOT add gatsby-plugin-theme-ui here—
+       * it would add a second provider and break color-mode toggling (e.g. after hash navigation).
        */
-      'gatsby-plugin-theme-ui'
+      // 'gatsby-plugin-theme-ui' — omitted; theme is applied in wrapRootElement
     ]
   }
 }

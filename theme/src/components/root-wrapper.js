@@ -37,44 +37,22 @@ const RootWrapper = ({ children }) => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
   }, [])
 
-  // On route change (including in-page hash links like #instagram), reconcile context from
-  // localStorage and re-apply our DOM sync so we win over gatsby-plugin-theme-ui's provider
-  // (which can overwrite the root with stale state when the route updates).
+  // On route change, reconcile context from localStorage (e.g. after navigation or hash link).
+  // With a single ThemeUIProvider (from gatsby-plugin-theme-ui), no need to re-sync DOM here.
   useEffect(() => {
-    let timeoutId
     const handler = () => {
       const stored = getStoredColorMode()
       if (stored && stored !== normalizedColorMode) {
         setColorMode(stored)
       }
-      // Always re-sync the root from localStorage after a tick so we overwrite any
-      // stale DOM update from the plugin (e.g. after clicking a home nav hash link).
-      timeoutId = setTimeout(() => {
-        if (typeof document === 'undefined') return
-        const mode = stored || normalizedColorMode || 'default'
-        const isDark = mode === 'dark'
-        const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
-        const htmlElement = document.documentElement
-        Array.from(htmlElement.classList)
-          .filter(className => className.startsWith('theme-ui-'))
-          .forEach(className => htmlElement.classList.remove(className))
-        htmlElement.classList.add(`theme-ui-${mode}`)
-        htmlElement.setAttribute('data-theme-ui-color-mode', mode)
-        htmlElement.style.backgroundColor = bgColorRaw
-      }, 0)
     }
     window.addEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
-    return () => {
-      window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
-      if (timeoutId) clearTimeout(timeoutId)
-    }
-  }, [normalizedColorMode, setColorMode, theme?.colors?.background, theme?.rawColors?.background])
+    return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
+  }, [normalizedColorMode, setColorMode])
 
-  // Sync DOM from context before paint so toggles never show one frame of wrong combo.
-  // When gatsby-plugin-theme-ui is also in use, it adds a second ThemeUIProvider that can
-  // overwrite the root with stale state in its useEffect. We run sync immediately, then
-  // again after a microtask so our (correct) state wins.
-  const syncRootToColorMode = () => {
+  // Sync root (html class, data attribute, background) from theme context so CSS vars and
+  // fallbacks apply. Uses layout effect so DOM is correct before paint when color mode changes.
+  useIsomorphicLayoutEffect(() => {
     if (typeof document === 'undefined') return
     const isDark = normalizedColorMode === 'dark'
     const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
@@ -86,12 +64,6 @@ const RootWrapper = ({ children }) => {
     htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
     htmlElement.style.backgroundColor = bgColorRaw
     logColorModeState(normalizedColorMode, theme, 'RootWrapper')
-  }
-
-  useIsomorphicLayoutEffect(() => {
-    syncRootToColorMode()
-    const t = setTimeout(syncRootToColorMode, 0)
-    return () => clearTimeout(t)
   }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme])
 
   return (

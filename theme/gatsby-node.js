@@ -139,9 +139,30 @@ exports.createSchemaCustomization = ({ actions }) => {
       reactIcon: String!
       set: String!
     }
+
+    # Stub for consumers (e.g. gatsby-theme-style-guide) that query themeUiConfig.
+    # We apply theme in wrapRootElement; this avoids errors when not using gatsby-plugin-theme-ui.
+    type ThemeUiConfig implements Node {
+      id: ID!
+      preset: String
+      prismPreset: String
+    }
+    extend type Query {
+      themeUiConfig: ThemeUiConfig
+    }
   `
 
   createTypes(typeDefs)
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  createResolvers({
+    Query: {
+      themeUiConfig: {
+        resolve: () => ({ id: 'theme-ui-config-stub', preset: null, prismPreset: null })
+      }
+    }
+  })
 }
 
 exports.onCreateNode = ({ node, getNode, actions, reporter }) => {
