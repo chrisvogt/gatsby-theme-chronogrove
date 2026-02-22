@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@emotion/react": "catalog:",
-    "@mdx-js/react": "catalog:",
+    "@mdx-js/react": "^3.1.1",
     "@theme-ui/components": "catalog:",
     "@theme-ui/mdx": "catalog:",
     "gatsby": "catalog:",
@@ -22,8 +22,8 @@
     "theme-ui": "catalog:"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.6",
-    "@babel/preset-env": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.28.5"
   }
 }
