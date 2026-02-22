@@ -51,24 +51,28 @@ const RootWrapper = ({ children }) => {
     return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
   }, [normalizedColorMode, setColorMode])
 
-  // Sync DOM from context before paint so toggles never show one frame of wrong combo
-  // (e.g. dark background with black text when root still had light attribute).
-  useIsomorphicLayoutEffect(() => {
+  // Sync DOM from context before paint so toggles never show one frame of wrong combo.
+  // When gatsby-plugin-theme-ui is also in use, it adds a second ThemeUIProvider that can
+  // overwrite the root with stale state in its useEffect. We run sync immediately, then
+  // again after a microtask so our (correct) state wins.
+  const syncRootToColorMode = () => {
     if (typeof document === 'undefined') return
-
     const isDark = normalizedColorMode === 'dark'
     const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
     const htmlElement = document.documentElement
-
     Array.from(htmlElement.classList)
       .filter(className => className.startsWith('theme-ui-'))
       .forEach(className => htmlElement.classList.remove(className))
-
     htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
     htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
     htmlElement.style.backgroundColor = bgColorRaw
-
     logColorModeState(normalizedColorMode, theme, 'RootWrapper')
+  }
+
+  useIsomorphicLayoutEffect(() => {
+    syncRootToColorMode()
+    const t = setTimeout(syncRootToColorMode, 0)
+    return () => clearTimeout(t)
   }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme])
 
   return (
