@@ -1,10 +1,13 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useSelector } from 'react-redux'
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 
 import { logColorModeDebugBanner, logColorModeState } from '../helpers/color-mode-debug'
 import AudioPlayer from './audio-player'
+
+// Sync DOM before paint when color mode changes (avoids one frame of dark bg + light root / black text)
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 const LIGHT_BG = '#fdf8f5'
 const DARK_BG = '#14141F'
@@ -48,9 +51,9 @@ const RootWrapper = ({ children }) => {
     return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
   }, [normalizedColorMode, setColorMode])
 
-  // Sync DOM from context so toggles update immediately. Do not prefer localStorage here or
-  // the DOM can lag (Theme UI may write localStorage after updating context).
-  useEffect(() => {
+  // Sync DOM from context before paint so toggles never show one frame of wrong combo
+  // (e.g. dark background with black text when root still had light attribute).
+  useIsomorphicLayoutEffect(() => {
     if (typeof document === 'undefined') return
 
     const isDark = normalizedColorMode === 'dark'
