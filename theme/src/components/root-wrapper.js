@@ -37,19 +37,38 @@ const RootWrapper = ({ children }) => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
   }, [])
 
-  // On route change, reconcile Theme UI context with localStorage (fixes wrong context on
-  // Blog/Music/Travel/Home after navigation). Only runs when the event is dispatched from
-  // gatsby-browser onRouteUpdate, so toggling the theme never triggers this and avoids a loop.
+  // On route change (including in-page hash links like #instagram), reconcile context from
+  // localStorage and re-apply our DOM sync so we win over gatsby-plugin-theme-ui's provider
+  // (which can overwrite the root with stale state when the route updates).
   useEffect(() => {
+    let timeoutId
     const handler = () => {
       const stored = getStoredColorMode()
       if (stored && stored !== normalizedColorMode) {
         setColorMode(stored)
       }
+      // Always re-sync the root from localStorage after a tick so we overwrite any
+      // stale DOM update from the plugin (e.g. after clicking a home nav hash link).
+      timeoutId = setTimeout(() => {
+        if (typeof document === 'undefined') return
+        const mode = stored || normalizedColorMode || 'default'
+        const isDark = mode === 'dark'
+        const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
+        const htmlElement = document.documentElement
+        Array.from(htmlElement.classList)
+          .filter(className => className.startsWith('theme-ui-'))
+          .forEach(className => htmlElement.classList.remove(className))
+        htmlElement.classList.add(`theme-ui-${mode}`)
+        htmlElement.setAttribute('data-theme-ui-color-mode', mode)
+        htmlElement.style.backgroundColor = bgColorRaw
+      }, 0)
     }
     window.addEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
-    return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
-  }, [normalizedColorMode, setColorMode])
+    return () => {
+      window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
+      if (timeoutId) clearTimeout(timeoutId)
+    }
+  }, [normalizedColorMode, setColorMode, theme?.colors?.background, theme?.rawColors?.background])
 
   // Sync DOM from context before paint so toggles never show one frame of wrong combo.
   // When gatsby-plugin-theme-ui is also in use, it adds a second ThemeUIProvider that can
