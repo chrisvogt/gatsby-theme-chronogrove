@@ -19,6 +19,23 @@ module.exports = {
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
 
+  // Barrel re-export files (no logic to test)
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'src/components/home-backgrounds/index.js',
+    'src/components/skip-nav/index.js',
+    'src/reducers/index.js'
+  ],
+
+  coverageThreshold: {
+    global: {
+      statements: 97,
+      branches: 85,
+      functions: 97,
+      lines: 97
+    }
+  },
+
   globals: {
     __BASE_PATH__: '',
     __PATH_PREFIX__: ''

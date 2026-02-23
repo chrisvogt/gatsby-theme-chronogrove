@@ -72,4 +72,23 @@ describe('gatsby-ssr', () => {
     colorModeKeys.forEach(key => expect(firstThree).toContain(key))
     expect(sorted[3].key).toBe('emotion-insertion-point')
   })
+
+  it('onPreRenderHTML sorts color-mode keys before other head components', () => {
+    const getHeadComponents = jest.fn(() => [
+      { key: 'other-meta', type: 'meta' },
+      { key: 'theme-ui-no-flash', type: 'script' },
+      { key: 'another-tag', type: 'link' },
+      { key: 'html-bg-color', type: 'script' },
+      { key: 'theme-ui-color-mode-fallback', type: 'style' }
+    ])
+    const replaceHeadComponents = jest.fn()
+
+    gatsbySSR.onPreRenderHTML({ getHeadComponents, replaceHeadComponents })
+
+    const sorted = replaceHeadComponents.mock.calls[0][0]
+    const keys = sorted.map(c => c.key)
+    expect(keys.indexOf('theme-ui-no-flash')).toBeLessThan(keys.indexOf('other-meta'))
+    expect(keys.indexOf('html-bg-color')).toBeLessThan(keys.indexOf('another-tag'))
+    expect(keys.indexOf('theme-ui-color-mode-fallback')).toBeLessThan(keys.indexOf('other-meta'))
+  })
 })
