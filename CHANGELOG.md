@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.72.18
+
+### 🐛 Bug Fixes
+
+- **Article post body text font size now matches About page**.
+  - **Root cause**: MDXProvider only supplied custom components (Emoji, pre, YouTube, Table). Post and media templates render MDX as plain HTML (`<p>`, `<h1>`, etc.), so that content never received the theme’s typography (e.g. `styles.p` with `fontSize: [2, 3]`). The About page explicitly uses `<Themed.p>` / `<Themed.h1>`, so it looked correct while article body text appeared smaller.
+  - **Fix**: Spread `Themed` from `@theme-ui/mdx` into the MDXProvider `components` in `wrapRootElement.js` so MDX-rendered content uses Theme UI’s typography. Custom components (pre, Table, YouTube, Emoji) remain overrides after the spread.
+  - **Result**: Post and media article body text now uses the same font size as the About page.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.18)
+- `theme/wrapRootElement.js` (MDXProvider components include ...Themed)
+
+---
+
 ## 0.72.17
 
 ### ♻️ Refactor
