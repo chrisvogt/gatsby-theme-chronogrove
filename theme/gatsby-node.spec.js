@@ -175,6 +175,26 @@ describe('gatsby-node', () => {
     })
   })
 
+  describe('createResolvers', () => {
+    it('adds themeUiConfig resolver that returns stub', () => {
+      const createResolversMock = jest.fn()
+      gatsbyNode.createResolvers({ createResolvers: createResolversMock })
+
+      expect(createResolversMock).toHaveBeenCalledTimes(1)
+      const resolvers = createResolversMock.mock.calls[0][0]
+      expect(resolvers.Query).toBeDefined()
+      expect(resolvers.Query.themeUiConfig).toBeDefined()
+      expect(typeof resolvers.Query.themeUiConfig.resolve).toBe('function')
+
+      const result = resolvers.Query.themeUiConfig.resolve()
+      expect(result).toEqual({
+        id: 'theme-ui-config-stub',
+        preset: null,
+        prismPreset: null
+      })
+    })
+  })
+
   describe('onCreateNode', () => {
     const mockCreateNodeField = jest.fn()
 

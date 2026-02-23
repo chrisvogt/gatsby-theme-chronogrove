@@ -203,4 +203,92 @@ describe('RootWrapper', () => {
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
     expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
   })
+
+  it('reconcile event updates context from localStorage when stored differs from current mode', () => {
+    const setColorModeMock = jest.fn()
+    mockUseColorMode.mockReturnValue(['default', setColorModeMock])
+    mockUseThemeUI.mockReturnValue({
+      theme: { colors: { background: '#fdf8f5' } }
+    })
+    window.localStorage.setItem('theme-ui-color-mode', 'dark')
+
+    render(
+      <Provider store={store}>
+        <RootWrapper>
+          <div>Child</div>
+        </RootWrapper>
+      </Provider>
+    )
+
+    window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
+
+    expect(setColorModeMock).toHaveBeenCalledWith('dark')
+  })
+
+  it('reconcile event does not call setColorMode when stored matches current mode', () => {
+    const setColorModeMock = jest.fn()
+    mockUseColorMode.mockReturnValue(['dark', setColorModeMock])
+    mockUseThemeUI.mockReturnValue({
+      theme: { colors: { background: '#14141F' } }
+    })
+    window.localStorage.setItem('theme-ui-color-mode', 'dark')
+
+    render(
+      <Provider store={store}>
+        <RootWrapper>
+          <div>Child</div>
+        </RootWrapper>
+      </Provider>
+    )
+
+    window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
+
+    expect(setColorModeMock).not.toHaveBeenCalled()
+  })
+
+  it('reconcile event normalizes stored "light" to "default" when updating context', () => {
+    const setColorModeMock = jest.fn()
+    mockUseColorMode.mockReturnValue(['dark', setColorModeMock])
+    mockUseThemeUI.mockReturnValue({
+      theme: { colors: { background: '#14141F' } }
+    })
+    window.localStorage.setItem('theme-ui-color-mode', 'light')
+
+    render(
+      <Provider store={store}>
+        <RootWrapper>
+          <div>Child</div>
+        </RootWrapper>
+      </Provider>
+    )
+
+    window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
+
+    expect(setColorModeMock).toHaveBeenCalledWith('default')
+  })
+
+  it('reconcile event handles localStorage getItem throwing', () => {
+    const setColorModeMock = jest.fn()
+    mockUseColorMode.mockReturnValue(['default', setColorModeMock])
+    mockUseThemeUI.mockReturnValue({
+      theme: { colors: { background: '#fdf8f5' } }
+    })
+    const originalGetItem = window.localStorage.getItem
+    window.localStorage.getItem = jest.fn(() => {
+      throw new Error('localStorage unavailable')
+    })
+
+    render(
+      <Provider store={store}>
+        <RootWrapper>
+          <div>Child</div>
+        </RootWrapper>
+      </Provider>
+    )
+
+    window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
+
+    expect(setColorModeMock).not.toHaveBeenCalled()
+    window.localStorage.getItem = originalGetItem
+  })
 })

@@ -156,8 +156,6 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
     const currentPath = location?.pathname
     const prevPath = prevLocation?.pathname
     const currentHash = location?.hash
-
-    // If we're on the same page and there's a hash, let the browser handle it
     if (currentPath === prevPath && currentHash) {
       return
     }

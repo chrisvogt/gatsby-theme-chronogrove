@@ -1,10 +1,13 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useSelector } from 'react-redux'
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 
 import { logColorModeDebugBanner, logColorModeState } from '../helpers/color-mode-debug'
 import AudioPlayer from './audio-player'
+
+// Sync DOM before paint when color mode changes (avoids one frame of dark bg + light root / black text)
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 const LIGHT_BG = '#fdf8f5'
 const DARK_BG = '#14141F'
@@ -34,9 +37,8 @@ const RootWrapper = ({ children }) => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
   }, [])
 
-  // On route change, reconcile Theme UI context with localStorage (fixes wrong context on
-  // Blog/Music/Travel/Home after navigation). Only runs when the event is dispatched from
-  // gatsby-browser onRouteUpdate, so toggling the theme never triggers this and avoids a loop.
+  // On route change, reconcile context from localStorage (e.g. after navigation or hash link).
+  // With a single ThemeUIProvider (from gatsby-plugin-theme-ui), no need to re-sync DOM here.
   useEffect(() => {
     const handler = () => {
       const stored = getStoredColorMode()
@@ -48,23 +50,19 @@ const RootWrapper = ({ children }) => {
     return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
   }, [normalizedColorMode, setColorMode])
 
-  // Sync DOM from context so toggles update immediately. Do not prefer localStorage here or
-  // the DOM can lag (Theme UI may write localStorage after updating context).
-  useEffect(() => {
+  // Sync root (html class, data attribute, background) from theme context so CSS vars and
+  // fallbacks apply. Uses layout effect so DOM is correct before paint when color mode changes.
+  useIsomorphicLayoutEffect(() => {
     if (typeof document === 'undefined') return
-
     const isDark = normalizedColorMode === 'dark'
     const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? DARK_BG : LIGHT_BG)
     const htmlElement = document.documentElement
-
     Array.from(htmlElement.classList)
       .filter(className => className.startsWith('theme-ui-'))
       .forEach(className => htmlElement.classList.remove(className))
-
     htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
     htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
     htmlElement.style.backgroundColor = bgColorRaw
-
     logColorModeState(normalizedColorMode, theme, 'RootWrapper')
   }, [normalizedColorMode, theme?.colors?.background, theme?.rawColors?.background, theme])
 

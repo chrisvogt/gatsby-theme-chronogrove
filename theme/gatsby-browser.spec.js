@@ -201,6 +201,22 @@ describe('gatsby-browser', () => {
       getItemSpy.mockRestore()
     })
 
+    it('does not dispatch reconcile event when CustomEvent is not available', () => {
+      window.localStorage.setItem('theme-ui-color-mode', 'dark')
+      const originalCustomEvent = window.CustomEvent
+      window.CustomEvent = undefined
+
+      expect(() => {
+        onRouteUpdate({
+          location: { pathname: '/current', hash: '' },
+          prevLocation: null
+        })
+      }).not.toThrow()
+      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+
+      window.CustomEvent = originalCustomEvent
+    })
+
     it('removes stale theme-ui classes before applying the resolved mode', () => {
       window.localStorage.setItem('theme-ui-color-mode', 'default')
       document.documentElement.className = 'theme-ui-dark theme-ui-default app-shell'
