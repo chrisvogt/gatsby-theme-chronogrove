@@ -47,8 +47,11 @@ const Table = props => {
 /* istanbul ignore next */
 const Pre = ({ children }) => <>{children}</>
 
-// Define MDX components
+// Define MDX components. Spread Themed so MDX-rendered content (posts, media) gets
+// the theme's typography (e.g. styles.p fontSize [2,3]) and matches the About page.
+// Custom components override: pre (passthrough), table (color-mode variant), plus shortcodes.
 const components = {
+  ...Themed,
   Emoji,
   pre: Pre,
   YouTube,
