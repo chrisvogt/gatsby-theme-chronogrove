@@ -260,7 +260,7 @@ const CareerPathVisualization = () => {
       if (d.data.name === 'Career Journey') return
 
       const node = d3.select(this)
-      let displayText = ''
+      let displayText
 
       if (d.data.type === 'path') {
         displayText = d.data.name
@@ -276,9 +276,9 @@ const CareerPathVisualization = () => {
       }
 
       // Smart text positioning with collision avoidance
-      let textX = 0
-      let textY = 0
-      let textAnchor = 'middle'
+      let textX
+      let textY
+      let textAnchor
 
       // Determine initial position based on node location and type
       if (d.data.type === 'path') {
