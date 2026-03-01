@@ -62,7 +62,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   useEffect(() => {
     const updateBreakpoint = () => {
       const width = window.innerWidth
-      let breakpointIndex = 4 // Default to largest breakpoint
+      let breakpointIndex
 
       if (width < 640) {
         breakpointIndex = 0 // Mobile: 3 columns
