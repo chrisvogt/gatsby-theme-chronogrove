@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.72.19
+
+### ✨ Improvements
+
+- **Discogs modal: fix layout shift and add loading skeleton for cover artwork**.
+  - **Layout shift**: Cover image container now reserves fixed dimensions (280×280px) so the modal no longer jumps when the image loads.
+  - **Loading state**: A `RectShape` skeleton (matching Steam, Instagram, Goodreads patterns) displays until the artwork finishes downloading.
+  - **Behavior**: `onLoad` tracks when the image has loaded; skeleton fades out and image fades in. State resets when selecting a different record.
+
+### 🧪 Tests
+
+- Added tests for Discogs modal: image `onLoad` handler, backdrop click, body scroll lock, and cover URL change reset.
+- Improved coverage for `discogs-modal.js` (100% statements, functions, lines; 97%+ branches).
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.19)
+- `theme/src/components/widgets/discogs/discogs-modal.js` (skeleton, fixed dimensions, image load state)
+- `theme/src/components/widgets/discogs/discogs-modal.spec.js` (expanded coverage)
+
+---
+
 ## 0.72.18
 
 ### 🐛 Bug Fixes
