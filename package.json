@@ -43,7 +43,8 @@
       "@mdx-js/react": "^3.1.1",
       "multer": "^2.1.0",
       "serialize-javascript": ">=7.0.3",
-      "minimatch": ">=3.1.4"
+      "gatsby-plugin-google-analytics>minimatch": "^3.1.4",
+      "gatsby-plugin-sitemap>minimatch": "^3.1.4"
     },
     "publicHoistPattern": [
       "*"
