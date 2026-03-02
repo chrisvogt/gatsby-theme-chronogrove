@@ -1,5 +1,8 @@
-const boxen = require('boxen').default
-const chalk = require('chalk')
+import boxen from 'boxen'
+import chalk from 'chalk'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
 const packageData = require('../theme/package.json')
 
 const banner = boxen(`${chalk.bold('www.chrisvogt.me')}\nMy Personal Website\nv${packageData.version}`, {
