@@ -4,6 +4,10 @@ import '@testing-library/jest-dom'
 
 import DiscogsModal from './discogs-modal'
 
+// Helper to find the backdrop (first Close button) vs the X button (second)
+const getBackdropButton = () => screen.getAllByRole('button', { name: 'Close modal' })[0]
+const getCloseXButton = () => screen.getAllByRole('button', { name: 'Close modal' })[1]
+
 // Mock createPortal to render directly in the test environment
 jest.mock('react-dom', () => ({
   ...jest.requireActual('react-dom'),
@@ -126,6 +130,28 @@ describe('DiscogsModal', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
+  it('handles release with undefined genres and styles (uses fallback)', () => {
+    const releaseWithUndefinedGenresStyles = {
+      id: 77777,
+      basicInformation: {
+        id: 77777,
+        title: 'No Genres Album',
+        year: 2023,
+        artists: [{ name: 'Unknown' }],
+        genres: undefined,
+        styles: undefined
+      },
+      resource: {
+        id: 77777,
+        uri: 'https://www.discogs.com/release/77777-No-Genres-Album'
+      }
+    }
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithUndefinedGenresStyles} />)
+    expect(screen.getByText('No Genres Album')).toBeInTheDocument()
+    expect(screen.queryByText('Genres')).not.toBeInTheDocument()
+    expect(screen.queryByText('Styles')).not.toBeInTheDocument()
+  })
+
   it('handles release with empty arrays', () => {
     const releaseWithEmptyArrays = {
       id: 88888,
@@ -153,6 +179,41 @@ describe('DiscogsModal', () => {
 
     fireEvent.keyDown(document, { key: 'Escape' })
     expect(mockOnClose).toHaveBeenCalled()
+  })
+
+  it('calls onClose when backdrop is clicked', () => {
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+    fireEvent.click(getBackdropButton())
+    expect(mockOnClose).toHaveBeenCalled()
+  })
+
+  it('calls onClose when close X button is clicked', () => {
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+    fireEvent.click(getCloseXButton())
+    expect(mockOnClose).toHaveBeenCalled()
+  })
+
+  it('does not call onClose when modal content is clicked (stopPropagation)', () => {
+    const { container } = render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+    const modalContent = container.querySelector('[role="dialog"]').children[1]
+    fireEvent.click(modalContent)
+    expect(mockOnClose).not.toHaveBeenCalled()
+  })
+
+  it('sets body overflow hidden when modal is open', () => {
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+    expect(document.body.style.overflow).toBe('hidden')
+  })
+
+  it('restores body overflow when modal closes', () => {
+    const { rerender } = render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+    expect(document.body.style.overflow).toBe('hidden')
+
+    rerender(<DiscogsModal isOpen={false} onClose={mockOnClose} release={mockRelease} />)
+    expect(document.body.style.overflow).toBe('unset')
   })
 
   it('does not call onClose for other keys', () => {
@@ -205,6 +266,79 @@ describe('DiscogsModal', () => {
       }
       const { asFragment } = render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithoutCover} />)
       expect(asFragment()).toMatchSnapshot()
+    })
+
+    it('shows loading skeleton until image onLoad fires', () => {
+      render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+      expect(document.querySelector('.show-loading-animation')).toBeInTheDocument()
+
+      fireEvent.load(screen.getByRole('img', { name: /album cover/i }))
+
+      expect(document.querySelector('.show-loading-animation')).not.toBeInTheDocument()
+    })
+
+    it('resets image load state when release changes (different cover URL)', () => {
+      const { rerender } = render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+      fireEvent.load(screen.getByRole('img', { name: /album cover/i }))
+      expect(document.querySelector('.show-loading-animation')).not.toBeInTheDocument()
+
+      const otherRelease = {
+        ...mockRelease,
+        basicInformation: {
+          ...mockRelease.basicInformation,
+          cdnCoverUrl: 'https://other.com/different-cover.jpg'
+        }
+      }
+      rerender(<DiscogsModal isOpen={true} onClose={mockOnClose} release={otherRelease} />)
+
+      expect(document.querySelector('.show-loading-animation')).toBeInTheDocument()
+    })
+
+    it('renders No Image Available with dark mode styling when no cover', () => {
+      const isDarkModeMock = require('../../../helpers/isDarkMode')
+      isDarkModeMock.mockReturnValue(true)
+
+      const releaseWithoutCover = {
+        ...mockRelease,
+        basicInformation: {
+          ...mockRelease.basicInformation,
+          cdnCoverUrl: null,
+          coverImage: null
+        }
+      }
+      render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithoutCover} />)
+      expect(screen.getByText('No Image Available')).toBeInTheDocument()
+
+      isDarkModeMock.mockReturnValue(false)
+    })
+
+    it('does not render View on Discogs link when finalDiscogsUrl is missing', () => {
+      const releaseWithoutUrl = {
+        ...mockRelease,
+        basicInformation: { ...mockRelease.basicInformation, resourceUrl: null },
+        resource: { ...mockRelease.resource, uri: null }
+      }
+      render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithoutUrl} />)
+      expect(screen.queryByText('View on Discogs')).not.toBeInTheDocument()
+    })
+
+    it('renders tracklist with fallbacks for missing position, title, duration', () => {
+      const releaseWithIncompleteTracks = {
+        ...mockRelease,
+        resource: {
+          ...mockRelease.resource,
+          tracklist: [
+            { position: '', title: undefined, duration: null },
+            { position: 'B1', title: 'Known Title', duration: '4:00' }
+          ]
+        }
+      }
+      render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseWithIncompleteTracks} />)
+      expect(screen.getAllByText('—').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getByText('Unknown Title')).toBeInTheDocument()
+      expect(screen.getByText('Known Title')).toBeInTheDocument()
     })
   })
 })

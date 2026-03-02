@@ -1,17 +1,28 @@
 /** @jsx jsx */
+import React from 'react'
 import { jsx, useThemeUI } from 'theme-ui'
 import { createPortal } from 'react-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Themed } from '@theme-ui/mdx'
 import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
+
+import 'react-placeholder/lib/reactPlaceholder.css'
 
 const DiscogsModal = ({ isOpen, onClose, release }) => {
   const { colorMode } = useThemeUI()
   const darkMode = isDarkMode(colorMode)
   const modalRef = useRef(null)
   const previousActiveElement = useRef(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  // Reset image load state when release/cover changes
+  const coverImageUrl = release?.basicInformation?.cdnCoverUrl || release?.basicInformation?.coverImage
+  useEffect(() => {
+    setImageLoaded(false)
+  }, [coverImageUrl])
 
   // Handle escape key
   useEffect(() => {
@@ -56,7 +67,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   if (!isOpen || !release) return null
 
   const { basicInformation = {}, resource = {} } = release
-  const { title, year, artists = [], genres = [], styles = [], cdnCoverUrl, coverImage } = basicInformation
+  const { title, year, artists = [], genres = [], styles = [] } = basicInformation
 
   // Extract additional data from resource object
   const { uri: discogsUrl, tracklist = [] } = resource
@@ -67,8 +78,6 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   const artistNames = (artists || []).map(artist => artist.name).join(', ')
   const genreList = (genres || []).join(', ')
   const styleList = (styles || []).join(', ')
-
-  const coverImageUrl = cdnCoverUrl || coverImage
 
   return createPortal(
     <div
@@ -189,32 +198,64 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
               alignItems: 'start'
             }}
           >
-            {/* Cover image */}
+            {/* Cover image - fixed dimensions prevent layout shift */}
             <div
               sx={{
+                position: 'relative',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                minHeight: '300px'
+                width: '280px',
+                height: '280px',
+                flexShrink: 0
               }}
             >
               {coverImageUrl ? (
-                <Themed.img
-                  src={coverImageUrl}
-                  alt={`${title} album cover`}
-                  sx={{
-                    maxWidth: '100%',
-                    maxHeight: '400px',
-                    borderRadius: 2,
-                    boxShadow: 'lg',
-                    objectFit: 'contain'
-                  }}
-                />
+                <>
+                  {/* Skeleton shown until image loads */}
+                  {!imageLoaded && (
+                    <div
+                      className='show-loading-animation'
+                      sx={{
+                        position: 'absolute',
+                        inset: 0,
+                        borderRadius: 2,
+                        overflow: 'hidden'
+                      }}
+                    >
+                      <RectShape
+                        color={darkMode ? '#3a3a4a' : '#efefef'}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          borderRadius: '8px'
+                        }}
+                      />
+                    </div>
+                  )}
+                  <Themed.img
+                    src={coverImageUrl}
+                    alt={`${title} album cover`}
+                    onLoad={() => setImageLoaded(true)}
+                    sx={{
+                      position: 'relative',
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      width: 'auto',
+                      height: 'auto',
+                      borderRadius: 2,
+                      boxShadow: 'lg',
+                      objectFit: 'contain',
+                      opacity: imageLoaded ? 1 : 0,
+                      transition: 'opacity 0.2s ease-in-out'
+                    }}
+                  />
+                </>
               ) : (
                 <div
                   sx={{
-                    width: '200px',
-                    height: '200px',
+                    width: '100%',
+                    height: '100%',
                     backgroundColor: darkMode ? '#2d3748' : '#f7fafc',
                     borderRadius: 2,
                     display: 'flex',
