@@ -1,0 +1,158 @@
+{
+  "ok": true,
+  "payload": {
+    "collections": {
+      "photos": [
+        {
+          "id": "55083116547",
+          "title": "Castro Street Fair",
+          "description": "",
+          "dateTaken": "2025-06-20 19:02:34",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55083116547_b385034f18_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55083116547_b385034f18.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55083116547_b385034f18_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55083116547"
+        },
+        {
+          "id": "55084212288",
+          "title": "Castro SF",
+          "description": "",
+          "dateTaken": "2022-01-15 13:51:28",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55084212288_0cbf7f37da_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55084212288_0cbf7f37da.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55084212288_0cbf7f37da_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55084212288"
+        },
+        {
+          "id": "55083102372",
+          "title": "Castro SF Halloween",
+          "description": "",
+          "dateTaken": "2023-10-28 19:11:33",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55083102372_aa25f5d5bf_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55083102372_aa25f5d5bf.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55083102372_aa25f5d5bf_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55083102372"
+        },
+        {
+          "id": "55084197658",
+          "title": "Stay Conventional",
+          "description": "In Phoenix, AZ.",
+          "dateTaken": "2022-11-05 16:35:25",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55084197658_55f913df6e_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55084197658_55f913df6e.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55084197658_55f913df6e_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55084197658"
+        },
+        {
+          "id": "55083994746",
+          "title": "Mateo Getting Tattoo'd",
+          "description": "",
+          "dateTaken": "2022-11-05 16:22:49",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55083994746_49a44dc5f7_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55083994746_49a44dc5f7.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55083994746_49a44dc5f7_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55083994746"
+        },
+        {
+          "id": "55083091247",
+          "title": "Bubble Man in Front of Lookout",
+          "description": "",
+          "dateTaken": "2022-01-08 13:57:32",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55083091247_50ffe106d4_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55083091247_50ffe106d4.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55083091247_50ffe106d4_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55083091247"
+        },
+        {
+          "id": "55084351810",
+          "title": "Phillip Burton Statue",
+          "description": "At the Great Meadow in Fort Mason.",
+          "dateTaken": "2021-10-28 17:28:50",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55084351810_8f8a14c05f_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55084351810_8f8a14c05f.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55084351810_8f8a14c05f_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55084351810"
+        },
+        {
+          "id": "55084241694",
+          "title": "History Has Its Eyes On You",
+          "description": "",
+          "dateTaken": "2020-06-08 17:44:51",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55084241694_8fc2a7b6df_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55084241694_8fc2a7b6df.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55084241694_8fc2a7b6df_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55084241694"
+        },
+        {
+          "id": "55083074917",
+          "title": "Fisherman's Grotto",
+          "description": "Looking at Fisherman's Grotto from the water.",
+          "dateTaken": "2026-02-07 20:30:38",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55083074917_270d2fd89e_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55083074917_270d2fd89e.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55083074917_270d2fd89e_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55083074917"
+        },
+        {
+          "id": "55084133035",
+          "title": "Time Machine in San Francisco",
+          "description": "A group of people I found near Sutter and Powell in San Francisco many years ago. I still don't understand what was going on.",
+          "dateTaken": "2019-04-18 08:44:44",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/65535/55084133035_4af592355d_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/65535/55084133035_4af592355d.jpg",
+          "largeUrl": "https://live.staticflickr.com/65535/55084133035_4af592355d_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/55084133035"
+        },
+        {
+          "id": "44091329442",
+          "title": "Looking down a square staircase",
+          "description": "Looking down a square stairwell inside of the Empire Building (Elyton Hotel) in Birmingham Alabama.",
+          "dateTaken": "2017-10-28 05:01:34",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/1867/44091329442_4123e75249_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/1867/44091329442_4123e75249.jpg",
+          "largeUrl": "https://live.staticflickr.com/1867/44091329442_4123e75249_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/44091329442"
+        },
+        {
+          "id": "44090719372",
+          "title": "The Atlantic Ocean from First Landing State Park",
+          "description": "Looking out at the Atlantic Ocean last November. Taken from one of the beach boardwalks at First Landing State Park, a National History Landmark in Virginia Beach, Virginia where English colonists first landed in 1607.",
+          "dateTaken": "2017-11-05 00:16:47",
+          "ownerName": "c1v0",
+          "thumbnailUrl": "https://live.staticflickr.com/1813/44090719372_6446812ab1_q.jpg",
+          "mediumUrl": "https://live.staticflickr.com/1813/44090719372_6446812ab1.jpg",
+          "largeUrl": "https://live.staticflickr.com/1813/44090719372_6446812ab1_b.jpg",
+          "link": "https://www.flickr.com/photos/c1v0/44090719372"
+        }
+      ]
+    },
+    "meta": {
+      "synced": {
+        "_seconds": 1773025629,
+        "_nanoseconds": 887000000
+      }
+    },
+    "metrics": [
+      {
+        "displayName": "Photos",
+        "id": "photos-count",
+        "value": 25
+      }
+    ],
+    "profile": {
+      "displayName": "c1v0",
+      "profileURL": "https://www.flickr.com/photos/c1v0/"
+    }
+  }
+}

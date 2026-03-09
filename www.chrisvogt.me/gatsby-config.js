@@ -40,31 +40,27 @@ module.exports = {
     widgets: {
       discogs: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+        widgetDataSource: '/api/discogs.json'
       },
       flickr: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/flickr'
+        widgetDataSource: '/api/flickr.json'
       },
       github: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/github'
+        widgetDataSource: '/api/github.json'
       },
       goodreads: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/goodreads?t=1771106360'
-      },
-      instagram: {
-        username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram'
+        widgetDataSource: '/api/goodreads.json'
       },
       spotify: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/spotify'
+        widgetDataSource: '/api/spotify.json'
       },
       steam: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/steam?t=1771106360'
+        widgetDataSource: '/api/steam.json'
       }
     },
     webmentionUrl: 'https://webmention.io/www.chrisvogt.me/webmention'
@@ -243,29 +239,29 @@ module.exports = {
           }
         },
         widgets: {
+          discogs: {
+            username: 'chrisvogt',
+            widgetDataSource: '/api/discogs.json'
+          },
           flickr: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/flickr'
+            widgetDataSource: '/api/flickr.json'
           },
           github: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/github'
+            widgetDataSource: '/api/github.json'
           },
           goodreads: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/goodreads'
-          },
-          instagram: {
-            username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram'
+            widgetDataSource: '/api/goodreads.json'
           },
           spotify: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/spotify'
+            widgetDataSource: '/api/spotify.json'
           },
           steam: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/steam'
+            widgetDataSource: '/api/steam.json'
           }
         }
       }
