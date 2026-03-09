@@ -5,6 +5,7 @@ import { Link } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
+import useSiteMetadata from '../hooks/use-site-metadata'
 import {
   faHome,
   faNewspaper,
@@ -100,7 +101,14 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   const colors = retroPanelThemes[colorMode] || retroPanelThemes.default
 
   const navigation = useNavigationData()
-  const homeItems = navigation?.header?.home || []
+  const metadata = useSiteMetadata()
+  const allHomeItems = navigation?.header?.home || []
+  // Only hide nav items when a widget exists for that slug but has no data source (e.g. Instagram removed)
+  const homeItems = allHomeItems.filter(item => {
+    const widgetConfig = metadata?.widgets?.[item.slug]
+    if (!widgetConfig) return true // Not a widget slug (e.g. travel, photography) — always show
+    return Boolean(widgetConfig.widgetDataSource)
+  })
 
   const links = useMemo(
     () => [

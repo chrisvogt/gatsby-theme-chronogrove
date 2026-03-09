@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.72.20
+
+### 🔄 Recovery / Placeholder
+
+**Context**: Firebase shut down the backend API at **metrics.chrisvogt.me** and flagged it as a phishing site (possibly triggered during auth/login page development). An appeal has been submitted. Until the backend is recovered, the site uses a local static JSON fallback as a placeholder.
+
+### ✨ Improvements
+
+- **Local static JSON fallback for widget data**.
+  - Widget data sources (Discogs, Flickr, GitHub, Goodreads, Spotify, Steam) now point to `/api/{widget}.json` — static JSON files in `www.chrisvogt.me/static/api/` served from the site root.
+  - Removed Instagram widget config (no backup available).
+  - Added `static/api/README.md` documenting expected filenames and response shape.
+
+- **Home nav filters by widget config**.
+  - Nav items are filtered by widget configuration: items are hidden when a widget exists for that slug but has no `widgetDataSource` (e.g. Instagram when unconfigured).
+  - Non-widget nav items (e.g. travel, photography) remain visible.
+
+### 🐛 Bug Fixes
+
+- Fixed Flickr backup filename typo: `flikr.json` → `flickr.json`.
+
+### 📦 Files Changed
+
+- `www.chrisvogt.me/gatsby-config.js` (widget URLs to `/api/*.json`; Instagram removed)
+- `www.chrisvogt.me/static/api/` (new directory with README)
+- `theme/src/components/home-navigation.js` (filter nav by widget config)
+- `theme/src/components/home-navigation.spec.js` (mock `useSiteMetadata`; test for widget-based filtering)
+
+---
+
 ## 0.72.19
 
 ### ✨ Improvements

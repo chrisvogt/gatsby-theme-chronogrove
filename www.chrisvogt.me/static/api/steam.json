@@ -1,0 +1,474 @@
+{
+  "ok": true,
+  "payload": {
+    "collections": {
+      "ownedGames": [
+        {
+          "displayName": "Cities: Skylines",
+          "id": 255710,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/255710/6cf7b10dd29db28448ef79698ed2118a03617d63.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/255710/hero_capsule.jpg"
+          },
+          "playTimeForever": 45441
+        },
+        {
+          "displayName": "ARK: Survival Evolved",
+          "id": 346110,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/346110/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/346110/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/346110/fef1799533131c10f538d2dd697bbbd89e663265.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/346110/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/346110/hero_capsule.jpg"
+          },
+          "playTimeForever": 16670
+        },
+        {
+          "displayName": "Fallout 4",
+          "id": 377160,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/377160/779c4356ebe32af2af7c9f0bbba595dfe872cd7f.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/hero_capsule.jpg"
+          },
+          "playTimeForever": 7200
+        },
+        {
+          "displayName": "Starfield",
+          "id": 1716740,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1716740/b4d5828937b2d29b875405dce97bbae0a5d01bbe.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/hero_capsule.jpg"
+          },
+          "playTimeForever": 5556
+        },
+        {
+          "displayName": "The Witcher 3: Wild Hunt",
+          "id": 292030,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/292030/78d0ff98b67851f24539cdf2402cf147679134f4.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/hero_capsule.jpg"
+          },
+          "playTimeForever": 3775
+        },
+        {
+          "displayName": "Conan Exiles",
+          "id": 440900,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/440900/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/440900/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/440900/399859f8bdaeef066f14029d5f1910960545fbd9.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/440900/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/440900/hero_capsule.jpg"
+          },
+          "playTimeForever": 3198
+        },
+        {
+          "displayName": "No Man's Sky",
+          "id": 275850,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/275850/fccb20f309ac5ae05b3cb4576a8a3357edf86f2e.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/hero_capsule.jpg"
+          },
+          "playTime2Weeks": 69,
+          "playTimeForever": 2967
+        },
+        {
+          "displayName": "X-Plane 11",
+          "id": 269950,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/269950/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/269950/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/269950/82f1ee9515d2c7fd45ebe664f89225cf90a5c6fb.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/269950/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/269950/hero_capsule.jpg"
+          },
+          "playTimeForever": 2133
+        },
+        {
+          "displayName": "BioShock Infinite",
+          "id": 8870,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/8870/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/8870/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/8870/4ebaf5f9ee74f50152f7ff361debef7553fa0e4e.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/8870/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/8870/hero_capsule.jpg"
+          },
+          "playTimeForever": 1729
+        },
+        {
+          "displayName": "The Elder Scrolls V: Skyrim Special Edition",
+          "id": 489830,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/489830/0dfe3eed5658f9fbd8b62f8021038c0a4190f21d.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/hero_capsule.jpg"
+          },
+          "playTimeForever": 1379
+        },
+        {
+          "displayName": "Manor Lords",
+          "id": 1363080,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1363080/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1363080/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1363080/f0b869c004ddb564f961668130894f335fe04175.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1363080/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1363080/hero_capsule.jpg"
+          },
+          "playTimeForever": 1129
+        },
+        {
+          "displayName": "The Outer Worlds: Spacer's Choice Edition",
+          "id": 1920490,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1920490/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1920490/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1920490/74b001635a01a0f2e504ec0a842ec53171906a1b.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1920490/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1920490/hero_capsule.jpg"
+          },
+          "playTimeForever": 1084
+        },
+        {
+          "displayName": "The Outer Worlds",
+          "id": 578650,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/578650/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/578650/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/578650/6de56b3e6ff07177a97cf2373145afc6d3a9a926.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/578650/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/578650/hero_capsule.jpg"
+          },
+          "playTimeForever": 1082
+        },
+        {
+          "displayName": "Fallout 76",
+          "id": 1151340,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151340/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151340/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1151340/81185120c1c1a4b26442828b25bbb58aec8d734c.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151340/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151340/hero_capsule.jpg"
+          },
+          "playTimeForever": 822
+        },
+        {
+          "displayName": "Horizon Zero Dawn™ Complete Edition",
+          "id": 1151640,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1151640/08a1b6df68bdc8c28c974b79325ed8c89417af48.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/hero_capsule.jpg"
+          },
+          "playTimeForever": 589
+        },
+        {
+          "displayName": "The Elder Scrolls Online",
+          "id": 306130,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/306130/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/306130/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/306130/2a0f43963c08a3755682adb2369918c9ad07ef1b.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/306130/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/306130/hero_capsule.jpg"
+          },
+          "playTimeForever": 540
+        },
+        {
+          "displayName": "New World: Aeternum",
+          "id": 1063730,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1063730/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1063730/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1063730/672e6cf0670022bc9222af15e5f8cd4b21872d1b.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1063730/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1063730/hero_capsule.jpg"
+          },
+          "playTimeForever": 437
+        },
+        {
+          "displayName": "Far Cry New Dawn",
+          "id": 939960,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/939960/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/939960/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/939960/4123e8e644fd7c9d576e405f76f4296869293deb.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/939960/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/939960/hero_capsule.jpg"
+          },
+          "playTimeForever": 384
+        },
+        {
+          "displayName": "Sea of Thieves",
+          "id": 1172620,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1172620/f95f362708fc326511c5d86566c447ee625bf776.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1172620/hero_capsule.jpg"
+          },
+          "playTimeForever": 329
+        },
+        {
+          "displayName": "BioShock 2",
+          "id": 8850,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/8850/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/8850/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/8850/f5eda925c0e57373aaea4cae17b6f175115a8d54.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/8850/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/8850/hero_capsule.jpg"
+          },
+          "playTimeForever": 288
+        },
+        {
+          "displayName": "Ori and the Blind Forest",
+          "id": 261570,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/261570/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/261570/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/261570/a8b0c1ca89fa421e5061d4ac5c17e2fbf4f08845.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/261570/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/261570/hero_capsule.jpg"
+          },
+          "playTimeForever": 280
+        },
+        {
+          "displayName": "Terraria",
+          "id": 105600,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/105600/858961e95fbf869f136e1770d586e0caefd4cfac.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/105600/hero_capsule.jpg"
+          },
+          "playTimeForever": 270
+        },
+        {
+          "displayName": "Assassin's Creed IV Black Flag",
+          "id": 242050,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/242050/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/242050/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/242050/a03c06290af00eed66814815663b68f5fd063882.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/242050/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/242050/hero_capsule.jpg"
+          },
+          "playTimeForever": 212
+        },
+        {
+          "displayName": "Among Us",
+          "id": 945360,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/945360/b82c3f46da8f3c918e1c9e0d18bd6fa8fcef6801.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/945360/hero_capsule.jpg"
+          },
+          "playTimeForever": 202
+        },
+        {
+          "displayName": "Baldur's Gate 3",
+          "id": 1086940,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1086940/d866cae7ea1e471fdbc206287111f1b642373bd9.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/hero_capsule.jpg"
+          },
+          "playTimeForever": 175
+        },
+        {
+          "displayName": "Obduction",
+          "id": 306760,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/306760/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/306760/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/306760/fdc976882ae614a0101bf03cfcba9f9fc3dd266b.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/306760/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/306760/hero_capsule.jpg"
+          },
+          "playTimeForever": 164
+        },
+        {
+          "displayName": "Subnautica",
+          "id": 264710,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/264710/8a14ceef6e230330a916d7a6324b8c52d464d569.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/264710/hero_capsule.jpg"
+          },
+          "playTimeForever": 151
+        },
+        {
+          "displayName": "To the Moon",
+          "id": 206440,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/206440/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/206440/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/206440/6e29eb4076a6253fdbccb987a2a21746d2df54d7.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/206440/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/206440/hero_capsule.jpg"
+          },
+          "playTimeForever": 133
+        },
+        {
+          "displayName": "Firewatch",
+          "id": 383870,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/383870/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/383870/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/383870/d13e70a08cab192c52104f315a7d68591c085e81.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/383870/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/383870/hero_capsule.jpg"
+          },
+          "playTimeForever": 130
+        },
+        {
+          "displayName": "The Sims™ 4",
+          "id": 1222670,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/1222670/ca6bc8b2411bce4a2cd325ab75f0204bc3a4ad98.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/1222670/hero_capsule.jpg"
+          },
+          "playTimeForever": 130
+        },
+        {
+          "displayName": "Age of Empires® III (2007)",
+          "id": 105450,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/105450/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/105450/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/105450/6fd62f99d3d245868d83af54eb60def5d1667402.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/105450/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/105450/hero_capsule.jpg"
+          },
+          "playTimeForever": 120
+        },
+        {
+          "displayName": "Jurassic World Evolution",
+          "id": 648350,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/648350/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/648350/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/648350/729afe990601e31fb216e60c4b755600a9d939df.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/648350/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/648350/hero_capsule.jpg"
+          },
+          "playTimeForever": 109
+        },
+        {
+          "displayName": "Portal 2",
+          "id": 620,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/620/25a5a16b2423bf7487ac5340b5b0948cef48c5f8.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/620/hero_capsule.jpg"
+          },
+          "playTimeForever": 108
+        },
+        {
+          "displayName": "Besiege",
+          "id": 346010,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/346010/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/346010/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/346010/16667f445723c720782314269e41f9daa8a7fb56.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/346010/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/346010/hero_capsule.jpg"
+          },
+          "playTimeForever": 107
+        },
+        {
+          "displayName": "Rust",
+          "id": 252490,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/252490/820be4782639f9c4b64fa3ca7e6c26a95ae4fd1c.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/252490/hero_capsule.jpg"
+          },
+          "playTimeForever": 100
+        }
+      ],
+      "recentlyPlayedGames": [
+        {
+          "displayName": "No Man's Sky",
+          "id": 275850,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/275850/fccb20f309ac5ae05b3cb4576a8a3357edf86f2e.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/275850/hero_capsule.jpg"
+          },
+          "playTime2Weeks": 69,
+          "playTimeForever": 2967
+        },
+        {
+          "displayName": "BioShock Remastered",
+          "id": 409710,
+          "images": {
+            "capsuleLarge": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/capsule_616x353.jpg",
+            "capsuleSmall": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/capsule_231x87.jpg",
+            "icon": "https://media.steampowered.com/steamcommunity/public/images/apps/409710/eb72262cd3ccc3219dd76392be3b60a4b6cbfd38.jpg",
+            "header": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/header.jpg",
+            "heroCapsule": "https://cdn.cloudflare.steamstatic.com/steam/apps/409710/hero_capsule.jpg"
+          },
+          "playTime2Weeks": 12,
+          "playTimeForever": 38
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "displayName": "Owned Games",
+        "id": "owned-games-count",
+        "value": 153
+      }
+    ],
+    "profile": {
+      "avatarURL": "https://avatars.steamstatic.com/32e50fb93e46d86428ee67b787c4151dcbbf1832_full.jpg",
+      "displayName": "C1V0",
+      "profileURL": "https://steamcommunity.com/id/chrisvogt/"
+    },
+    "aiSummary": "<p>Chris seems to enjoy expansive and immersive gaming experiences. Recent activity includes exploring the vastness of <em>No Man's Sky</em> and revisiting the atmospheric world of <em>BioShock Remastered</em>. </p><p>A look at Chris's most played games reveals a strong preference for open-world titles and simulation games. <em>Cities: Skylines</em>, <em>ARK: Survival Evolved</em>, and <em>Fallout 4</em> stand out as long-term favorites, showcasing a penchant for city-building, survival mechanics, and engaging RPG elements.</p>",
+    "meta": {
+      "synced": "2026-03-09T03:05:35.126Z"
+    }
+  }
+}

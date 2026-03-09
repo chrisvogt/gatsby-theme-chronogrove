@@ -5,8 +5,10 @@ import '@testing-library/jest-dom'
 import { TestProvider } from '../testUtils'
 import HomeNavigation, { sideShadowGradientFromTheme } from './home-navigation'
 import useNavigationData from '../hooks/use-navigation-data'
+import useSiteMetadata from '../hooks/use-site-metadata'
 
 jest.mock('../hooks/use-navigation-data')
+jest.mock('../hooks/use-site-metadata')
 
 const mockNavigationData = {
   header: {
@@ -48,6 +50,7 @@ Object.defineProperty(window, 'innerHeight', {
 describe('HomeNavigation', () => {
   beforeEach(() => {
     useNavigationData.mockImplementation(() => mockNavigationData)
+    useSiteMetadata.mockReturnValue({}) // No widgets by default — nav items without widget config are shown
     mockGetBoundingClientRect.mockReturnValue({
       top: 0,
       bottom: 100,
@@ -79,6 +82,35 @@ describe('HomeNavigation', () => {
   it('accepts undefined props (default parameters)', () => {
     const { container } = render(<TestProvider>{React.createElement(HomeNavigation, undefined)}</TestProvider>)
     expect(container.querySelector('nav')).toBeInTheDocument()
+  })
+
+  it('hides nav items for widgets that have no data source configured', () => {
+    useNavigationData.mockImplementation(() => ({
+      header: {
+        home: [
+          { path: '#instagram', slug: 'instagram', text: 'Instagram', title: 'Instagram' },
+          { path: '#github', slug: 'github', text: 'GitHub', title: 'GitHub' }
+        ]
+      }
+    }))
+    useSiteMetadata.mockReturnValue({
+      widgets: {
+        instagram: { widgetDataSource: '' },
+        github: { widgetDataSource: '/api/github.json' }
+      }
+    })
+
+    const { container } = render(
+      <TestProvider>
+        <HomeNavigation />
+      </TestProvider>
+    )
+
+    const links = container.querySelectorAll('a')
+    // Home, Latest Posts, GitHub (Instagram filtered out)
+    expect(links).toHaveLength(3)
+    expect(links[2].getAttribute('href')).toBe('#github')
+    expect(links[2].textContent).toContain('GitHub')
   })
 
   it('handles navigation data with empty home items', () => {
