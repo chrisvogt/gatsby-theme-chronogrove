@@ -2,6 +2,41 @@
 import { jsx, useColorMode } from 'theme-ui'
 import { Fragment } from 'react'
 import { Link } from '@theme-ui/components'
+
+// Hash-only links use a plain <a>; we handle click with preventDefault and smooth scroll.
+const isHashLink = href => typeof href === 'string' && href.startsWith('#')
+
+const SCROLL_RETRY_MS = 50
+const SCROLL_MAX_WAIT_MS = 3000
+
+/**
+ * Scroll to element by id with smooth behavior. If not in DOM yet, retry until it appears.
+ */
+const scrollToSection = id => {
+  if (typeof document === 'undefined') return
+  const targetId = decodeURIComponent(id.replace(/^#/, ''))
+  const start = Date.now()
+
+  const tryScroll = () => {
+    const el = document.getElementById(targetId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      return true
+    }
+    return false
+  }
+
+  if (tryScroll()) return
+
+  const interval = setInterval(() => {
+    if (Date.now() - start > SCROLL_MAX_WAIT_MS) {
+      clearInterval(interval)
+      return
+    }
+    if (tryScroll()) clearInterval(interval)
+  }, SCROLL_RETRY_MS)
+}
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
@@ -321,54 +356,50 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
             <nav role='navigation' aria-label='On-page navigation'>
               {links.map(({ href, icon, id, text }) => {
                 const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
-                return (
-                  <Link
-                    href={href}
-                    key={id}
-                    className={activeSection === id ? 'active' : ''}
-                    sx={{
-                      fontFamily: 'sans',
-                      color: colors.text,
-                      display: 'flex',
-                      alignItems: 'center',
-                      position: 'relative',
-                      py: 2,
-                      px: 2,
-                      textDecoration: 'none',
-                      borderRadius: '6px',
-                      transition: 'all 0.2s ease',
-                      fontSize: 1,
-                      letterSpacing: '0.02em',
-                      '&:not(:last-of-type)': {
-                        borderBottom: `1px solid ${colors.divider}`
-                      },
-                      '&:hover, &:focus': {
-                        backgroundColor: colors.hoverBg,
-                        outline: 'none'
-                      },
-                      '&:focus-visible': {
-                        outline: 'none',
-                        boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
-                      },
-                      '&.active': {
-                        color: colors.active,
-                        fontWeight: 'bold'
-                      },
-                      /* Glowing indicator dot for the active section */
-                      '&.active::before': {
-                        content: '""',
-                        position: 'absolute',
-                        left: 0,
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        width: '5px',
-                        height: '5px',
-                        borderRadius: '50%',
-                        backgroundColor: colors.active,
-                        boxShadow: `0 0 8px ${colors.activeGlow}`
-                      }
-                    }}
-                  >
+                const linkSx = {
+                  fontFamily: 'sans',
+                  color: colors.text,
+                  display: 'flex',
+                  alignItems: 'center',
+                  position: 'relative',
+                  py: 2,
+                  px: 2,
+                  textDecoration: 'none',
+                  borderRadius: '6px',
+                  transition: 'all 0.2s ease',
+                  fontSize: 1,
+                  letterSpacing: '0.02em',
+                  '&:not(:last-of-type)': {
+                    borderBottom: `1px solid ${colors.divider}`
+                  },
+                  '&:hover, &:focus': {
+                    backgroundColor: colors.hoverBg,
+                    outline: 'none'
+                  },
+                  '&:focus-visible': {
+                    outline: 'none',
+                    boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
+                  },
+                  '&.active': {
+                    color: colors.active,
+                    fontWeight: 'bold'
+                  },
+                  /* Glowing indicator dot for the active section */
+                  '&.active::before': {
+                    content: '""',
+                    position: 'absolute',
+                    left: 0,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '5px',
+                    height: '5px',
+                    borderRadius: '50%',
+                    backgroundColor: colors.active,
+                    boxShadow: `0 0 8px ${colors.activeGlow}`
+                  }
+                }
+                const content = (
+                  <Fragment>
                     {IconComponent ? (
                       <span
                         style={{
@@ -385,6 +416,31 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
                       </span>
                     ) : null}
                     {text}
+                  </Fragment>
+                )
+                return isHashLink(href) ? (
+                  <a
+                    key={id}
+                    href={href}
+                    className={activeSection === id ? 'active' : ''}
+                    sx={linkSx}
+                    onClick={e => {
+                      e.preventDefault()
+                      if (typeof window !== 'undefined') {
+                        window.history.pushState(null, '', href)
+                        if (id === 'home' || href === '#top') {
+                          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+                        } else {
+                          scrollToSection(href)
+                        }
+                      }
+                    }}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <Link key={id} href={href} className={activeSection === id ? 'active' : ''} sx={linkSx}>
+                    {content}
                   </Link>
                 )
               })}

@@ -71,7 +71,7 @@ export default () => {
   }, {})
 
   return (
-    <Widget id='posts' styleOverrides={{ pt: 0 }}>
+    <Widget id='posts'>
       <WidgetHeader aside={callToAction} icon={faNewspaper}>
         Latest Posts
       </WidgetHeader>

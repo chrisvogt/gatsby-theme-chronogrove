@@ -26,6 +26,10 @@ const mockNavigationData = {
 
 jest.mock('../hooks/use-navigation-data')
 jest.mock('../hooks/use-site-metadata')
+jest.mock('@gatsbyjs/reach-router', () => ({
+  ...jest.requireActual('@gatsbyjs/reach-router'),
+  useLocation: jest.fn(() => ({ pathname: '/', hash: '', search: '' }))
+}))
 
 describe('TopNavigation', () => {
   useNavigationData.mockImplementation(() => mockNavigationData)

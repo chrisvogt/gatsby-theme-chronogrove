@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Container } from 'theme-ui'
 import { Link } from 'gatsby'
+import { useLocation } from '@gatsbyjs/reach-router'
 import { Themed } from '@theme-ui/mdx'
 
 import ColorToggle from '../components/color-toggle'
@@ -15,11 +16,18 @@ import useSiteMetadata from '../hooks/use-site-metadata'
  * Top navigation component for the page.
  */
 const TopNavigation = () => {
+  const location = useLocation()
   const metadata = useSiteMetadata()
 
   const navigation = useNavigationData()
   const menuItems = getHeaderLeftItems(navigation)
   const title = getTitle(metadata)
+
+  const handleBrandClick = () => {
+    if (location.pathname === '/' && typeof window !== 'undefined') {
+      window.scrollTo(0, 0)
+    }
+  }
 
   return (
     <Themed.div
@@ -49,6 +57,7 @@ const TopNavigation = () => {
         >
           <Link
             to='/'
+            onClick={handleBrandClick}
             sx={{
               variant: 'styles.a',
               color: 'text',
