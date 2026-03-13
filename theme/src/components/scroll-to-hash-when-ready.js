@@ -13,11 +13,12 @@ import { useLocation } from '@gatsbyjs/reach-router'
 const MAX_WAIT_MS = 3000
 const RETRY_INTERVAL_MS = 50
 
-export default function ScrollToHashWhenReady() {
+export default function ScrollToHashWhenReady({ getHash } = {}) {
   const location = useLocation()
 
   useEffect(() => {
-    const hash = typeof window !== 'undefined' ? window.location.hash : ''
+    const hash =
+      (typeof getHash === 'function' && getHash()) || (typeof window !== 'undefined' ? window.location.hash : '')
     if (!hash || hash.length < 2) return
 
     const id = decodeURIComponent(hash.slice(1))
@@ -47,7 +48,7 @@ export default function ScrollToHashWhenReady() {
     return () => {
       clearInterval(interval)
     }
-  }, [location.pathname, location.hash])
+  }, [location.pathname, location.hash, getHash])
 
   return null
 }

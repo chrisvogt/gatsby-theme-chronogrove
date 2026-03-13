@@ -291,4 +291,28 @@ describe('RootWrapper', () => {
     expect(setColorModeMock).not.toHaveBeenCalled()
     window.localStorage.getItem = originalGetItem
   })
+
+  it('reconcile event does not call setColorMode when getStoredColorMode returns null (e.g. catch path)', () => {
+    const setColorModeMock = jest.fn()
+    mockUseColorMode.mockReturnValue(['default', setColorModeMock])
+    mockUseThemeUI.mockReturnValue({
+      theme: { colors: { background: '#fdf8f5' } }
+    })
+    const getItemSpy = jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new Error('QuotaExceededError')
+    })
+
+    render(
+      <Provider store={store}>
+        <RootWrapper>
+          <div>Child</div>
+        </RootWrapper>
+      </Provider>
+    )
+
+    window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
+
+    expect(setColorModeMock).not.toHaveBeenCalled()
+    getItemSpy.mockRestore()
+  })
 })

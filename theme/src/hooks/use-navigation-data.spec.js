@@ -61,4 +61,40 @@ describe('useNavigationData', () => {
     const { result } = renderHook(() => useNavigationData())
     expect(result.current).toEqual({})
   })
+
+  it('returns empty arrays when header.left or header.home are missing', () => {
+    useStaticQuery.mockImplementation(() => ({
+      site: {
+        siteMetadata: {
+          navigation: {
+            header: {}
+          }
+        }
+      }
+    }))
+    const { result } = renderHook(() => useNavigationData())
+    expect(result.current).toEqual({
+      header: {
+        left: [],
+        home: []
+      }
+    })
+  })
+
+  it('returns empty array for header.home when only header.left is present', () => {
+    useStaticQuery.mockImplementation(() => ({
+      site: {
+        siteMetadata: {
+          navigation: {
+            header: {
+              left: [{ path: '/about', slug: 'about', text: 'About', title: 'About' }]
+            }
+          }
+        }
+      }
+    }))
+    const { result } = renderHook(() => useNavigationData())
+    expect(result.current.header.left).toHaveLength(1)
+    expect(result.current.header.home).toEqual([])
+  })
 })

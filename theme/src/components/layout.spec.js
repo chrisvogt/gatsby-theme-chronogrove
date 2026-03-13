@@ -96,6 +96,17 @@ describe('Layout', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
+  it('renders with transparentBackground prop', () => {
+    const { container } = render(
+      <TestProviderWithState>
+        <Layout transparentBackground>
+          <div>Test content with transparent background</div>
+        </Layout>
+      </TestProviderWithState>
+    )
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
   it('renders with audio player visible state', () => {
     const initialState = {
       audioPlayer: {
