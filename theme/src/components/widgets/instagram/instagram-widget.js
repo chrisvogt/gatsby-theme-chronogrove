@@ -223,7 +223,8 @@ export default () => {
     </CallToAction>
   )
 
-  const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
+  // Assume full grid when loading so scroll-to-section doesn't drift
+  const countItemsToRender = isLoading ? MAX_IMAGES.showMore : isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
 
   // Memoize LightGallery props to prevent reinitializing on every render
   const lightGalleryPlugins = useMemo(() => [lgThumbnail, lgZoom, lgVideo, lgAutoplay], [])
@@ -397,13 +398,27 @@ export default () => {
         </Grid>
       </div>
 
-      {!isLoading && media?.length > MAX_IMAGES.default && (
+      {/* Reserve space for Show More when loading; show button when loaded and > 8 items */}
+      {isLoading ? (
+        <div sx={{ my: 4, textAlign: 'center' }} aria-hidden>
+          <div
+            sx={{
+              display: 'inline-block',
+              height: '44px',
+              minWidth: '140px',
+              borderRadius: '8px',
+              bg: darkModeActive ? 'gray.8' : 'gray.2',
+              opacity: 0.5
+            }}
+          />
+        </div>
+      ) : media?.length > MAX_IMAGES.default ? (
         <div sx={{ my: 4, textAlign: 'center' }}>
           <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
             {isShowingMore ? 'Show Less' : 'Show More'}
           </ActionButton>
         </div>
-      )}
+      ) : null}
 
       {dynamicEl.length > 0 && (
         <LightGallery

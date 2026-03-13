@@ -71,7 +71,7 @@ const GitHubWidget = () => {
         GitHub
       </WidgetHeader>
 
-      <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={2} />
+      <PinnedItems isLoading={isLoading} items={pinnedItems} placeholderCount={6} />
       <LastPullRequest isLoading={isLoading} pullRequest={lastPullRequest} />
 
       {/* Lazy load the contribution graph to prevent FOUC and improve initial render performance */}

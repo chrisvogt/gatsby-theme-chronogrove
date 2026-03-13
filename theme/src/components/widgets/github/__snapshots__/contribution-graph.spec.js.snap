@@ -2274,17 +2274,17 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
             class="css-zpzmf1"
           >
             <div
-              class="css-9xugph"
+              class="css-1e61oo1"
             >
               Mon
             </div>
             <div
-              class="css-1po9no3"
+              class="css-kyvn0t"
             >
               Wed
             </div>
             <div
-              class="css-1i59xme"
+              class="css-1hc6pss"
             >
               Fri
             </div>
@@ -2300,31 +2300,31 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
               class="css-xn8io8"
             >
               <div
-                class="cell-hidden css-11va98h"
+                class="cell-visible css-1j55t5o"
                 title="No contributions on Saturday, November 9, 2024"
               />
               <div
-                class="cell-hidden css-xouyp0"
+                class="cell-visible css-5w50os"
                 title="No contributions on Sunday, November 3, 2024"
               />
               <div
-                class="cell-hidden css-10yu6s"
+                class="cell-visible css-1uvemv3"
                 title="1 contribution on Monday, November 4, 2024"
               />
               <div
-                class="cell-hidden css-16j158j"
+                class="cell-visible css-1h1fez0"
                 title="5 contributions on Tuesday, November 5, 2024"
               />
               <div
-                class="cell-hidden css-ebcvn8"
+                class="cell-visible css-xdnop"
                 title="No contributions on Wednesday, November 6, 2024"
               />
               <div
-                class="cell-hidden css-5zzvf3"
+                class="cell-visible css-26pfvs"
                 title="No contributions on Thursday, November 7, 2024"
               />
               <div
-                class="cell-hidden css-5yi8tl"
+                class="cell-visible css-1a4z7kf"
                 title="No contributions on Friday, November 8, 2024"
               />
             </div>
@@ -2335,7 +2335,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
         class="css-1ts1diq"
       >
         <div
-          class="css-1mkj686"
+          class="css-1yz7e9k"
           component="span"
         >
           Less
@@ -2344,23 +2344,23 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
           class="css-1amotyw"
         >
           <div
-            class="css-uhym38"
+            class="css-mfiemg"
           />
           <div
-            class="css-1m3a6mn"
+            class="css-vl27ft"
           />
           <div
-            class="css-nrs6xv"
+            class="css-oscwj2"
           />
           <div
-            class="css-pd28sq"
+            class="css-1fzf2yx"
           />
           <div
-            class="css-6d96ja"
+            class="css-1f1yu9w"
           />
         </div>
         <div
-          class="css-8swnhh"
+          class="css-1yz7e9k"
           component="span"
         >
           More

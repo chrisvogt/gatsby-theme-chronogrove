@@ -23,40 +23,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const darkModeActive = isDarkMode(colorMode)
   const containerRef = useRef(null)
   const graphRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
   const [hoveredCell, setHoveredCell] = useState(null)
-
-  // Intersection Observer to trigger animation when component comes into view
-  useEffect(() => {
-    if (!graphRef.current || isLoading || !contributionCalendar?.weeks?.length) return
-
-    // Check if IntersectionObserver is available (not in some test environments)
-    if (typeof IntersectionObserver === 'undefined') {
-      // If not available, just show the component immediately
-      setIsVisible(true)
-      return
-    }
-
-    // eslint-disable-next-line no-undef
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !isVisible) {
-            setIsVisible(true)
-            observer.disconnect() // Only animate once
-          }
-        })
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of the component is visible
-        rootMargin: '50px' // Start slightly before it comes into view
-      }
-    )
-
-    observer.observe(graphRef.current)
-
-    return () => observer.disconnect()
-  }, [isLoading, contributionCalendar, isVisible])
 
   // Calculate total days for cell size calculation
   const totalDays = useMemo(() => {
@@ -274,7 +241,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                 height: `${7 * cellSize + 6 * 4}px` // Align container height with grid rows
               }}
             >
-              {[2, 4, 6].map((dayOfWeek, idx) => (
+              {[2, 4, 6].map(dayOfWeek => (
                 <Box
                   key={dayOfWeek}
                   sx={{
@@ -284,11 +251,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                     lineHeight: `${cellSize}px`,
                     textAlign: 'right',
                     pr: 1,
-                    width: '100%',
-                    // Animate day labels with stagger
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
-                    transition: `opacity 0.4s ease-out ${0.3 + idx * 0.1}s, transform 0.5s ease-out ${0.3 + idx * 0.1}s`
+                    width: '100%'
                   }}
                 >
                   {['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'][dayOfWeek]}
@@ -336,11 +299,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                       fontSize: 0,
                       color: 'textMuted',
                       fontWeight: 'normal',
-                      whiteSpace: 'nowrap',
-                      // Animate month labels with stagger
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
-                      transition: `opacity 0.4s ease-out ${idx * 0.1}s, transform 0.5s ease-out ${idx * 0.1}s`
+                      whiteSpace: 'nowrap'
                     }}
                   >
                     {month.label}
@@ -391,9 +350,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   // (Saturday=0, Sunday=1, Monday=2, ..., Friday=6)
                   const gridRow = dayOfWeek + 1
 
-                  // Calculate staggered animation delay based on position
-                  // Animate from left to right, with a slight diagonal effect
-                  const animationDelay = isVisible ? `${weekIndex * 0.015 + dayOfWeek * 0.01}s` : '0s'
                   const hasContributions = day.contributionCount > 0
                   const contributionText = hasContributions
                     ? `${day.contributionCount} contribution${day.contributionCount !== 1 ? 's' : ''}`
@@ -403,7 +359,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                     <Box
                       key={key}
                       title={`${contributionText} on ${formattedDate}`}
-                      className={isVisible ? 'cell-visible' : 'cell-hidden'}
+                      className='cell-visible'
                       onMouseEnter={e => {
                         if (hasContributions) {
                           setHoveredCell({
@@ -426,11 +382,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                         position: 'relative',
                         cursor: hasContributions ? 'pointer' : 'default',
                         overflow: 'hidden',
-                        // Animation styles
-                        opacity: isVisible ? 1 : 0,
-                        transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(10px)',
-                        transition: `opacity 0.4s ease-out ${animationDelay}, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${animationDelay}, box-shadow 0.2s ease, transform 0.2s ease`,
-                        willChange: isVisible ? 'auto' : 'opacity, transform',
+                        transition: 'box-shadow 0.2s ease, transform 0.2s ease',
                         // Shimmer + hover effect only for cells with contributions
                         ...(hasContributions && {
                           '&::after': {
@@ -457,10 +409,8 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                               backgroundPosition: '-100% 0'
                             }
                           },
-                          ...(isVisible && {
-                            animation: 'pulse 2s ease-in-out infinite',
-                            animationDelay: `${(weekIndex * 7 + dayOfWeek) * 0.01 + 1}s`
-                          })
+                          animation: 'pulse 2s ease-in-out infinite',
+                          animationDelay: `${(weekIndex * 7 + dayOfWeek) * 0.01 + 1}s`
                         })
                       }}
                     />
@@ -483,16 +433,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
             color: 'textMuted'
           }}
         >
-          <Box
-            component='span'
-            sx={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
-              transition: 'opacity 0.4s ease-out 1.8s, transform 0.5s ease-out 1.8s'
-            }}
-          >
-            Less
-          </Box>
+          <Box component='span'>Less</Box>
           <Box
             sx={{
               display: 'flex',
@@ -513,25 +454,12 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                         : '#ebedf0'
                       : darkModeActive
                         ? ['#0e4429', '#006d32', '#26a641', '#39d353'][level - 1]
-                        : ['#9be9a8', '#40c463', '#30a14e', '#216e39'][level - 1],
-                  // Animate legend after grid cells
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'scale(1) translateY(0)' : 'scale(0.6) translateY(10px)',
-                  transition: `opacity 0.4s ease-out ${2 + level * 0.1}s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${2 + level * 0.1}s`
+                        : ['#9be9a8', '#40c463', '#30a14e', '#216e39'][level - 1]
                 }}
               />
             ))}
           </Box>
-          <Box
-            component='span'
-            sx={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateX(0)' : 'translateX(10px)',
-              transition: 'opacity 0.4s ease-out 2.5s, transform 0.5s ease-out 2.5s'
-            }}
-          >
-            More
-          </Box>
+          <Box component='span'>More</Box>
         </Box>
       </Card>
 
