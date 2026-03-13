@@ -74,6 +74,8 @@ I’ve exported what I needed from the database and I’m running the home page 
 
 I’m also thinking hard about migration. I no longer feel I can trust Firebase or GCP to keep a personal (or any) app healthy without warning or explanation. **If this were a real product instead of a personal site, I’d be in a much worse position.** As it is, I’m mainly frustrated—and I’m publishing this in the hope it helps someone else avoid the same situation, or at least know they’re not alone when an automated flag torpedoes a project overnight.
 
+Next step: I’m going to decouple Firebase and GCP from the project and introduce adapters so the backend and widgets can talk to any data source. That way the site (and the open-source metrics stack) can run on other platforms—Vercel, Fly.io, a simple Node server, or whatever comes after—without being locked to one vendor.
+
 If you’re deploying anything behind Firebase Auth plus a login UI, be careful mixing emulator and production credentials—even once. I thought I was doing _routine QA_. Google categorized it as phishing and cut the URL with almost no recourse and no timeline.
 
 ---
