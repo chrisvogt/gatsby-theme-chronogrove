@@ -11,6 +11,10 @@ import useSocialProfiles from '../hooks/use-social-profiles'
 jest.mock('../hooks/use-site-metadata')
 jest.mock('../hooks/use-navigation-data')
 jest.mock('../hooks/use-social-profiles')
+jest.mock('@gatsbyjs/reach-router', () => ({
+  ...jest.requireActual('@gatsbyjs/reach-router'),
+  useLocation: jest.fn(() => ({ pathname: '/', hash: '', search: '' }))
+}))
 
 const mockSiteMetadata = {
   title: 'Test Site',

@@ -39,6 +39,11 @@ jest.mock('gatsby', () => ({
   useStaticQuery: jest.fn()
 }))
 
+jest.mock('@gatsbyjs/reach-router', () => ({
+  ...jest.requireActual('@gatsbyjs/reach-router'),
+  useLocation: jest.fn(() => ({ pathname: '/', hash: '', search: '' }))
+}))
+
 // Mock Theme
 const mockTheme = {
   colors: {
