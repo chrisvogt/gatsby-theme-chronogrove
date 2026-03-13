@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, act, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import ContributionGraph from './contribution-graph'
 import { TestProviderWithState } from '../../../testUtils'
@@ -22,22 +22,6 @@ const mockContributionCalendar = {
 }
 
 describe('ContributionGraph Component', () => {
-  let mockIntersectionObserver
-
-  beforeEach(() => {
-    const mockInstance = {
-      observe: jest.fn(),
-      disconnect: jest.fn(),
-      unobserve: jest.fn()
-    }
-    mockIntersectionObserver = jest.fn(() => mockInstance)
-    global.IntersectionObserver = mockIntersectionObserver
-  })
-
-  afterEach(() => {
-    delete global.IntersectionObserver
-  })
-
   it('matches the loading state snapshot', () => {
     const { asFragment } = render(
       <TestProviderWithState>
@@ -147,72 +131,15 @@ describe('ContributionGraph Component', () => {
     expect(screen.getByText('Fri')).toBeInTheDocument()
   })
 
-  it('sets up IntersectionObserver when component mounts with data', () => {
-    render(
+  it('renders graph in final state immediately (no fade-in)', () => {
+    const { container } = render(
       <TestProviderWithState>
         <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
       </TestProviderWithState>
     )
 
-    expect(mockIntersectionObserver).toHaveBeenCalled()
-    const observeInstance = mockIntersectionObserver.mock.results[0].value
-    expect(observeInstance.observe).toHaveBeenCalled()
-  })
-
-  it('calls IntersectionObserver disconnect on unmount', () => {
-    const { unmount } = render(
-      <TestProviderWithState>
-        <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
-      </TestProviderWithState>
-    )
-
-    const observeInstance = mockIntersectionObserver.mock.results[0].value
-    expect(observeInstance.disconnect).not.toHaveBeenCalled()
-
-    unmount()
-
-    expect(observeInstance.disconnect).toHaveBeenCalled()
-  })
-
-  it('triggers animation when IntersectionObserver detects visibility', () => {
-    let intersectionCallback
-    const mockInstance = {
-      observe: jest.fn(),
-      disconnect: jest.fn(),
-      unobserve: jest.fn()
-    }
-
-    mockIntersectionObserver = jest.fn(callback => {
-      intersectionCallback = callback
-      return mockInstance
-    })
-    global.IntersectionObserver = mockIntersectionObserver
-
-    render(
-      <TestProviderWithState>
-        <ContributionGraph isLoading={false} contributionCalendar={mockContributionCalendar} />
-      </TestProviderWithState>
-    )
-
-    expect(intersectionCallback).toBeDefined()
-
-    act(() => {
-      const mockEntry = { isIntersecting: true, target: {} }
-      intersectionCallback([mockEntry])
-    })
-
-    expect(mockIntersectionObserver).toHaveBeenCalled()
-    expect(mockInstance.disconnect).toHaveBeenCalled()
-  })
-
-  it('does not set up IntersectionObserver when loading', () => {
-    render(
-      <TestProviderWithState>
-        <ContributionGraph isLoading={true} contributionCalendar={null} />
-      </TestProviderWithState>
-    )
-
-    expect(mockIntersectionObserver).not.toHaveBeenCalled()
+    const cells = container.querySelectorAll('.cell-visible')
+    expect(cells.length).toBeGreaterThan(0)
   })
 
   it('shows hover popover for cells with contributions', () => {

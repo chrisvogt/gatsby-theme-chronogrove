@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.72.22
+
+### ✨ Improvements
+
+- **Home widget loading & scroll stability**:
+  - Updated grid-based widgets (Steam, Discogs, Instagram, Flickr, Goodreads, GitHub) so their loading skeletons match the final card layouts, grid density, and pagination footprint, preventing scroll drift when navigating via Home navigation links.
+  - Added dedicated skeleton components for AI summaries (Steam, Goodreads) and Discogs vinyl records so only the image/summary areas “animate in” while their containers keep a stable size and shape.
+  - Removed remaining entrance/fade-in effects from AI summaries and the GitHub contribution graph so they render immediately in their final layout without late-stage shifts.
+
+### 🧪 Tests
+
+- Updated Jest snapshots for the affected widgets and graphs to reflect the new skeleton layouts and non-animated loading behavior.
+- Adjusted AI summary and GitHub contribution graph tests to assert immediate visibility instead of relying on delayed animation timing.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.22)
+- `theme/src/components/widgets/steam/ai-summary-skeleton.js` (new AI summary skeleton)
+- `theme/src/components/widgets/steam/ai-summary.js` (remove slide-open effects; simple opacity transition)
+- `theme/src/components/widgets/steam/steam-widget.js` (recently-played skeleton cards; AI summary skeleton usage)
+- `theme/src/components/widgets/goodreads/goodreads-widget.js` (AI summary skeleton usage)
+- `theme/src/components/widgets/discogs/vinyl-record-skeleton.js` (new vinyl record skeleton)
+- `theme/src/components/widgets/discogs/vinyl-collection.js` (3-page full-grid loading state; vinyl skeleton usage; pagination skeleton)
+- `theme/src/components/widgets/instagram/instagram-widget.js` (full-grid loading state; Show More skeleton)
+- `theme/src/components/widgets/flickr/flickr-widget.js` (full-grid loading state; Show More skeleton)
+- `theme/src/components/widgets/github/github-widget.js` (full pinned-items loading state; graph placeholder height)
+- `theme/src/components/widgets/github/contribution-graph.js` (remove IntersectionObserver-based entrance animations)
+- `theme/src/components/widgets/steam/ai-summary.spec.js`, `theme/src/components/widgets/github/contribution-graph.spec.js`, and related widget specs/snapshots (updated expectations)
+
+---
+
 ## 0.72.21
 
 ### 🐛 Bug Fixes

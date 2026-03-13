@@ -7,6 +7,7 @@ import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
 
 import AiSummary from '../steam/ai-summary'
+import AiSummarySkeleton from '../steam/ai-summary-skeleton'
 import CallToAction from '../call-to-action'
 import RecentlyReadBooks from './recently-read-books'
 import UserStatus from './user-status'
@@ -64,7 +65,8 @@ export default () => {
 
       <UserStatus actorName={profileDisplayName} isLoading={isLoading} status={status} />
 
-      {aiSummary && <AiSummary aiSummary={aiSummary} />}
+      {isLoading && !aiSummary ? <AiSummarySkeleton skeletonRows={5} /> : null}
+      {aiSummary ? <AiSummary aiSummary={aiSummary} /> : null}
     </Widget>
   )
 }

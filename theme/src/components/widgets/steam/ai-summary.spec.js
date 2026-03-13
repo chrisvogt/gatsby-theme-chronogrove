@@ -88,10 +88,8 @@ describe('AiSummary', () => {
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
 
-      // Trigger intersection and wait for animations
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('AI Summary')).toBeInTheDocument()
@@ -104,10 +102,8 @@ describe('AiSummary', () => {
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
 
-      // Trigger intersection and wait for animations
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('AI Summary')).toBeInTheDocument()
@@ -123,7 +119,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.queryByText('Show More')).not.toBeInTheDocument()
@@ -138,7 +133,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('AI Summary')).toBeInTheDocument()
@@ -153,7 +147,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('AI Summary')).toBeInTheDocument()
@@ -168,7 +161,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('AI Summary')).toBeInTheDocument()
@@ -184,7 +176,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       const showMoreButton = screen.getByText('Show More')
@@ -200,7 +191,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       const showMoreButton = screen.getByText('Show More')
@@ -234,7 +224,6 @@ describe('AiSummary', () => {
       // Simulate intersection
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('Test content.')).toBeInTheDocument()
@@ -248,7 +237,6 @@ describe('AiSummary', () => {
       // Simulate no intersection
       await act(async () => {
         triggerIntersection(false)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.queryByText('Test content.')).not.toBeInTheDocument()
@@ -261,7 +249,6 @@ describe('AiSummary', () => {
       // Trigger intersection to ensure observer is created and ref is observed
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(100)
       })
 
       // Unmount triggers cleanup - the cleanup function runs (covers return () => { ... } and unobserve branch when ref is set)
@@ -272,20 +259,13 @@ describe('AiSummary', () => {
       ).resolves.not.toThrow()
     })
 
-    it('ProgressiveReveal becomes visible after delay when in view', async () => {
+    it('content becomes visible when in view (no slide-open delay)', async () => {
       const aiSummary = '<p>First paragraph.</p><p>Second paragraph.</p>'
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
-      })
-
-      expect(screen.getByText('First paragraph.')).toBeInTheDocument()
-
-      await act(async () => {
-        jest.advanceTimersByTime(200)
       })
 
       expect(screen.getByText('First paragraph.')).toBeInTheDocument()
@@ -309,9 +289,7 @@ describe('AiSummary', () => {
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
 
-      await act(async () => {
-        jest.advanceTimersByTime(600)
-      })
+      await act(async () => {})
 
       expect(screen.getByText('Test content.')).toBeInTheDocument()
     })
@@ -325,7 +303,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       // Should have two robot icons - one in header, one in footer
@@ -340,7 +317,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByTestId('icon-chevron-down')).toBeInTheDocument()
@@ -359,7 +335,6 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('First paragraph.')).toBeInTheDocument()
@@ -377,26 +352,22 @@ describe('AiSummary', () => {
 
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('Plain text without paragraph tags')).toBeInTheDocument()
     })
   })
 
-  describe('Animation timing', () => {
-    it('shows content after the correct delay', async () => {
+  describe('Visibility when in view', () => {
+    it('shows content when in view (no delay)', async () => {
       const aiSummary = '<p>Test content.</p>'
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
 
-      // Content should not be visible immediately
       expect(screen.queryByText('Test content.')).not.toBeInTheDocument()
 
-      // After triggering intersection and waiting 600ms, content should be visible
       await act(async () => {
         triggerIntersection(true)
-        jest.advanceTimersByTime(600)
       })
 
       expect(screen.getByText('Test content.')).toBeInTheDocument()

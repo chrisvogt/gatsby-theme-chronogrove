@@ -9,32 +9,6 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
 
-const ProgressiveReveal = ({ children, delay = 0, isInView = false }) => {
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    if (isInView) {
-      const timer = setTimeout(() => {
-        setIsVisible(true)
-      }, delay)
-
-      return () => clearTimeout(timer)
-    }
-  }, [isInView, delay])
-
-  return (
-    <div
-      sx={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(10px)',
-        transition: 'all 0.8s ease-out'
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
 const AiSummary = React.memo(({ aiSummary }) => {
   const { theme } = useThemeUI()
   const primary = theme?.colors?.primary ?? '#422EA3'
@@ -44,14 +18,12 @@ const AiSummary = React.memo(({ aiSummary }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [showContent, setShowContent] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
-  const [isInView, setIsInView] = useState(false)
   const [parsedContent, setParsedContent] = useState({ firstParagraph: '', remainingParagraphs: [] })
   const containerRef = useRef(null)
 
   useEffect(() => {
     if (!aiSummary) return
 
-    // Split content on paragraph tags
     const paragraphs = aiSummary.split(/<\/?p[^>]*>/).filter(text => text.trim())
     const firstParagraph = paragraphs[0] || ''
     const remainingParagraphs = paragraphs.slice(1).filter(text => text.trim())
@@ -61,48 +33,24 @@ const AiSummary = React.memo(({ aiSummary }) => {
       remainingParagraphs: remainingParagraphs.map(p => `<p>${p}</p>`)
     })
 
-    // Check if IntersectionObserver is supported
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
       const observer = new window.IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setIsInView(true)
             setIsVisible(true)
-
-            // Start content animation after entrance
-            const timer = setTimeout(() => {
-              setShowContent(true)
-            }, 600)
-
-            return () => clearTimeout(timer)
+            setShowContent(true)
           }
         },
-        {
-          threshold: 0.1,
-          rootMargin: '50px'
-        }
+        { threshold: 0.1, rootMargin: '50px' }
       )
-
-      if (containerRef.current) {
-        observer.observe(containerRef.current)
-      }
-
+      const node = containerRef.current
+      if (node) observer.observe(node)
       return () => {
-        if (containerRef.current) {
-          observer.unobserve(containerRef.current)
-        }
+        if (node) observer.unobserve(node)
       }
-    } else {
-      // Fallback for environments without IntersectionObserver
-      setIsInView(true)
-      setIsVisible(true)
-
-      const timer = setTimeout(() => {
-        setShowContent(true)
-      }, 600)
-
-      return () => clearTimeout(timer)
     }
+    setIsVisible(true)
+    setShowContent(true)
   }, [aiSummary])
 
   const handleToggleExpanded = () => {
@@ -121,8 +69,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
         mt: 4,
         mb: 4,
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-        transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+        transition: 'opacity 0.3s ease-out',
         animation: isVisible ? 'gentleFloat 8s ease-in-out infinite' : 'none'
       }}
     >
@@ -157,18 +104,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                animation: isVisible ? 'slideInFromLeft 0.8s ease-out' : 'none',
-                position: 'relative',
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-4px',
-                  left: 0,
-                  width: '0%',
-                  height: '2px',
-                  background: `linear-gradient(90deg, ${primary}, ${secondary})`,
-                  animation: isVisible ? 'expandWidth 1.2s ease-out 0.8s forwards' : 'none'
-                }
+                position: 'relative'
               }}
             >
               AI Summary
@@ -183,11 +119,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
               }
             }}
           >
-            {showContent && (
-              <ProgressiveReveal delay={200} isInView={isInView}>
-                {parseSafeHtml(parsedContent.firstParagraph)}
-              </ProgressiveReveal>
-            )}
+            {showContent && parseSafeHtml(parsedContent.firstParagraph)}
           </div>
         </div>
 
@@ -197,10 +129,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
             sx={{
               display: 'flex',
               justifyContent: ['center', 'flex-end'],
-              flexShrink: 0,
-              opacity: showContent ? 1 : 0,
-              transform: showContent ? 'translateY(0)' : 'translateY(10px)',
-              transition: 'all 0.8s ease-out 0.8s'
+              flexShrink: 0
             }}
           >
             <ActionButton
@@ -225,22 +154,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
 
       {/* Expanded Content */}
       {isExpanded && parsedContent.remainingParagraphs.length > 0 && (
-        <div
-          sx={{
-            animation: 'slideDown 0.6s ease-out forwards',
-            overflow: 'hidden',
-            '& p': {
-              mb: 2,
-              lineHeight: 1.6,
-              animation: 'fadeInUp 0.5s ease-out forwards',
-              '&:nth-of-type(1)': { animationDelay: '0.1s' },
-              '&:nth-of-type(2)': { animationDelay: '0.2s' },
-              '&:nth-of-type(3)': { animationDelay: '0.3s' },
-              '&:nth-of-type(4)': { animationDelay: '0.4s' },
-              '&:nth-of-type(5)': { animationDelay: '0.5s' }
-            }
-          }}
-        >
+        <div sx={{ '& p': { mb: 2, lineHeight: 1.6 } }}>
           {parseSafeHtml(parsedContent.remainingParagraphs.join(''))}
         </div>
       )}
@@ -252,21 +166,7 @@ const AiSummary = React.memo(({ aiSummary }) => {
           color: 'textMuted',
           fontStyle: 'italic',
           display: 'flex',
-          alignItems: 'center',
-          opacity: showContent ? 1 : 0,
-          transform: showContent ? 'translateY(0)' : 'translateY(10px)',
-          transition: 'all 0.8s ease-out 0.5s',
-          position: 'relative',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: '0%',
-            height: '1px',
-            background: `linear-gradient(90deg, ${primary}, ${secondary})`,
-            animation: showContent ? 'expandWidth 1s ease-out 1.5s forwards' : 'none'
-          }
+          alignItems: 'center'
         }}
       >
         <FontAwesomeIcon

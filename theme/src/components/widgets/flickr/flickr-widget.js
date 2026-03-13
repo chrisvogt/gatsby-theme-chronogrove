@@ -87,7 +87,8 @@ export default () => {
     </CallToAction>
   )
 
-  const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
+  // Assume full grid when loading so scroll-to-section doesn't drift
+  const countItemsToRender = isLoading ? MAX_IMAGES.showMore : isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
 
   return (
     <Widget id='flickr' hasFatalError={hasFatalError}>
@@ -129,7 +130,21 @@ export default () => {
         </Grid>
       </div>
 
-      {!isLoading && (
+      {/* Reserve space for Show More when loading; show button when loaded */}
+      {isLoading ? (
+        <div sx={{ my: 4, textAlign: 'center' }} aria-hidden>
+          <div
+            sx={{
+              display: 'inline-block',
+              height: '44px',
+              minWidth: '140px',
+              borderRadius: '8px',
+              bg: darkModeActive ? 'gray.8' : 'gray.2',
+              opacity: 0.5
+            }}
+          />
+        </div>
+      ) : (
         <div sx={{ my: 4, textAlign: 'center' }}>
           <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
             {isShowingMore ? 'Show Less' : 'Show More'}
