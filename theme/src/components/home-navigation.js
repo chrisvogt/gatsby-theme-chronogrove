@@ -2,42 +2,8 @@
 import { jsx, useColorMode } from 'theme-ui'
 import { Fragment } from 'react'
 import { Link } from '@theme-ui/components'
-
-// Hash-only links use a plain <a>; we handle click with preventDefault and smooth scroll.
-const isHashLink = href => typeof href === 'string' && href.startsWith('#')
-
-const SCROLL_RETRY_MS = 50
-const SCROLL_MAX_WAIT_MS = 3000
-
-/**
- * Scroll to element by id with smooth behavior. If not in DOM yet, retry until it appears.
- */
-const scrollToSection = id => {
-  if (typeof document === 'undefined') return
-  const targetId = decodeURIComponent(id.replace(/^#/, ''))
-  const start = Date.now()
-
-  const tryScroll = () => {
-    const el = document.getElementById(targetId)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      return true
-    }
-    return false
-  }
-
-  if (tryScroll()) return
-
-  const interval = setInterval(() => {
-    if (Date.now() - start > SCROLL_MAX_WAIT_MS) {
-      clearInterval(interval)
-      return
-    }
-    if (tryScroll()) clearInterval(interval)
-  }, SCROLL_RETRY_MS)
-}
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { scrollToElementWhenReady } from '../helpers/scrollToElementWhenReady'
 import { useMemo, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
@@ -51,6 +17,9 @@ import {
   faRecordVinyl
 } from '@fortawesome/free-solid-svg-icons'
 import { faFlickr, faGithub, faGoodreads, faInstagram, faSpotify, faSteam } from '@fortawesome/free-brands-svg-icons'
+
+// Hash-only links use a plain <a>; we handle click with preventDefault and smooth scroll.
+const isHashLink = href => typeof href === 'string' && href.startsWith('#')
 
 const icons = {
   faHome,
@@ -431,7 +400,7 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
                         if (id === 'home' || href === '#top') {
                           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
                         } else {
-                          scrollToSection(href)
+                          scrollToElementWhenReady(href)
                         }
                       }
                     }}

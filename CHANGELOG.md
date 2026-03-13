@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.72.21
+
+### 🐛 Bug Fixes
+
+- **Home and Layout unit tests**: Components that use `useLocation()` from `@gatsbyjs/reach-router` (e.g. `ScrollToHashWhenReady`, `TopNavigation`) were rendering in tests without a router context, causing "LocationContext.Provider was not found" errors. Added a mock for `@gatsbyjs/reach-router` with a stub `useLocation` in `home.spec.js` and `layout.spec.js` so tests run without a real Router.
+
+### ✨ Improvements
+
+- **ScrollToHashWhenReady**: Added optional `getHash` prop so tests can inject the hash without touching `window.location` (which is not mockable in jsdom). Production usage is unchanged (no `getHash` passed).
+
+### 🧪 Tests
+
+- **scroll-to-hash-when-ready.spec.js** (new): Full coverage for hash-based scroll behavior — no hash / short hash, scroll when element exists, decodeURIComponent, element appears after interval, timeout branch, cleanup on unmount.
+- **layout.spec.js**: Mock `@gatsbyjs/reach-router`; added test for `transparentBackground` prop.
+- **top-navigation.spec.js**: Mock `window.___navigate` for Gatsby Link; added tests for brand-link click calling `window.scrollTo(0, 0)` on home path and not on other paths.
+- **use-navigation-data.spec.js**: Tests for missing `header.left` / `header.home` (fallback to empty arrays).
+- **root-wrapper.spec.js**: Test for reconcile event when `localStorage.getItem` throws (catch path in `getStoredColorMode`).
+- **Coverage**: Global statement coverage raised to **97%** (threshold met); `scroll-to-hash-when-ready.js`, `layout.js`, `top-navigation.js`, and `use-navigation-data.js` at 100% statements/lines where applicable.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.72.21)
+- `theme/src/components/scroll-to-hash-when-ready.js` (optional `getHash` prop)
+- `theme/src/components/scroll-to-hash-when-ready.spec.js` (new)
+- `theme/src/templates/home.spec.js` (mock `@gatsbyjs/reach-router`)
+- `theme/src/components/layout.spec.js` (mock `@gatsbyjs/reach-router`; `transparentBackground` test)
+- `theme/src/components/top-navigation.spec.js` (`window.___navigate`; brand-click / scrollTo tests)
+- `theme/src/hooks/use-navigation-data.spec.js` (header.left/home fallback tests)
+- `theme/src/components/root-wrapper.spec.js` (reconcile event when getItem throws / catch path)
+
+---
+
 ## 0.72.20
 
 ### 🔄 Recovery / Placeholder

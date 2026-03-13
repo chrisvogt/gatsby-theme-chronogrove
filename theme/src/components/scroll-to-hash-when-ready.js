@@ -9,9 +9,7 @@
  */
 import { useEffect } from 'react'
 import { useLocation } from '@gatsbyjs/reach-router'
-
-const MAX_WAIT_MS = 3000
-const RETRY_INTERVAL_MS = 50
+import { scrollToElementWhenReady } from '../helpers/scrollToElementWhenReady'
 
 export default function ScrollToHashWhenReady({ getHash } = {}) {
   const location = useLocation()
@@ -21,33 +19,8 @@ export default function ScrollToHashWhenReady({ getHash } = {}) {
       (typeof getHash === 'function' && getHash()) || (typeof window !== 'undefined' ? window.location.hash : '')
     if (!hash || hash.length < 2) return
 
-    const id = decodeURIComponent(hash.slice(1))
-    const start = Date.now()
-
-    const tryScroll = () => {
-      const el = document.getElementById(id)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        return true
-      }
-      return false
-    }
-
-    if (tryScroll()) return
-
-    const interval = setInterval(() => {
-      if (Date.now() - start > MAX_WAIT_MS) {
-        clearInterval(interval)
-        return
-      }
-      if (tryScroll()) {
-        clearInterval(interval)
-      }
-    }, RETRY_INTERVAL_MS)
-
-    return () => {
-      clearInterval(interval)
-    }
+    const cleanup = scrollToElementWhenReady(hash)
+    return cleanup
   }, [location.pathname, location.hash, getHash])
 
   return null
