@@ -11,11 +11,13 @@ import HomeHeaderContent from '../components/home-header-content'
 import HomeNavigation from '../components/home-navigation.js'
 import HomeWidgets from '../components/home-widgets'
 import Layout from '../components/layout'
+import ScrollToHashWhenReady from '../components/scroll-to-hash-when-ready'
 import HomeHead from './home-head'
 
 const HomeTemplate = () => {
   return (
     <Fragment>
+      <ScrollToHashWhenReady />
       <AnimatedPageBackground />
       <div
         sx={{
@@ -60,7 +62,7 @@ const HomeTemplate = () => {
                         maxWidth: '1200px'
                       }}
                     >
-                      <section>
+                      <section id='top'>
                         <HomeHeaderContent />
                       </section>
                       <HomeWidgets />

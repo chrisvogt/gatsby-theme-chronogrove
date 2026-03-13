@@ -152,18 +152,22 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
   }
 
   if (prevLocation !== null) {
-    // Don't scroll to top if it's just a hash change on the same page
     const currentPath = location?.pathname
     const prevPath = prevLocation?.pathname
-    const currentHash = location?.hash
-    if (currentPath === prevPath && currentHash) {
-      return
+    if (currentPath === prevPath) return
+    const performScrollToTop = () => {
+      if (typeof window === 'undefined') return
+      const pathname = window.location?.pathname
+      const hash = window.location?.hash
+      if (pathname === '/' && hash) return
+      window.scrollTo(0, 0)
+      const skipContent = document.getElementById('skip-nav-content')
+      if (skipContent) skipContent.focus({ preventScroll: true })
     }
-
-    window.scrollTo(0, 0)
-    const skipContent = document.getElementById('skip-nav-content')
-    if (skipContent) {
-      skipContent.focus({ preventScroll: true })
+    if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+      window.requestAnimationFrame(performScrollToTop)
+    } else {
+      performScrollToTop()
     }
   }
 }

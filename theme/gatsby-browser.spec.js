@@ -19,11 +19,16 @@ const mockSkipContent = {
   focus: mockFocus
 }
 
-// Setup document and window mocks
+// Run requestAnimationFrame callbacks immediately so deferred scroll runs in tests
+const originalRequestAnimationFrame = window.requestAnimationFrame
 beforeEach(() => {
   jest.clearAllMocks()
   document.getElementById = mockGetElementById
   window.scrollTo = mockScrollTo
+  window.requestAnimationFrame = cb => {
+    cb()
+    return 0
+  }
   window.matchMedia = mockMatchMedia.mockReturnValue({
     matches: false,
     addEventListener: jest.fn(),
@@ -38,6 +43,7 @@ beforeEach(() => {
 afterEach(() => {
   delete document.getElementById
   delete window.scrollTo
+  window.requestAnimationFrame = originalRequestAnimationFrame
 })
 
 describe('gatsby-browser', () => {
@@ -333,6 +339,17 @@ describe('gatsby-browser', () => {
 
       expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
+      expect(mockFocus).not.toHaveBeenCalled()
+    })
+
+    it('should not scroll to top when pathname is unchanged (same page)', () => {
+      onRouteUpdate({
+        location: { pathname: '/', hash: '' },
+        prevLocation: { pathname: '/', hash: '#section' }
+      })
+
+      expect(mockScrollTo).not.toHaveBeenCalled()
+      expect(mockGetElementById).not.toHaveBeenCalled()
       expect(mockFocus).not.toHaveBeenCalled()
     })
 
