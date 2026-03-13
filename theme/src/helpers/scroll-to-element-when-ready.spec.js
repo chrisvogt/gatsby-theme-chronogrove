@@ -1,4 +1,4 @@
-import { scrollToElementWhenReady } from './scrollToElementWhenReady'
+import { scrollToElementWhenReady } from './scroll-to-element-when-ready'
 
 describe('scrollToElementWhenReady', () => {
   beforeEach(() => {

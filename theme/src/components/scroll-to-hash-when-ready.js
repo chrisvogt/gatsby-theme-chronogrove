@@ -9,7 +9,7 @@
  */
 import { useEffect } from 'react'
 import { useLocation } from '@gatsbyjs/reach-router'
-import { scrollToElementWhenReady } from '../helpers/scrollToElementWhenReady'
+import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 
 export default function ScrollToHashWhenReady({ getHash } = {}) {
   const location = useLocation()
