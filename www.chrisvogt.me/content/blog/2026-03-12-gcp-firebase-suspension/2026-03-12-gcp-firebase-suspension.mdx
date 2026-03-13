@@ -1,0 +1,86 @@
+---
+title: 'My Website’s API Was Flagged as Phishing—and I Still Don’t Know Why'
+slug: gcp-firebase-api-suspended
+category: meta
+date: '2026-03-13T01:41:00.000Z'
+banner: https://res.cloudinary.com/chrisvogt/image/upload/f_auto,c_scale,w_1200/v1773364970/posts/gcp-firebase-issue/firebase-this-is-fine-meme.png
+description: >
+  Last Saturday Google Cloud / Firebase suspended my website’s API (metrics.chrisvogt.me) as a phishing site. I’m on a backup a week later with no explanation and no response to my appeal. Here’s what happened and what I’m doing next.
+excerpt: >
+  Google suspended my Firebase-backed API, calling it a phishing site. A week later: no clarity, no reply. I’m sharing the story so others might avoid the same trap.
+keywords:
+  [
+    Firebase,
+    Google Cloud Platform,
+    GCP suspension,
+    phishing flag,
+    website API,
+    personal API,
+    chrisvogt,
+    open source,
+    migration,
+    trust and safety
+  ]
+---
+
+import { PhotoGallery } from '../../../components/PhotoGallery'
+import { gcpFirebaseSuspensionGallery, gcpWhatIveTriedGallery } from './photos'
+
+<br />
+
+![](https://res.cloudinary.com/chrisvogt/image/upload/f_auto,c_scale,w_1200/v1773364970/posts/gcp-firebase-issue/firebase-this-is-fine-meme.png)
+
+Last Saturday I was working on [metrics.chrisvogt.me](https://metrics.chrisvogt.me)—the small Firebase-backed API that powers the widgets on my personal site. The code is open source at [github.com/chrisvogt/metrics](https://github.com/chrisvogt/metrics). I had just merged a PR that converted the project from JavaScript to TypeScript and was manually testing my changes using the Firebase emulator. In a hurry, I pointed the staging, emulator-backed app at production auth credentials without realizing they were for the _wrong environment_.
+
+Within minutes, I got an email from Google. The gist:
+
+> Dear Developer,
+>
+> We have recently detected that your Google Cloud Project Personal Metrics API (id: personal-stats-chrisvogt) has been hosting content that appears to be phishing and violating our Terms of Service. Based on our investigation the phishing content is located at the following location(s).
+>
+> Site Name: personal-stats-chrisvogt
+
+It ended with:
+
+> Please note, you may have received a warning that we would suspend the url if you did not correct the violation. If you didn’t receive a warning, it was because your project’s behavior was seriously interfering with the service or other users. Google was forced to suspend the url in order to protect the integrity of the system.
+
+So: no prior warning, and the only explanation is that I was _seriously interfering with the service or other users_—from trying to sign in against prod auth while hitting the emulator, as far as I can tell.
+
+![](https://res.cloudinary.com/chrisvogt/image/upload/f_auto,c_scale,w_1200/v1773364677/posts/gcp-firebase-issue/suspension-notice.png)
+
+## What my website’s API actually does
+
+My website’s API isn’t a product or a SaaS. It’s my own backend: it fetches data from Goodreads, Spotify, Instagram, Discogs, and Steam, transforms it for the front end, and caches it in Firestore. There are authenticated endpoints to manually trigger syncs for those integrations, behind Firebase Auth and a login screen—because _only I_ should be kicking off sync jobs.
+
+Is the login screen what triggered the phishing classification? I have no idea. The email doesn’t say. And as of today, Thursday—almost a week later—I still haven’t heard back from anyone with specifics.
+
+<PhotoGallery photos={gcpFirebaseSuspensionGallery} />
+
+## What I’ve tried
+
+I submitted an appeal the same day the suspension landed. No response.
+
+I emailed Firebase Support the same day. David replied promptly and explained that Firebase can’t clear suspensions—that Google Cloud owns security and compliance—and suggested: open an appeal, use Search Console (my API isn’t in that app), email google-cloud-compliance@google.com, or use paid Google Cloud Support to talk to a “Project Suspension” expert.
+
+I also emailed google-cloud-compliance@google.com with my GCP and Firebase ticket numbers that same day. _Silence._
+
+So I’m in a loop: Firebase can’t help, the appeal is a black box, and compliance hasn’t replied.
+
+<PhotoGallery photos={gcpWhatIveTriedGallery} />
+
+## Where things stand
+
+I’ve exported what I needed from the database and I’m running the home page on a backup right now. The site still loads, but the widgets no longer update automatically—the pipeline that kept them fresh is offline.
+
+I’m also thinking hard about migration. I no longer feel I can trust Firebase or GCP to keep a personal (or any) app healthy without warning or explanation. **If this were a real product instead of a personal site, I’d be in a much worse position.** As it is, I’m mainly frustrated—and I’m publishing this in the hope it helps someone else avoid the same situation, or at least know they’re not alone when an automated flag torpedoes a project overnight.
+
+If you’re deploying anything behind Firebase Auth plus a login UI, be careful mixing emulator and production credentials—even once. I thought I was doing _routine QA_. Google categorized it as phishing and cut the URL with almost no recourse and no timeline.
+
+---
+
+Reference (for support and transparency):
+
+- Firebase Case: 10398734
+- GCP Trust & Safety Case: YYCQAG2IWBMVSIWXMNLXF3UQUM
+
+If anyone from Google reads this and can explain what happened—or lift the suspension with clear guardrails—_I’m listening._
