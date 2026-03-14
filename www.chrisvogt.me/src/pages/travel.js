@@ -91,6 +91,7 @@ const TravelPage = ({ data }) => {
 
 export const Head = () => (
   <Seo
+    canonicalPath='/travel/'
     title='Travel — Chris Vogt'
     description='Travel posts and photo galleries from trips and destinations. Narrative stories and photos from Belize, Alaska, the Caribbean, and more.'
   >

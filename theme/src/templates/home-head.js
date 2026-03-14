@@ -48,7 +48,7 @@ export default function HomeHead() {
   }
 
   return (
-    <Seo title='Home' description={description}>
+    <Seo canonicalPath='/' title='Home' description={description}>
       {url && <meta property='og:url' content={url} />}
       <meta property='og:type' content='website' />
       <script type='application/ld+json'>{JSON.stringify(structuredData)}</script>

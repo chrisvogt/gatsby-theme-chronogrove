@@ -6,7 +6,7 @@ export default function BlogHead() {
   const { title, description, siteUrl } = useSiteMetadata()
 
   return (
-    <Seo title={`Blog - ${title}`} description={description}>
+    <Seo canonicalPath='/blog/' title={`Blog - ${title}`} description={description}>
       <meta property='og:url' content={`${siteUrl}/blog/`} />
       <meta property='og:type' content='website' />
     </Seo>

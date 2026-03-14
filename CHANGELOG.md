@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.23
+
+### ✨ Improvements
+
+- **Canonical URLs for all main pages**: The theme now outputs a `<link rel="canonical">` tag for the home page, blog index, and about page (blog posts and media pages already had canonicals). The canonical URL is built from site metadata: `baseURL` or `siteUrl` from `gatsby-config` plus the page path. There is no hardcoded domain — every consumer of the theme gets canonicals pointing at their own configured origin. Useful when serving the same site from multiple domains (e.g. alias or redirect) so search engines consolidate on one preferred URL.
+
+### 📦 Files Changed
+
+- `theme/src/templates/home-head.js` (pass `canonicalPath='/'` to `Seo`)
+- `theme/src/pages/blog-head.js` (pass `canonicalPath='/blog/'` to `Seo`)
+- `theme/src/pages/about.js` (pass `canonicalPath='/about/'` to `Seo`)
+
+---
+
 ## 0.72.22
 
 ### ✨ Improvements
