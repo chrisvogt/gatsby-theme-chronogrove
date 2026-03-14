@@ -65,6 +65,7 @@ const MusicPage = ({ data }) => {
 
 export const Head = () => (
   <Seo
+    canonicalPath='/music/'
     title="Chris Vogt's Music - Original and Cover Songs"
     description="Explore Chris Vogt's collection of original songs and covers. Listen to unique tracks and discover the stories behind the music on chrisvogt.me."
   >

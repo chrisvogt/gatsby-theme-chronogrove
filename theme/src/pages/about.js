@@ -38,6 +38,6 @@ const AboutPage = () => {
   )
 }
 
-export const Head = () => <Seo title='About' />
+export const Head = () => <Seo canonicalPath='/about/' title='About' />
 
 export default AboutPage

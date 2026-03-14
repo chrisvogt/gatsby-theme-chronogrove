@@ -44,6 +44,7 @@ export default function HomeHead() {
 
   return (
     <Seo
+      canonicalPath='/'
       title='Home'
       description="Explore Chris Vogt's digital garden. A Software Engineer in San Francisco, Chris shares his interest in photography, piano, and travel."
       keywords='Chris Vogt, Software Engineer in San Francisco, GoDaddy engineer blog, photography blog, piano recordings, travel blog, personal blog, digital garden'
