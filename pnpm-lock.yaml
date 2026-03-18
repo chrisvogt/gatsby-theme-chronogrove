@@ -363,7 +363,7 @@ importers:
       gatsby:
         specifier: 'catalog:'
         version: 5.16.1(babel-eslint@10.1.0(eslint@10.0.2))(eslint-plugin-jest@29.15.0(eslint@10.0.2)(jest@30.2.0(@types/node@25.3.0)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
-      gatsby-plugin-google-analytics:
+      gatsby-plugin-google-gtag:
         specifier: ^5.16.0
         version: 5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@10.0.2))(eslint-plugin-jest@29.15.0(eslint@10.0.2)(jest@30.2.0(@types/node@25.3.0)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       gatsby-plugin-robots-txt:
@@ -4806,8 +4806,8 @@ packages:
       react: ^18.0.0 || ^19.0.0 || ^0.0.0
       react-dom: ^18.0.0 || ^19.0.0 || ^0.0.0
 
-  gatsby-plugin-google-analytics@5.16.0:
-    resolution: {integrity: sha512-S+RCYDWgwJiKmr6hzjohyeNpAY/ryKW2R4DIoH/TGM03eJdMW5kstQdKHIUOOTc/PJQU3sRRL42YEu0KTZqWSg==}
+  gatsby-plugin-google-gtag@5.16.0:
+    resolution: {integrity: sha512-UAUIiPowIDByfyOmhVH4YstA3yPlw4/1JWr3aLs0UWi1O3JE3qubGFSQ3glqtgxm5Fi0fvTkbiuHrRBlT6WD7A==}
     engines: {node: '>=18.0.0 <26'}
     peerDependencies:
       gatsby: ^5.0.0-next
@@ -8933,9 +8933,6 @@ packages:
 
   web-namespaces@1.1.4:
     resolution: {integrity: sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==}
-
-  web-vitals@1.1.2:
-    resolution: {integrity: sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==}
 
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
@@ -14798,14 +14795,13 @@ snapshots:
       - graphql
       - react-native-b4a
 
-  gatsby-plugin-google-analytics@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@10.0.2))(eslint-plugin-jest@29.15.0(eslint@10.0.2)(jest@30.2.0(@types/node@25.3.0)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  gatsby-plugin-google-gtag@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@10.0.2))(eslint-plugin-jest@29.15.0(eslint@10.0.2)(jest@30.2.0(@types/node@25.3.0)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@babel/runtime': 7.28.6
       gatsby: 5.16.1(babel-eslint@10.1.0(eslint@10.0.2))(eslint-plugin-jest@29.15.0(eslint@10.0.2)(jest@30.2.0(@types/node@25.3.0)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3)
       minimatch: 3.1.5
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
-      web-vitals: 1.1.2
 
   gatsby-plugin-manifest@5.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@7.32.0))(eslint-plugin-jest@29.15.0(eslint@10.0.2)(jest@30.2.0(@types/node@25.3.0)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(type-fest@4.41.0)(typescript@5.9.3))(graphql@16.12.0):
     dependencies:
@@ -20625,8 +20621,6 @@ snapshots:
   weak-lru-cache@1.2.2: {}
 
   web-namespaces@1.1.4: {}
-
-  web-vitals@1.1.2: {}
 
   webidl-conversions@3.0.1: {}
 
