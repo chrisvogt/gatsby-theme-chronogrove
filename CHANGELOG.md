@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.73.0
+
+### ✨ Improvements
+
+- **GA4 support via gtag**: `www.chrisvogt.me` now uses `gatsby-plugin-google-gtag` for Google Analytics 4, replacing the legacy `gatsby-plugin-google-analytics` / `analytics.js` integration and wiring the site up to a GA4 measurement ID.
+
+### 📦 Files Changed
+
+- `www.chrisvogt.me/gatsby-config.js` (switch to `gatsby-plugin-google-gtag`, new `GA_MEASUREMENT_ID` env var)
+- `www.chrisvogt.me/package.json` (replace `gatsby-plugin-google-analytics` with `gatsby-plugin-google-gtag`)
+- `theme/package.json` (version 0.73.0)
+
+---
+
 ## 0.72.24
 
 ### ✨ Improvements

@@ -274,14 +274,16 @@ module.exports = {
         }
       }
     },
-    ...(process.env.GA_PROPERTY_ID
+    ...(process.env.GA_MEASUREMENT_ID
       ? [
           {
-            resolve: 'gatsby-plugin-google-analytics',
+            resolve: 'gatsby-plugin-google-gtag',
             options: {
-              trackingId: process.env.GA_PROPERTY_ID,
-              head: false,
-              respectDNT: true
+              trackingIds: [process.env.GA_MEASUREMENT_ID],
+              gtagConfig: {},
+              pluginConfig: {
+                respectDNT: true
+              }
             }
           }
         ]
