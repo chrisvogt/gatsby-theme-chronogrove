@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.72.24
+
+### ✨ Improvements
+
+- **Restore live metrics API for widgets**: Reverted the temporary `/api/*.json` static JSON fallback and pointed all widget `widgetDataSource` URLs back to `https://metrics.chrisvogt.me/api/widgets/*`, including Instagram, now that the backend is healthy again. The home navigation guard introduced in 0.72.20 (which hides nav items when a widget exists but has no `widgetDataSource`) remains in place.
+
+### 📦 Files Changed
+
+- `www.chrisvogt.me/gatsby-config.js` (restore live metrics API URLs; re-add Instagram widget config)
+- `www.chrisvogt.me/static/api/*` (remove temporary static JSON backups and README)
+- `theme/package.json` (version 0.72.24)
+
+---
+
 ## 0.72.23
 
 ### ✨ Improvements
