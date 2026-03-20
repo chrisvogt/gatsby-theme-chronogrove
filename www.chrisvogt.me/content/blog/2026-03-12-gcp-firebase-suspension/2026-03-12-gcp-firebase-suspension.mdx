@@ -23,12 +23,28 @@ keywords:
   ]
 ---
 
+import { jsx } from 'theme-ui'
 import { PhotoGallery } from '../../../components/PhotoGallery'
 import { gcpFirebaseSuspensionGallery, gcpWhatIveTriedGallery } from './photos'
 
 <br />
 
 ![](https://res.cloudinary.com/chrisvogt/image/upload/f_auto,c_scale,w_1200/v1773364970/posts/gcp-firebase-issue/firebase-this-is-fine-meme.png)
+
+<blockquote
+  sx={{
+    borderLeft: '4px solid',
+    borderColor: 'primary',
+    bg: 'rgba(66, 46, 163, 0.06)',
+    py: 2,
+    px: 3,
+    my: 4,
+    borderRadius: '0 4px 4px 0'
+  }}
+>
+  <strong>Update:</strong> This issue was resolved on March 16–17, 2026.{' '}
+  <a href='#update-march-2026'>Read the full update →</a>
+</blockquote>
 
 Last Saturday I was working on [metrics.chrisvogt.me](https://metrics.chrisvogt.me)—the small Firebase-backed API that powers the widgets on my personal site. The code is open source at [github.com/chrisvogt/metrics](https://github.com/chrisvogt/metrics). I had just merged a PR that converted the project from JavaScript to TypeScript and was manually testing my changes using the Firebase emulator. In a hurry, I pointed the staging, emulator-backed app at production auth credentials without realizing they were for the _wrong environment_.
 
@@ -77,6 +93,14 @@ I’m also thinking hard about migration. I no longer feel I can trust Firebase 
 Next step: I’m going to decouple Firebase and GCP from the project and introduce adapters so the backend and widgets can talk to any data source. That way the site (and the open-source metrics stack) can run on other platforms—Vercel, Fly.io, a simple Node server, or whatever comes after—without being locked to one vendor.
 
 If you’re deploying anything behind Firebase Auth plus a login UI, be careful mixing emulator and production credentials—even once. I thought I was doing _routine QA_. Google categorized it as phishing and cut the URL with almost no recourse and no timeline.
+
+## Update (March 2026)
+
+On March 16, the Google Safe Browsing block was lifted. By March 17, everything was back online and the widgets were syncing again.
+
+Thank you to everyone who investigated and helped get things working again—I really appreciate it.
+
+The incident helped push me to make some positive changes: (1) I'm rewriting the metrics app to be more portable, with adapters that decouple it from a specific provider, and (2) I've converted the project to TypeScript and am defining types to tighten the contract between the front end and the back end.
 
 ---
 
