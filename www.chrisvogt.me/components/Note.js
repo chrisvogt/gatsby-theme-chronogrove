@@ -15,7 +15,20 @@ const Note = ({ children }) => (
       py: 2,
       px: 3,
       my: 4,
-      borderRadius: '0 4px 4px 0'
+      borderRadius: '0 4px 4px 0',
+      fontSize: [2, 3],
+      color: 'text',
+      '& a': {
+        color: 'primary',
+        textDecoration: 'none',
+        '&:hover, &:focus': {
+          textDecoration: 'underline'
+        },
+        '&:focus': {
+          outline: 'none',
+          boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
+        }
+      }
     }}
   >
     {children}
