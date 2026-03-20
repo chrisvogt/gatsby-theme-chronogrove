@@ -8,6 +8,7 @@ import { Themed } from '@theme-ui/mdx'
 import { ThemeUIProvider, InitializeColorMode } from 'theme-ui'
 
 import Emoji from './src/shortcodes/emoji'
+import Note from './src/shortcodes/Note'
 import RootWrapper from './src/components/root-wrapper'
 import store from './src/store'
 import theme from './src/gatsby-plugin-theme-ui'
@@ -53,6 +54,7 @@ const Pre = ({ children }) => <>{children}</>
 const components = {
   ...Themed,
   Emoji,
+  Note,
   pre: Pre,
   YouTube,
   Table
