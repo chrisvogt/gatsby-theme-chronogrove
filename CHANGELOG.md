@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.74.1
+
+### 🧹 Cleanup
+
+- **Dead code removal**: Removed unused files and dependencies across the monorepo.
+  - Deleted root `index.js` (duplicate of postinstall banner; never invoked).
+  - Removed `ogl` from theme dependencies (unused; theme uses `three` for WebGL).
+  - Removed `gatsby-plugin-webpack-bundle-analyser-v2` from `www.chrisvogt.me` (installed but not in gatsby-config).
+  - Removed `@babel/core`, `@babel/preset-env`, `@babel/preset-react` and `main` field from `www.chronogrove.com` (unused).
+  - Added `junit.xml` to `.gitignore` and stopped tracking generated test output.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.1, remove `ogl`)
+- `www.chrisvogt.me/package.json` (remove `gatsby-plugin-webpack-bundle-analyser-v2`)
+- `www.chronogrove.com/package.json` (remove Babel devDependencies and `main` field)
+- `index.js` (deleted)
+- `.gitignore` (add `junit.xml`)
+- `theme/junit.xml` (removed from git tracking)
+
+---
+
 ## 0.74.0
 
 ### ✨ Improvements
