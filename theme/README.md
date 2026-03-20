@@ -219,10 +219,31 @@ This is my first blog post using Gatsby Theme Chronogrove!
 ## Features
 
 - **MDX Support**: Write in Markdown with React components
+- **Built-in shortcodes**: `Note` (callout panels), `Emoji`, `YouTube`, `Spotify`, `SoundCloud`
 - **Syntax Highlighting**: Code blocks with Prism.js
 - **Responsive Images**: Optimized images with Gatsby Image
 - **SEO**: Automatic meta tags and structured data
 ```
+
+### Note Callout
+
+Use the built-in `Note` component for callout panels in blog posts. No import required:
+
+```mdx
+<Note variant='info'>
+  <strong>Note:</strong> This is an informational aside.
+</Note>
+
+<Note variant='update'>
+  <strong>Update:</strong> This issue was resolved.
+</Note>
+
+<Note variant='outdated'>
+  <strong>Note:</strong> These numbers are from 2024.
+</Note>
+```
+
+Variants: `info` (default), `update` (green checkmark), `outdated` (amber clock).
 
 ### Music Posts
 
