@@ -104,7 +104,7 @@ module.exports = (themeOptions = {}) => {
        * Features:
        * - Write blog posts in MDX
        * - Embed React components in content
-       * - Use custom shortcodes (Spotify, YouTube, etc.)
+       * - Use custom shortcodes (Note, Spotify, YouTube, etc.)
        * - Syntax highlighting for code blocks
        */
       {

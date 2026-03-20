@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.74.0
+
+### ✨ Improvements
+
+- **Note callout component**: Added a reusable `Note` shortcode for blog posts. Use `<Note>`, `<Note variant='info'>`, `<Note variant='update'>`, or `<Note variant='outdated'>` in MDX content for callout panels (informational asides, resolution updates, or outdated-content notices). No import required—Note is provided by the theme's MDXProvider.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.0)
+- `theme/src/shortcodes/Note.js` (new)
+- `theme/src/shortcodes/Note.spec.js` (new)
+- `theme/wrapRootElement.js` (add Note to MDXProvider components)
+- `www.chrisvogt.me/content/blog/*` (remove Note imports; use theme-provided component)
+- `www.chrisvogt.me/package.json` (remove FontAwesome deps; theme provides them)
+
+---
+
 ## 0.73.0
 
 ### ✨ Improvements
