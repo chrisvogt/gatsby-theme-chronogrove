@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.74.2
+
+### 📦 Dependencies
+
+- **@fortawesome/react-fontawesome**: 3.2.0 → 3.3.0
+- **@tanstack/react-query**: 5.90.21 → 5.91.3
+- **jest**: 30.2.0 → 30.3.0
+- **jest-environment-jsdom**: 30.2.0 → 30.3.0
+- **three**: 0.182.0 → 0.183.2
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.2, dependency updates)
+- `pnpm-lock.yaml`
+
+---
+
 ## 0.74.1
 
 ### 🧹 Cleanup
