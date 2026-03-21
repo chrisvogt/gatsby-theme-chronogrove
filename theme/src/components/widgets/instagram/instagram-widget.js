@@ -223,8 +223,7 @@ export default () => {
     </CallToAction>
   )
 
-  // Assume full grid when loading so scroll-to-section doesn't drift
-  const countItemsToRender = isLoading ? MAX_IMAGES.showMore : isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
+  const countItemsToRender = isShowingMore ? MAX_IMAGES.showMore : MAX_IMAGES.default
 
   // Memoize LightGallery props to prevent reinitializing on every render
   const lightGalleryPlugins = useMemo(() => [lgThumbnail, lgZoom, lgVideo, lgAutoplay], [])
