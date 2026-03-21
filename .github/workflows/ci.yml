@@ -60,10 +60,6 @@ jobs:
       - name: Run tests and collect coverage
         run: pnpm exec turbo run test:coverage -- --maxWorkers=2
 
-      - name: Verify coverage artifacts exist
-        run: |
-          ls -la theme/coverage/lcov.info || (echo "Coverage file missing"; exit 1)
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -73,15 +69,11 @@ jobs:
           flags: unittests
           fail_ci_if_error: true
           disable_search: true
-          verbose: true
           working-directory: ${{ github.workspace }}
           root_dir: theme
 
       - name: Run tests for Codecov analytics
         run: pnpm exec turbo run test:codecov
-
-      - name: Verify JUnit output exists
-        run: ls -la theme/junit.xml || (echo "JUnit file missing"; exit 1)
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
