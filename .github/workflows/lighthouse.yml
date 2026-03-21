@@ -14,6 +14,12 @@ jobs:
         with:
           site_name: 'chrisvogt'
           max_timeout: 600 # Timeout if the deploy preview hasn't posted within 10 minutes
+      - name: Warm up deploy preview
+        run: |
+          echo "Warming up deploy preview at ${{ steps.netlify.outputs.url }}"
+          curl -sS -o /dev/null -w "Response: %{http_code}\n" "${{ steps.netlify.outputs.url }}"
+          echo "Waiting 8 seconds for cache and server to warm..."
+          sleep 8
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
