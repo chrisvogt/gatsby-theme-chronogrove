@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.74.5
+
+### 🐛 Bug Fix
+
+- **Instagram & Flickr loading placeholders**: Fixed loading state showing 16 placeholder rows instead of 8. The widgets assumed a "full grid" during loading to prevent scroll drift, but the page never initially loads in Show More state. Placeholders now match the default display (8 items), fixing a visible layout shift.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.5)
+- `theme/src/components/widgets/instagram/instagram-widget.js`
+- `theme/src/components/widgets/flickr/flickr-widget.js`
+
+---
+
 ## 0.74.4
 
 ### 📦 Dependencies
