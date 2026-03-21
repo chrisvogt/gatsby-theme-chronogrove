@@ -1,4 +1,8 @@
 name: Lighthouse CI for Netlify sites
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
 on: pull_request
@@ -7,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Wait for the Netlify Preview
         uses: jakepartusch/wait-for-netlify-action@v1.4
         id: netlify
