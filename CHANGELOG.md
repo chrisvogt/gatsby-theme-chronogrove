@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.74.3
+
+### 🔒 Security
+
+- **Dependabot High alerts resolved**: Added pnpm overrides to patch transitive vulnerabilities in `flatted`, `socket.io-parser`, `immutable`, `multer`, and `svgo`. See [docs/dependency-overrides.md](docs/dependency-overrides.md) for rationale and maintenance notes.
+
+### 📦 Files Changed
+
+- `package.json` (security overrides)
+- `pnpm-lock.yaml`
+- `docs/dependency-overrides.md` (new)
+- `README.md` (link to overrides doc)
+
+---
+
 ## 0.74.2
 
 ### 📦 Dependencies
