@@ -1,8 +1,8 @@
 # Dependency Overrides
 
-This document explains why pnpm overrides are defined in the root `package.json`. JSON cannot contain comments, so this file serves as the source of truth for future maintainers.
+This document explains why `pnpm` overrides are defined in the root `package.json`. Since JSON cannot contain comments, this file acts as the source of truth for future maintainers.
 
-When upstream dependencies adopt these versions, overrides can be removed. Periodically run `gh api repos/chrisvogt/gatsby-theme-chronogrove/dependabot/alerts` to check if alerts are resolved.
+When upstream dependencies catch up, these overrides can be removed. Periodically run `gh api repos/chrisvogt/gatsby-theme-chronogrove/dependabot/alerts` to check whether the related alerts have been resolved.
 
 ## Security Fixes (Dependabot High/Critical)
 

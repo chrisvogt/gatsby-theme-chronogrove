@@ -1,6 +1,6 @@
 # Steam Widget
 
-The Steam widget displays information about a user's Steam profile, including recently played games and owned games.
+The Steam widget displays information from a Steam profile, including recently played games and owned games.
 
 ## Features
 
@@ -38,7 +38,7 @@ Table component for displaying owned games.
 
 **Props:**
 
-- `games` (Array): Array of game objects from Steam API
+- `games` (Array): Array of game objects from the Steam API
 
 **Features:**
 
@@ -86,7 +86,7 @@ The widget expects Steam API data in the following format:
 
 ## Usage
 
-The Steam widget is automatically included in the home page when a Steam data source is configured in the site metadata.
+The Steam widget is automatically included on the home page when a Steam data source is configured.
 
 To configure the Steam widget, add the following to your `gatsby-config.js`:
 

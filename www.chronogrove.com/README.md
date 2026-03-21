@@ -1,15 +1,15 @@
 # Chronogrove Demo Site
 
-This is the official demo site for `gatsby-theme-chronogrove`, showcasing the theme's capabilities and serving as a development environment.
+This is the official demo site for `gatsby-theme-chronogrove`. It showcases the theme and doubles as a lightweight development environment when working on the theme package.
 
 ## Purpose
 
-This demo site serves multiple purposes:
+This demo site serves a few purposes:
 
-- **Live Demo**: Showcases the theme's features and design
-- **Development Environment**: Test theme functionality and new features
+- **Live demo**: Shows the theme's features and design
+- **Development environment**: Exercises theme functionality and new features
 - **Documentation**: Provides real examples of theme usage
-- **Testing**: Ensures the theme works with different content types
+- **Testing**: Confirms the theme works with different content types
 
 ## Usage
 
@@ -26,7 +26,7 @@ pnpm develop
 
 ### Theme switching (dark/light mode)
 
-If dark/light mode doesn’t update correctly after changing the theme, clear the cache and restart:
+If dark/light mode does not update correctly after changing the theme, clear the cache and restart:
 
 ```bash
 cd www.chronogrove.com
@@ -36,7 +36,7 @@ pnpm develop
 pnpm run develop:clean
 ```
 
-This site adds a minimal `gatsby-browser.js` that re-exports only the theme’s `onRouteUpdate` and `shouldUpdateScroll` (not `wrapRootElement`) so route-based color-mode reconciliation runs without duplicating head or double-wrapping the root.
+This site adds a minimal `gatsby-browser.js` that re-exports only the theme's `onRouteUpdate` and `shouldUpdateScroll` hooks, not `wrapRootElement`. That keeps route-based color-mode reconciliation working without duplicating head content or double-wrapping the root.
 
 ## Content Structure
 
@@ -50,15 +50,13 @@ The site uses demo data that showcases the theme's capabilities while remaining 
 
 ## Widget Testing
 
-The site includes demo widget configurations that point to mock endpoints. You can:
-
-1. Set up real API endpoints for live demos
+The site includes demo widget configurations that point to mock or demo endpoints. If you want a more realistic demo, you can swap those for real APIs.
 
 ## Development Workflow
 
 1. Make changes to the theme in the `theme/` directory
 2. Test changes using this example site
-3. Once satisfied, test with your actual site (`www.chrisvogt.me`)
+3. Once satisfied, test the change against the personal site in `www.chrisvogt.me`
 4. Commit and push changes
 
-This setup ensures your theme remains generic and reusable while providing a proper development environment.
+This setup keeps the theme generic and reusable while still giving you a practical place to develop against.
