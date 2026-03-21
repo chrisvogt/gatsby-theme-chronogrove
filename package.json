@@ -56,7 +56,6 @@
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "core-js-pure",
-      "es5-ext",
       "gatsby",
       "gatsby-cli",
       "lmdb",
