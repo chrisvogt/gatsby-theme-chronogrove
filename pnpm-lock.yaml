@@ -257,7 +257,7 @@ importers:
         version: 4.17.23
       lottie-react-web:
         specifier: github:chrisvogt/lottie-react-web#codex/modernize-tooling-and-ci
-        version: https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/159b59940e078035e9eea8f8aaaae60a271056d3(react@19.2.4)
+        version: https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751(react@19.2.4)
       prettier:
         specifier: 'catalog:'
         version: 3.8.1
@@ -6155,8 +6155,8 @@ packages:
   lottie-api@1.0.3:
     resolution: {integrity: sha512-TB8sytVs/o7/xrT76Gq1p49SpvV/KRz9g7wJpNXC6c0CjqowvQaBy+ynLR5R+cGu9ORwmNSwphC0Zy1r9QZtZQ==}
 
-  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/159b59940e078035e9eea8f8aaaae60a271056d3:
-    resolution: {tarball: https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/159b59940e078035e9eea8f8aaaae60a271056d3}
+  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751:
+    resolution: {tarball: https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751}
     version: 3.0.0
     engines: {node: '>=20', npm: '>=9'}
     peerDependencies:
@@ -17030,7 +17030,7 @@ snapshots:
 
   lottie-api@1.0.3: {}
 
-  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/159b59940e078035e9eea8f8aaaae60a271056d3(react@19.2.4):
+  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751(react@19.2.4):
     dependencies:
       global: 4.4.0
       lottie-api: 1.0.3

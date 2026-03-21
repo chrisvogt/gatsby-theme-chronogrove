@@ -59,6 +59,7 @@
       "gatsby",
       "gatsby-cli",
       "lmdb",
+      "lottie-react-web",
       "sharp"
     ]
   },
