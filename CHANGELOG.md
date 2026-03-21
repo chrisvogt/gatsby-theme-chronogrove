@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.74.4
+
+### 📦 Dependencies
+
+- **lottie-react-web**: Replaced npm package (`^2.2.2`) with GitHub fork `chrisvogt/lottie-react-web#codex/modernize-tooling-and-ci`. Removes deprecated `core-js@2.x` transitive dependency (previously pulled in via `babel-runtime`). The fork uses modern tooling and supports React 19.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.4, lottie-react-web GitHub dependency)
+- `pnpm-lock.yaml`
+
+---
+
 ## 0.74.3
 
 ### 🔒 Security
