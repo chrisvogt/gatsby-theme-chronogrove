@@ -256,8 +256,8 @@ importers:
         specifier: ^4.17.23
         version: 4.17.23
       lottie-react-web:
-        specifier: ^2.2.2
-        version: 2.2.2(react@19.2.4)
+        specifier: github:chrisvogt/lottie-react-web#codex/modernize-tooling-and-ci
+        version: https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751(react@19.2.4)
       prettier:
         specifier: 'catalog:'
         version: 3.8.1
@@ -3111,9 +3111,6 @@ packages:
     peerDependencies:
       '@babel/core': ^7.11.0 || ^8.0.0-beta.1
 
-  babel-runtime@6.26.0:
-    resolution: {integrity: sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==}
-
   bail@1.0.5:
     resolution: {integrity: sha512-xFbRxM1tahm08yHBP16MMjVUAvDaBMD38zsM9EMAUN61omwLmKlOpB/Zku5QkjZ8TZ4vn53pj+t518cH0S03RQ==}
 
@@ -3591,10 +3588,6 @@ packages:
 
   core-js-pure@3.48.0:
     resolution: {integrity: sha512-1slJgk89tWC51HQ1AEqG+s2VuwpTRr8ocu4n20QUcH1v9lAN0RXen0Q0AABa/DK1I7RrNWLucplOHMx8hfTGTw==}
-
-  core-js@2.6.12:
-    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
-    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
 
   core-js@3.48.0:
     resolution: {integrity: sha512-zpEHTy1fjTMZCKLHUZoVeylt9XrzaIN2rbPXEt0k+q7JE5CkCZdo6bNq55bn24a69CH7ErAVLKijxJja4fw+UQ==}
@@ -6162,11 +6155,12 @@ packages:
   lottie-api@1.0.3:
     resolution: {integrity: sha512-TB8sytVs/o7/xrT76Gq1p49SpvV/KRz9g7wJpNXC6c0CjqowvQaBy+ynLR5R+cGu9ORwmNSwphC0Zy1r9QZtZQ==}
 
-  lottie-react-web@2.2.2:
-    resolution: {integrity: sha512-0xCUysLcOsIHUy+PdHOXdCJb58XOYrWtUaZkIJwVS3E807/j6Rs9jt57YvqYgziFXquCjI2uP3hxBrOw528CZQ==}
-    engines: {npm: ^3.0.0}
+  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751:
+    resolution: {tarball: https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751}
+    version: 3.0.0
+    engines: {node: '>=20', npm: '>=9'}
     peerDependencies:
-      react: ^0.14.7 || ^15.0.0 || ^16.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   lottie-web@5.13.0:
     resolution: {integrity: sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==}
@@ -7675,9 +7669,6 @@ packages:
 
   regenerate@1.4.2:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
-
-  regenerator-runtime@0.11.1:
-    resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
 
   regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
@@ -12549,11 +12540,6 @@ snapshots:
       babel-plugin-jest-hoist: 30.3.0
       babel-preset-current-node-syntax: 1.2.0(@babel/core@7.29.0)
 
-  babel-runtime@6.26.0:
-    dependencies:
-      core-js: 2.6.12
-      regenerator-runtime: 0.11.1
-
   bail@1.0.5: {}
 
   bail@2.0.2: {}
@@ -13107,8 +13093,6 @@ snapshots:
       browserslist: 4.28.1
 
   core-js-pure@3.48.0: {}
-
-  core-js@2.6.12: {}
 
   core-js@3.48.0: {}
 
@@ -17046,9 +17030,8 @@ snapshots:
 
   lottie-api@1.0.3: {}
 
-  lottie-react-web@2.2.2(react@19.2.4):
+  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751(react@19.2.4):
     dependencies:
-      babel-runtime: 6.26.0
       global: 4.4.0
       lottie-api: 1.0.3
       lottie-web: 5.13.0
@@ -19059,8 +19042,6 @@ snapshots:
       regenerate: 1.4.2
 
   regenerate@1.4.2: {}
-
-  regenerator-runtime@0.11.1: {}
 
   regenerator-runtime@0.13.11: {}
 
