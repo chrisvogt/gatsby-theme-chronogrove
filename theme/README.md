@@ -5,7 +5,7 @@
 [![Code Coverage](https://codecov.io/gh/chrisvogt/gatsby-theme-chronogrove/branch/main/graph/badge.svg?token=YUksu2c99s)](https://codecov.io/gh/chrisvogt/gatsby-theme-chronogrove)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/chrisvogt/gatsby-theme-chronogrove/blob/main/LICENSE)
 
-A beautiful Gatsby theme for personal websites and blogs with built-in social media widgets. Features a dashboard-style home page that showcases your recent activity across multiple platforms.
+A Gatsby theme for personal websites and blogs with built-in social media widgets. It includes a dashboard-style home page that can surface recent activity across multiple platforms.
 
 ## ✨ Features
 
@@ -18,7 +18,7 @@ A beautiful Gatsby theme for personal websites and blogs with built-in social me
 - **Accessibility**: ARIA labels and keyboard navigation
 - **Navigation System**: Configurable navigation with GraphQL integration
 - **Error Handling**: Robust error handling and fallbacks
-- **Testing**: Comprehensive test suite with 459 passing tests
+- **Testing**: Comprehensive unit tests and coverage reporting
 
 ## 🚀 Quick Start
 
@@ -314,13 +314,16 @@ cd gatsby-theme-chronogrove
 # Install dependencies
 pnpm install
 
-# Start development server
-pnpm --filter www.chrisvogt.me develop
+# Start the personal site with HTTPS
+pnpm develop
+
+# Or start the demo site
+pnpm develop:theme
 ```
 
 ### Testing
 
-The theme includes comprehensive testing with **459 passing tests**:
+The theme includes comprehensive testing for components, widgets, selectors, and Gatsby integration points:
 
 ```bash
 # Run all tests
@@ -333,14 +336,12 @@ pnpm test:watch
 pnpm test:coverage
 ```
 
-**Test Coverage:**
+**Coverage highlights:**
 
-- ✅ 79 test suites passing
-- ✅ 459 individual tests passing
-- ✅ 69 snapshot tests
+- ✅ Component and widget coverage
 - ✅ GraphQL mocking for Gatsby components
 - ✅ Navigation component testing
-- ✅ Widget component testing
+- ✅ Selector and hook coverage
 
 ## 📦 Available Widgets
 
@@ -386,20 +387,6 @@ pnpm test:coverage
 - Photo metadata
 - Lightbox gallery
 
-## 🔧 Recent Improvements (v0.51.0)
-
-### Bug Fixes
-
-- **Fixed failing unit tests**: Resolved GraphQL errors in test environment
-- **Fixed navigation data handling**: Updated `useNavigationData` hook to return empty object when navigation data is missing
-- **Improved test reliability**: Added proper mocking for Gatsby's `useStaticQuery` and `graphql` in component tests
-
-### Technical Improvements
-
-- Enhanced test coverage for navigation components
-- Improved error handling in navigation data hooks
-- Better separation of concerns between theme and site-specific configuration
-
 ## 🔍 Troubleshooting
 
 ### Dark/light mode not updating (workspace or local dependency)
@@ -423,11 +410,7 @@ See [www.chronogrove.com/gatsby-browser.js](https://github.com/chrisvogt/gatsby-
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Pull requests are welcome. See [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for the contribution flow, PR title format, and CI expectations.
 
 ## 📄 License
 
@@ -442,13 +425,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [GitHub Wiki](https://github.com/chrisvogt/gatsby-theme-chronogrove/wiki)
+- **Root docs**: [`../README.md`](../README.md)
 - **Issues**: [GitHub Issues](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/chrisvogt/gatsby-theme-chronogrove/discussions)
-- **Changelog**: [CHANGELOG.md](../CHANGELOG.md) - Complete version history
+- **Changelog**: [`../CHANGELOG.md`](../CHANGELOG.md)
 
 ---
 
 Made with ❤️ by [Chris Vogt](https://www.chrisvogt.me)
-
-**Current Version**: v0.51.0

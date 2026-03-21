@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/chrisvogt/gatsby-theme-chronogrove/blob/main/LICENSE)
 [![BlueSky](https://img.shields.io/badge/BlueSky-@chrisvogt.me-blue?logo=bluesky&logoColor=white)](https://bsky.app/profile/chrisvogt.me)
 
-A modern, feature-rich Gatsby theme for personal websites and blogs with social media integration. This theme powers [www.chrisvogt.me](https://www.chrisvogt.me) and provides a comprehensive solution for developers looking to build their own personal website.
+A modern Gatsby theme for personal websites and blogs with social media integration. It powers [www.chrisvogt.me](https://www.chrisvogt.me) and includes a demo site, reusable theme package, and content examples.
 
 ## 🚀 Features
 
@@ -16,7 +16,7 @@ A modern, feature-rich Gatsby theme for personal websites and blogs with social 
 - **Widget System**: Pre-built widgets for GitHub, Instagram, Spotify, Goodreads, and Steam
 - **Responsive Design**: Mobile-first design with dark/light mode support
 - **Performance Optimized**: Built with Gatsby for fast loading and SEO
-- **Testing**: Comprehensive test suite with 459 passing tests
+- **Testing**: Comprehensive unit tests and coverage reporting
 - **Navigation System**: Configurable navigation with proper GraphQL integration
 - **Error Handling**: Robust error handling and fallbacks throughout the theme
 
@@ -96,15 +96,17 @@ gatsby-theme-chronogrove/
      mv www.dev-chrisvogt.me.pem www.chrisvogt.me/certs/
      ```
 
-4. **If you don’t have a Google Analytics tracking ID or don’t plan to use it, remove or comment out these lines in `gatsby-config.js`:**
+4. **If you do not plan to use Google Analytics, remove or comment out the analytics plugin block in `www.chrisvogt.me/gatsby-config.js`:**
 
    ```
    {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingId: process.env.GA_PROPERTY_ID,
-        head: false,
-        respectDNT: true
+        trackingIds: [process.env.GA_MEASUREMENT_ID],
+        gtagConfig: {},
+        pluginConfig: {
+          respectDNT: true
+        }
       }
     },
 
@@ -216,10 +218,10 @@ See the [mock data examples](theme/__mocks__/) for expected API response formats
 
 ## 🧪 Testing
 
-The project includes comprehensive testing with **459 passing tests**:
+The project includes comprehensive testing for theme components, widgets, selectors, and build-critical behavior:
 
 - **Unit Tests**: Jest + React Testing Library
-- **Snapshot Tests**: Component regression testing (69 snapshots)
+- **Snapshot Tests**: Component regression coverage
 - **Coverage Reports**: Code coverage tracking
 - **GraphQL Mocking**: Proper mocking for Gatsby's `useStaticQuery` and `graphql`
 - **Navigation Testing**: Comprehensive tests for navigation components and hooks
@@ -271,15 +273,7 @@ http-server -o -S -C ../certs/www.chrisvogt.me.pem -K ../certs/www.chrisvogt.me-
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
-### Development Setup for Contributors
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Run tests: `pnpm test`
-5. Commit your changes: `git commit -m 'Add amazing feature'`
-6. Push to the branch: `git push origin feature/amazing-feature`
-7. Open a Pull Request
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the pull request process, PR title format, and CI expectations.
 
 ## 📚 Documentation
 
@@ -296,7 +290,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ```bash
 # Kill the process using port 8000
-lsof -ti:8000 | xargs kill -9
+lsof -ti:8000 | xargs kill
 ```
 
 **Demo site not loading**

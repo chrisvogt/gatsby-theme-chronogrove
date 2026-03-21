@@ -1,6 +1,6 @@
 # Discogs Widget
 
-A widget that displays a user's vinyl record collection from Discogs as circular vinyl records with hover effects.
+A widget that displays a Discogs vinyl collection as circular records with hover effects.
 
 ## Features
 
@@ -17,23 +17,28 @@ A widget that displays a user's vinyl record collection from Discogs as circular
 
 ## Configuration
 
-Add to your site metadata in `gatsby-config.js`:
+Add this to the theme options in your `gatsby-config.js`:
 
 ```javascript
 module.exports = {
-  siteMetadata: {
-    widgets: {
-      discogs: {
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+  plugins: [
+    {
+      resolve: 'gatsby-theme-chronogrove',
+      options: {
+        widgets: {
+          discogs: {
+            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+          }
+        }
       }
     }
-  }
+  ]
 }
 ```
 
 ## API Data Structure
 
-The widget expects data from the `/api/widgets/discogs` endpoint with this structure:
+The widget expects data from a Discogs widget endpoint with this structure:
 
 ```javascript
 {

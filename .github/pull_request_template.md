@@ -1,6 +1,6 @@
 ## Overview
 
-<!-- Provide a brief overview of what this PR accomplishes -->
+<!-- Briefly explain what changed and why. -->
 
 ## Screenshots
 
@@ -8,6 +8,8 @@
 | ------------------------------ | ---------------------------- |
 | ![Before](url-to-before-image) | ![After](url-to-after-image) |
 
-## AI summary
+<!-- Delete this section if screenshots are not relevant. -->
 
-<!-- AI-generated summary of the changes -->
+## AI Summary
+
+<!-- Optional AI-generated summary of the changes. -->
