@@ -3,6 +3,7 @@
 .log
 .vscode
 coverage
+junit.xml
 launch.json
 node_modules
 public
