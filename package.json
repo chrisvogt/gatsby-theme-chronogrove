@@ -41,8 +41,12 @@
     "overrides": {
       "lodash": "^4.17.23",
       "@mdx-js/react": "^3.1.1",
-      "multer": "^2.1.0",
+      "multer": "^2.1.1",
       "serialize-javascript": ">=7.0.3",
+      "flatted": "^3.4.2",
+      "socket.io-parser": "^4.2.6",
+      "immutable": "^3.8.3",
+      "svgo": "^2.8.1",
       "gatsby-plugin-google-analytics>minimatch": "^3.1.4",
       "gatsby-plugin-sitemap>minimatch": "^3.1.4"
     },
@@ -52,7 +56,6 @@
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "core-js-pure",
-      "es5-ext",
       "gatsby",
       "gatsby-cli",
       "lmdb",

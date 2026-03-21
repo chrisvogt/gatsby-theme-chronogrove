@@ -52,6 +52,8 @@ gatsby-theme-chronogrove/
 └── package.json              # Root workspace config
 ```
 
+> **Dependency overrides**: The root `package.json` uses pnpm overrides for security patches. See [docs/dependency-overrides.md](docs/dependency-overrides.md) for rationale.
+
 ## ⚡ Quick Start
 
 1. **Clone the repository**
