@@ -20,17 +20,17 @@ exports[`VinylCollection Edge cases handles releases with empty artist name 1`] 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -124,17 +124,17 @@ exports[`VinylCollection Edge cases handles releases with empty artists array 1`
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -228,17 +228,17 @@ exports[`VinylCollection Edge cases handles releases with empty cdnThumbUrl 1`] 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -332,17 +332,17 @@ exports[`VinylCollection Edge cases handles releases with empty resourceUrl 1`] 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -444,17 +444,17 @@ exports[`VinylCollection Edge cases handles releases with missing artist name 1`
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -548,17 +548,17 @@ exports[`VinylCollection Edge cases handles releases with missing basicInformati
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -652,17 +652,17 @@ exports[`VinylCollection Edge cases handles releases with missing cdnThumbUrl pr
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -756,17 +756,17 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl 1`
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -868,17 +868,17 @@ exports[`VinylCollection Edge cases handles releases with missing resourceUrl pr
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -980,17 +980,17 @@ exports[`VinylCollection Edge cases handles releases with missing title 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1084,17 +1084,17 @@ exports[`VinylCollection Edge cases handles releases with missing year 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1188,17 +1188,17 @@ exports[`VinylCollection Edge cases handles releases with null artists 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1292,17 +1292,17 @@ exports[`VinylCollection Edge cases handles releases with undefined artist name 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1396,17 +1396,17 @@ exports[`VinylCollection Edge cases handles releases with undefined artists 1`] 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1500,17 +1500,17 @@ exports[`VinylCollection Edge cases handles releases with undefined cdnThumbUrl 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1604,17 +1604,17 @@ exports[`VinylCollection Edge cases handles releases with undefined resourceUrl 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1716,17 +1716,17 @@ exports[`VinylCollection handles releases with missing artist information 1`] = 
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1820,17 +1820,17 @@ exports[`VinylCollection handles releases with missing basicInformation 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -1988,17 +1988,17 @@ exports[`VinylCollection handles releases with multiple artists 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -2092,17 +2092,17 @@ exports[`VinylCollection handles releases without CDN thumb URL 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -2196,17 +2196,17 @@ exports[`VinylCollection renders empty state when no releases 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           />
         </div>
       </div>
@@ -2235,17 +2235,17 @@ exports[`VinylCollection renders loading state 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-1k7abfv"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-eapruo"
+          class="css-nkqvje"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-5f6p6o"
@@ -2610,10 +2610,10 @@ exports[`VinylCollection renders loading state 1`] = `
           </div>
         </div>
         <div
-          class="css-eapruo"
+          class="css-nkqvje"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-5f6p6o"
@@ -2978,10 +2978,10 @@ exports[`VinylCollection renders loading state 1`] = `
           </div>
         </div>
         <div
-          class="css-eapruo"
+          class="css-nkqvje"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-5f6p6o"
@@ -3385,17 +3385,17 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-7zqrxy"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-ymqdh6"
+          class="css-16svll3"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -4480,10 +4480,10 @@ exports[`VinylCollection renders with many releases for pagination testing 1`] =
           </div>
         </div>
         <div
-          class="css-ymqdh6"
+          class="css-16svll3"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"
@@ -5304,17 +5304,17 @@ exports[`VinylCollection renders with vinyl releases 1`] = `
       My owned vinyl records from Discogs.
     </p>
     <div
-      class="css-1719y60"
+      class="css-v16mwl"
     >
       <div
         class="css-nlq8f0"
         data-testid="vinyl-carousel"
       >
         <div
-          class="css-gjogkf"
+          class="css-1x3rlll"
         >
           <div
-            class="vinyl-collection_grid null css-i49jks"
+            class="vinyl-collection_grid null css-1c8stqo"
           >
             <div
               class="css-16bi5cb"

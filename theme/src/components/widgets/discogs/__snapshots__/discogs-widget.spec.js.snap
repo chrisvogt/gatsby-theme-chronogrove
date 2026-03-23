@@ -79,17 +79,17 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
         My owned vinyl records from Discogs.
       </p>
       <div
-        class="css-1719y60"
+        class="css-us3dds"
       >
         <div
           class="css-nlq8f0"
           data-testid="vinyl-carousel"
         >
           <div
-            class="css-gjogkf"
+            class="css-ynlqmx"
           >
             <div
-              class="vinyl-collection_grid null css-qstdbb"
+              class="vinyl-collection_grid null css-1xfuo0x"
             />
           </div>
         </div>
@@ -174,17 +174,17 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         My owned vinyl records from Discogs.
       </p>
       <div
-        class="css-1719y60"
+        class="css-us3dds"
       >
         <div
           class="css-nlq8f0"
           data-testid="vinyl-carousel"
         >
           <div
-            class="css-gjogkf"
+            class="css-ynlqmx"
           >
             <div
-              class="vinyl-collection_grid null css-qstdbb"
+              class="vinyl-collection_grid null css-1xfuo0x"
             >
               <div
                 class="css-r4jg7j"
@@ -461,17 +461,17 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         My owned vinyl records from Discogs.
       </p>
       <div
-        class="css-1719y60"
+        class="css-us3dds"
       >
         <div
           class="css-1k7abfv"
           data-testid="vinyl-carousel"
         >
           <div
-            class="css-eapruo"
+            class="css-14hc1pz"
           >
             <div
-              class="vinyl-collection_grid null css-qstdbb"
+              class="vinyl-collection_grid null css-1xfuo0x"
             >
               <div
                 class="css-1cu3vo6"
@@ -836,10 +836,10 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
             </div>
           </div>
           <div
-            class="css-eapruo"
+            class="css-14hc1pz"
           >
             <div
-              class="vinyl-collection_grid null css-qstdbb"
+              class="vinyl-collection_grid null css-1xfuo0x"
             >
               <div
                 class="css-1cu3vo6"
@@ -1204,10 +1204,10 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
             </div>
           </div>
           <div
-            class="css-eapruo"
+            class="css-14hc1pz"
           >
             <div
-              class="vinyl-collection_grid null css-qstdbb"
+              class="vinyl-collection_grid null css-1xfuo0x"
             >
               <div
                 class="css-1cu3vo6"

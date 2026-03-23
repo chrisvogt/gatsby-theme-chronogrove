@@ -149,12 +149,12 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
         ) : (
           <div
             sx={{
-              overflowX: 'hidden',
-              overflowY: 'visible',
+              overflow: 'hidden',
               position: 'relative',
               width: '100%',
-              pb: 2,
-              px: 1
+              maxWidth: '100%',
+              pb: 4,
+              mb: -4
             }}
           >
             {isLoading ? (
@@ -207,16 +207,25 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                     data-testid={`goodreads-page-${pageIndex + 1}`}
                     sx={{
                       width: `${100 / totalPages}%`,
-                      flexShrink: 0
+                      flexShrink: 0,
+                      minWidth: 0,
+                      boxSizing: 'border-box',
+                      overflowX: 'clip',
+                      overflowY: 'visible',
+                      pr: 3,
+                      pb: 1
                     }}
                   >
                     <div
-                      sx={{
+                      sx={t => ({
                         display: 'grid',
                         gridGap: [3, 1, 2],
                         gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)'],
-                        pb: 1
-                      }}
+                        // Fill slide width including pr shadow gutter (negative mr does not widen 1fr tracks).
+                        width: `calc(100% + ${t.space[3]})`,
+                        maxWidth: 'none',
+                        boxSizing: 'border-box'
+                      })}
                     >
                       {pageBooks.map(book => (
                         <BookLink

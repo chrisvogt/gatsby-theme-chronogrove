@@ -68,6 +68,7 @@ const BookLink = ({ id, thumbnailURL, title, suppressNavigation = false }) => {
     <Card
       variant='actionCard'
       sx={{
+        minWidth: 0,
         height: '100%',
         display: 'flex',
         flexDirection: 'column',

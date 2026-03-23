@@ -176,7 +176,9 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
           overflow: 'hidden',
           position: 'relative',
           width: '100%',
-          maxWidth: '100%'
+          maxWidth: '100%',
+          pb: 4,
+          mb: -4
         }}
       >
         <div
@@ -204,13 +206,19 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
               key={pageIndex}
               sx={{
                 width: `${100 / totalPages}%`,
-                flexShrink: 0
+                flexShrink: 0,
+                minWidth: 0,
+                boxSizing: 'border-box',
+                overflowX: 'clip',
+                overflowY: 'visible',
+                pr: 3,
+                pb: 1
               }}
             >
               <div
                 key={`grid-${currentBreakpointIndex}-${pageIndex}`}
                 className={`vinyl-collection_grid ${currentVinylId ? 'vinyl-collection_grid--interacting' : null}`}
-                sx={{
+                sx={t => ({
                   display: 'grid',
                   gridGap: [1, 2, 2, 3],
                   gridTemplateColumns: [
@@ -220,12 +228,13 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                     'repeat(5, 1fr)',
                     'repeat(6, 1fr)'
                   ],
-                  width: '100%',
-                  maxWidth: '100%',
+                  // Fill slide width including pr shadow gutter (negative mr does not widen 1fr tracks).
+                  width: `calc(100% + ${t.space[3]})`,
+                  maxWidth: 'none',
                   boxSizing: 'border-box',
                   minHeight: 'auto',
                   height: 'auto'
-                }}
+                })}
               >
                 {isLoading
                   ? pageItems.map(({ id }) => <VinylRecordSkeleton key={id} darkModeActive={darkModeActive} />)
