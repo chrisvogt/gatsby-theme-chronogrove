@@ -4,22 +4,56 @@ import { Heading } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { Themed } from '@theme-ui/mdx'
 import { useLocation, navigate } from '@gatsbyjs/reach-router'
-import { useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
+import Pagination from '../../pagination'
+import useSwipePagination from '../../../hooks/use-swipe-pagination'
 
 import BookExplorer from './book-explorer'
 import BookLink from './book-link'
 
 export const HEADLINE = 'Books'
-export const BODY_TEXT = 'The last 12 books I read and finished.'
+export const BODY_TEXT = 'Recently read and finished books from Goodreads.'
+
+const BOOKS_PER_PAGE = 12
 
 const RecentlyReadBooks = ({ books = [], isLoading }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const location = useLocation()
+  const [currentPage, setCurrentPage] = useState(1)
   const params = new URLSearchParams(location.search)
   const bookId = params.get('bookId')
   const selectedBook = bookId ? books.find(book => book.id === bookId) : null
+  const totalPages = Math.max(1, Math.ceil(books.length / BOOKS_PER_PAGE))
+  const pages = useMemo(() => {
+    if (!books.length) {
+      return [[]]
+    }
+
+    return Array.from({ length: totalPages }, (_, pageIndex) => {
+      const start = pageIndex * BOOKS_PER_PAGE
+      return books.slice(start, start + BOOKS_PER_PAGE)
+    })
+  }, [books, totalPages])
+  const {
+    getTransform,
+    handleMouseDown,
+    handleMouseLeave,
+    handleMouseMove,
+    handleMouseUp,
+    handlePageChange,
+    handlePointerCancel,
+    handlePointerDown,
+    handlePointerMove,
+    handlePointerUp,
+    isDragging,
+    isTransitioning
+  } = useSwipePagination({
+    currentPage,
+    totalPages,
+    onPageChange: setCurrentPage
+  })
 
   // Handle scroll position restoration and prevention
   useEffect(() => {
@@ -70,6 +104,16 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
     }
   }, [location.state, location.search, bookId]) // Add bookId to dependencies
 
+  useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [books])
+
   const handleClose = e => {
     if (e) {
       e.preventDefault()
@@ -105,35 +149,94 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
         ) : (
           <div
             sx={{
-              display: 'grid',
-              gridGap: [3, 1, 2],
-              gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)']
+              overflowX: 'hidden',
+              overflowY: 'visible',
+              position: 'relative',
+              width: '100%',
+              pb: 2,
+              px: 1
             }}
           >
-            {isLoading &&
-              Array(12)
-                .fill()
-                .map((item, idx) => (
-                  <RectShape
-                    color={darkModeActive ? '#3a3a4a' : '#efefef'}
-                    key={idx}
+            {isLoading ? (
+              <div
+                sx={{
+                  display: 'grid',
+                  gridGap: [3, 1, 2],
+                  gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)']
+                }}
+              >
+                {Array(12)
+                  .fill()
+                  .map((item, idx) => (
+                    <RectShape
+                      color={darkModeActive ? '#3a3a4a' : '#efefef'}
+                      key={idx}
+                      sx={{
+                        boxShadow: 'md',
+                        minHeight: '140px',
+                        width: '100%'
+                      }}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <div
+                data-testid='goodreads-carousel'
+                sx={{
+                  display: 'flex',
+                  width: `${totalPages * 100}%`,
+                  transform: getTransform(),
+                  transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  cursor: totalPages > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                  userSelect: 'none',
+                  touchAction: 'pan-y'
+                }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerCancel}
+              >
+                {pages.map((pageBooks, pageIndex) => (
+                  <div
+                    key={`goodreads-page-${pageIndex + 1}`}
+                    aria-hidden={pageIndex !== currentPage - 1}
+                    data-testid={`goodreads-page-${pageIndex + 1}`}
                     sx={{
-                      boxShadow: 'md',
-                      minHeight: '140px',
-                      width: '100%'
+                      width: `${100 / totalPages}%`,
+                      flexShrink: 0
                     }}
-                  />
+                  >
+                    <div
+                      sx={{
+                        display: 'grid',
+                        gridGap: [3, 1, 2],
+                        gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)'],
+                        pb: 1
+                      }}
+                    >
+                      {pageBooks.map(book => (
+                        <BookLink
+                          id={book.id}
+                          key={book.id}
+                          suppressNavigation={isDragging || isTransitioning}
+                          thumbnailURL={book.cdnMediaURL || book.thumbnail}
+                          title={book.title}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 ))}
-            {!isLoading &&
-              books.map(book => (
-                <BookLink
-                  id={book.id}
-                  key={book.id}
-                  thumbnailURL={book.cdnMediaURL || book.thumbnail}
-                  title={book.title}
-                />
-              ))}
+              </div>
+            )}
           </div>
+        )}
+
+        {!selectedBook && !isLoading && (
+          <Pagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={totalPages} />
         )}
       </div>
     </div>

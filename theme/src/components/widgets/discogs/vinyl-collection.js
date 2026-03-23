@@ -6,6 +6,7 @@ import { Themed } from '@theme-ui/mdx'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
 import Pagination from '../../pagination'
+import useSwipePagination from '../../../hooks/use-swipe-pagination'
 import DiscogsModal from './discogs-modal'
 import VinylRecordSkeleton from './vinyl-record-skeleton'
 
@@ -14,11 +15,6 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   const darkModeActive = isDarkMode(colorMode)
   const [currentVinylId, setCurrentVinylId] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [dragDistance, setDragDistance] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const carouselRef = useRef(null)
   const [exitingVinylId, setExitingVinylId] = useState(null)
   const leaveTimeoutRef = useRef(null)
 
@@ -101,87 +97,24 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     setCurrentPage(1)
   }, [currentBreakpointIndex])
 
-  // Swipe/drag handlers
-  const handleMouseDown = e => {
-    if (isTransitioning) return
-    setIsDragging(true)
-    setStartX(e.pageX)
-    setDragDistance(0)
-  }
-
-  const handleMouseMove = e => {
-    if (!isDragging || isTransitioning) return
-    const distance = e.pageX - startX
-
-    // Add elastic resistance at boundaries
-    let elasticDistance = distance
-    if (distance > 0 && currentPage === 1) {
-      elasticDistance = distance * 0.3
-    } else if (distance < 0 && currentPage === totalPages) {
-      elasticDistance = distance * 0.3
-    }
-
-    setDragDistance(elasticDistance)
-  }
-
-  const handleDragEnd = () => {
-    if (!isDragging || isTransitioning) return
-
-    const threshold = 80
-    if (Math.abs(dragDistance) > threshold) {
-      if (dragDistance > 0 && currentPage > 1) {
-        handlePageChange(currentPage - 1)
-      } else if (dragDistance < 0 && currentPage < totalPages) {
-        handlePageChange(currentPage + 1)
-      }
-    }
-
-    setIsDragging(false)
-    setDragDistance(0)
-  }
-
-  const handleMouseUp = () => {
-    handleDragEnd()
-  }
-
-  const handlePointerDown = e => {
-    if (e.pointerType === 'mouse' || isTransitioning) return
-    setIsDragging(true)
-    setStartX(e.pageX)
-    setDragDistance(0)
-  }
-
-  const handlePointerMove = e => {
-    if (e.pointerType === 'mouse' || !isDragging || isTransitioning) return
-    const distance = e.pageX - startX
-
-    let elasticDistance = distance
-    if (distance > 0 && currentPage === 1) {
-      elasticDistance = distance * 0.3
-    } else if (distance < 0 && currentPage === totalPages) {
-      elasticDistance = distance * 0.3
-    }
-
-    setDragDistance(elasticDistance)
-  }
-
-  const handlePointerUp = e => {
-    if (e.pointerType === 'mouse') return
-    handleDragEnd()
-  }
-
-  const handlePageChange = page => {
-    if (page === currentPage || isTransitioning) return
-
-    setIsTransitioning(true)
-    setCurrentPage(page)
-    setDragDistance(0)
-
-    // Clear transition state after animation completes
-    setTimeout(() => {
-      setIsTransitioning(false)
-    }, 300)
-  }
+  const {
+    getTransform,
+    handleMouseDown,
+    handleMouseLeave,
+    handleMouseMove,
+    handleMouseUp,
+    handlePageChange,
+    handlePointerCancel,
+    handlePointerDown,
+    handlePointerMove,
+    handlePointerUp,
+    isDragging,
+    isTransitioning
+  } = useSwipePagination({
+    currentPage,
+    totalPages,
+    onPageChange: setCurrentPage
+  })
 
   // Modal handlers
   const handleVinylClick = release => {
@@ -227,14 +160,6 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   }
 
-  // Calculate transform for carousel
-  const getTransform = () => {
-    const pageWidth = 100 / totalPages
-    const baseTransform = -((currentPage - 1) * pageWidth)
-    const dragOffset = isDragging ? (dragDistance / window.innerWidth) * pageWidth : 0
-    return `translateX(${baseTransform + dragOffset}%)`
-  }
-
   return (
     <div sx={{ mb: 4, maxWidth: '100%', overflow: 'hidden' }}>
       <div sx={{ display: 'flex', alignItems: 'center' }}>
@@ -255,7 +180,6 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
         }}
       >
         <div
-          ref={carouselRef}
           data-testid='vinyl-carousel'
           sx={{
             display: 'flex',
@@ -269,11 +193,11 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
         >
           {pages.map((pageItems, pageIndex) => (
             <div

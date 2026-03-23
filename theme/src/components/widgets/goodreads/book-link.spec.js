@@ -37,7 +37,7 @@ describe('Widget/Goodreads/BookLink', () => {
   it('renders a book link with the correct attributes', () => {
     render(<BookLink {...mockProps} />)
     const link = screen.getByTestId('book-link')
-    expect(link).toHaveAttribute('href', '?bookId=123')
+    expect(link.tagName).toBe('BUTTON')
     expect(link).toHaveAttribute('title', 'Test Book')
   })
 
@@ -72,6 +72,16 @@ describe('Widget/Goodreads/BookLink', () => {
         scrollPosition: 200
       }
     })
+  })
+
+  it('suppresses navigation when swipe interaction is active', async () => {
+    render(<BookLink {...mockProps} suppressNavigation={true} />)
+    const link = screen.getByTestId('book-link')
+
+    fireEvent.click(link)
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(gatsbyNavigate).not.toHaveBeenCalled()
   })
 
   it('renders in dark mode (placeholder color branch)', () => {
