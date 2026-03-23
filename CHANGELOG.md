@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.74.7
+
+### 🎨 Style
+
+- **SoundCloud embed card height**: SoundCloud iframes in post cards now expand to fill available card height instead of rendering at a fixed 166px. When displayed alongside taller YouTube embeds in a grid, SoundCloud cards visually balance rather than leaving empty space.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.7)
+- `theme/src/components/widgets/recent-posts/post-card.js`
+- `theme/src/components/widgets/recent-posts/__snapshots__/post-card.spec.js.snap`
+
+---
+
 ## 0.74.6
 
 ### ✨ Features

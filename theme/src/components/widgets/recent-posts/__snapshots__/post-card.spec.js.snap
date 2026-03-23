@@ -204,13 +204,12 @@ exports[`PostCard renders SoundCloud embed when soundcloudId is provided 1`] = `
           </div>
         </div>
         <div
-          class="card-soundcloud css-aheozo"
+          class="card-soundcloud css-12ixrq5"
         >
           <iframe
             allow="autoplay"
-            class="css-1d70iz2"
+            class="css-1ak6ou3"
             frameborder="no"
-            height="166"
             scrolling="no"
             src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1820395353&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
             title="A House Is Not A Home"

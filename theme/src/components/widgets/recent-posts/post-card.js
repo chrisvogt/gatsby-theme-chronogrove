@@ -220,21 +220,23 @@ export default ({
           </div>
         )}
 
-        {/* SoundCloud embed - pushed to bottom with margin-top: auto */}
+        {/* SoundCloud embed - flex container fills remaining card height */}
         {hasSoundCloud && (
           <div
             className='card-soundcloud'
             sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              flex: 1,
               width: '100%',
               borderRadius: '8px',
               overflow: 'hidden',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-              marginTop: 'auto' // Push to bottom of card
+              marginTop: 'auto'
             }}
           >
             <iframe
               width='100%'
-              height='166'
               scrolling='no'
               frameBorder='no'
               allow='autoplay'
@@ -242,7 +244,9 @@ export default ({
               title={title}
               sx={{
                 display: 'block',
-                border: 'none'
+                border: 'none',
+                flex: 1,
+                minHeight: '166px'
               }}
             />
           </div>
