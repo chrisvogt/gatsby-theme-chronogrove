@@ -12,7 +12,7 @@ import 'react-placeholder/lib/reactPlaceholder.css'
 
 const MAX_TILT_DEG = 18
 
-const BookLink = ({ id, thumbnailURL, title }) => {
+const BookLink = ({ id, thumbnailURL, title, suppressNavigation = false }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const bookContainerRef = useRef(null)
@@ -46,6 +46,9 @@ const BookLink = ({ id, thumbnailURL, title }) => {
   const handleClick = e => {
     e.preventDefault()
     e.stopPropagation() // Prevent event bubbling
+    if (suppressNavigation) {
+      return
+    }
     // Store current scroll position
     const currentScroll = window.scrollY
     // Use a small timeout to ensure the scroll position is preserved
@@ -62,32 +65,41 @@ const BookLink = ({ id, thumbnailURL, title }) => {
   }
 
   return (
-    <a
-      data-testid='book-link'
-      href={`?bookId=${id}`}
-      onClick={handleClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      title={title}
+    <Card
+      variant='actionCard'
       sx={{
-        color: 'var(--theme-ui-colors-panel-text)',
-        textDecoration: 'none',
-        display: 'block',
+        minWidth: 0,
         height: '100%',
-        '&:hover, &:focus': {
-          textDecoration: 'none'
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'transform 0.2s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-4px)'
         }
       }}
     >
-      <Card
-        variant='actionCard'
+      <button
+        data-testid='book-link'
+        type='button'
+        onClick={handleClick}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        title={title}
         sx={{
+          appearance: 'none',
+          background: 'transparent',
+          border: 0,
+          color: 'var(--theme-ui-colors-panel-text)',
+          cursor: 'pointer',
+          display: 'block',
           height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          transition: 'transform 0.2s ease-in-out',
-          '&:hover': {
-            transform: 'translateY(-4px)'
+          m: 0,
+          p: 0,
+          width: '100%',
+          '&:focus': {
+            outline: '2px solid',
+            outlineColor: 'primary',
+            outlineOffset: '2px'
           }
         }}
       >
@@ -127,8 +139,8 @@ const BookLink = ({ id, thumbnailURL, title }) => {
             </div>
           </div>
         </LazyLoad>
-      </Card>
-    </a>
+      </button>
+    </Card>
   )
 }
 

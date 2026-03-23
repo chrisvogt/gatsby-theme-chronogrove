@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.74.6
+
+### ✨ Features
+
+- **Goodreads swipe pagination**: Swipe between pages on the recently read books carousel. Adds a reusable `useSwipePagination` hook with unit tests.
+
+### 🎨 Widget layout
+
+- **Goodreads & Discogs carousels**: Tighter shared carousel shell (overflow clipping, slide spacing, bottom padding for hover shadows). `minWidth: 0` on Goodreads book cards for predictable grid sizing. Discogs vinyl collection aligned with the same patterns; Jest snapshots and widget specs updated.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.6)
+- `theme/src/hooks/use-swipe-pagination.js`
+- `theme/src/hooks/use-swipe-pagination.spec.js`
+- `theme/src/components/widgets/goodreads/book-link.js`
+- `theme/src/components/widgets/goodreads/book-link.spec.js`
+- `theme/src/components/widgets/goodreads/goodreads-widget.js`
+- `theme/src/components/widgets/goodreads/goodreads-widget.spec.js`
+- `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `theme/src/components/widgets/goodreads/recently-read-books.spec.js`
+- `theme/src/components/widgets/discogs/vinyl-collection.js`
+- `theme/src/components/widgets/discogs/vinyl-collection.spec.js`
+- `theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`
+- `theme/src/components/widgets/discogs/__snapshots__/vinyl-collection.spec.js.snap`
+
+---
+
 ## 0.74.5
 
 ### 🐛 Bug Fix

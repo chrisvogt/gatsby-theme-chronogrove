@@ -26,7 +26,7 @@ export default () => {
 
   // Books come from recentlyReadBooks, filtered to only those with thumbnails
   const recentlyReadBooks = data?.collections?.recentlyReadBooks || []
-  const books = recentlyReadBooks.filter(({ thumbnail }) => Boolean(thumbnail)).slice(0, 12)
+  const books = recentlyReadBooks.filter(({ thumbnail, cdnMediaURL }) => Boolean(cdnMediaURL || thumbnail))
 
   // Build metrics from profile data
   const metrics = []

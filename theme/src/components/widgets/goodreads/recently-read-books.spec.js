@@ -1,7 +1,8 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Router, LocationProvider } from '@gatsbyjs/reach-router'
+import { act } from 'react'
 
 import RecentlyReadBooks, { HEADLINE, BODY_TEXT } from './recently-read-books'
 import goodreadsMock from '../../../../__mocks__/goodreads-widget.mock.json'
@@ -28,6 +29,10 @@ const renderWithRouter = ui =>
   )
 
 describe('Widget/Goodreads/RecentlyReadBooks', () => {
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+
   describe('loading state', () => {
     it('renders a placeholder for each book expected to render', () => {
       const { container } = renderWithRouter(<RecentlyReadBooks books={[]} isLoading={true} default />)
@@ -44,13 +49,118 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       expect(screen.getByText(BODY_TEXT)).toHaveTextContent(BODY_TEXT)
     })
 
-    it('renders thumbnails using the image cdn urls', () => {
-      renderWithRouter(<RecentlyReadBooks books={mockBooks} isLoading={false} default />)
-      const images = screen.getAllByTestId('book-preview-thumbnail')
-      expect(images).toHaveLength(mockBooks.length)
+    it('renders the first page of thumbnails using the image cdn urls', () => {
+      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        cdnMediaURL: `https://images.imgix.net/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+      const currentPage = screen.getByTestId('goodreads-page-1')
+      const images = within(currentPage).getAllByTestId('book-preview-thumbnail')
+      expect(images).toHaveLength(12)
       images.forEach((image, idx) => {
-        expect(image).toHaveAttribute('xlink:href', `${mockBooks[idx].cdnMediaURL}?auto=compress&auto=format`)
+        expect(image).toHaveAttribute(
+          'xlink:href',
+          `https://images.imgix.net/book-${idx + 1}.jpg?auto=compress&auto=format`
+        )
       })
+    })
+
+    it('renders pagination and navigates to the second page', () => {
+      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')).toHaveLength(12)
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')[0]).toHaveAttribute(
+        'title',
+        'Book 1'
+      )
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+      expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')).toHaveLength(12)
+      expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')[0]).toHaveAttribute(
+        'title',
+        'Book 13'
+      )
+    })
+
+    it('supports drag pagination using the shared carousel behavior', () => {
+      jest.useFakeTimers()
+
+      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      const carousel = screen.getByTestId('goodreads-carousel')
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+
+      fireEvent.mouseDown(carousel, { clientX: 200 })
+      fireEvent.mouseMove(carousel, { clientX: 100 })
+      fireEvent.mouseUp(carousel)
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+      expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')[0]).toHaveAttribute(
+        'title',
+        'Book 13'
+      )
+    })
+
+    it('returns to the first page when the books list shrinks', () => {
+      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      const { rerender } = renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      rerender(
+        <LocationProvider
+          history={{
+            location: { pathname: '/' },
+            listen: () => () => {},
+            navigate: () => {},
+            _onTransitionComplete: () => {}
+          }}
+        >
+          <Router>
+            <div default>
+              <RecentlyReadBooks books={paginatedBooks.slice(0, 12)} isLoading={false} default />
+            </div>
+          </Router>
+        </LocationProvider>
+      )
+
+      expect(screen.queryByText('Page 2 of 2')).not.toBeInTheDocument()
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')[0]).toHaveAttribute(
+        'title',
+        'Book 1'
+      )
     })
   })
 
@@ -193,6 +303,41 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
         top: initialScroll,
         behavior: 'instant'
       })
+    })
+
+    it('maintains the current scroll position when location state sets noScroll', async () => {
+      const originalRAF = window.requestAnimationFrame
+      window.requestAnimationFrame = callback => {
+        callback()
+        return 1
+      }
+      Object.defineProperty(window, 'scrollY', { value: 275, configurable: true })
+
+      render(
+        <LocationProvider
+          history={{
+            location: { pathname: '/', state: { noScroll: true } },
+            listen: () => () => {},
+            navigate: () => {},
+            _onTransitionComplete: () => {}
+          }}
+        >
+          <Router>
+            <div default>
+              <RecentlyReadBooks books={mockBooks} isLoading={false} default />
+            </div>
+          </Router>
+        </LocationProvider>
+      )
+
+      await new Promise(resolve => setTimeout(resolve, 0))
+
+      expect(mockScrollTo).toHaveBeenCalledWith({
+        top: 275,
+        behavior: 'instant'
+      })
+
+      window.requestAnimationFrame = originalRAF
     })
 
     it('does not restore scroll position on unmount if unchanged', () => {

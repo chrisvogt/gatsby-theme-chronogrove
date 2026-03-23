@@ -238,7 +238,7 @@ describe('Goodreads Widget', () => {
     expect(container).toBeDefined()
   })
 
-  it('filters books without thumbnails', () => {
+  it('filters books without thumbnails or cdn media URLs', () => {
     const stateWithMixedBooks = {
       ...mockSuccessState,
       data: {
@@ -247,8 +247,9 @@ describe('Goodreads Widget', () => {
           ...mockSuccessState.data.collections,
           recentlyReadBooks: [
             { id: 1, title: 'Book with thumb', thumbnail: 'thumb.jpg' },
-            { id: 2, title: 'Book without thumb', thumbnail: null },
-            { id: 3, title: 'Book with empty thumb', thumbnail: '' }
+            { id: 2, title: 'Book with CDN media', cdnMediaURL: 'https://images.imgix.net/book.jpg', thumbnail: null },
+            { id: 3, title: 'Book without thumb', thumbnail: null },
+            { id: 4, title: 'Book with empty thumb', thumbnail: '' }
           ]
         }
       }
@@ -261,7 +262,6 @@ describe('Goodreads Widget', () => {
       </TestProviderWithQuery>
     )
 
-    // Only 1 book has a valid thumbnail
-    expect(getByTestId('recently-read-books')).toHaveTextContent('1 books')
+    expect(getByTestId('recently-read-books')).toHaveTextContent('2 books')
   })
 })
