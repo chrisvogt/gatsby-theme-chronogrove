@@ -125,6 +125,43 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
         'Book 13'
       )
     })
+
+    it('returns to the first page when the books list shrinks', () => {
+      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      const { rerender } = renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      rerender(
+        <LocationProvider
+          history={{
+            location: { pathname: '/' },
+            listen: () => () => {},
+            navigate: () => {},
+            _onTransitionComplete: () => {}
+          }}
+        >
+          <Router>
+            <div default>
+              <RecentlyReadBooks books={paginatedBooks.slice(0, 12)} isLoading={false} default />
+            </div>
+          </Router>
+        </LocationProvider>
+      )
+
+      expect(screen.queryByText('Page 2 of 2')).not.toBeInTheDocument()
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')[0]).toHaveAttribute(
+        'title',
+        'Book 1'
+      )
+    })
   })
 
   describe('navigation and scroll behavior', () => {
@@ -266,6 +303,41 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
         top: initialScroll,
         behavior: 'instant'
       })
+    })
+
+    it('maintains the current scroll position when location state sets noScroll', async () => {
+      const originalRAF = window.requestAnimationFrame
+      window.requestAnimationFrame = callback => {
+        callback()
+        return 1
+      }
+      Object.defineProperty(window, 'scrollY', { value: 275, configurable: true })
+
+      render(
+        <LocationProvider
+          history={{
+            location: { pathname: '/', state: { noScroll: true } },
+            listen: () => () => {},
+            navigate: () => {},
+            _onTransitionComplete: () => {}
+          }}
+        >
+          <Router>
+            <div default>
+              <RecentlyReadBooks books={mockBooks} isLoading={false} default />
+            </div>
+          </Router>
+        </LocationProvider>
+      )
+
+      await new Promise(resolve => setTimeout(resolve, 0))
+
+      expect(mockScrollTo).toHaveBeenCalledWith({
+        top: 275,
+        behavior: 'instant'
+      })
+
+      window.requestAnimationFrame = originalRAF
     })
 
     it('does not restore scroll position on unmount if unchanged', () => {

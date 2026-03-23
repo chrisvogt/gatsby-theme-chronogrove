@@ -323,6 +323,57 @@ describe('VinylCollection', () => {
     })
   })
 
+  describe('Responsive pagination', () => {
+    it('uses the expected page counts across breakpoint ranges', () => {
+      const manyReleases = createManyReleases(25)
+
+      window.innerWidth = 500
+      const { rerender } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+
+      window.innerWidth = 700
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+
+      window.innerWidth = 900
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+
+      window.innerWidth = 1400
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+
+      rerender(<VinylCollection isLoading={false} releases={manyReleases} />)
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+    })
+
+    it('clamps the current page when a resize reduces the total page count', () => {
+      const manyReleases = createManyReleases(25)
+
+      window.innerWidth = 500
+      render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 3'))
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+      expect(screen.getByText('Page 3 of 3')).toBeInTheDocument()
+
+      window.innerWidth = 1400
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+    })
+  })
+
   describe('Pointer event handlers', () => {
     it('handles pointer down event', () => {
       const manyReleases = createManyReleases(25)
@@ -1065,5 +1116,26 @@ describe('VinylCollection', () => {
       const vinylItems = container.querySelectorAll('.vinyl-record')
       expect(vinylItems).toHaveLength(5)
     })
+  })
+
+  it('clears a pending leave timeout before scheduling another one outside test mode', () => {
+    const previousNodeEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = 'development'
+
+    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
+    const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+    const vinylItem = container.querySelector('.vinyl-record')
+
+    fireEvent.mouseEnter(vinylItem)
+    fireEvent.mouseLeave(vinylItem)
+    fireEvent.mouseLeave(vinylItem)
+
+    expect(clearTimeoutSpy).toHaveBeenCalled()
+
+    act(() => {
+      jest.runOnlyPendingTimers()
+    })
+
+    process.env.NODE_ENV = previousNodeEnv
   })
 })
