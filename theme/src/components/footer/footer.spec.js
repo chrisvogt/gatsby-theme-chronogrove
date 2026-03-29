@@ -68,6 +68,20 @@ describe('Footer', () => {
     expect(privacyLink).toHaveAttribute('href', '/privacy')
   })
 
+  it('renders the View Source link', () => {
+    renderWithTheme(<Footer />)
+    const sourceLink = screen.getByText('View Source')
+    expect(sourceLink).toBeInTheDocument()
+    expect(sourceLink).toHaveAttribute('href', 'https://github.com/chrisvogt/gatsby-theme-chronogrove')
+  })
+
+  it('renders the Status link', () => {
+    renderWithTheme(<Footer />)
+    const statusLink = screen.getByText('Status')
+    expect(statusLink).toBeInTheDocument()
+    expect(statusLink).toHaveAttribute('href', 'https://metrics.chrisvogt.me/')
+  })
+
   it('does not render footer text if none is available', () => {
     getFooterText.mockReturnValue(null)
     renderWithTheme(<Footer />)

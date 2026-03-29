@@ -123,10 +123,17 @@ exports[`Layout matches the snapshot 1`] = `
               <a
                 class="css-4d1obe"
                 href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 View Source
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                class="css-4d1obe"
+                href="https://metrics.chrisvogt.me/"
+              >
+                Status
               </a>
             </span>
           </div>
@@ -260,10 +267,17 @@ exports[`Layout renders with audio player hidden state 1`] = `
               <a
                 class="css-4d1obe"
                 href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 View Source
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                class="css-4d1obe"
+                href="https://metrics.chrisvogt.me/"
+              >
+                Status
               </a>
             </span>
           </div>
@@ -397,10 +411,17 @@ exports[`Layout renders with audio player visible state 1`] = `
               <a
                 class="css-4d1obe"
                 href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 View Source
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                class="css-4d1obe"
+                href="https://metrics.chrisvogt.me/"
+              >
+                Status
               </a>
             </span>
           </div>
@@ -524,10 +545,17 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
               <a
                 class="css-4d1obe"
                 href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 View Source
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                class="css-4d1obe"
+                href="https://metrics.chrisvogt.me/"
+              >
+                Status
               </a>
             </span>
           </div>
@@ -691,10 +719,17 @@ exports[`Layout renders with hideHeader prop 1`] = `
               <a
                 class="css-4d1obe"
                 href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-                rel="noopener noreferrer"
-                target="_blank"
               >
                 View Source
+              </a>
+            </span>
+             | 
+            <span>
+              <a
+                class="css-4d1obe"
+                href="https://metrics.chrisvogt.me/"
+              >
+                Status
               </a>
             </span>
           </div>
