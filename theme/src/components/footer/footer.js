@@ -40,7 +40,7 @@ export default () => {
             </span>
             {' | '}
             <span>
-              <ThemedLink href='https://metrics.chrisvogt.me/status/' sx={{ textDecoration: 'underline' }}>
+              <ThemedLink href='https://metrics.chrisvogt.me/' sx={{ textDecoration: 'underline' }}>
                 Status
               </ThemedLink>
             </span>

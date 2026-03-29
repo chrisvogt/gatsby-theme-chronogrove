@@ -131,7 +131,7 @@ exports[`Layout matches the snapshot 1`] = `
             <span>
               <a
                 class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/status/"
+                href="https://metrics.chrisvogt.me/"
               >
                 Status
               </a>
@@ -275,7 +275,7 @@ exports[`Layout renders with audio player hidden state 1`] = `
             <span>
               <a
                 class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/status/"
+                href="https://metrics.chrisvogt.me/"
               >
                 Status
               </a>
@@ -419,7 +419,7 @@ exports[`Layout renders with audio player visible state 1`] = `
             <span>
               <a
                 class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/status/"
+                href="https://metrics.chrisvogt.me/"
               >
                 Status
               </a>
@@ -553,7 +553,7 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
             <span>
               <a
                 class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/status/"
+                href="https://metrics.chrisvogt.me/"
               >
                 Status
               </a>
@@ -727,7 +727,7 @@ exports[`Layout renders with hideHeader prop 1`] = `
             <span>
               <a
                 class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/status/"
+                href="https://metrics.chrisvogt.me/"
               >
                 Status
               </a>

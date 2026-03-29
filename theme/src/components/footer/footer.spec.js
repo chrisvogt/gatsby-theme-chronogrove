@@ -79,7 +79,7 @@ describe('Footer', () => {
     renderWithTheme(<Footer />)
     const statusLink = screen.getByText('Status')
     expect(statusLink).toBeInTheDocument()
-    expect(statusLink).toHaveAttribute('href', 'https://metrics.chrisvogt.me/status/')
+    expect(statusLink).toHaveAttribute('href', 'https://metrics.chrisvogt.me/')
   })
 
   it('does not render footer text if none is available', () => {
