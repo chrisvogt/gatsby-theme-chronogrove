@@ -33,11 +33,15 @@ export default () => {
             <span>
               <ThemedLink
                 href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
-                target='_blank'
-                rel='noopener noreferrer'
                 sx={{ textDecoration: 'underline' }}
               >
                 View Source
+              </ThemedLink>
+            </span>
+            {' | '}
+            <span>
+              <ThemedLink href='https://metrics.chrisvogt.me/status/' sx={{ textDecoration: 'underline' }}>
+                Status
               </ThemedLink>
             </span>
           </div>
