@@ -4,6 +4,7 @@ import { Themed } from '@theme-ui/mdx'
 import { graphql } from 'gatsby'
 
 import Category from '../components/category'
+import { articleColumnContainerSx } from '../constants/article-column-container-sx'
 import Layout from '../components/layout'
 import PageHeader from '../components/blog/page-header'
 import Seo from '../components/seo'
@@ -27,7 +28,7 @@ const PostTemplate = ({ children, data }) => {
   return (
     <Layout>
       <Themed.div sx={{ py: 3 }}>
-        <Container sx={{ position: 'relative', width: ['', '', 'max(80ch, 50vw)'], lineHeight: 1.7 }}>
+        <Container sx={articleColumnContainerSx}>
           <article className='h-entry c1v0-blog-post' id={mdx.id}>
             {category && <Category type={category} sx={{ mb: 2 }} />}
 

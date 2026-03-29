@@ -15,8 +15,8 @@ import { TestProvider } from '../testUtils'
 jest.mock('../components/animated-page-background', () => () => <div data-testid='animated-background'>Background</div>)
 jest.mock('../components/layout', () => ({ children }) => <div data-testid='layout'>{children}</div>)
 jest.mock('../components/blog/page-header', () => ({ children }) => <h1>{children}</h1>)
-jest.mock('../components/widgets/recent-posts/post-card', () => ({ title, category }) => (
-  <div data-testid='post-card' data-category={category}>
+jest.mock('../components/widgets/recent-posts/post-card', () => ({ title, category, horizontal }) => (
+  <div data-testid='post-card' data-category={category} data-horizontal={horizontal ? 'true' : 'false'}>
     {title}
   </div>
 ))
@@ -224,7 +224,7 @@ describe('BlogIndexPage', () => {
     expect(screen.getByText('Now Post')).toBeInTheDocument()
   })
 
-  it('renders posts grouped by category', () => {
+  it('renders posts in a single list with categories on each card', () => {
     getPosts.mockReturnValue(mockPosts)
 
     const { container } = render(
@@ -233,12 +233,12 @@ describe('BlogIndexPage', () => {
       </TestProvider>
     )
 
-    // Check that posts are rendered with their fields.category
     const technologyCards = container.querySelectorAll('[data-category="technology"]')
     const blogCards = container.querySelectorAll('[data-category="blog"]')
 
     expect(technologyCards).toHaveLength(1)
     expect(blogCards).toHaveLength(1)
+    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
   })
 
   it('handles category with only one post (no remaining posts grid)', () => {
@@ -268,12 +268,11 @@ describe('BlogIndexPage', () => {
       </TestProvider>
     )
 
-    // Should render the single post as featured, with no remaining posts grid
     expect(screen.getByText('Single Tech Post')).toBeInTheDocument()
     expect(screen.getAllByTestId('post-card')).toHaveLength(1)
   })
 
-  it('selects post with banner as featured when available', () => {
+  it('renders all matching posts regardless of banner', () => {
     const postsWithBanner = [
       {
         id: '1',
@@ -315,7 +314,6 @@ describe('BlogIndexPage', () => {
       </TestProvider>
     )
 
-    // Post with banner should be rendered
     expect(screen.getByText('Post With Banner')).toBeInTheDocument()
     expect(screen.getByText('Post Without Banner')).toBeInTheDocument()
   })
@@ -359,43 +357,53 @@ describe('BlogIndexPage', () => {
       </TestProvider>
     )
 
-    // Should render under "All Posts" section
     expect(screen.getByText('Uncategorized Post')).toBeInTheDocument()
   })
 
-  it('renders section headers with correct post counts', () => {
-    const multiplePosts = [
-      ...mockPosts,
-      {
-        id: '3',
-        frontmatter: {
-          title: 'Another Tech Post',
-          date: '2021-01-03',
-          slug: 'tech-3',
-          banner: null,
-          excerpt: 'More tech content'
-        },
-        fields: {
-          category: 'technology',
-          id: '3',
-          path: '/blog/tech-3'
-        }
-      }
-    ]
+  it('does not render category section headings', () => {
+    getPosts.mockReturnValue(mockPosts)
 
-    getPosts.mockReturnValue(multiplePosts)
-
-    const { container } = render(
+    render(
       <TestProvider>
         <BlogIndexPage data={mockData} />
       </TestProvider>
     )
 
-    // Check for section with count
-    expect(container.textContent).toMatch(/\d+ posts?/)
+    expect(screen.queryByText('Monthly Recaps')).not.toBeInTheDocument()
+    expect(screen.queryByText('Technology')).not.toBeInTheDocument()
+    expect(screen.queryByText('Personal')).not.toBeInTheDocument()
   })
 
-  it('renders recap posts in their own section with thumbnails layout', () => {
+  it('filters out travel posts', () => {
+    const travelPost = {
+      id: '6',
+      excerpt: 'Travel post',
+      frontmatter: {
+        title: 'Trip Report',
+        date: '2021-01-06',
+        path: '/travel/trip',
+        slug: 'trip'
+      },
+      fields: {
+        category: 'travel',
+        id: '6',
+        path: '/travel/trip'
+      }
+    }
+
+    getPosts.mockReturnValue([...mockPosts, travelPost])
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(screen.queryByText('Trip Report')).not.toBeInTheDocument()
+  })
+
+  it('renders recap posts with vertical cards (not horizontal)', () => {
     const recapPosts = [
       {
         id: 'recap-1',
@@ -433,21 +441,19 @@ describe('BlogIndexPage', () => {
 
     getPosts.mockReturnValue(recapPosts)
 
-    render(
+    const { container } = render(
       <TestProvider>
         <BlogIndexPage data={mockData} />
       </TestProvider>
     )
 
-    // Should render both recap posts
     expect(screen.getByText('January 2025 Recap')).toBeInTheDocument()
     expect(screen.getByText('February 2025 Recap')).toBeInTheDocument()
-
-    // Should render 2 post cards for the recaps
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(container.querySelectorAll('[data-horizontal="false"]')).toHaveLength(2)
   })
 
-  it('renders recap posts separately from personal posts', () => {
+  it('renders recap and personal posts in one list with correct card types', () => {
     const mixedPosts = [
       {
         id: 'recap-1',
@@ -490,11 +496,13 @@ describe('BlogIndexPage', () => {
       </TestProvider>
     )
 
-    // Both posts should be rendered
     expect(screen.getByText('March 2025 Recap')).toBeInTheDocument()
     expect(screen.getByText('Personal Story')).toBeInTheDocument()
-
-    // Should have 2 total post cards
     expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+
+    const recapCard = screen.getByText('March 2025 Recap').closest('[data-testid="post-card"]')
+    const personalCard = screen.getByText('Personal Story').closest('[data-testid="post-card"]')
+    expect(recapCard).toHaveAttribute('data-horizontal', 'false')
+    expect(personalCard).toHaveAttribute('data-horizontal', 'true')
   })
 })

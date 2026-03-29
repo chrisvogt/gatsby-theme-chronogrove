@@ -1,7 +1,7 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import PostCard from './post-card'
+import PostCard, { buildYouTubeEmbedUrl } from './post-card'
 
 // Mock the YouTube shortcode component
 jest.mock('../../../shortcodes/youtube', () => {
@@ -10,6 +10,26 @@ jest.mock('../../../shortcodes/youtube', () => {
       <iframe src={url} title={title} />
     </div>
   )
+})
+
+describe('buildYouTubeEmbedUrl', () => {
+  it('returns falsy url unchanged', () => {
+    expect(buildYouTubeEmbedUrl(null)).toBe(null)
+    expect(buildYouTubeEmbedUrl(undefined)).toBe(undefined)
+    expect(buildYouTubeEmbedUrl('')).toBe('')
+  })
+
+  it('appends ?rel when url has no query string', () => {
+    expect(buildYouTubeEmbedUrl('https://www.youtube.com/embed/abc')).toBe(
+      'https://www.youtube.com/embed/abc?rel=0&modestbranding=1'
+    )
+  })
+
+  it('appends &rel when url already has query parameters', () => {
+    expect(buildYouTubeEmbedUrl('https://www.youtube.com/embed/abc?si=1')).toBe(
+      'https://www.youtube.com/embed/abc?si=1&rel=0&modestbranding=1'
+    )
+  })
 })
 
 describe('PostCard', () => {
@@ -101,6 +121,15 @@ describe('PostCard', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
+  it('renders horizontal headline without preview when no banner or thumbnails', () => {
+    const { container } = render(
+      <PostCard category='personal' date='January 1, 2024' horizontal link='/blog/plain' title='Text-only post' />
+    )
+
+    expect(container.querySelector('.card-headline-preview')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 3, name: 'Text-only post' })).toBeInTheDocument()
+  })
+
   it('renders as image-only recap when isRecap prop is true', () => {
     const propsWithRecap = {
       ...baseProps,
@@ -131,18 +160,20 @@ describe('PostCard', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('renders thumbnails inside text area when horizontal mode with thumbnails', () => {
+  it('uses first thumbnail as left preview in horizontal mode (no thumbnail row)', () => {
     const propsWithThumbnailsHorizontal = {
       ...baseProps,
+      banner: null,
       horizontal: true,
       thumbnails: ['https://example.com/thumb1.jpg', 'https://example.com/thumb2.jpg', 'https://example.com/thumb3.jpg']
     }
     const { container, asFragment } = render(<PostCard {...propsWithThumbnailsHorizontal} />)
 
-    // Should render thumbnails container
-    expect(container.querySelector('.card-thumbnails')).toBeInTheDocument()
+    const preview = container.querySelector('.card-headline-preview')
+    expect(preview).toBeInTheDocument()
+    expect(window.getComputedStyle(preview).backgroundImage).toContain('thumb1.jpg')
 
-    // Should not render banner
+    expect(container.querySelector('.card-thumbnails')).not.toBeInTheDocument()
     expect(container.querySelector('.card-media')).not.toBeInTheDocument()
 
     expect(asFragment()).toMatchSnapshot()

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Flex } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
+import { articleColumnContainerSx } from '../constants/article-column-container-sx'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 
@@ -15,7 +16,7 @@ const AboutPage = () => {
           py: 3
         }}
       >
-        <Container sx={{ width: ['', '', 'max(80ch, 50vw)'], lineHeight: 1.7 }}>
+        <Container sx={articleColumnContainerSx}>
           <Themed.h1>About</Themed.h1>
 
           <Themed.p>

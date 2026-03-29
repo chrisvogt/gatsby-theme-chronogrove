@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.74.8
+
+### ✨ Blog index
+
+- **Single chronological feed**: `/blog` no longer splits posts into category sections (Monthly Recaps, Personal, Technology, etc.). All in-scope posts render in **publication order** (newest first, matching the MDX query). Posts that belong on dedicated indexes are still excluded: **music**, **photography**, and **travel**.
+- **Card styles unchanged by category**: **Recap** posts (title contains “recap”) still use the vertical card with circular thumbnails; **everything else** uses the horizontal “headline + small preview image” card.
+
+### 🎨 Post cards & layout
+
+- **Horizontal index cards**: Text-first layout with the preview image on the **same row as the headline**, **aligned right**, at a **wider aspect ratio** (1.9:1) and a larger thumb width (`5.625rem`).
+- **`buildYouTubeEmbedUrl`**: Exported for tests; unit tests cover empty URLs and query-string appends (`?` vs `&`).
+
+### 🏠 Home widget
+
+- **Travel** posts in “Latest Posts” use the **same vertical card** as the Travel index (circular thumbnails), not the horizontal blog card.
+
+### 📐 Shared article column
+
+- **`articleColumnContainerSx`**: Shared Theme UI container (`max(80ch, 50vw)`) for **blog index**, **MDX post template**, and **About** so the blog list matches the article measure.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.74.8)
+- `theme/src/constants/article-column-container-sx.js` (new)
+- `theme/src/pages/blog.js`, `theme/src/pages/blog.spec.js`
+- `theme/src/pages/about.js`
+- `theme/src/templates/post.js`
+- `theme/src/components/widgets/recent-posts/post-card.js`, `post-card.spec.js`, `__snapshots__/post-card.spec.js.snap`
+- `theme/src/components/widgets/recent-posts/recent-posts-widget.js`
+
+---
+
 ## 0.74.7
 
 ### 🎨 Style

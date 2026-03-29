@@ -185,7 +185,6 @@ export default () => {
                       link={post.fields.path}
                       thumbnails={post.frontmatter.thumbnails}
                       title={post.frontmatter.title}
-                      horizontal
                     />
                   ))}
                 </Grid>
