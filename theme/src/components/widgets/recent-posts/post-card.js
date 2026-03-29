@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import React, { Fragment } from 'react'
 import { jsx } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Card } from '@theme-ui/components'
@@ -21,10 +22,22 @@ const getYouTubeVideoId = url => {
  * Build YouTube embed URL with additional parameters
  * Handles URLs that may already have query parameters (e.g., ?si=...)
  */
-const buildYouTubeEmbedUrl = url => {
+export const buildYouTubeEmbedUrl = url => {
   if (!url) return url
   const separator = url.includes('?') ? '&' : '?'
   return `${url}${separator}rel=0&modestbranding=1`
+}
+
+/** Small float beside headline — wide crop matches OG / banner art */
+const HORIZONTAL_PREVIEW_ASPECT = '1.9 / 1'
+/** Fixed width for the headline-row thumb (height follows aspect ratio); 5.625rem = 4.5rem × 1.25 */
+const HEADLINE_THUMB_WIDTH = '5.625rem'
+
+/** Preview URL for horizontal cards: banner, else first thumbnail */
+const getHorizontalPreviewUrl = (banner, thumbnails) => {
+  if (banner) return banner
+  if (thumbnails && thumbnails.length > 0) return thumbnails[0]
+  return null
 }
 
 export default ({
@@ -43,6 +56,8 @@ export default ({
   const hasYouTube = !!videoId
   const hasSoundCloud = !!soundcloudId
   const hasMediaEmbed = hasYouTube || hasSoundCloud
+
+  const horizontalPreviewUrl = horizontal && !hasMediaEmbed ? getHorizontalPreviewUrl(banner, thumbnails) : null
 
   // Card content without wrapper - used when YouTube embed is present
   const CardContent = () => (
@@ -68,136 +83,81 @@ export default ({
           flex: 1
         }}
       >
-        {/* Show thumbnails above text for vertical cards (Recaps) */}
-        {!horizontal && thumbnails && thumbnails.length > 0 && (
-          <div className='card-thumbnails' sx={{ flexShrink: 0, mb: 2 }}>
-            <ImageThumbnails images={thumbnails} maxImages={4} />
-          </div>
+        {/* Horizontal index: text-first; small image floats left in headline row */}
+        {horizontal && !hasMediaEmbed && (
+          <HorizontalTextBlock
+            category={category}
+            date={date}
+            excerpt={excerpt}
+            hasMediaEmbed={hasMediaEmbed}
+            headlinePreviewUrl={horizontalPreviewUrl}
+            horizontal
+            link={link}
+            title={title}
+          />
         )}
 
-        {/* Show banner for posts without thumbnails and no media embed */}
-        {banner && (!thumbnails || thumbnails.length === 0) && !hasMediaEmbed && (
-          <div className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
-            <div
-              sx={{
-                backgroundImage: `url(${banner})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                borderRadius: '8px',
-                width: horizontal ? ['100%', '200px'] : '100%',
-                height: horizontal ? ['auto', '105px'] : 'auto',
-                aspectRatio: '1.9 / 1',
-                transition: 'all 2.5s ease'
-              }}
+        {/* Vertical layout (recaps, default) */}
+        {!horizontal && (
+          <Fragment>
+            {/* Show thumbnails above text for vertical cards (Recaps) */}
+            {thumbnails && thumbnails.length > 0 && (
+              <div className='card-thumbnails' sx={{ flexShrink: 0, mb: 2 }}>
+                <ImageThumbnails images={thumbnails} maxImages={4} />
+              </div>
+            )}
+
+            {/* Show banner for posts without thumbnails and no media embed */}
+            {banner && (!thumbnails || thumbnails.length === 0) && !hasMediaEmbed && (
+              <div className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
+                <div
+                  sx={{
+                    backgroundImage: `url(${banner})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    borderRadius: '8px',
+                    width: '100%',
+                    height: 'auto',
+                    aspectRatio: '1.9 / 1',
+                    transition: 'all 2.5s ease'
+                  }}
+                />
+              </div>
+            )}
+
+            <div sx={{ flexShrink: 0 }}>
+              <HorizontalTextBlock
+                category={category}
+                date={date}
+                excerpt={excerpt}
+                hasMediaEmbed={hasMediaEmbed}
+                headlinePreviewUrl={null}
+                horizontal={false}
+                link={link}
+                title={title}
+              />
+            </div>
+          </Fragment>
+        )}
+
+        {/* Horizontal: media embeds stay full-width below the row */}
+        {horizontal && hasMediaEmbed && (
+          <div sx={{ flexShrink: 0 }}>
+            <HorizontalTextBlock
+              category={category}
+              date={date}
+              excerpt={excerpt}
+              hasMediaEmbed={hasMediaEmbed}
+              headlinePreviewUrl={null}
+              horizontal
+              link={link}
+              title={title}
             />
           </div>
         )}
 
-        {/* Text content area */}
-        <div sx={{ flexShrink: 0 }}>
-          {/* Show thumbnails inside text area for horizontal cards (Photography) */}
-          {horizontal && thumbnails && thumbnails.length > 0 && (
-            <div className='card-thumbnails' sx={{ mb: 2 }}>
-              <ImageThumbnails images={thumbnails} maxImages={4} />
-            </div>
-          )}
-
-          {/* Title - linked when media embed is present */}
-          {hasMediaEmbed ? (
-            <Link
-              to={link}
-              sx={{
-                textDecoration: 'none',
-                color: 'inherit',
-                '&:hover h3': {
-                  color: 'primary'
-                }
-              }}
-            >
-              <Themed.h3
-                sx={{
-                  mt: 0,
-                  mb: 2,
-                  fontFamily: 'serif',
-                  fontSize: horizontal ? 2 : 3,
-                  lineHeight: 1.3,
-                  transition: 'color 0.2s ease'
-                }}
-              >
-                {title}
-              </Themed.h3>
-            </Link>
-          ) : (
-            <Themed.h3
-              sx={{
-                mt: 0,
-                mb: 2,
-                fontFamily: 'serif',
-                fontSize: horizontal ? 2 : 3,
-                lineHeight: 1.3
-              }}
-            >
-              {title}
-            </Themed.h3>
-          )}
-
-          {/* Metadata row: Category + Date on same line, below title */}
-          {(category || date) && (
-            <div
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: 2,
-                mb: excerpt || hasMediaEmbed ? 3 : 0
-              }}
-            >
-              {category && <Category type={category} />}
-              {category && date && (
-                <span
-                  sx={{
-                    color: 'textMuted',
-                    fontSize: 0,
-                    opacity: 0.5
-                  }}
-                >
-                  •
-                </span>
-              )}
-              {date && (
-                <time
-                  className='created'
-                  sx={{
-                    color: 'textMuted',
-                    fontFamily: 'sans',
-                    fontSize: 0
-                  }}
-                >
-                  {date}
-                </time>
-              )}
-            </div>
-          )}
-
-          {/* Excerpt - only shown when no media embed */}
-          {excerpt && !hasMediaEmbed && (
-            <p
-              className='description'
-              sx={{
-                mt: 0,
-                mb: 0,
-                fontSize: [1, 2],
-                lineHeight: 1.6,
-                color: 'text'
-              }}
-            >
-              {excerpt}
-            </p>
-          )}
-        </div>
-
-        {/* YouTube embed - marginTop: auto aligns to bottom, mt: 3 adds fixed spacing */}
+        {/* YouTube embed */}
         {hasYouTube && (
           <div
             className='card-youtube'
@@ -220,7 +180,7 @@ export default ({
           </div>
         )}
 
-        {/* SoundCloud embed - flex container fills remaining card height */}
+        {/* SoundCloud embed */}
         {hasSoundCloud && (
           <div
             className='card-soundcloud'
@@ -283,5 +243,159 @@ export default ({
     >
       <CardContent />
     </Link>
+  )
+}
+
+const HorizontalTextBlock = ({
+  category,
+  date,
+  excerpt,
+  hasMediaEmbed,
+  headlinePreviewUrl = null,
+  horizontal,
+  link,
+  title
+}) => {
+  const showHeadlineWithPreview = horizontal && !hasMediaEmbed && headlinePreviewUrl
+
+  const titleHeading = (
+    <Themed.h3
+      sx={{
+        mt: 0,
+        mb: 0,
+        fontFamily: 'serif',
+        fontSize: horizontal ? 2 : 3,
+        lineHeight: 1.35,
+        transition: hasMediaEmbed ? 'color 0.2s ease' : undefined
+      }}
+    >
+      {title}
+    </Themed.h3>
+  )
+
+  return (
+    <>
+      {hasMediaEmbed ? (
+        <Link
+          to={link}
+          sx={{
+            textDecoration: 'none',
+            color: 'inherit',
+            '&:hover h3': {
+              color: 'primary'
+            }
+          }}
+        >
+          {titleHeading}
+        </Link>
+      ) : showHeadlineWithPreview ? (
+        <div
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            gap: 3,
+            mb: 2
+          }}
+        >
+          <Themed.h3
+            sx={{
+              flex: '1 1 0',
+              minWidth: 0,
+              mt: 0,
+              mb: 0,
+              fontFamily: 'serif',
+              fontSize: 2,
+              lineHeight: 1.35,
+              textAlign: 'left'
+            }}
+          >
+            {title}
+          </Themed.h3>
+          <div
+            aria-hidden
+            className='card-headline-preview'
+            sx={{
+              flexShrink: 0,
+              width: HEADLINE_THUMB_WIDTH,
+              aspectRatio: HORIZONTAL_PREVIEW_ASPECT,
+              borderRadius: '6px',
+              overflow: 'hidden',
+              backgroundImage: `url(${headlinePreviewUrl})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              border: '1px solid',
+              borderColor: 'muted',
+              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)'
+            }}
+          />
+        </div>
+      ) : (
+        <Themed.h3
+          sx={{
+            mt: 0,
+            mb: 2,
+            fontFamily: 'serif',
+            fontSize: horizontal ? 2 : 3,
+            lineHeight: 1.3
+          }}
+        >
+          {title}
+        </Themed.h3>
+      )}
+
+      {(category || date) && (
+        <div
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 2,
+            mb: excerpt || hasMediaEmbed ? 3 : 0
+          }}
+        >
+          {category && <Category type={category} />}
+          {category && date && (
+            <span
+              sx={{
+                color: 'textMuted',
+                fontSize: 0,
+                opacity: 0.5
+              }}
+            >
+              •
+            </span>
+          )}
+          {date && (
+            <time
+              className='created'
+              sx={{
+                color: 'textMuted',
+                fontFamily: 'sans',
+                fontSize: 0
+              }}
+            >
+              {date}
+            </time>
+          )}
+        </div>
+      )}
+
+      {excerpt && !hasMediaEmbed && (
+        <p
+          className='description'
+          sx={{
+            mt: 0,
+            mb: 0,
+            fontSize: [1, 2],
+            lineHeight: 1.6,
+            color: 'text'
+          }}
+        >
+          {excerpt}
+        </p>
+      )}
+    </>
   )
 }
