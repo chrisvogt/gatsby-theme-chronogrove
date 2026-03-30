@@ -270,6 +270,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
 
       // Load cover texture (or fall back immediately if no URL)
       const applyFallback = () => {
+        if (!coverMat) return
         const fallbackTex = buildCoverFallbackTexture(title)
         coverMat.map = fallbackTex
         coverMat.color.set(0xffffff)
@@ -285,6 +286,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
         loader.load(
           thumbnailURL,
           tex => {
+            if (!coverMat) return
             tex.colorSpace = THREE.SRGBColorSpace
             coverMat.map = tex
             coverMat.color.set(0xffffff)
