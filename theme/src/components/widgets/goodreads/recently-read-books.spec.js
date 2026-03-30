@@ -10,6 +10,19 @@ import goodreadsMock from '../../../../__mocks__/goodreads-widget.mock.json'
 // Mock LazyLoad component
 jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 
+// Mock Book3D so tests don't need a WebGL context; expose book-preview-thumbnail
+// so existing assertions continue to work
+jest.mock('../../artwork/book-3d', () => {
+  const React = require('react')
+  return function MockBook3D({ title, thumbnailURL }) {
+    return (
+      <div data-testid='book-preview-3d' role='img' aria-label={title}>
+        <img data-testid='book-preview-thumbnail' src={thumbnailURL} alt={title} />
+      </div>
+    )
+  }
+})
+
 const mockBooks = goodreadsMock.payload.collections.recentlyReadBooks
 
 const renderWithRouter = ui =>
@@ -36,7 +49,7 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
   describe('loading state', () => {
     it('renders a placeholder for each book expected to render', () => {
       const { container } = renderWithRouter(<RecentlyReadBooks books={[]} isLoading={true} default />)
-      expect(container.querySelectorAll('.rect-shape')).toHaveLength(12)
+      expect(container.querySelectorAll('.rect-shape')).toHaveLength(10)
     })
   })
 
@@ -60,17 +73,14 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
       const currentPage = screen.getByTestId('goodreads-page-1')
       const images = within(currentPage).getAllByTestId('book-preview-thumbnail')
-      expect(images).toHaveLength(12)
+      expect(images).toHaveLength(10)
       images.forEach((image, idx) => {
-        expect(image).toHaveAttribute(
-          'xlink:href',
-          `https://images.imgix.net/book-${idx + 1}.jpg?auto=compress&auto=format`
-        )
+        expect(image).toHaveAttribute('src', `https://images.imgix.net/book-${idx + 1}.jpg?auto=compress&auto=format`)
       })
     })
 
     it('renders pagination and navigates to the second page', () => {
-      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+      const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
         ...mockBooks[idx % mockBooks.length],
         id: `book-${idx + 1}`,
         title: `Book ${idx + 1}`,
@@ -80,7 +90,7 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
 
       expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
-      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')).toHaveLength(12)
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')).toHaveLength(10)
       expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')[0]).toHaveAttribute(
         'title',
         'Book 1'
@@ -89,17 +99,17 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       fireEvent.click(screen.getByLabelText('Go to page 2'))
 
       expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
-      expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')).toHaveLength(12)
+      expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')).toHaveLength(10)
       expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')[0]).toHaveAttribute(
         'title',
-        'Book 13'
+        'Book 11'
       )
     })
 
     it('supports drag pagination using the shared carousel behavior', () => {
       jest.useFakeTimers()
 
-      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+      const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
         ...mockBooks[idx % mockBooks.length],
         id: `book-${idx + 1}`,
         title: `Book ${idx + 1}`,
@@ -122,12 +132,12 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
       expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')[0]).toHaveAttribute(
         'title',
-        'Book 13'
+        'Book 11'
       )
     })
 
     it('returns to the first page when the books list shrinks', () => {
-      const paginatedBooks = Array.from({ length: 24 }, (_, idx) => ({
+      const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
         ...mockBooks[idx % mockBooks.length],
         id: `book-${idx + 1}`,
         title: `Book ${idx + 1}`,
@@ -150,7 +160,7 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
         >
           <Router>
             <div default>
-              <RecentlyReadBooks books={paginatedBooks.slice(0, 12)} isLoading={false} default />
+              <RecentlyReadBooks books={paginatedBooks.slice(0, 10)} isLoading={false} default />
             </div>
           </Router>
         </LocationProvider>
@@ -375,8 +385,8 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       ]
       renderWithRouter(<RecentlyReadBooks books={booksWithMixedUrls} isLoading={false} default />)
       const images = screen.getAllByTestId('book-preview-thumbnail')
-      expect(images[0]).toHaveAttribute('xlink:href', 'https://images.imgix.net/book1.jpg?auto=compress&auto=format')
-      expect(images[1]).toHaveAttribute('xlink:href', 'https://example.com/book2.jpg')
+      expect(images[0]).toHaveAttribute('src', 'https://images.imgix.net/book1.jpg?auto=compress&auto=format')
+      expect(images[1]).toHaveAttribute('src', 'https://example.com/book2.jpg')
     })
   })
 })
