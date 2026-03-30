@@ -333,6 +333,63 @@ describe('Artwork/Book3D', () => {
     expect(Color).toHaveBeenCalledWith(0x1a365d)
   })
 
+  // ── Texture race-condition guards ─────────────────────────────────────────
+  // The TextureLoader callbacks are async; destroyScene() may null coverMat
+  // before they fire (e.g. the book scrolled off or was unmounted while the
+  // image was still in flight).
+
+  it('does not throw when onLoad fires after the scene is destroyed by leaving the viewport', () => {
+    let storedOnLoad = null
+    mockLoader.load.mockImplementation((url, onLoad) => {
+      storedOnLoad = onLoad
+    })
+
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    leaveViewport() // destroyScene — coverMat is now null
+
+    expect(() => storedOnLoad && storedOnLoad(mockTexture)).not.toThrow()
+  })
+
+  it('does not throw when onError (fallback) fires after the scene is destroyed by leaving the viewport', () => {
+    let storedOnError = null
+    mockLoader.load.mockImplementation((url, _onLoad, _onProgress, onError) => {
+      storedOnError = onError
+    })
+
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    leaveViewport()
+
+    expect(() => storedOnError && storedOnError(new Error('network error'))).not.toThrow()
+  })
+
+  it('does not throw when onLoad fires after unmount', () => {
+    let storedOnLoad = null
+    mockLoader.load.mockImplementation((url, onLoad) => {
+      storedOnLoad = onLoad
+    })
+
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    unmount()
+
+    expect(() => storedOnLoad && storedOnLoad(mockTexture)).not.toThrow()
+  })
+
+  it('does not throw when onError (fallback) fires after unmount', () => {
+    let storedOnError = null
+    mockLoader.load.mockImplementation((url, _onLoad, _onProgress, onError) => {
+      storedOnError = onError
+    })
+
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    unmount()
+
+    expect(() => storedOnError && storedOnError(new Error('network error'))).not.toThrow()
+  })
+
   // ── Mouse interaction ──────────────────────────────────────────────────────
 
   it('ignores mouse events before the scene is created', () => {
