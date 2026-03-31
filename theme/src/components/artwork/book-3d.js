@@ -32,8 +32,8 @@ function buildSpineTexture(title) {
   const label = title.length > maxChars ? title.slice(0, maxChars - 1) + '\u2026' : title
 
   ctx.save()
-  ctx.translate(32, 490)
-  ctx.rotate(-Math.PI / 2)
+  ctx.translate(32, 22)
+  ctx.rotate(Math.PI / 2)
   ctx.fillStyle = '#cbd5e0'
   ctx.font = 'bold 18px Arial, sans-serif'
   ctx.textBaseline = 'middle'
