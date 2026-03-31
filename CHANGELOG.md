@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.74.9
+## 0.75.0
 
 ### 📚 Goodreads — interactive 3D book covers
 
@@ -16,7 +16,7 @@
 
 ### 📦 Files Changed
 
-- `theme/package.json` (version 0.74.9)
+- `theme/package.json` (version 0.75.0)
 - `theme/src/components/artwork/book-3d.js` (new)
 - `theme/src/components/artwork/book-3d.spec.js` (new)
 - `theme/src/components/widgets/goodreads/book-link.js`
