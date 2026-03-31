@@ -15,7 +15,7 @@ import BookLink from './book-link'
 export const HEADLINE = 'Books'
 export const BODY_TEXT = 'Recently read and finished books from Goodreads.'
 
-const BOOKS_PER_PAGE = 12
+const BOOKS_PER_PAGE = 10
 
 const RecentlyReadBooks = ({ books = [], isLoading }) => {
   const { colorMode } = useThemeUI()
@@ -165,7 +165,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                   gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)']
                 }}
               >
-                {Array(12)
+                {Array(BOOKS_PER_PAGE)
                   .fill()
                   .map((item, idx) => (
                     <RectShape
@@ -220,17 +220,18 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                       sx={t => ({
                         display: 'grid',
                         gridGap: [3, 1, 2],
-                        gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)'],
+                        gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(5, 1fr)'],
                         // Fill slide width including pr shadow gutter (negative mr does not widen 1fr tracks).
                         width: `calc(100% + ${t.space[3]})`,
                         maxWidth: 'none',
                         boxSizing: 'border-box'
                       })}
                     >
-                      {pageBooks.map(book => (
+                      {pageBooks.map((book, bookIndex) => (
                         <BookLink
                           id={book.id}
                           key={book.id}
+                          introDelay={bookIndex * 80}
                           suppressNavigation={isDragging || isTransitioning}
                           thumbnailURL={book.cdnMediaURL || book.thumbnail}
                           title={book.title}

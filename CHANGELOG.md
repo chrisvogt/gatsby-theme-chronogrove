@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.75.0
+
+### 📚 Goodreads — interactive 3D book covers
+
+- **Three.js book renderer** (`Book3D`): replaces flat SVG book thumbnails with an interactive 3D box rendered via WebGL. The front face displays the cover image, the spine carries the title text, and all other faces use dark neutral materials.
+- **Staggered intro animation**: books ease from face-on to their resting 3D angle sequentially on first render (80 ms per-book delay), then sit statically at rest — zero per-frame GPU cost while idle.
+- **Hover interaction**: cursor movement rotates the book in real time; rotation is clamped to ±1.35 rad so the blank back face never comes into view. On mouse-leave the book eases back to its resting pose.
+- **IntersectionObserver lifecycle**: WebGL contexts are created only when a book enters the viewport and fully disposed when it leaves, preventing context exhaustion across the paginated carousel.
+- **Cover fallback**: when a thumbnail URL is missing or fails to load, the book title is rendered directly on the cover using a canvas texture with word-wrapping and a dark gradient background.
+- **Loading pulse**: while a cover texture is in-flight the front face emits a subtle blue glow that fades once the image arrives.
+- **Book detail view**: `BookExplorer` now uses `Book3D` for the cover art, matching the grid.
+- **Grid layout**: updated to 5 columns (2 rows × 5 = 10 books per page) with responsive breakpoints (2 → 3 → 4 → 5 columns), matching the Instagram and Flickr widget grids.
+- **Race-condition guards**: texture `onLoad`/`onError` callbacks bail out early when `coverMat` has already been nulled by a concurrent `destroyScene()`.
+
+### 📦 Files Changed
+
+- `theme/package.json` (version 0.75.0)
+- `theme/src/components/artwork/book-3d.js` (new)
+- `theme/src/components/artwork/book-3d.spec.js` (new)
+- `theme/src/components/widgets/goodreads/book-link.js`
+- `theme/src/components/widgets/goodreads/book-link.spec.js`
+- `theme/src/components/widgets/goodreads/book-explorer.js`
+- `theme/src/components/widgets/goodreads/book-explorer.spec.js`
+- `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `theme/src/components/widgets/goodreads/recently-read-books.spec.js`
+
+---
+
 ## 0.74.8
 
 ### ✨ Blog index

@@ -5,7 +5,7 @@ import { Themed } from '@theme-ui/mdx'
 import { Link } from 'gatsby'
 import { useLocation } from '@gatsbyjs/reach-router'
 
-import Book from '../../artwork/book'
+import Book3D from '../../artwork/book-3d'
 import ViewExternal from '../view-external'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
 
@@ -82,8 +82,8 @@ const BookExplorer = ({ book, onClose }) => {
               alignItems: 'center'
             }}
           >
-            <div sx={{ width: '100%', maxWidth: '128px' }}>
-              <Book thumbnailURL={`${cdnMediaURL}?auto=compress&auto=format`} title={title} />
+            <div sx={{ width: '100%', maxWidth: '160px' }}>
+              <Book3D thumbnailURL={`${cdnMediaURL}?auto=compress&auto=format`} title={title} />
             </div>
             <Link
               to={location.pathname}

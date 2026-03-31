@@ -12,6 +12,14 @@ jest.mock('@gatsbyjs/reach-router', () => ({
   useLocation: () => ({ pathname: '/test' })
 }))
 
+// Mock Book3D to avoid WebGL in jsdom
+jest.mock('../../artwork/book-3d', () => {
+  const React = require('react')
+  return function MockBook3D({ thumbnailURL, title }) {
+    return <img data-testid='book-preview-3d' src={thumbnailURL} alt={title} />
+  }
+})
+
 // Mock console.log to keep test output clean
 jest.spyOn(console, 'log').mockImplementation(() => {})
 
@@ -58,10 +66,10 @@ describe('Widget/Goodreads/BookExplorer', () => {
     expect(screen.getByText('Learn more on Google Books')).toBeInTheDocument()
   })
 
-  it('renders book image with webp format for CDN URLs', () => {
+  it('renders the 3D book cover with the CDN-optimised URL', () => {
     renderWithRouter(<BookExplorer book={mockBook} onClose={() => {}} default />)
-    const image = screen.getByTestId('book-preview-thumbnail')
-    expect(image).toHaveAttribute('xlink:href', 'https://images.imgix.net/book.jpg?auto=compress&auto=format')
+    const image = screen.getByTestId('book-preview-3d')
+    expect(image).toHaveAttribute('src', 'https://images.imgix.net/book.jpg?auto=compress&auto=format')
   })
 
   it('renders rating stars correctly', () => {
