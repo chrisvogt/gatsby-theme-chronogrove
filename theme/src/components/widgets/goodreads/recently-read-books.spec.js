@@ -54,6 +54,11 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
   })
 
   describe('success sate', () => {
+    it('renders without crashing when the books prop is omitted (default empty array)', () => {
+      renderWithRouter(<RecentlyReadBooks isLoading={false} default />)
+      expect(screen.getByText(HEADLINE)).toBeInTheDocument()
+    })
+
     it('renders a headline and paragraph text for the widget', () => {
       renderWithRouter(<RecentlyReadBooks books={mockBooks} isLoading={false} default />)
       expect(screen.getByText(HEADLINE)).toBeInTheDocument()

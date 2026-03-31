@@ -118,7 +118,11 @@ global.IntersectionObserver = jest.fn(cb => {
   return mockIntersectionObserver
 })
 
-global.ResizeObserver = jest.fn(() => mockResizeObserver)
+let resizeCallback = null
+global.ResizeObserver = jest.fn(cb => {
+  resizeCallback = cb
+  return mockResizeObserver
+})
 
 let animationCallback = null
 global.requestAnimationFrame = jest.fn(cb => {
@@ -150,6 +154,7 @@ describe('Artwork/Book3D', () => {
     jest.clearAllMocks()
     animationCallback = null
     intersectionCallback = null
+    resizeCallback = null
     mockRenderer.domElement = createMockCanvas()
     mockLoader.load.mockImplementation((url, onLoad) => {
       onLoad && onLoad(mockTexture)
@@ -211,6 +216,14 @@ describe('Artwork/Book3D', () => {
     expect(mockIntersectionObserver.observe).toHaveBeenCalled()
   })
 
+  it('does not recreate the scene on rapid viewport re-entry when the scene already exists', () => {
+    render(<Book3D {...defaultProps} />)
+    enterViewport() // createScene — renderer set
+    const setSizeCount = mockRenderer.setSize.mock.calls.length
+    enterViewport() // renderer already exists — no-op (line 358 false branch)
+    expect(mockRenderer.setSize.mock.calls).toHaveLength(setSizeCount)
+  })
+
   it('creates the scene immediately when IntersectionObserver is unavailable', () => {
     const original = global.IntersectionObserver
     delete global.IntersectionObserver
@@ -260,6 +273,142 @@ describe('Artwork/Book3D', () => {
     expect(mockRenderer.render).toHaveBeenCalled()
   })
 
+  it('skips the intro animation and goes to IDLE if the book is already hovered when introDelay fires', () => {
+    const { getByTestId } = render(<Book3D {...defaultProps} introDelay={500} />)
+    const container = getByTestId('book-preview-3d')
+
+    enterViewport()
+
+    // Hover BEFORE the intro timer fires — sets hovered = true
+    fireEvent.mouseEnter(container)
+
+    // Fire the timer — hovered is true, takes the if(hovered) branch (lines 308-311)
+    jest.advanceTimersByTime(500)
+
+    expect(container).toBeInTheDocument()
+  })
+
+  // ── Animation phases ───────────────────────────────────────────────────────
+
+  it('completes the INTRO animation and transitions to IDLE when t reaches 1', () => {
+    let nowValue = 0
+    const mockNow = jest.spyOn(performance, 'now').mockImplementation(() => nowValue)
+
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.runAllTimers() // introStartMs = 0, RAF starts
+
+    // Advance past INTRO_DURATION (480ms) so t >= 1
+    nowValue = 500
+    animationCallback && animationCallback()
+
+    // INTRO completed → stopAnim() called → RAF cancelled
+    expect(global.cancelAnimationFrame).toHaveBeenCalled()
+    mockNow.mockRestore()
+  })
+
+  it('pulses the emissive intensity while the cover texture is still loading', () => {
+    // Defer the texture callback so coverLoaded stays false during the tick
+    mockLoader.load.mockImplementation(() => {
+      // intentionally not calling onLoad
+    })
+
+    let nowValue = 0
+    const mockNow = jest.spyOn(performance, 'now').mockImplementation(() => nowValue)
+
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.runAllTimers() // phase = INTRO, coverLoaded = false
+
+    // Run tick mid-intro (t < 1) — loading pulse body (lines 185-186) executes
+    nowValue = 100
+    animationCallback && animationCallback()
+
+    expect(mockRenderer.render).toHaveBeenCalled()
+    mockNow.mockRestore()
+  })
+
+  it('interpolates book rotation toward targetRotY during the HOVERED phase', () => {
+    let nowValue = 0
+    const mockNow = jest.spyOn(performance, 'now').mockImplementation(() => nowValue)
+
+    const { getByTestId } = render(<Book3D {...defaultProps} />)
+    const container = getByTestId('book-preview-3d')
+
+    enterViewport()
+    jest.runAllTimers()
+
+    // Complete INTRO first
+    nowValue = 500
+    animationCallback && animationCallback()
+
+    // Hover → HOVERED phase, new RAF starts
+    fireEvent.mouseEnter(container)
+
+    // Tick in HOVERED phase (line 180)
+    animationCallback && animationCallback()
+
+    expect(mockRenderer.render).toHaveBeenCalled()
+    mockNow.mockRestore()
+  })
+
+  it('executes the RETURN animation tick while the easing is still in progress (t < 1)', () => {
+    let nowValue = 0
+    const mockNow = jest.spyOn(performance, 'now').mockImplementation(() => nowValue)
+
+    const { getByTestId } = render(<Book3D {...defaultProps} />)
+    const container = getByTestId('book-preview-3d')
+
+    enterViewport()
+    jest.runAllTimers()
+
+    // Complete INTRO
+    nowValue = 500
+    animationCallback && animationCallback()
+
+    fireEvent.mouseEnter(container)
+
+    // Leave → RETURN, returnStartMs = 1000
+    nowValue = 1000
+    fireEvent.mouseLeave(container)
+
+    // Run tick mid-RETURN (t ≈ 0.3, < 1) — covers the false path of the t >= 1 check
+    nowValue = 1100
+    animationCallback && animationCallback()
+
+    expect(mockRenderer.render).toHaveBeenCalled()
+    mockNow.mockRestore()
+  })
+
+  it('completes the RETURN animation and transitions back to IDLE', () => {
+    let nowValue = 0
+    const mockNow = jest.spyOn(performance, 'now').mockImplementation(() => nowValue)
+
+    const { getByTestId } = render(<Book3D {...defaultProps} />)
+    const container = getByTestId('book-preview-3d')
+
+    enterViewport()
+    jest.runAllTimers()
+
+    // Complete INTRO
+    nowValue = 500
+    animationCallback && animationCallback()
+
+    // Hover → HOVERED phase
+    fireEvent.mouseEnter(container)
+
+    // Leave → RETURN phase, returnStartMs = 1000
+    nowValue = 1000
+    fireEvent.mouseLeave(container)
+
+    // Advance past RETURN_DURATION (320ms) so t >= 1
+    nowValue = 1400
+    animationCallback && animationCallback()
+
+    expect(global.cancelAnimationFrame).toHaveBeenCalled()
+    mockNow.mockRestore()
+  })
+
   // ── Texture loading ────────────────────────────────────────────────────────
 
   it('loads the cover image via TextureLoader after entering viewport', () => {
@@ -306,6 +455,23 @@ describe('Artwork/Book3D', () => {
     render(<Book3D thumbnailURL={null} title='No Cover Book' />)
     enterViewport()
     expect(mockLoader.load).not.toHaveBeenCalled()
+  })
+
+  it('word-wraps the fallback cover text when a line would exceed 14 characters', () => {
+    const { CanvasTexture } = require('three')
+    // 'aa bbbbbbbbbbbbb' = 16 chars > 14 — triggers the push-and-wrap branch
+    render(<Book3D thumbnailURL='' title='The Quick Brown Fox Jumps' />)
+    enterViewport()
+    expect(CanvasTexture.mock.calls.length).toBeGreaterThanOrEqual(2)
+  })
+
+  it('breaks the word-wrap loop early when the line buffer reaches 4 lines', () => {
+    const { CanvasTexture } = require('three')
+    // Each adjacent word pair exceeds 14 chars, filling 4 lines before all words
+    // are processed — triggers the `if (lines.length >= 4) break` path
+    render(<Book3D thumbnailURL='' title='aa bbbbbbbbbbbbb cc ddddddddddddd ee' />)
+    enterViewport()
+    expect(CanvasTexture.mock.calls.length).toBeGreaterThanOrEqual(2)
   })
 
   it('builds a spine texture via CanvasTexture', () => {
@@ -408,6 +574,31 @@ describe('Artwork/Book3D', () => {
     expect(global.requestAnimationFrame).toHaveBeenCalled()
   })
 
+  it('does not start a second RAF loop when startAnim is called while already running', () => {
+    const { getByTestId } = render(<Book3D {...defaultProps} />)
+    const container = getByTestId('book-preview-3d')
+    enterViewport()
+    fireEvent.mouseEnter(container) // rafId = 1, RAF starts
+    const countAfterFirst = global.requestAnimationFrame.mock.calls.length
+    fireEvent.mouseEnter(container) // rafId !== null → early return (line 147)
+    expect(global.requestAnimationFrame.mock.calls).toHaveLength(countAfterFirst)
+  })
+
+  it('ignores mousemove events when the book is not being hovered', () => {
+    const { getByTestId } = render(<Book3D {...defaultProps} />)
+    const container = getByTestId('book-preview-3d')
+    enterViewport()
+    container.getBoundingClientRect = jest.fn(() => ({
+      left: 0,
+      top: 0,
+      width: 200,
+      height: 200
+    }))
+    // mousemove without mouseenter — hovered = false, early return (line 398)
+    fireEvent.mouseMove(container, { clientX: 100, clientY: 100 })
+    expect(container).toBeInTheDocument()
+  })
+
   it('clamps targetRotY on mousemove to prevent back face showing', () => {
     const { getByTestId } = render(<Book3D {...defaultProps} />)
     const container = getByTestId('book-preview-3d')
@@ -443,6 +634,27 @@ describe('Artwork/Book3D', () => {
     expect(mockResizeObserver.observe).toHaveBeenCalled()
   })
 
+  it('updates the camera and renderer dimensions when the container is resized', () => {
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+
+    // Fire the ResizeObserver callback while the scene is active (lines 377-383)
+    resizeCallback && resizeCallback([])
+
+    expect(mockCamera.updateProjectionMatrix).toHaveBeenCalled()
+    // setSize called once in createScene, once in the resize callback
+    expect(mockRenderer.setSize).toHaveBeenCalledTimes(2)
+  })
+
+  it('does nothing in the resize callback when the scene has been destroyed', () => {
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    leaveViewport() // destroyScene — renderer = null
+
+    // Should not throw due to the !renderer guard (line 377)
+    expect(() => resizeCallback && resizeCallback([])).not.toThrow()
+  })
+
   // ── Cleanup ────────────────────────────────────────────────────────────────
 
   it('cleans up all resources on unmount', () => {
@@ -469,5 +681,17 @@ describe('Artwork/Book3D', () => {
     const { unmount } = render(<Book3D {...defaultProps} />)
     // Never enter viewport — unmount should not throw
     expect(() => unmount()).not.toThrow()
+  })
+
+  it('cleans up without errors when ResizeObserver was unavailable', () => {
+    const originalRO = global.ResizeObserver
+    delete global.ResizeObserver
+
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport() // createScene without ResizeObserver (ro = undefined)
+    // cleanup: if (ro) = false branch (line 423)
+    expect(() => unmount()).not.toThrow()
+
+    global.ResizeObserver = originalRO
   })
 })
