@@ -40,31 +40,31 @@ module.exports = {
     widgets: {
       discogs: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/discogs'
       },
       flickr: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/flickr'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/flickr'
       },
       github: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/github'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/github'
       },
       goodreads: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/goodreads'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/goodreads'
       },
       instagram: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/instagram'
       },
       spotify: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/spotify'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/spotify'
       },
       steam: {
         username: 'chrisvogt',
-        widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/steam'
+        widgetDataSource: 'https://api.chrisvogt.me/widgets/steam'
       }
     },
     webmentionUrl: 'https://webmention.io/www.chrisvogt.me/webmention'
@@ -245,31 +245,31 @@ module.exports = {
         widgets: {
           discogs: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/discogs'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/discogs'
           },
           flickr: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/flickr'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/flickr'
           },
           github: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/github'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/github'
           },
           goodreads: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/goodreads'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/goodreads'
           },
           instagram: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/instagram'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/instagram'
           },
           spotify: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/spotify'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/spotify'
           },
           steam: {
             username: 'chrisvogt',
-            widgetDataSource: 'https://metrics.chrisvogt.me/api/widgets/steam'
+            widgetDataSource: 'https://api.chrisvogt.me/widgets/steam'
           }
         }
       }
