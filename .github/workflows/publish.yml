@@ -6,6 +6,14 @@ name: Publish
 on:
   push:
     branches: [main]
+    paths:
+      - 'packages/ui/**'
+      - 'theme/**'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'package.json'
+      - '.github/workflows/publish.yml'
+  workflow_dispatch:
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -120,18 +128,79 @@ jobs:
           publish_check "packages/ui/package.json" "ui"
           publish_check "theme/package.json" "theme"
 
-  publish:
-    name: Publish (${{ matrix.registry }})
+  changes:
+    name: Detect package tree changes
     runs-on: ubuntu-latest
-    needs: resolve-version
-    if: |
-      (matrix.registry == 'npm' && (needs.resolve-version.outputs.publish_npm_ui == 'true' || needs.resolve-version.outputs.publish_npm_theme == 'true')) ||
-      (matrix.registry == 'github' && (needs.resolve-version.outputs.publish_github_ui == 'true' || needs.resolve-version.outputs.publish_github_theme == 'true'))
+    needs: test
+    outputs:
+      packages_ui: ${{ steps.detect.outputs.packages_ui }}
+      theme: ${{ steps.detect.outputs.theme }}
+      workspace: ${{ steps.detect.outputs.workspace }}
 
-    strategy:
-      fail-fast: false
-      matrix:
-        registry: [npm, github]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Classify changed paths
+        id: detect
+        run: |
+          set -euo pipefail
+          packages_ui=false
+          theme=false
+          workspace=false
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            packages_ui=true
+            theme=true
+            workspace=true
+          else
+            before="${{ github.event.before }}"
+            if [ -z "${before}" ] || [ "${before}" = "0000000000000000000000000000000000000000" ]; then
+              packages_ui=true
+              theme=true
+              workspace=true
+            else
+              while IFS= read -r f; do
+                [ -z "${f}" ] && continue
+                case "${f}" in
+                  packages/ui/*)
+                    packages_ui=true
+                    ;;
+                  theme/*)
+                    theme=true
+                    ;;
+                  pnpm-lock.yaml|pnpm-workspace.yaml|package.json|.github/workflows/publish.yml)
+                    workspace=true
+                    ;;
+                esac
+              done <<< "$(git diff --name-only "${before}" "${{ github.sha }}")"
+            fi
+          fi
+
+          echo "packages_ui=${packages_ui}" >> "${GITHUB_OUTPUT}"
+          echo "theme=${theme}" >> "${GITHUB_OUTPUT}"
+          echo "workspace=${workspace}" >> "${GITHUB_OUTPUT}"
+
+  publish-npm:
+    name: Publish (npm)
+    runs-on: ubuntu-latest
+    needs: [resolve-version, changes]
+    if: |
+      (
+        needs.resolve-version.outputs.publish_npm_ui == 'true' ||
+        needs.resolve-version.outputs.publish_npm_theme == 'true'
+      ) && (
+        needs.changes.outputs.workspace == 'true' ||
+        (
+          needs.resolve-version.outputs.publish_npm_ui == 'true' &&
+          needs.changes.outputs.packages_ui == 'true'
+        ) ||
+        (
+          needs.resolve-version.outputs.publish_npm_theme == 'true' &&
+          needs.changes.outputs.theme == 'true'
+        )
+      )
 
     permissions:
       contents: read
@@ -145,18 +214,60 @@ jobs:
         with:
           run_install: false
 
-      # Never set registry-url to GitHub on the default config: it merges with
-      # registry.npmjs.org and breaks npm OIDC publish (ENEEDAUTH).
       - name: Use Node.js 24 (npm registry)
-        if: matrix.registry == 'npm'
         uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
+      - run: pnpm install --frozen-lockfile
+
+      - name: Ensure npm supports OIDC trusted publishing
+        run: npm install -g npm@latest
+
+      - name: Publish to npm (@chronogrove/ui)
+        if: needs.resolve-version.outputs.publish_npm_ui == 'true'
+        run: pnpm publish --filter './packages/ui' --access public --no-git-checks --provenance
+
+      - name: Publish to npm (gatsby-theme-chronogrove)
+        if: needs.resolve-version.outputs.publish_npm_theme == 'true'
+        run: pnpm publish --filter './theme' --access public --no-git-checks --provenance
+
+  publish-github:
+    name: Publish (GitHub Packages)
+    runs-on: ubuntu-latest
+    needs: [resolve-version, changes]
+    if: |
+      (
+        needs.resolve-version.outputs.publish_github_ui == 'true' ||
+        needs.resolve-version.outputs.publish_github_theme == 'true'
+      ) && (
+        needs.changes.outputs.workspace == 'true' ||
+        (
+          needs.resolve-version.outputs.publish_github_ui == 'true' &&
+          needs.changes.outputs.packages_ui == 'true'
+        ) ||
+        (
+          needs.resolve-version.outputs.publish_github_theme == 'true' &&
+          needs.changes.outputs.theme == 'true'
+        )
+      )
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      # Never set registry-url to GitHub on the default config: it merges with
+      # registry.npmjs.org and breaks npm OIDC publish (ENEEDAUTH).
       - name: Use Node.js 24 (no publish registry in default npmrc)
-        if: matrix.registry == 'github'
         uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -164,20 +275,8 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Ensure npm supports OIDC trusted publishing
-        if: matrix.registry == 'npm'
-        run: npm install -g npm@latest
-
-      - name: Publish to npm (@chronogrove/ui)
-        if: matrix.registry == 'npm' && needs.resolve-version.outputs.publish_npm_ui == 'true'
-        run: pnpm publish --filter './packages/ui' --access public --no-git-checks --provenance
-
-      - name: Publish to npm (gatsby-theme-chronogrove)
-        if: matrix.registry == 'npm' && needs.resolve-version.outputs.publish_npm_theme == 'true'
-        run: pnpm publish --filter './theme' --access public --no-git-checks --provenance
-
       - name: Publish scoped packages to GitHub Packages
-        if: matrix.registry == 'github'
+        if: needs.resolve-version.outputs.publish_github_ui == 'true' || needs.resolve-version.outputs.publish_github_theme == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
           PUBLISH_GH_UI: ${{ needs.resolve-version.outputs.publish_github_ui }}
