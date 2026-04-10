@@ -4,7 +4,7 @@ import { ThemeUIProvider } from 'theme-ui'
 
 import SkipNavLink from './SkipNavLink'
 import { TestProvider } from '../../testUtils'
-import * as isDarkModeModule from '../../helpers/isDarkMode'
+import * as isDarkModeModule from '@chronogrove/ui/is-dark-mode'
 
 describe('SkipNavLink', () => {
   const renderComponent = (props = {}) => {

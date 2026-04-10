@@ -1,2 +1,1 @@
-const isDarkMode = colorMode => colorMode === 'dark'
-export default isDarkMode
+export { default } from '@chronogrove/ui/is-dark-mode'

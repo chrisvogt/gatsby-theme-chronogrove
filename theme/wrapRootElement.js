@@ -1,75 +1,48 @@
 /** @jsx jsx */
-import { Global } from '@emotion/react'
-import { jsx, useColorMode } from 'theme-ui'
+import { jsx } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Themed } from '@theme-ui/mdx'
-import { ThemeUIProvider, InitializeColorMode } from 'theme-ui'
 
 import Emoji from './src/shortcodes/emoji'
 import Note from './src/shortcodes/Note'
 import RootWrapper from './src/components/root-wrapper'
 import store from './src/store'
-import theme from './src/gatsby-plugin-theme-ui'
+import theme from '@chronogrove/ui/theme'
 import YouTube from './src/shortcodes/youtube'
+import { ChronogroveThemeProvider } from '@chronogrove/ui'
+import { MdxPrePassthrough, MdxTable } from './src/mdx-provider-components'
 
-// Single source of truth: theme from src/gatsby-plugin-theme-ui. We provide exactly one
-// ThemeUIProvider here (do not add gatsby-plugin-theme-ui to gatsby-config or you get two providers and broken color-mode toggling).
-
-// Create a TanStack Query client with optimized defaults for Gatsby
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // Data stays fresh for 5 minutes
       staleTime: 5 * 60 * 1000,
-      // Cache data for 30 minutes
       gcTime: 30 * 60 * 1000,
-      // Don't refetch on window focus (better for static sites)
       refetchOnWindowFocus: false,
-      // Don't refetch on reconnect
       refetchOnReconnect: false,
-      // Retry failed requests once
       retry: 1
     }
   }
 })
 
-// Table component that adapts to color mode
-// istanbul ignore next - internal MDX component only used when rendering MDX tables
-const Table = props => {
-  const [colorMode] = useColorMode()
-  const tableVariant = colorMode === 'dark' ? 'styles.tableDark' : 'styles.table'
-
-  return <Themed.table {...props} sx={{ variant: tableVariant }} />
-}
-
-// Simple passthrough for MDX code blocks
-/* istanbul ignore next */
-const Pre = ({ children }) => <>{children}</>
-
-// Define MDX components. Spread Themed so MDX-rendered content (posts, media) gets
-// the theme's typography (e.g. styles.p fontSize [2,3]) and matches the About page.
-// Custom components override: pre (passthrough), table (color-mode variant), plus shortcodes.
 const components = {
   ...Themed,
   Emoji,
   Note,
-  pre: Pre,
+  pre: MdxPrePassthrough,
   YouTube,
-  Table
+  Table: MdxTable
 }
 
 const WrapRootElement = ({ element }) => (
   <QueryClientProvider client={queryClient}>
     <ReduxProvider store={store}>
-      <ThemeUIProvider theme={theme}>
-        <InitializeColorMode />
-        <Global styles={theme.global} />
+      <ChronogroveThemeProvider theme={theme}>
         <MDXProvider components={components}>
           <RootWrapper>{element}</RootWrapper>
         </MDXProvider>
-      </ThemeUIProvider>
+      </ChronogroveThemeProvider>
     </ReduxProvider>
   </QueryClientProvider>
 )

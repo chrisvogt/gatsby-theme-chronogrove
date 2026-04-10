@@ -9,15 +9,18 @@ jest.mock('./src/store', () => ({
   subscribe: jest.fn()
 }))
 
-jest.mock('./src/gatsby-plugin-theme-ui', () => ({
-  colors: {
-    text: '#333',
-    background: '#fff'
-  },
-  global: {},
-  styles: {
-    table: { borderCollapse: 'collapse' },
-    tableDark: { borderCollapse: 'collapse', bg: '#333' }
+jest.mock('@chronogrove/ui/theme', () => ({
+  __esModule: true,
+  default: {
+    colors: {
+      text: '#333',
+      background: '#fff'
+    },
+    global: {},
+    styles: {
+      table: { borderCollapse: 'collapse' },
+      tableDark: { borderCollapse: 'collapse', bg: '#333' }
+    }
   }
 }))
 

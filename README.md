@@ -34,7 +34,11 @@ This is a monorepo using pnpm workspaces and Turborepo:
 
 ```
 gatsby-theme-chronogrove/
-├── theme/                    # Gatsby theme package
+├── packages/
+│   └── ui/                   # @chronogrove/ui — Theme UI theme, color-mode, shared primitives
+│       ├── src/
+│       └── package.json
+├── theme/                    # Gatsby theme package (gatsby-theme-chronogrove)
 │   ├── src/
 │   │   ├── components/       # React components
 │   │   ├── widgets/          # Social media widgets
@@ -140,11 +144,13 @@ gatsby-theme-chronogrove/
 
 #### Working on the Theme
 
-The theme code is located in the `/theme` directory. To work on theme components:
+The theme code is located in the `/theme` directory. Shared **Theme UI** surface (theme object, color-mode helpers, `ChronogroveThemeProvider`, Button, skip-nav, color toggle) lives in **`packages/ui`** (`@chronogrove/ui`). To work on theme components:
 
 1. Start the demo site: `pnpm develop:theme`
-2. Make your changes to components in `theme/src/components/`
+2. Make your changes in `theme/src/components/` and/or `packages/ui/src/` as appropriate
 3. The changes will be reflected in the demo site at `http://localhost:8000`
+
+Run UI package tests only: `pnpm --filter @chronogrove/ui test`
 
 #### Working on Content
 

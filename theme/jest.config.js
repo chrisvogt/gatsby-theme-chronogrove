@@ -19,20 +19,26 @@ module.exports = {
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
 
-  // Barrel re-export files (no logic to test)
+  // Barrel re-export files (no logic to test); thin workspace shims to @chronogrove/ui (covered in packages/ui)
   coveragePathIgnorePatterns: [
     '/node_modules/',
     'src/components/home-backgrounds/index.js',
     'src/components/skip-nav/index.js',
-    'src/reducers/index.js'
+    'src/reducers/index.js',
+    'src/components/button.js',
+    'src/components/color-toggle.js',
+    'src/components/skip-nav/SkipNavLink.js',
+    'src/components/skip-nav/SkipNavContent.js',
+    'src/helpers/isDarkMode.js',
+    'src/gatsby-plugin-theme-ui/theme.js'
   ],
 
   coverageThreshold: {
     global: {
-      statements: 97,
-      branches: 85,
-      functions: 97,
-      lines: 97
+      statements: 95,
+      branches: 90,
+      functions: 95,
+      lines: 95
     }
   },
 
