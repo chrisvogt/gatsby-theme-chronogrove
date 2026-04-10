@@ -1,0 +1,327 @@
+name: Publish
+
+# Publishes workspace packages to npm (OIDC / trusted publishing) and GitHub Packages
+# when each package's version is not already on the respective registry.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/ui/**'
+      - 'theme/**'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'package.json'
+      - '.github/workflows/publish.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Test (Node.js 24)
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write # Codecov tokenless / OIDC upload
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run lint
+
+      - run: pnpm run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+
+  resolve-version:
+    name: Resolve publish targets
+    runs-on: ubuntu-latest
+    needs: test
+
+    # github.token is written only to a runner-temp file for npm view (not echoed).
+    # Token is not passed to job outputs. packages: read is for querying GitHub Packages.
+    permissions:
+      contents: read
+      packages: read
+
+    outputs:
+      publish_npm_ui: ${{ steps.meta.outputs.publish_npm_ui }}
+      publish_npm_theme: ${{ steps.meta.outputs.publish_npm_theme }}
+      publish_github_ui: ${{ steps.meta.outputs.publish_github_ui }}
+      publish_github_theme: ${{ steps.meta.outputs.publish_github_theme }}
+      github_pkg_name_ui: ${{ steps.meta.outputs.github_pkg_name_ui }}
+      github_pkg_name_theme: ${{ steps.meta.outputs.github_pkg_name_theme }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Compare local versions to registries
+        id: meta
+        env:
+          GITHUB_PACKAGES_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          OWNER_LC=$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')
+          printf '%s\n' "//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_TOKEN}" > "${RUNNER_TEMP}/npmrc-github-packages"
+
+          publish_check() {
+            local PKG_JSON="$1"
+            local KEY="$2"
+
+            local NPM_NAME
+            NPM_NAME=$(node -p "require('./${PKG_JSON}').name")
+            local BASE_NAME
+            if [[ "${NPM_NAME}" == @* ]]; then
+              BASE_NAME="${NPM_NAME#@*/}"
+            else
+              BASE_NAME="${NPM_NAME}"
+            fi
+            local GH_PKG_NAME="@${OWNER_LC}/${BASE_NAME}"
+            local LOCAL
+            LOCAL=$(node -p "require('./${PKG_JSON}').version")
+
+            local NPM_REMOTE
+            NPM_REMOTE=$(npm view "${NPM_NAME}" version 2>/dev/null || true)
+            local GH_REMOTE
+            GH_REMOTE=$(npm view "${GH_PKG_NAME}" version --registry https://npm.pkg.github.com --userconfig "${RUNNER_TEMP}/npmrc-github-packages" 2>/dev/null || true)
+
+            echo "github_pkg_name_${KEY}=${GH_PKG_NAME}" >> "${GITHUB_OUTPUT}"
+
+            if [ "${LOCAL}" = "${NPM_REMOTE}" ]; then
+              echo "publish_npm_${KEY}=false" >> "${GITHUB_OUTPUT}"
+              echo "npm ${NPM_NAME}: ${LOCAL} already published"
+            else
+              echo "publish_npm_${KEY}=true" >> "${GITHUB_OUTPUT}"
+              echo "npm ${NPM_NAME}: will publish ${LOCAL} (registry latest: ${NPM_REMOTE:-none})"
+            fi
+
+            if [ "${LOCAL}" = "${GH_REMOTE}" ]; then
+              echo "publish_github_${KEY}=false" >> "${GITHUB_OUTPUT}"
+              echo "GitHub Packages ${GH_PKG_NAME}: ${LOCAL} already published"
+            else
+              echo "publish_github_${KEY}=true" >> "${GITHUB_OUTPUT}"
+              echo "GitHub Packages ${GH_PKG_NAME}: will publish ${LOCAL} (registry latest: ${GH_REMOTE:-none})"
+            fi
+          }
+
+          publish_check "packages/ui/package.json" "ui"
+          publish_check "theme/package.json" "theme"
+
+  changes:
+    name: Detect package tree changes
+    runs-on: ubuntu-latest
+    needs: test
+    outputs:
+      packages_ui: ${{ steps.detect.outputs.packages_ui }}
+      theme: ${{ steps.detect.outputs.theme }}
+      workspace: ${{ steps.detect.outputs.workspace }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Classify changed paths
+        id: detect
+        run: |
+          set -euo pipefail
+          packages_ui=false
+          theme=false
+          workspace=false
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            packages_ui=true
+            theme=true
+            workspace=true
+          else
+            before="${{ github.event.before }}"
+            if [ -z "${before}" ] || [ "${before}" = "0000000000000000000000000000000000000000" ]; then
+              packages_ui=true
+              theme=true
+              workspace=true
+            else
+              while IFS= read -r f; do
+                [ -z "${f}" ] && continue
+                case "${f}" in
+                  packages/ui/*)
+                    packages_ui=true
+                    ;;
+                  theme/*)
+                    theme=true
+                    ;;
+                  pnpm-lock.yaml|pnpm-workspace.yaml|package.json|.github/workflows/publish.yml)
+                    workspace=true
+                    ;;
+                esac
+              done <<< "$(git diff --name-only "${before}" "${{ github.sha }}")"
+            fi
+          fi
+
+          echo "packages_ui=${packages_ui}" >> "${GITHUB_OUTPUT}"
+          echo "theme=${theme}" >> "${GITHUB_OUTPUT}"
+          echo "workspace=${workspace}" >> "${GITHUB_OUTPUT}"
+
+  publish-npm:
+    name: Publish (npm)
+    runs-on: ubuntu-latest
+    needs: [resolve-version, changes]
+    if: |
+      (
+        needs.resolve-version.outputs.publish_npm_ui == 'true' ||
+        needs.resolve-version.outputs.publish_npm_theme == 'true'
+      ) && (
+        needs.changes.outputs.workspace == 'true' ||
+        (
+          needs.resolve-version.outputs.publish_npm_ui == 'true' &&
+          needs.changes.outputs.packages_ui == 'true'
+        ) ||
+        (
+          needs.resolve-version.outputs.publish_npm_theme == 'true' &&
+          needs.changes.outputs.theme == 'true'
+        )
+      )
+
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Use Node.js 24 (npm registry)
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Ensure npm supports OIDC trusted publishing
+        run: npm install -g npm@latest
+
+      - name: Publish to npm (@chronogrove/ui)
+        if: needs.resolve-version.outputs.publish_npm_ui == 'true'
+        run: pnpm publish --filter './packages/ui' --access public --no-git-checks --provenance
+
+      - name: Publish to npm (gatsby-theme-chronogrove)
+        if: needs.resolve-version.outputs.publish_npm_theme == 'true'
+        run: pnpm publish --filter './theme' --access public --no-git-checks --provenance
+
+  publish-github:
+    name: Publish (GitHub Packages)
+    runs-on: ubuntu-latest
+    needs: [resolve-version, changes]
+    if: |
+      (
+        needs.resolve-version.outputs.publish_github_ui == 'true' ||
+        needs.resolve-version.outputs.publish_github_theme == 'true'
+      ) && (
+        needs.changes.outputs.workspace == 'true' ||
+        (
+          needs.resolve-version.outputs.publish_github_ui == 'true' &&
+          needs.changes.outputs.packages_ui == 'true'
+        ) ||
+        (
+          needs.resolve-version.outputs.publish_github_theme == 'true' &&
+          needs.changes.outputs.theme == 'true'
+        )
+      )
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      # Never set registry-url to GitHub on the default config: it merges with
+      # registry.npmjs.org and breaks npm OIDC publish (ENEEDAUTH).
+      - name: Use Node.js 24 (no publish registry in default npmrc)
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Publish scoped packages to GitHub Packages
+        if: needs.resolve-version.outputs.publish_github_ui == 'true' || needs.resolve-version.outputs.publish_github_theme == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+          PUBLISH_GH_UI: ${{ needs.resolve-version.outputs.publish_github_ui }}
+          PUBLISH_GH_THEME: ${{ needs.resolve-version.outputs.publish_github_theme }}
+          GH_PKG_UI: ${{ needs.resolve-version.outputs.github_pkg_name_ui }}
+          GH_PKG_THEME: ${{ needs.resolve-version.outputs.github_pkg_name_theme }}
+        run: |
+          set -euo pipefail
+
+          npmrc="${RUNNER_TEMP}/npmrc-github-publish"
+          printf '%s\n' "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > "${npmrc}"
+
+          publish_gh_dir() {
+            local DIR="$1"
+            local GH_NAME="$2"
+
+            (
+              cd "${DIR}"
+              cp package.json package.json.ci-backup
+              npm pkg set "name=${GH_NAME}"
+              npm pkg set publishConfig.registry=https://npm.pkg.github.com
+              pnpm publish --registry https://npm.pkg.github.com --no-git-checks --userconfig "${npmrc}"
+              mv package.json.ci-backup package.json
+            )
+          }
+
+          if [ "${PUBLISH_GH_UI}" = "true" ]; then
+            publish_gh_dir "packages/ui" "${GH_PKG_UI}"
+          fi
+
+          if [ "${PUBLISH_GH_THEME}" = "true" ]; then
+            cp theme/package.json theme/package.json.publish-backup
+            UI_VER=$(node -p "require('./packages/ui/package.json').version")
+            node -e "
+              const fs = require('fs');
+              const ghUi = process.argv[1];
+              const ghTheme = process.argv[2];
+              const uiVer = process.argv[3];
+              const j = JSON.parse(fs.readFileSync('theme/package.json', 'utf8'));
+              delete j.dependencies['@chronogrove/ui'];
+              j.dependencies[ghUi] = uiVer;
+              j.name = ghTheme;
+              j.publishConfig = { registry: 'https://npm.pkg.github.com' };
+              fs.writeFileSync('theme/package.json', JSON.stringify(j, null, 2) + '\n');
+            " "${GH_PKG_UI}" "${GH_PKG_THEME}" "${UI_VER}"
+            pnpm publish --filter './theme' --registry https://npm.pkg.github.com --no-git-checks --userconfig "${npmrc}"
+            mv theme/package.json.publish-backup theme/package.json
+          fi
