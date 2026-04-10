@@ -39,7 +39,7 @@
   },
   "pnpm": {
     "overrides": {
-      "lodash": "^4.17.23",
+      "lodash": "^4.18.1",
       "@mdx-js/react": "^3.1.1",
       "multer": "^2.1.1",
       "serialize-javascript": ">=7.0.3",
@@ -55,6 +55,7 @@
     ],
     "onlyBuiltDependencies": [
       "@parcel/watcher",
+      "core-js",
       "core-js-pure",
       "gatsby",
       "gatsby-cli",
