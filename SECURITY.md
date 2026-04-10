@@ -1,24 +1,22 @@
 # Security policy
 
-## Reporting a vulnerability
+If you think you’ve found a security issue in this project, please tell me before it’s public. Email works best:
 
-If you believe you have found a security vulnerability in this project, please report it **privately** so we can address it before details are public.
+[support@chrisvogt.me](mailto:support@chrisvogt.me)
 
-**Email:** [support@chrisvogt.me](mailto:support@chrisvogt.me)
+That gives me a chance to understand it, fix it, and get a release out without leaving everyone exposed in the meantime. Please don’t open a regular GitHub issue for something that’s still under wraps—that timeline is hard to walk back.
 
-Please include as much of the following as you can:
+If you can, include:
 
-- A clear description of the issue and its impact
-- Steps to reproduce, or proof-of-concept, if possible
-- Affected versions, components, or files (if known)
-- Your contact information if we need follow-up (optional)
+- What’s wrong and why it matters (impact)
+- How to reproduce it, or a minimal proof of concept
+- Anything you know about affected versions, files, or setup
+- A way to reach you if I have questions (only if you’re comfortable)
 
-Do **not** open a public GitHub issue for undisclosed security vulnerabilities.
+## After you write in
 
-## What to expect
+I read everything that lands in that inbox. I’ll reply when I’ve had a chance to look, and I’ll work with you to confirm whether it’s a real issue and what a fix should look like. For things that hold up, I’ll ship a patch as soon as I can and coordinate when it makes sense to talk about it publicly.
 
-We will acknowledge receipt of your report as soon as we reasonably can and will work with you to understand and validate the issue. We aim to release fixes for confirmed vulnerabilities in a timely manner and to coordinate disclosure once a mitigation is available.
+## Older releases
 
-## Supported versions
-
-Security fixes are generally applied to the latest release on the default branch. If you need a fix in an older line, say so in your report and we can discuss feasibility.
+I fix security problems on the current default branch / latest release. If you’re pinned to something older and need a backport, mention that in your email and I’ll see what’s realistic.
