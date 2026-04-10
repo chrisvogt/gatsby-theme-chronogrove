@@ -7,7 +7,8 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 
 ## Architecture
 - **Root**: Contains workspace configuration and shared tooling
-- **`theme/`**: The Gatsby theme package (`gatsby-theme-chronogrove`)
+- **`packages/ui/`**: `@chronogrove/ui` — Theme UI theme object, `ChronogroveThemeProvider`, color-mode helpers, Emotion cache utilities, and portable components (Button, skip-nav, color toggle); consumable from Next.js or other React apps
+- **`theme/`**: The Gatsby theme package (`gatsby-theme-chronogrove`); depends on `@chronogrove/ui` via `workspace:*` with thin re-export shims for backwards-compatible import paths
 - **`www.chrisvogt.me/`**: The actual website content and configuration
 
 ## Back-end API

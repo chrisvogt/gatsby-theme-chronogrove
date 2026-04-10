@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.75.0",
+  "version": "0.76.0",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
@@ -50,6 +50,7 @@
     "redux-mock-store": "^1.5.5"
   },
   "dependencies": {
+    "@chronogrove/ui": "workspace:*",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "catalog:",
     "@emotion/server": "^11.11.0",

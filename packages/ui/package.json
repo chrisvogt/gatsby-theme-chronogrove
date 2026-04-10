@@ -1,0 +1,72 @@
+{
+  "name": "@chronogrove/ui",
+  "version": "0.76.0",
+  "description": "Chronogrove Theme UI theme, color mode helpers, and shared UI primitives",
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./theme": {
+      "import": "./src/theme.js",
+      "default": "./src/theme.js"
+    },
+    "./provider": {
+      "import": "./src/provider.js",
+      "default": "./src/provider.js"
+    },
+    "./button": {
+      "import": "./src/button.js",
+      "default": "./src/button.js"
+    },
+    "./color-toggle": {
+      "import": "./src/color-toggle.js",
+      "default": "./src/color-toggle.js"
+    },
+    "./skip-nav": {
+      "import": "./src/skip-nav/index.js",
+      "default": "./src/skip-nav/index.js"
+    },
+    "./color-mode": {
+      "import": "./src/color-mode/index.js",
+      "default": "./src/color-mode/index.js"
+    },
+    "./emotion-cache": {
+      "import": "./src/emotion-cache.js",
+      "default": "./src/emotion-cache.js"
+    },
+    "./is-dark-mode": {
+      "import": "./src/helpers/isDarkMode.js",
+      "default": "./src/helpers/isDarkMode.js"
+    }
+  },
+  "scripts": {
+    "test": "jest --config jest.config.cjs"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "catalog:",
+    "@theme-toggles/react": "^4.1.0",
+    "@theme-ui/components": "catalog:",
+    "@theme-ui/presets": "^0.17.4",
+    "theme-ui": "catalog:"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  }
+}

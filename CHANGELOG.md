@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.76.0
+
+### 📦 `@chronogrove/ui` — shared Theme UI layer
+
+- **New workspace package** [`@chronogrove/ui`](packages/ui/README.md): Theme UI **theme object**, **`ChronogroveThemeProvider`** (`ThemeUIProvider` + `InitializeColorMode` + global styles), **color-mode** helpers (SSR inline scripts/CSS derived from `resolveChronogroveSurfaceColors(theme)`, browser sync, reconcile event + storage key), **Emotion cache** helpers, and portable primitives (**Button**, **ColorToggle**, **SkipNavLink** / **SkipNavContent**, **isDarkMode**).
+- **Subpath exports** for tree-shaking: e.g. `@chronogrove/ui/theme`, `@chronogrove/ui/color-mode`, `@chronogrove/ui/provider`, `@chronogrove/ui/button`, `@chronogrove/ui/color-toggle`, `@chronogrove/ui/skip-nav`, `@chronogrove/ui/emotion-cache`, `@chronogrove/ui/is-dark-mode`.
+- **Theme integration**: `gatsby-theme-chronogrove` depends on `workspace:*` and keeps **thin re-exports** under `theme/src/gatsby-plugin-theme-ui/theme.js` and shims for moved components/helpers; `gatsby-browser`, `gatsby-ssr`, `wrapRootElement`, and `root-wrapper` consume the package so light/dark bootstrap colors stay aligned with the theme tokens.
+- **Versioning**: `@chronogrove/ui` is released in lockstep with the theme at **0.76.0** for this milestone; future independent semver on npm is supported via `pnpm publish` (workspace protocol rewritten in the tarball).
+
+### 📦 Files Changed
+
+- `pnpm-workspace.yaml` (include `packages/*`)
+- `packages/ui/**` (new)
+- `theme/package.json` (version 0.76.0, dependency on `@chronogrove/ui`)
+- `theme/gatsby-browser.js`, `theme/gatsby-ssr.js`, `theme/wrapRootElement.js`, `theme/src/components/root-wrapper.js`
+- `theme/src/gatsby-plugin-theme-ui/theme.js`, component/helper shims, related specs
+
+---
+
 ## 0.75.0
 
 ### 📚 Goodreads — interactive 3D book covers

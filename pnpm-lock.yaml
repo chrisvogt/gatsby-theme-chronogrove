@@ -115,8 +115,63 @@ importers:
         specifier: ^2.9.5
         version: 2.9.5
 
+  packages/ui:
+    dependencies:
+      '@emotion/cache':
+        specifier: ^11.14.0
+        version: 11.14.0
+      '@emotion/react':
+        specifier: 'catalog:'
+        version: 11.14.0(@types/react@19.2.14)(react@19.2.5)
+      '@theme-toggles/react':
+        specifier: ^4.1.0
+        version: 4.1.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@theme-ui/components':
+        specifier: 'catalog:'
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/theme-provider@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5))(react@19.2.5)
+      '@theme-ui/presets':
+        specifier: ^0.17.4
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/css@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)))
+      theme-ui:
+        specifier: 'catalog:'
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.28.5
+        version: 7.29.0
+      '@babel/preset-env':
+        specifier: ^7.28.5
+        version: 7.29.2(@babel/core@7.29.0)
+      '@babel/preset-react':
+        specifier: ^7.28.5
+        version: 7.28.5(@babel/core@7.29.0)
+      '@testing-library/jest-dom':
+        specifier: ^6.9.1
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: ^16.3.2
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      babel-jest:
+        specifier: ^30.0.5
+        version: 30.3.0(@babel/core@7.29.0)
+      jest:
+        specifier: ^30.3.0
+        version: 30.3.0(@types/node@25.5.2)(babel-plugin-macros@3.1.0)
+      jest-environment-jsdom:
+        specifier: ^30.3.0
+        version: 30.3.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.5
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.5(react@19.2.5)
+
   theme:
     dependencies:
+      '@chronogrove/ui':
+        specifier: workspace:*
+        version: link:../packages/ui
       '@emotion/cache':
         specifier: ^11.14.0
         version: 11.14.0

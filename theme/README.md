@@ -387,6 +387,18 @@ pnpm test:coverage
 - Photo metadata
 - Lightbox gallery
 
+## 📦 Shared UI package (`@chronogrove/ui`)
+
+This repo ships a workspace package **[`@chronogrove/ui`](../packages/ui/README.md)** alongside the Gatsby theme. It holds:
+
+- The **Theme UI theme** (tokens, variants, modes) consumed via `@chronogrove/ui/theme`
+- **`ChronogroveThemeProvider`** — `ThemeUIProvider`, `InitializeColorMode`, and `Global` styles
+- **Color-mode utilities** — SSR inline script/style builders tied to `resolveChronogroveSurfaceColors(theme)`, browser reconciliation, and the same storage key / custom event the theme uses on navigation
+- **Emotion** `CacheProvider` helpers for the Gatsby browser entry
+- **Primitives**: Button, color toggle, skip-nav components, `isDarkMode` helper
+
+The published **theme** package lists `@chronogrove/ui` as a dependency; in the monorepo this resolves with `workspace:*`. **`pnpm publish`** rewrites workspace protocol ranges to semver in the tarball. Consumers of **only** `gatsby-theme-chronogrove` do not need to install `@chronogrove/ui` separately unless they import it directly (for example in a Next.js app reusing the design system).
+
 ## 🔍 Troubleshooting
 
 ### Dark/light mode not updating (workspace or local dependency)

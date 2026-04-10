@@ -22,11 +22,10 @@ jest.mock('@loadable/component', () => {
   }
 })
 
-// Mock the isDarkMode helper
-jest.mock('../helpers/isDarkMode', () => jest.fn())
+jest.mock('@chronogrove/ui/is-dark-mode', () => jest.fn())
 
 describe('ColorToggle', () => {
-  const mockIsDarkMode = require('../helpers/isDarkMode')
+  const mockIsDarkMode = require('@chronogrove/ui/is-dark-mode')
   const MockDarkModeToggle = require('@loadable/component').default()
 
   beforeEach(() => {
