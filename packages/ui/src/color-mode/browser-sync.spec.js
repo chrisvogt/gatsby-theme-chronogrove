@@ -96,6 +96,12 @@ describe('syncThemeUiColorMode', () => {
     expect(document.documentElement.classList.contains('theme-ui-other')).toBe(false)
     expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
   })
+
+  it('returns early when documentElement is missing', () => {
+    const spy = jest.spyOn(document, 'documentElement', 'get').mockReturnValue(null)
+    expect(() => syncThemeUiColorMode()).not.toThrow()
+    spy.mockRestore()
+  })
 })
 
 describe('scheduleThemeUiColorModeSync', () => {
