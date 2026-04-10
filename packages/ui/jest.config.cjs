@@ -7,5 +7,26 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest'
   },
-  transformIgnorePatterns: ['node_modules/(?!theme-ui)']
+  transformIgnorePatterns: ['node_modules/(?!theme-ui)'],
+  collectCoverageFrom: ['src/**/*.js', '!src/**/*.spec.js'],
+  coverageDirectory: 'coverage',
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'src/index.js',
+    'src/skip-nav/index.js',
+    'src/color-mode/index.js',
+    'src/theme.js'
+  ],
+  moduleNameMapper: {
+    '^@chronogrove/ui/is-dark-mode$': '<rootDir>/src/helpers/isDarkMode.js',
+    '^@theme-toggles/react$': '<rootDir>/test-utils/mock-theme-toggles-react.js'
+  },
+  coverageThreshold: {
+    global: {
+      statements: 95,
+      branches: 90,
+      functions: 95,
+      lines: 95
+    }
+  }
 }

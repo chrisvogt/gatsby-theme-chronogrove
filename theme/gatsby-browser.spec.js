@@ -387,5 +387,21 @@ describe('gatsby-browser', () => {
       expect(mockGetElementById).toHaveBeenCalledWith('skip-nav-content')
       expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
     })
+
+    it('calls performScrollToTop directly when requestAnimationFrame is unavailable', () => {
+      const originalRaf = window.requestAnimationFrame
+      mockGetElementById.mockReturnValue(mockSkipContent)
+      try {
+        delete window.requestAnimationFrame
+        onRouteUpdate({
+          location: { pathname: '/next', hash: '' },
+          prevLocation: { pathname: '/prev' }
+        })
+        expect(mockScrollTo).toHaveBeenCalledWith(0, 0)
+        expect(mockFocus).toHaveBeenCalledWith({ preventScroll: true })
+      } finally {
+        window.requestAnimationFrame = originalRaf
+      }
+    })
   })
 })

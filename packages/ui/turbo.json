@@ -4,6 +4,9 @@
   "tasks": {
     "test": {
       "outputs": []
+    },
+    "test:coverage": {
+      "outputs": ["coverage/**"]
     }
   }
 }

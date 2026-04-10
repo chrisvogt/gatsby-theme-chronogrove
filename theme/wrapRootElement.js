@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useColorMode } from 'theme-ui'
+import { jsx } from 'theme-ui'
 import { MDXProvider } from '@mdx-js/react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -12,6 +12,7 @@ import store from './src/store'
 import theme from '@chronogrove/ui/theme'
 import YouTube from './src/shortcodes/youtube'
 import { ChronogroveThemeProvider } from '@chronogrove/ui'
+import { MdxPrePassthrough, MdxTable } from './src/mdx-provider-components'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,22 +26,13 @@ const queryClient = new QueryClient({
   }
 })
 
-const Table = props => {
-  const [colorMode] = useColorMode()
-  const tableVariant = colorMode === 'dark' ? 'styles.tableDark' : 'styles.table'
-
-  return <Themed.table {...props} sx={{ variant: tableVariant }} />
-}
-
-const Pre = ({ children }) => <>{children}</>
-
 const components = {
   ...Themed,
   Emoji,
   Note,
-  pre: Pre,
+  pre: MdxPrePassthrough,
   YouTube,
-  Table
+  Table: MdxTable
 }
 
 const WrapRootElement = ({ element }) => (
