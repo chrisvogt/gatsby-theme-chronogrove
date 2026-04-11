@@ -38,6 +38,10 @@ gatsby-theme-chronogrove/
 │   └── ui/                   # @chronogrove/ui — Theme UI theme, color-mode, shared primitives
 │       ├── src/
 │       └── package.json
+├── examples/
+│   └── chronogrove-next/     # Next.js 15 App Router reference (optional; not the main Gatsby site)
+│       ├── app/
+│       └── package.json
 ├── theme/                    # Gatsby theme package (gatsby-theme-chronogrove)
 │   ├── src/
 │   │   ├── components/       # React components
@@ -129,16 +133,17 @@ gatsby-theme-chronogrove/
 
 ### Available Scripts
 
-| Command              | Description                            |
-| -------------------- | -------------------------------------- |
-| `pnpm develop`       | Start personal site (www.chrisvogt.me) |
-| `pnpm develop:theme` | Start demo site (www.chronogrove.com)  |
-| `pnpm test`          | Run test suite                         |
-| `pnpm test:watch`    | Run tests in watch mode                |
-| `pnpm test:coverage` | Generate coverage report               |
-| `pnpm build`         | Build for production                   |
-| `pnpm format`        | Format code with Prettier              |
-| `pnpm lint`          | Run ESLint                             |
+| Command              | Description                                               |
+| -------------------- | --------------------------------------------------------- |
+| `pnpm develop`       | Start personal site (www.chrisvogt.me)                    |
+| `pnpm develop:theme` | Start demo site (www.chronogrove.com)                     |
+| `pnpm develop:next`  | Start Next.js reference app (`examples/chronogrove-next`) |
+| `pnpm test`          | Run test suite                                            |
+| `pnpm test:watch`    | Run tests in watch mode                                   |
+| `pnpm test:coverage` | Generate coverage report                                  |
+| `pnpm build`         | Build for production                                      |
+| `pnpm format`        | Format code with Prettier                                 |
+| `pnpm lint`          | Run ESLint                                                |
 
 ### Development Workflow
 
@@ -261,7 +266,13 @@ pnpm --filter www.chrisvogt.me build
 pnpm --filter www.chronogrove.com build
 ```
 
-The build outputs will be in `/www.chrisvogt.me/public` and `/www.chronogrove.com/public` respectively.
+**Next.js reference app** (optional):
+
+```bash
+pnpm --filter chronogrove-next build
+```
+
+The Gatsby build outputs will be in `/www.chrisvogt.me/public` and `/www.chronogrove.com/public` respectively. The Next example writes to `examples/chronogrove-next/.next` (gitignored).
 
 ### Testing Production Build
 
@@ -283,6 +294,8 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the pull request process, PR title 
 
 ## 📚 Documentation
 
+- **[`@chronogrove/ui`](packages/ui/README.md)**: Shared Theme UI layer, color-mode helpers, Gatsby helpers (`@chronogrove/ui/gatsby`), and **Next.js App Router** helpers (`@chronogrove/ui/next`)
+- **[Next.js example](examples/chronogrove-next/README.md)**: Minimal App Router app consuming `@chronogrove/ui/next` (private workspace package `chronogrove-next`)
 - **[Theme Documentation](theme/README.md)**: Detailed theme configuration and customization
 - **[Demo Site Documentation](www.chronogrove.com/README.md)**: Demo site setup and usage
 - **[Widget Documentation](theme/src/components/widgets/)**: Individual widget documentation

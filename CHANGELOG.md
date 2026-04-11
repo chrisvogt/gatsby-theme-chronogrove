@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.80.0
+
+### `@chronogrove/ui` — Next.js App Router helpers, Color Bends export, and test hardening
+
+- **New subpath** [`@chronogrove/ui/next`](packages/ui/src/next/index.js): **`ChronogroveNextRootLayoutHead`**, **`ChronogroveNextEmotionRegistry`**, **`ChronogroveNextAppShell`**, **`ChronogroveNextThemeUiColorModeRouteSync`** — shared wiring for Emotion SSR, Theme UI color-mode head scripts, optional three.js animated background (`ChronogroveAnimatedPageBackground`), document surface sync, and client route reconcile (peer **`next`** optional for non-Next consumers).
+- **New subpath** [`@chronogrove/ui/color-bends`](packages/ui/src/animated-page-background/ColorBends.js): direct export of the **Color Bends** WebGL background primitive (also composed by `ChronogroveAnimatedPageBackground`).
+- **Theme**: thin re-export [`theme/src/components/home-backgrounds/color-bends.js`](theme/src/components/home-backgrounds/color-bends.js) → `@chronogrove/ui/color-bends` for backwards-compatible `home-backgrounds` imports.
+- **Tests / Jest**: `theme` color-toggle spec loads the shim with **`require()` after `jest.mock('theme-ui')`** so `@chronogrove/ui` sees the mocked `useColorMode`; **`@theme-toggles/react`** manual mock matches **`Expand`**’s boolean `toggle` callback; layout/widget snapshots refreshed.
+
+### Examples
+
+- **`examples/chronogrove-next`**: private **Next.js 15** App Router reference app (`transpilePackages`, `ChronogroveNext*` layout/providers). **Gitignored:** `.next`, `out`, `node_modules`, `.turbo`, `.vercel`, local env files, logs — only source and config are tracked (no build output).
+
+### Tooling
+
+- **Catalog**: Next.js and **`eslint-config-next`** remain on the **15.x** line via [`pnpm-workspace.yaml`](pnpm-workspace.yaml) (`catalog:`); lockfile resolves current 15.x patches. Upgrade to **Next 16** is a separate, intentional migration.
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.80.0**, exports `./next`, `./color-bends`), `packages/ui/src/next/**`
+- `theme/package.json` (version **0.80.0**), `theme/src/components/home-backgrounds/color-bends.js`, `theme/src/components/color-toggle.spec.js`, `theme/__mocks__/theme-toggles-react-mock.js`, snapshots
+- `examples/chronogrove-next/**`, `examples/chronogrove-next/.gitignore`
+- `README.md`, `packages/ui/README.md`, `examples/chronogrove-next/README.md`
+
+---
+
 ## 0.79.0
 
 ### `@chronogrove/ui` — ESM metadata, packaging, and imports
