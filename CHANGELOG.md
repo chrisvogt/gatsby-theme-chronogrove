@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.77.0
+
+### `@chronogrove/ui/gatsby` — Gatsby wiring helpers (Issue #565)
+
+- **New subpath** [`@chronogrove/ui/gatsby`](packages/ui/src/gatsby/): **`buildThemeUiColorModeHeadComponents({ theme })`** (Theme UI no-flash script, HTML background script, fallback CSS from `resolveChronogroveSurfaceColors`), **`onPreRenderHTMLSortThemeUiColorModeFirst`** (Gatsby `onPreRenderHTML` head ordering for `CHRONOGROVE_COLOR_MODE_HEAD_PRIORITY_KEYS`), **`onRouteUpdateThemeUiColorMode`** (browser route reconciliation + `RECONCILE_COLOR_MODE_EVENT`), and re-export of **`RECONCILE_COLOR_MODE_EVENT`**.
+- **Theme integration**: `gatsby-theme-chronogrove` **`gatsby-ssr.js`** / **`gatsby-browser.js`** consume these helpers instead of inlining color-mode wiring; **`onRouteUpdateChronogroveNavigation`** is exported for sites that compose their own `onRouteUpdate` with `@chronogrove/ui/gatsby`.
+
+### Files changed
+
+- `packages/ui/package.json` (export `./gatsby`, version **0.77.0**)
+- `packages/ui/src/gatsby/**`, `packages/ui/src/gatsby/index.spec.js`
+- `theme/package.json` (version **0.77.0**)
+- `theme/gatsby-ssr.js`, `theme/gatsby-browser.js`, `theme/gatsby-browser.spec.js`
+- `packages/ui/jest.config.cjs`
+
+---
+
 ## 0.76.0
 
 ### 📦 `@chronogrove/ui` — shared Theme UI layer

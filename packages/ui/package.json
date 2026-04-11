@@ -1,6 +1,6 @@
 {
   "name": "@chronogrove/ui",
-  "version": "0.76.0",
+  "version": "0.77.0",
   "description": "Chronogrove Theme UI theme, color mode helpers, and shared UI primitives",
   "license": "MIT",
   "repository": {
@@ -45,6 +45,10 @@
     "./is-dark-mode": {
       "import": "./src/helpers/isDarkMode.js",
       "default": "./src/helpers/isDarkMode.js"
+    },
+    "./gatsby": {
+      "import": "./src/gatsby/index.js",
+      "default": "./src/gatsby/index.js"
     }
   },
   "scripts": {
