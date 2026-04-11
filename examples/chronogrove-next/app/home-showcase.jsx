@@ -580,7 +580,8 @@ export default function HomeShowcase() {
                               placeholder={<LazyPlaceholder />}
                               useInViewOptions={{
                                 initialInView: false,
-                                rootMargin: '0px 0px -32% 0px',
+                                // px only: some test env IO implementations reject % in rootMargin (JSDOM / strict parsers).
+                                rootMargin: '0px 0px -240px 0px',
                                 threshold: 0
                               }}
                             >

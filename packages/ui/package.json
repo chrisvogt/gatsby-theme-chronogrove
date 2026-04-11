@@ -90,6 +90,10 @@
       "import": "./src/animated-page-background/index.js",
       "default": "./src/animated-page-background/index.js"
     },
+    "./color-bends": {
+      "import": "./src/animated-page-background/ColorBends.js",
+      "default": "./src/animated-page-background/ColorBends.js"
+    },
     "./action-card-layout": {
       "import": "./src/action-card-layout.js",
       "default": "./src/action-card-layout.js"

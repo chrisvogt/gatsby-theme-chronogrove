@@ -1,26 +1,20 @@
-// TEMPORARY MOCK: This is a bandaid to unblock tests until we resolve node_modules resolution issues with Jest.
-// The real @theme-toggles/react Expand component is not found by Jest due to monorepo module resolution quirks.
-// This mock should be removed once the underlying issue is fixed.
+// Stand-in for @theme-toggles/react in theme Jest (mapper). Matches real Expand click behavior: `toggle(!l)` with a boolean.
 import React from 'react'
 
-export function Expand(props) {
-  // Support both prop shapes
-  const { toggled, toggle, className, checked, onChange, id, attributes, size, ...rest } = props
-
-  // Prefer aria-label from attributes, fallback to undefined
-  const ariaLabel = attributes?.['aria-label']
-
+export function Expand({ toggled, toggle, className, ...rest }) {
+  const l = Boolean(toggled)
   return (
     <button
       type='button'
       data-testid='dark-mode-toggle'
-      aria-pressed={toggled ?? checked}
-      aria-label={ariaLabel}
+      aria-pressed={l}
       className={className}
-      id={id}
-      style={size ? { width: size, height: size } : undefined}
-      onClick={toggle || onChange}
       {...rest}
+      onClick={() => {
+        if (typeof toggle === 'function') {
+          toggle(!l)
+        }
+      }}
     >
       Mock Expand
     </button>

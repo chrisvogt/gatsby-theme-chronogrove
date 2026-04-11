@@ -1,3 +1,4 @@
+import React from 'react'
 import { Box } from '@theme-ui/components'
 
 const Button = ({ variant = 'primary', ...props }) => (

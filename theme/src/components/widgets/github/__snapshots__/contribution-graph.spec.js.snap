@@ -11,7 +11,7 @@ exports[`ContributionGraph Component matches the empty state snapshot 1`] = `
       Contribution Graph
     </h3>
     <div
-      class="css-1359vi5"
+      class="css-1ptykou"
     >
       <p
         class="css-1qwovgy"
@@ -1133,7 +1133,7 @@ exports[`ContributionGraph Component matches the loading state snapshot 1`] = `
       Contribution Graph
     </h3>
     <div
-      class="css-1359vi5"
+      class="css-1ptykou"
     >
       <p
         class="css-1qwovgy"
@@ -2255,7 +2255,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
       Contribution Graph
     </h3>
     <div
-      class="css-1359vi5"
+      class="css-1ptykou"
     >
       <p
         class="css-nfwjx8"
