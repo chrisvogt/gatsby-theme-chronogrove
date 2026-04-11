@@ -1,7 +1,7 @@
 import React from 'react'
 import { useColorMode } from 'theme-ui'
 import { Expand } from '@theme-toggles/react'
-import isDarkMode from '@chronogrove/ui/is-dark-mode'
+import isDarkMode from './helpers/isDarkMode.js'
 
 export default function ColorToggle() {
   const [colorMode, setColorMode] = useColorMode()

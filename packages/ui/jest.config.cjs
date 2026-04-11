@@ -19,7 +19,6 @@ module.exports = {
     'src/theme.js'
   ],
   moduleNameMapper: {
-    '^@chronogrove/ui/is-dark-mode$': '<rootDir>/src/helpers/isDarkMode.js',
     '^@theme-toggles/react$': '<rootDir>/test-utils/mock-theme-toggles-react.js'
   },
   coverageThreshold: {

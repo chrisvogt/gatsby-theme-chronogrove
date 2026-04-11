@@ -12,6 +12,8 @@ pnpm add @chronogrove/ui
 
 Use **`pnpm publish`** for releases so `workspace:` dependencies in dependents are rewritten; see [pnpm workspaces — publishing](https://pnpm.io/workspaces#publishing-workspace-packages).
 
+**Shared dependencies with `gatsby-theme-chronogrove`:** both packages depend on Theme UI, Emotion, and related libraries, with versions driven by the root [pnpm catalog](../../pnpm-workspace.yaml). When you bump those catalog entries, update **`packages/ui`** and **`theme`** in the **same change** so the theme and `@chronogrove/ui` stay aligned and you avoid duplicate or mismatched installs.
+
 ## Subpath exports
 
 Prefer deep imports so bundles stay lean:

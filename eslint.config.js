@@ -18,9 +18,27 @@ module.exports = [
     ]
   },
   {
-    files: ['theme/**/*.js', 'www.chrisvogt.me/**/*.js']
+    files: ['eslint.config.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'commonjs',
+      globals: {
+        ...globals.node
+      }
+    }
   },
   {
+    files: ['scripts/**/*.js', 'scripts/**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node
+      }
+    }
+  },
+  {
+    files: ['theme/**/*.js', 'www.chrisvogt.me/**/*.js', 'www.chronogrove.com/**/*.js', 'packages/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -44,6 +62,7 @@ module.exports = [
   },
   js.configs.recommended,
   {
+    files: ['theme/**/*.js', 'www.chrisvogt.me/**/*.js', 'www.chronogrove.com/**/*.js', 'packages/**/*.js'],
     plugins: {
       react,
       'jsx-a11y': jsxA11Y,
