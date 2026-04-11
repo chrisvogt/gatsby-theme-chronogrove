@@ -3,97 +3,223 @@
 import { useState } from 'react'
 import { Box, Card, Container, Flex, Grid, Heading, Text, Badge, Link } from '@theme-ui/components'
 import { useColorMode } from 'theme-ui'
+import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders'
+import 'react-placeholder/lib/reactPlaceholder.css'
 
 import { SkipNavLink, SkipNavContent } from '@chronogrove/ui/skip-nav'
-import PageHeader from '@chronogrove/ui/page-header'
 import Button from '@chronogrove/ui/button'
 import ActionButton from '@chronogrove/ui/action-button'
 import PaginationButton from '@chronogrove/ui/pagination-button'
 import ColorToggle from '@chronogrove/ui/color-toggle'
 import LazyLoad from '@chronogrove/ui/lazy-load'
-import { actionCardPinnedLayoutSx } from '@chronogrove/ui/action-card-layout'
 
-/** Same stack as GitHub pinned cards: `cards.actionCard` + pinned layout (see `pinned-item-card.js`). */
-const demoActionCardSx = { ...actionCardPinnedLayoutSx, p: [3, 4] }
+/**
+ * Docs-style preview surface (like shadcn / Radix examples): one bordered region per section,
+ * not a stack of glass cards.
+ */
+const previewShellSx = {
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'panel-divider',
+  borderRadius: 'default',
+  bg: 'tableBackground',
+  overflow: 'hidden'
+}
+
+const previewChromeSx = {
+  px: 3,
+  py: '10px',
+  borderBottom: '1px solid',
+  borderColor: 'panel-divider',
+  bg: 'tableBackground'
+}
+
+const previewDividerSx = {
+  border: 0,
+  borderTopWidth: '1px',
+  borderTopStyle: 'solid',
+  borderColor: 'panel-divider',
+  my: 0
+}
+
+/** Subheading above each demo group (sentence case — not theme `text.title`). */
+const demoLabelSx = {
+  fontSize: 2,
+  fontWeight: 'bold',
+  fontFamily: 'heading',
+  letterSpacing: 'normal',
+  color: 'text',
+  mb: 2,
+  display: 'block'
+}
+
+/** Calmer hover for the one actionCard demo we keep. */
+const showcaseActionCardSx = {
+  ...previewShellSx,
+  p: [3, 4],
+  bg: 'panel-background',
+  backdropFilter: 'blur(12px) saturate(150%)',
+  WebkitBackdropFilter: 'blur(12px) saturate(150%)',
+  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+  '&:hover, &:focus': {
+    transform: 'none',
+    boxShadow: 'md'
+  }
+}
+
+const homeGridColumns = [
+  null,
+  null,
+  'minmax(200px, 0.375fr) minmax(0, 1.625fr)',
+  'minmax(200px, 0.4fr) minmax(0, 1.6fr)'
+]
+
+const homeMainShellSx = {
+  position: 'relative',
+  borderTopRightRadius: '3em',
+  borderTopLeftRadius: '.5em',
+  px: [3, 4],
+  pt: [2, 3],
+  pb: [4, 5]
+}
+
+const widgetHeadingSx = {
+  fontSize: [4, 5],
+  display: 'flex',
+  alignItems: 'baseline',
+  m: 0,
+  py: 0,
+  lineHeight: 1,
+  color: 'text',
+  textTransform: 'none',
+  letterSpacing: 'normal',
+  fontFamily: 'heading'
+}
 
 const navLinkSx = {
   display: 'block',
-  py: 1,
+  py: 2,
+  px: 2,
+  borderRadius: '6px',
   color: 'textMuted',
   textDecoration: 'none',
   fontSize: 1,
-  borderLeft: '2px solid transparent',
-  pl: 2,
-  ml: -2,
-  transition: 'color 0.15s ease, border-color 0.15s ease',
-  '&:hover': {
-    color: 'primary',
-    borderLeftColor: 'primary'
+  letterSpacing: '0.02em',
+  transition: 'background-color 0.2s ease, color 0.2s ease',
+  '&:hover, &:focus': {
+    color: 'text',
+    bg: 'tableBackground',
+    outline: 'none'
   }
+}
+
+const sectionNavLinkSx = {
+  ...navLinkSx,
+  display: 'inline-block',
+  py: 1,
+  mr: 2,
+  mb: 1
 }
 
 function Section({ id, title, description, children }) {
   return (
     <Box id={id} as='section' sx={{ mb: [4, 5], scrollMarginTop: '5rem' }}>
-      <Heading as='h2' variant='text.title' sx={{ mb: 2 }}>
+      <Heading as='h2' sx={{ ...widgetHeadingSx, mb: description ? 2 : 3 }}>
         {title}
       </Heading>
       {description ? (
-        <Text sx={{ color: 'textMuted', maxWidth: '48rem', mb: 3, fontSize: [2, 3], lineHeight: 1.6 }}>
+        <Text sx={{ color: 'textMuted', maxWidth: '44rem', mb: 0, fontSize: [2, 3], lineHeight: 1.65 }}>
           {description}
         </Text>
       ) : null}
+      <Box sx={{ mt: description ? [2, 3] : 0, display: 'flex', flexDirection: 'column', gap: [3] }}>{children}</Box>
+    </Box>
+  )
+}
+
+/** Preview container + optional top chrome bar. */
+function DemoPreview({ title: previewTitle = 'Preview', children }) {
+  return (
+    <Box sx={previewShellSx}>
+      <Box sx={previewChromeSx}>
+        <Text sx={{ fontSize: 0, fontFamily: 'monospace', color: 'textMuted', m: 0 }}>{previewTitle}</Text>
+      </Box>
       {children}
     </Box>
   )
 }
 
-/** Intentionally not a Card — dashed “skeleton” like widgets use before content mounts. */
-function LazyPlaceholder() {
+function DemoBlock({ label, children }) {
   return (
-    <Box
-      sx={{
-        minHeight: '200px',
-        borderRadius: 'card',
-        border: '1px dashed',
-        borderColor: 'panel-divider',
-        bg: 'tableBackground',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        px: 3,
-        textAlign: 'center'
-      }}
-    >
-      <Text sx={{ color: 'textMuted', fontSize: 2 }}>
-        Placeholder — subtree loads when this region enters the viewport
-      </Text>
+    <Box sx={{ p: [2, 3] }}>
+      {label ? <Text sx={demoLabelSx}>{label}</Text> : null}
+      {children}
     </Box>
   )
 }
 
-function LazyLoadedPanel() {
+/**
+ * Skeleton for the lazy demo — same building blocks as theme widgets (react-placeholder + show-loading-animation).
+ * The GitHub widget’s contribution graph uses a plain min-height box; Steam game cards and pinned repo cards use
+ * RectShape/TextBlock like this.
+ */
+function LazyPlaceholder() {
+  const [colorMode] = useColorMode()
+  const placeholderColor = colorMode === 'dark' ? '#3a3a4a' : '#efefef'
+
   return (
-    <Card variant='actionCard' sx={demoActionCardSx}>
-      <Heading as='h3' sx={{ fontSize: 3, mb: 2, fontFamily: 'heading' }}>
-        Deferred content
-      </Heading>
-      <Text sx={{ color: 'textMuted', lineHeight: 1.65 }}>
-        Widgets such as the GitHub contribution graph use{' '}
+    <Box
+      role='status'
+      aria-live='polite'
+      aria-busy='true'
+      sx={{
+        p: [3, 4],
+        borderLeft: '4px solid',
+        borderColor: 'panel-divider',
+        bg: 'tableBackground'
+      }}
+    >
+      <div className='show-loading-animation'>
+        <Flex sx={{ alignItems: 'center', gap: 2, mb: 2, flexWrap: 'wrap' }}>
+          <RectShape color={placeholderColor} style={{ width: 56, height: 22, borderRadius: 6, flexShrink: 0 }} />
+          <Box sx={{ flex: '1 1 12rem', minWidth: 0, maxWidth: '100%' }}>
+            <TextBlock rows={1} color={placeholderColor} />
+          </Box>
+        </Flex>
+        <TextBlock rows={2} color={placeholderColor} />
+      </div>
+    </Box>
+  )
+}
+
+function LazyLoadedContent() {
+  return (
+    <Box
+      sx={{
+        p: [3, 4],
+        borderLeft: '4px solid',
+        borderColor: 'primary',
+        bg: 'tableBackground'
+      }}
+    >
+      <Flex sx={{ alignItems: 'center', gap: 2, mb: 2, flexWrap: 'wrap' }}>
+        <Badge variant='primary'>Loaded</Badge>
+        <Heading as='h3' sx={{ fontSize: [2, 3], fontFamily: 'heading', color: 'text', m: 0 }}>
+          Deferred content
+        </Heading>
+      </Flex>
+      <Text sx={{ color: 'textMuted', lineHeight: 1.65, m: 0, fontSize: [2, 3] }}>
+        Same pattern as{' '}
         <Text as='span' sx={{ fontFamily: 'monospace', fontSize: 1 }}>
           LazyLoad
         </Text>{' '}
-        with a sized placeholder (
+        in{' '}
         <Text as='span' sx={{ fontFamily: 'monospace', fontSize: 1 }}>
-          minHeight: 200px
-        </Text>
-        ) so the shell is visible and layout stays stable—same pattern as{' '}
-        <Text as='span' sx={{ fontFamily: 'monospace', fontSize: 1 }}>
-          examples/…/github-widget
+          theme/…/github-widget
         </Text>
         .
       </Text>
-    </Card>
+    </Box>
   )
 }
 
@@ -105,22 +231,22 @@ export default function HomeShowcase() {
     <>
       <SkipNavLink />
       <SkipNavContent as='main'>
-        <Card
-          variant='actionCard'
+        <Box
+          as='header'
           sx={{
-            borderRadius: 0,
-            borderLeft: 'none',
-            borderRight: 'none',
-            borderTop: 'none',
             borderBottom: '1px solid',
             borderColor: 'panel-divider',
-            backdropFilter: 'blur(12px) saturate(150%)'
+            bg: 'panel-background',
+            backdropFilter: 'blur(14px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(160%)',
+            position: 'sticky',
+            top: 0,
+            zIndex: 2
           }}
         >
           <Container>
             <Flex
               sx={{
-                py: 3,
                 flexDirection: ['column', 'row'],
                 alignItems: ['flex-start', 'center'],
                 justifyContent: 'space-between',
@@ -128,310 +254,373 @@ export default function HomeShowcase() {
               }}
             >
               <Box>
-                <Text
+                <Heading
+                  as='p'
                   sx={{
                     fontFamily: 'heading',
                     fontWeight: 'bold',
-                    fontSize: [2, 3],
+                    fontSize: [3, 4],
                     color: 'text',
-                    letterSpacing: '0.05em'
+                    lineHeight: 1.25,
+                    m: 0,
+                    mb: 1
                   }}
                 >
                   Chronogrove UI
-                </Text>
-                <Text sx={{ color: 'textMuted', fontSize: 1, mt: 1 }}>
-                  Next.js reference · mode{' '}
+                </Heading>
+                <Text sx={{ color: 'textMuted', fontSize: [2, 3], lineHeight: 1.6, maxWidth: '36rem', m: 0 }}>
+                  Next.js App Router reference · color mode{' '}
                   <Text as='span' sx={{ fontFamily: 'monospace', color: 'primary' }}>
                     {colorMode === 'dark' ? 'dark' : 'default'}
                   </Text>
                 </Text>
               </Box>
-              <Flex sx={{ alignItems: 'center', gap: 2 }}>
+              <Flex sx={{ alignItems: 'center', gap: 2, flexShrink: 0 }}>
                 <Badge variant='outline'>@chronogrove/ui</Badge>
                 <ColorToggle />
               </Flex>
             </Flex>
           </Container>
-        </Card>
+        </Box>
 
-        <Container sx={{ py: [3, 4] }}>
-          <Flex
-            sx={{
-              display: ['flex', null, null, 'none'],
-              flexWrap: 'wrap',
-              gap: 2,
-              mb: 3,
-              pb: 3,
-              borderBottom: '1px solid',
-              borderColor: 'panel-divider'
-            }}
-            as='nav'
-            aria-label='Section navigation'
-          >
-            {['Overview', 'Buttons', 'Tokens', 'Lazy load'].map((label, i) => {
-              const href = ['#overview', '#buttons', '#tokens', '#lazy'][i]
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  sx={{ ...navLinkSx, display: 'inline-block', borderLeft: 'none', pl: 0, ml: 0 }}
-                >
-                  {label}
-                </Link>
-              )
-            })}
-          </Flex>
-          <Grid columns={[1, null, null, 'minmax(200px, 0.36fr) minmax(0, 1.64fr)']} gap={[4, null, null, 4]}>
-            <Box
-              as='aside'
+        <Box sx={{ minHeight: '500px', pt: 3, px: 0 }}>
+          <Container>
+            <Flex
               sx={{
-                display: ['none', null, null, 'block'],
-                position: 'sticky',
-                top: '1rem',
-                alignSelf: 'start'
+                display: ['flex', null, null, 'none'],
+                flexWrap: 'wrap',
+                gap: 2,
+                mb: [4, null],
+                pb: 3,
+                borderBottom: '1px solid',
+                borderColor: 'panel-divider'
               }}
+              as='nav'
+              aria-label='Section navigation'
             >
-              <Text variant='text.title' sx={{ mb: 2, display: 'block' }}>
-                On this page
-              </Text>
-              <Text as='nav' aria-label='Section navigation' sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                <Link href='#overview' sx={navLinkSx}>
-                  Overview
-                </Link>
-                <Link href='#buttons' sx={navLinkSx}>
-                  Buttons
-                </Link>
-                <Link href='#tokens' sx={navLinkSx}>
-                  Tokens & links
-                </Link>
-                <Link href='#lazy' sx={navLinkSx}>
-                  Lazy load
-                </Link>
-              </Text>
-              <Text sx={{ color: 'textMuted', fontSize: 0, mt: 3, lineHeight: 1.5 }}>
-                Skip link targets this main region (
-                <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                  SkipNavContent
+              {['Overview', 'Buttons', 'Tokens', 'Lazy load'].map((label, i) => {
+                const href = ['#overview', '#buttons', '#tokens', '#lazy'][i]
+                return (
+                  <Link key={href} href={href} sx={sectionNavLinkSx}>
+                    {label}
+                  </Link>
+                )
+              })}
+            </Flex>
+
+            <Grid columns={homeGridColumns} gap={[null, 4]}>
+              <Box
+                as='aside'
+                sx={{ mb: [4, null], display: ['none', null, 'block'], position: 'sticky', top: '1.5em' }}
+              >
+                <Text sx={{ fontSize: [2, 3], fontFamily: 'heading', fontWeight: 'bold', color: 'text', mb: 2 }}>
+                  On this page
                 </Text>
-                ).
-              </Text>
-            </Box>
-
-            <Card
-              variant='actionCard'
-              sx={{
-                position: 'relative',
-                borderTopRightRadius: '3em',
-                borderTopLeftRadius: '.5em',
-                borderBottom: 'none',
-                px: [3, 4],
-                pt: [3, 4],
-                pb: [4, 5],
-                border: '1px solid',
-                borderColor: 'panel-divider',
-                boxShadow: 'default',
-                backdropFilter: 'blur(12px) saturate(150%)'
-              }}
-            >
-              <Box sx={{ maxWidth: '1200px' }}>
-                <Box id='overview' sx={{ mb: [4, 5], scrollMarginTop: '5rem' }}>
-                  <PageHeader>Starter & reference</PageHeader>
-                  <Heading
-                    as='p'
-                    sx={{
-                      fontSize: ['calc(1.15rem + 0.6vw)', null, 'calc(1.25rem + 0.5vw)'],
-                      fontWeight: 'body',
-                      fontFamily: 'body',
-                      color: 'textMuted',
-                      lineHeight: 1.65,
-                      maxWidth: '42rem',
-                      mb: 0
-                    }}
-                  >
-                    Uses Theme UI{' '}
-                    <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                      Card variant=&quot;actionCard&quot;
-                    </Text>{' '}
-                    (theme{' '}
-                    <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                      cards.actionCard
-                    </Text>
-                    , same layout sx as GitHub pinned cards) and{' '}
-                    <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                      ChronogroveAnimatedPageBackground
-                    </Text>{' '}
-                    like the Gatsby home stack. Wire Emotion SSR and color-mode scripts per{' '}
-                    <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                      packages/ui/README.md
-                    </Text>
-                    .
-                  </Heading>
+                <Box as='nav' aria-label='Section navigation' sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                  <Link href='#overview' sx={navLinkSx}>
+                    Overview
+                  </Link>
+                  <Link href='#buttons' sx={navLinkSx}>
+                    Buttons
+                  </Link>
+                  <Link href='#tokens' sx={navLinkSx}>
+                    Tokens & links
+                  </Link>
+                  <Link href='#lazy' sx={navLinkSx}>
+                    Lazy load
+                  </Link>
                 </Box>
-
-                <Section
-                  id='buttons'
-                  title='Buttons'
-                  description='Primitives used across the theme: solid Theme UI buttons for forms, ActionButton for “show more” / outline actions, PaginationButton for paging controls (same defaults as theme Pagination).'
-                >
-                  <Grid columns={[1, null, 2]} gap={4}>
-                    <Card variant='actionCard' sx={demoActionCardSx}>
-                      <Heading as='h3' sx={{ fontSize: 2, mb: 3, fontFamily: 'heading' }}>
-                        Button
-                      </Heading>
-                      <Text sx={{ color: 'textMuted', mb: 3, fontSize: 1, lineHeight: 1.6 }}>
-                        Primary and secondary map to{' '}
-                        <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                          buttons.primary
-                        </Text>{' '}
-                        /{' '}
-                        <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                          buttons.secondary
-                        </Text>{' '}
-                        (see theme button tests).
-                      </Text>
-                      <Flex sx={{ flexWrap: 'wrap', gap: 2 }}>
-                        <Button type='button'>Primary</Button>
-                        <Button type='button' variant='secondary'>
-                          Secondary
-                        </Button>
-                      </Flex>
-                    </Card>
-                    <Card variant='actionCard' sx={demoActionCardSx}>
-                      <Heading as='h3' sx={{ fontSize: 2, mb: 3, fontFamily: 'heading' }}>
-                        ActionButton
-                      </Heading>
-                      <Text sx={{ color: 'textMuted', mb: 3, fontSize: 1, lineHeight: 1.6 }}>
-                        Widgets use primary + large for expand actions; secondary for alternate emphasis.
-                      </Text>
-                      <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
-                        <ActionButton type='button' size='large'>
-                          Show more
-                        </ActionButton>
-                        <ActionButton type='button' variant='secondary' size='small'>
-                          Secondary
-                        </ActionButton>
-                        <ActionButton
-                          href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
-                          target='_blank'
-                          rel='noreferrer'
-                        >
-                          Repo
-                        </ActionButton>
-                      </Flex>
-                    </Card>
-                  </Grid>
-                  <Card variant='actionCard' sx={{ ...demoActionCardSx, mt: 4 }}>
-                    <Heading as='h3' sx={{ fontSize: 2, mb: 3, fontFamily: 'heading' }}>
-                      PaginationButton
-                    </Heading>
-                    <Text sx={{ color: 'textMuted', mb: 3, fontSize: 1, lineHeight: 1.6 }}>
-                      Matches{' '}
-                      <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                        theme/src/components/pagination.js
-                      </Text>{' '}
-                      (primary / medium by default).
-                    </Text>
-                    <Flex sx={{ alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
-                      <PaginationButton
-                        type='button'
-                        aria-label='Previous page'
-                        disabled={page <= 1}
-                        onClick={() => setPage(p => Math.max(1, p - 1))}
-                      >
-                        ‹
-                      </PaginationButton>
-                      {[1, 2, 3, 4, 5].map(n => (
-                        <PaginationButton
-                          key={n}
-                          type='button'
-                          active={page === n}
-                          onClick={() => setPage(n)}
-                          aria-current={page === n ? 'page' : undefined}
-                          aria-label={`Page ${n}`}
-                        >
-                          {n}
-                        </PaginationButton>
-                      ))}
-                      <PaginationButton
-                        type='button'
-                        aria-label='Next page'
-                        disabled={page >= 5}
-                        onClick={() => setPage(p => Math.min(5, p + 1))}
-                      >
-                        ›
-                      </PaginationButton>
-                      <Text sx={{ color: 'textMuted', ml: 2 }}>Page {page}</Text>
-                    </Flex>
-                  </Card>
-                </Section>
-
-                <Section
-                  id='tokens'
-                  title='Tokens & typography'
-                  description='Title style, badges, and widget CTA links as on the live site.'
-                >
-                  <Grid columns={[1, 2, 3]} gap={3}>
-                    <Card variant='actionCard' sx={demoActionCardSx}>
-                      <Text variant='text.title' sx={{ display: 'block', mb: 2 }}>
-                        Section label
-                      </Text>
-                      <Text sx={{ color: 'textMuted', fontSize: 1 }}>variant=&quot;text.title&quot;</Text>
-                    </Card>
-                    <Card variant='actionCard' sx={demoActionCardSx}>
-                      <Badge variant='primary'>primary</Badge>
-                      <Badge variant='outline' sx={{ ml: 2 }}>
-                        outline
-                      </Badge>
-                      <Badge variant='metrics' sx={{ ml: 2 }}>
-                        metrics
-                      </Badge>
-                    </Card>
-                    <Card variant='actionCard' sx={demoActionCardSx}>
-                      <Link
-                        href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
-                        sx={{ variant: 'links.widgetCta' }}
-                      >
-                        Widget CTA link →
-                      </Link>
-                    </Card>
-                  </Grid>
-                </Section>
-
-                <Section
-                  id='lazy'
-                  title='Lazy load'
-                  description='Reserve height with a visible placeholder, then mount heavy UI when the region intersects the viewport (see GitHub widget).'
-                >
-                  <LazyLoad placeholder={<LazyPlaceholder />}>
-                    <LazyLoadedPanel />
-                  </LazyLoad>
-                </Section>
-
-                <Box
-                  as='footer'
-                  sx={{
-                    mt: 5,
-                    pt: 4,
-                    borderTop: '1px solid',
-                    borderColor: 'panel-divider',
-                    color: 'textMuted',
-                    fontSize: 1
-                  }}
-                >
-                  <Text>
-                    <Link href='https://github.com/chrisvogt/gatsby-theme-chronogrove' sx={{ color: 'primary' }}>
-                      gatsby-theme-chronogrove
-                    </Link>
-                    {' · '}
-                    <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                      packages/ui/README.md
-                    </Text>
+                <Text sx={{ color: 'textMuted', fontSize: 0, mt: 3, lineHeight: 1.6 }}>
+                  Skip link targets{' '}
+                  <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                    SkipNavContent
                   </Text>
+                  .
+                </Text>
+              </Box>
+
+              <Box>
+                <Box sx={homeMainShellSx}>
+                  <Box sx={{ maxWidth: '1200px' }}>
+                    <Box id='overview' sx={{ scrollMarginTop: '5rem', mb: [3, 4] }}>
+                      <Box sx={{ lineHeight: '2.5em', mb: [3, 4] }}>
+                        <Heading
+                          as='h1'
+                          sx={{
+                            mb: 0,
+                            pb: 0,
+                            fontSize: 'calc(1.5rem + 2vw)',
+                            fontFamily: 'heading',
+                            color: 'text',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          Starter & reference
+                        </Heading>
+                      </Box>
+                      <Text
+                        as='p'
+                        sx={{
+                          fontSize: [2, 3],
+                          fontWeight: 'body',
+                          fontFamily: 'body',
+                          color: 'textMuted',
+                          lineHeight: 1.65,
+                          maxWidth: '42rem',
+                          m: 0,
+                          mb: 0
+                        }}
+                      >
+                        Layout follows common component-doc patterns: one flat preview block per section (border + muted
+                        fill), not a wall of glass cards. Widget dashboards still use{' '}
+                        <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                          Card variant=&quot;actionCard&quot;
+                        </Text>{' '}
+                        — we show that once below. Main shell matches{' '}
+                        <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                          theme/src/templates/home.js
+                        </Text>
+                        ; background stack:{' '}
+                        <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                          ChronogroveAnimatedPageBackground
+                        </Text>
+                        . See{' '}
+                        <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                          packages/ui/README.md
+                        </Text>
+                        .
+                      </Text>
+                    </Box>
+
+                    <Section
+                      id='buttons'
+                      title='Buttons'
+                      description='Theme UI filled buttons, outline-style ActionButtons, and pagers — same pieces as the Gatsby theme.'
+                    >
+                      <DemoPreview>
+                        <DemoBlock label='Theme UI Button'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6 }}>
+                            Default uses{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              buttons.primary
+                            </Text>
+                            ;{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              variant=&quot;secondary&quot;
+                            </Text>{' '}
+                            is Theme UI’s second filled style (less emphasis than primary).
+                          </Text>
+                          <Flex sx={{ flexWrap: 'wrap', gap: 2 }}>
+                            <Button type='button'>Publish</Button>
+                            <Button type='button' variant='secondary'>
+                              Back
+                            </Button>
+                          </Flex>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='ActionButton'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6 }}>
+                            Outline / tinted controls for widgets —{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              variant=&quot;secondary&quot;
+                            </Text>{' '}
+                            uses a muted palette for alternate actions (not a separate component type).
+                          </Text>
+                          <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
+                            <ActionButton type='button' size='large'>
+                              Show more
+                            </ActionButton>
+                            <ActionButton type='button' variant='secondary' size='small'>
+                              Filter
+                            </ActionButton>
+                          </Flex>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='PaginationButton'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6 }}>
+                            Defaults match{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              theme/src/components/pagination.js
+                            </Text>
+                            .
+                          </Text>
+                          <Flex sx={{ alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
+                            <PaginationButton
+                              type='button'
+                              aria-label='Previous page'
+                              disabled={page <= 1}
+                              onClick={() => setPage(p => Math.max(1, p - 1))}
+                            >
+                              ‹
+                            </PaginationButton>
+                            {[1, 2, 3, 4, 5].map(n => (
+                              <PaginationButton
+                                key={n}
+                                type='button'
+                                active={page === n}
+                                onClick={() => setPage(n)}
+                                aria-current={page === n ? 'page' : undefined}
+                                aria-label={`Page ${n}`}
+                              >
+                                {n}
+                              </PaginationButton>
+                            ))}
+                            <PaginationButton
+                              type='button'
+                              aria-label='Next page'
+                              disabled={page >= 5}
+                              onClick={() => setPage(p => Math.min(5, p + 1))}
+                            >
+                              ›
+                            </PaginationButton>
+                            <Text sx={{ color: 'textMuted', ml: 2 }}>Page {page}</Text>
+                          </Flex>
+                        </DemoBlock>
+                      </DemoPreview>
+
+                      <Box sx={{ mt: 3 }}>
+                        <Text sx={{ ...demoLabelSx, mb: 2 }}>Frosted widget card</Text>
+                        <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, maxWidth: '40rem', lineHeight: 1.6 }}>
+                          Pinned repos and widget shells use the frosted card — shown once so the preview above can stay
+                          light.
+                        </Text>
+                        <Card variant='actionCard' sx={showcaseActionCardSx}>
+                          <Text sx={{ fontFamily: 'heading', fontSize: 2, color: 'text', mb: 2 }}>
+                            Example action card
+                          </Text>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.6, m: 0 }}>
+                            Same variant as GitHub pinned items — glass border, primary accent edge.
+                          </Text>
+                        </Card>
+                      </Box>
+                    </Section>
+
+                    <Section
+                      id='tokens'
+                      title='Tokens & typography'
+                      description='Badges, links, and the optional small-caps label token for dense UI.'
+                    >
+                      <DemoPreview title='Examples'>
+                        <DemoBlock label='Headings'>
+                          <Heading as='h3' sx={{ fontSize: [4, 5], fontFamily: 'heading', color: 'text', m: 0, mb: 2 }}>
+                            Widget section title
+                          </Heading>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, m: 0 }}>
+                            Matches{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              widget-header.js
+                            </Text>{' '}
+                            (
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              fontSize: [4, 5]
+                            </Text>
+                            ).
+                          </Text>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='Dense label token'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6 }}>
+                            <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                              theme.text.title
+                            </Text>{' '}
+                            — micro-label style (avoid for page headings):
+                          </Text>
+                          <Text variant='text.title' sx={{ display: 'inline-block', fontSize: 1, color: 'textMuted' }}>
+                            theme.text.title
+                          </Text>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='Badges'>
+                          <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
+                            <Badge variant='primary'>primary</Badge>
+                            <Badge variant='outline'>outline</Badge>
+                            <Badge variant='metrics'>metrics</Badge>
+                          </Flex>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='Widget CTA'>
+                          <Link
+                            href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
+                            sx={{ variant: 'links.widgetCta' }}
+                          >
+                            Widget CTA link →
+                          </Link>
+                        </DemoBlock>
+                      </DemoPreview>
+                    </Section>
+
+                    <Section
+                      id='lazy'
+                      title='Lazy load'
+                      description='Placeholder until the block intersects the viewport (pinned repos use the same helper). Scroll the page to this section to load the subtree.'
+                    >
+                      <DemoPreview>
+                        <DemoBlock label='IntersectionObserver + placeholder'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, lineHeight: 1.65 }}>
+                            SSR is skeleton-only; after hydration the observer runs. The skeleton uses{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                              react-placeholder
+                            </Text>{' '}
+                            like pinned repos and Steam cards; the contribution graph in{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                              github-widget
+                            </Text>{' '}
+                            only reserves height (
+                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                              minHeight: 200px
+                            </Text>
+                            ). Negative bottom{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                              rootMargin
+                            </Text>{' '}
+                            reduces instant loads when the section barely peeks in.
+                          </Text>
+                          <Box sx={{ pt: 2 }}>
+                            <LazyLoad
+                              placeholder={<LazyPlaceholder />}
+                              useInViewOptions={{
+                                initialInView: false,
+                                rootMargin: '0px 0px -32% 0px',
+                                threshold: 0
+                              }}
+                            >
+                              <LazyLoadedContent />
+                            </LazyLoad>
+                          </Box>
+                        </DemoBlock>
+                      </DemoPreview>
+                    </Section>
+
+                    <Box
+                      as='footer'
+                      sx={{
+                        mt: 5,
+                        pt: 4,
+                        borderTop: '1px solid',
+                        borderColor: 'panel-divider',
+                        color: 'textMuted',
+                        fontSize: 1
+                      }}
+                    >
+                      <Text>
+                        <Link
+                          href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
+                          sx={{ variant: 'links.widgetCta' }}
+                        >
+                          gatsby-theme-chronogrove
+                        </Link>
+                        {' · '}
+                        <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                          packages/ui/README.md
+                        </Text>
+                      </Text>
+                    </Box>
+                  </Box>
                 </Box>
               </Box>
-            </Card>
-          </Grid>
-        </Container>
+            </Grid>
+          </Container>
+        </Box>
       </SkipNavContent>
     </>
   )

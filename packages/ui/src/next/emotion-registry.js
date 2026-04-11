@@ -6,10 +6,11 @@ import createCache from '@emotion/cache'
 import { useServerInsertedHTML } from 'next/navigation'
 
 /**
- * Emotion cache for App Router: streaming SSR via useServerInsertedHTML, key `css` to match Theme UI / Chronogrove.
+ * Emotion cache for Next.js App Router: streaming SSR via `useServerInsertedHTML`, key `css`
+ * to match Theme UI / Chronogrove.
  * @see https://nextjs.org/docs/app/building-your-application/styling/css-in-js
  */
-export default function EmotionRegistry({ children }) {
+export function ChronogroveNextEmotionRegistry({ children }) {
   const [cache] = React.useState(() => {
     const c = createCache({ key: 'css' })
     c.compat = true

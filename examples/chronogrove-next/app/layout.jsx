@@ -1,14 +1,7 @@
 import './globals.css'
 
-import {
-  chronogroveHeadTheme,
-  resolveChronogroveSurfaceColors,
-  buildThemeUiNoFlashInlineScript,
-  buildHtmlBackgroundInlineScript,
-  buildThemeUiColorModeFallbackCss
-} from '@chronogrove/ui/color-mode'
+import { ChronogroveNextEmotionRegistry, ChronogroveNextRootLayoutHead } from '@chronogrove/ui/next'
 
-import EmotionRegistry from './emotion-registry'
 import Providers from './providers'
 
 export const metadata = {
@@ -17,37 +10,15 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  const surface = resolveChronogroveSurfaceColors(chronogroveHeadTheme)
-  const colorModeScript = buildThemeUiNoFlashInlineScript()
-  const htmlBackgroundScript = buildHtmlBackgroundInlineScript({
-    defaultBackgroundHex: surface.defaultBackgroundHex,
-    darkBackgroundHex: surface.darkBackgroundHex
-  })
-  const colorModeFallbackCSS = buildThemeUiColorModeFallbackCss({
-    defaultBackgroundHex: surface.defaultBackgroundHex,
-    darkBackgroundHex: surface.darkBackgroundHex,
-    defaultTextHex: surface.defaultTextHex,
-    defaultTextMutedHex: surface.defaultTextMutedHex,
-    darkTextHex: surface.darkTextHex,
-    darkTextMutedHex: surface.darkTextMutedHex,
-    defaultPanelBackground: surface.defaultPanelBackground,
-    darkPanelBackground: surface.darkPanelBackground,
-    defaultPanelText: surface.defaultPanelText,
-    darkPanelText: surface.darkPanelText
-  })
-
   return (
     <html lang='en' suppressHydrationWarning>
       <head>
-        <meta name='emotion-insertion-point' content='' />
-        <script dangerouslySetInnerHTML={{ __html: colorModeScript }} />
-        <script dangerouslySetInnerHTML={{ __html: htmlBackgroundScript }} />
-        <style dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
+        <ChronogroveNextRootLayoutHead />
       </head>
       <body suppressHydrationWarning>
-        <EmotionRegistry>
+        <ChronogroveNextEmotionRegistry>
           <Providers>{children}</Providers>
-        </EmotionRegistry>
+        </ChronogroveNextEmotionRegistry>
       </body>
     </html>
   )

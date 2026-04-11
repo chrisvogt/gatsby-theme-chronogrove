@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import { reconcileThemeUiColorModeOnNavigation } from '@chronogrove/ui/color-mode'
+
+import { reconcileThemeUiColorModeOnNavigation } from '../color-mode/index.js'
 
 /**
  * Keeps Theme UI color mode aligned after Next.js **client-side navigations** (same role as Gatsby
@@ -11,7 +12,7 @@ import { reconcileThemeUiColorModeOnNavigation } from '@chronogrove/ui/color-mod
  * `localStorage` in a `useEffect` — an eager reconcile can re-read stale `localStorage` and force
  * the page back to the previous mode (e.g. stuck in dark).
  */
-export default function ThemeUiColorModeRouteSync() {
+export function ChronogroveNextThemeUiColorModeRouteSync() {
   const pathname = usePathname()
   const previousPathname = useRef(null)
 

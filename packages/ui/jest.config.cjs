@@ -8,7 +8,7 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest'
   },
   transformIgnorePatterns: ['node_modules/(?!theme-ui)'],
-  collectCoverageFrom: ['src/**/*.js', '!src/**/*.spec.js'],
+  collectCoverageFrom: ['src/**/*.js', '!src/**/*.spec.js', '!src/next/**'],
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
     '/node_modules/',

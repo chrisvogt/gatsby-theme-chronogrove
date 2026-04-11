@@ -1,6 +1,6 @@
 # Next.js reference — `@chronogrove/ui`
 
-Minimal **Next.js 15 App Router** app proving Emotion SSR (`useServerInsertedHTML` + `CacheProvider`), `ChronogroveThemeProvider`, Theme UI color-mode head scripts, and client-side navigation reconcile for Theme UI.
+Minimal **Next.js 15 App Router** app using **`@chronogrove/ui/next`** (`ChronogroveNextRootLayoutHead`, `ChronogroveNextEmotionRegistry`, `ChronogroveNextAppShell`) for Emotion SSR, Theme UI color-mode head scripts, three.js background, and client-side navigation reconcile.
 
 **Package name:** `chronogrove-next` (private workspace package).
 
@@ -26,12 +26,10 @@ pnpm build
 
 ## Layout of interest
 
-| File                                                                                 | Role                                                                                                               |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| [`app/layout.jsx`](./app/layout.jsx)                                                 | Server layout: `<head>` scripts/CSS; `suppressHydrationWarning` on `<html>`/`<body>` for Theme UI no-flash scripts |
-| [`app/emotion-registry.jsx`](./app/emotion-registry.jsx)                             | Client: Emotion cache `key: 'css'`, `useServerInsertedHTML`                                                        |
-| [`app/providers.jsx`](./app/providers.jsx)                                           | Client: `ChronogroveThemeProvider`                                                                                 |
-| [`app/theme-ui-color-mode-route-sync.jsx`](./app/theme-ui-color-mode-route-sync.jsx) | Client: `reconcileThemeUiColorModeOnNavigation` on pathname change                                                 |
-| [`app/globals.css`](./app/globals.css)                                               | `@import '@chronogrove/ui/color-toggle-styles'` (styles for `color-toggle`)                                        |
+| File                                       | Role                                                                                                                              |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| [`app/layout.jsx`](./app/layout.jsx)       | Server layout: `ChronogroveNextRootLayoutHead`, `ChronogroveNextEmotionRegistry`; `suppressHydrationWarning` on `<html>`/`<body>` |
+| [`app/providers.jsx`](./app/providers.jsx) | Client: `ChronogroveNextAppShell` (theme provider, three.js background, surface sync, route reconcile)                            |
+| [`app/globals.css`](./app/globals.css)     | `@import '@chronogrove/ui/color-toggle-styles'` (styles for `color-toggle`)                                                       |
 
 See [`@chronogrove/ui` README](../../packages/ui/README.md#nextjs-app-router) for integration notes.

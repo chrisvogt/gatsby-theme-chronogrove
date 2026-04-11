@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import LazyLoad from './lazy-load.js'
 
@@ -31,7 +31,7 @@ describe('LazyLoad', () => {
     expect(screen.queryByTestId('content')).not.toBeInTheDocument()
   })
 
-  it('renders the children when visible', () => {
+  it('renders the children when visible', async () => {
     mockInView = true
 
     render(
@@ -40,7 +40,9 @@ describe('LazyLoad', () => {
       </LazyLoad>
     )
 
-    expect(screen.getByTestId('content')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByTestId('content')).toBeInTheDocument()
+    })
   })
 
   it('renders the custom placeholder when provided', () => {
@@ -54,7 +56,7 @@ describe('LazyLoad', () => {
     expect(screen.queryByTestId('content')).not.toBeInTheDocument()
   })
 
-  it('does not re-render children if already visible', () => {
+  it('does not re-render children if already visible', async () => {
     mockInView = true
 
     const { rerender } = render(
@@ -63,7 +65,9 @@ describe('LazyLoad', () => {
       </LazyLoad>
     )
 
-    expect(screen.getByTestId('content')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByTestId('content')).toBeInTheDocument()
+    })
 
     mockInView = false
 

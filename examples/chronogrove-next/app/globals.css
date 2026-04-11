@@ -1,4 +1,14 @@
 /* Minimal base; Chronogrove global styles come from ChronogroveThemeProvider (Theme UI Global). */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -11,6 +21,9 @@ body {
  */
 body {
   background-color: var(--theme-ui-colors-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Color toggle: bundled by `@chronogrove/ui` (transitive `@theme-toggles/react`). */
