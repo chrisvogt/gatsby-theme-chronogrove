@@ -91,9 +91,13 @@ jobs:
 
             local NPM_NAME
             NPM_NAME=$(node -p "require('./${PKG_JSON}').name")
+            # GitHub Packages uses @OWNER/<single-segment-name>. For npm scoped names
+            # like @chronogrove/ui, "${NPM_NAME#@*/}" wrongly becomes just "ui" — use the
+            # full @scope/pkg string with "/" -> "-" (e.g. chronogrove-ui).
             local BASE_NAME
             if [[ "${NPM_NAME}" == @* ]]; then
-              BASE_NAME="${NPM_NAME#@*/}"
+              local REST="${NPM_NAME#@}"
+              BASE_NAME="${REST//\//-}"
             else
               BASE_NAME="${NPM_NAME}"
             fi
