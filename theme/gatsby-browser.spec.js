@@ -1,12 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import {
-  shouldUpdateScroll,
-  onRouteUpdate,
-  onRouteUpdateChronogroveNavigation,
-  wrapRootElement
-} from './gatsby-browser'
+import { shouldUpdateScroll, onRouteUpdate, wrapRootElement } from './gatsby-browser'
+import { onRouteUpdateChronogroveNavigation } from './src/helpers/on-route-update-chronogrove-navigation'
 
 jest.mock('@gatsbyjs/reach-router', () => ({
   ...jest.requireActual('@gatsbyjs/reach-router'),

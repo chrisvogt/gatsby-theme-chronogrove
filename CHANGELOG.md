@@ -13,11 +13,15 @@
 - **`gatsby-theme-chronogrove` Jest**: `transformIgnorePatterns` now **transpiles `@chronogrove/ui`** from `node_modules` (including `.pnpm` paths) so ESM in the workspace package stays compatible with Babel-Jest.
 - **Root ESLint**: Scoped React/browser rules to `theme/`, `www.chrisvogt.me/`, `www.chronogrove.com/`, and `packages/`; **Node globals** for `eslint.config.js` and `scripts/**` so root tooling still lints.
 
+### `gatsby-theme-chronogrove` — Gatsby `gatsby-browser` API validation
+
+- **Fixed** Gatsby **#11329** (`API.NODE.VALIDATION`): `gatsby-browser.js` may only export [known lifecycle APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/). The scroll/skip-nav helper **`onRouteUpdateChronogroveNavigation`** is moved to **`theme/src/helpers/on-route-update-chronogrove-navigation.js`**. Sites that implement their own `onRouteUpdate` should import that helper (and `@chronogrove/ui/gatsby`’s `onRouteUpdateThemeUiColorMode`) from those modules — do not export custom names from `gatsby-browser.js`.
+
 ### Files changed
 
 - `packages/ui/package.json` (version **0.79.0**)
 - `packages/ui/README.md`, `packages/ui/jest.config.cjs`, `packages/ui/src/color-toggle.js`, `packages/ui/src/skip-nav/SkipNavLink.js`
-- `theme/package.json` (version **0.79.0**), `theme/jest.config.js`
+- `theme/package.json` (version **0.79.0**), `theme/jest.config.js`, `theme/gatsby-browser.js`, `theme/gatsby-browser.spec.js`, `theme/src/helpers/on-route-update-chronogrove-navigation.js` (new)
 - `eslint.config.js`
 
 ---
