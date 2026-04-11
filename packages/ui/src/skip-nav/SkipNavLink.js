@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
 import { forwardRef } from 'react'
-import isDarkMode from '@chronogrove/ui/is-dark-mode'
+import isDarkMode from '../helpers/isDarkMode.js'
 
 const SkipNavLink = forwardRef(function SkipNavLink(
   { as: Comp = 'a', children = 'Skip to content', contentId = 'skip-nav-content', ...props },

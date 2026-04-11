@@ -90,8 +90,8 @@ module.exports = {
 
   // Allow specific ESM packages in node_modules to be transformed (pnpm uses .pnpm store)
   transformIgnorePatterns: [
-    'node_modules/(?!(gatsby|@mdx-js|react-error-boundary|\\.pnpm)(/|$))',
-    '\\.pnpm/[^/]+/node_modules/(?!(gatsby|@mdx-js|react-error-boundary)/)'
+    'node_modules/(?!(gatsby|@mdx-js|react-error-boundary|@chronogrove/ui|\\.pnpm)(/|$))',
+    '\\.pnpm/[^/]+/node_modules/(?!(gatsby|@mdx-js|react-error-boundary|@chronogrove/ui)/)'
   ],
 
   // Indicates whether each individual test should be reported during the run
