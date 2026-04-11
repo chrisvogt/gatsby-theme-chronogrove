@@ -37,7 +37,7 @@
     "linux"
   ],
   "peerDependencies": {
-    "gatsby": "*",
+    "gatsby": "^5.16.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
@@ -46,6 +46,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "babel-preset-gatsby": "^3.16.0",
+    "gatsby": "catalog:",
     "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.3.0",
@@ -81,7 +82,6 @@
     "@theme-ui/prism": "^0.17.4",
     "boxen": "catalog:",
     "classnames": "^2.5.1",
-    "gatsby": "catalog:",
     "gatsby-plugin-emotion": "^8.16.0",
     "gatsby-plugin-feed": "^5.16.0",
     "gatsby-plugin-manifest": "^5.16.0",

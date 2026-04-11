@@ -20,6 +20,11 @@ A Gatsby theme for personal websites and blogs with built-in social media widget
 - **Error Handling**: Robust error handling and fallbacks
 - **Testing**: Comprehensive unit tests and coverage reporting
 
+## Requirements
+
+- **Gatsby** `^5.16.0` (peer dependency; use Gatsby 5.16.x in practice)
+- **React** and **React DOM** 18 or 19
+
 ## 🚀 Quick Start
 
 ### Installation
