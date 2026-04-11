@@ -13,8 +13,11 @@ catalog:
   boxen: ^8.0.1
   # All Gatsby sites and theme tooling resolve this; bump here when upgrading Gatsby.
   gatsby: ^5.16.1
+  gatsby-plugin-google-gtag: ^5.16.0
+  gatsby-plugin-robots-txt: ^1.8.0
+  gatsby-plugin-sitemap: ^6.16.0
   lightgallery: ^2.9.0
-  prettier: 3.8.1
+  prettier: ^3.8.2
   react: ^19.2.5
   react-dom: ^19.2.5
   react-intersection-observer: ^10.0.3
