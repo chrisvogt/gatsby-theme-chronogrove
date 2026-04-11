@@ -16,17 +16,24 @@ Use **`pnpm publish`** for releases so `workspace:` dependencies in dependents a
 
 Prefer deep imports so bundles stay lean:
 
-| Import path                     | Contents                                                                                           |
-| ------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `@chronogrove/ui`               | `ChronogroveThemeProvider`                                                                         |
-| `@chronogrove/ui/theme`         | Default Theme UI theme object + named exports                                                      |
-| `@chronogrove/ui/provider`      | `ChronogroveThemeProvider`                                                                         |
-| `@chronogrove/ui/color-mode`    | Storage key, reconcile event, SSR inline builders, `resolveChronogroveSurfaceColors`, browser sync |
-| `@chronogrove/ui/emotion-cache` | `createChronogroveEmotionCache`, `getChronogroveEmotionCache`                                      |
-| `@chronogrove/ui/button`        | Theme UI `components` button                                                                       |
-| `@chronogrove/ui/color-toggle`  | Theme UI + `@theme-toggles/react` toggle                                                           |
-| `@chronogrove/ui/skip-nav`      | `SkipNavLink`, `SkipNavContent`                                                                    |
-| `@chronogrove/ui/is-dark-mode`  | `colorMode === 'dark'` helper                                                                      |
+| Import path                         | Contents                                                                                           |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `@chronogrove/ui`                   | `ChronogroveThemeProvider`                                                                         |
+| `@chronogrove/ui/theme`             | Default Theme UI theme object + named exports                                                      |
+| `@chronogrove/ui/provider`          | `ChronogroveThemeProvider`                                                                         |
+| `@chronogrove/ui/color-mode`        | Storage key, reconcile event, SSR inline builders, `resolveChronogroveSurfaceColors`, browser sync |
+| `@chronogrove/ui/emotion-cache`     | `createChronogroveEmotionCache`, `getChronogroveEmotionCache`                                      |
+| `@chronogrove/ui/button`            | Theme UI `components` button                                                                       |
+| `@chronogrove/ui/color-toggle`      | Theme UI + `@theme-toggles/react` toggle                                                           |
+| `@chronogrove/ui/skip-nav`          | `SkipNavLink`, `SkipNavContent`                                                                    |
+| `@chronogrove/ui/is-dark-mode`      | `colorMode === 'dark'` helper                                                                      |
+| `@chronogrove/ui/color-utils`       | `hexToRgb`, `hexToRgba`, `BUTTON_PRIMARY_COLORS`                                                   |
+| `@chronogrove/ui/action-button`     | Outline CTA as `<button>` or `<a>`                                                                 |
+| `@chronogrove/ui/pagination-button` | Compact paginator control                                                                          |
+| `@chronogrove/ui/lazy-load`         | Defer children until in viewport (`react-intersection-observer`)                                   |
+| `@chronogrove/ui/header`            | Masthead shell (`variant: styles.Header`)                                                          |
+| `@chronogrove/ui/page-header`       | Blog-style `h1` heading (`p-name`)                                                                 |
+| `@chronogrove/ui/gatsby`            | Color-mode Gatsby SSR/browser helpers                                                              |
 
 ## Next.js (App Router)
 

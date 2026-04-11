@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import Header from './header'
+import Header from './header.js'
 
 describe('Header', () => {
   it('renders with children', () => {

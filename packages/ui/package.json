@@ -1,6 +1,6 @@
 {
   "name": "@chronogrove/ui",
-  "version": "0.77.0",
+  "version": "0.78.0",
   "description": "Chronogrove Theme UI theme, color mode helpers, and shared UI primitives",
   "license": "MIT",
   "repository": {
@@ -46,6 +46,30 @@
       "import": "./src/helpers/isDarkMode.js",
       "default": "./src/helpers/isDarkMode.js"
     },
+    "./color-utils": {
+      "import": "./src/color-utils.js",
+      "default": "./src/color-utils.js"
+    },
+    "./action-button": {
+      "import": "./src/action-button.js",
+      "default": "./src/action-button.js"
+    },
+    "./pagination-button": {
+      "import": "./src/pagination-button.js",
+      "default": "./src/pagination-button.js"
+    },
+    "./lazy-load": {
+      "import": "./src/lazy-load.js",
+      "default": "./src/lazy-load.js"
+    },
+    "./header": {
+      "import": "./src/header.js",
+      "default": "./src/header.js"
+    },
+    "./page-header": {
+      "import": "./src/page-header.js",
+      "default": "./src/page-header.js"
+    },
     "./gatsby": {
       "import": "./src/gatsby/index.js",
       "default": "./src/gatsby/index.js"
@@ -65,6 +89,7 @@
     "@theme-toggles/react": "^4.1.0",
     "@theme-ui/components": "catalog:",
     "@theme-ui/presets": "^0.17.4",
+    "react-intersection-observer": "catalog:",
     "theme-ui": "catalog:"
   },
   "devDependencies": {

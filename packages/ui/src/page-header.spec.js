@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import PageHeader from './page-header'
+import PageHeader from './page-header.js'
 
 describe('PageHeader', () => {
   it('renders correctly with given children', () => {

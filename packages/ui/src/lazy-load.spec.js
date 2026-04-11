@@ -1,9 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import LazyLoad from './lazy-load'
+import LazyLoad from './lazy-load.js'
 
-// Control visibility per test
 let mockInView = false
 
 jest.mock('react-intersection-observer', () => ({
@@ -13,13 +12,12 @@ jest.mock('react-intersection-observer', () => ({
   })
 }))
 
-// Mock placeholder component
 const MockPlaceholder = () => <div data-testid='placeholder'>Placeholder</div>
 
 describe('LazyLoad', () => {
   afterEach(() => {
     jest.clearAllMocks()
-    mockInView = false // Reset visibility after each test
+    mockInView = false
   })
 
   it('renders the default placeholder initially', () => {
@@ -67,7 +65,6 @@ describe('LazyLoad', () => {
 
     expect(screen.getByTestId('content')).toBeInTheDocument()
 
-    // Change visibility to false (should not affect render after being visible once)
     mockInView = false
 
     rerender(
