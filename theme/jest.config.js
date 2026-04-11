@@ -27,9 +27,15 @@ module.exports = {
     'src/reducers/index.js',
     'src/components/button.js',
     'src/components/color-toggle.js',
+    'src/components/action-button.js',
+    'src/components/pagination-button.js',
+    'src/components/lazy-load.js',
+    'src/components/header.js',
+    'src/components/blog/page-header.js',
     'src/components/skip-nav/SkipNavLink.js',
     'src/components/skip-nav/SkipNavContent.js',
     'src/helpers/isDarkMode.js',
+    'src/utils/colors.js',
     'src/gatsby-plugin-theme-ui/theme.js'
   ],
 

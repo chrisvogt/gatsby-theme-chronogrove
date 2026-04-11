@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.78.0
+
+### `@chronogrove/ui` — presentational components (Issue #566)
+
+- **New subpaths**: [`@chronogrove/ui/color-utils`](packages/ui/src/color-utils.js) (`hexToRgb`, `hexToRgba`, `BUTTON_PRIMARY_COLORS`), [`@chronogrove/ui/action-button`](packages/ui/src/action-button.js), [`@chronogrove/ui/pagination-button`](packages/ui/src/pagination-button.js), [`@chronogrove/ui/lazy-load`](packages/ui/src/lazy-load.js) (adds dependency on `react-intersection-observer`), [`@chronogrove/ui/header`](packages/ui/src/header.js), [`@chronogrove/ui/page-header`](packages/ui/src/page-header.js).
+- **Tests**: Coverage for new modules lives under `packages/ui`; theme specs for the moved components were removed in favor of UI package tests.
+- **Theme integration**: `gatsby-theme-chronogrove` keeps **thin re-exports** at the previous import paths; `theme/src/utils/colors.js` re-exports from `@chronogrove/ui/color-utils`. `react-intersection-observer` is no longer a direct dependency of the theme (provided via `@chronogrove/ui`).
+
+### Files changed
+
+- `packages/ui/package.json` (new exports, `react-intersection-observer`, version **0.78.0**)
+- `packages/ui/README.md` (subpath export table)
+- `packages/ui/src/color-utils.js`, `action-button.js`, `pagination-button.js`, `lazy-load.js`, `header.js`, `page-header.js`, and matching `*.spec.js` / snapshots
+- `theme/package.json` (version **0.78.0**, drop direct `react-intersection-observer`)
+- `theme/jest.config.js` (coverage ignore for UI shim files)
+- `theme/src/components/action-button.js`, `pagination-button.js`, `lazy-load.js`, `header.js`, `blog/page-header.js`, `utils/colors.js` (re-exports)
+- Removed obsolete theme snapshot files for header / page-header (snapshots moved to `packages/ui`)
+
+---
+
 ## 0.77.0
 
 ### `@chronogrove/ui/gatsby` — Gatsby wiring helpers (Issue #565)
