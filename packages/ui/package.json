@@ -3,6 +3,11 @@
   "version": "0.76.0",
   "description": "Chronogrove Theme UI theme, color mode helpers, and shared UI primitives",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisvogt/gatsby-theme-chronogrove.git",
+    "directory": "packages/ui"
+  },
   "sideEffects": false,
   "exports": {
     ".": {
