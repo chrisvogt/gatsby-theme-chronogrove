@@ -286,8 +286,9 @@ jobs:
         run: |
           set -euo pipefail
 
-          npmrc="${RUNNER_TEMP}/npmrc-github-publish"
-          printf '%s\n' "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > "${npmrc}"
+          # pnpm publish does not support npm's --userconfig; auth must be in a readable npmrc
+          # (e.g. ~/.npmrc). See https://github.com/pnpm/pnpm/issues/6036
+          printf '%s\n' "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> "${HOME}/.npmrc"
 
           publish_gh_dir() {
             local DIR="$1"
@@ -298,7 +299,7 @@ jobs:
               cp package.json package.json.ci-backup
               npm pkg set "name=${GH_NAME}"
               npm pkg set publishConfig.registry=https://npm.pkg.github.com
-              pnpm publish --registry https://npm.pkg.github.com --no-git-checks --userconfig "${npmrc}"
+              pnpm publish --registry https://npm.pkg.github.com --no-git-checks
               mv package.json.ci-backup package.json
             )
           }
@@ -322,6 +323,6 @@ jobs:
               j.publishConfig = { registry: 'https://npm.pkg.github.com' };
               fs.writeFileSync('theme/package.json', JSON.stringify(j, null, 2) + '\n');
             " "${GH_PKG_UI}" "${GH_PKG_THEME}" "${UI_VER}"
-            pnpm publish --filter './theme' --registry https://npm.pkg.github.com --no-git-checks --userconfig "${npmrc}"
+            pnpm publish --filter './theme' --registry https://npm.pkg.github.com --no-git-checks
             mv theme/package.json.publish-backup theme/package.json
           fi
