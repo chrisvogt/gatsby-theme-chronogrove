@@ -11,7 +11,7 @@ import 'prismjs/themes/prism-solarizedlight.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 import WrapRootElement from './wrapRootElement'
-import { scheduleThemeUiColorModeSync, RECONCILE_COLOR_MODE_EVENT } from '@chronogrove/ui/color-mode'
+import { onRouteUpdateThemeUiColorMode } from '@chronogrove/ui/gatsby'
 import { getChronogroveEmotionCache } from '@chronogrove/ui/emotion-cache'
 
 export const wrapRootElement = ({ element }) => (
@@ -31,17 +31,14 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
   return false
 }
 
-export const onRouteUpdate = ({ location, prevLocation }) => {
-  scheduleThemeUiColorModeSync()
-  if (typeof window !== 'undefined' && typeof window.CustomEvent === 'function') {
-    window.dispatchEvent(new window.CustomEvent(RECONCILE_COLOR_MODE_EVENT))
-  }
-
+/** Scroll-to-top and skip-link focus after pathname changes (used with {@link onRouteUpdateThemeUiColorMode} on consumer sites). */
+export const onRouteUpdateChronogroveNavigation = ({ location, prevLocation }) => {
   if (prevLocation !== null) {
     const currentPath = location?.pathname
     const prevPath = prevLocation?.pathname
     if (currentPath === prevPath) return
     const performScrollToTop = () => {
+      /* istanbul ignore next -- gatsby-browser always runs in a browser */
       if (typeof window === 'undefined') return
       const pathname = window.location?.pathname
       const hash = window.location?.hash
@@ -56,4 +53,9 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
       performScrollToTop()
     }
   }
+}
+
+export const onRouteUpdate = ({ location, prevLocation }) => {
+  onRouteUpdateThemeUiColorMode()
+  onRouteUpdateChronogroveNavigation({ location, prevLocation })
 }

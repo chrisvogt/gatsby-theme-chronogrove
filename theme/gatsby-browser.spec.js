@@ -1,7 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { shouldUpdateScroll, onRouteUpdate, wrapRootElement } from './gatsby-browser'
+import {
+  shouldUpdateScroll,
+  onRouteUpdate,
+  onRouteUpdateChronogroveNavigation,
+  wrapRootElement
+} from './gatsby-browser'
 
 jest.mock('@gatsbyjs/reach-router', () => ({
   ...jest.requireActual('@gatsbyjs/reach-router'),
@@ -47,6 +52,30 @@ afterEach(() => {
 })
 
 describe('gatsby-browser', () => {
+  describe('onRouteUpdateChronogroveNavigation', () => {
+    it('is a no-op when prevLocation is null', () => {
+      expect(() =>
+        onRouteUpdateChronogroveNavigation({ location: { pathname: '/' }, prevLocation: null })
+      ).not.toThrow()
+    })
+
+    it('does not scroll when window is at / with a hash (home hash routes)', () => {
+      mockGetElementById.mockReturnValue(mockSkipContent)
+      const href = window.location.href
+      window.history.pushState({}, '', '/#posts')
+      try {
+        onRouteUpdateChronogroveNavigation({
+          location: { pathname: '/blog', hash: '' },
+          prevLocation: { pathname: '/' }
+        })
+        expect(mockScrollTo).not.toHaveBeenCalled()
+        expect(mockFocus).not.toHaveBeenCalled()
+      } finally {
+        window.history.pushState({}, '', href)
+      }
+    })
+  })
+
   describe('wrapRootElement', () => {
     it('wraps the root element with Emotion cache provider without crashing', () => {
       const wrapped = wrapRootElement({ element: <div>Root content</div> })

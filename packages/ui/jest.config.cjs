@@ -15,6 +15,7 @@ module.exports = {
     'src/index.js',
     'src/skip-nav/index.js',
     'src/color-mode/index.js',
+    'src/gatsby/index.js',
     'src/theme.js'
   ],
   moduleNameMapper: {
