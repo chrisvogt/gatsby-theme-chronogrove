@@ -86,6 +86,13 @@ describe('syncThemeUiColorMode', () => {
     syncThemeUiColorMode()
     expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
     expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    expect(document.documentElement.style.backgroundColor).toBe('rgb(20, 20, 31)')
+  })
+
+  it('sets html inline background for default mode', () => {
+    window.localStorage.setItem('theme-ui-color-mode', 'default')
+    syncThemeUiColorMode()
+    expect(document.documentElement.style.backgroundColor).toBe('rgb(253, 248, 245)')
   })
 
   it('strips prior theme-ui-* classes before applying', () => {

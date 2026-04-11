@@ -17,8 +17,8 @@ jest.mock('theme-ui', () => {
   }
 })
 
-// Mock the background component (only ColorBends is used now)
-jest.mock('./home-backgrounds/color-bends', () => {
+// Mock WebGL layer (implementation lives in @chronogrove/ui)
+jest.mock('../../../packages/ui/src/animated-page-background/ColorBends.js', () => {
   return function MockColorBends() {
     return <div data-testid='color-bends'>Color Bends</div>
   }

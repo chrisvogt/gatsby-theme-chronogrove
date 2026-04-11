@@ -1,6 +1,6 @@
-/** @jsx jsx */
 import React from 'react'
-import { jsx, useThemeUI } from 'theme-ui'
+import { Box } from '@theme-ui/components'
+import { useThemeUI } from 'theme-ui'
 import isDarkMode from './helpers/isDarkMode.js'
 import { hexToRgb } from './color-utils.js'
 
@@ -67,16 +67,16 @@ const ActionButton = ({ children, href, onClick, variant = 'primary', size = 'me
 
   if (href) {
     return (
-      <a href={href} sx={baseStyles} {...props}>
+      <Box as='a' href={href} sx={baseStyles} {...props}>
         {content}
-      </a>
+      </Box>
     )
   }
 
   return (
-    <button type='button' onClick={onClick} sx={baseStyles} {...props}>
+    <Box as='button' type='button' onClick={onClick} sx={baseStyles} {...props}>
       {content}
-    </button>
+    </Box>
   )
 }
 

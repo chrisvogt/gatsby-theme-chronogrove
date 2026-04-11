@@ -74,8 +74,8 @@ export const backdropBlurLight = {
 
 export const card = {
   borderRadius: 'card',
-  background: 'var(--theme-ui-colors-panel-background)',
-  color: 'var(--theme-ui-colors-panel-text)',
+  bg: 'panel-background',
+  color: 'text',
   boxShadow: 'default',
   flexGrow: 1,
   padding: 3,
@@ -86,9 +86,9 @@ export const card = {
 }
 
 export const metricCard = {
-  backgroundColor: 'var(--theme-ui-colors-panel-background)',
+  backgroundColor: 'panel-background',
   boxShadow: 'none',
-  color: 'var(--theme-ui-colors-panel-text)',
+  color: 'text',
   span: {
     fontFamily: 'heading',
     fontWeight: 'bold',
@@ -100,8 +100,6 @@ export const PostCard = {
   ...card,
   ...floatOnHover,
   ...glassmorhismPanel,
-  backgroundColor: 'var(--theme-ui-colors-panel-background)',
-  color: 'var(--theme-ui-colors-panel-text)',
   display: 'flex',
   height: '100%',
   flexDirection: 'column',

@@ -13,7 +13,9 @@
     "url": "https://github.com/chrisvogt/gatsby-theme-chronogrove.git",
     "directory": "packages/ui"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
       "import": "./src/index.js",
@@ -35,6 +37,7 @@
       "import": "./src/color-toggle.js",
       "default": "./src/color-toggle.js"
     },
+    "./color-toggle-styles": "./src/color-toggle-styles.css",
     "./skip-nav": {
       "import": "./src/skip-nav/index.js",
       "default": "./src/skip-nav/index.js"
@@ -75,6 +78,18 @@
       "import": "./src/page-header.js",
       "default": "./src/page-header.js"
     },
+    "./page-backdrop": {
+      "import": "./src/page-backdrop.js",
+      "default": "./src/page-backdrop.js"
+    },
+    "./animated-page-background": {
+      "import": "./src/animated-page-background/index.js",
+      "default": "./src/animated-page-background/index.js"
+    },
+    "./action-card-layout": {
+      "import": "./src/action-card-layout.js",
+      "default": "./src/action-card-layout.js"
+    },
     "./gatsby": {
       "import": "./src/gatsby/index.js",
       "default": "./src/gatsby/index.js"
@@ -89,13 +104,14 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@emotion/cache": "^11.14.0",
+    "@emotion/cache": "catalog:",
     "@emotion/react": "catalog:",
-    "@theme-toggles/react": "^4.1.0",
+    "@theme-toggles/react": "catalog:",
     "@theme-ui/components": "catalog:",
     "@theme-ui/presets": "^0.17.4",
     "react-intersection-observer": "catalog:",
-    "theme-ui": "catalog:"
+    "theme-ui": "catalog:",
+    "three": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

@@ -1,9 +1,7 @@
-/**
- * Jest transforms @emotion and JSX; mirror theme with classic runtime.
- */
+// Standard automatic JSX; Theme UI `sx` is applied via @theme-ui/components (Box, etc.), not file-level jsxImportSource.
 module.exports = {
   presets: [
     [require.resolve('@babel/preset-env'), { targets: { node: 'current' } }],
-    [require.resolve('@babel/preset-react'), { runtime: 'classic', useBuiltIns: true }]
+    [require.resolve('@babel/preset-react'), { runtime: 'automatic' }]
   ]
 }

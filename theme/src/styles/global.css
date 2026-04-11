@@ -105,15 +105,7 @@ article.c1v0-blog-post img.solid-background {
   padding-left: 2.8em;
 }
 
-@import '@theme-toggles/react/css/Expand.css';
-
-.theme-toggle,
-.theme-toggle svg {
-  color: inherit;
-  fill: currentColor;
-  width: 16px;
-  height: 16px;
-}
+@import '@chronogrove/ui/color-toggle-styles';
 
 /* LightGallery Instagram Album Styling */
 .lg-sub-html .lg-sub-html-inner {

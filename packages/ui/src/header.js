@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { Box } from '@theme-ui/components'
 
 /**
  * Header
@@ -8,20 +7,9 @@ import { jsx } from 'theme-ui'
  */
 const Header = ({ children, styles }) => {
   return (
-    <header
-      role='banner'
-      sx={{
-        variant: 'styles.Header'
-      }}
-    >
-      <div
-        sx={{
-          ...(styles ? styles : {})
-        }}
-      >
-        {children}
-      </div>
-    </header>
+    <Box as='header' role='banner' sx={{ variant: 'styles.Header' }}>
+      <Box sx={{ ...(styles ? styles : {}) }}>{children}</Box>
+    </Box>
   )
 }
 

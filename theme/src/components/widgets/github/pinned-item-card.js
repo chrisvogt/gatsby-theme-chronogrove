@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { Card } from '@theme-ui/components'
+import { actionCardPinnedLayoutSx } from '@chronogrove/ui/action-card-layout'
 
 import PlaceholderContent from './renderers/placeholder'
 import RepositoryContent from './renderers/repository'
@@ -14,18 +15,7 @@ const rendererRegistry = {
 }
 
 const PinnedItemCard = ({ item, type = PLACEHOLDER }) => (
-  <Card
-    variant='actionCard'
-    sx={{
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      transition: 'transform 0.2s ease-in-out',
-      '&:hover': {
-        transform: 'translateY(-4px)'
-      }
-    }}
-  >
+  <Card variant='actionCard' sx={actionCardPinnedLayoutSx}>
     {rendererRegistry[type] && rendererRegistry[type](item)}
   </Card>
 )

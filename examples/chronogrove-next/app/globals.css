@@ -1,0 +1,17 @@
+/* Minimal base; Chronogrove global styles come from ChronogroveThemeProvider (Theme UI Global). */
+html,
+body {
+  margin: 0;
+}
+
+/*
+ * Match Gatsby’s page surface: `buildThemeUiColorModeFallbackCss` seeds `--theme-ui-colors-background`
+ * on :root before hydration. Body must use it so frosted panels (semi-transparent rgba over this
+ * layer) read the same as the main site; otherwise the html fill can sit behind an opaque body.
+ */
+body {
+  background-color: var(--theme-ui-colors-background);
+}
+
+/* Color toggle: bundled by `@chronogrove/ui` (transitive `@theme-toggles/react`). */
+@import '@chronogrove/ui/color-toggle-styles';

@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
 

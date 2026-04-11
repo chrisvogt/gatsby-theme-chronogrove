@@ -1,10 +1,9 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
 import { useState, useEffect } from 'react'
+import { Box } from '@theme-ui/components'
 import { useInView } from 'react-intersection-observer'
 
 const DefaultPlaceholder = ({ height = '100%', width = '100%' }) => (
-  <div
+  <Box
     data-testid='default-placeholder'
     sx={{
       minHeight: '1px',
@@ -14,7 +13,7 @@ const DefaultPlaceholder = ({ height = '100%', width = '100%' }) => (
     }}
   >
     {' '}
-  </div>
+  </Box>
 )
 
 /**
@@ -35,7 +34,7 @@ const LazyLoad = ({ children, placeholder = <DefaultPlaceholder /> }) => {
     }
   }, [inView, hasBeenVisible])
 
-  return <div ref={ref}>{hasBeenVisible ? children : placeholder}</div>
+  return <Box ref={ref}>{hasBeenVisible ? children : placeholder}</Box>
 }
 
 export default LazyLoad

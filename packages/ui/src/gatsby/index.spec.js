@@ -40,6 +40,8 @@ describe('@chronogrove/ui/gatsby', () => {
       const fallbackStyle = fallbackStyleContainer.querySelector('style')
       expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="default"\]/)
       expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #111 !important/)
+      expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-panel-background:/)
+      expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-panel-text:/)
     })
   })
 

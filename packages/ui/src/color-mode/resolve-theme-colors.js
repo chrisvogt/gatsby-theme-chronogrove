@@ -18,6 +18,11 @@ export function resolveChronogroveSurfaceColors(theme) {
     defaultTextHex: pickColor(colors.text) || '#111',
     defaultTextMutedHex: pickColor(colors.textMuted) || '#333',
     darkTextHex: pickColor(dark.text) || '#fff',
-    darkTextMutedHex: pickColor(dark.textMuted) || '#d8d8d8'
+    darkTextMutedHex: pickColor(dark.textMuted) || '#d8d8d8',
+    defaultPanelBackground: pickColor(colors['panel-background']) || 'rgba(255, 255, 255, 0.45)',
+    darkPanelBackground: pickColor(dark['panel-background']) || 'rgba(20, 20, 31, 0.45)',
+    /** Head fallback only; panel copy usually uses `color: 'text'` — no separate `panel-text` token required. */
+    defaultPanelText: pickColor(colors['panel-text']) || pickColor(colors.text) || '#111',
+    darkPanelText: pickColor(dark['panel-text']) || pickColor(dark.text) || '#fff'
   }
 }
