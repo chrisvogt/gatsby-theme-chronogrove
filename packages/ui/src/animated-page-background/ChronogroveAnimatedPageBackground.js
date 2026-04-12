@@ -132,7 +132,7 @@ export default function ChronogroveAnimatedPageBackground({
           right: 0,
           width: '100%',
           height: overlayHeight,
-          zIndex: 0.5,
+          zIndex: 0,
           pointerEvents: 'none',
           opacity: overlayOpacity,
           transition: 'opacity 0.1s ease-out',
