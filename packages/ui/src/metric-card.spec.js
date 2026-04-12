@@ -39,6 +39,15 @@ describe('MetricCard', () => {
     expect(screen.getByRole('status')).toBeInTheDocument()
   })
 
+  it('treats showPlaceholder as loading', () => {
+    render(
+      <ThemeUIProvider theme={theme}>
+        <MetricCard title='F' value='1' showPlaceholder />
+      </ThemeUIProvider>
+    )
+    expect(screen.getByRole('status')).toBeInTheDocument()
+  })
+
   it('uses metricCardDark when dark', () => {
     useThemeUI.mockReturnValue({ colorMode: 'dark' })
     render(

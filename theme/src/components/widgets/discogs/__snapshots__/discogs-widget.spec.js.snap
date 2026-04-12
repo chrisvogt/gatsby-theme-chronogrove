@@ -24,27 +24,31 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       />
     </div>
     <header
-      class="css-f8y2ki"
+      class="css-7pzsne"
     >
       <div
-        class="css-x7xacr"
+        class="css-s076pz"
       >
         <h2
           class="css-16f4ihe"
         >
-          <svg
-            aria-hidden="true"
-            class="svg-inline--fa fa-record-vinyl css-1f4q58s"
-            data-icon="record-vinyl"
-            data-prefix="fas"
-            role="img"
-            viewBox="0 0 512 512"
+          <span
+            class="css-2s41mq"
           >
-            <path
-              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-              fill="currentColor"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-record-vinyl"
+              data-icon="record-vinyl"
+              data-prefix="fas"
+              role="img"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
           Discogs
         </h2>
         <a
@@ -106,27 +110,31 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
     id="discogs"
   >
     <header
-      class="css-zvwfan"
+      class="css-1edl0q7"
     >
       <div
-        class="css-x7xacr"
+        class="css-s076pz"
       >
         <h2
           class="css-16f4ihe"
         >
-          <svg
-            aria-hidden="true"
-            class="svg-inline--fa fa-record-vinyl css-1f4q58s"
-            data-icon="record-vinyl"
-            data-prefix="fas"
-            role="img"
-            viewBox="0 0 512 512"
+          <span
+            class="css-2s41mq"
           >
-            <path
-              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-              fill="currentColor"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-record-vinyl"
+              data-icon="record-vinyl"
+              data-prefix="fas"
+              role="img"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
           Discogs
         </h2>
         <a
@@ -143,10 +151,10 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         </a>
       </div>
       <div
-        class="css-iydney"
+        class="css-74giqt"
       >
         <div
-          class="css-6ad07s"
+          class="css-6oqysq"
         >
           <div
             class="css-1njnxko"
@@ -274,27 +282,31 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
     id="discogs"
   >
     <header
-      class="css-zvwfan"
+      class="css-1edl0q7"
     >
       <div
-        class="css-x7xacr"
+        class="css-s076pz"
       >
         <h2
           class="css-16f4ihe"
         >
-          <svg
-            aria-hidden="true"
-            class="svg-inline--fa fa-record-vinyl css-1f4q58s"
-            data-icon="record-vinyl"
-            data-prefix="fas"
-            role="img"
-            viewBox="0 0 512 512"
+          <span
+            class="css-2s41mq"
           >
-            <path
-              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
-              fill="currentColor"
-            />
-          </svg>
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-record-vinyl"
+              data-icon="record-vinyl"
+              data-prefix="fas"
+              role="img"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
           Discogs
         </h2>
         <svg
@@ -318,10 +330,10 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         </svg>
       </div>
       <div
-        class="css-iydney"
+        class="css-74giqt"
       >
         <div
-          class="css-6ad07s"
+          class="css-6oqysq"
         >
           <div
             class="css-1njnxko"
