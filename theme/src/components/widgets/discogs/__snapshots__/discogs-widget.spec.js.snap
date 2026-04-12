@@ -3,14 +3,14 @@
 exports[`Discogs Widget matches the error state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1k28k4o"
+    class="css-vhkudu"
     id="discogs"
   >
     <div
-      class="css-rmw57n"
+      class="css-33wwjq"
     >
       <div
-        class="css-59lkxq"
+        class="css-1yb068l"
       >
         <h4>
           Something went wrong
@@ -20,7 +20,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
         </p>
       </div>
       <div
-        class="css-bgces8"
+        class="css-oxv113"
       />
     </div>
     <header
@@ -48,7 +48,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
           Discogs
         </h2>
         <a
-          class="css-1hh4m8m"
+          class="css-bgnrb"
           href="https://www.discogs.com"
           title="Collection on Discogs"
         >
@@ -102,7 +102,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
 exports[`Discogs Widget matches the loaded state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1pk2a5b"
+    class="css-1gmhq94"
     id="discogs"
   >
     <header
@@ -130,7 +130,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
           Discogs
         </h2>
         <a
-          class="css-1hh4m8m"
+          class="css-bgnrb"
           href="https://www.discogs.com/user/chrisvogt/collection"
           title="Collection on Discogs"
         >
@@ -270,7 +270,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
 exports[`Discogs Widget matches the loading state snapshot 1`] = `
 <DocumentFragment>
   <section
-    class="css-1pk2a5b"
+    class="css-1gmhq94"
     id="discogs"
   >
     <header
@@ -298,130 +298,23 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
           Discogs
         </h2>
         <svg
-          class="svg-loaders-svg css-ao632c"
-          fill="#1E90FF"
+          aria-label="Loading"
+          class="css-1xa9lgo"
           height="24"
-          viewBox="0 0 135 140"
+          role="status"
+          viewBox="0 0 24 24"
           width="24"
         >
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="30"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="140"
-            rx="6"
-            width="15"
-            x="60"
-          >
-            <animate
-              attributeName="height"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="90"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.25s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
-          <rect
-            height="120"
-            rx="6"
-            width="15"
-            x="120"
-            y="10"
-          >
-            <animate
-              attributeName="height"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="120;110;100;90;80;70;60;50;40;140;120"
-            />
-            <animate
-              attributeName="y"
-              begin="0.5s"
-              calcMode="linear"
-              dur="1s"
-              repeatCount="indefinite"
-              values="10;15;20;25;30;35;40;45;50;0;10"
-            />
-          </rect>
+          <circle
+            cx="12"
+            cy="12"
+            fill="none"
+            r="10"
+            stroke="currentColor"
+            stroke-dasharray="31.4 31.4"
+            stroke-linecap="round"
+            stroke-width="3"
+          />
         </svg>
       </div>
       <div

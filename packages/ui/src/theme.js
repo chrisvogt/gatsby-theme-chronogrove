@@ -94,11 +94,9 @@ export const metricCard = {
   backgroundColor: 'panel-background',
   boxShadow: 'none',
   color: 'text',
-  span: {
-    fontFamily: 'heading',
-    fontWeight: 'bold',
-    padding: 2
-  }
+  /** Stat tiles read clearly on animated / busy page backgrounds */
+  border: '1px solid',
+  borderColor: 'panel-divider'
 }
 
 export const PostCard = {
@@ -254,6 +252,12 @@ export default merge(tailwind, {
     metricCard: {
       ...card,
       ...metricCard
+    },
+
+    metricCardDark: {
+      ...card,
+      ...metricCard,
+      backgroundColor: '#1e2530'
     },
 
     /* The following styles represent specific card components, indicated in PascalCase. */
@@ -558,6 +562,12 @@ export default merge(tailwind, {
     },
 
     GitHubCardFooter: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      mt: 2
+    },
+
+    mutedCardFooter: {
       display: 'flex',
       justifyContent: 'space-between',
       mt: 2

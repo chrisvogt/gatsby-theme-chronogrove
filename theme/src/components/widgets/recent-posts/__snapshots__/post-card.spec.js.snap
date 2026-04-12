@@ -31,7 +31,7 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -84,7 +84,7 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -137,7 +137,7 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -187,7 +187,7 @@ exports[`PostCard renders SoundCloud embed when soundcloudId is provided 1`] = `
             class="css-1wohmj5"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Music
             </div>
@@ -250,7 +250,7 @@ exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
             class="css-1wohmj5"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Music
             </div>
@@ -315,7 +315,7 @@ exports[`PostCard renders YouTube embed with horizontal layout when both props a
             class="css-1wohmj5"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Music
             </div>
@@ -383,7 +383,7 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -436,7 +436,7 @@ exports[`PostCard renders banner when thumbnails array is empty 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -489,7 +489,7 @@ exports[`PostCard renders banner when thumbnails is null 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -542,7 +542,7 @@ exports[`PostCard renders excerpt when provided 1`] = `
             class="css-1wohmj5"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -598,7 +598,7 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
           class="css-1c1541m"
         >
           <div
-            class="css-1wualeq"
+            class="css-hizx0c"
           >
             Personal
           </div>
@@ -643,7 +643,7 @@ exports[`PostCard renders neither banner nor thumbnails when both are missing 1`
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -725,7 +725,7 @@ exports[`PostCard renders thumbnails instead of banner when thumbnails are provi
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -771,7 +771,7 @@ exports[`PostCard renders without banner when not provided 1`] = `
             class="css-1c1541m"
           >
             <div
-              class="css-1wualeq"
+              class="css-hizx0c"
             >
               Personal
             </div>
@@ -865,7 +865,7 @@ exports[`PostCard uses first thumbnail as left preview in horizontal mode (no th
           class="css-1c1541m"
         >
           <div
-            class="css-1wualeq"
+            class="css-hizx0c"
           >
             Personal
           </div>

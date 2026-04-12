@@ -100,11 +100,10 @@ describe('Theme Configuration', () => {
       expect(actionCard.a).toHaveProperty(':hover', 'pointer')
     })
 
-    it('tests metricCard nested span styles', () => {
+    it('defines metricCard with panel border (stat tiles)', () => {
       const metricCard = theme.cards.metricCard
-      expect(metricCard.span).toHaveProperty('fontFamily', 'heading')
-      expect(metricCard.span).toHaveProperty('fontWeight', 'bold')
-      expect(metricCard.span).toHaveProperty('padding', 2)
+      expect(metricCard).toHaveProperty('border', '1px solid')
+      expect(metricCard).toHaveProperty('borderColor', 'panel-divider')
     })
 
     it('defines UserProfile card styles dynamically', () => {
