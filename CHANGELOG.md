@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.82.0
+
+### `@chronogrove/ui` — widget header row, profile metrics, `MetricCard` alias, remove unused backdrop
+
+- **New subpaths**: [`@chronogrove/ui/widget-header`](packages/ui/src/widget-header.js) (dashboard widget title row with optional Font Awesome icon, aside slot, optional metrics strip) and [`@chronogrove/ui/profile-metrics-badge`](packages/ui/src/profile-metrics-badge.js) (metrics badges for that header). Implementation uses Theme UI `Box` / `Heading` / `Badge` (no classic `jsx` pragma) for compatibility with automatic JSX in Jest.
+- **Dependencies**: `@fortawesome/fontawesome-svg-core` and `@fortawesome/react-fontawesome` (icon slot in `WidgetHeader`).
+- **`MetricCard`**: accepts **`showPlaceholder`** as an alias for **`loading`** (same loading UI), for parity with previous Gatsby-only prop naming.
+- **Removed**: **`ChronogrovePageBackdrop`** and the **`@chronogrove/ui/page-backdrop`** export. Nothing in this repo consumed it; the supported full-bleed background remains [`@chronogrove/ui/animated-page-background`](packages/ui/src/animated-page-background/index.js) (three.js Color Bends). If you copied `page-backdrop` from an older publish, pin to **0.81.x** or switch to the animated background / your own fixed layer.
+
+### `gatsby-theme-chronogrove`
+
+- **Thin re-exports**: [`widget-header`](theme/src/components/widgets/widget-header.js), [`profile-metrics-badge`](theme/src/components/widgets/profile-metrics-badge.js), and [`metric-card`](theme/src/components/widgets/metric-card.js) now re-export from `@chronogrove/ui` (Jest coverage ignores these shims; logic is tested in `packages/ui`).
+- **Tests**: widget snapshots updated for header/icon markup; removed invalid **`platform`** prop from the widget-header spec.
+
+### Examples & documentation
+
+- **`examples/chronogrove-next`**: [`home-showcase.jsx`](examples/chronogrove-next/app/home-showcase.jsx) uses **`WidgetHeader`** (with **`@fortawesome/free-brands-svg-icons`**), **`PageHeader`**, **`Header`**, **`PaginationButton`**, **`MetricBadge`**, and **`MetricCard`** **`showPlaceholder`** alongside existing demos; [`README.md`](examples/chronogrove-next/README.md) updated.
+- **`packages/ui/README.md`**: Notes on **additional `exports`**, **`WidgetHeader`** icon packages, and **`MetricCard`** **`loading`** / **`showPlaceholder`**.
+- **[Root `README.md`](README.md)** and **[`theme/README.md`](theme/README.md)**: Cross-references for widget re-exports and the Next showcase.
+- **[`.cursorrules`](.cursorrules)** and **[`CONTRIBUTING.md`](CONTRIBUTING.md)**: Gatsby **shadow** import paths (theme shims) vs **direct** `@chronogrove/ui/...` imports for Next and other non-Gatsby code.
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.82.0**, new exports; removed `./page-backdrop`), `packages/ui/src/widget-header.js`, `packages/ui/src/profile-metrics-badge.js`, `packages/ui/src/metric-card.js`, specs and snapshots, `packages/ui/README.md`
+- `theme/package.json` (version **0.82.0**), widget shims, `theme/jest.config.js`, snapshot updates under `theme/src/components/widgets/**`
+- `pnpm-lock.yaml`
+
+---
+
 ## 0.81.0
 
 ### `@chronogrove/ui` — dashboard widget primitives (Issue #566) and reference-app polish

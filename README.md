@@ -295,7 +295,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the pull request process, PR title 
 ## 📚 Documentation
 
 - **[`@chronogrove/ui`](packages/ui/README.md)**: Shared Theme UI layer, color-mode helpers, Gatsby helpers (`@chronogrove/ui/gatsby`), and **Next.js App Router** helpers (`@chronogrove/ui/next`)
-- **[Next.js example](examples/chronogrove-next/README.md)**: Minimal App Router app consuming `@chronogrove/ui/next` (private workspace package `chronogrove-next`)
+- **[Next.js example](examples/chronogrove-next/README.md)**: App Router reference (`chronogrove-next`): `@chronogrove/ui/next` shell plus [`home-showcase.jsx`](examples/chronogrove-next/app/home-showcase.jsx) demonstrating the same `@chronogrove/ui` primitives as the Gatsby theme (widgets, layout, controls)
 - **[Theme Documentation](theme/README.md)**: Detailed theme configuration and customization
 - **[Demo Site Documentation](www.chronogrove.com/README.md)**: Demo site setup and usage
 - **[Widget Documentation](theme/src/components/widgets/)**: Individual widget documentation

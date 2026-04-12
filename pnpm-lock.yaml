@@ -151,6 +151,9 @@ importers:
       '@emotion/react':
         specifier: 'catalog:'
         version: 11.14.0(@types/react@19.2.14)(react@19.2.5)
+      '@fortawesome/free-brands-svg-icons':
+        specifier: ^7.2.0
+        version: 7.2.0
       next:
         specifier: 'catalog:'
         version: 15.5.15(@babel/core@7.29.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -182,6 +185,12 @@ importers:
       '@emotion/react':
         specifier: 'catalog:'
         version: 11.14.0(@types/react@19.2.14)(react@19.2.5)
+      '@fortawesome/fontawesome-svg-core':
+        specifier: ^7.2.0
+        version: 7.2.0
+      '@fortawesome/react-fontawesome':
+        specifier: ^3.3.0
+        version: 3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.5)
       '@theme-toggles/react':
         specifier: 'catalog:'
         version: 4.1.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)

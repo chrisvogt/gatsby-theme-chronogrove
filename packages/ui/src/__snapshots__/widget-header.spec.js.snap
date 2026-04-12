@@ -3,14 +3,23 @@
 exports[`WidgetHeader matches the snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="css-18zkt1i"
+    class="css-7pzsne"
   >
     <div
-      class="css-s3uzbn"
+      class="css-s076pz"
     >
       <h2
-        class="css-1w2ddu7"
+        class="css-16f4ihe"
       >
+        <span
+          class="css-2s41mq"
+        >
+          <span
+            aria-hidden="true"
+            data-icon="spotify"
+            data-testid="fa-icon"
+          />
+        </span>
         Neat & Interesting Widget
       </h2>
       <div

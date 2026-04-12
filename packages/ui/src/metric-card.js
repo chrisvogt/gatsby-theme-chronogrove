@@ -6,13 +6,14 @@ import isDarkMode from './helpers/isDarkMode.js'
 
 /**
  * Metric summary card (e.g. Goodreads profile metrics). Uses `metricCard` / `metricCardDark` card variants.
- * When `loading` is true, renders `loadingSlot` or a lightweight pulse placeholder (no react-placeholder dependency).
+ * When `loading` or `showPlaceholder` is true, renders `loadingSlot` or a lightweight pulse placeholder (no react-placeholder dependency).
  */
-const MetricCard = ({ title, value, loading = false, loadingSlot, sx, ...props }) => {
+const MetricCard = ({ title, value, loading = false, showPlaceholder, loadingSlot, sx, ...props }) => {
   const { colorMode } = useThemeUI()
   const variant = isDarkMode(colorMode) ? 'metricCardDark' : 'metricCard'
+  const isLoading = Boolean(loading || showPlaceholder)
 
-  const body = loading ? (
+  const body = isLoading ? (
     (loadingSlot ?? (
       <Box
         aria-busy='true'

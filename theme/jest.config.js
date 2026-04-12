@@ -37,6 +37,8 @@ module.exports = {
     'src/components/widgets/view-external.js',
     'src/components/widgets/call-to-action.js',
     'src/components/widgets/metric-card.js',
+    'src/components/widgets/profile-metrics-badge.js',
+    'src/components/widgets/widget-header.js',
     'src/components/lazy-load.js',
     'src/components/header.js',
     'src/components/blog/page-header.js',
