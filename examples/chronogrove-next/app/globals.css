@@ -1,3 +1,6 @@
+/* Color toggle: bundled by `@chronogrove/ui` (transitive `@theme-toggles/react`). */
+@import '@chronogrove/ui/color-toggle-styles';
+
 /* Minimal base; Chronogrove global styles come from ChronogroveThemeProvider (Theme UI Global). */
 html {
   scroll-behavior: smooth;
@@ -25,6 +28,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-
-/* Color toggle: bundled by `@chronogrove/ui` (transitive `@theme-toggles/react`). */
-@import '@chronogrove/ui/color-toggle-styles';

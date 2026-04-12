@@ -10,8 +10,14 @@ import { useServerInsertedHTML } from 'next/navigation'
  * to match Theme UI / Chronogrove.
  *
  * Intercepts `cache.insert` and flushes only *new* rule names on each `useServerInsertedHTML`
- * invocation. Without this, each streaming chunk re-emits the full `cache.inserted` map and
- * duplicates `<style>` tags (see emotion-js/emotion#2928, @Andarist’s pattern).
+ * invocation. Do **not** use `Object.keys(cache.inserted)` (or similar) in the hook body — that
+ * re-emits every rule on every chunk during streaming SSR. Here, `flush()` drains a per-request
+ * queue so each rule is serialized once; `cache.inserted` stays as Emotion’s dedupe store.
+ *
+ * Next.js **pushes** a new callback from every render (`serverInsertedHTMLCallbacks.push`); all
+ * closures call the same `flush`, so only the first callback in a flush pass drains pending names.
+ *
+ * @see https://github.com/emotion-js/emotion/issues/2928
  *
  * @see https://nextjs.org/docs/app/building-your-application/styling/css-in-js
  */
@@ -45,7 +51,13 @@ export function ChronogroveNextEmotionRegistry({ children }) {
     for (const name of names) {
       styles += cache.inserted[name]
     }
-    return <style data-emotion={`${cache.key} ${names.join(' ')}`} dangerouslySetInnerHTML={{ __html: styles }} />
+    return (
+      <style
+        key={cache.key}
+        data-emotion={`${cache.key} ${names.join(' ')}`}
+        dangerouslySetInnerHTML={{ __html: styles }}
+      />
+    )
   })
 
   return <CacheProvider value={cache}>{children}</CacheProvider>
