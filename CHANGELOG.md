@@ -1,5 +1,43 @@
 # Changelog
 
+## 0.81.0
+
+### `@chronogrove/ui` — dashboard widget primitives (Issue #566) and reference-app polish
+
+Tracked under epic **[#561](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/561)** (Decouple Chronogrove UX into `@chronogrove/ui`). This release advances **[#566](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/566)** by moving additional low-coupling dashboard pieces into the UI package with subpath exports and tests.
+
+- **New subpaths**: [`@chronogrove/ui/category-label`](packages/ui/src/category-label.js), [`@chronogrove/ui/external-link-icon`](packages/ui/src/external-link-icon.js), [`@chronogrove/ui/metric-badge`](packages/ui/src/metric-badge.js), [`@chronogrove/ui/metric-card`](packages/ui/src/metric-card.js), [`@chronogrove/ui/muted-card-footer`](packages/ui/src/muted-card-footer.js), [`@chronogrove/ui/pagination`](packages/ui/src/pagination.js) (bar composition; pairs with existing `@chronogrove/ui/pagination-button`), [`@chronogrove/ui/status-card`](packages/ui/src/status-card.js), [`@chronogrove/ui/widget-section`](packages/ui/src/widget-section.js), [`@chronogrove/ui/widget-call-to-action`](packages/ui/src/widget-call-to-action.js). Shared chevron SVG helpers live alongside implementations for pagination (`chevron-icons.js`, not separately exported).
+- **`WidgetCallToAction`**: when `linkComponent` is set (e.g. Next.js `Link` or Gatsby `Link`), the outer node is Theme UI **`Box as={linkComponent}`** so **`sx`** and **`links.widgetCta`** apply — framework links do not accept `sx` on their own.
+- **`MetricCard`**: centered stat-tile layout (value + uppercase label), optional **`sx`** merge, theme **`metricCard`** gains a light **border** on **`panel-divider`** for contrast on animated backgrounds.
+- **Theme**: `cards.metricCard` snapshot updated.
+
+### `gatsby-theme-chronogrove`
+
+- **Thin re-exports** for category, pagination, and widget modules now point at `@chronogrove/ui` where applicable; widget snapshot tests updated for moved markup.
+
+### Examples
+
+- **`examples/chronogrove-next`**: **[#563](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/563)** reference app homepage reworked into a **composite widget** preview (header row, metrics grid, status, `WidgetSection`, pinned **`actionCard`** via `@chronogrove/ui/action-card-layout`) plus focused sections for controls, tokens, and lazy load — closer to the Gatsby home dashboard than a flat control list.
+
+### Related GitHub issues (not closed by this release alone)
+
+| Issue                                                                                                 | Relationship                                                                                  |
+| ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [#561](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/561)                              | Parent epic; still open until decoupling milestones finish.                                   |
+| [#566](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/566)                              | Directly advanced; may remain open until migration scope matches the issue checklist.         |
+| [#563](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/563)                              | Closed earlier; Next example continues to serve as the proof app — layout/docs improved here. |
+| [#568](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/568) — Global CSS / consumer docs | Not targeted in this PR.                                                                      |
+| [#569](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/569) — Remove theme shims         | Opposite direction (this PR adds/keeps shims while moving sources to `packages/ui`).          |
+| [#570](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/570) — Publish `@chronogrove/ui`  | Version bump prepares npm tag; publishing workflow is separate.                               |
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.81.0**, new exports), `packages/ui/src/**`, `packages/ui/src/__snapshots__/theme.spec.js.snap`
+- `theme/package.json` (version **0.81.0**), widget and template shims, snapshots, `theme/jest.config.js`
+- `examples/chronogrove-next/app/home-showcase.jsx`
+
+---
+
 ## 0.80.0
 
 ### `@chronogrove/ui` — Next.js App Router helpers, Color Bends export, and test hardening

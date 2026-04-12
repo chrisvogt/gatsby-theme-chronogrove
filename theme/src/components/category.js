@@ -1,24 +1,15 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
-import { Themed } from '@theme-ui/mdx'
+import React from 'react'
+
+import CategoryLabel from '@chronogrove/ui/category-label'
 import { getCategoryDisplayName } from '../helpers/categoryHelpers'
 
-const Category = ({ sx = {}, type }) => {
+const Category = ({ sx = {}, type, ...props }) => {
   const category = getCategoryDisplayName(type)
 
   return (
-    <Themed.div
-      sx={{
-        display: 'inline-block',
-        fontSize: [0],
-        fontFamily: 'heading',
-        color: 'primary',
-        letterSpacing: '0.05em',
-        ...sx
-      }}
-    >
+    <CategoryLabel sx={sx} {...props}>
       {category}
-    </Themed.div>
+    </CategoryLabel>
   )
 }
 

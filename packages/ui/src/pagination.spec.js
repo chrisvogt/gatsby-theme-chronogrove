@@ -1,15 +1,12 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
 import { ThemeUIProvider } from 'theme-ui'
 
-import Pagination from './pagination'
+import Pagination from './pagination.js'
 
-// Mock theme
 const mockTheme = {
   colors: {
+    primary: '#422EA3',
+    primaryRgb: '66, 46, 163',
     modes: {
       dark: {
         text: '#ffffff',
@@ -19,19 +16,8 @@ const mockTheme = {
   }
 }
 
-// Mock store
-const mockStore = configureStore({
-  reducer: {
-    theme: (state = { colorMode: 'light' }) => state
-  }
-})
-
 const renderWithProviders = component => {
-  return render(
-    <Provider store={mockStore}>
-      <ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>
-    </Provider>
-  )
+  return render(<ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>)
 }
 
 describe('Pagination', () => {
@@ -74,6 +60,13 @@ describe('Pagination', () => {
     fireEvent.click(page2Button)
 
     expect(defaultProps.onPageChange).toHaveBeenCalledWith(2)
+  })
+
+  it('does not call onPageChange when clicking the already active page', () => {
+    renderWithProviders(<Pagination {...defaultProps} currentPage={2} />)
+    jest.clearAllMocks()
+    fireEvent.click(screen.getByText('2'))
+    expect(defaultProps.onPageChange).not.toHaveBeenCalled()
   })
 
   it('handles previous button click', () => {
@@ -143,7 +136,6 @@ describe('Pagination', () => {
   it('applies custom variant', () => {
     renderWithProviders(<Pagination {...defaultProps} variant='secondary' currentPage={2} />)
 
-    // Check that buttons have secondary styling (test non-current page)
     const pageButton = screen.getByText('1')
     expect(pageButton).toHaveStyle({
       color: 'rgb(102, 102, 102)'
@@ -153,7 +145,6 @@ describe('Pagination', () => {
   it('applies custom size', () => {
     renderWithProviders(<Pagination {...defaultProps} size='large' />)
 
-    // Check that buttons have large styling
     const pageButton = screen.getByText('1')
     expect(pageButton).toHaveStyle({
       fontSize: '12px',
@@ -165,7 +156,6 @@ describe('Pagination', () => {
   it('shows ellipsis when gap is exactly 2 pages from start', () => {
     renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={4} maxVisiblePages={3} />)
 
-    // Should show ellipsis after page 1 since visiblePages[0] (4) > 2
     const ellipsis = screen.getAllByText('...')
     expect(ellipsis.length).toBeGreaterThan(0)
     expect(screen.getByText('1')).toBeInTheDocument()
@@ -174,7 +164,6 @@ describe('Pagination', () => {
   it('shows ellipsis when gap is exactly 2 pages from end', () => {
     renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={7} maxVisiblePages={3} />)
 
-    // Should show ellipsis before last page since visiblePages[visiblePages.length - 1] (9) < totalPages - 1 (9)
     const ellipsis = screen.getAllByText('...')
     expect(ellipsis.length).toBeGreaterThan(0)
     expect(screen.getByText('10')).toBeInTheDocument()
@@ -183,7 +172,6 @@ describe('Pagination', () => {
   it('handles clicking first page button when first page is not visible', () => {
     renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={5} maxVisiblePages={3} />)
 
-    // Click the first page button (should be visible with ellipsis)
     const firstPageButton = screen.getByLabelText('Go to page 1')
     fireEvent.click(firstPageButton)
 
@@ -193,11 +181,27 @@ describe('Pagination', () => {
   it('handles clicking last page button when last page is not visible', () => {
     renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={5} maxVisiblePages={3} />)
 
-    // Click the last page button (should be visible with ellipsis)
     const lastPageButton = screen.getByLabelText('Go to page 10')
     fireEvent.click(lastPageButton)
 
     expect(defaultProps.onPageChange).toHaveBeenCalledWith(10)
+  })
+
+  it('uses custom prev and next icons when provided', () => {
+    renderWithProviders(
+      <Pagination
+        {...defaultProps}
+        prevIcon={<span data-testid='prev-custom'>«</span>}
+        nextIcon={<span data-testid='next-custom'>»</span>}
+      />
+    )
+    expect(screen.getByTestId('prev-custom')).toBeInTheDocument()
+    expect(screen.getByTestId('next-custom')).toBeInTheDocument()
+  })
+
+  it('expands page window from the end when the range is narrower than maxVisiblePages', () => {
+    renderWithProviders(<Pagination {...defaultProps} totalPages={10} currentPage={10} maxVisiblePages={5} />)
+    expect(screen.getByLabelText('Go to page 10')).toBeInTheDocument()
   })
 
   describe('Simple mode', () => {
@@ -206,7 +210,6 @@ describe('Pagination', () => {
 
       expect(screen.getByLabelText('Previous page')).toBeInTheDocument()
       expect(screen.getByLabelText('Next page')).toBeInTheDocument()
-      // Should not render page number buttons
       expect(screen.queryByText('1')).not.toBeInTheDocument()
       expect(screen.queryByText('2')).not.toBeInTheDocument()
     })
@@ -221,7 +224,6 @@ describe('Pagination', () => {
       renderWithProviders(<Pagination {...defaultProps} simple={true} showPageInfo={false} />)
 
       expect(screen.queryByText('1/5')).not.toBeInTheDocument()
-      // Buttons should still be present
       expect(screen.getByLabelText('Previous page')).toBeInTheDocument()
       expect(screen.getByLabelText('Next page')).toBeInTheDocument()
     })
@@ -261,7 +263,6 @@ describe('Pagination', () => {
     it('applies custom variant in simple mode', () => {
       renderWithProviders(<Pagination {...defaultProps} simple={true} variant='secondary' />)
 
-      // Buttons should render with secondary variant
       expect(screen.getByLabelText('Previous page')).toBeInTheDocument()
       expect(screen.getByLabelText('Next page')).toBeInTheDocument()
     })
@@ -269,7 +270,6 @@ describe('Pagination', () => {
     it('applies custom size in simple mode', () => {
       renderWithProviders(<Pagination {...defaultProps} simple={true} size='small' />)
 
-      // Buttons should render with small size
       const prevButton = screen.getByLabelText('Previous page')
       expect(prevButton).toHaveStyle({
         fontSize: '10px',
