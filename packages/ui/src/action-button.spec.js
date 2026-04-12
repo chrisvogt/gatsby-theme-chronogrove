@@ -82,6 +82,20 @@ describe('ActionButton', () => {
     })
   })
 
+  it('uses dark secondary palette when color mode is dark', () => {
+    mockUseThemeUI.mockReturnValueOnce({
+      colorMode: 'dark',
+      theme: {
+        colors: {
+          primary: BUTTON_PRIMARY_COLORS.light,
+          primaryRgb: '66, 46, 163'
+        }
+      }
+    })
+    renderWithProviders(<ActionButton variant='secondary'>Secondary Dark</ActionButton>)
+    expect(screen.getByRole('button', { name: /secondary dark/i })).toHaveStyle({ color: '#888' })
+  })
+
   it('applies small size styles', () => {
     renderWithProviders(<ActionButton size='small'>Small Button</ActionButton>)
 

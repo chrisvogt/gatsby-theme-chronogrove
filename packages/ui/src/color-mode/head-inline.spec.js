@@ -36,4 +36,15 @@ describe('head-inline scripts', () => {
     expect(css).toContain('--theme-ui-colors-panel-background:')
     expect(css).toContain('--theme-ui-colors-panel-text:')
   })
+
+  it('buildThemeUiColorModeFallbackCss uses default background hexes when omitted', () => {
+    const css = buildThemeUiColorModeFallbackCss({
+      defaultTextHex: '#111',
+      defaultTextMutedHex: '#333',
+      darkTextHex: '#fff',
+      darkTextMutedHex: '#ccc'
+    })
+    expect(css).toContain('--theme-ui-colors-background: #fdf8f5')
+    expect(css).toContain('--theme-ui-colors-background: #14141F')
+  })
 })

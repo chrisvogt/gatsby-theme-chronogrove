@@ -30,6 +30,17 @@ describe('SkipNavLink', () => {
     expect(link).toHaveAttribute('data-skip-nav-link', '')
   })
 
+  it('respects custom contentId for the hash target', () => {
+    renderLink(<SkipNavLink contentId='main'>Jump</SkipNavLink>)
+    expect(screen.getByRole('link', { name: /jump/i })).toHaveAttribute('href', '#main')
+  })
+
+  it('uses default label and skip target when props are omitted', () => {
+    renderLink(<SkipNavLink />)
+    const link = screen.getByRole('link', { name: /skip to content/i })
+    expect(link).toHaveAttribute('href', '#skip-nav-content')
+  })
+
   it('uses fallback colors when theme omits primary tokens', () => {
     render(
       <ThemeUIProvider theme={{ colors: {} }}>

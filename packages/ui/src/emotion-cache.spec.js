@@ -27,4 +27,16 @@ describe('getChronogroveEmotionCache', () => {
     })
     document.head.removeChild(meta)
   })
+
+  it('passes a real insertion point meta when present', () => {
+    const meta = document.createElement('meta')
+    meta.setAttribute('name', 'emotion-insertion-point')
+    document.head.appendChild(meta)
+    jest.isolateModules(() => {
+      const { createChronogroveEmotionCache } = require('./emotion-cache')
+      const cache = createChronogroveEmotionCache()
+      expect(cache).toBeTruthy()
+    })
+    document.head.removeChild(meta)
+  })
 })
