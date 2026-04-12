@@ -1,6 +1,19 @@
 const path = require('path')
 const startCase = require('lodash/startCase')
 
+/**
+ * Drop Gatsby’s ESLintWebpackPlugin. The workspace hoists ESLint 10, while Gatsby’s default
+ * eslint-config-react-app → eslint-plugin-flowtype expects legacy ESLint internals (see
+ * https://github.com/gatsbyjs/gatsby/issues/39033). Linting stays on `pnpm lint` at the repo root.
+ */
+exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
+  const config = getConfig()
+  if (config.plugins?.length) {
+    config.plugins = config.plugins.filter(plugin => !plugin || plugin.constructor.name !== 'ESLintWebpackPlugin')
+  }
+  actions.replaceWebpackConfig(config)
+}
+
 const getNodePath = node => {
   let nodePath = '/'
 

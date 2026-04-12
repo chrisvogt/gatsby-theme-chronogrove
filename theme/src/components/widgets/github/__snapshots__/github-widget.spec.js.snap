@@ -81,7 +81,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -137,7 +137,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -193,7 +193,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -249,7 +249,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -305,7 +305,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -361,7 +361,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -427,7 +427,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
         class="css-1srnkuc"
       >
         <div
-          class="css-zl6176"
+          class="css-12zd2xr"
         >
           <span>
              – in 
@@ -467,7 +467,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
         Contribution Graph
       </h3>
       <div
-        class="css-1359vi5"
+        class="css-1ptykou"
       >
         <p
           class="css-1qwovgy"
@@ -1662,7 +1662,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
           href="https://github.com/test/repo"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -1729,7 +1729,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
         href="https://github.com/test/repo/pull/1"
       >
         <div
-          class="css-zl6176"
+          class="css-12zd2xr"
         >
           <span>
             Test PR – in 
@@ -1769,7 +1769,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
         Contribution Graph
       </h3>
       <div
-        class="css-1359vi5"
+        class="css-1ptykou"
       >
         <p
           class="css-1qwovgy"
@@ -3077,7 +3077,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -3133,7 +3133,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -3189,7 +3189,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -3245,7 +3245,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -3301,7 +3301,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -3357,7 +3357,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           class="css-nf0qmy"
         >
           <div
-            class="css-19c3fuf"
+            class="css-13h6ibl"
           >
             <div
               class="show-loading-animation"
@@ -3423,7 +3423,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         class="css-1srnkuc"
       >
         <div
-          class="css-zl6176"
+          class="css-12zd2xr"
         >
           <div
             class="text-row show-loading-animation"
@@ -3449,7 +3449,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         Contribution Graph
       </h3>
       <div
-        class="css-1359vi5"
+        class="css-1ptykou"
       >
         <p
           class="css-1qwovgy"

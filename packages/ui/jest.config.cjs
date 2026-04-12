@@ -8,7 +8,7 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest'
   },
   transformIgnorePatterns: ['node_modules/(?!theme-ui)'],
-  collectCoverageFrom: ['src/**/*.js', '!src/**/*.spec.js'],
+  collectCoverageFrom: ['src/**/*.js', '!src/**/*.spec.js', '!src/next/**'],
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
     '/node_modules/',
@@ -16,17 +16,22 @@ module.exports = {
     'src/skip-nav/index.js',
     'src/color-mode/index.js',
     'src/gatsby/index.js',
-    'src/theme.js'
+    'src/animated-page-background/index.js',
+    'src/gatsby/on-route-update-color-mode.js',
+    'src/theme.js',
+    // Shader + WebGL: exercised via ChronogroveAnimatedPageBackground; unit-testing three.js is brittle.
+    'src/animated-page-background/ColorBends.js'
   ],
   moduleNameMapper: {
-    '^@theme-toggles/react$': '<rootDir>/test-utils/mock-theme-toggles-react.js'
+    '^@theme-toggles/react$': '<rootDir>/test-utils/mock-theme-toggles-react.js',
+    '\\.css$': '<rootDir>/test-utils/mock-empty.css.js'
   },
   coverageThreshold: {
     global: {
-      statements: 95,
-      branches: 90,
-      functions: 95,
-      lines: 95
+      statements: 100,
+      branches: 100,
+      functions: 100,
+      lines: 100
     }
   }
 }

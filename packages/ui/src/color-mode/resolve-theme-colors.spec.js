@@ -7,11 +7,13 @@ describe('resolveChronogroveSurfaceColors', () => {
         background: '#fdf8f5',
         text: '#111',
         textMuted: '#333',
+        'panel-background': 'rgba(255, 255, 255, 0.45)',
         modes: {
           dark: {
             background: '#14141F',
             text: '#fff',
-            textMuted: '#d8d8d8'
+            textMuted: '#d8d8d8',
+            'panel-background': 'rgba(20, 20, 31, 0.45)'
           }
         }
       }
@@ -22,7 +24,11 @@ describe('resolveChronogroveSurfaceColors', () => {
       defaultTextHex: '#111',
       defaultTextMutedHex: '#333',
       darkTextHex: '#fff',
-      darkTextMutedHex: '#d8d8d8'
+      darkTextMutedHex: '#d8d8d8',
+      defaultPanelBackground: 'rgba(255, 255, 255, 0.45)',
+      darkPanelBackground: 'rgba(20, 20, 31, 0.45)',
+      defaultPanelText: '#111',
+      darkPanelText: '#fff'
     })
   })
 
@@ -33,7 +39,11 @@ describe('resolveChronogroveSurfaceColors', () => {
       defaultTextHex: '#111',
       defaultTextMutedHex: '#333',
       darkTextHex: '#fff',
-      darkTextMutedHex: '#d8d8d8'
+      darkTextMutedHex: '#d8d8d8',
+      defaultPanelBackground: 'rgba(255, 255, 255, 0.45)',
+      darkPanelBackground: 'rgba(20, 20, 31, 0.45)',
+      defaultPanelText: '#111',
+      darkPanelText: '#fff'
     })
   })
 })

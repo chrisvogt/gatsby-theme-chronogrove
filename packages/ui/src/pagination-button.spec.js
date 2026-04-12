@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
 
@@ -96,6 +94,20 @@ describe('PaginationButton', () => {
     })
   })
 
+  it('uses dark secondary palette when color mode is dark', () => {
+    mockUseThemeUI.mockReturnValueOnce({
+      colorMode: 'dark',
+      theme: {
+        colors: {
+          primary: BUTTON_PRIMARY_COLORS.light,
+          primaryRgb: '66, 46, 163'
+        }
+      }
+    })
+    renderWithProviders(<PaginationButton variant='secondary'>2</PaginationButton>)
+    expect(screen.getByRole('button', { name: /2/i })).toHaveStyle({ color: '#888' })
+  })
+
   it('applies small size styles', () => {
     renderWithProviders(<PaginationButton size='small'>1</PaginationButton>)
 
@@ -115,6 +127,18 @@ describe('PaginationButton', () => {
       fontSize: '12px',
       minWidth: '32px',
       height: '32px'
+    })
+  })
+
+  it('falls back to medium size when size is invalid', () => {
+    renderWithProviders(<PaginationButton size='invalid'>1</PaginationButton>)
+
+    const button = screen.getByRole('button', { name: /1/i })
+    expect(button).toHaveStyle({
+      fontSize: '11px',
+      minWidth: '28px',
+      height: '28px',
+      padding: '6px 10px'
     })
   })
 

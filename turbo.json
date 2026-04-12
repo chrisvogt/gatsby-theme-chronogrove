@@ -4,7 +4,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["public/**", "dist/**"]
+      "outputs": ["public/**", "dist/**", ".next/**"]
     },
     "test": {
       "outputs": ["coverage/**"]

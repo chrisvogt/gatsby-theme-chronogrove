@@ -25,6 +25,8 @@ A Gatsby theme for personal websites and blogs with built-in social media widget
 - **Gatsby** `^5.16.0` (peer dependency; use Gatsby 5.16.x in practice)
 - **React** and **React DOM** 18 or 19
 
+Shared presentation and color-mode logic also ship in **[`@chronogrove/ui`](../packages/ui/README.md)**. If you are **not** using Gatsby, consume that package directly. A **Next.js App Router** reference app lives under [`examples/chronogrove-next`](../examples/chronogrove-next/README.md) (`pnpm develop:next` from the repo root).
+
 ## 🚀 Quick Start
 
 ### Installation

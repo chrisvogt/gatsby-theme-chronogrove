@@ -1,3 +1,8 @@
+import {
+  chronogroveThemeSurfaceColorsDark,
+  chronogroveThemeSurfaceColorsLight
+} from '../chronogrove-theme-surface-colors.js'
+
 import { THEME_UI_COLOR_MODE_STORAGE_KEY } from './constants.js'
 
 function q(str) {
@@ -60,13 +65,43 @@ export function buildHtmlBackgroundInlineScript({
   `
 }
 
+const surfaceLight = chronogroveThemeSurfaceColorsLight
+const surfaceDark = chronogroveThemeSurfaceColorsDark
+
 export function buildThemeUiColorModeFallbackCss({
-  defaultTextHex,
-  defaultTextMutedHex,
-  darkTextHex,
-  darkTextMutedHex
-}) {
+  defaultBackgroundHex = surfaceLight.background,
+  darkBackgroundHex = surfaceDark.background,
+  defaultTextHex = surfaceLight.text,
+  defaultTextMutedHex = surfaceLight.textMuted,
+  darkTextHex = surfaceDark.text,
+  darkTextMutedHex = surfaceDark.textMuted,
+  defaultPanelBackground = surfaceLight['panel-background'],
+  darkPanelBackground = surfaceDark['panel-background'],
+  defaultPanelText = surfaceLight.text,
+  darkPanelText = surfaceDark.text
+} = {}) {
+  /**
+   * Base `:root` (light) must not depend on `data-theme-ui-color-mode`. In App Router SSR / first
+   * paint, that attribute is not set until the inline no-flash script runs—rules that only target
+   * `:root[data-theme-ui-color-mode="default"]` would leave `--theme-ui-colors-panel-background`
+   * (and glass panels using `bg: 'panel-background'`) unset until hydration.
+   */
   return `
+:root {
+  --theme-ui-colors-background: ${defaultBackgroundHex} !important;
+  --theme-ui-colors-panel-background: ${defaultPanelBackground} !important;
+  --theme-ui-colors-panel-text: ${defaultPanelText} !important;
+  --theme-ui-colors-text: ${defaultTextHex};
+  --theme-ui-colors-text-muted: ${defaultTextMutedHex};
+}
+:root[data-theme-ui-color-mode="dark"],
+html.theme-ui-dark {
+  --theme-ui-colors-background: ${darkBackgroundHex} !important;
+  --theme-ui-colors-panel-background: ${darkPanelBackground} !important;
+  --theme-ui-colors-panel-text: ${darkPanelText} !important;
+  --theme-ui-colors-text: ${darkTextHex};
+  --theme-ui-colors-text-muted: ${darkTextMutedHex};
+}
 :root[data-theme-ui-color-mode="default"], :root[data-theme-ui-color-mode="default"] * { --theme-ui-colors-text: ${defaultTextHex} !important; --theme-ui-colors-text-muted: ${defaultTextMutedHex} !important; }
 :root[data-theme-ui-color-mode="dark"], :root[data-theme-ui-color-mode="dark"] * { --theme-ui-colors-text: ${darkTextHex} !important; --theme-ui-colors-text-muted: ${darkTextMutedHex} !important; }
   `.trim()

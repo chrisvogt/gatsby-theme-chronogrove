@@ -1,0 +1,10 @@
+/* Styles for `@chronogrove/ui/color-toggle` (`@theme-toggles/react` Expand). Import once in global CSS, e.g. `@import '@chronogrove/ui/color-toggle-styles';` */
+@import '@theme-toggles/react/css/Expand.css';
+
+.theme-toggle,
+.theme-toggle svg {
+  color: inherit;
+  fill: currentColor;
+  width: 16px;
+  height: 16px;
+}

@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
 
@@ -82,6 +80,20 @@ describe('ActionButton', () => {
     expect(button).toHaveStyle({
       color: '#666'
     })
+  })
+
+  it('uses dark secondary palette when color mode is dark', () => {
+    mockUseThemeUI.mockReturnValueOnce({
+      colorMode: 'dark',
+      theme: {
+        colors: {
+          primary: BUTTON_PRIMARY_COLORS.light,
+          primaryRgb: '66, 46, 163'
+        }
+      }
+    })
+    renderWithProviders(<ActionButton variant='secondary'>Secondary Dark</ActionButton>)
+    expect(screen.getByRole('button', { name: /secondary dark/i })).toHaveStyle({ color: '#888' })
   })
 
   it('applies small size styles', () => {

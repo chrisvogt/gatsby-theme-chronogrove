@@ -66,7 +66,7 @@ describe('Theme Configuration', () => {
       const postCard = theme.cards.PostCard
       expect(postCard).toHaveProperty('display', 'flex')
       expect(postCard).toHaveProperty('flexDirection', 'column')
-      expect(postCard).toHaveProperty('backgroundColor', 'var(--theme-ui-colors-panel-background)')
+      expect(postCard).toHaveProperty('bg', 'panel-background')
     })
 
     it('integrates floatOnHover into PostCard', () => {

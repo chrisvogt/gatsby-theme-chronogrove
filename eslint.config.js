@@ -14,6 +14,7 @@ module.exports = [
       '**/theme/public/**',
       '**/www.chrisvogt.me/public/**',
       '**/www.chronogrove.com/public/**',
+      '**/examples/**/.next/**',
       '**/.cache/**'
     ]
   },
@@ -38,7 +39,14 @@ module.exports = [
     }
   },
   {
-    files: ['theme/**/*.js', 'www.chrisvogt.me/**/*.js', 'www.chronogrove.com/**/*.js', 'packages/**/*.js'],
+    files: [
+      'theme/**/*.js',
+      'www.chrisvogt.me/**/*.js',
+      'www.chronogrove.com/**/*.js',
+      'packages/**/*.js',
+      'examples/**/*.js',
+      'examples/**/*.jsx'
+    ],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -62,7 +70,14 @@ module.exports = [
   },
   js.configs.recommended,
   {
-    files: ['theme/**/*.js', 'www.chrisvogt.me/**/*.js', 'www.chronogrove.com/**/*.js', 'packages/**/*.js'],
+    files: [
+      'theme/**/*.js',
+      'www.chrisvogt.me/**/*.js',
+      'www.chronogrove.com/**/*.js',
+      'packages/**/*.js',
+      'examples/**/*.js',
+      'examples/**/*.jsx'
+    ],
     plugins: {
       react,
       'jsx-a11y': jsxA11Y,

@@ -1,6 +1,6 @@
-/** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
+import { Box } from '@theme-ui/components'
+import { useThemeUI } from 'theme-ui'
 import isDarkMode from '../helpers/isDarkMode.js'
 
 const SkipNavLink = forwardRef(function SkipNavLink(
@@ -13,7 +13,8 @@ const SkipNavLink = forwardRef(function SkipNavLink(
   const primaryRgb = theme?.colors?.primaryRgb ?? (darkModeActive ? '74, 158, 255' : '66, 46, 163')
 
   return (
-    <Comp
+    <Box
+      as={Comp}
       {...props}
       ref={forwardedRef}
       href={`#${contentId}`}
@@ -63,7 +64,7 @@ const SkipNavLink = forwardRef(function SkipNavLink(
       }}
     >
       {children}
-    </Comp>
+    </Box>
   )
 })
 

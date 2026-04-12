@@ -1,17 +1,15 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useSelector } from 'react-redux'
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { logColorModeDebugBanner, logColorModeState } from '../helpers/color-mode-debug'
 import AudioPlayer from './audio-player'
 import {
   THEME_UI_COLOR_MODE_STORAGE_KEY,
   RECONCILE_COLOR_MODE_EVENT,
-  resolveChronogroveSurfaceColors
+  useDocumentColorModeSurface
 } from '@chronogrove/ui/color-mode'
-
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 const normalizeStored = mode => (mode === 'light' ? 'default' : mode || null)
 
@@ -29,8 +27,9 @@ const RootWrapper = ({ children }) => {
   const [colorMode, setColorMode] = useColorMode()
   const { theme } = useThemeUI()
 
+  useDocumentColorModeSurface()
+
   const normalizedColorMode = colorMode === 'light' ? 'default' : colorMode || 'default'
-  const surface = resolveChronogroveSurfaceColors(theme)
 
   useEffect(() => {
     if (typeof window !== 'undefined') logColorModeDebugBanner()
@@ -47,22 +46,9 @@ const RootWrapper = ({ children }) => {
     return () => window.removeEventListener(RECONCILE_COLOR_MODE_EVENT, handler)
   }, [normalizedColorMode, setColorMode])
 
-  useIsomorphicLayoutEffect(() => {
-    if (typeof document === 'undefined') return
-    const isDark = normalizedColorMode === 'dark'
-    const bgColorRaw =
-      theme?.rawColors?.background ||
-      theme?.colors?.background ||
-      (isDark ? surface.darkBackgroundHex : surface.defaultBackgroundHex)
-    const htmlElement = document.documentElement
-    Array.from(htmlElement.classList)
-      .filter(className => className.startsWith('theme-ui-'))
-      .forEach(className => htmlElement.classList.remove(className))
-    htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
-    htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
-    htmlElement.style.backgroundColor = bgColorRaw
-    logColorModeState(normalizedColorMode, theme, 'RootWrapper')
-  }, [normalizedColorMode, surface.darkBackgroundHex, surface.defaultBackgroundHex, theme])
+  useEffect(() => {
+    if (typeof window !== 'undefined') logColorModeState(normalizedColorMode, theme, 'RootWrapper')
+  }, [normalizedColorMode, theme])
 
   return (
     <>

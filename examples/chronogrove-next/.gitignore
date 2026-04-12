@@ -1,0 +1,20 @@
+# Dependencies
+node_modules
+
+# Next.js build / export (never commit)
+.next
+out
+
+# Tooling & local env
+.turbo
+.vercel
+*.log
+.env
+.env*.local
+
+# OS / editor
+.DS_Store
+
+# TypeScript (if you add TS later)
+next-env.d.ts
+*.tsbuildinfo

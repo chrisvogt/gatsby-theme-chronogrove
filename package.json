@@ -4,6 +4,7 @@
     "develop": "pnpm run develop:website",
     "develop:theme": "pnpm --filter www.chronogrove.com develop",
     "develop:website": "pnpm --filter www.chrisvogt.me develop:https",
+    "develop:next": "pnpm --filter chronogrove-next dev",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,mdx}\"",
     "lint": "eslint .",
     "preinstall": "npx only-allow pnpm",

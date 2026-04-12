@@ -22,10 +22,16 @@ export function buildThemeUiColorModeHeadComponents({ theme }) {
     darkBackgroundHex: surface.darkBackgroundHex
   })
   const colorModeFallbackCSS = buildThemeUiColorModeFallbackCss({
+    defaultBackgroundHex: surface.defaultBackgroundHex,
+    darkBackgroundHex: surface.darkBackgroundHex,
     defaultTextHex: surface.defaultTextHex,
     defaultTextMutedHex: surface.defaultTextMutedHex,
     darkTextHex: surface.darkTextHex,
-    darkTextMutedHex: surface.darkTextMutedHex
+    darkTextMutedHex: surface.darkTextMutedHex,
+    defaultPanelBackground: surface.defaultPanelBackground,
+    darkPanelBackground: surface.darkPanelBackground,
+    defaultPanelText: surface.defaultPanelText,
+    darkPanelText: surface.darkPanelText
   })
 
   return [

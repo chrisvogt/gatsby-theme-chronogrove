@@ -1,6 +1,6 @@
-/** @jsx jsx */
 import React from 'react'
-import { jsx, useThemeUI } from 'theme-ui'
+import { Box } from '@theme-ui/components'
+import { useThemeUI } from 'theme-ui'
 import isDarkMode from './helpers/isDarkMode.js'
 import { hexToRgb } from './color-utils.js'
 
@@ -97,9 +97,9 @@ const PaginationButton = ({
   )
 
   return (
-    <button type='button' onClick={onClick} disabled={disabled} sx={baseStyles} {...props}>
+    <Box as='button' type='button' onClick={onClick} disabled={disabled} sx={baseStyles} {...props}>
       {content}
-    </button>
+    </Box>
   )
 }
 

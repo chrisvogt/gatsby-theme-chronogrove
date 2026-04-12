@@ -40,6 +40,8 @@ describe('@chronogrove/ui/gatsby', () => {
       const fallbackStyle = fallbackStyleContainer.querySelector('style')
       expect(fallbackStyle).toHaveTextContent(/:root\[data-theme-ui-color-mode="default"\]/)
       expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #111 !important/)
+      expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-panel-background:/)
+      expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-panel-text:/)
     })
   })
 
@@ -99,6 +101,46 @@ describe('@chronogrove/ui/gatsby', () => {
       const replaceHeadComponents = jest.fn()
       onPreRenderHTMLSortThemeUiColorModeFirst({ getHeadComponents, replaceHeadComponents })
       expect(replaceHeadComponents.mock.calls[0][0].map(c => c.key)).toEqual(['html-bg-color', 'theme-ui-no-flash'])
+    })
+
+    it('treats missing component keys as empty string', () => {
+      const getHeadComponents = jest.fn(() => [{ type: 'meta' }, { key: 'theme-ui-no-flash', type: 'script' }])
+      const replaceHeadComponents = jest.fn()
+      onPreRenderHTMLSortThemeUiColorModeFirst({ getHeadComponents, replaceHeadComponents })
+      const sorted = replaceHeadComponents.mock.calls[0][0]
+      expect(sorted[0].key).toBe('theme-ui-no-flash')
+    })
+
+    it('handles null or undefined head entries when sorting', () => {
+      const getHeadComponents = jest.fn(() => [
+        null,
+        undefined,
+        { key: 'theme-ui-no-flash', type: 'script' },
+        { key: 'other', type: 'meta' }
+      ])
+      const replaceHeadComponents = jest.fn()
+      onPreRenderHTMLSortThemeUiColorModeFirst({ getHeadComponents, replaceHeadComponents })
+      const sorted = replaceHeadComponents.mock.calls[0][0]
+      expect(sorted[0].key).toBe('theme-ui-no-flash')
+    })
+
+    it('treats explicit null keys like missing keys', () => {
+      const getHeadComponents = jest.fn(() => [
+        { key: null, type: 'meta' },
+        { key: 'theme-ui-no-flash', type: 'script' }
+      ])
+      const replaceHeadComponents = jest.fn()
+      onPreRenderHTMLSortThemeUiColorModeFirst({ getHeadComponents, replaceHeadComponents })
+      const sorted = replaceHeadComponents.mock.calls[0][0]
+      expect(sorted[0].key).toBe('theme-ui-no-flash')
+    })
+
+    it('sorts when the right-hand entry is null', () => {
+      const getHeadComponents = jest.fn(() => [{ key: 'theme-ui-no-flash', type: 'script' }, null])
+      const replaceHeadComponents = jest.fn()
+      onPreRenderHTMLSortThemeUiColorModeFirst({ getHeadComponents, replaceHeadComponents })
+      const sorted = replaceHeadComponents.mock.calls[0][0]
+      expect(sorted[0].key).toBe('theme-ui-no-flash')
     })
   })
 

@@ -1,5 +1,9 @@
+import { chronogroveHeadTheme } from './chronogrove-head-theme.js'
 import { THEME_UI_COLOR_MODE_STORAGE_KEY } from './constants.js'
 import { normalizeThemeUiColorMode } from './normalize.js'
+import { resolveChronogroveSurfaceColors } from './resolve-theme-colors.js'
+
+const SURFACE = resolveChronogroveSurfaceColors(chronogroveHeadTheme)
 
 export function resolveThemeUiColorMode(storageKey = THEME_UI_COLOR_MODE_STORAGE_KEY) {
   let mode
@@ -49,6 +53,9 @@ export function syncThemeUiColorMode(storageKey = THEME_UI_COLOR_MODE_STORAGE_KE
     .forEach(className => htmlElement.classList.remove(className))
   htmlElement.classList.add(`theme-ui-${mode}`)
   htmlElement.setAttribute('data-theme-ui-color-mode', mode)
+  // Match `buildHtmlBackgroundInlineScript`: inline background must follow toggles; otherwise the
+  // initial head script’s color sticks and wins over Theme UI’s `--theme-ui-colors-background`.
+  htmlElement.style.backgroundColor = mode === 'dark' ? SURFACE.darkBackgroundHex : SURFACE.defaultBackgroundHex
 }
 
 export function scheduleThemeUiColorModeSync(storageKey = THEME_UI_COLOR_MODE_STORAGE_KEY) {
