@@ -1,6 +1,11 @@
 import { tailwind } from '@theme-ui/presets'
 import { merge } from 'theme-ui'
 
+import {
+  chronogroveThemeSurfaceColorsDark,
+  chronogroveThemeSurfaceColorsLight
+} from './chronogrove-theme-surface-colors.js'
+
 const fonts = {
   sans: '-apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif',
   serif:
@@ -367,20 +372,16 @@ export default merge(tailwind, {
 
   colors: {
     accent: 'deeppink',
-    background: '#fdf8f5',
-    'panel-background': 'rgba(255, 255, 255, 0.45)',
+    ...chronogroveThemeSurfaceColorsLight,
     'panel-divider': () => '1px solid rgba(255, 229, 224, 0.17)',
     'panel-highlight': theme => theme.colors.gray[1],
     modes: {
       dark: {
-        background: '#14141F',
-        'panel-background': 'rgba(20, 20, 31, 0.45)',
+        ...chronogroveThemeSurfaceColorsDark,
         'panel-divider': theme => `1px solid ${theme.colors.gray[8]}`,
         'panel-highlight': theme => theme.colors.gray[8],
         primary: '#4a9eff',
         primaryRgb: '74, 158, 255',
-        text: '#fff',
-        textMuted: '#d8d8d8',
         tableText: '#fff',
         tableBackground: 'rgba(30, 30, 47, 0.45)',
         tableHeaderBackground: 'rgba(30, 37, 48, 0.8)',
@@ -398,9 +399,7 @@ export default merge(tailwind, {
     tableHeaderBackground: '#f4f4f9',
     tableRowBackground: 'transparent',
     tableRowAlternateBackground: '#fafafa',
-    tableBorder: 'muted',
-    text: '#111',
-    textMuted: '#333'
+    tableBorder: 'muted'
   },
 
   fonts: {

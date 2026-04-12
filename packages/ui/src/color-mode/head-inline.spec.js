@@ -47,4 +47,16 @@ describe('head-inline scripts', () => {
     expect(css).toContain('--theme-ui-colors-background: #fdf8f5')
     expect(css).toContain('--theme-ui-colors-background: #14141F')
   })
+
+  it('buildThemeUiColorModeFallbackCss uses chronogrove-theme-surface-colors when called with no options', () => {
+    const css = buildThemeUiColorModeFallbackCss()
+    expect(css).toContain('--theme-ui-colors-background: #fdf8f5')
+    expect(css).toContain('--theme-ui-colors-background: #14141F')
+    expect(css).toContain('rgba(255, 255, 255, 0.45)')
+    expect(css).toContain('rgba(20, 20, 31, 0.45)')
+    expect(css).toMatch(/--theme-ui-colors-text: #111/)
+    expect(css).toMatch(/--theme-ui-colors-text-muted: #333/)
+    expect(css).toMatch(/--theme-ui-colors-text: #fff/)
+    expect(css).toMatch(/--theme-ui-colors-text-muted: #d8d8d8/)
+  })
 })

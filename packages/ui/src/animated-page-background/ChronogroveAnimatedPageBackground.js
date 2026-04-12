@@ -5,6 +5,10 @@ import { Box } from '@theme-ui/components'
 import { useColorMode, useThemeUI } from 'theme-ui'
 
 import ColorBends from './ColorBends.js'
+import {
+  chronogroveThemeSurfaceColorsDark,
+  chronogroveThemeSurfaceColorsLight
+} from '../chronogrove-theme-surface-colors.js'
 import { hexToRgba } from '../color-utils.js'
 
 // Based on Starry Banner SVG colors: purple #800080 and gold #FFD700
@@ -29,7 +33,10 @@ export default function ChronogroveAnimatedPageBackground({
   const [maxScrollDistance, setMaxScrollDistance] = useState(1)
   const [mounted, setMounted] = useState(false)
 
-  const bgColorRaw = theme?.rawColors?.background || theme?.colors?.background || (isDark ? '#14141F' : '#fdf8f5')
+  const bgColorRaw =
+    theme?.rawColors?.background ||
+    theme?.colors?.background ||
+    (isDark ? chronogroveThemeSurfaceColorsDark.background : chronogroveThemeSurfaceColorsLight.background)
 
   useEffect(() => {
     setMounted(true)
@@ -81,7 +88,7 @@ export default function ChronogroveAnimatedPageBackground({
           style={COLOR_BENDS_STYLE}
         />
       ) : null,
-    [isDark, colorMode]
+    [isDark]
   )
 
   if (!mounted) {
@@ -90,7 +97,9 @@ export default function ChronogroveAnimatedPageBackground({
 
   const toRgba = (color, alpha) => {
     if (typeof color === 'string' && color.startsWith('var(')) {
-      const fallbackHex = isDark ? '#14141F' : '#fdf8f5'
+      const fallbackHex = isDark
+        ? chronogroveThemeSurfaceColorsDark.background
+        : chronogroveThemeSurfaceColorsLight.background
       return hexToRgba(fallbackHex, alpha)
     }
     return hexToRgba(color, alpha)

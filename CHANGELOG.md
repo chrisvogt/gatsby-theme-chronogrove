@@ -8,6 +8,7 @@
 - **New subpath** [`@chronogrove/ui/color-bends`](packages/ui/src/animated-page-background/ColorBends.js): direct export of the **Color Bends** WebGL background primitive (also composed by `ChronogroveAnimatedPageBackground`).
 - **Theme**: thin re-export [`theme/src/components/home-backgrounds/color-bends.js`](theme/src/components/home-backgrounds/color-bends.js) → `@chronogrove/ui/color-bends` for backwards-compatible `home-backgrounds` imports.
 - **Tests / Jest**: `theme` color-toggle spec loads the shim with **`require()` after `jest.mock('theme-ui')`** so `@chronogrove/ui` sees the mocked `useColorMode`; **`@theme-toggles/react`** manual mock matches **`Expand`**’s boolean `toggle` callback; layout/widget snapshots refreshed.
+- **Color mode / SSR**: canonical surface palette in [`chronogrove-theme-surface-colors.js`](packages/ui/src/chronogrove-theme-surface-colors.js) — shared by `theme.js`, **`chronogroveHeadTheme`** (RSC-safe), **`resolveChronogroveSurfaceColors`** / **`buildThemeUiColorModeFallbackCss`** defaults, and **`ChronogroveAnimatedPageBackground`** fallbacks so inline head CSS, Theme UI, and WebGL overlay tints stay aligned (no duplicate hex lists).
 
 ### Examples
 
@@ -19,7 +20,7 @@
 
 ### Files changed
 
-- `packages/ui/package.json` (version **0.80.0**, exports `./next`, `./color-bends`), `packages/ui/src/next/**`
+- `packages/ui/package.json` (version **0.80.0**, exports `./next`, `./color-bends`), `packages/ui/src/next/**`, `packages/ui/src/chronogrove-theme-surface-colors.js`, `packages/ui/src/theme.js`, `packages/ui/src/color-mode/**`, `packages/ui/src/animated-page-background/ChronogroveAnimatedPageBackground.js`
 - `theme/package.json` (version **0.80.0**), `theme/src/components/home-backgrounds/color-bends.js`, `theme/src/components/color-toggle.spec.js`, `theme/__mocks__/theme-toggles-react-mock.js`, snapshots
 - `examples/chronogrove-next/**`, `examples/chronogrove-next/.gitignore`
 - `README.md`, `packages/ui/README.md`, `examples/chronogrove-next/README.md`

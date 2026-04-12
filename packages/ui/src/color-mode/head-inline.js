@@ -1,3 +1,8 @@
+import {
+  chronogroveThemeSurfaceColorsDark,
+  chronogroveThemeSurfaceColorsLight
+} from '../chronogrove-theme-surface-colors.js'
+
 import { THEME_UI_COLOR_MODE_STORAGE_KEY } from './constants.js'
 
 function q(str) {
@@ -60,18 +65,21 @@ export function buildHtmlBackgroundInlineScript({
   `
 }
 
+const surfaceLight = chronogroveThemeSurfaceColorsLight
+const surfaceDark = chronogroveThemeSurfaceColorsDark
+
 export function buildThemeUiColorModeFallbackCss({
-  defaultBackgroundHex = '#fdf8f5',
-  darkBackgroundHex = '#14141F',
-  defaultTextHex,
-  defaultTextMutedHex,
-  darkTextHex,
-  darkTextMutedHex,
-  defaultPanelBackground = 'rgba(255, 255, 255, 0.45)',
-  darkPanelBackground = 'rgba(20, 20, 31, 0.45)',
-  defaultPanelText = '#111',
-  darkPanelText = '#fff'
-}) {
+  defaultBackgroundHex = surfaceLight.background,
+  darkBackgroundHex = surfaceDark.background,
+  defaultTextHex = surfaceLight.text,
+  defaultTextMutedHex = surfaceLight.textMuted,
+  darkTextHex = surfaceDark.text,
+  darkTextMutedHex = surfaceDark.textMuted,
+  defaultPanelBackground = surfaceLight['panel-background'],
+  darkPanelBackground = surfaceDark['panel-background'],
+  defaultPanelText = surfaceLight.text,
+  darkPanelText = surfaceDark.text
+} = {}) {
   /**
    * Base `:root` (light) must not depend on `data-theme-ui-color-mode`. In App Router SSR / first
    * paint, that attribute is not set until the inline no-flash script runs—rules that only target
