@@ -11,6 +11,10 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 - **`theme/`**: The Gatsby theme package (`gatsby-theme-chronogrove`); depends on `@chronogrove/ui` via `workspace:*` with thin re-export shims for backwards-compatible import paths
 - **`www.chrisvogt.me/`**: The actual website content and configuration
 
+### Importing `@chronogrove/ui` (Gatsby shims vs direct subpaths)
+- **Inside `theme/`**: Prefer existing **shim paths** under `theme/src/components/...` when they exist (e.g. `button.js` re-exports `@chronogrove/ui/button`). That preserves **[Gatsby theme shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/theme-shadowing/)** for sites that override files by path. Implement shared UI in **`packages/ui`**; keep theme files as thin re-exports unless the code is Gatsby-only (e.g. `Link` from `gatsby`).
+- **Next.js (`examples/chronogrove-next`)**, tooling, or non-Gatsby code: import **`@chronogrove/ui/<subpath>`** directly (see `packages/ui/package.json` → `exports`).
+
 ## Back-end API
 
 - **`metrics.chrisvogt.me/`**: Backend API for widgets, uses Firebase, Firestore and scheduled Firebase Functions to sync and cache third-party data

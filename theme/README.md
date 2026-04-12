@@ -27,6 +27,8 @@ A Gatsby theme for personal websites and blogs with built-in social media widget
 
 Shared presentation and color-mode logic also ship in **[`@chronogrove/ui`](../packages/ui/README.md)**. If you are **not** using Gatsby, consume that package directly. A **Next.js App Router** reference app lives under [`examples/chronogrove-next`](../examples/chronogrove-next/README.md) (`pnpm develop:next` from the repo root).
 
+Dashboard widget chrome (**`WidgetHeader`**, **`ProfileMetricsBadge`**, and related primitives) is implemented in **`@chronogrove/ui`** and **re-exported** from this theme under `src/components/` (for example `widgets/widget-header.js`) so Gatsby **shadowing** import paths stay stable.
+
 ## 🚀 Quick Start
 
 ### Installation

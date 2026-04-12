@@ -7,20 +7,26 @@ import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders'
 import 'react-placeholder/lib/reactPlaceholder.css'
 
 import NextLink from 'next/link'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import { actionCardPinnedLayoutSx } from '@chronogrove/ui/action-card-layout'
+import Header from '@chronogrove/ui/header'
 import { SkipNavLink, SkipNavContent } from '@chronogrove/ui/skip-nav'
 import Button from '@chronogrove/ui/button'
 import ActionButton from '@chronogrove/ui/action-button'
 import Pagination from '@chronogrove/ui/pagination'
+import PaginationButton from '@chronogrove/ui/pagination-button'
+import PageHeader from '@chronogrove/ui/page-header'
 import ColorToggle from '@chronogrove/ui/color-toggle'
 import LazyLoad from '@chronogrove/ui/lazy-load'
 import CategoryLabel from '@chronogrove/ui/category-label'
 import MutedCardFooter from '@chronogrove/ui/muted-card-footer'
+import MetricBadge from '@chronogrove/ui/metric-badge'
 import { ExternalLinkIcon } from '@chronogrove/ui/external-link-icon'
 import MetricCard from '@chronogrove/ui/metric-card'
 import StatusCard from '@chronogrove/ui/status-card'
 import WidgetSection from '@chronogrove/ui/widget-section'
+import WidgetHeader from '@chronogrove/ui/widget-header'
 import { WidgetCallToAction } from '@chronogrove/ui/widget-call-to-action'
 
 const previewShellSx = {
@@ -127,6 +133,7 @@ const NAV = [
   { label: 'Overview', href: '#overview' },
   { label: 'Widget preview', href: '#widget-demo' },
   { label: 'Controls', href: '#controls' },
+  { label: 'Layout', href: '#layout' },
   { label: 'Tokens', href: '#tokens' },
   { label: 'Lazy load', href: '#lazy' }
 ]
@@ -224,52 +231,34 @@ function LazyLoadedContent() {
 }
 
 /**
- * One bounded “home widget” slice: header row (title + metrics badge + CTA), metric grid,
- * status strip, body rhythm, and a pinned-repo style actionCard — matching how the Gatsby dashboard composes pieces.
+ * One bounded “home widget” slice: `WidgetHeader` + `ProfileMetricsBadge` (from `@chronogrove/ui`), metric grid,
+ * status strip, body rhythm, and a pinned-repo style actionCard — same primitives as the Gatsby home dashboard.
  */
 function WidgetCompositionDemo() {
+  const headerMetrics = [{ id: 'commits', value: 847, displayName: 'commits' }]
+  const widgetAside = (
+    <WidgetCallToAction href='https://github.com/chrisvogt/gatsby-theme-chronogrove'>
+      View on GitHub
+      <span className='read-more-icon'>&rarr;</span>
+    </WidgetCallToAction>
+  )
+
   return (
     <Box>
-      <Box
-        sx={{
-          borderBottom: '1px solid',
-          borderColor: 'panel-divider',
-          px: [2, 3],
-          pt: [3, 4],
-          pb: 3
-        }}
-      >
-        <Flex
-          sx={{
-            flexDirection: ['column', 'row'],
-            flexWrap: 'wrap',
-            alignItems: ['flex-start', 'baseline'],
-            justifyContent: 'space-between',
-            gap: [3, 4]
-          }}
-        >
-          <Box sx={{ minWidth: 0 }}>
-            <CategoryLabel sx={{ mb: 2 }}>Example</CategoryLabel>
-            <Heading as='h2' sx={{ ...widgetHeadingSx, mb: 0 }}>
-              Sample widget
-            </Heading>
-          </Box>
-          <Flex sx={{ alignItems: 'baseline', gap: [2, 3], flexWrap: 'wrap' }}>
-            <Badge variant='metrics'>847 commits</Badge>
-            <WidgetCallToAction href='https://github.com/chrisvogt/gatsby-theme-chronogrove'>
-              View on GitHub
-              <span className='read-more-icon'>&rarr;</span>
-            </WidgetCallToAction>
-          </Flex>
-        </Flex>
+      <Box sx={{ px: [2, 3], pt: [3, 4] }}>
+        <CategoryLabel sx={{ mb: 2 }}>Example</CategoryLabel>
+        <WidgetHeader aside={widgetAside} icon={faGithub} metrics={headerMetrics}>
+          Sample widget
+        </WidgetHeader>
       </Box>
 
       <Box sx={{ px: [2, 3], py: [3, 4] }}>
         <Text sx={sectionKickerSx}>Metrics (profile strip)</Text>
-        <Grid sx={{ gap: 3, gridTemplateColumns: ['1fr', 'repeat(3, minmax(0, 1fr))'] }}>
+        <Grid sx={{ gap: 3, gridTemplateColumns: ['1fr', 'repeat(2, minmax(0, 1fr))', 'repeat(4, minmax(0, 1fr))'] }}>
           <MetricCard value='142' title='Friends' />
           <MetricCard value='892' title='Books read' />
           <MetricCard value='36' title='This year' />
+          <MetricCard title='Pending' value='…' showPlaceholder />
         </Grid>
 
         <Box sx={{ mt: [3, 4] }}>
@@ -439,8 +428,8 @@ export default function HomeShowcase() {
                           m: 0
                         }}
                       >
-                        It is a compact, realistic slice of the Gatsby home dashboard: same widget header pattern,
-                        metric tiles, and pinned-style cards — not a flat list of disconnected controls. See{' '}
+                        It is a compact, realistic slice of the Gatsby home dashboard: shared WidgetHeader, metric
+                        tiles, and pinned-style cards — not a flat list of disconnected controls. See{' '}
                         <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
                           packages/ui/README.md
                         </Text>{' '}
@@ -451,7 +440,7 @@ export default function HomeShowcase() {
                     <Section
                       id='widget-demo'
                       title='Widget composition'
-                      description='How dashboard widgets are assembled in the theme: headline row, optional metrics badge and CTA, metric cards, status, body spacing, then interactive glass cards for pinned content.'
+                      description='Uses WidgetHeader from @chronogrove/ui (same module as gatsby-theme-chronogrove): optional icon, title, WidgetCallToAction aside, and ProfileMetricsBadge metrics — then MetricCard (including showPlaceholder), StatusCard, WidgetSection, and actionCard.'
                     >
                       <DemoPreview title='Composite widget (read-only demo)'>
                         <WidgetCompositionDemo />
@@ -513,13 +502,57 @@ export default function HomeShowcase() {
                             maxVisiblePages={5}
                           />
                         </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='PaginationButton (building block)'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6, m: 0 }}>
+                            Used inside Pagination for page numbers and prev/next; primary tint follows theme
+                            colors.primary.
+                          </Text>
+                          <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
+                            <PaginationButton active variant='primary'>
+                              3
+                            </PaginationButton>
+                            <PaginationButton variant='primary'>4</PaginationButton>
+                            <PaginationButton variant='secondary' size='small'>
+                              5
+                            </PaginationButton>
+                            <PaginationButton disabled variant='primary'>
+                              …
+                            </PaginationButton>
+                          </Flex>
+                        </DemoBlock>
+                      </DemoPreview>
+                    </Section>
+
+                    <Section
+                      id='layout'
+                      title='Layout primitives'
+                      description='Blog-style post title (PageHeader) and decorative masthead shell (Header) — same exports the Gatsby theme uses for MDX/blog and layout chrome.'
+                    >
+                      <DemoPreview title='PageHeader · Header'>
+                        <DemoBlock label='PageHeader (h1 · p-name)'>
+                          <PageHeader>October in the Bay Area</PageHeader>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, m: 0, mt: 2, lineHeight: 1.6 }}>
+                            Microformats{' '}
+                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                              p-name
+                            </Text>{' '}
+                            on the title for posts.
+                          </Text>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='Header (variant: styles.Header)'>
+                          <Header>
+                            <Text sx={{ m: 0, color: 'text', fontFamily: 'heading', fontSize: 2 }}>Masthead slot</Text>
+                          </Header>
+                        </DemoBlock>
                       </DemoPreview>
                     </Section>
 
                     <Section
                       id='tokens'
                       title='Labels, cards, links'
-                      description='Small patterns used inside widgets: category label, muted footer, outbound-link icon, typography tokens, and badges.'
+                      description='Small patterns used inside widgets: category label, muted footer, MetricBadge, outbound-link icon, typography tokens, and badges.'
                     >
                       <DemoPreview title='Patterns'>
                         <DemoBlock label='CategoryLabel · card with MutedCardFooter'>
@@ -554,7 +587,7 @@ export default function HomeShowcase() {
                           <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
                             <Badge variant='primary'>primary</Badge>
                             <Badge variant='outline'>outline</Badge>
-                            <Badge variant='metrics'>metrics</Badge>
+                            <MetricBadge variant='metrics'>metrics (MetricBadge)</MetricBadge>
                           </Flex>
                         </DemoBlock>
                         <Box as='hr' sx={previewDividerSx} />

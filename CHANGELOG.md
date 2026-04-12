@@ -14,6 +14,13 @@
 - **Thin re-exports**: [`widget-header`](theme/src/components/widgets/widget-header.js), [`profile-metrics-badge`](theme/src/components/widgets/profile-metrics-badge.js), and [`metric-card`](theme/src/components/widgets/metric-card.js) now re-export from `@chronogrove/ui` (Jest coverage ignores these shims; logic is tested in `packages/ui`).
 - **Tests**: widget snapshots updated for header/icon markup; removed invalid **`platform`** prop from the widget-header spec.
 
+### Examples & documentation
+
+- **`examples/chronogrove-next`**: [`home-showcase.jsx`](examples/chronogrove-next/app/home-showcase.jsx) uses **`WidgetHeader`** (with **`@fortawesome/free-brands-svg-icons`**), **`PageHeader`**, **`Header`**, **`PaginationButton`**, **`MetricBadge`**, and **`MetricCard`** **`showPlaceholder`** alongside existing demos; [`README.md`](examples/chronogrove-next/README.md) updated.
+- **`packages/ui/README.md`**: Notes on **additional `exports`**, **`WidgetHeader`** icon packages, and **`MetricCard`** **`loading`** / **`showPlaceholder`**.
+- **[Root `README.md`](README.md)** and **[`theme/README.md`](theme/README.md)**: Cross-references for widget re-exports and the Next showcase.
+- **[`.cursorrules`](.cursorrules)** and **[`CONTRIBUTING.md`](CONTRIBUTING.md)**: Gatsby **shadow** import paths (theme shims) vs **direct** `@chronogrove/ui/...` imports for Next and other non-Gatsby code.
+
 ### Files changed
 
 - `packages/ui/package.json` (version **0.82.0**, new exports; removed `./page-backdrop`), `packages/ui/src/widget-header.js`, `packages/ui/src/profile-metrics-badge.js`, `packages/ui/src/metric-card.js`, specs and snapshots, `packages/ui/README.md`
