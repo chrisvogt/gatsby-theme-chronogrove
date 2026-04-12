@@ -45,7 +45,8 @@ describe('ChronogroveNextEmotionRegistry', () => {
 
     const first = flushCallbacks[flushCallbacks.length - 1]()
     expect(first).not.toBeNull()
-    expect(first.props.dangerouslySetInnerHTML.__html.length).toBeGreaterThan(0)
+    // `cache.inserted[id]` can be `true` for Global in jsdom; must not stringify to invalid CSS.
+    expect(first.props.dangerouslySetInnerHTML.__html).not.toMatch(/^true+$/)
 
     expect(flushCallbacks[flushCallbacks.length - 1]()).toBeNull()
 

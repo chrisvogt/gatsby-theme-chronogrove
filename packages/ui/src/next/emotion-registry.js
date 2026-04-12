@@ -49,7 +49,11 @@ export function ChronogroveNextEmotionRegistry({ children }) {
     }
     let styles = ''
     for (const name of names) {
-      styles += cache.inserted[name]
+      const inserted = cache.inserted[name]
+      // `inserted` can be `true` for Global/keyframes when rules are already in a sheet (Next.js + Emotion pattern).
+      if (typeof inserted === 'string') {
+        styles += inserted
+      }
     }
     return (
       <style
