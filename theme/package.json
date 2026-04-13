@@ -113,6 +113,6 @@
     "theme-ui": "catalog:",
     "three": "^0.183.2",
     "vanilla-tilt": "^1.8.1",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.12"
   }
 }

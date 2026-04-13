@@ -2,9 +2,13 @@ import theme, { floatOnHover } from './theme'
 import { tailwind } from '@theme-ui/presets'
 import { merge } from 'theme-ui'
 
-jest.mock('theme-ui', () => ({
-  merge: jest.fn((...args) => Object.assign({}, ...args))
-}))
+jest.mock('theme-ui', () => {
+  const actual = jest.requireActual('theme-ui')
+  return {
+    ...actual,
+    merge: jest.fn((...args) => actual.merge(...args))
+  }
+})
 
 describe('Theme Configuration', () => {
   describe('a snapshot of the configuration', () => {

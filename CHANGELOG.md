@@ -7,7 +7,8 @@
 - **Breaking**: The theme no longer ships **Redux** (`react-redux`, `@reduxjs/toolkit`, `redux`, `reselect`). Removed [`theme/src/store.js`](theme/src/store.js) and [`theme/src/reducers/`](theme/src/reducers/) (including the former `audioPlayer` slice). Sites that **shadowed** those files or imported them must migrate.
 - **New**: Global audio UI state lives in [`theme/src/stores/audio-player-store.js`](theme/src/stores/audio-player-store.js) (**Zustand**). Behavior is unchanged: SoundCloud / Spotify track selection, visibility, and the fixed player still work from layout, media templates, and Spotify widgets.
 - **Root wiring**: [`theme/wrapRootElement.js`](theme/wrapRootElement.js) wraps **TanStack Query** + Theme UI + MDX only (no Redux `Provider`).
-- **Tests**: [`theme/src/testUtils.js`](theme/src/testUtils.js) exports **`resetAudioPlayerStore`** for isolation; Redux mock store removed.
+- **Tests**: [`theme/src/testUtils.js`](theme/src/testUtils.js) exports **`resetAudioPlayerStore`** for isolation; Redux mock store removed. Jest **`moduleNameMapper`** maps **`theme-ui`** to one resolved file so tests and **`@chronogrove/ui`** always share the same **`ThemeUIProvider`** / **`useColorMode`** module (pnpm can otherwise install duplicate **`theme-ui`** trees). [`theme/src/gatsby-plugin-theme-ui/theme.spec.js`](theme/src/gatsby-plugin-theme-ui/theme.spec.js) uses **`jest.requireActual('theme-ui')`** for the mock so **`merge`** stays Theme UI’s deep merge (the previous stub replaced the whole module and flattened the exported theme). Theme snapshot under **`theme/src/gatsby-plugin-theme-ui/__snapshots__/`** updated accordingly.
+- **Dependencies (theme dev)**: **`zustand`** range bumped to **`^5.0.12`** (still compatible with the audio store API).
 - **Docs**: [`.cursorrules`](.cursorrules) and [`theme/src/components/widgets/steam/README.md`](theme/src/components/widgets/steam/README.md) updated to describe widget data via **`useWidgetData`** (not Redux).
 
 ### `@chronogrove/ui`
@@ -16,7 +17,7 @@
 
 ### Files changed
 
-- `theme/package.json` (version **0.83.0**), `theme/src/stores/audio-player-store.js`, `theme/src/stores/audio-player-store.spec.js`, `theme/wrapRootElement.js`, `theme/src/testUtils.js`, component/template updates, `theme/jest.config.js`, snapshot under `theme/src/components/__snapshots__/`, `.cursorrules`, `pnpm-lock.yaml`
+- `theme/package.json` (version **0.83.0**), `theme/src/stores/audio-player-store.js`, `theme/src/stores/audio-player-store.spec.js`, `theme/wrapRootElement.js`, `theme/src/testUtils.js`, component/template updates, `theme/jest.config.js` (including **`theme-ui`** dedupe and removed-**`reducers`** coverage ignore), `theme/src/gatsby-plugin-theme-ui/theme.spec.js` + snapshot, snapshots under `theme/src/components/__snapshots__/`, `.cursorrules`, `pnpm-lock.yaml`
 
 ---
 

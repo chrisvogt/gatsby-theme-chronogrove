@@ -25,7 +25,6 @@ export const createTestQueryClient = () =>
     }
   })
 
-// React module that provides necessary context to components being tested.
 export const TestProvider = ({ children }) => <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
 
 /**
