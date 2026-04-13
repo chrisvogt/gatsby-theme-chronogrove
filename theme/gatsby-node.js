@@ -2,6 +2,24 @@ const path = require('path')
 const startCase = require('lodash/startCase')
 
 /**
+ * pnpm can install multiple physical copies of Theme UI (different peer-dependency graphs). React
+ * context from `ColorModeProvider` in one `@theme-ui/color-modes` instance is then invisible to
+ * `useColorMode` loaded from another — runtime error:
+ * "[useColorMode] requires the ColorModeProvider component". Force webpack to resolve `theme-ui`
+ * and the core Theme UI packages from the same tree as `ChronogroveThemeProvider` (see
+ * `wrapRootElement.js`).
+ */
+function getThemeUiSingleInstanceAliases() {
+  const themeUiPkgDir = path.dirname(require.resolve('theme-ui/package.json', { paths: [__dirname] }))
+  const searchPaths = [themeUiPkgDir]
+  const pkgs = ['theme-ui', '@theme-ui/color-modes', '@theme-ui/core', '@theme-ui/theme-provider']
+  return pkgs.reduce((alias, pkg) => {
+    alias[pkg] = path.dirname(require.resolve(`${pkg}/package.json`, { paths: searchPaths }))
+    return alias
+  }, {})
+}
+
+/**
  * Drop Gatsby’s ESLintWebpackPlugin. The workspace hoists ESLint 10, while Gatsby’s default
  * eslint-config-react-app → eslint-plugin-flowtype expects legacy ESLint internals (see
  * https://github.com/gatsbyjs/gatsby/issues/39033). Linting stays on `pnpm lint` at the repo root.
@@ -11,6 +29,21 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   if (config.plugins?.length) {
     config.plugins = config.plugins.filter(plugin => !plugin || plugin.constructor.name !== 'ESLintWebpackPlugin')
   }
+
+  const themeUiAliases = getThemeUiSingleInstanceAliases()
+  config.resolve = config.resolve || {}
+  const prevAlias = config.resolve.alias
+  if (Array.isArray(prevAlias)) {
+    for (const [name, aliasPath] of Object.entries(themeUiAliases)) {
+      prevAlias.push({ name, alias: aliasPath })
+    }
+  } else {
+    config.resolve.alias = {
+      ...(typeof prevAlias === 'object' && prevAlias !== null ? prevAlias : {}),
+      ...themeUiAliases
+    }
+  }
+
   actions.replaceWebpackConfig(config)
 }
 
