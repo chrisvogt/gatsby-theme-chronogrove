@@ -1,6 +1,6 @@
 # Next.js reference — `@chronogrove/ui`
 
-Minimal **Next.js 15 App Router** app using **`@chronogrove/ui/next`** (`ChronogroveNextRootLayoutHead`, `ChronogroveNextEmotionRegistry`, `ChronogroveNextAppShell`) for Emotion SSR, Theme UI color-mode head scripts, three.js background, and client-side navigation reconcile.
+Minimal **Next.js 16 App Router** app using **`@chronogrove/ui/next`** (`ChronogroveNextRootLayoutHead`, `ChronogroveNextEmotionRegistry`, `ChronogroveNextAppShell`) for Emotion SSR, Theme UI color-mode head scripts, three.js background, and client-side navigation reconcile.
 
 **Package name:** `chronogrove-next` (private workspace package). It is **not** the main site in this repo (that remains **Gatsby** under `www.chrisvogt.me`); it exists to exercise `@chronogrove/ui/next` in CI-friendly source form and to keep Next integration docs honest.
 
@@ -13,7 +13,7 @@ Minimal **Next.js 15 App Router** app using **`@chronogrove/ui/next`** (`Chronog
 
 **`@fortawesome/free-brands-svg-icons`:** A **direct** dependency so [`app/home-showcase.jsx`](./app/home-showcase.jsx) can pass brand icons (e.g. `faGithub`) into **`WidgetHeader`** — matching how `gatsby-theme-chronogrove` widgets import icons for the same component. Core Font Awesome packages are also dependencies of `@chronogrove/ui`.
 
-**Versions:** Shared dependency versions (`next`, `react`, `theme-ui`, Emotion, `eslint-config-next`, etc.) use the repo [`pnpm` catalog](../../pnpm-workspace.yaml) (`catalog:` in this package’s `package.json`). Bump the catalog when upgrading tooling so this example stays aligned with `packages/ui` and the rest of the monorepo. The catalog pins the **Next.js 15** line; moving to **Next 16** should be a deliberate repo-wide upgrade, not a silent major bump.
+**Versions:** Shared dependency versions (`next`, `react`, `theme-ui`, Emotion, `eslint-config-next`, etc.) use the repo [`pnpm` catalog](../../pnpm-workspace.yaml) (`catalog:` in this package’s `package.json`). Bump the catalog when upgrading tooling so this example stays aligned with `packages/ui` and the rest of the monorepo. The catalog pins the **Next.js 16** line; major Next upgrades should stay deliberate repo-wide changes, not silent bumps in one package.
 
 **localStorage:** Theme UI / Chronogrove use the key `theme-ui-color-mode` (see `@chronogrove/ui/color-mode`). This app does **not** install Material UI; keys like `mui-color-scheme` / `mui-color-scheme-light` come from [MUI](https://mui.com/) and are **not** written by this example—they usually indicate another origin (different tab, another `localhost` app, or a browser extension), not `node_modules` here.
 

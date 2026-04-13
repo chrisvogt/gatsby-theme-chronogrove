@@ -1,6 +1,6 @@
 {
   "name": "www.chronogrove.com",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Official demo site for gatsby-theme-chronogrove",
   "scripts": {
     "develop": "gatsby develop",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emotion/react": "catalog:",
-    "@mdx-js/react": "^3.1.1",
+    "@mdx-js/react": "catalog:",
     "@theme-ui/components": "catalog:",
     "@theme-ui/mdx": "catalog:",
     "gatsby": "catalog:",
