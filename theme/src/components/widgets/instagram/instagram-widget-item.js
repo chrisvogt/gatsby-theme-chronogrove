@@ -37,14 +37,19 @@ const ambientPulseAnimation = keyframes`
 `
 
 // Helper to build image URL with CDN params
+/** Avoid `src=""` (React warns); keep a valid img for empty/loading edge cases */
+const TRANSPARENT_PIXEL = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+
 const buildImageURL = url =>
-  url ? `${url}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format` : ''
+  url ? `${url}?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format` : undefined
 
 // Preload an image by creating a hidden Image object
 // Note: Called with URLs from carouselImages which is already filtered with .filter(Boolean)
 const preloadImage = url => {
+  const src = buildImageURL(url)
+  if (!src) return
   const img = new window.Image()
-  img.src = buildImageURL(url)
+  img.src = src
 }
 
 const InstagramWidgetItem = ({
@@ -261,7 +266,7 @@ const InstagramWidgetItem = ({
         key={currentImageIndex}
         className='instagram-item-image'
         loading='lazy'
-        src={buildImageURL(currentImageURL)}
+        src={buildImageURL(currentImageURL) ?? TRANSPARENT_PIXEL}
         height='280'
         width='280'
         alt={caption ? `Instagram post: ${caption}` : 'Instagram post thumbnail'}

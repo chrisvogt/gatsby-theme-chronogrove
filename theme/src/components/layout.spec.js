@@ -11,6 +11,15 @@ import useSocialProfiles from '../hooks/use-social-profiles'
 jest.mock('../hooks/use-site-metadata')
 jest.mock('../hooks/use-navigation-data')
 jest.mock('../hooks/use-social-profiles')
+// @theme-toggles/react Expand triggers a React key warning in jsdom; layout snapshots do not need the real toggle.
+jest.mock('./color-toggle', () => ({
+  __esModule: true,
+  default: () => (
+    <button type='button' aria-label='Toggle color mode'>
+      toggle
+    </button>
+  )
+}))
 jest.mock('@gatsbyjs/reach-router', () => ({
   ...jest.requireActual('@gatsbyjs/reach-router'),
   useLocation: jest.fn(() => ({ pathname: '/', hash: '', search: '' }))
@@ -36,8 +45,10 @@ const mockNavigationData = {
 
 const mockSocialProfiles = [
   {
-    name: 'GitHub',
-    url: 'https://github.com/test'
+    slug: 'github',
+    displayName: 'GitHub',
+    href: 'https://github.com/test',
+    icon: { reactIcon: 'faGithub' }
   }
 ]
 
