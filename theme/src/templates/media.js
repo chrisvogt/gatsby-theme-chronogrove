@@ -3,13 +3,11 @@ import { Container, Flex, jsx } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { graphql } from 'gatsby'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-
 import Category from '../components/category'
 import Layout from '../components/layout'
 import PageHeader from '../components/blog/page-header'
 import Seo from '../components/seo'
-import { setSoundcloudTrack } from '../reducers/audioPlayer'
+import { useAudioPlayerStore } from '../stores/audio-player-store'
 
 import YouTube from '../shortcodes/youtube'
 import useSiteMetadata from '../hooks/use-site-metadata'
@@ -19,7 +17,7 @@ const getDescription = mdx => mdx.frontmatter.description
 const getTitle = mdx => mdx.frontmatter.title
 
 const MediaTemplate = ({ data: { mdx }, children }) => {
-  const dispatch = useDispatch()
+  const setSoundcloudTrack = useAudioPlayerStore(state => state.setSoundcloudTrack)
   const category = mdx.fields.category
   const date = mdx.frontmatter.date
   const soundcloudId = mdx.frontmatter.soundcloudId
@@ -34,12 +32,12 @@ const MediaTemplate = ({ data: { mdx }, children }) => {
   // Build canonical URL from site metadata
   const canonicalUrl = `${baseURL || siteUrl || ''}${path}`
 
-  // Set the SoundCloud track in Redux when this component mounts
+  // Set the SoundCloud track in global audio player state when this component mounts
   useEffect(() => {
     if (soundcloudId) {
-      dispatch(setSoundcloudTrack(soundcloudId))
+      setSoundcloudTrack(soundcloudId)
     }
-  }, [soundcloudId, dispatch])
+  }, [soundcloudId, setSoundcloudTrack])
 
   return (
     <Layout>

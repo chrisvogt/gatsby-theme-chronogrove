@@ -24,7 +24,8 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 - **Gatsby 5.x**: Static site generator; the repo pins **`gatsby`** in `pnpm-workspace.yaml` `catalog` (`^5.16.1`, lockfile resolves 5.16.x). The published theme lists **`gatsby` `^5.16.0`** in `peerDependencies` for npm consumers.
 - **React 19.x**: UI framework (supports React 18 and 19 via peer dependencies)
 - **Theme UI**: Design system and styling (CSS-in-JS)
-- **Redux Toolkit**: State management (v2.x)
+- **TanStack Query**: Server/async state for dashboard widgets (`useWidgetData`)
+- **Zustand**: Small global client state for the bottom audio player (SoundCloud / Spotify UI)
 - **Jest 30.x**: Testing framework with comprehensive setup
 - **pnpm 10.x**: Monorepo management with workspaces (v10.15.0)
 - **Turborepo**: Build orchestration and caching
@@ -57,9 +58,9 @@ The theme includes a sophisticated widget system for the home page dashboard:
 
 ## Data Flow
 1. **Data Sources**: Metrics API at `metrics.chrisvogt.me` (backed by chrisvogt/metrics GitHub repo)
-2. **Actions**: `fetchDataSource.js` handles API calls with deduplication
-3. **Reducers**: Process and store data with loading states (INIT, SUCCESS, FAILURE)
-4. **Selectors**: Transform data for components
+2. **Widget data**: `useWidgetData` (TanStack Query) fetches per-widget URLs from site metadata, caches responses, and exposes loading/error to widget components
+3. **Metadata selectors**: `theme/src/selectors/metadata.js` (and related) resolve widget endpoints and usernames from Gatsby site metadata
+4. **Audio player**: `theme/src/stores/audio-player-store.js` (Zustand) holds which track/embed is active; any component can call store actions, `RootWrapper` mounts the player
 5. **Components**: Display data with loading states and error handling
 
 ## Environment Variables
@@ -93,7 +94,7 @@ The following files contain hardcoded personal information that needs to be made
 - **Jest**: Unit testing framework with comprehensive configuration
 - **React Testing Library**: Component testing with DOM queries and user interactions
 - **React Test Renderer**: Snapshot testing for visual regression testing
-- **Redux Mock Store**: Mock Redux store for testing components with state
+- **Zustand**: Reset `useAudioPlayerStore` in tests via `resetAudioPlayerStore` from `theme/src/testUtils.js` when assertions depend on player state
 - **Jest Canvas Mock**: Canvas API mocking for visual components
 - **Identity Object Proxy**: CSS/SCSS module mocking
 - **File Mock**: Static asset mocking (images, fonts, etc.)
@@ -105,7 +106,7 @@ The following files contain hardcoded personal information that needs to be made
 - Loading and error states
 - Accessibility considerations
 - Responsive design
-- Redux actions for API calls
+- `useWidgetData` / TanStack Query for widget API calls; Zustand only for global audio player UI state
 - Error handling and retry logic
 - Theme UI components with dark/light mode support
 - MDX for content with React component integration
@@ -134,12 +135,11 @@ The following files contain hardcoded personal information that needs to be made
 
 ## Common Development Tasks
 When adding new widgets:
-1. Create widget component in `src/components/widgets/[name]/`
-2. Add Redux actions and reducers
-3. Create selectors for data access
-4. Add mock data
-5. Write comprehensive tests
-6. Update documentation
+1. Create widget component in `theme/src/components/widgets/[name]/`
+2. Add metadata helpers in `theme/src/selectors/metadata.js` (and `use-site-metadata` if needed) for API URL / username
+3. Use `useWidgetData` for fetching; add fixtures under `theme/__mocks__/` or inline test data
+4. Write comprehensive tests (QueryClient via `TestProviderWithQuery` / `renderWithProviders` from `theme/src/testUtils.js`)
+5. Update documentation as needed
 
 When decoupling personal information:
 1. Move hardcoded values to site metadata configuration

@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.83.0
+
+### `gatsby-theme-chronogrove` — Zustand audio player, remove Redux
+
+- **Breaking**: The theme no longer ships **Redux** (`react-redux`, `@reduxjs/toolkit`, `redux`, `reselect`). Removed [`theme/src/store.js`](theme/src/store.js) and [`theme/src/reducers/`](theme/src/reducers/) (including the former `audioPlayer` slice). Sites that **shadowed** those files or imported them must migrate.
+- **New**: Global audio UI state lives in [`theme/src/stores/audio-player-store.js`](theme/src/stores/audio-player-store.js) (**Zustand**). Behavior is unchanged: SoundCloud / Spotify track selection, visibility, and the fixed player still work from layout, media templates, and Spotify widgets.
+- **Root wiring**: [`theme/wrapRootElement.js`](theme/wrapRootElement.js) wraps **TanStack Query** + Theme UI + MDX only (no Redux `Provider`).
+- **Tests**: [`theme/src/testUtils.js`](theme/src/testUtils.js) exports **`resetAudioPlayerStore`** for isolation; Redux mock store removed.
+- **Docs**: [`.cursorrules`](.cursorrules) and [`theme/src/components/widgets/steam/README.md`](theme/src/components/widgets/steam/README.md) updated to describe widget data via **`useWidgetData`** (not Redux).
+
+### `@chronogrove/ui`
+
+- No changes in this release (version remains **0.82.0**).
+
+### Files changed
+
+- `theme/package.json` (version **0.83.0**), `theme/src/stores/audio-player-store.js`, `theme/src/stores/audio-player-store.spec.js`, `theme/wrapRootElement.js`, `theme/src/testUtils.js`, component/template updates, `theme/jest.config.js`, snapshot under `theme/src/components/__snapshots__/`, `.cursorrules`, `pnpm-lock.yaml`
+
+---
+
 ## 0.82.0
 
 ### `@chronogrove/ui` — widget header row, profile metrics, `MetricCard` alias, remove unused backdrop

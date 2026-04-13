@@ -291,7 +291,7 @@ exports[`Layout renders with audio player hidden state 1`] = `
 exports[`Layout renders with audio player visible state 1`] = `
 <DocumentFragment>
   <div
-    class="css-e2rbjw"
+    class="css-1uj8esv"
   >
     <a
       class="css-821g5p"

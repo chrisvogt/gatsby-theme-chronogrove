@@ -1,9 +1,8 @@
 import React from 'react'
 import { render, waitFor, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import configureStore from 'redux-mock-store'
-import { Provider } from 'react-redux'
-import AudioPlayer from '../components/audio-player'
+import AudioPlayer from './audio-player'
+import { resetAudioPlayerStore, useAudioPlayerStore } from '../stores/audio-player-store'
 
 // Mock SoundCloud and Spotify to avoid iframe logic
 jest.mock('../shortcodes/soundcloud', () => jest.fn(() => <div data-testid='mock-soundcloud'>MockSoundCloud</div>))
@@ -29,14 +28,9 @@ jest.mock('theme-ui', () => ({
   }))
 }))
 
-const mockStore = configureStore([])
-
 describe('AudioPlayer', () => {
-  let store
-
   beforeEach(() => {
-    store = mockStore({})
-    store.dispatch = jest.fn()
+    resetAudioPlayerStore()
   })
 
   afterEach(() => {
@@ -44,11 +38,7 @@ describe('AudioPlayer', () => {
   })
 
   it('renders and cleans up the portal container', async () => {
-    const { unmount } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount } = render(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
 
     await waitFor(() => {
       expect(document.getElementById('audio-player-portal')).toBeTruthy()
@@ -63,11 +53,7 @@ describe('AudioPlayer', () => {
     // Only mock createPortal for this test
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
-    const { asFragment } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { asFragment } = render(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
 
     await waitFor(() => {
       expect(asFragment()).toMatchSnapshot()
@@ -80,9 +66,7 @@ describe('AudioPlayer', () => {
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
     const { asFragment } = render(
-      <Provider store={store}>
-        <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
-      </Provider>
+      <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
     )
 
     await waitFor(() => {
@@ -93,11 +77,7 @@ describe('AudioPlayer', () => {
   })
 
   it('does not render when not visible', async () => {
-    const { container } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={false} provider='soundcloud' />
-      </Provider>
-    )
+    const { container } = render(<AudioPlayer soundcloudId='abc' isVisible={false} provider='soundcloud' />)
 
     await waitFor(() => {
       expect(container.firstChild).toBeNull()
@@ -105,11 +85,7 @@ describe('AudioPlayer', () => {
   })
 
   it('does not render when no provider', async () => {
-    const { container } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} />
-      </Provider>
-    )
+    const { container } = render(<AudioPlayer soundcloudId='abc' isVisible={true} />)
 
     await waitFor(() => {
       expect(container.firstChild).toBeNull()
@@ -120,11 +96,7 @@ describe('AudioPlayer', () => {
     // Mock createPortal to return null to simulate no container
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(() => null)
 
-    const { container } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { container } = render(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
 
     await waitFor(() => {
       expect(container.firstChild).toBeNull()
@@ -135,11 +107,7 @@ describe('AudioPlayer', () => {
 
   it('renders SoundCloud when provider is soundcloud and soundcloudId is provided', async () => {
     // Test that the component doesn't throw when rendered with valid props
-    render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    render(<AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />)
 
     // If we get here without throwing, the test passes
     expect(true).toBe(true)
@@ -147,11 +115,7 @@ describe('AudioPlayer', () => {
 
   it('renders Spotify when provider is spotify and spotifyURL is provided', async () => {
     // Test that the component doesn't throw when rendered with valid props
-    render(
-      <Provider store={store}>
-        <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
-      </Provider>
-    )
+    render(<AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />)
 
     // If we get here without throwing, the test passes
     expect(true).toBe(true)
@@ -160,11 +124,7 @@ describe('AudioPlayer', () => {
   it('renders null when provider is soundcloud but no soundcloudId', async () => {
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
-    render(
-      <Provider store={store}>
-        <AudioPlayer isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    render(<AudioPlayer isVisible={true} provider='soundcloud' />)
 
     expect(require('../shortcodes/soundcloud')).not.toHaveBeenCalled()
 
@@ -174,11 +134,7 @@ describe('AudioPlayer', () => {
   it('renders null when provider is spotify but no spotifyURL', async () => {
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
-    render(
-      <Provider store={store}>
-        <AudioPlayer isVisible={true} provider='spotify' />
-      </Provider>
-    )
+    render(<AudioPlayer isVisible={true} provider='spotify' />)
 
     expect(require('../shortcodes/spotify')).not.toHaveBeenCalled()
 
@@ -189,14 +145,7 @@ describe('AudioPlayer', () => {
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
     render(
-      <Provider store={store}>
-        <AudioPlayer
-          soundcloudId='abc'
-          spotifyURL='https://spotify.com/track/123'
-          isVisible={true}
-          provider='unknown'
-        />
-      </Provider>
+      <AudioPlayer soundcloudId='abc' spotifyURL='https://spotify.com/track/123' isVisible={true} provider='unknown' />
     )
 
     expect(require('../shortcodes/soundcloud')).not.toHaveBeenCalled()
@@ -216,19 +165,11 @@ describe('AudioPlayer', () => {
       return node
     })
 
-    const { rerender } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { rerender } = render(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
 
     // Force re-render after useEffect has run
     await waitFor(() => {
-      rerender(
-        <Provider store={store}>
-          <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-        </Provider>
-      )
+      rerender(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
     })
 
     // Find and click the close button using document query since portal renders outside container
@@ -239,16 +180,14 @@ describe('AudioPlayer', () => {
       }
     })
 
+    expect(useAudioPlayerStore.getState().isVisible).toBe(false)
+
     createPortalMock.mockRestore()
     portalContainer.remove()
   })
 
   it('creates portal container for SoundCloud provider', async () => {
-    const { unmount } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount } = render(<AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />)
 
     // Wait for the portal to be created
     await waitFor(() => {
@@ -260,9 +199,7 @@ describe('AudioPlayer', () => {
 
   it('creates portal container for Spotify provider', async () => {
     const { unmount } = render(
-      <Provider store={store}>
-        <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
-      </Provider>
+      <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
     )
 
     // Wait for portal to be created
@@ -275,9 +212,7 @@ describe('AudioPlayer', () => {
 
   it('creates portal container for unknown provider', async () => {
     const { unmount } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' spotifyURL='https://spotify.com/track/123' isVisible={true} provider='other' />
-      </Provider>
+      <AudioPlayer soundcloudId='abc' spotifyURL='https://spotify.com/track/123' isVisible={true} provider='other' />
     )
 
     // Wait for portal to be created
@@ -290,11 +225,7 @@ describe('AudioPlayer', () => {
 
   it('updates widget ref when soundcloudId changes', async () => {
     // Test that the component can be rendered with different soundcloudId values
-    render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    render(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
 
     // If we get here without throwing, the test passes
     expect(true).toBe(true)
@@ -302,29 +233,16 @@ describe('AudioPlayer', () => {
 
   it('tests renderEmbed function with different providers', async () => {
     // Test that the component handles different provider types
-    const { unmount: unmount1 } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount: unmount1 } = render(<AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />)
     unmount1()
 
     const { unmount: unmount2 } = render(
-      <Provider store={store}>
-        <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
-      </Provider>
+      <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
     )
     unmount2()
 
     const { unmount: unmount3 } = render(
-      <Provider store={store}>
-        <AudioPlayer
-          soundcloudId='abc'
-          spotifyURL='https://spotify.com/track/123'
-          isVisible={true}
-          provider='unknown'
-        />
-      </Provider>
+      <AudioPlayer soundcloudId='abc' spotifyURL='https://spotify.com/track/123' isVisible={true} provider='unknown' />
     )
     unmount3()
 
@@ -334,18 +252,10 @@ describe('AudioPlayer', () => {
 
   it('tests component with different visibility states', async () => {
     // Test that the component handles different visibility states
-    const { unmount: unmount1 } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={false} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount: unmount1 } = render(<AudioPlayer soundcloudId='abc' isVisible={false} provider='soundcloud' />)
     unmount1()
 
-    const { unmount: unmount2 } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount: unmount2 } = render(<AudioPlayer soundcloudId='abc' isVisible={true} provider='soundcloud' />)
     unmount2()
 
     // If we get here without throwing, the tests pass
@@ -357,11 +267,7 @@ describe('AudioPlayer', () => {
     const createPortalMock = jest.spyOn(require('react-dom'), 'createPortal').mockImplementation(node => node)
 
     // Now render with the container ref available
-    const { container, unmount } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { container, unmount } = render(<AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />)
 
     // Verify the component renders without throwing
     expect(container).toBeTruthy()
@@ -372,18 +278,12 @@ describe('AudioPlayer', () => {
 
   it('tests renderEmbed function execution', async () => {
     // Test SoundCloud rendering
-    const { unmount: unmount1 } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount: unmount1 } = render(<AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />)
     unmount1()
 
     // Test Spotify rendering
     const { unmount: unmount2 } = render(
-      <Provider store={store}>
-        <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
-      </Provider>
+      <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
     )
     unmount2()
 
@@ -393,29 +293,16 @@ describe('AudioPlayer', () => {
 
   it('tests component rendering with different providers', async () => {
     // Test that the component can handle different provider types
-    const { unmount: unmount1 } = render(
-      <Provider store={store}>
-        <AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />
-      </Provider>
-    )
+    const { unmount: unmount1 } = render(<AudioPlayer soundcloudId='abc123' isVisible={true} provider='soundcloud' />)
     unmount1()
 
     const { unmount: unmount2 } = render(
-      <Provider store={store}>
-        <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
-      </Provider>
+      <AudioPlayer spotifyURL='https://spotify.com/track/123' isVisible={true} provider='spotify' />
     )
     unmount2()
 
     const { unmount: unmount3 } = render(
-      <Provider store={store}>
-        <AudioPlayer
-          soundcloudId='abc'
-          spotifyURL='https://spotify.com/track/123'
-          isVisible={true}
-          provider='unknown'
-        />
-      </Provider>
+      <AudioPlayer soundcloudId='abc' spotifyURL='https://spotify.com/track/123' isVisible={true} provider='unknown' />
     )
     unmount3()
 
@@ -435,11 +322,7 @@ describe('AudioPlayer', () => {
     ]
 
     for (const testCase of testCases) {
-      const { unmount } = render(
-        <Provider store={store}>
-          <AudioPlayer {...testCase} />
-        </Provider>
-      )
+      const { unmount } = render(<AudioPlayer {...testCase} />)
       unmount()
     }
 

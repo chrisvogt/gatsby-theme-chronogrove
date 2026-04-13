@@ -1,7 +1,9 @@
 /** @jsx jsx */
-import { jsx, useColorMode, useThemeUI } from 'theme-ui'
-import { useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
+import { jsx, useColorMode, useThemeUI } from 'theme-ui'
+import { useShallow } from 'zustand/react/shallow'
+
+import { useAudioPlayerStore } from '../stores/audio-player-store'
 
 import { logColorModeDebugBanner, logColorModeState } from '../helpers/color-mode-debug'
 import AudioPlayer from './audio-player'
@@ -23,7 +25,14 @@ const getStoredColorMode = () => {
 }
 
 const RootWrapper = ({ children }) => {
-  const { soundcloudId, spotifyURL, isVisible, provider } = useSelector(state => state.audioPlayer)
+  const { soundcloudId, spotifyURL, isVisible, provider } = useAudioPlayerStore(
+    useShallow(state => ({
+      soundcloudId: state.soundcloudId,
+      spotifyURL: state.spotifyURL,
+      isVisible: state.isVisible,
+      provider: state.provider
+    }))
+  )
   const [colorMode, setColorMode] = useColorMode()
   const { theme } = useThemeUI()
 

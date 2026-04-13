@@ -6,14 +6,13 @@ import {
   TestProviderWithQuery,
   createTestQueryClient,
   renderWithProviders,
-  store
+  resetAudioPlayerStore
 } from './testUtils'
 
 describe('testUtils', () => {
-  it('exports the Redux store', () => {
-    expect(store).toBeDefined()
-    expect(typeof store.dispatch).toBe('function')
-    expect(typeof store.getState).toBe('function')
+  it('exports resetAudioPlayerStore for test isolation', () => {
+    expect(resetAudioPlayerStore).toBeDefined()
+    expect(typeof resetAudioPlayerStore).toBe('function')
   })
 
   describe('TestProvider', () => {
@@ -31,7 +30,7 @@ describe('testUtils', () => {
   })
 
   describe('TestProviderWithState', () => {
-    it('provides both Redux and ThemeUI context to children', () => {
+    it('provides ThemeUI context to children (audio state is Zustand, no Redux)', () => {
       const TestComponent = () => <div data-testid='test'>Test with State</div>
 
       const { getByTestId } = render(
@@ -64,7 +63,7 @@ describe('testUtils', () => {
   })
 
   describe('TestProviderWithQuery', () => {
-    it('provides QueryClient, Redux, and ThemeUI context to children', () => {
+    it('provides QueryClient and ThemeUI context to children', () => {
       const TestComponent = () => <div data-testid='test'>Test with Query</div>
 
       const { getByTestId } = render(

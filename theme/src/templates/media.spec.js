@@ -3,11 +3,10 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import { useStaticQuery } from 'gatsby'
-import { Provider } from 'react-redux'
-import configureStore from 'redux-mock-store'
 
 import Media, { Head } from './media'
 import * as useSiteMetadataModule from '../hooks/use-site-metadata'
+import { resetAudioPlayerStore } from '../stores/audio-player-store'
 
 // Mocked Data
 const data = {
@@ -36,15 +35,6 @@ const mockTheme = {
   }
 }
 
-// Create mock store
-const mockStore = configureStore([])
-const store = mockStore({
-  audioPlayer: {
-    isVisible: false,
-    soundcloudId: null
-  }
-})
-
 jest.mock('gatsby')
 jest.mock('../components/layout', () => {
   return ({ children }) => <div className='layoutMock'>{children}</div>
@@ -66,6 +56,7 @@ const MediaPostContent = <div>Lorum ipsum dolor sit amet.</div>
 
 describe('Media Post', () => {
   beforeEach(() => {
+    resetAudioPlayerStore()
     useStaticQuery.mockImplementation(() => data)
     jest
       .spyOn(useSiteMetadataModule, 'default')
@@ -77,13 +68,7 @@ describe('Media Post', () => {
     jest.restoreAllMocks()
   })
 
-  // Helper function to wrap components in the ThemeUIProvider and Redux Provider
-  const renderWithTheme = component =>
-    render(
-      <Provider store={store}>
-        <ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>
-      </Provider>
-    )
+  const renderWithTheme = component => render(<ThemeUIProvider theme={mockTheme}>{component}</ThemeUIProvider>)
 
   // Test with no media sources
   it('renders correctly with no media sources', () => {

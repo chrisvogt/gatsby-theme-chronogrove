@@ -3,8 +3,7 @@ import { jsx } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import MediaItemGrid from './media-item-grid'
 import { Themed } from '@theme-ui/mdx'
-import { useDispatch } from 'react-redux'
-import { setSpotifyTrack } from '../../../reducers/audioPlayer'
+import { useAudioPlayerStore } from '../../../stores/audio-player-store'
 
 const transformPlaylist = playlist => {
   if (!playlist) {
@@ -37,10 +36,10 @@ const transformPlaylist = playlist => {
 }
 
 const Playlists = ({ isLoading, playlists = [] }) => {
-  const dispatch = useDispatch()
+  const setSpotifyTrack = useAudioPlayerStore(state => state.setSpotifyTrack)
 
   const handlePlaylistClick = spotifyURL => {
-    dispatch(setSpotifyTrack(spotifyURL))
+    setSpotifyTrack(spotifyURL)
   }
 
   const items = playlists

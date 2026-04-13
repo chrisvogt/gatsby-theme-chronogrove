@@ -24,7 +24,6 @@ module.exports = {
     '/node_modules/',
     'src/components/home-backgrounds/index.js',
     'src/components/skip-nav/index.js',
-    'src/reducers/index.js',
     'src/components/button.js',
     'src/components/color-toggle.js',
     'src/components/action-button.js',

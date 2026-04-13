@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { useSelector } from 'react-redux'
+import { useAudioPlayerStore } from '../stores/audio-player-store'
 import React from 'react'
 import { SkipNavLink, SkipNavContent } from './skip-nav'
 
@@ -15,7 +15,7 @@ import TopNavigation from './top-navigation'
  * to extend this component and attach additional contexts and providers.
  */
 const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter, transparentBackground }) => {
-  const { isVisible } = useSelector(state => state.audioPlayer)
+  const isVisible = useAudioPlayerStore(state => state.isVisible)
 
   return (
     <div
