@@ -12,8 +12,14 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 import WrapRootElement from './wrapRootElement'
 import { onRouteUpdateThemeUiColorMode } from '@chronogrove/ui/gatsby'
+import { setChronogroveCrossDomainColorModeClientConfig } from '@chronogrove/ui/color-mode'
 import { getChronogroveEmotionCache } from '@chronogrove/ui/emotion-cache'
 import { onRouteUpdateChronogroveNavigation } from './src/helpers/on-route-update-chronogrove-navigation'
+
+export const onClientEntry = () => {
+  const registrableDomain = process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN?.trim()
+  setChronogroveCrossDomainColorModeClientConfig(registrableDomain ? { registrableDomain } : null)
+}
 
 export const wrapRootElement = ({ element }) => (
   <CacheProvider value={getChronogroveEmotionCache()}>

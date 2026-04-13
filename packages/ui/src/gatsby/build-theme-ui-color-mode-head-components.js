@@ -11,15 +11,16 @@ import {
  * React head elements for Theme UI color mode: no-flash script, HTML background script, fallback CSS.
  * Compose with your own meta tags (e.g. Emotion insertion point) in `onRenderBody`.
  *
- * @param {{ theme: object }} options — Theme UI theme object (same as `ThemeUIProvider`)
+ * @param {{ theme: object, crossDomainColorMode?: { registrableDomain?: string, cookieName?: string } | null }} options — Theme UI theme object (same as `ThemeUIProvider`). Optional `crossDomainColorMode` enables subdomain cookie sync (must match the same object passed to `setChronogroveCrossDomainColorModeClientConfig` in the browser).
  * @returns {import('react').ReactElement[]}
  */
-export function buildThemeUiColorModeHeadComponents({ theme }) {
+export function buildThemeUiColorModeHeadComponents({ theme, crossDomainColorMode = null }) {
   const surface = resolveChronogroveSurfaceColors(theme)
-  const colorModeScript = buildThemeUiNoFlashInlineScript()
+  const colorModeScript = buildThemeUiNoFlashInlineScript({ crossDomainColorMode })
   const htmlBackgroundScript = buildHtmlBackgroundInlineScript({
     defaultBackgroundHex: surface.defaultBackgroundHex,
-    darkBackgroundHex: surface.darkBackgroundHex
+    darkBackgroundHex: surface.darkBackgroundHex,
+    crossDomainColorMode
   })
   const colorModeFallbackCSS = buildThemeUiColorModeFallbackCss({
     defaultBackgroundHex: surface.defaultBackgroundHex,

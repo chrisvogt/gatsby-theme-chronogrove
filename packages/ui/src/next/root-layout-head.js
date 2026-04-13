@@ -10,13 +10,16 @@ import {
  * Server Component fragment for the root `<head>`: Emotion insertion point, Theme UI no-flash
  * script, HTML background script, and fallback CSS (same composition as
  * `buildThemeUiColorModeHeadComponents` for Gatsby).
+ *
+ * @param {{ crossDomainColorMode?: { registrableDomain?: string, cookieName?: string } | null }} [props]
  */
-export function ChronogroveNextRootLayoutHead() {
+export function ChronogroveNextRootLayoutHead({ crossDomainColorMode = null } = {}) {
   const surface = resolveChronogroveSurfaceColors(chronogroveHeadTheme)
-  const colorModeScript = buildThemeUiNoFlashInlineScript()
+  const colorModeScript = buildThemeUiNoFlashInlineScript({ crossDomainColorMode })
   const htmlBackgroundScript = buildHtmlBackgroundInlineScript({
     defaultBackgroundHex: surface.defaultBackgroundHex,
-    darkBackgroundHex: surface.darkBackgroundHex
+    darkBackgroundHex: surface.darkBackgroundHex,
+    crossDomainColorMode
   })
   const colorModeFallbackCSS = buildThemeUiColorModeFallbackCss({
     defaultBackgroundHex: surface.defaultBackgroundHex,

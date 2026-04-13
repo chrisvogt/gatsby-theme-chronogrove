@@ -3,26 +3,104 @@ import {
   chronogroveThemeSurfaceColorsLight
 } from '../chronogrove-theme-surface-colors.js'
 
-import { THEME_UI_COLOR_MODE_STORAGE_KEY } from './constants.js'
+import { CHRONOGROVE_CROSS_DOMAIN_COLOR_MODE_COOKIE_NAME, THEME_UI_COLOR_MODE_STORAGE_KEY } from './constants.js'
+import { validateRegistrableDomain } from './registrable-domain.js'
 
 function q(str) {
   return JSON.stringify(str)
 }
 
-export function buildThemeUiNoFlashInlineScript(storageKey = THEME_UI_COLOR_MODE_STORAGE_KEY) {
-  const key = q(storageKey)
-  return `
-    (function() {
-      try {
-        var mode = localStorage.getItem(${key});
+/**
+ * Inline JS that sets `mode` and syncs `localStorage`. When `crossDomainColorMode.registrableDomain`
+ * is set (validated), reads the shared cookie first so subdomains stay aligned.
+ *
+ * @param {string} [storageKey]
+ * @param {{ registrableDomain?: string, cookieName?: string } | null} [crossDomainColorMode]
+ */
+export function buildInitialThemeUiColorModeResolutionInlineFragment(
+  storageKey = THEME_UI_COLOR_MODE_STORAGE_KEY,
+  crossDomainColorMode = null
+) {
+  const cookieName = crossDomainColorMode?.cookieName ?? CHRONOGROVE_CROSS_DOMAIN_COLOR_MODE_COOKIE_NAME
+  const domainOk =
+    crossDomainColorMode &&
+    typeof crossDomainColorMode.registrableDomain === 'string' &&
+    validateRegistrableDomain(crossDomainColorMode.registrableDomain)
+
+  if (!domainOk) {
+    const keyOnly = q(storageKey)
+    return `
+        var __cgKey = ${keyOnly};
+        var mode;
+        try {
+          mode = localStorage.getItem(__cgKey);
+        } catch (e) {
+          mode = null;
+        }
         if (!mode) {
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           mode = prefersDark ? 'dark' : 'default';
-          localStorage.setItem(${key}, mode);
         }
         if (mode === 'light') {
           mode = 'default';
         }
+        try { localStorage.setItem(__cgKey, mode); } catch (e2) {}
+  `.trim()
+  }
+
+  const key = q(storageKey)
+  const cname = q(cookieName)
+  return `
+        function __cgGetCookie(name) {
+          try {
+            var parts = ('; ' + document.cookie).split('; ' + name + '=');
+            if (parts.length < 2) return null;
+            var raw = parts.pop().split(';').shift() || '';
+            try { return decodeURIComponent(raw.trim()); } catch (e1) { return raw.trim(); }
+          } catch (e) { return null; }
+        }
+        function __cgNormMode(m) {
+          if (m === 'light') return 'default';
+          if (m === 'dark' || m === 'default') return m;
+          return null;
+        }
+        var __cgKey = ${key};
+        var __cgCookieMode = __cgNormMode(__cgGetCookie(${cname}));
+        var mode;
+        if (__cgCookieMode) {
+          mode = __cgCookieMode;
+          try { localStorage.setItem(__cgKey, mode); } catch (e) {}
+        } else {
+          try {
+            mode = localStorage.getItem(__cgKey);
+          } catch (e) {
+            mode = null;
+          }
+          if (!mode) {
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            mode = prefersDark ? 'dark' : 'default';
+          }
+          if (mode === 'light') {
+            mode = 'default';
+          }
+          try { localStorage.setItem(__cgKey, mode); } catch (e2) {}
+        }
+        if (mode === 'light') {
+          mode = 'default';
+        }
+  `.trim()
+}
+
+/**
+ * @param {string | { storageKey?: string, crossDomainColorMode?: { registrableDomain?: string, cookieName?: string } | null }} [options]
+ */
+export function buildThemeUiNoFlashInlineScript(options) {
+  const { storageKey, crossDomainColorMode } = normalizeNoFlashInlineScriptOptions(options)
+  const fragment = buildInitialThemeUiColorModeResolutionInlineFragment(storageKey, crossDomainColorMode)
+  return `
+    (function() {
+      try {
+        ${fragment}
         var htmlElement = document.documentElement;
         var classesToRemove = [];
         for (var i = 0; i < htmlElement.classList.length; i++) {
@@ -41,23 +119,32 @@ export function buildThemeUiNoFlashInlineScript(storageKey = THEME_UI_COLOR_MODE
   `
 }
 
+function normalizeNoFlashInlineScriptOptions(options) {
+  if (options == null || typeof options === 'string') {
+    return {
+      storageKey: typeof options === 'string' ? options : THEME_UI_COLOR_MODE_STORAGE_KEY,
+      crossDomainColorMode: null
+    }
+  }
+  return {
+    storageKey: options.storageKey ?? THEME_UI_COLOR_MODE_STORAGE_KEY,
+    crossDomainColorMode: options.crossDomainColorMode ?? null
+  }
+}
+
 export function buildHtmlBackgroundInlineScript({
   storageKey = THEME_UI_COLOR_MODE_STORAGE_KEY,
   defaultBackgroundHex,
-  darkBackgroundHex
-}) {
-  const key = q(storageKey)
+  darkBackgroundHex,
+  crossDomainColorMode = null
+} = {}) {
+  const fragment = buildInitialThemeUiColorModeResolutionInlineFragment(storageKey, crossDomainColorMode)
   const lightBg = q(defaultBackgroundHex)
   const darkBg = q(darkBackgroundHex)
   return `
     (function() {
       try {
-        var mode = localStorage.getItem(${key});
-        if (!mode) {
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          mode = prefersDark ? 'dark' : 'default';
-          localStorage.setItem(${key}, mode);
-        }
+        ${fragment}
         var bgColor = mode === 'dark' ? ${darkBg} : ${lightBg};
         document.documentElement.style.backgroundColor = bgColor;
       } catch (e) {}
