@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { TestProviderWithState } from '../testUtils'
+import { TestProviderWithState, resetAudioPlayerStore } from '../testUtils'
 import Layout from './layout'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import useNavigationData from '../hooks/use-navigation-data'
@@ -43,6 +43,7 @@ const mockSocialProfiles = [
 
 describe('Layout', () => {
   beforeEach(() => {
+    resetAudioPlayerStore()
     useSiteMetadata.mockImplementation(() => mockSiteMetadata)
     useNavigationData.mockImplementation(() => mockNavigationData)
     useSocialProfiles.mockImplementation(() => mockSocialProfiles)
@@ -108,19 +109,10 @@ describe('Layout', () => {
   })
 
   it('renders with audio player visible state', () => {
-    const initialState = {
-      audioPlayer: {
-        isVisible: true,
-        currentTrack: {
-          title: 'Test Track',
-          artist: 'Test Artist',
-          url: 'https://example.com/track.mp3'
-        }
-      }
-    }
+    resetAudioPlayerStore({ isVisible: true })
 
     const { asFragment } = render(
-      <TestProviderWithState initialState={initialState}>
+      <TestProviderWithState>
         <Layout>
           <div>Test content with audio player</div>
         </Layout>
@@ -130,19 +122,10 @@ describe('Layout', () => {
   })
 
   it('renders with audio player visible state and checks padding', () => {
-    const initialState = {
-      audioPlayer: {
-        isVisible: true,
-        currentTrack: {
-          title: 'Test Track',
-          artist: 'Test Artist',
-          url: 'https://example.com/track.mp3'
-        }
-      }
-    }
+    resetAudioPlayerStore({ isVisible: true })
 
     const { asFragment } = render(
-      <TestProviderWithState initialState={initialState}>
+      <TestProviderWithState>
         <Layout>
           <div>Test content with audio player</div>
         </Layout>
@@ -154,15 +137,10 @@ describe('Layout', () => {
   })
 
   it('renders with audio player hidden state', () => {
-    const initialState = {
-      audioPlayer: {
-        isVisible: false,
-        currentTrack: null
-      }
-    }
+    resetAudioPlayerStore({ isVisible: false })
 
     const { asFragment } = render(
-      <TestProviderWithState initialState={initialState}>
+      <TestProviderWithState>
         <Layout>
           <div>Test content without audio player</div>
         </Layout>
@@ -172,15 +150,10 @@ describe('Layout', () => {
   })
 
   it('renders with audio player hidden state and checks no padding', () => {
-    const initialState = {
-      audioPlayer: {
-        isVisible: false,
-        currentTrack: null
-      }
-    }
+    resetAudioPlayerStore({ isVisible: false })
 
     const { asFragment } = render(
-      <TestProviderWithState initialState={initialState}>
+      <TestProviderWithState>
         <Layout>
           <div>Test content without audio player</div>
         </Layout>

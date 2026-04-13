@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.82.0",
+  "version": "0.83.0",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
@@ -52,8 +52,7 @@
     "jest": "^30.3.0",
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^30.3.0",
-    "jest-junit": "^16.0.0",
-    "redux-mock-store": "^1.5.5"
+    "jest-junit": "^16.0.0"
   },
   "dependencies": {
     "@chronogrove/ui": "workspace:*",
@@ -71,7 +70,6 @@
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/mdx": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
-    "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-query": "^5.97.0",
     "@theme-toggles/react": "^4.1.0",
     "@theme-ui/color": "^0.17.4",
@@ -110,13 +108,11 @@
     "react-error-boundary": "^6.1.1",
     "react-photo-gallery": "catalog:",
     "react-placeholder": "^4.1.0",
-    "react-redux": "^9.2.0",
-    "redux": "^5.0.1",
-    "reselect": "^5.1.1",
     "s-ago": "^2.2.0",
     "svg-loaders-react": "^3.1.1",
     "theme-ui": "catalog:",
     "three": "^0.183.2",
-    "vanilla-tilt": "^1.8.1"
+    "vanilla-tilt": "^1.8.1",
+    "zustand": "^5.0.12"
   }
 }

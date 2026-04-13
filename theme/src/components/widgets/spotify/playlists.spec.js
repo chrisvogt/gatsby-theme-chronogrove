@@ -5,8 +5,7 @@ import Playlists from './playlists'
 import MediaItemGrid from './media-item-grid'
 import spotifyResponseFixture from '../../../../__mocks__/spotify.mock.json'
 import { TestProviderWithState } from '../../../testUtils'
-import { setSpotifyTrack } from '../../../reducers/audioPlayer'
-import { Provider as ReduxProvider } from 'react-redux'
+import { useAudioPlayerStore, resetAudioPlayerStore } from '../../../stores/audio-player-store'
 import { ThemeUIProvider } from 'theme-ui'
 import theme from '../../../gatsby-plugin-theme-ui/theme'
 
@@ -20,6 +19,7 @@ const renderWithProvider = component => {
 
 describe('Playlists Component', () => {
   beforeEach(() => {
+    resetAudioPlayerStore()
     jest.clearAllMocks()
   })
 
@@ -225,21 +225,7 @@ describe('Playlists Component', () => {
     )
   })
 
-  it('dispatches setSpotifyTrack action when playlist is clicked', () => {
-    const mockDispatch = jest.fn()
-    const mockStore = {
-      getState: () => ({}),
-      subscribe: jest.fn(),
-      dispatch: mockDispatch
-    }
-
-    // Mock the store in TestProviderWithState
-    const TestProviderWithMockStore = ({ children }) => (
-      <ReduxProvider store={mockStore}>
-        <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
-      </ReduxProvider>
-    )
-
+  it('updates audio player store when playlist is clicked', () => {
     const validPlaylist = {
       id: 'test-playlist',
       external_urls: { spotify: 'https://open.spotify.com/playlist/test' },
@@ -249,18 +235,18 @@ describe('Playlists Component', () => {
     }
 
     render(
-      <TestProviderWithMockStore>
+      <ThemeUIProvider theme={theme}>
         <Playlists isLoading={false} playlists={[validPlaylist]} />
-      </TestProviderWithMockStore>
+      </ThemeUIProvider>
     )
 
-    // Get the onTrackClick function that was passed to MediaItemGrid
     const onTrackClick = MediaItemGrid.mock.calls[0][0].onTrackClick
-
-    // Call the click handler with a Spotify URL
     onTrackClick('https://open.spotify.com/playlist/test')
 
-    // Verify that dispatch was called with the correct action
-    expect(mockDispatch).toHaveBeenCalledWith(setSpotifyTrack('https://open.spotify.com/playlist/test'))
+    expect(useAudioPlayerStore.getState()).toMatchObject({
+      spotifyURL: 'https://open.spotify.com/playlist/test',
+      isVisible: true,
+      provider: 'spotify'
+    })
   })
 })

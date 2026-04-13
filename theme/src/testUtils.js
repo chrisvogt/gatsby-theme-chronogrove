@@ -1,12 +1,9 @@
 import React from 'react'
-import { Provider as ReduxProvider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeUIProvider } from 'theme-ui'
 import theme from './gatsby-plugin-theme-ui'
 
-import store from './store'
-
-export { store }
+export { resetAudioPlayerStore } from './stores/audio-player-store'
 
 /**
  * Creates a new QueryClient configured for testing
@@ -28,18 +25,13 @@ export const createTestQueryClient = () =>
     }
   })
 
-// React module that provides necessary context to components being tested.
 export const TestProvider = ({ children }) => <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
 
 /**
- * Test provider with Redux state (legacy)
- * Use TestProviderWithQuery for new tests
+ * Theme + optional legacy name for tests that previously wrapped Redux.
+ * Audio player state uses Zustand (`useAudioPlayerStore`); call `resetAudioPlayerStore()` in beforeEach when needed.
  */
-export const TestProviderWithState = ({ children }) => (
-  <ReduxProvider store={store}>
-    <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
-  </ReduxProvider>
-)
+export const TestProviderWithState = ({ children }) => <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
 
 /**
  * Test provider with TanStack Query support
@@ -57,9 +49,7 @@ export const TestProviderWithQuery = ({ children, queryClient }) => {
 
   return (
     <QueryClientProvider client={client}>
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
-      </ReduxProvider>
+      <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
     </QueryClientProvider>
   )
 }
@@ -73,9 +63,7 @@ export const renderWithProviders = (ui, { queryClient, ...options } = {}) => {
 
   const Wrapper = ({ children }) => (
     <QueryClientProvider client={client}>
-      <ReduxProvider store={store}>
-        <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
-      </ReduxProvider>
+      <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
     </QueryClientProvider>
   )
 

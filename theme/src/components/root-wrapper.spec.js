@@ -1,9 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import configureStore from 'redux-mock-store'
-import { Provider } from 'react-redux'
 import RootWrapper from './root-wrapper'
+import { resetAudioPlayerStore } from '../stores/audio-player-store'
 
 // Mock AudioPlayer component
 jest.mock('./audio-player', () => jest.fn(() => <div data-testid='mock-audio-player'>MockAudioPlayer</div>))
@@ -38,19 +37,14 @@ jest.mock('@gatsbyjs/reach-router', () => ({
   useLocation: jest.fn(() => ({ pathname: '/' }))
 }))
 
-const mockStore = configureStore([])
-
 describe('RootWrapper', () => {
-  let store
-
   beforeEach(() => {
-    store = mockStore({
-      audioPlayer: {
-        soundcloudId: '123',
-        isVisible: true
-      }
+    resetAudioPlayerStore({
+      soundcloudId: '123',
+      spotifyURL: null,
+      isVisible: true,
+      provider: 'soundcloud'
     })
-    store.dispatch = jest.fn()
     document.documentElement.className = ''
     document.documentElement.removeAttribute('data-theme-ui-color-mode')
     document.documentElement.style.backgroundColor = ''
@@ -63,11 +57,9 @@ describe('RootWrapper', () => {
 
   it('renders children and AudioPlayer', () => {
     const { asFragment } = render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     expect(asFragment()).toMatchSnapshot()
@@ -76,11 +68,9 @@ describe('RootWrapper', () => {
   it('passes correct props to AudioPlayer', () => {
     const AudioPlayer = require('./audio-player')
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     // Check that AudioPlayer was called with the expected props
@@ -101,11 +91,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
@@ -123,11 +111,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
@@ -147,11 +133,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     expect(document.documentElement.style.backgroundColor).toMatch(/rgb\(17,\s*34,\s*51\)|#112233/i)
@@ -166,11 +150,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
@@ -189,11 +171,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Test Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Test Child</div>
+      </RootWrapper>
     )
 
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
@@ -213,11 +193,9 @@ describe('RootWrapper', () => {
     window.localStorage.setItem('theme-ui-color-mode', 'dark')
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Child</div>
+      </RootWrapper>
     )
 
     window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
@@ -234,11 +212,9 @@ describe('RootWrapper', () => {
     window.localStorage.setItem('theme-ui-color-mode', 'dark')
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Child</div>
+      </RootWrapper>
     )
 
     window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
@@ -255,11 +231,9 @@ describe('RootWrapper', () => {
     window.localStorage.setItem('theme-ui-color-mode', 'light')
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Child</div>
+      </RootWrapper>
     )
 
     window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
@@ -279,11 +253,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Child</div>
+      </RootWrapper>
     )
 
     window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))
@@ -303,11 +275,9 @@ describe('RootWrapper', () => {
     })
 
     render(
-      <Provider store={store}>
-        <RootWrapper>
-          <div>Child</div>
-        </RootWrapper>
-      </Provider>
+      <RootWrapper>
+        <div>Child</div>
+      </RootWrapper>
     )
 
     window.dispatchEvent(new window.CustomEvent('theme-ui-reconcile-color-mode'))

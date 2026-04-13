@@ -5,8 +5,7 @@ import '@testing-library/jest-dom'
 import { jsx } from 'theme-ui'
 import TopTracks from './top-tracks'
 import { TestProviderWithState } from '../../../testUtils'
-import { setSpotifyTrack } from '../../../reducers/audioPlayer'
-import { Provider as ReduxProvider } from 'react-redux'
+import { useAudioPlayerStore, resetAudioPlayerStore } from '../../../stores/audio-player-store'
 import { ThemeUIProvider } from 'theme-ui'
 import theme from '../../../gatsby-plugin-theme-ui/theme'
 
@@ -15,6 +14,7 @@ import MediaItemGrid from './media-item-grid'
 
 describe('TopTracks Component', () => {
   beforeEach(() => {
+    resetAudioPlayerStore()
     jest.clearAllMocks()
   })
 
@@ -87,34 +87,20 @@ describe('TopTracks Component', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('dispatches setSpotifyTrack action when track is clicked', () => {
-    const mockDispatch = jest.fn()
-    const mockStore = {
-      getState: () => ({}),
-      subscribe: jest.fn(),
-      dispatch: mockDispatch
-    }
-
-    const TestProviderWithMockStore = ({ children }) => (
-      <ReduxProvider store={mockStore}>
-        <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
-      </ReduxProvider>
-    )
-
-    // Render the component
+  it('updates audio player store when track is clicked', () => {
     render(
-      <TestProviderWithMockStore>
+      <ThemeUIProvider theme={theme}>
         <TopTracks isLoading={false} tracks={mockTracks} />
-      </TestProviderWithMockStore>
+      </ThemeUIProvider>
     )
 
-    // Get the onTrackClick function that was passed to MediaItemGrid
     const onTrackClick = MediaItemGrid.mock.calls[0][0].onTrackClick
-
-    // Call the click handler with a Spotify URL
     onTrackClick('http://spotify.com/track1')
 
-    // Verify that dispatch was called with the correct action
-    expect(mockDispatch).toHaveBeenCalledWith(setSpotifyTrack('http://spotify.com/track1'))
+    expect(useAudioPlayerStore.getState()).toMatchObject({
+      spotifyURL: 'http://spotify.com/track1',
+      isVisible: true,
+      provider: 'spotify'
+    })
   })
 })

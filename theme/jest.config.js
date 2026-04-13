@@ -1,6 +1,11 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
+// pnpm can install multiple physical copies of `theme-ui` (different peer graphs). Jest mocks and
+// `ThemeUIProvider` then apply to only one copy while `@chronogrove/ui` imports another, so
+// `useColorMode` runs without ColorModeProvider. Force a single module instance.
+const themeUiEntry = require.resolve('theme-ui')
+
 module.exports = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
@@ -67,6 +72,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'jsx'],
 
   moduleNameMapper: {
+    '^theme-ui$': themeUiEntry,
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/file-mock.js',

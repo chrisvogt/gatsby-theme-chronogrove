@@ -2,15 +2,14 @@
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { useDispatch } from 'react-redux'
-import { hidePlayer } from '../reducers/audioPlayer'
+import { useAudioPlayerStore } from '../stores/audio-player-store'
 import SoundCloud from '../shortcodes/soundcloud'
 import Spotify from '../shortcodes/spotify'
 
 const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode: colorModeProp }) => {
   const containerRef = useRef(null)
   const widgetRef = useRef(null)
-  const dispatch = useDispatch()
+  const hidePlayer = useAudioPlayerStore(state => state.hidePlayer)
   // Use prop if provided (more reliable for portal re-renders), fallback to hook
   const [colorModeFromHook] = useColorMode()
   const { theme } = useThemeUI()
@@ -102,7 +101,7 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode:
         }}
       >
         <button
-          onClick={() => dispatch(hidePlayer())}
+          onClick={() => hidePlayer()}
           // Use inline style for color to ensure it updates on color mode toggle
           style={{ color: textColor }}
           sx={{

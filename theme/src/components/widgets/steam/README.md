@@ -23,7 +23,7 @@ The Steam widget displays information from a Steam profile, including recently p
 
 Main widget component that orchestrates the display of Steam data.
 
-**Props:** None (uses Redux store for data)
+**Props:** None (widget data from `useWidgetData` / TanStack Query)
 
 **Features:**
 

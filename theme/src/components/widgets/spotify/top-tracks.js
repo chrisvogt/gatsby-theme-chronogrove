@@ -2,16 +2,14 @@
 import { jsx } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
-import { useDispatch } from 'react-redux'
-
-import { setSpotifyTrack } from '../../../reducers/audioPlayer'
+import { useAudioPlayerStore } from '../../../stores/audio-player-store'
 import MediaItemGrid from './media-item-grid'
 
 const TopTracks = ({ isLoading, tracks = [] }) => {
-  const dispatch = useDispatch()
+  const setSpotifyTrack = useAudioPlayerStore(state => state.setSpotifyTrack)
 
   const handleTrackClick = spotifyURL => {
-    dispatch(setSpotifyTrack(spotifyURL))
+    setSpotifyTrack(spotifyURL)
   }
 
   const items = tracks.map(track => {

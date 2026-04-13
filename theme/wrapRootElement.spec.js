@@ -2,13 +2,6 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-// Mock dependencies before importing the component
-jest.mock('./src/store', () => ({
-  getState: jest.fn(() => ({ audioPlayer: {} })),
-  dispatch: jest.fn(),
-  subscribe: jest.fn()
-}))
-
 jest.mock('@chronogrove/ui/theme', () => ({
   __esModule: true,
   default: {
@@ -44,8 +37,8 @@ describe('wrapRootElement', () => {
     expect(container).toBeDefined()
   })
 
-  it('renders ReduxProvider wrapper', () => {
-    const { container } = render(<WrapRootElement element={<span>Redux Test</span>} />)
+  it('wraps the app without a legacy global Redux provider', () => {
+    const { container } = render(<WrapRootElement element={<span>No Redux Test</span>} />)
     expect(container).toBeDefined()
   })
 
