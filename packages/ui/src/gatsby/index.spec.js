@@ -28,7 +28,8 @@ describe('@chronogrove/ui/gatsby', () => {
 
       const { container: colorModeScriptContainer } = render(head[0])
       const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
-      expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(['"]theme-ui-color-mode['"]\)/)
+      expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(__cgKey\)/)
+      expect(colorModeScriptTag.textContent).not.toContain('__cgGetCookie')
       expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
 
       const { container: htmlBgScriptContainer } = render(head[1])
@@ -42,6 +43,15 @@ describe('@chronogrove/ui/gatsby', () => {
       expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-text: #111 !important/)
       expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-panel-background:/)
       expect(fallbackStyle).toHaveTextContent(/--theme-ui-colors-panel-text:/)
+    })
+
+    it('embeds cookie merge when crossDomainColorMode.registrableDomain is set', () => {
+      const head = buildThemeUiColorModeHeadComponents({
+        theme: chronogroveTheme,
+        crossDomainColorMode: { registrableDomain: 'example.com' }
+      })
+      const { container } = render(head[0])
+      expect(container.querySelector('script').textContent).toContain('__cgGetCookie')
     })
   })
 

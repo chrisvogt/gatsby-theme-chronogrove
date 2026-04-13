@@ -5,13 +5,17 @@ import { buildThemeUiColorModeHeadComponents, onPreRenderHTMLSortThemeUiColorMod
 
 export { default as wrapRootElement } from './wrapRootElement'
 
+const colorModeCrossDomain = process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN?.trim()
+  ? { registrableDomain: process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN.trim() }
+  : undefined
+
 export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
   setHtmlAttributes({ lang: 'en' })
 
   setHeadComponents([
     <meta key='emotion-insertion-point' name='emotion-insertion-point' content='' />,
     <meta key='gatsby-theme-chronogrove-version' name='gatsby-theme-chronogrove-version' content={themeVersion} />,
-    ...buildThemeUiColorModeHeadComponents({ theme: chronogroveTheme })
+    ...buildThemeUiColorModeHeadComponents({ theme: chronogroveTheme, crossDomainColorMode: colorModeCrossDomain })
   ])
 }
 

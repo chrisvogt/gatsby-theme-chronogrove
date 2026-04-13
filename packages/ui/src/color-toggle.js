@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useColorMode } from 'theme-ui'
 import { Expand } from '@theme-toggles/react'
 import { scheduleThemeUiColorModeSync } from './color-mode/browser-sync.js'
+import { getChronogroveCrossDomainColorModeClientConfig } from './color-mode/cross-domain-color-mode-client-config.js'
+import { setChronogroveCrossDomainColorModeCookie } from './color-mode/cross-domain-color-mode-cookie.js'
 import isDarkMode from './helpers/isDarkMode.js'
 
 export default function ColorToggle() {
@@ -13,6 +15,7 @@ export default function ColorToggle() {
   // attribute makes toggles appear to do nothing. Run after ancestor effects so localStorage matches.
   useEffect(() => {
     scheduleThemeUiColorModeSync()
+    setChronogroveCrossDomainColorModeCookie(colorMode, getChronogroveCrossDomainColorModeClientConfig() ?? undefined)
   }, [colorMode])
 
   return (

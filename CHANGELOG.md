@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.83.2
+
+### `@chronogrove/ui` — configurable cross-subdomain color mode
+
+- **Feature**: Optional sync of light/dark preference across subdomains via a first-party cookie (`Domain=.<registrableDomain>`; `Path=/`; `SameSite=Lax`; `Secure` on HTTPS). Head inline scripts can read the shared cookie into `theme-ui-color-mode` when **`crossDomainColorMode.registrableDomain`** is set; **`ColorToggle`** writes the cookie when **`setChronogroveCrossDomainColorModeClientConfig`** matches (or use **`ChronogroveNextAppShell`** / Gatsby **`onClientEntry`** wiring). There is **no** hardcoded site domain in the package.
+- **API**: **`buildThemeUiNoFlashInlineScript`**, **`buildHtmlBackgroundInlineScript`**, **`ChronogroveNextRootLayoutHead`**, **`ChronogroveNextAppShell`**, **`buildThemeUiColorModeHeadComponents`** accept optional **`crossDomainColorMode?: { registrableDomain?: string, cookieName?: string }`**. New exports: **`validateRegistrableDomain`**, **`isHostnameUnderRegistrableDomain`**, **`setChronogroveCrossDomainColorModeClientConfig`**, **`getChronogroveCrossDomainColorModeClientConfig`**, **`setChronogroveCrossDomainColorModeCookie`**, and related cookie helpers under **`@chronogrove/ui/color-mode`**.
+- **Version**: **0.82.3**
+
+### `gatsby-theme-chronogrove`
+
+- **Gatsby**: When **`GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN`** is set (e.g. `chrisvogt.me`), **`gatsby-ssr`** passes **`crossDomainColorMode`** into head components and **`gatsby-browser`** calls **`setChronogroveCrossDomainColorModeClientConfig`** on **`onClientEntry`**. If unset, behavior matches the previous localStorage-only color mode (no shared cookie).
+- **Version**: **0.83.2**
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.82.3**), `packages/ui/src/color-mode/*`, `packages/ui/src/color-toggle.js`, `packages/ui/src/gatsby/build-theme-ui-color-mode-head-components.js`, `packages/ui/src/next/app-shell.js`, `packages/ui/src/next/root-layout-head.js`
+- `theme/package.json` (version **0.83.2**), `theme/gatsby-ssr.js`, `theme/gatsby-browser.js`
+
+---
+
 ## 0.83.1
 
 ### `@chronogrove/ui` — three.js `Timer` for Color Bends
