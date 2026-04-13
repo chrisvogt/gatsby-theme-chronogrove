@@ -178,7 +178,8 @@ export default function ColorBends({
 
     container.appendChild(renderer.domElement)
 
-    const clock = new THREE.Clock()
+    const timer = new THREE.Timer()
+    timer.connect(document)
 
     const handleResize = () => {
       const w = container.clientWidth || 1
@@ -197,9 +198,10 @@ export default function ColorBends({
       window.addEventListener('resize', handleResize)
     }
 
-    const loop = () => {
-      const dt = clock.getDelta()
-      const elapsed = clock.elapsedTime
+    const loop = time => {
+      timer.update(time)
+      const dt = timer.getDelta()
+      const elapsed = timer.getElapsed()
 
       material.uniforms.uTime.value = elapsed
 
@@ -222,6 +224,7 @@ export default function ColorBends({
     rafRef.current = requestAnimationFrame(loop)
 
     return () => {
+      timer.dispose()
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
       if (resizeObserverRef.current) resizeObserverRef.current.disconnect()
       else window.removeEventListener('resize', handleResize)

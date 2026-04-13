@@ -5,9 +5,13 @@ import ColorBends from './color-bends'
 // Create comprehensive THREE.js mocks
 const mockScene = { add: jest.fn() }
 const mockCamera = { position: { z: 1 } }
-const mockClock = {
+let mockElapsed = 0
+const mockTimer = {
+  update: jest.fn(),
   getDelta: jest.fn(() => 0.016),
-  elapsedTime: 0
+  getElapsed: jest.fn(() => mockElapsed),
+  connect: jest.fn(),
+  dispose: jest.fn()
 }
 const mockGeometry = {
   setAttribute: jest.fn(),
@@ -57,7 +61,7 @@ jest.mock('three', () => ({
   PlaneGeometry: jest.fn(() => mockGeometry),
   ShaderMaterial: jest.fn(() => mockMaterial),
   Mesh: jest.fn(() => mockMesh),
-  Clock: jest.fn(() => mockClock),
+  Timer: jest.fn(() => mockTimer),
   BufferAttribute: jest.fn(),
   Vector2: jest.fn(function (x, y) {
     this.x = x || 0
@@ -109,7 +113,7 @@ describe('ColorBends', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     animationCallback = null
-    mockClock.elapsedTime = 0
+    mockElapsed = 0
     // Reset renderer dom element
     mockRenderer.domElement = createMockCanvas()
   })
@@ -173,7 +177,7 @@ describe('ColorBends', () => {
 
     // Trigger animation callback
     if (animationCallback) {
-      mockClock.elapsedTime = 1.5
+      mockElapsed = 1.5
       animationCallback()
     }
 
@@ -240,7 +244,7 @@ describe('ColorBends', () => {
     render(<ColorBends autoRotate={10} />)
 
     if (animationCallback) {
-      mockClock.elapsedTime = 2
+      mockElapsed = 2
       animationCallback()
     }
 

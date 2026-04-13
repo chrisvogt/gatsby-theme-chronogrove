@@ -15,10 +15,22 @@ catalogs:
     '@theme-toggles/react':
       specifier: ^4.1.0
       version: 4.1.0
+    '@theme-ui/color':
+      specifier: ^0.17.4
+      version: 0.17.4
     '@theme-ui/components':
       specifier: ^0.17.4
       version: 0.17.4
+    '@theme-ui/css':
+      specifier: ^0.17.4
+      version: 0.17.4
     '@theme-ui/mdx':
+      specifier: ^0.17.4
+      version: 0.17.4
+    '@theme-ui/presets':
+      specifier: ^0.17.4
+      version: 0.17.4
+    '@theme-ui/prism':
       specifier: ^0.17.4
       version: 0.17.4
     boxen:
@@ -82,7 +94,7 @@ importers:
   .:
     dependencies:
       boxen:
-        specifier: ^8.0.1
+        specifier: 'catalog:'
         version: 8.0.1
       chalk:
         specifier: ^4.1.2
@@ -128,7 +140,7 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       prettier:
-        specifier: ^3.8.2
+        specifier: 'catalog:'
         version: 3.8.2
       pretty-quick:
         specifier: ^4.2.2
@@ -191,7 +203,7 @@ importers:
         specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/theme-provider@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5))(react@19.2.5)
       '@theme-ui/presets':
-        specifier: ^0.17.4
+        specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/css@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)))
       react-intersection-observer:
         specifier: 'catalog:'
@@ -243,7 +255,7 @@ importers:
         specifier: workspace:*
         version: link:../packages/ui
       '@emotion/cache':
-        specifier: ^11.14.0
+        specifier: 'catalog:'
         version: 11.14.0
       '@emotion/react':
         specifier: 'catalog:'
@@ -288,25 +300,25 @@ importers:
         specifier: ^5.99.0
         version: 5.99.0(react@19.2.5)
       '@theme-toggles/react':
-        specifier: ^4.1.0
+        specifier: 'catalog:'
         version: 4.1.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@theme-ui/color':
-        specifier: ^0.17.4
+        specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))
       '@theme-ui/components':
         specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/theme-provider@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5))(react@19.2.5)
       '@theme-ui/css':
-        specifier: ^0.17.4
+        specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))
       '@theme-ui/mdx':
         specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@types/mdx@2.0.13)(react@19.2.5)
       '@theme-ui/presets':
-        specifier: ^0.17.4
+        specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/css@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5)))
       '@theme-ui/prism':
-        specifier: ^0.17.4
+        specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@theme-ui/mdx@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@types/mdx@2.0.13)(react@19.2.5))(react@19.2.5)(theme-ui@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5))
       boxen:
         specifier: 'catalog:'
@@ -408,7 +420,7 @@ importers:
         specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
       three:
-        specifier: ^0.183.2
+        specifier: 'catalog:'
         version: 0.183.2
       vanilla-tilt:
         specifier: ^1.8.1

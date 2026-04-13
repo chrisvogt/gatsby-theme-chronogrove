@@ -11,8 +11,12 @@ catalog:
   '@emotion/react': ^11.14.0
   '@mdx-js/react': ^3.1.1
   '@theme-toggles/react': ^4.1.0
+  '@theme-ui/color': ^0.17.4
   '@theme-ui/components': ^0.17.4
+  '@theme-ui/css': ^0.17.4
   '@theme-ui/mdx': ^0.17.4
+  '@theme-ui/presets': ^0.17.4
+  '@theme-ui/prism': ^0.17.4
   boxen: ^8.0.1
   # All Gatsby sites and theme tooling resolve this; bump here when upgrading Gatsby.
   gatsby: ^5.16.1
