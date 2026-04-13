@@ -408,6 +408,8 @@ This repo ships a workspace package **[`@chronogrove/ui`](../packages/ui/README.
 
 The published **theme** package lists `@chronogrove/ui` as a dependency; in the monorepo this resolves with `workspace:*`. **`pnpm publish`** rewrites workspace protocol ranges to semver in the tarball. Consumers of **only** `gatsby-theme-chronogrove` do not need to install `@chronogrove/ui` separately unless they import it directly (for example in a Next.js app reusing the design system).
 
+**three.js:** The theme also declares **`three`** (same version as `@chronogrove/ui`, via the root **pnpm catalog**) because [`book-3d.js`](src/components/artwork/book-3d.js) imports it directly. Workspace packages should not rely on transitive hoisting for bare module resolution in their own sources.
+
 ## 🔍 Troubleshooting
 
 ### Dark/light mode not updating (workspace or local dependency)

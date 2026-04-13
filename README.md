@@ -39,7 +39,7 @@ gatsby-theme-chronogrove/
 │       ├── src/
 │       └── package.json
 ├── examples/
-│   └── chronogrove-next/     # Next.js 15 App Router reference (optional; not the main Gatsby site)
+│   └── chronogrove-next/     # Next.js 16 App Router reference (optional; not the main Gatsby site)
 │       ├── app/
 │       └── package.json
 ├── theme/                    # Gatsby theme package (gatsby-theme-chronogrove)

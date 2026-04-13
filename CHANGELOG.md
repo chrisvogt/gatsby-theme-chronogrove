@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.83.1
+
+### `@chronogrove/ui` — three.js `Timer` for Color Bends
+
+- **Runtime**: [`ColorBends`](packages/ui/src/animated-page-background/ColorBends.js) uses **`THREE.Timer`** (with `requestAnimationFrame` timestamps, optional `connect(document)` for visibility-aware deltas, and `dispose()` on teardown) instead of deprecated **`THREE.Clock`**, removing r183+ console warnings for consumers of **`@chronogrove/ui/animated-page-background`**, **`@chronogrove/ui/color-bends`**, and **`@chronogrove/ui/next`** (`ChronogroveAnimatedPageBackground`).
+- **Version**: **0.82.1**
+
+### `gatsby-theme-chronogrove`
+
+- **Dependencies**: Declare **`three`** via the workspace catalog so webpack can resolve imports in [`book-3d.js`](theme/src/components/artwork/book-3d.js) (pnpm does not rely on transitive hoisting for bare `three` imports in theme source).
+- **Tests**: [`color-bends.spec.js`](theme/src/components/home-backgrounds/color-bends.spec.js) mocks updated from `Clock` to `Timer`.
+- **Version**: **0.83.1**
+
+### Workspace (pnpm catalog)
+
+- **Catalog** ([`pnpm-workspace.yaml`](pnpm-workspace.yaml)): Restored **`three`**; added **`@theme-ui/color`**, **`@theme-ui/css`**, **`@theme-ui/presets`**, **`@theme-ui/prism`** so Theme UI satellite packages stay on one bump line with **`@theme-ui/components`** / **`theme-ui`**.
+- **Consumers** using `catalog:` where versions match: root **`prettier`** / **`boxen`**; **`theme`** (`@emotion/cache`, `@mdx-js/react`, `@theme-toggles/react`, Theme UI entries above); **`packages/ui`** (`@theme-ui/presets`); **`www.chrisvogt.me`** and **`www.chronogrove.com`** (`@mdx-js/react`).
+
+### Site packages
+
+- **`www.chrisvogt.me`**: **1.14.2** (dependency alignment with catalog edits).
+- **`www.chronogrove.com`**: **1.1.3** (same).
+
+### Documentation
+
+- **[`packages/ui/README.md`](packages/ui/README.md)**, **[`README.md`](README.md)** (repo root), **[`examples/chronogrove-next/README.md`](examples/chronogrove-next/README.md)**: Clarify Color Bends / three.js timing; align **Next.js** reference wording with the **16.x** line pinned in the catalog.
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.82.1**), `packages/ui/src/animated-page-background/ColorBends.js`, `packages/ui/README.md`
+- `theme/package.json` (version **0.83.1**), `theme/src/components/home-backgrounds/color-bends.spec.js`
+- `package.json` (root), `pnpm-workspace.yaml`, `pnpm-lock.yaml`
+- `www.chrisvogt.me/package.json`, `www.chronogrove.com/package.json`
+- `README.md`, `examples/chronogrove-next/README.md`
+
+---
+
 ## 0.83.0
 
 ### `gatsby-theme-chronogrove` — Zustand audio player, remove Redux
