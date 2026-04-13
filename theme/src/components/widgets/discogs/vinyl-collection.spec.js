@@ -45,9 +45,6 @@ const createManyReleases = count => {
   }))
 }
 
-// Mock setTimeout
-jest.useFakeTimers()
-
 // Mock window.innerWidth
 Object.defineProperty(window, 'innerWidth', {
   writable: true,
@@ -57,9 +54,6 @@ Object.defineProperty(window, 'innerWidth', {
 
 describe('VinylCollection', () => {
   beforeEach(() => {
-    // Reset timers
-    jest.clearAllTimers()
-    // Reset window.innerWidth
     window.innerWidth = 1024
   })
 
@@ -68,24 +62,34 @@ describe('VinylCollection', () => {
   })
 
   it('renders loading state', () => {
-    const { asFragment } = render(<VinylCollection isLoading={true} releases={[]} />)
-    expect(asFragment()).toMatchSnapshot()
+    const { container } = render(<VinylCollection isLoading={true} releases={[]} />)
+    expect(screen.getByRole('heading', { name: /Vinyl Collection/i })).toBeInTheDocument()
+    expect(screen.getByText('My owned vinyl records from Discogs.')).toBeInTheDocument()
+    expect(screen.getByTestId('vinyl-carousel')).toBeInTheDocument()
+    expect(container.querySelectorAll('.vinyl-collection_grid')).toHaveLength(3)
   })
 
   it('renders with vinyl releases', () => {
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
-    expect(asFragment()).toMatchSnapshot()
+    render(<VinylCollection isLoading={false} releases={mockReleases} />)
+    expect(
+      screen.getByRole('button', { name: /The Rise & Fall Of A Midwest Princess \(2023\) - Chappell Roan/ })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /Brat And It's Completely Different \(2025\) - Charli XCX/ })
+    ).toBeInTheDocument()
   })
 
   it('renders empty state when no releases', () => {
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={[]} />)
-    expect(asFragment()).toMatchSnapshot()
+    const { container } = render(<VinylCollection isLoading={false} releases={[]} />)
+    expect(screen.getByRole('heading', { name: /Vinyl Collection/i })).toBeInTheDocument()
+    expect(container.querySelectorAll('.vinyl-record')).toHaveLength(0)
   })
 
   it('renders with many releases for pagination testing', () => {
     const manyReleases = createManyReleases(25)
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
-    expect(asFragment()).toMatchSnapshot()
+    const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+    expect(container.querySelectorAll('.vinyl-record')).toHaveLength(25)
+    expect(screen.getByText(/Page 1 of/)).toBeInTheDocument()
   })
 
   it('handles releases with missing basicInformation', () => {
@@ -103,8 +107,9 @@ describe('VinylCollection', () => {
         }
       }
     ]
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingData} />)
-    expect(asFragment()).toMatchSnapshot()
+    render(<VinylCollection isLoading={false} releases={releasesWithMissingData} />)
+    expect(screen.getByRole('button', { name: /Valid Album \(2023\) - Valid Artist/ })).toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: /Click to view details/ }).length).toBeGreaterThanOrEqual(1)
   })
 
   it('handles releases with missing artist information', () => {
@@ -118,8 +123,8 @@ describe('VinylCollection', () => {
         }
       }
     ]
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingArtists} />)
-    expect(asFragment()).toMatchSnapshot()
+    render(<VinylCollection isLoading={false} releases={releasesWithMissingArtists} />)
+    expect(screen.getByRole('button', { name: /Unknown Artist/ })).toBeInTheDocument()
   })
 
   it('handles releases with multiple artists', () => {
@@ -133,8 +138,8 @@ describe('VinylCollection', () => {
         }
       }
     ]
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMultipleArtists} />)
-    expect(asFragment()).toMatchSnapshot()
+    render(<VinylCollection isLoading={false} releases={releasesWithMultipleArtists} />)
+    expect(screen.getByRole('button', { name: /Artist 1, Artist 2, Artist 3/ })).toBeInTheDocument()
   })
 
   it('handles releases without CDN thumb URL', () => {
@@ -150,8 +155,8 @@ describe('VinylCollection', () => {
         }
       }
     ]
-    const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithoutThumb} />)
-    expect(asFragment()).toMatchSnapshot()
+    render(<VinylCollection isLoading={false} releases={releasesWithoutThumb} />)
+    expect(screen.getByRole('button', { name: /Album Without Thumb/ })).toBeInTheDocument()
   })
 
   describe('Vinyl item interactions', () => {
@@ -353,24 +358,37 @@ describe('VinylCollection', () => {
       expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
     })
 
-    it('clamps the current page when a resize reduces the total page count', () => {
-      const manyReleases = createManyReleases(25)
-
-      window.innerWidth = 500
-      render(<VinylCollection isLoading={false} releases={manyReleases} />)
-
-      fireEvent.click(screen.getByLabelText('Go to page 3'))
-      act(() => {
-        jest.advanceTimersByTime(300)
-      })
-      expect(screen.getByText('Page 3 of 3')).toBeInTheDocument()
-
-      window.innerWidth = 1400
-      act(() => {
-        window.dispatchEvent(new Event('resize'))
+    describe('when transition timers run (fake timers)', () => {
+      beforeEach(() => {
+        jest.useFakeTimers()
       })
 
-      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      afterEach(() => {
+        act(() => {
+          jest.runOnlyPendingTimers()
+        })
+        jest.useRealTimers()
+      })
+
+      it('clamps the current page when a resize reduces the total page count', () => {
+        const manyReleases = createManyReleases(25)
+
+        window.innerWidth = 500
+        render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+        fireEvent.click(screen.getByLabelText('Go to page 3'))
+        act(() => {
+          jest.advanceTimersByTime(300)
+        })
+        expect(screen.getByText('Page 3 of 3')).toBeInTheDocument()
+
+        window.innerWidth = 1400
+        act(() => {
+          window.dispatchEvent(new Event('resize'))
+        })
+
+        expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      })
     })
   })
 
@@ -491,30 +509,69 @@ describe('VinylCollection', () => {
       expect(carousel).toBeTruthy()
     })
 
-    it('applies elastic resistance at last page when dragging left', () => {
-      const manyReleases = createManyReleases(25)
-      const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+    describe('on last page after transition (fake timers)', () => {
+      beforeEach(() => {
+        jest.useFakeTimers()
+      })
 
-      // Navigate to last page
-      const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
-      if (lastPageButton) {
-        fireEvent.click(lastPageButton)
-
-        // Fast forward time to complete transition
+      afterEach(() => {
         act(() => {
-          jest.advanceTimersByTime(300)
+          jest.runOnlyPendingTimers()
         })
+        jest.useRealTimers()
+      })
 
-        const carousel = getByTestId('vinyl-carousel')
-        expect(carousel).toBeTruthy()
+      it('applies elastic resistance at last page when dragging left', () => {
+        const manyReleases = createManyReleases(25)
+        const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
-        // Start dragging left from last page
-        fireEvent.mouseDown(carousel, { pageX: 200 })
-        fireEvent.mouseMove(carousel, { pageX: 100 })
+        // Navigate to last page
+        const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
+        if (lastPageButton) {
+          fireEvent.click(lastPageButton)
 
-        // Event handlers should be called without error
-        expect(carousel).toBeTruthy()
-      }
+          // Fast forward time to complete transition
+          act(() => {
+            jest.advanceTimersByTime(300)
+          })
+
+          const carousel = getByTestId('vinyl-carousel')
+          expect(carousel).toBeTruthy()
+
+          // Start dragging left from last page
+          fireEvent.mouseDown(carousel, { pageX: 200 })
+          fireEvent.mouseMove(carousel, { pageX: 100 })
+
+          // Event handlers should be called without error
+          expect(carousel).toBeTruthy()
+        }
+      })
+
+      it('applies elastic resistance for pointer events at last page', () => {
+        const manyReleases = createManyReleases(25)
+        const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+        // Navigate to last page
+        const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
+        if (lastPageButton) {
+          fireEvent.click(lastPageButton)
+
+          // Fast forward time to complete transition
+          act(() => {
+            jest.advanceTimersByTime(300)
+          })
+
+          const carousel = getByTestId('vinyl-carousel')
+          expect(carousel).toBeTruthy()
+
+          // Start touch pointer drag left from last page
+          fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 200 })
+          fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 100 })
+
+          // Event handlers should be called without error
+          expect(carousel).toBeTruthy()
+        }
+      })
     })
 
     it('applies elastic resistance for pointer events at first page', () => {
@@ -530,32 +587,6 @@ describe('VinylCollection', () => {
 
       // Event handlers should be called without error
       expect(carousel).toBeTruthy()
-    })
-
-    it('applies elastic resistance for pointer events at last page', () => {
-      const manyReleases = createManyReleases(25)
-      const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
-
-      // Navigate to last page
-      const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
-      if (lastPageButton) {
-        fireEvent.click(lastPageButton)
-
-        // Fast forward time to complete transition
-        act(() => {
-          jest.advanceTimersByTime(300)
-        })
-
-        const carousel = getByTestId('vinyl-carousel')
-        expect(carousel).toBeTruthy()
-
-        // Start touch pointer drag left from last page
-        fireEvent.pointerDown(carousel, { pointerType: 'touch', pageX: 200 })
-        fireEvent.pointerMove(carousel, { pointerType: 'touch', pageX: 100 })
-
-        // Event handlers should be called without error
-        expect(carousel).toBeTruthy()
-      }
     })
 
     it('triggers elastic resistance with specific conditions', () => {
@@ -580,6 +611,17 @@ describe('VinylCollection', () => {
   })
 
   describe('Page change functionality', () => {
+    beforeEach(() => {
+      jest.useFakeTimers()
+    })
+
+    afterEach(() => {
+      act(() => {
+        jest.runOnlyPendingTimers()
+      })
+      jest.useRealTimers()
+    })
+
     it('clears transition state after timeout', () => {
       const manyReleases = createManyReleases(25)
       const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
@@ -641,32 +683,45 @@ describe('VinylCollection', () => {
   })
 
   describe('Page change with threshold exceeded', () => {
-    it('changes to previous page when dragging right with threshold exceeded', () => {
-      const manyReleases = createManyReleases(25)
-      const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+    describe('after navigating to page 2 (fake timers)', () => {
+      beforeEach(() => {
+        jest.useFakeTimers()
+      })
 
-      // Navigate to second page first
-      const secondPageButton = container.querySelector('button[aria-label*="page 2"]')
-      if (secondPageButton) {
-        fireEvent.click(secondPageButton)
-
-        // Fast forward time to complete transition
+      afterEach(() => {
         act(() => {
-          jest.advanceTimersByTime(300)
+          jest.runOnlyPendingTimers()
         })
+        jest.useRealTimers()
+      })
 
-        const carousel = getByTestId('vinyl-carousel')
-        expect(carousel).toBeTruthy()
+      it('changes to previous page when dragging right with threshold exceeded', () => {
+        const manyReleases = createManyReleases(25)
+        const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
-        // Start dragging right (towards previous page) with large distance
-        fireEvent.mouseDown(carousel, { pageX: 100 })
-        fireEvent.mouseMove(carousel, { pageX: 200 }) // Large distance to exceed threshold
-        fireEvent.mouseUp(carousel)
+        // Navigate to second page first
+        const secondPageButton = container.querySelector('button[aria-label*="page 2"]')
+        if (secondPageButton) {
+          fireEvent.click(secondPageButton)
 
-        // Should be back on page 1
-        const firstPageButton = container.querySelector('button[aria-label*="page 1"]')
-        expect(firstPageButton).toBeTruthy()
-      }
+          // Fast forward time to complete transition
+          act(() => {
+            jest.advanceTimersByTime(300)
+          })
+
+          const carousel = getByTestId('vinyl-carousel')
+          expect(carousel).toBeTruthy()
+
+          // Start dragging right (towards previous page) with large distance
+          fireEvent.mouseDown(carousel, { pageX: 100 })
+          fireEvent.mouseMove(carousel, { pageX: 200 }) // Large distance to exceed threshold
+          fireEvent.mouseUp(carousel)
+
+          // Should be back on page 1
+          const firstPageButton = container.querySelector('button[aria-label*="page 1"]')
+          expect(firstPageButton).toBeTruthy()
+        }
+      })
     })
 
     it('changes to next page when dragging left with threshold exceeded', () => {
@@ -732,8 +787,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingTitle} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithMissingTitle} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Unknown (2023) - Artist. Click to view details.'
+      )
     })
 
     it('handles releases with missing year', () => {
@@ -746,8 +804,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingYear} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithMissingYear} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (Unknown) - Artist. Click to view details.'
+      )
     })
 
     it('handles releases with empty artists array', () => {
@@ -761,8 +822,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtists} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtists} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with missing resourceUrl', () => {
@@ -778,8 +842,9 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingResourceUrl} />)
-      expect(asFragment()).toMatchSnapshot()
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithMissingResourceUrl} />)
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
     it('handles releases with missing basicInformation properties', () => {
@@ -792,8 +857,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingProperties} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithMissingProperties} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (Unknown) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with null artists', () => {
@@ -807,8 +875,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithNullArtists} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithNullArtists} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with undefined artists', () => {
@@ -822,8 +893,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtists} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtists} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with missing artist name', () => {
@@ -837,8 +911,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingArtistName} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithMissingArtistName} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with undefined artist name', () => {
@@ -852,8 +929,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtistName} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtistName} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with empty artist name', () => {
@@ -867,8 +947,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtistName} />)
-      expect(asFragment()).toMatchSnapshot()
+      render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtistName} />)
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Unknown Artist. Click to view details.'
+      )
     })
 
     it('handles releases with missing cdnThumbUrl property', () => {
@@ -883,8 +966,8 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithMissingCdnThumbUrl} />)
-      expect(asFragment()).toMatchSnapshot()
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithMissingCdnThumbUrl} />)
+      expect(container.querySelector('.vinyl-record_album-art')).toBeNull()
     })
 
     it('handles releases with undefined cdnThumbUrl', () => {
@@ -899,8 +982,8 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedCdnThumbUrl} />)
-      expect(asFragment()).toMatchSnapshot()
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedCdnThumbUrl} />)
+      expect(container.querySelector('.vinyl-record_album-art')).toBeNull()
     })
 
     it('handles releases with empty cdnThumbUrl', () => {
@@ -915,8 +998,8 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyCdnThumbUrl} />)
-      expect(asFragment()).toMatchSnapshot()
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyCdnThumbUrl} />)
+      expect(container.querySelector('.vinyl-record_album-art')).toBeNull()
     })
 
     it('handles releases with missing resourceUrl property', () => {
@@ -932,10 +1015,11 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(
+      const { container } = render(
         <VinylCollection isLoading={false} releases={releasesWithMissingResourceUrlProperty} />
       )
-      expect(asFragment()).toMatchSnapshot()
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
     it('handles releases with undefined resourceUrl', () => {
@@ -951,8 +1035,9 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedResourceUrl} />)
-      expect(asFragment()).toMatchSnapshot()
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedResourceUrl} />)
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
     it('handles releases with empty resourceUrl', () => {
@@ -968,8 +1053,9 @@ describe('VinylCollection', () => {
           }
         }
       ]
-      const { asFragment } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyResourceUrl} />)
-      expect(asFragment()).toMatchSnapshot()
+      const { container } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyResourceUrl} />)
+      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
   })
 
@@ -1014,29 +1100,42 @@ describe('VinylCollection', () => {
       process.env.NODE_ENV = originalNodeEnv
     })
 
-    it('adds exiting class on mouse leave and clears after delay (production env)', () => {
-      process.env.NODE_ENV = 'production'
-      const manyReleases = createManyReleases(25)
-      const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
-
-      const vinylItem = container.querySelector('.vinyl-record')
-      expect(vinylItem).toBeTruthy()
-
-      // Focus via mouse enter
-      fireEvent.mouseEnter(vinylItem)
-      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
-
-      // Trigger exit
-      fireEvent.mouseLeave(vinylItem)
-      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
-
-      // Advance timers to clear exit state
-      act(() => {
-        jest.advanceTimersByTime(220)
+    describe('mouse leave delay in production (fake timers)', () => {
+      beforeEach(() => {
+        jest.useFakeTimers()
       })
 
-      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
-      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
+      afterEach(() => {
+        act(() => {
+          jest.runOnlyPendingTimers()
+        })
+        jest.useRealTimers()
+      })
+
+      it('adds exiting class on mouse leave and clears after delay (production env)', () => {
+        process.env.NODE_ENV = 'production'
+        const manyReleases = createManyReleases(25)
+        const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+        const vinylItem = container.querySelector('.vinyl-record')
+        expect(vinylItem).toBeTruthy()
+
+        // Focus via mouse enter
+        fireEvent.mouseEnter(vinylItem)
+        expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+
+        // Trigger exit
+        fireEvent.mouseLeave(vinylItem)
+        expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
+
+        // Advance timers to clear exit state
+        act(() => {
+          jest.advanceTimersByTime(220)
+        })
+
+        expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
+        expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
+      })
     })
 
     it('clears pending exit when re-entering quickly (production env)', () => {
@@ -1118,24 +1217,37 @@ describe('VinylCollection', () => {
     })
   })
 
-  it('clears a pending leave timeout before scheduling another one outside test mode', () => {
-    const previousNodeEnv = process.env.NODE_ENV
-    process.env.NODE_ENV = 'development'
-
-    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
-    const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
-    const vinylItem = container.querySelector('.vinyl-record')
-
-    fireEvent.mouseEnter(vinylItem)
-    fireEvent.mouseLeave(vinylItem)
-    fireEvent.mouseLeave(vinylItem)
-
-    expect(clearTimeoutSpy).toHaveBeenCalled()
-
-    act(() => {
-      jest.runOnlyPendingTimers()
+  describe('development leave timeout', () => {
+    beforeEach(() => {
+      jest.useFakeTimers()
     })
 
-    process.env.NODE_ENV = previousNodeEnv
+    afterEach(() => {
+      act(() => {
+        jest.runOnlyPendingTimers()
+      })
+      jest.useRealTimers()
+    })
+
+    it('clears a pending leave timeout before scheduling another one outside test mode', () => {
+      const previousNodeEnv = process.env.NODE_ENV
+      process.env.NODE_ENV = 'development'
+
+      const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
+      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+      const vinylItem = container.querySelector('.vinyl-record')
+
+      fireEvent.mouseEnter(vinylItem)
+      fireEvent.mouseLeave(vinylItem)
+      fireEvent.mouseLeave(vinylItem)
+
+      expect(clearTimeoutSpy).toHaveBeenCalled()
+
+      act(() => {
+        jest.runOnlyPendingTimers()
+      })
+
+      process.env.NODE_ENV = previousNodeEnv
+    })
   })
 })

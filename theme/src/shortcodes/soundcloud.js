@@ -16,7 +16,7 @@ const SoundCloud = ({ title, soundcloudId }) => {
   return (
     <iframe
       allow='autoplay'
-      frameborder='no'
+      frameBorder='no'
       height='166'
       scrolling='no'
       src={buildSoundCloudEmbedURL(soundcloudId, isDarkMode)}

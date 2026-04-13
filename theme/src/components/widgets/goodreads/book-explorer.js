@@ -115,7 +115,9 @@ const BookExplorer = ({ book, onClose }) => {
               <span sx={{ color: 'primary' }}>{renderStarsForRating(parseInt(rating, 10))}</span>
             </div>
 
-            <Themed.p sx={{ mt: 2, mb: 3 }}>{parseSafeHtml(description)}</Themed.p>
+            <Themed.div data-testid='book-explorer-description' sx={{ mt: 2, mb: 3, lineHeight: 'body' }}>
+              {parseSafeHtml(description)}
+            </Themed.div>
 
             <Themed.a
               href={infoLink}

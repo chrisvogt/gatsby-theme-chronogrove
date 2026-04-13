@@ -705,24 +705,30 @@ describe('HomeNavigation', () => {
 
   describe('Dark mode', () => {
     it('renders with dark panel when theme initial color mode is dark', () => {
-      const theme = require('../gatsby-plugin-theme-ui/theme').default
-      const darkTheme = {
-        ...theme,
-        config: {
-          ...theme.config,
-          initialColorModeName: 'dark',
-          useColorSchemeMediaQuery: false
+      // Theme UI warns when initialColorModeName matches a `colors.modes` key; we only need dark styles for this assertion.
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+      try {
+        const theme = require('../gatsby-plugin-theme-ui/theme').default
+        const darkTheme = {
+          ...theme,
+          config: {
+            ...theme.config,
+            initialColorModeName: 'dark',
+            useColorSchemeMediaQuery: false
+          }
         }
+        const { ThemeUIProvider } = require('theme-ui')
+        const { container } = render(
+          <ThemeUIProvider theme={darkTheme}>
+            <HomeNavigation scrollSyncDisabled />
+          </ThemeUIProvider>
+        )
+        const nav = container.querySelector('nav')
+        expect(nav).toBeInTheDocument()
+        expect(nav.querySelectorAll('a').length).toBeGreaterThan(0)
+      } finally {
+        warnSpy.mockRestore()
       }
-      const { ThemeUIProvider } = require('theme-ui')
-      const { container } = render(
-        <ThemeUIProvider theme={darkTheme}>
-          <HomeNavigation scrollSyncDisabled />
-        </ThemeUIProvider>
-      )
-      const nav = container.querySelector('nav')
-      expect(nav).toBeInTheDocument()
-      expect(nav.querySelectorAll('a').length).toBeGreaterThan(0)
     })
   })
 })

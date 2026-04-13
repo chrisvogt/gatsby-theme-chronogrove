@@ -110,7 +110,7 @@ describe('Widget/Goodreads/BookExplorer', () => {
     renderWithRouter(<BookExplorer book={bookWithHtml} onClose={() => {}} default />)
 
     // Check that the HTML is properly rendered as elements
-    const descriptionElement = screen.getByText(/This is/).closest('p')
+    const descriptionElement = screen.getByTestId('book-explorer-description')
     expect(descriptionElement.innerHTML).toContain('<b>bold</b>')
     expect(descriptionElement.innerHTML).toContain('<br>')
     expect(descriptionElement.innerHTML).toContain('<i>italic</i>')
@@ -138,7 +138,7 @@ describe('Widget/Goodreads/BookExplorer', () => {
     renderWithRouter(<BookExplorer book={bookWithAdvancedHtml} onClose={() => {}} default />)
 
     // Check that the HTML is properly rendered as elements
-    const descriptionElement = screen.getByText(/This is/).closest('p')
+    const descriptionElement = screen.getByTestId('book-explorer-description')
     expect(descriptionElement.innerHTML).toContain('<em>emphasized</em>')
     expect(descriptionElement.innerHTML).toContain('<a href="https://example.com"')
     expect(descriptionElement.textContent).toBe('This is emphasized text with a link')

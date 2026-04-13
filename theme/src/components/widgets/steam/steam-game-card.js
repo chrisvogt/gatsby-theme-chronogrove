@@ -46,31 +46,43 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
           overflow: 'hidden'
         }}
       >
-        <LazyLoad
-          placeholder={
-            <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
-              <RectShape
-                color={darkModeActive ? '#3a3a4a' : '#efefef'}
-                style={{
-                  width: '100%',
-                  height: '200px'
-                }}
-              />
-            </div>
-          }
-        >
-          <img
-            src={gameImage}
-            alt={`${game.displayName} header`}
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              transition: 'transform 0.3s ease',
-              transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-            }}
-          />
-        </LazyLoad>
+        {gameImage ? (
+          <LazyLoad
+            placeholder={
+              <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+                <RectShape
+                  color={darkModeActive ? '#3a3a4a' : '#efefef'}
+                  style={{
+                    width: '100%',
+                    height: '200px'
+                  }}
+                />
+              </div>
+            }
+          >
+            <img
+              src={gameImage}
+              alt={`${game.displayName} header`}
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                transition: 'transform 0.3s ease',
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+              }}
+            />
+          </LazyLoad>
+        ) : (
+          <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+            <RectShape
+              color={darkModeActive ? '#3a3a4a' : '#efefef'}
+              style={{
+                width: '100%',
+                height: '200px'
+              }}
+            />
+          </div>
+        )}
 
         {/* Rank Badge */}
         {showRank && rank && (

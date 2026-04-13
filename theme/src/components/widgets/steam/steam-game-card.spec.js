@@ -54,17 +54,13 @@ describe('SteamGameCard', () => {
   })
 
   it('handles missing images gracefully', () => {
-    // React 19 warns about empty src, suppress for this test
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
     const gameWithoutImages = {
       ...mockGame,
       images: {}
     }
     const { container } = renderWithTheme(<SteamGameCard game={gameWithoutImages} />)
-    const img = container.querySelector('img')
-    // The component may render with empty or null src
-    expect(img).toBeInTheDocument()
-    consoleSpy.mockRestore()
+    expect(container.querySelector('img')).not.toBeInTheDocument()
+    expect(container.querySelector('.show-loading-animation')).toBeInTheDocument()
   })
 
   it('displays rank badge when showRank is true', () => {
