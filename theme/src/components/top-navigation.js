@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { jsx, Container } from 'theme-ui'
+import { jsx, Container, Link as ThemedLink } from 'theme-ui'
 import { Link } from 'gatsby'
 import { useLocation } from '@gatsbyjs/reach-router'
 import { Themed } from '@theme-ui/mdx'
 
 import ColorToggle from '../components/color-toggle'
-import { getHeaderLeftItems } from '../selectors/navigation'
+import { getHeaderLeftItems, shouldUseNativeNavigationLink } from '../selectors/navigation'
 import { getTitle } from '../selectors/metadata'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
@@ -88,22 +88,25 @@ const TopNavigation = () => {
           }}
         >
           <nav role='navigation'>
-            {menuItems.map(({ slug, path, title, text }) => (
-              <Link
-                key={slug}
-                sx={{
-                  fontSize: 2,
-                  variant: 'styles.a',
-                  color: 'text',
-                  mr: 3,
-                  mb: [1, '', 0]
-                }}
-                title={title}
-                to={path}
-              >
-                {text}
-              </Link>
-            ))}
+            {menuItems.map(item => {
+              const { slug, path, title, text } = item
+              const linkSx = {
+                fontSize: 2,
+                variant: 'styles.a',
+                color: 'text',
+                mr: 3,
+                mb: [1, '', 0]
+              }
+              return shouldUseNativeNavigationLink(path, item) ? (
+                <ThemedLink key={slug} href={path} title={title} sx={linkSx}>
+                  {text}
+                </ThemedLink>
+              ) : (
+                <Link key={slug} sx={linkSx} title={title} to={path}>
+                  {text}
+                </Link>
+              )
+            })}
           </nav>
         </Themed.div>
       </Container>

@@ -86,10 +86,12 @@ describe('theme-config', () => {
 
     it('should have default navigation structure', () => {
       expect(defaultConfig.navigation).toHaveProperty('header')
+      expect(defaultConfig.navigation).toHaveProperty('footer')
       expect(defaultConfig.navigation.header).toHaveProperty('left')
       expect(defaultConfig.navigation.header).toHaveProperty('home')
       expect(Array.isArray(defaultConfig.navigation.header.left)).toBe(true)
       expect(Array.isArray(defaultConfig.navigation.header.home)).toBe(true)
+      expect(defaultConfig.navigation.footer).toEqual([])
     })
 
     it('should have default navigation items', () => {
@@ -210,6 +212,7 @@ describe('theme-config', () => {
         text: 'Custom Widget',
         title: 'Custom Widget'
       })
+      expect(result.navigation.footer).toEqual([])
     })
 
     it('should merge widgets correctly', () => {
@@ -272,6 +275,7 @@ describe('theme-config', () => {
       // Should preserve other defaults
       expect(result.siteMetadata.description).toBe('A personal website and blog')
       expect(result.navigation.header.home).toHaveLength(2)
+      expect(result.navigation.footer).toEqual([])
       expect(result.widgets.instagram.username).toBe('')
     })
 

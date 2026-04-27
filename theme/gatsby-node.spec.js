@@ -80,6 +80,7 @@ describe('gatsby-node', () => {
       expect(typeDefs).toContain('type SiteSiteMetadataNavigation')
       expect(typeDefs).toContain('type SiteSiteMetadataNavigationHeader')
       expect(typeDefs).toContain('type SiteSiteMetadataNavigationItem')
+      expect(typeDefs).toContain('footer: [SiteSiteMetadataNavigationItem]')
       expect(typeDefs).toContain('type SiteSiteMetadataWidgets')
       expect(typeDefs).toContain('type SiteSiteMetadataWidgetConfig')
       expect(typeDefs).toContain('type SiteSiteMetadataHCard')
@@ -89,6 +90,7 @@ describe('gatsby-node', () => {
       expect(typeDefs).toContain('slug: String!')
       expect(typeDefs).toContain('text: String!')
       expect(typeDefs).toContain('title: String!')
+      expect(typeDefs).toContain('nativeAnchor: Boolean')
 
       // Check that widget config has optional fields
       expect(typeDefs).toContain('username: String')

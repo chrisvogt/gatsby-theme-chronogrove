@@ -110,44 +110,6 @@ exports[`Layout matches the snapshot 1`] = `
               </a>
             </div>
           </div>
-          <div
-            class="css-k5zx4s"
-          >
-            <span>
-              <a
-                class="css-4d1obe"
-                href="/rss.xml"
-              >
-                Subscribe via RSS
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                href="/privacy"
-              >
-                Privacy Policy
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-              >
-                View Source
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/"
-              >
-                Status
-              </a>
-            </span>
-          </div>
         </div>
       </div>
     </footer>
@@ -264,44 +226,6 @@ exports[`Layout renders with audio player hidden state 1`] = `
                 </svg>
               </a>
             </div>
-          </div>
-          <div
-            class="css-k5zx4s"
-          >
-            <span>
-              <a
-                class="css-4d1obe"
-                href="/rss.xml"
-              >
-                Subscribe via RSS
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                href="/privacy"
-              >
-                Privacy Policy
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-              >
-                View Source
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/"
-              >
-                Status
-              </a>
-            </span>
           </div>
         </div>
       </div>
@@ -420,44 +344,6 @@ exports[`Layout renders with audio player visible state 1`] = `
               </a>
             </div>
           </div>
-          <div
-            class="css-k5zx4s"
-          >
-            <span>
-              <a
-                class="css-4d1obe"
-                href="/rss.xml"
-              >
-                Subscribe via RSS
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                href="/privacy"
-              >
-                Privacy Policy
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-              >
-                View Source
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/"
-              >
-                Status
-              </a>
-            </span>
-          </div>
         </div>
       </div>
     </footer>
@@ -564,44 +450,6 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
                 </svg>
               </a>
             </div>
-          </div>
-          <div
-            class="css-k5zx4s"
-          >
-            <span>
-              <a
-                class="css-4d1obe"
-                href="/rss.xml"
-              >
-                Subscribe via RSS
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                href="/privacy"
-              >
-                Privacy Policy
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-              >
-                View Source
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/"
-              >
-                Status
-              </a>
-            </span>
           </div>
         </div>
       </div>
@@ -749,44 +597,6 @@ exports[`Layout renders with hideHeader prop 1`] = `
                 </svg>
               </a>
             </div>
-          </div>
-          <div
-            class="css-k5zx4s"
-          >
-            <span>
-              <a
-                class="css-4d1obe"
-                href="/rss.xml"
-              >
-                Subscribe via RSS
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                href="/privacy"
-              >
-                Privacy Policy
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://github.com/chrisvogt/gatsby-theme-chronogrove"
-              >
-                View Source
-              </a>
-            </span>
-             | 
-            <span>
-              <a
-                class="css-4d1obe"
-                href="https://metrics.chrisvogt.me/"
-              >
-                Status
-              </a>
-            </span>
           </div>
         </div>
       </div>

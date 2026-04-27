@@ -12,13 +12,22 @@ const useNavigationData = () => {
                 slug
                 text
                 title
+                nativeAnchor
               }
               left {
                 path
                 slug
                 text
                 title
+                nativeAnchor
               }
+            }
+            footer {
+              path
+              slug
+              text
+              title
+              nativeAnchor
             }
           }
         }
@@ -26,20 +35,20 @@ const useNavigationData = () => {
     }
   `)
 
-  // Return empty object if no navigation data exists
-  if (!navigation || !navigation.header) {
-    return {}
-  }
-
-  // Defensive: always return arrays for header.left and header.home
-  const result = {
-    header: {
-      left: navigation.header.left || [],
-      home: navigation.header.home || []
+  if (!navigation) {
+    return {
+      header: { left: [], home: [] },
+      footer: []
     }
   }
 
-  return result
+  return {
+    header: {
+      left: navigation.header?.left || [],
+      home: navigation.header?.home || []
+    },
+    footer: Array.isArray(navigation.footer) ? navigation.footer : []
+  }
 }
 
 export default useNavigationData

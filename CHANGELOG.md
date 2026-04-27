@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.84.0
+
+### `gatsby-theme-chronogrove` — configurable footer links
+
+- **Feature**: Optional **`siteMetadata.navigation.footer`** (same item shape as header links: `path`, `slug`, `text`, `title`, optional **`nativeAnchor`**). Internal pages use Gatsby **`Link`**; **`https://` / `http://` paths**, site-relative paths that look like static outputs (e.g. **`.xml`**, **`.rss`**, **`.atom`**), and items with **`nativeAnchor: true`** use a plain anchor so feeds and other non-page assets are not routed through **`gatsby-link`**. Default **`footer`** in theme config is **[]** so the published theme does not embed site-specific URLs. Header **`left`** links use the same rules.
+- **API**: GraphQL type **`SiteSiteMetadataNavigation`** includes **`footer`**. Navigation items may set **`nativeAnchor`**. **`useNavigationData`** returns **`footer`** (and always returns defined **`header` / `footer` arrays**; footer-only config is supported). Selectors **`getFooterLinkItems`**, **`isExternalNavigationPath`**, **`isStaticOutputNavigationPath`**, and **`shouldUseNativeNavigationLink`** in [`theme/src/selectors/navigation.js`](theme/src/selectors/navigation.js).
+- **Site**: [`www.chrisvogt.me`](www.chrisvogt.me) supplies RSS, Privacy, View Source, and Status (**`https://api.chrisvogt.me`**) via theme options.
+- **Docs**: [`theme/README.md`](theme/README.md) (navigation.footer).
+- **Version**: **0.84.0**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.15.0** (theme options: `navigation.footer`).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.2.0** — theme options add **`navigation.footer`** with **View Source** (GitHub) so the public demo shows configurable footer links. RSS is omitted here because this package does not ship **`gatsby-plugin-feed`** (unlike **`www.chrisvogt.me`**); adding a feed plugin first would be required for a real **`/rss.xml`** link.
+
+### Files changed
+
+- `theme/package.json` (version **0.84.0**), `theme/gatsby-node.js`, `theme/src/data/theme-config.js`, `theme/src/hooks/use-navigation-data.js`, `theme/src/selectors/navigation.js`, `theme/src/components/footer/footer.js`, `theme/src/components/top-navigation.js`, related specs and layout snapshots, `theme/README.md`
+- `www.chrisvogt.me/package.json` (version **1.15.0**), `www.chrisvogt.me/gatsby-config.js`
+- `www.chronogrove.com/package.json` (version **1.2.0**), `www.chronogrove.com/gatsby-config.js`
+- `CHANGELOG.md`
+
+---
+
 ## 0.83.2
 
 ### `@chronogrove/ui` — configurable cross-subdomain color mode

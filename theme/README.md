@@ -163,7 +163,25 @@ Customize your site's navigation menu:
             title: 'Reading Activity'
           }
         ]
-      }
+      },
+      // Optional footer link row (same item shape as header links). Omitted or [] = no links.
+      // Use site-relative paths for internal pages; use https://… in `path` for external links.
+      // Paths ending in .xml, .rss, .atom, etc. use a plain <a> (not Gatsby Link) so feeds and
+      // other static outputs work with gatsby-plugin-feed. For other static URLs, set nativeAnchor: true.
+      footer: [
+        {
+          path: '/rss.xml',
+          slug: 'rss',
+          text: 'Subscribe via RSS',
+          title: 'RSS feed'
+        },
+        {
+          path: '/privacy',
+          slug: 'privacy',
+          text: 'Privacy Policy',
+          title: 'Privacy Policy'
+        }
+      ]
     }
   }
 }
