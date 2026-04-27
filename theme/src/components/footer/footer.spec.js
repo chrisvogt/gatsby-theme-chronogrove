@@ -9,7 +9,7 @@ import { getFooterText } from '../../selectors/metadata'
 
 jest.mock('gatsby', () => ({
   Link: ({ to, children, title, ...rest }) => (
-    <a href={to} title={title} {...rest}>
+    <a data-gatsby-link href={to} title={title} {...rest}>
       {children}
     </a>
   )
@@ -95,15 +95,38 @@ describe('Footer', () => {
     const rssLink = screen.getByText('Subscribe via RSS')
     expect(rssLink).toBeInTheDocument()
     expect(rssLink).toHaveAttribute('href', '/rss.xml')
+    expect(rssLink).not.toHaveAttribute('data-gatsby-link')
 
     const privacyLink = screen.getByText('Privacy Policy')
     expect(privacyLink).toHaveAttribute('href', '/privacy')
+    expect(privacyLink).toHaveAttribute('data-gatsby-link')
 
     const sourceLink = screen.getByText('View Source')
     expect(sourceLink).toHaveAttribute('href', 'https://github.com/chrisvogt/gatsby-theme-chronogrove')
+    expect(sourceLink).not.toHaveAttribute('data-gatsby-link')
 
     const statusLink = screen.getByText('Status')
     expect(statusLink).toHaveAttribute('href', 'https://api.chrisvogt.me')
+    expect(statusLink).not.toHaveAttribute('data-gatsby-link')
+  })
+
+  it('uses a plain anchor when nativeAnchor is set for a non-extension path', () => {
+    useNavigationData.mockImplementation(() => ({
+      header: { left: [], home: [] },
+      footer: [
+        {
+          path: '/sitemap-index',
+          slug: 'sitemap',
+          text: 'Sitemap',
+          title: 'Sitemap',
+          nativeAnchor: true
+        }
+      ]
+    }))
+    renderWithTheme(<Footer />)
+    const link = screen.getByText('Sitemap')
+    expect(link).toHaveAttribute('href', '/sitemap-index')
+    expect(link).not.toHaveAttribute('data-gatsby-link')
   })
 
   it('does not render footer text if none is available', () => {

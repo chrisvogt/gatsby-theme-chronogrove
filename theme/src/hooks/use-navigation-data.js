@@ -12,12 +12,14 @@ const useNavigationData = () => {
                 slug
                 text
                 title
+                nativeAnchor
               }
               left {
                 path
                 slug
                 text
                 title
+                nativeAnchor
               }
             }
             footer {
@@ -25,6 +27,7 @@ const useNavigationData = () => {
               slug
               text
               title
+              nativeAnchor
             }
           }
         }

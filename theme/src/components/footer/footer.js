@@ -8,7 +8,7 @@ import Profiles from './profiles'
 import useNavigationData from '../../hooks/use-navigation-data'
 import useSiteMetadata from '../../hooks/use-site-metadata'
 import { getFooterText } from '../../selectors/metadata'
-import { getFooterLinkItems, isExternalNavigationPath } from '../../selectors/navigation'
+import { getFooterLinkItems, shouldUseNativeNavigationLink } from '../../selectors/navigation'
 
 const footerLinkSx = { textDecoration: 'underline' }
 
@@ -30,7 +30,7 @@ export default () => {
               {footerLinks.map((item, i) => (
                 <span key={item.slug}>
                   {i > 0 ? ' | ' : null}
-                  {isExternalNavigationPath(item.path) ? (
+                  {shouldUseNativeNavigationLink(item.path, item) ? (
                     <ThemedLink href={item.path} title={item.title} sx={footerLinkSx}>
                       {item.text}
                     </ThemedLink>

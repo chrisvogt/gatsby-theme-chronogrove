@@ -145,6 +145,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String!
       text: String!
       title: String!
+      """If true, render with a plain anchor instead of Gatsby Link (e.g. odd static paths without a known file extension)."""
+      nativeAnchor: Boolean
     }
 
     type SiteSiteMetadataWidgets {
