@@ -240,7 +240,33 @@ module.exports = {
                 title: 'Steam'
               }
             ]
-          }
+          },
+          footer: [
+            {
+              path: '/rss.xml',
+              slug: 'rss',
+              text: 'Subscribe via RSS',
+              title: 'RSS feed'
+            },
+            {
+              path: '/privacy',
+              slug: 'privacy',
+              text: 'Privacy Policy',
+              title: 'Privacy Policy'
+            },
+            {
+              path: 'https://github.com/chrisvogt/gatsby-theme-chronogrove',
+              slug: 'source',
+              text: 'View Source',
+              title: 'View theme source on GitHub'
+            },
+            {
+              path: 'https://api.chrisvogt.me',
+              slug: 'status',
+              text: 'Status',
+              title: 'API status'
+            }
+          ]
         },
         widgets: {
           discogs: {

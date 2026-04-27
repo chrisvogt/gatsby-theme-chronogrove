@@ -119,7 +119,15 @@ module.exports = {
                 title: 'GitHub'
               }
             ]
-          }
+          },
+          footer: [
+            {
+              path: 'https://github.com/chrisvogt/gatsby-theme-chronogrove',
+              slug: 'source',
+              text: 'View Source',
+              title: 'View theme source on GitHub'
+            }
+          ]
         },
         widgets: {
           github: {

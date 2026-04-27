@@ -163,7 +163,23 @@ Customize your site's navigation menu:
             title: 'Reading Activity'
           }
         ]
-      }
+      },
+      // Optional footer link row (same item shape as header links). Omitted or [] = no links.
+      // Use site-relative paths for internal pages; use https://… in `path` for external links.
+      footer: [
+        {
+          path: '/rss.xml',
+          slug: 'rss',
+          text: 'Subscribe via RSS',
+          title: 'RSS feed'
+        },
+        {
+          path: '/privacy',
+          slug: 'privacy',
+          text: 'Privacy Policy',
+          title: 'Privacy Policy'
+        }
+      ]
     }
   }
 }

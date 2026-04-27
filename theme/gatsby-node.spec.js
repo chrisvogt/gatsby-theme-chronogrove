@@ -80,6 +80,7 @@ describe('gatsby-node', () => {
       expect(typeDefs).toContain('type SiteSiteMetadataNavigation')
       expect(typeDefs).toContain('type SiteSiteMetadataNavigationHeader')
       expect(typeDefs).toContain('type SiteSiteMetadataNavigationItem')
+      expect(typeDefs).toContain('footer: [SiteSiteMetadataNavigationItem]')
       expect(typeDefs).toContain('type SiteSiteMetadataWidgets')
       expect(typeDefs).toContain('type SiteSiteMetadataWidgetConfig')
       expect(typeDefs).toContain('type SiteSiteMetadataHCard')

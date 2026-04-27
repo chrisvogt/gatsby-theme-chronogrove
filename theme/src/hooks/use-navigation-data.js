@@ -20,26 +20,32 @@ const useNavigationData = () => {
                 title
               }
             }
+            footer {
+              path
+              slug
+              text
+              title
+            }
           }
         }
       }
     }
   `)
 
-  // Return empty object if no navigation data exists
-  if (!navigation || !navigation.header) {
-    return {}
-  }
-
-  // Defensive: always return arrays for header.left and header.home
-  const result = {
-    header: {
-      left: navigation.header.left || [],
-      home: navigation.header.home || []
+  if (!navigation) {
+    return {
+      header: { left: [], home: [] },
+      footer: []
     }
   }
 
-  return result
+  return {
+    header: {
+      left: navigation.header?.left || [],
+      home: navigation.header?.home || []
+    },
+    footer: Array.isArray(navigation.footer) ? navigation.footer : []
+  }
 }
 
 export default useNavigationData

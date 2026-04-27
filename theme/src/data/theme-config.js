@@ -126,7 +126,8 @@ const defaultConfig = {
           title: 'Instagram'
         }
       ]
-    }
+    },
+    footer: []
   },
 
   // Widget configuration

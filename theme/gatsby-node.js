@@ -132,6 +132,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type SiteSiteMetadataNavigation {
       header: SiteSiteMetadataNavigationHeader
+      footer: [SiteSiteMetadataNavigationItem]
     }
 
     type SiteSiteMetadataNavigationHeader {
