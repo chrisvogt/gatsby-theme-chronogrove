@@ -36,23 +36,22 @@ const SectionHeader = ({ icon, title }) => (
   </Box>
 )
 
+const musicGridSx = {
+  display: 'grid',
+  gridAutoRows: '1fr',
+  gridGap: [2, 2, 3, 3],
+  gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
+}
+
+const recapTravelGridSx = {
+  display: 'grid',
+  gridAutoRows: '1fr',
+  gridGap: [2, 2, 3, 3],
+  gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
+}
+
 export default () => {
   const { posts } = useCategorizedPosts()
-
-  const getColumnCount = postsCount => {
-    let columnCount
-    switch (postsCount) {
-      case 1:
-        columnCount = 1
-        break
-      case 2:
-        columnCount = 2
-        break
-      default:
-        columnCount = 3
-    }
-    return columnCount
-  }
 
   const callToAction = (
     <CallToAction title='Browse all published content' to='/blog'>
@@ -81,24 +80,12 @@ export default () => {
         {postsBySection.recaps && postsBySection.recaps.length > 0 && (
           <Box sx={{ mb: 4 }}>
             <SectionHeader icon={faCalendarAlt} title='Recaps' />
-            <Grid
-              sx={{
-                display: 'grid',
-                gridGap: [3, 3, 3, 4],
-                gridTemplateColumns: [
-                  '1fr',
-                  '1fr',
-                  '1fr',
-                  `repeat(${getColumnCount(postsBySection.recaps.length)}, 1fr)`
-                ]
-              }}
-            >
+            <Grid sx={recapTravelGridSx}>
               {postsBySection.recaps.map(post => (
                 <PostCard
                   key={post.fields.id}
                   category={post.fields.category}
                   date={post.frontmatter.date}
-                  excerpt={post.frontmatter.excerpt}
                   link={post.fields.path}
                   thumbnails={post.frontmatter.thumbnails}
                   title={post.frontmatter.title}
@@ -109,7 +96,10 @@ export default () => {
         )}
 
         {/* Single Post Sections - Order matches nav: Recaps, Posts, Music, Travel */}
-        {(postsBySection.other || postsBySection.music || postsBySection.travel) && (
+        {(postsBySection.other ||
+          postsBySection.musicSoundcloud ||
+          postsBySection.musicYoutube ||
+          postsBySection.travel) && (
           <Box>
             {/* Posts */}
             {postsBySection.other && postsBySection.other.length > 0 && (
@@ -138,30 +128,43 @@ export default () => {
               </Box>
             )}
 
-            {/* Music */}
-            {postsBySection.music && postsBySection.music.length > 0 && (
+            {/* Music: SoundCloud row, then YouTube row (2 each) */}
+            {(postsBySection.musicSoundcloud?.length > 0 || postsBySection.musicYoutube?.length > 0) && (
               <Box sx={{ mb: 4 }}>
                 <SectionHeader icon={faMusic} title='Music' />
-                <Grid
-                  sx={{
-                    display: 'grid',
-                    gridAutoRows: '1fr',
-                    gridGap: [2, 2, 3, 3],
-                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
-                  }}
-                >
-                  {postsBySection.music.map(post => (
-                    <PostCard
-                      key={post.fields.id}
-                      category={post.fields.category}
-                      date={post.frontmatter.date}
-                      link={post.fields.path}
-                      soundcloudId={post.frontmatter.soundcloudId}
-                      title={post.frontmatter.title}
-                      youtubeSrc={post.frontmatter.youtubeSrc}
-                    />
-                  ))}
-                </Grid>
+                {postsBySection.musicSoundcloud?.length > 0 && (
+                  <Grid sx={musicGridSx}>
+                    {postsBySection.musicSoundcloud.map(post => (
+                      <PostCard
+                        key={post.fields.id}
+                        category={post.fields.category}
+                        date={post.frontmatter.date}
+                        link={post.fields.path}
+                        soundcloudId={post.frontmatter.soundcloudId}
+                        title={post.frontmatter.title}
+                      />
+                    ))}
+                  </Grid>
+                )}
+                {postsBySection.musicYoutube?.length > 0 && (
+                  <Grid
+                    sx={{
+                      ...musicGridSx,
+                      mt: postsBySection.musicSoundcloud?.length > 0 ? [2, 2, 3, 3] : 0
+                    }}
+                  >
+                    {postsBySection.musicYoutube.map(post => (
+                      <PostCard
+                        key={post.fields.id}
+                        category={post.fields.category}
+                        date={post.frontmatter.date}
+                        link={post.fields.path}
+                        title={post.frontmatter.title}
+                        youtubeSrc={post.frontmatter.youtubeSrc}
+                      />
+                    ))}
+                  </Grid>
+                )}
               </Box>
             )}
 
@@ -169,14 +172,7 @@ export default () => {
             {postsBySection.travel && postsBySection.travel.length > 0 && (
               <Box sx={{ mb: 4 }}>
                 <SectionHeader icon={faMapMarkedAlt} title='Travel' />
-                <Grid
-                  sx={{
-                    display: 'grid',
-                    gridAutoRows: '1fr',
-                    gridGap: [2, 2, 3, 3],
-                    gridTemplateColumns: ['1fr', '1fr', '1fr', 'repeat(2, 1fr)']
-                  }}
-                >
+                <Grid sx={recapTravelGridSx}>
                   {postsBySection.travel.map(post => (
                     <PostCard
                       key={post.fields.id}
