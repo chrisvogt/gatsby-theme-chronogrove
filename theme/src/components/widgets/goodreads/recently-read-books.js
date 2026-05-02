@@ -231,6 +231,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                         <BookLink
                           id={book.id}
                           key={book.id}
+                          flatCover={pageIndex !== currentPage - 1}
                           introDelay={bookIndex * 80}
                           suppressNavigation={isDragging || isTransitioning}
                           thumbnailURL={book.cdnMediaURL || book.thumbnail}
