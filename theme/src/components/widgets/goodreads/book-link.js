@@ -25,9 +25,38 @@ const BookLink = ({
     }
   })()
 
-  const [flatImgFailed, setFlatImgFailed] = useState(false)
+  /** Flat cover only: probe URL off the DOM so the visible `<img>` needs no handlers (a11y lint). */
+  const [flatCoverMediaStatus, setFlatCoverMediaStatus] = useState('pending')
+
   useEffect(() => {
-    setFlatImgFailed(false)
+    if (!flatCover) {
+      setFlatCoverMediaStatus('pending')
+      return
+    }
+
+    if (!imageUrl) {
+      setFlatCoverMediaStatus('failed')
+      return
+    }
+
+    setFlatCoverMediaStatus('pending')
+    let cancelled = false
+    const probe = new window.Image()
+    const onLoad = () => {
+      if (!cancelled) setFlatCoverMediaStatus('ready')
+    }
+    const onErr = () => {
+      if (!cancelled) setFlatCoverMediaStatus('failed')
+    }
+    probe.addEventListener('load', onLoad)
+    probe.addEventListener('error', onErr)
+    probe.src = imageUrl
+
+    return () => {
+      cancelled = true
+      probe.removeEventListener('load', onLoad)
+      probe.removeEventListener('error', onErr)
+    }
   }, [imageUrl, flatCover])
 
   const handleClick = e => {
@@ -90,6 +119,7 @@ const BookLink = ({
             <div
               data-testid='book-preview-flat'
               role='img'
+              aria-busy={flatCoverMediaStatus === 'pending'}
               aria-label={title}
               sx={{
                 position: 'absolute',
@@ -102,23 +132,7 @@ const BookLink = ({
                 justifyContent: 'center'
               }}
             >
-              {!flatImgFailed ? (
-                <img
-                  data-testid='book-preview-thumbnail'
-                  src={imageUrl}
-                  alt=''
-                  loading='lazy'
-                  decoding='async'
-                  onError={() => setFlatImgFailed(true)}
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                />
-              ) : (
+              {flatCoverMediaStatus === 'failed' ? (
                 <span
                   sx={{
                     p: 2,
@@ -131,7 +145,22 @@ const BookLink = ({
                 >
                   {title}
                 </span>
-              )}
+              ) : flatCoverMediaStatus === 'ready' ? (
+                <img
+                  data-testid='book-preview-thumbnail'
+                  src={imageUrl}
+                  alt=''
+                  loading='lazy'
+                  decoding='async'
+                  sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              ) : null}
             </div>
           </div>
         ) : (
