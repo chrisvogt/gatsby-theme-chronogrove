@@ -88,4 +88,11 @@ describe('Widget/Goodreads/BookLink', () => {
     render(<BookLink {...mockProps} introDelay={240} />)
     expect(screen.getByTestId('book-preview-3d')).toBeInTheDocument()
   })
+
+  it('renders a flat image preview when flatCover is true (no WebGL)', () => {
+    render(<BookLink {...mockProps} flatCover />)
+    expect(screen.queryByTestId('book-preview-3d')).not.toBeInTheDocument()
+    expect(screen.getByTestId('book-preview-thumbnail')).toHaveAttribute('src', 'https://example.com/book.jpg')
+    expect(screen.getByTestId('book-preview-flat')).toHaveAttribute('aria-label', 'Test Book')
+  })
 })

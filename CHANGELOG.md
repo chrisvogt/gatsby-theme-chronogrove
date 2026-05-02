@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.2
+
+### `gatsby-theme-chronogrove` — Goodreads carousel WebGL limits
+
+- **Bug fix**: The Goodreads carousel kept **every page** mounted for swipe layout, so each tile created a **`Book3D` / WebGL context**. That could exceed the browser context cap (**“Too many active WebGL contexts”**), trigger **context loss**, and break covers after pagination (and stress other canvases, e.g. the home background). **Non-active carousel pages** now use **`BookLink`** with **`flatCover`** (static `<img>` plus a title fallback on image error). Only the **current page** mounts **`Book3D`** (~10 contexts instead of dozens).
+- **Tests**: **`book-link.spec.js`** covers **`flatCover`**; **`recently-read-books`** pagination tests unchanged.
+- **Version**: **0.85.2**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.2** (tracks theme **0.85.2**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.2** (tracks theme **0.85.2**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.2**), `theme/src/components/widgets/goodreads/book-link.js`, `theme/src/components/widgets/goodreads/book-link.spec.js`, `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `www.chrisvogt.me/package.json` (version **1.16.2**)
+- `www.chronogrove.com/package.json` (version **1.3.2**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.1
 
 ### `gatsby-theme-chronogrove` — Goodreads 3D books and WebGL background
