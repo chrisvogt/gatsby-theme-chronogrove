@@ -192,22 +192,24 @@ describe('Artwork/Book3D', () => {
     expect(mockScene.add).toHaveBeenCalledWith(mockMesh)
   })
 
-  it('destroys the scene when the book leaves the viewport', () => {
+  it('pauses WebGL when the book leaves the viewport without disposing the renderer', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
     leaveViewport()
-    expect(mockRenderer.dispose).toHaveBeenCalled()
-    expect(mockGeometry.dispose).toHaveBeenCalled()
+    expect(mockRenderer.dispose).not.toHaveBeenCalled()
+    expect(mockGeometry.dispose).not.toHaveBeenCalled()
+    expect(mockRenderer.domElement.style.visibility).toBe('hidden')
   })
 
-  it('recreates the scene when the book re-enters after leaving', () => {
+  it('reuses the existing WebGL scene when the book re-enters after leaving', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
     leaveViewport()
     jest.clearAllMocks()
-    mockRenderer.domElement = createMockCanvas()
     enterViewport()
-    expect(mockRenderer.setSize).toHaveBeenCalled()
+    expect(mockRenderer.dispose).not.toHaveBeenCalled()
+    expect(mockRenderer.setSize).not.toHaveBeenCalled()
+    expect(mockRenderer.domElement.style.visibility).toBe('visible')
   })
 
   it('sets up an IntersectionObserver on mount', () => {
@@ -646,13 +648,15 @@ describe('Artwork/Book3D', () => {
     expect(mockRenderer.setSize).toHaveBeenCalledTimes(2)
   })
 
-  it('does nothing in the resize callback when the scene has been destroyed', () => {
+  it('still applies resize when the book is off-screen (renderer kept alive)', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
-    leaveViewport() // destroyScene — renderer = null
+    leaveViewport()
 
-    // Should not throw due to the !renderer guard (line 377)
-    expect(() => resizeCallback && resizeCallback([])).not.toThrow()
+    resizeCallback && resizeCallback([])
+
+    expect(mockCamera.updateProjectionMatrix).toHaveBeenCalled()
+    expect(mockRenderer.setSize).toHaveBeenCalled()
   })
 
   // ── Cleanup ────────────────────────────────────────────────────────────────

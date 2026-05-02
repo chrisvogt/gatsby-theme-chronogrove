@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.1
+
+### `gatsby-theme-chronogrove` — Goodreads 3D books and WebGL background
+
+- **Bug fix**: **`Book3D`** no longer **`dispose()`**s its Three.js renderer when it leaves the viewport. It pauses animation, clears the intro timer, resets hover/intro state to the resting pose, and hides the canvas (**`visibility: hidden`**). Scrolling past many Goodreads tiles and back was creating a burst of new WebGL contexts and could exceed the browser limit, **revoking the dark-mode Color Bends background** on the home page. The scene is still fully torn down on component unmount.
+- **Tests**: **`book-3d.spec.js`** expects pause/reuse on viewport exit/re-entry instead of dispose/recreate.
+- **Version**: **0.85.1**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.1** (tracks theme **0.85.1**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.1** (tracks theme **0.85.1**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.1**), `theme/src/components/artwork/book-3d.js`, `theme/src/components/artwork/book-3d.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.1**)
+- `www.chronogrove.com/package.json` (version **1.3.1**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.0
 
 ### `gatsby-theme-chronogrove` — home “Latest Posts” widget layout

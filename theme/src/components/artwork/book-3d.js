@@ -137,6 +137,8 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     let returnStartY = 0
     let returnStartMs = null
     let introTimer = null
+    /** Tracks viewport visibility; kept in sync with IntersectionObserver (or true when IO is unavailable). */
+    let inViewport = false
 
     // ── Helpers defined up front so createScene/destroyScene can reference them
     const doRender = () => {
@@ -146,6 +148,11 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     const startAnim = () => {
       if (rafId !== null) return
       const tick = () => {
+        if (!inViewport) {
+          rafId = null
+          return
+        }
+
         const now = performance.now()
 
         if (phase === 'INTRO') {
@@ -197,6 +204,30 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
         cancelAnimationFrame(rafId)
         rafId = null
       }
+    }
+
+    const startIntroTimer = () => {
+      clearTimeout(introTimer)
+      introTimer = setTimeout(() => {
+        if (!inViewport) {
+          if (book) {
+            book.rotation.y = REST_Y
+            book.rotation.x = REST_X
+          }
+          phase = 'IDLE'
+          doRender()
+          return
+        }
+        if (hovered) {
+          phase = 'IDLE'
+          book.rotation.y = REST_Y
+          book.rotation.x = REST_X
+          return
+        }
+        phase = 'INTRO'
+        introStartMs = performance.now()
+        startAnim()
+      }, introDelay)
     }
 
     // ── Scene creation ─────────────────────────────────────────────────────
@@ -302,18 +333,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
         applyFallback()
       }
 
-      // Start intro after the per-book stagger delay
-      introTimer = setTimeout(() => {
-        if (hovered) {
-          phase = 'IDLE'
-          book.rotation.y = REST_Y
-          book.rotation.x = REST_X
-          return
-        }
-        phase = 'INTRO'
-        introStartMs = performance.now()
-        startAnim()
-      }, introDelay)
+      startIntroTimer()
 
       doRender()
     }
@@ -349,17 +369,40 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
       camera = null
     }
 
-    // ── IntersectionObserver owns the scene lifecycle ──────────────────────
+    // ── IntersectionObserver: defer WebGL creation until visible, but do NOT dispose the
+    // renderer when off-screen. Disposing many book renderers at once and recreating them
+    // on scroll-back can exceed the browser WebGL context limit and revoke other canvases
+    // (e.g. the fixed ColorBends home background).
     let observer
     if ('IntersectionObserver' in window) {
       observer = new window.IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            if (!renderer) createScene()
-            // else: rapid re-entry before destroyScene ran — book is at resting pose, nothing to do
+            inViewport = true
+            if (!renderer) {
+              createScene()
+            } else {
+              renderer.domElement.style.visibility = 'visible'
+              if (phase === 'PENDING' && !introTimer) {
+                startIntroTimer()
+              }
+              doRender()
+            }
           } else {
+            inViewport = false
+            hovered = false
             stopAnim()
-            destroyScene()
+            clearTimeout(introTimer)
+            introTimer = null
+            if (book && (phase === 'INTRO' || phase === 'RETURN' || phase === 'HOVERED')) {
+              book.rotation.y = REST_Y
+              book.rotation.x = REST_X
+              phase = 'IDLE'
+            }
+            if (renderer) {
+              renderer.domElement.style.visibility = 'hidden'
+              doRender()
+            }
           }
         },
         { threshold: 0.1 }
@@ -367,6 +410,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
       observer.observe(container)
     } else {
       // No IntersectionObserver support — create immediately
+      inViewport = true
       createScene()
     }
 
