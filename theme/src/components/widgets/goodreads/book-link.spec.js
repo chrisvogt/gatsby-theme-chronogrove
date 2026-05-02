@@ -95,4 +95,12 @@ describe('Widget/Goodreads/BookLink', () => {
     expect(screen.getByTestId('book-preview-thumbnail')).toHaveAttribute('src', 'https://example.com/book.jpg')
     expect(screen.getByTestId('book-preview-flat')).toHaveAttribute('aria-label', 'Test Book')
   })
+
+  it('shows the title when the flat cover image fails to load', () => {
+    render(<BookLink {...mockProps} flatCover />)
+    const img = screen.getByTestId('book-preview-thumbnail')
+    fireEvent.error(img)
+    expect(screen.queryByTestId('book-preview-thumbnail')).not.toBeInTheDocument()
+    expect(screen.getByText('Test Book')).toBeInTheDocument()
+  })
 })
