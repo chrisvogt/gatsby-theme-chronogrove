@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.0
+
+### `gatsby-theme-chronogrove` — home “Latest Posts” widget layout
+
+- **Recaps**: `PostCard` no longer receives **`excerpt`** (matches Travel-style cards: thumbnails, title, meta). Recaps use the same **2-column** grid as Travel on large breakpoints instead of a dynamic 3-column layout.
+- **Music**: **`useCategorizedPosts`** exposes **`musicSoundcloud`** and **`musicYoutube`** (up to **two** newest music posts per embed type). The home widget renders **two rows** under one Music heading: SoundCloud first, then YouTube, with spacing between rows. Posts already shown in the SoundCloud row are excluded from the YouTube row so dual-embed posts do not duplicate. Each row passes **only** the relevant embed props so previews align. Music posts **without** `soundcloudId` or `youtubeSrc` do not appear in these rows.
+- **Version**: **0.85.0**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.0** (tracks theme **0.85.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.0** (tracks theme **0.85.0**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.0**), `theme/src/hooks/use-categorized-posts.js`, `theme/src/hooks/use-categorized-posts.spec.js`, `theme/src/components/widgets/recent-posts/recent-posts-widget.js`, `theme/src/components/widgets/recent-posts/recent-posts-widget.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.0**)
+- `www.chronogrove.com/package.json` (version **1.3.0**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.84.0
 
 ### `gatsby-theme-chronogrove` — configurable footer links

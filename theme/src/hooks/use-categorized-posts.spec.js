@@ -66,7 +66,8 @@ describe('useCategorizedPosts', () => {
               title: 'Here and Now Piano Cover',
               slug: 'here-and-now',
               date: '2025-06-19',
-              banner: 'banner4.jpg'
+              banner: 'banner4.jpg',
+              soundcloudId: '12345'
             },
             fields: {
               category: 'music/piano-covers',
@@ -133,8 +134,9 @@ describe('useCategorizedPosts', () => {
     expect(result.recaps[0].frontmatter.title).toBe('September 2025 Recap')
     expect(result.recaps[1].frontmatter.title).toBe('July 2025 Recap')
 
-    expect(result.music).toHaveLength(1)
-    expect(result.music[0].frontmatter.title).toBe('Here and Now Piano Cover')
+    expect(result.musicSoundcloud).toHaveLength(1)
+    expect(result.musicSoundcloud[0].frontmatter.title).toBe('Here and Now Piano Cover')
+    expect(result.musicYoutube).toHaveLength(0)
 
     expect(result.photography).toHaveLength(1)
     expect(result.photography[0].frontmatter.title).toBe('Belize Travel Photos')
@@ -145,7 +147,7 @@ describe('useCategorizedPosts', () => {
     expect(result.other[0].frontmatter.title).toBe('Evolution of My Blog')
 
     // Check that posts array contains deduplicated posts
-    expect(result.posts).toHaveLength(5) // 2 recaps + 1 music + 1 photography + 1 other
+    expect(result.posts).toHaveLength(5) // 2 recaps + 1 music (SoundCloud) + 1 photography + 1 other
     expect(result.posts.every(post => post.section)).toBe(true)
   })
 
@@ -164,7 +166,8 @@ describe('useCategorizedPosts', () => {
     const result = useCategorizedPosts()
 
     expect(result.recaps).toHaveLength(0)
-    expect(result.music).toHaveLength(0)
+    expect(result.musicSoundcloud).toHaveLength(0)
+    expect(result.musicYoutube).toHaveLength(0)
     expect(result.photography).toHaveLength(0)
     expect(result.travel).toHaveLength(0)
     expect(result.other).toHaveLength(0)
@@ -177,7 +180,8 @@ describe('useCategorizedPosts', () => {
     const result = useCategorizedPosts()
 
     expect(result.recaps).toHaveLength(0)
-    expect(result.music).toHaveLength(0)
+    expect(result.musicSoundcloud).toHaveLength(0)
+    expect(result.musicYoutube).toHaveLength(0)
     expect(result.photography).toHaveLength(0)
     expect(result.travel).toHaveLength(0)
     expect(result.other).toHaveLength(0)
@@ -230,7 +234,7 @@ describe('useCategorizedPosts', () => {
     expect(result.recaps[0].frontmatter.title).toBe('Monthly Recap')
   })
 
-  it('correctly identifies music posts', () => {
+  it('correctly identifies music posts for SoundCloud and YouTube rows', () => {
     const mockData = {
       allMdx: {
         edges: [
@@ -240,7 +244,8 @@ describe('useCategorizedPosts', () => {
                 title: 'Piano Practice',
                 slug: 'piano-practice',
                 date: '2025-01-01',
-                banner: 'banner.jpg'
+                banner: 'banner.jpg',
+                soundcloudId: '111'
               },
               fields: {
                 category: 'music',
@@ -255,7 +260,8 @@ describe('useCategorizedPosts', () => {
                 title: 'Piano Covers',
                 slug: 'piano-covers',
                 date: '2025-01-02',
-                banner: 'banner2.jpg'
+                banner: 'banner2.jpg',
+                youtubeSrc: 'https://www.youtube.com/embed/abc123'
               },
               fields: {
                 category: 'music/piano-covers',
@@ -272,9 +278,10 @@ describe('useCategorizedPosts', () => {
 
     const result = useCategorizedPosts()
 
-    expect(result.music).toHaveLength(2)
-    expect(result.music[0].frontmatter.title).toBe('Piano Practice')
-    expect(result.music[1].frontmatter.title).toBe('Piano Covers')
+    expect(result.musicSoundcloud).toHaveLength(1)
+    expect(result.musicSoundcloud[0].frontmatter.title).toBe('Piano Practice')
+    expect(result.musicYoutube).toHaveLength(1)
+    expect(result.musicYoutube[0].frontmatter.title).toBe('Piano Covers')
   })
 
   it('correctly identifies photography posts', () => {
@@ -383,7 +390,8 @@ describe('useCategorizedPosts', () => {
                 title: 'Music Post',
                 slug: 'music-post',
                 date: '2025-01-01',
-                banner: 'banner1.jpg'
+                banner: 'banner1.jpg',
+                soundcloudId: '999'
               },
               fields: {
                 category: 'music',
@@ -452,7 +460,8 @@ describe('useCategorizedPosts', () => {
                 title: 'Music Post',
                 slug: 'music-post',
                 date: '2025-01-01',
-                banner: 'banner1.jpg'
+                banner: 'banner1.jpg',
+                soundcloudId: '999'
               },
               fields: {
                 category: 'music',
@@ -503,7 +512,7 @@ describe('useCategorizedPosts', () => {
     expect(result.posts).toHaveLength(2)
 
     // Verify sections are assigned correctly
-    expect(result.posts[0].section).toBe('music')
+    expect(result.posts[0].section).toBe('musicSoundcloud')
     expect(result.posts[1].section).toBe('photography')
 
     // Verify no duplicate IDs
@@ -522,7 +531,8 @@ describe('useCategorizedPosts', () => {
                 title: 'Duplicate Test Post',
                 slug: 'duplicate-test',
                 date: '2025-01-01',
-                banner: 'banner1.jpg'
+                banner: 'banner1.jpg',
+                soundcloudId: '888'
               },
               fields: {
                 category: 'music',
@@ -560,7 +570,7 @@ describe('useCategorizedPosts', () => {
     expect(result.posts[1].fields.id).toBe('2')
 
     // Verify sections are assigned correctly
-    expect(result.posts[0].section).toBe('music')
+    expect(result.posts[0].section).toBe('musicSoundcloud')
     expect(result.posts[1].section).toBe('photography')
   })
 
@@ -589,7 +599,8 @@ describe('useCategorizedPosts', () => {
                 title: 'Music Post',
                 slug: 'music-post',
                 date: '2025-01-02',
-                banner: 'banner2.jpg'
+                banner: 'banner2.jpg',
+                soundcloudId: '777'
               },
               fields: {
                 category: 'music',
@@ -686,7 +697,7 @@ describe('useCategorizedPosts', () => {
 
     // Verify sections are assigned correctly
     expect(result.posts[0].section).toBe('recaps')
-    expect(result.posts[1].section).toBe('music')
+    expect(result.posts[1].section).toBe('musicSoundcloud')
     expect(result.posts[2].section).toBe('photography')
     expect(result.posts[3].section).toBe('other')
 

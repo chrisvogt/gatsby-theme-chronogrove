@@ -57,7 +57,7 @@ describe('RecentPostsWidget', () => {
             id: '2',
             path: '/music/piano-practice'
           },
-          section: 'music'
+          section: 'musicSoundcloud'
         },
         {
           frontmatter: {
@@ -87,7 +87,8 @@ describe('RecentPostsWidget', () => {
         }
       ],
       recaps: [],
-      music: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
       travel: [],
       other: []
     })
@@ -144,7 +145,8 @@ describe('RecentPostsWidget', () => {
         }
       ],
       recaps: [],
-      music: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
       travel: [],
       other: []
     })
@@ -168,7 +170,8 @@ describe('RecentPostsWidget', () => {
     useCategorizedPosts.mockReturnValue({
       posts: [],
       recaps: [],
-      music: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
       travel: [],
       other: []
     })
@@ -232,7 +235,8 @@ describe('RecentPostsWidget', () => {
         }
       ],
       recaps: [],
-      music: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
       travel: [],
       other: []
     })
@@ -277,7 +281,8 @@ describe('RecentPostsWidget', () => {
         }
       ],
       recaps: [],
-      music: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
       travel: [],
       other: []
     })
@@ -312,7 +317,8 @@ describe('RecentPostsWidget', () => {
         }
       ],
       recaps: [],
-      music: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
       travel: [],
       other: []
     })
