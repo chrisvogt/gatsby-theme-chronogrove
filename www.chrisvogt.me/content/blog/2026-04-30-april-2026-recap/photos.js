@@ -36,13 +36,13 @@ export const hunkyJesus = [
 export const hunkyJesusCastroMix = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1777694462/chrisvogt-me/galleries/now-april-2026/20260405-IMG_3987.jpg',
-    title: 'Castro sidewalk, walking toward The Mix',
+    title: 'Castro sidewalk toward The Mix — Augustin, Allen, and Nick',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1777694462/chrisvogt-me/galleries/now-april-2026/20260405-IMG_3989.jpg',
-    title: 'Patio sun, drinks, afternoon near The Mix',
+    title: 'Patio sun, drinks, afternoon near The Mix — Nick cooling off under a fan',
     width: 3,
     height: 4
   },
@@ -120,19 +120,19 @@ export const grandPrixLongBeach = [
 export const battleshipIowa = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1777694468/chrisvogt-me/galleries/now-april-2026/20260418-IMG_4309.jpg',
-    title: 'Naval shell on display — teak decks, USS Iowa',
+    title: 'Nick hugging a naval shell on display — teak decks, USS Iowa',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1777694468/chrisvogt-me/galleries/now-april-2026/20260418-IMG_4314.jpg',
-    title: 'Ship-mounted binoculars on the superstructure',
+    title: 'Mateo at the ship-mounted binoculars on the superstructure',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/f_auto/v1777694468/chrisvogt-me/galleries/now-april-2026/20260418-IMG_4316.jpg',
-    title: 'Bridge optics: harbor geometry through glass',
+    title: 'Nick at the bridge optics — harbor geometry through glass',
     width: 4,
     height: 3
   }
