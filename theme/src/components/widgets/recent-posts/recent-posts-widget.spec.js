@@ -298,6 +298,82 @@ describe('RecentPostsWidget', () => {
     expect(postCards[1]).toHaveAttribute('data-has-thumbnails', 'true')
   })
 
+  it('renders SoundCloud and YouTube music rows when both sections have posts', () => {
+    useCategorizedPosts.mockReturnValue({
+      posts: [
+        {
+          frontmatter: {
+            date: '2024-10-01',
+            title: 'SoundCloud Track',
+            soundcloudId: '12345'
+          },
+          fields: {
+            category: 'music',
+            id: '1',
+            path: '/music/soundcloud-track'
+          },
+          section: 'musicSoundcloud'
+        },
+        {
+          frontmatter: {
+            date: '2024-10-02',
+            title: 'YouTube Track',
+            youtubeSrc: 'https://www.youtube.com/embed/abc123def'
+          },
+          fields: {
+            category: 'music',
+            id: '2',
+            path: '/music/youtube-track'
+          },
+          section: 'musicYoutube'
+        }
+      ],
+      recaps: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
+      travel: [],
+      other: []
+    })
+
+    render(<RecentPostsWidget />)
+
+    expect(screen.getByText('Music')).toBeInTheDocument()
+    const postCards = screen.getAllByTestId('post-card')
+    expect(postCards).toHaveLength(2)
+    expect(postCards[0]).toHaveTextContent('SoundCloud Track')
+    expect(postCards[1]).toHaveTextContent('YouTube Track')
+  })
+
+  it('renders YouTube-only music row without extra top margin', () => {
+    useCategorizedPosts.mockReturnValue({
+      posts: [
+        {
+          frontmatter: {
+            date: '2024-10-02',
+            title: 'YouTube Only',
+            youtubeSrc: 'https://www.youtube.com/embed/xyz789'
+          },
+          fields: {
+            category: 'music',
+            id: '1',
+            path: '/music/youtube-only'
+          },
+          section: 'musicYoutube'
+        }
+      ],
+      recaps: [],
+      musicSoundcloud: [],
+      musicYoutube: [],
+      travel: [],
+      other: []
+    })
+
+    render(<RecentPostsWidget />)
+
+    expect(screen.getByText('Music')).toBeInTheDocument()
+    expect(screen.getByTestId('post-card')).toHaveTextContent('YouTube Only')
+  })
+
   it('handles posts without thumbnails in recaps section', () => {
     useCategorizedPosts.mockReturnValue({
       posts: [
