@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.3
+
+### `gatsby-theme-chronogrove` — Steam widget & GitHub contribution graph
+
+- **Steam**: The **Recently-Played Games** block (heading, copy, and grid) is shown only while **loading** or when the API returns **at least one** recently played game. If the last-two-weeks list is empty after load, the section is omitted so the widget does not show a bare headline.
+- **GitHub contribution graph**: Uses an explicit **4px** gap constant for the heatmap, skeleton, legend, and day-label row math so month labels line up with cells (Theme UI **`gap: 1`** is not guaranteed to be 4px). **Month labels** match GitHub when the year view does not start on the 1st: skip the cramped first partial month and omit the trailing partial month. **Tests**: **`contribution-graph.spec.js`** covers partial-range month labeling.
+- **Version**: **0.85.3**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.3** (tracks theme **0.85.3**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.3** (tracks theme **0.85.3**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.3**), `theme/src/components/widgets/steam/steam-widget.js`, `theme/src/components/widgets/steam/README.md`, `theme/src/components/widgets/steam/__snapshots__/steam-widget.spec.js.snap`, `theme/src/components/widgets/github/contribution-graph.js`, `theme/src/components/widgets/github/contribution-graph.spec.js`, `theme/src/components/widgets/github/__snapshots__/contribution-graph.spec.js.snap`, `theme/src/components/widgets/github/__snapshots__/github-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.16.3**)
+- `www.chronogrove.com/package.json` (version **1.3.3**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.2
 
 ### `gatsby-theme-chronogrove` — Goodreads carousel WebGL limits
