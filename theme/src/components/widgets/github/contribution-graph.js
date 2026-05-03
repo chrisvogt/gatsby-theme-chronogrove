@@ -6,6 +6,19 @@ import React, { useMemo, useRef, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import isDarkMode from '../../../helpers/isDarkMode'
 
+/** Must match grid / legend gap so month labels and row math align with cells (Theme UI `gap: 1` is not guaranteed to be 4px). */
+const CONTRIBUTION_CELL_GAP_PX = 4
+
+function earliestContributionDate(weeks) {
+  let min = null
+  for (const week of weeks) {
+    for (const day of week.contributionDays) {
+      if (!min || day.date < min) min = day.date
+    }
+  }
+  return min
+}
+
 /**
  * ContributionGraph Component
  *
@@ -59,6 +72,20 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
 
     return months
   }, [contributionCalendar])
+
+  // GitHub omits the first month headline when the range doesn't start on the 1st (avoids a cramped first label).
+  // Still omit the last month (partial final month), matching GitHub's right edge.
+  const monthLabelsForDisplay = useMemo(() => {
+    if (!monthLabels.length || !contributionCalendar?.weeks) return []
+
+    const earliest = earliestContributionDate(contributionCalendar.weeks)
+    if (!earliest) return monthLabels.slice(0, -1)
+
+    const dayOfMonth = Number(earliest.slice(8, 10))
+    const skipFirstPartialMonth = dayOfMonth !== 1
+    const withoutEnds = skipFirstPartialMonth ? monthLabels.slice(1) : monthLabels
+    return withoutEnds.length ? withoutEnds.slice(0, -1) : []
+  }, [monthLabels, contributionCalendar?.weeks])
 
   // Calculate responsive cell size
   const [cellSize, setCellSize] = useState(10)
@@ -120,7 +147,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
     const updateCellSize = () => {
       const containerWidth = containerRef.current?.offsetWidth || 800
       const weeksCount = contributionCalendar.weeks.length
-      const gap = 4 // Gap between cells in pixels
+      const gap = CONTRIBUTION_CELL_GAP_PX
       const availableWidth = containerWidth - 16 // Small padding for scrollbar/margins
       const calculatedSize = Math.floor((availableWidth - (weeksCount - 1) * gap) / weeksCount)
 
@@ -152,7 +179,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
             sx={{
               display: 'grid',
               gridTemplateColumns: 'repeat(53, 1fr)',
-              gap: 1,
+              gap: `${CONTRIBUTION_CELL_GAP_PX}px`,
               opacity: 0.5,
               p: 3
             }}
@@ -237,8 +264,8 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                 color: 'textMuted',
                 width: '40px',
                 flexShrink: 0,
-                pt: '24px', // Offset for month labels height (20px) + gap (4px)
-                height: `${7 * cellSize + 6 * 4}px` // Align container height with grid rows
+                pt: `${20 + CONTRIBUTION_CELL_GAP_PX}px`, // Month label row (20px) + gap under labels
+                height: `${7 * cellSize + 6 * CONTRIBUTION_CELL_GAP_PX}px` // Align with grid rows
               }}
             >
               {[2, 4, 6].map(dayOfWeek => (
@@ -246,7 +273,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   key={dayOfWeek}
                   sx={{
                     position: 'absolute',
-                    top: `${dayOfWeek * (cellSize + 4)}px`,
+                    top: `${dayOfWeek * (cellSize + CONTRIBUTION_CELL_GAP_PX)}px`,
                     height: `${cellSize}px`,
                     lineHeight: `${cellSize}px`,
                     textAlign: 'right',
@@ -286,16 +313,16 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                 sx={{
                   position: 'relative',
                   height: '20px',
-                  mb: 1,
+                  mb: `${CONTRIBUTION_CELL_GAP_PX}px`,
                   minWidth: 0
                 }}
               >
-                {monthLabels.slice(0, -1).map((month, idx) => (
+                {monthLabelsForDisplay.map((month, idx) => (
                   <Box
                     key={`${month.date}-${idx}`}
                     sx={{
                       position: 'absolute',
-                      left: `${month.weekIndex * (cellSize + 4)}px`,
+                      left: `${month.weekIndex * (cellSize + CONTRIBUTION_CELL_GAP_PX)}px`,
                       fontSize: 0,
                       color: 'textMuted',
                       fontWeight: 'normal',
@@ -313,7 +340,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   display: 'grid',
                   gridTemplateColumns: `repeat(${weeksCount}, ${cellSize}px)`,
                   gridTemplateRows: `repeat(7, ${cellSize}px)`,
-                  gap: 1,
+                  gap: `${CONTRIBUTION_CELL_GAP_PX}px`,
                   minWidth: 'max-content',
                   alignItems: 'start'
                 }}
@@ -426,7 +453,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: 1,
+            gap: `${CONTRIBUTION_CELL_GAP_PX}px`,
             mt: 3,
             ml: '40px', // Match day labels width
             fontSize: 0,
@@ -437,7 +464,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
           <Box
             sx={{
               display: 'flex',
-              gap: 1
+              gap: `${CONTRIBUTION_CELL_GAP_PX}px`
             }}
           >
             {[0, 1, 2, 3, 4].map(level => (

@@ -479,7 +479,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           Loading contribution data...
         </p>
         <div
-          class="css-1oal0qm"
+          class="css-8j9u6e"
         >
           <div
             class="css-1oe1md6"
@@ -1785,7 +1785,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
           Loading contribution data...
         </p>
         <div
-          class="css-1oal0qm"
+          class="css-8j9u6e"
         >
           <div
             class="css-1oe1md6"
@@ -3362,7 +3362,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           Loading contribution data...
         </p>
         <div
-          class="css-1oal0qm"
+          class="css-8j9u6e"
         >
           <div
             class="css-1oe1md6"

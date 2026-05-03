@@ -163,6 +163,31 @@ describe('ContributionGraph Component', () => {
     expect(document.body.querySelector('[role="tooltip"]')).not.toBeInTheDocument()
   })
 
+  it('omits the first month label when the range does not start on the 1st (GitHub-style)', () => {
+    const day = (date, n) => ({
+      date,
+      contributionCount: n,
+      color: n > 0 ? '#9be9a8' : '#ebedf0'
+    })
+    // One contribution day per week (Saturdays): starts 2025-04-26 so April is partial at the left edge
+    const weeks = Array.from({ length: 12 }, (_, i) => {
+      const d = new Date(2025, 3, 26 + i * 7)
+      const yyyy = d.getFullYear()
+      const mm = String(d.getMonth() + 1).padStart(2, '0')
+      const dd = String(d.getDate()).padStart(2, '0')
+      return { contributionDays: [day(`${yyyy}-${mm}-${dd}`, 0)] }
+    })
+
+    render(
+      <TestProviderWithState>
+        <ContributionGraph isLoading={false} contributionCalendar={{ totalContributions: 0, weeks }} />
+      </TestProviderWithState>
+    )
+
+    expect(screen.queryByText('Apr')).not.toBeInTheDocument()
+    expect(screen.getByText('May')).toBeInTheDocument()
+  })
+
   it('memo prevents re-render when props are unchanged', () => {
     const { rerender } = render(
       <TestProviderWithState>
