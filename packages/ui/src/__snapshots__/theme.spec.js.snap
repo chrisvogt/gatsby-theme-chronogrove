@@ -115,8 +115,8 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
         "paddingLeft": "8px",
       },
       "&:hover, &:focus": {
-        "boxShadow": "lg",
-        "transform": "scale(1.015)",
+        "boxShadow": "0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 8px 20px rgba(66,46,163,0.14)",
+        "transform": "translateY(-3px) scale(1.008)",
       },
       ".card-media": {
         "mb": 2,
@@ -145,7 +145,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "height": "100%",
       "padding": 3,
       "textDecoration": "none",
-      "transition": "all 200ms ease-in-out",
+      "transition": "transform 200ms ease-in-out, box-shadow 200ms ease-in-out",
     },
     "StatusCardDark": {
       "backgroundColor": "#1e2530",
@@ -175,8 +175,8 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     },
     "actionCard": {
       "&:hover, &:focus": {
-        "boxShadow": "lg",
-        "transform": "scale(1.015)",
+        "boxShadow": "0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 8px 20px rgba(66,46,163,0.14)",
+        "transform": "translateY(-3px) scale(1.008)",
       },
       "WebkitBackdropFilter": "blur(10px)",
       "a": {
@@ -196,7 +196,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       ],
       "padding": 3,
       "textDecoration": "none",
-      "transition": "all 200ms ease-in-out",
+      "transition": "transform 200ms ease-in-out, box-shadow 200ms ease-in-out",
     },
     "aiSummary": {
       "@keyframes blink": {
@@ -356,7 +356,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "backdropFilter": "blur(12px) saturate(150%)",
       "bg": "panel-background",
       "borderRadius": "card",
-      "boxShadow": "default",
+      "boxShadow": "0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 4px 12px rgba(66,46,163,0.08)",
       "color": "text",
       "flexGrow": 1,
       "fontSize": [
@@ -762,8 +762,8 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     },
     "InstagramItem": {
       "&:hover, &:focus": {
-        "boxShadow": "lg",
-        "transform": "scale(1.015)",
+        "boxShadow": "0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 8px 20px rgba(66,46,163,0.14)",
+        "transform": "translateY(-3px) scale(1.008)",
       },
       "background": "none",
       "border": "none",
@@ -772,7 +772,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "cursor": "pointer",
       "overflow": "hidden",
       "p": 0,
-      "transition": "all 200ms ease-in-out",
+      "transition": "transform 200ms ease-in-out, box-shadow 200ms ease-in-out",
     },
     "IntroExperienceSlide": {
       "&.active-slide": {

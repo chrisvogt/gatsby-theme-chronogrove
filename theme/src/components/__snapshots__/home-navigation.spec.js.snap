@@ -5,43 +5,31 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -49,7 +37,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -57,16 +45,24 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -74,7 +70,7 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -82,16 +78,16 @@ exports[`HomeNavigation Edge cases handles navigation data with undefined home i
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-        </nav>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -101,43 +97,31 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -145,7 +129,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -153,16 +137,24 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -170,7 +162,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -178,21 +170,33 @@ exports[`HomeNavigation Edge cases handles navigation items with missing path 1`
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            Test
-          </a>
-        </nav>
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Test
+            </span>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -202,43 +206,31 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -246,7 +238,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -254,16 +246,24 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -271,7 +271,7 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -279,20 +279,32 @@ exports[`HomeNavigation Edge cases handles navigation items with missing text 1`
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/test"
-          />
-        </nav>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/test"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            />
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -302,43 +314,31 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -346,7 +346,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -354,16 +354,24 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -371,7 +379,7 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -379,28 +387,52 @@ exports[`HomeNavigation Edge cases handles server-side rendering when document i
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/about"
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/about"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            About
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/blog"
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              About
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/blog"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            Blog
-          </a>
-        </nav>
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Blog
+            </span>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -410,43 +442,31 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -454,7 +474,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -462,16 +482,24 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -479,7 +507,7 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -487,16 +515,16 @@ exports[`HomeNavigation handles navigation data with empty home items 1`] = `
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-        </nav>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -506,43 +534,31 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -550,7 +566,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -558,16 +574,24 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -575,7 +599,7 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -583,16 +607,16 @@ exports[`HomeNavigation handles navigation data with missing header 1`] = `
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-        </nav>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -602,43 +626,31 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -646,7 +658,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -654,16 +666,24 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -671,7 +691,7 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -679,16 +699,16 @@ exports[`HomeNavigation handles navigation data with null values 1`] = `
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-        </nav>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -698,43 +718,31 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -742,7 +750,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -750,16 +758,24 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -767,7 +783,7 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -775,22 +791,34 @@ exports[`HomeNavigation handles navigation items with complex slug names 1`] = `
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/complex-slug"
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/complex-slug"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            Complex Slug
-          </a>
-        </nav>
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Complex Slug
+            </span>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -800,43 +828,31 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -844,7 +860,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -852,16 +868,24 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -869,7 +893,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -877,16 +901,24 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/discogs"
-          >
+            </div>
             <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/discogs"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -894,7 +926,7 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
                 data-icon="record-vinyl"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -902,16 +934,16 @@ exports[`HomeNavigation handles navigation items with discogs slug for icon mapp
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Discogs
             </span>
-            Discogs
-          </a>
-        </nav>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -921,43 +953,31 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -965,7 +985,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -973,16 +993,24 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -990,7 +1018,7 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -998,22 +1026,34 @@ exports[`HomeNavigation handles navigation items with missing icon reactIcon 1`]
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/test"
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/test"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            Test
-          </a>
-        </nav>
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Test
+            </span>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;
@@ -1023,43 +1063,31 @@ exports[`HomeNavigation matches the snapshot 1`] = `
   <div
     class="css-h0d98v"
   >
-    <div
-      class="css-3w4egu"
+    <nav
+      aria-label="On-page navigation"
+      role="navigation"
     >
       <div
-        class="css-mpwvo5"
+        class="css-73ghup"
       >
         <div
           aria-hidden="true"
-          class="css-q5pgmu"
+          class="css-1ondyr5"
         />
         <div
           aria-hidden="true"
-          class="css-f8d2eq"
+          class="css-q2w888"
         />
-        <div
-          aria-hidden="true"
-          class="css-10ww2o7"
-        />
-        <div
-          aria-hidden="true"
-          class="css-59kyfn"
-        />
-        <div
-          aria-hidden="true"
-          class="css-19fzzyb"
-        />
-        <nav
-          aria-label="On-page navigation"
-          role="navigation"
+        <a
+          class="active css-1h624jc"
+          href="#top"
         >
-          <a
-            class="active css-l4xqkv"
-            href="#top"
+          <div
+            class="css-17ptndy"
           >
-            <span
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-cj7kke"
             >
               <svg
                 aria-hidden="true"
@@ -1067,7 +1095,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
                 data-icon="house"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 18px; height: 18px; color: rgb(255, 255, 255); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -1075,16 +1103,24 @@ exports[`HomeNavigation matches the snapshot 1`] = `
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            Home
-          </a>
-          <a
-            class="css-l4xqkv"
-            href="#posts"
-          >
+            </div>
             <span
+              class="nav-label css-19pgkqn"
+            >
+              Home
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="#posts"
+        >
+          <div
+            class="css-wv2ojk"
+          >
+            <div
               aria-hidden="true"
-              style="display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; margin-right: 8px;"
+              class="nav-badge css-1h3x6ks"
             >
               <svg
                 aria-hidden="true"
@@ -1092,7 +1128,7 @@ exports[`HomeNavigation matches the snapshot 1`] = `
                 data-icon="newspaper"
                 data-prefix="fas"
                 role="img"
-                style="width: 18px; height: 18px;"
+                style="width: 14px; height: 14px; color: rgba(66, 46, 163, 0.85); transition: all 0.25s ease;"
                 viewBox="0 0 512 512"
               >
                 <path
@@ -1100,28 +1136,52 @@ exports[`HomeNavigation matches the snapshot 1`] = `
                   fill="currentColor"
                 />
               </svg>
+            </div>
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Latest Posts
             </span>
-            Latest Posts
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/about"
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/about"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            About
-          </a>
-          <a
-            class="css-15vm6gr"
-            href="/blog"
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              About
+            </span>
+          </div>
+        </a>
+        <a
+          class="css-1h624jc"
+          href="/blog"
+        >
+          <div
+            class="css-wv2ojk"
           >
-            Blog
-          </a>
-        </nav>
+            <div
+              aria-hidden="true"
+              class="nav-badge css-1h3x6ks"
+            />
+            <span
+              class="nav-label css-j92cgb"
+            >
+              Blog
+            </span>
+          </div>
+        </a>
       </div>
-      <div
-        aria-hidden="true"
-        class="css-ffkh8x"
-      />
-    </div>
+    </nav>
   </div>
 </DocumentFragment>
 `;

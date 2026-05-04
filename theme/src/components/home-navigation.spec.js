@@ -1,14 +1,17 @@
 import React from 'react'
-import { render, act } from '@testing-library/react'
+import { render, act, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-
 import { TestProvider } from '../testUtils'
-import HomeNavigation, { sideShadowGradientFromTheme } from './home-navigation'
+import HomeNavigation, { getRailFillPct, normalizeHomeNavProps, resolvePrimaryFromTheme } from './home-navigation'
+import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
 
 jest.mock('../hooks/use-navigation-data')
 jest.mock('../hooks/use-site-metadata')
+jest.mock('../helpers/scroll-to-element-when-ready', () => ({
+  scrollToElementWhenReady: jest.fn()
+}))
 
 const mockNavigationData = {
   header: {
@@ -47,6 +50,72 @@ Object.defineProperty(window, 'innerHeight', {
   writable: true
 })
 
+describe('normalizeHomeNavProps', () => {
+  it('returns empty object for nullish props', () => {
+    expect(normalizeHomeNavProps(undefined)).toEqual({})
+    expect(normalizeHomeNavProps(null)).toEqual({})
+  })
+
+  it('returns the same object reference when props are provided', () => {
+    const p = { scrollSyncDisabled: true }
+    expect(normalizeHomeNavProps(p)).toBe(p)
+  })
+})
+
+describe('resolvePrimaryFromTheme', () => {
+  it('returns fallback when light theme has no primary', () => {
+    expect(resolvePrimaryFromTheme(false, { rawColors: {} })).toBe('#422EA3')
+  })
+
+  it('returns fallback when dark theme has no dark primary', () => {
+    expect(resolvePrimaryFromTheme(true, { rawColors: { modes: { dark: {} } } })).toBe('#422EA3')
+  })
+
+  it('returns light primary when present', () => {
+    expect(resolvePrimaryFromTheme(false, { rawColors: { primary: '#abc' } })).toBe('#abc')
+  })
+
+  it('returns dark primary when present', () => {
+    expect(resolvePrimaryFromTheme(true, { rawColors: { modes: { dark: { primary: '#def' } } } })).toBe('#def')
+  })
+
+  it('returns fallback when theme is undefined', () => {
+    expect(resolvePrimaryFromTheme(false, undefined)).toBe('#422EA3')
+  })
+})
+
+describe('getRailFillPct', () => {
+  it('returns 0 when there is at most one link', () => {
+    expect(getRailFillPct(0, 0)).toBe(0)
+    expect(getRailFillPct(1, 0)).toBe(0)
+  })
+
+  it('returns 0 at first stop with multiple links', () => {
+    expect(getRailFillPct(4, 0)).toBe(0)
+  })
+
+  it('returns 100 at last stop', () => {
+    expect(getRailFillPct(4, 3)).toBe(100)
+  })
+
+  it('returns rounded intermediate percentages', () => {
+    expect(getRailFillPct(4, 1)).toBe(33)
+    expect(getRailFillPct(4, 2)).toBe(67)
+  })
+
+  it('caps at 100 when the fraction rounds above 100', () => {
+    expect(getRailFillPct(2, 10)).toBe(100)
+  })
+
+  it('treats a negative index (no matching link id) as the first stop', () => {
+    expect(getRailFillPct(4, -1)).toBe(0)
+  })
+
+  it('treats a non-finite index as the first stop', () => {
+    expect(getRailFillPct(4, NaN)).toBe(0)
+  })
+})
+
 describe('HomeNavigation', () => {
   beforeEach(() => {
     useNavigationData.mockImplementation(() => mockNavigationData)
@@ -70,6 +139,11 @@ describe('HomeNavigation', () => {
     jest.clearAllMocks()
   })
 
+  it('uses default props when created with undefined props', () => {
+    const { container } = render(<TestProvider>{React.createElement(HomeNavigation)}</TestProvider>)
+    expect(container.querySelector('nav')).toBeInTheDocument()
+  })
+
   it('matches the snapshot', () => {
     const { asFragment } = render(
       <TestProvider>
@@ -77,11 +151,6 @@ describe('HomeNavigation', () => {
       </TestProvider>
     )
     expect(asFragment()).toMatchSnapshot()
-  })
-
-  it('accepts undefined props (default parameters)', () => {
-    const { container } = render(<TestProvider>{React.createElement(HomeNavigation, undefined)}</TestProvider>)
-    expect(container.querySelector('nav')).toBeInTheDocument()
   })
 
   it('hides nav items for widgets that have no data source configured', () => {
@@ -420,6 +489,57 @@ describe('HomeNavigation', () => {
     })
   })
 
+  describe('Hash link clicks', () => {
+    beforeEach(() => {
+      window.history.pushState = jest.fn()
+      window.scrollTo = jest.fn()
+      scrollToElementWhenReady.mockClear()
+    })
+
+    it('scrolls to top when Home (#top) is clicked', () => {
+      const { container } = render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      const homeLink = container.querySelector('a[href="#top"]')
+      fireEvent.click(homeLink)
+      expect(window.history.pushState).toHaveBeenCalledWith(null, '', '#top')
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'smooth' })
+      expect(scrollToElementWhenReady).not.toHaveBeenCalled()
+    })
+
+    it('moves focus to #top when Home is clicked', () => {
+      const focusTop = jest.fn()
+      document.getElementById = jest.fn(id => {
+        if (id === 'top') {
+          return { focus: focusTop }
+        }
+        return { getBoundingClientRect: mockGetBoundingClientRect }
+      })
+
+      const { container } = render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      fireEvent.click(container.querySelector('a[href="#top"]'))
+      expect(focusTop).toHaveBeenCalledWith({ preventScroll: true })
+    })
+
+    it('calls scrollToElementWhenReady for non-top hash links', () => {
+      const { container } = render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      const postsLink = container.querySelector('a[href="#posts"]')
+      fireEvent.click(postsLink)
+      expect(scrollToElementWhenReady).toHaveBeenCalledWith('#posts')
+      expect(window.scrollTo).not.toHaveBeenCalled()
+    })
+  })
+
   describe('Navigation link rendering', () => {
     it('renders navigation links with correct href and text', () => {
       const { container } = render(
@@ -658,52 +778,42 @@ describe('HomeNavigation', () => {
     })
   })
 
-  describe('sideShadowGradientFromTheme', () => {
-    it('returns fallback gradient when theme has no gray or textMuted', () => {
-      const result = sideShadowGradientFromTheme({}, 'default')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-
-    it('returns fallback gradient when theme.colors is empty', () => {
-      const result = sideShadowGradientFromTheme({ colors: {} }, 'dark')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-
-    it('returns light-mode gradient using gray[5] when theme provides it', () => {
-      const theme = { colors: { gray: { 5: '#6b7280' }, textMuted: '#333' } }
-      const result = sideShadowGradientFromTheme(theme, 'default')
-      expect(result).toContain('color-mix(in srgb, #6b7280 50%, transparent)')
-      expect(result).toContain('26%')
-      expect(result).toContain('8%')
-    })
-
-    it('returns dark-mode gradient using gray[7] when theme provides it', () => {
-      const theme = { colors: { gray: { 7: '#374151' }, textMuted: '#d8d8d8' } }
-      const result = sideShadowGradientFromTheme(theme, 'dark')
-      expect(result).toContain('color-mix(in srgb, #374151 58%, transparent)')
-      expect(result).toContain('32%')
-      expect(result).toContain('10%')
-    })
-
-    it('falls back to textMuted when gray index is missing', () => {
-      const theme = { colors: { textMuted: '#9ca3af' } }
-      const result = sideShadowGradientFromTheme(theme, 'default')
-      expect(result).toContain('#9ca3af')
-      expect(result).toContain('50%')
-    })
-
-    it('returns fallback when theme is null', () => {
-      const result = sideShadowGradientFromTheme(null, 'default')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-
-    it('returns fallback when theme is undefined', () => {
-      const result = sideShadowGradientFromTheme(undefined, 'dark')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-  })
-
   describe('Dark mode', () => {
+    it('uses primary hex fallback when rawColors omit mode primary', () => {
+      const baseTheme = require('@chronogrove/ui/theme').default
+      const { ThemeUIProvider } = require('theme-ui')
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+      try {
+        const themeNoPrimary = {
+          ...baseTheme,
+          rawColors: {
+            ...baseTheme.rawColors,
+            primary: undefined,
+            modes: {
+              ...baseTheme.rawColors?.modes,
+              dark: {
+                ...baseTheme.rawColors?.modes?.dark,
+                primary: undefined
+              }
+            }
+          },
+          config: {
+            ...baseTheme.config,
+            initialColorModeName: 'dark',
+            useColorSchemeMediaQuery: false
+          }
+        }
+        const { container } = render(
+          <ThemeUIProvider theme={themeNoPrimary}>
+            <HomeNavigation scrollSyncDisabled />
+          </ThemeUIProvider>
+        )
+        expect(container.querySelector('nav')).toBeInTheDocument()
+      } finally {
+        warnSpy.mockRestore()
+      }
+    })
+
     it('renders with dark panel when theme initial color mode is dark', () => {
       // Theme UI warns when initialColorModeName matches a `colors.modes` key; we only need dark styles for this assertion.
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})

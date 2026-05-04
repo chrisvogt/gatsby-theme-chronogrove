@@ -81,6 +81,13 @@ describe('HomeTemplate', () => {
     const layoutDiv = container.querySelector('.layoutMock') // Assuming layout has this class
     expect(layoutDiv).toBeInTheDocument()
   })
+
+  it('marks the hero section as an in-page focus target for skip / HomeNavigation hashes', () => {
+    const { container } = renderWithTheme(<HomeTemplate data={mockData} />)
+    const top = container.querySelector('section#top')
+    expect(top).toBeInTheDocument()
+    expect(top).toHaveAttribute('tabindex', '-1')
+  })
 })
 
 // Test for the Head (SEO) component
