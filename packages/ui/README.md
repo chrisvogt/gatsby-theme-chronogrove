@@ -67,6 +67,79 @@ Prefer deep imports so bundles stay lean:
 
 **JSX + bundlers:** Primitives such as [`button`](./src/button.js) use [`Box`](https://theme-ui.com/components/box) from `@theme-ui/components` with an `as` prop for native elements, so `sx` works with Gatsby’s classic JSX runtime and Next’s SWC without a Theme UI file pragma. Jest uses [`babel.config.cjs`](./babel.config.cjs) (automatic JSX).
 
+## Global CSS, Prism / third-party CSS, and fonts
+
+Styles load in three layers. Understanding the split prevents accidental duplicates and keeps each host's build minimal.
+
+### Layer order
+
+| #   | Layer                                           | Mechanism                                                                                                                                                                                                               |
+| --- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Head — color-mode + Emotion insertion point** | Gatsby: `theme/gatsby-ssr.js` + `@chronogrove/ui/gatsby` helpers. Next: `ChronogroveNextRootLayoutHead` from `@chronogrove/ui/next`. Emit before any `<style>` tags so Emotion and Theme UI no-flash scripts run first. |
+| 2   | **Theme UI globals (`theme.global`)**           | `ChronogroveThemeProvider` renders `<Global styles={theme.global} />` via Emotion. This applies identical baseline CSS under both Gatsby and Next as long as the provider wraps the app. No extra import needed.        |
+| 3   | **Host global CSS**                             | Each host owns its plain-CSS files. See below for Gatsby and Next specifics.                                                                                                                                            |
+
+### Gatsby
+
+The theme's own global CSS entry is the side-effect import block in [`theme/gatsby-browser.js`](../../theme/gatsby-browser.js):
+
+```javascript
+import './src/styles/global.css' // layout, .sr-only, Prism overrides
+import 'lightgallery/css/lightgallery.css'
+import 'lightgallery/css/lg-thumbnail.css'
+import 'lightgallery/css/lg-zoom.css'
+import 'prismjs/themes/prism-solarizedlight.css'
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+```
+
+[`theme/src/styles/global.css`](../../theme/src/styles/global.css) also contains `@import '@chronogrove/ui/color-toggle-styles'` for the theme toggle animation.
+
+Prism is **tightly coupled to `gatsby-remark-prismjs`** (configured in [`theme/gatsby-config.js`](../../theme/gatsby-config.js)). The CSS theme and helper overrides (`.gatsby-highlight`, line-number padding, etc.) only make sense when that plugin is active. They are intentionally kept in the Gatsby theme rather than in this package.
+
+Sites that shadow or extend the theme can add additional side-effect imports in their own `gatsby-browser.js` alongside (not instead of) the theme's entry.
+
+### Next.js (App Router)
+
+The reference app is [`examples/chronogrove-next`](../../examples/chronogrove-next). Its [`app/globals.css`](../../examples/chronogrove-next/app/globals.css) shows the minimal baseline:
+
+```css
+/* Required if you use ColorToggle */
+@import '@chronogrove/ui/color-toggle-styles';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--theme-ui-colors-background);
+  -webkit-font-smoothing: antialiased;
+}
+```
+
+Import `globals.css` once from the root `layout.jsx`/`layout.tsx` — the same file that renders `ChronogroveNextRootLayoutHead` and `ChronogroveNextEmotionRegistry`. See [`examples/chronogrove-next/app/layout.jsx`](../../examples/chronogrove-next/app/layout.jsx).
+
+For syntax highlighting in a Next MDX pipeline, use whatever highlighter fits your setup (e.g. [Shiki via rehype-pretty-code](https://rehype-pretty.pages.dev/)) and load only its CSS. There is no dependency on `prismjs` in this package, and you should not add the Prism CSS from the Gatsby theme to a Next app unless your MDX pipeline explicitly emits Prism class names.
+
+### Fonts
+
+The default Chronogrove theme uses **system font stacks** only (defined in [`src/theme.js`](./src/theme.js)):
+
+```js
+sans: '-apple-system, BlinkMacSystemFont, avenir next, ..., sans-serif'
+mono: 'Menlo, Consolas, ..., monospace'
+```
+
+No `@font-face` rules or external font URLs are shipped by this package. Web fonts are **host-owned**:
+
+- **Next.js:** use [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to load faces with zero layout shift; then pass the resulting CSS variable or family name into a theme override: `{ fonts: { body: 'var(--font-inter), sans-serif' } }`.
+- **Gatsby:** use [`gatsby-plugin-google-gtag`](https://www.gatsbyjs.com/plugins/gatsby-plugin-google-gtag/) or a `<link>` in `gatsby-ssr.js`, then extend `theme.fonts` in your `gatsby-config.js` theme options.
+
+Changing `theme.fonts` is the only hook needed; `ChronogroveThemeProvider` merges the override automatically via Theme UI.
+
+### Font Awesome (icons)
+
+`@chronogrove/ui` depends on `@fortawesome/fontawesome-svg-core` and `@fortawesome/react-fontawesome` for `WidgetHeader`. Icon **definitions** (e.g. `faGithub`) come from a kit you add to your own app — see the `WidgetHeader + icons` bullet in the [Next.js](#nextjs-app-router) section above.
+
 ## Changelog
 
 Releases are recorded in the repository root [`CHANGELOG.md`](../../CHANGELOG.md).
