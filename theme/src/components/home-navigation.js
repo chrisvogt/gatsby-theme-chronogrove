@@ -3,7 +3,7 @@ import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { Fragment } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
-import { useMemo, useState, useEffect, useRef } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import {
@@ -82,7 +82,6 @@ const HomeNavigation = props => {
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
   const isDark = colorMode === 'dark'
-  const scrollRef = useRef(null)
 
   const navigation = useNavigationData()
   const metadata = useSiteMetadata()
@@ -179,7 +178,6 @@ const HomeNavigation = props => {
         <nav role='navigation' aria-label='On-page navigation'>
           {/* Outer scroll-wheel rail container */}
           <div
-            ref={scrollRef}
             sx={{
               position: 'relative',
               pl: '28px', // room for rail + badge overflow

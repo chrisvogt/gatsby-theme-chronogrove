@@ -35,7 +35,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const containerRef = useRef(null)
-  const graphRef = useRef(null)
   const [hoveredCell, setHoveredCell] = useState(null)
 
   // Calculate total days for cell size calculation
@@ -220,9 +219,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
         <Themed.p sx={{ mb: 3 }}>{totalContributions} contributions in the last year</Themed.p>
 
         {/* Outer wrapper with explicit width constraint - inline styles prevent FOUC */}
-        {/* Attach ref here for intersection observer */}
         <Box
-          ref={graphRef}
           style={{
             width: '100%',
             maxWidth: '100%',

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { Box, Container, Flex, Grid, jsx } from 'theme-ui'
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import loadable from '@loadable/component'
 import { Themed } from '@theme-ui/mdx'
 
@@ -15,8 +15,6 @@ const options = Object.freeze({
 })
 
 const NotFoundPage = () => {
-  const ref = useRef()
-
   const [isClient, setIsClient] = useState(false)
   useEffect(() => {
     setIsClient(true)
@@ -27,9 +25,7 @@ const NotFoundPage = () => {
       <Flex sx={{ position: 'relative', flex: 1 }}>
         <Container>
           <Grid gap={4} sx={{ gridTemplateColumns: ['auto', 'auto', '1fr 70%'] }}>
-            <Box>
-              {isClient && <LottieClientOnly key='$floatingAstronaut' ref={ref} height='50vh' options={options} />}
-            </Box>
+            <Box>{isClient && <LottieClientOnly key='$floatingAstronaut' height='50vh' options={options} />}</Box>
             <Box
               sx={{
                 display: 'flex',
