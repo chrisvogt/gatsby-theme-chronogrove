@@ -2,7 +2,7 @@ import React from 'react'
 import { render, cleanup, act } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
 import AnimatedPageBackground from './animated-page-background'
-import theme from '../gatsby-plugin-theme-ui/theme'
+import theme from '@chronogrove/ui/theme'
 
 // Store original hooks
 let mockColorMode = 'default'

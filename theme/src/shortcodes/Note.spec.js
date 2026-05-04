@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
-import theme from '../gatsby-plugin-theme-ui'
+import theme from '@chronogrove/ui/theme'
 
 // Mock useColorMode to control light/dark mode
 const mockUseColorMode = jest.fn()

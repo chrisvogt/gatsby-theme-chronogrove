@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
-import theme from '../../../gatsby-plugin-theme-ui'
+import theme from '@chronogrove/ui/theme'
 import PlayTimeChart from './play-time-chart'
 
 const renderWithTheme = (component, customTheme = null) => {

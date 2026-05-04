@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 
 import Category from './category'
-import theme from '../gatsby-plugin-theme-ui/theme'
+import theme from '@chronogrove/ui/theme'
 
 const renderWithTheme = ui => render(<ThemeUIProvider theme={theme}>{ui}</ThemeUIProvider>)
 
