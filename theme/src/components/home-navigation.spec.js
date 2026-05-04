@@ -1,14 +1,18 @@
 import React from 'react'
-import { render, act } from '@testing-library/react'
+import { render, act, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import { TestProvider } from '../testUtils'
 import HomeNavigation from './home-navigation'
+import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
 
 jest.mock('../hooks/use-navigation-data')
 jest.mock('../hooks/use-site-metadata')
+jest.mock('../helpers/scroll-to-element-when-ready', () => ({
+  scrollToElementWhenReady: jest.fn()
+}))
 
 const mockNavigationData = {
   header: {
@@ -417,6 +421,39 @@ describe('HomeNavigation', () => {
 
       // Should not throw error and should default to 'home'
       expect(document.getElementById).toHaveBeenCalled()
+    })
+  })
+
+  describe('Hash link clicks', () => {
+    beforeEach(() => {
+      window.history.pushState = jest.fn()
+      window.scrollTo = jest.fn()
+      scrollToElementWhenReady.mockClear()
+    })
+
+    it('scrolls to top when Home (#top) is clicked', () => {
+      const { container } = render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      const homeLink = container.querySelector('a[href="#top"]')
+      fireEvent.click(homeLink)
+      expect(window.history.pushState).toHaveBeenCalledWith(null, '', '#top')
+      expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'smooth' })
+      expect(scrollToElementWhenReady).not.toHaveBeenCalled()
+    })
+
+    it('calls scrollToElementWhenReady for non-top hash links', () => {
+      const { container } = render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      const postsLink = container.querySelector('a[href="#posts"]')
+      fireEvent.click(postsLink)
+      expect(scrollToElementWhenReady).toHaveBeenCalledWith('#posts')
+      expect(window.scrollTo).not.toHaveBeenCalled()
     })
   })
 

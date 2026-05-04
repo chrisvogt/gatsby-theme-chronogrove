@@ -79,4 +79,54 @@ describe('WidgetHeader', () => {
     expect(screen.getByText('1')).toBeInTheDocument()
     expect(screen.getByText('X')).toBeInTheDocument()
   })
+
+  it('renders icon chip when theme omits primaryRgb (shadow fallback)', () => {
+    const colorsRest = { ...chronogroveTheme.colors }
+    delete colorsRest.primaryRgb
+    const themeNoPrimaryRgb = { ...chronogroveTheme, colors: colorsRest }
+    render(
+      <ThemeUIProvider theme={themeNoPrimaryRgb}>
+        <WidgetHeader icon={mockIcon}>Chip</WidgetHeader>
+      </ThemeUIProvider>
+    )
+    expect(screen.getByText('Chip')).toBeInTheDocument()
+    expect(screen.getByTestId('fa-icon')).toBeInTheDocument()
+  })
+
+  it('renders metric chip border when theme omits colors.text (fallback)', () => {
+    const colorsRest = { ...chronogroveTheme.colors }
+    delete colorsRest.text
+    const themeNoText = { ...chronogroveTheme, colors: colorsRest }
+    render(
+      <ThemeUIProvider theme={themeNoText}>
+        <WidgetHeader icon={mockIcon} metrics={[{ displayName: 'Y', id: 'y', value: 2 }]}>
+          T
+        </WidgetHeader>
+      </ThemeUIProvider>
+    )
+    expect(screen.getByText('2')).toBeInTheDocument()
+    expect(screen.getByText('Y')).toBeInTheDocument()
+  })
+
+  it('handles metrics array with undefined entry (default destructuring)', () => {
+    render(
+      <ThemeUIProvider theme={chronogroveTheme}>
+        <WidgetHeader icon={mockIcon} metrics={[undefined]}>
+          T
+        </WidgetHeader>
+      </ThemeUIProvider>
+    )
+    expect(screen.getByText('—')).toBeInTheDocument()
+  })
+
+  it('uses metricsToShow empty array when metrics is not an array', () => {
+    render(
+      <ThemeUIProvider theme={chronogroveTheme}>
+        <WidgetHeader icon={mockIcon} metrics={null}>
+          No metrics prop array
+        </WidgetHeader>
+      </ThemeUIProvider>
+    )
+    expect(screen.getByText('No metrics prop array')).toBeInTheDocument()
+  })
 })
