@@ -1,5 +1,46 @@
 # Changelog
 
+## 0.85.6
+
+### `@chronogrove/ui` — Shared page layouts (article column, home dashboard, page shell)
+
+- **New subpaths**: `@chronogrove/ui/article-column-container` (`articleColumnContainerSx`, `ArticleColumnContainer`), `@chronogrove/ui/home-dashboard-layout` (`HomeDashboardGrid`, home dashboard `sx` tokens), `@chronogrove/ui/page-shell-layout` (`ChronogrovePageShell` — skip link, optional header/footer slots, main landmark or bare children).
+- **Tests**: unit specs for the new modules; coverage thresholds unchanged.
+- **Version**: **0.83.1**
+
+### `gatsby-theme-chronogrove`
+
+- **Layout**: `layout.js` composes **`ChronogrovePageShell`** from **`@chronogrove/ui/page-shell-layout`** (nav, footer, audio bar padding unchanged).
+- **Home**: `templates/home.js` uses **`HomeDashboardGrid`** and shared home layout tokens from **`@chronogrove/ui/home-dashboard-layout`**.
+- **Constants**: `constants/article-column-container-sx.js` re-exports **`articleColumnContainerSx`** from **`@chronogrove/ui/article-column-container`** for theme shadowing.
+- **Tests**: `layout.spec.js` snapshots updated for the shell’s `<main>` markup.
+- **Version**: **0.85.6**
+
+### `chronogrove-next` (example)
+
+- **`app/home-showcase.jsx`**: Uses the same **`@chronogrove/ui/home-dashboard-layout`** primitives as the Gatsby home template for the dashboard-style grid and main shell tokens.
+
+### `www.chrisvogt.me`
+
+- **About**: `articleColumnContainerSx` from **`gatsby-theme-chronogrove/src/constants/article-column-container-sx`** instead of duplicating container `sx`.
+- **Version**: **1.16.6** (tracks theme **0.85.6**).
+
+### `www.chronogrove.com` (demo)
+
+- **About**: Same **`articleColumnContainerSx`** import path; **`about.spec.js`** mocks the constants module for Jest.
+- **Version**: **1.3.6** (tracks theme **0.85.6**).
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.83.1**, new **`exports`**), `packages/ui/src/article-column-container.js`, `packages/ui/src/article-column-container.spec.js`, `packages/ui/src/home-dashboard-layout.js`, `packages/ui/src/home-dashboard-layout.spec.js`, `packages/ui/src/page-shell-layout.js`, `packages/ui/src/page-shell-layout.spec.js`
+- `theme/package.json` (version **0.85.6**), `theme/src/components/layout.js`, `theme/src/templates/home.js`, `theme/src/constants/article-column-container-sx.js`, `theme/src/components/__snapshots__/layout.spec.js.snap`
+- `examples/chronogrove-next/app/home-showcase.jsx`
+- `www.chrisvogt.me/package.json` (version **1.16.6**), `www.chrisvogt.me/src/pages/about.js`
+- `www.chronogrove.com/package.json` (version **1.3.6**), `www.chronogrove.com/src/pages/about.js`, `www.chronogrove.com/src/pages/about.spec.js`
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.5
 
 ### `gatsby-theme-chronogrove` — Direct `@chronogrove/ui/theme` imports ([Issue #569](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/569))

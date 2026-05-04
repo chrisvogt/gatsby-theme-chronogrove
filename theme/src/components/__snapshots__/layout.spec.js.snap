@@ -3,7 +3,7 @@
 exports[`Layout matches the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="css-e2rbjw"
+    class="css-s6ltgc"
   >
     <a
       class="css-821g5p"
@@ -54,6 +54,7 @@ exports[`Layout matches the snapshot 1`] = `
       </div>
     </header>
     <main
+      class="css-1yz7e9k"
       role="main"
     >
       <div
@@ -120,7 +121,7 @@ exports[`Layout matches the snapshot 1`] = `
 exports[`Layout renders with audio player hidden state 1`] = `
 <DocumentFragment>
   <div
-    class="css-e2rbjw"
+    class="css-s6ltgc"
   >
     <a
       class="css-821g5p"
@@ -171,6 +172,7 @@ exports[`Layout renders with audio player hidden state 1`] = `
       </div>
     </header>
     <main
+      class="css-1yz7e9k"
       role="main"
     >
       <div
@@ -237,7 +239,7 @@ exports[`Layout renders with audio player hidden state 1`] = `
 exports[`Layout renders with audio player visible state 1`] = `
 <DocumentFragment>
   <div
-    class="css-1uj8esv"
+    class="css-1hezyaw"
   >
     <a
       class="css-821g5p"
@@ -288,6 +290,7 @@ exports[`Layout renders with audio player visible state 1`] = `
       </div>
     </header>
     <main
+      class="css-1yz7e9k"
       role="main"
     >
       <div
@@ -354,7 +357,7 @@ exports[`Layout renders with audio player visible state 1`] = `
 exports[`Layout renders with disableMainWrapper prop 1`] = `
 <DocumentFragment>
   <div
-    class="css-e2rbjw"
+    class="css-s6ltgc"
   >
     <a
       class="css-821g5p"
@@ -461,7 +464,7 @@ exports[`Layout renders with disableMainWrapper prop 1`] = `
 exports[`Layout renders with hideFooter prop 1`] = `
 <DocumentFragment>
   <div
-    class="css-e2rbjw"
+    class="css-s6ltgc"
   >
     <a
       class="css-821g5p"
@@ -512,6 +515,7 @@ exports[`Layout renders with hideFooter prop 1`] = `
       </div>
     </header>
     <main
+      class="css-1yz7e9k"
       role="main"
     >
       <div
@@ -531,7 +535,7 @@ exports[`Layout renders with hideFooter prop 1`] = `
 exports[`Layout renders with hideHeader prop 1`] = `
 <DocumentFragment>
   <div
-    class="css-e2rbjw"
+    class="css-s6ltgc"
   >
     <a
       class="css-821g5p"
@@ -542,6 +546,7 @@ exports[`Layout renders with hideHeader prop 1`] = `
       Skip to content
     </a>
     <main
+      class="css-1yz7e9k"
       role="main"
     >
       <div

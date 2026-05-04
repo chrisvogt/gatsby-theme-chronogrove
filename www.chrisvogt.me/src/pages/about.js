@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Flex } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
+import { articleColumnContainerSx } from 'gatsby-theme-chronogrove/src/constants/article-column-container-sx'
 import Layout from 'gatsby-theme-chronogrove/src/components/layout'
 import Seo from 'gatsby-theme-chronogrove/src/components/seo'
 import CareerPathCurve from '../../components/CareerPathCurve'
@@ -16,7 +17,7 @@ const AboutPage = () => {
           py: 3
         }}
       >
-        <Container sx={{ width: ['', '', 'max(80ch, 50vw)'], lineHeight: 1.7 }}>
+        <Container sx={articleColumnContainerSx}>
           <Themed.h1>About Me</Themed.h1>
 
           <Themed.p>
