@@ -30,6 +30,12 @@ import WidgetHeader from '@chronogrove/ui/widget-header'
 import { WidgetCallToAction } from '@chronogrove/ui/widget-call-to-action'
 import ThumbnailStrip from '@chronogrove/ui/thumbnail-strip'
 import ImageThumbnails from '@chronogrove/ui/image-thumbnails'
+import {
+  HomeDashboardGrid,
+  homeDashboardMainInnerMaxWidthSx,
+  homeDashboardMainShellSx,
+  homeDashboardPageOuterSx
+} from '@chronogrove/ui/home-dashboard-layout'
 
 /** Stable demo assets for thumbnail components (no Cloudinary; pass-through `optimizeSrc` in the UI package). */
 const DEMO_THUMB_IMAGES = [
@@ -73,22 +79,6 @@ const demoLabelSx = {
   color: 'text',
   mb: 2,
   display: 'block'
-}
-
-const homeGridColumns = [
-  null,
-  null,
-  'minmax(200px, 0.375fr) minmax(0, 1.625fr)',
-  'minmax(200px, 0.4fr) minmax(0, 1.6fr)'
-]
-
-const homeMainShellSx = {
-  position: 'relative',
-  borderTopRightRadius: '3em',
-  borderTopLeftRadius: '.5em',
-  px: [3, 4],
-  pt: [2, 3],
-  pb: [4, 5]
 }
 
 const widgetHeadingSx = {
@@ -369,7 +359,7 @@ export default function HomeShowcase() {
           </Container>
         </Box>
 
-        <Box sx={{ minHeight: '500px', pt: [3, 4], px: 0, pb: [4, 5] }}>
+        <Box sx={{ ...homeDashboardPageOuterSx, pt: [3, 4], pb: [4, 5] }}>
           <Container>
             <Flex
               sx={{
@@ -391,344 +381,354 @@ export default function HomeShowcase() {
               ))}
             </Flex>
 
-            <Grid columns={homeGridColumns} gap={[null, 4]}>
-              <Box
-                as='aside'
-                sx={{ mb: [4, null], display: ['none', null, 'block'], position: 'sticky', top: '1.5em' }}
-              >
-                <Text sx={{ fontSize: [2, 3], fontFamily: 'heading', fontWeight: 'bold', color: 'text', mb: 2 }}>
-                  On this page
-                </Text>
-                <Box as='nav' aria-label='Section navigation' sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                  {NAV.map(({ label, href }) => (
-                    <Link key={href} href={href} sx={navLinkSx}>
-                      {label}
-                    </Link>
-                  ))}
-                </Box>
-                <Text sx={{ color: 'textMuted', fontSize: 0, mt: 3, lineHeight: 1.6 }}>
-                  Skip target:{' '}
-                  <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                    SkipNavContent
+            <HomeDashboardGrid
+              asideSx={{ display: ['none', null, 'block'], position: 'sticky', top: '1.5em' }}
+              aside={
+                <>
+                  <Text sx={{ fontSize: [2, 3], fontFamily: 'heading', fontWeight: 'bold', color: 'text', mb: 2 }}>
+                    On this page
                   </Text>
-                </Text>
-              </Box>
+                  <Box
+                    as='nav'
+                    aria-label='Section navigation'
+                    sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}
+                  >
+                    {NAV.map(({ label, href }) => (
+                      <Link key={href} href={href} sx={navLinkSx}>
+                        {label}
+                      </Link>
+                    ))}
+                  </Box>
+                  <Text sx={{ color: 'textMuted', fontSize: 0, mt: 3, lineHeight: 1.6 }}>
+                    Skip target:{' '}
+                    <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                      SkipNavContent
+                    </Text>
+                  </Text>
+                </>
+              }
+              main={
+                <Box>
+                  <Box sx={{ ...homeDashboardMainShellSx, pb: [4, 5] }}>
+                    <Box sx={homeDashboardMainInnerMaxWidthSx}>
+                      <Box id='overview' sx={{ scrollMarginTop: '5rem', mb: [4, 5] }}>
+                        <Heading
+                          as='h1'
+                          sx={{
+                            mb: 2,
+                            fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+                            fontFamily: 'heading',
+                            color: 'text',
+                            lineHeight: 1.2
+                          }}
+                        >
+                          What this page is for
+                        </Heading>
+                        <Text
+                          as='p'
+                          sx={{
+                            fontSize: [2, 3],
+                            color: 'textMuted',
+                            lineHeight: 1.7,
+                            maxWidth: '40rem',
+                            m: 0
+                          }}
+                        >
+                          It is a compact, realistic slice of the Gatsby home dashboard: shared WidgetHeader, metric
+                          tiles, and pinned-style cards — not a flat list of disconnected controls. See{' '}
+                          <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                            packages/ui/README.md
+                          </Text>{' '}
+                          for package entry points.
+                        </Text>
+                      </Box>
 
-              <Box>
-                <Box sx={homeMainShellSx}>
-                  <Box sx={{ maxWidth: '960px' }}>
-                    <Box id='overview' sx={{ scrollMarginTop: '5rem', mb: [4, 5] }}>
-                      <Heading
-                        as='h1'
-                        sx={{
-                          mb: 2,
-                          fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
-                          fontFamily: 'heading',
-                          color: 'text',
-                          lineHeight: 1.2
-                        }}
+                      <Section
+                        id='widget-demo'
+                        title='Widget composition'
+                        description='Uses WidgetHeader from @chronogrove/ui (same module as gatsby-theme-chronogrove): optional icon, title, WidgetCallToAction aside, and ProfileMetricsBadge metrics — then MetricCard (including showPlaceholder), StatusCard, WidgetSection, and actionCard.'
                       >
-                        What this page is for
-                      </Heading>
-                      <Text
-                        as='p'
-                        sx={{
-                          fontSize: [2, 3],
-                          color: 'textMuted',
-                          lineHeight: 1.7,
-                          maxWidth: '40rem',
-                          m: 0
-                        }}
+                        <DemoPreview title='Composite widget (read-only demo)'>
+                          <WidgetCompositionDemo />
+                        </DemoPreview>
+
+                        <Box sx={{ mt: 3 }}>
+                          <DemoPreview title='Router CTA vs external link'>
+                            <DemoBlock label={null}>
+                              <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6 }}>
+                                Internal routes use your framework link so soft navigation stays client-side; outbound
+                                links stay plain anchors.
+                              </Text>
+                              <Flex sx={{ flexDirection: 'column', gap: 2, alignItems: 'flex-start' }}>
+                                <WidgetCallToAction href='https://github.com/chrisvogt/gatsby-theme-chronogrove'>
+                                  External
+                                  <span className='read-more-icon'>&rarr;</span>
+                                </WidgetCallToAction>
+                                <WidgetCallToAction linkComponent={NextLink} href='/'>
+                                  App Router home
+                                  <span className='read-more-icon'>&rarr;</span>
+                                </WidgetCallToAction>
+                              </Flex>
+                            </DemoBlock>
+                          </DemoPreview>
+                        </Box>
+                      </Section>
+
+                      <Section
+                        id='controls'
+                        title='Buttons & pagination'
+                        description='Filled Theme UI buttons, outline ActionButtons for dense toolbars, and the pagination bar used in media and long lists.'
                       >
-                        It is a compact, realistic slice of the Gatsby home dashboard: shared WidgetHeader, metric
-                        tiles, and pinned-style cards — not a flat list of disconnected controls. See{' '}
-                        <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                          packages/ui/README.md
-                        </Text>{' '}
-                        for package entry points.
-                      </Text>
-                    </Box>
-
-                    <Section
-                      id='widget-demo'
-                      title='Widget composition'
-                      description='Uses WidgetHeader from @chronogrove/ui (same module as gatsby-theme-chronogrove): optional icon, title, WidgetCallToAction aside, and ProfileMetricsBadge metrics — then MetricCard (including showPlaceholder), StatusCard, WidgetSection, and actionCard.'
-                    >
-                      <DemoPreview title='Composite widget (read-only demo)'>
-                        <WidgetCompositionDemo />
-                      </DemoPreview>
-
-                      <Box sx={{ mt: 3 }}>
-                        <DemoPreview title='Router CTA vs external link'>
-                          <DemoBlock label={null}>
-                            <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6 }}>
-                              Internal routes use your framework link so soft navigation stays client-side; outbound
-                              links stay plain anchors.
+                        <DemoPreview title='Controls'>
+                          <DemoBlock label='Button'>
+                            <Flex sx={{ flexWrap: 'wrap', gap: 2 }}>
+                              <Button type='button'>Publish</Button>
+                              <Button type='button' variant='secondary'>
+                                Back
+                              </Button>
+                            </Flex>
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='ActionButton'>
+                            <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
+                              <ActionButton type='button' size='large'>
+                                Show more
+                              </ActionButton>
+                              <ActionButton type='button' variant='secondary' size='small'>
+                                Filter
+                              </ActionButton>
+                            </Flex>
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='Pagination'>
+                            <Pagination
+                              currentPage={paginationBarPage}
+                              totalPages={10}
+                              onPageChange={setPaginationBarPage}
+                              maxVisiblePages={5}
+                            />
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='PaginationButton (building block)'>
+                            <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6, m: 0 }}>
+                              Used inside Pagination for page numbers and prev/next; primary tint follows theme
+                              colors.primary.
                             </Text>
-                            <Flex sx={{ flexDirection: 'column', gap: 2, alignItems: 'flex-start' }}>
-                              <WidgetCallToAction href='https://github.com/chrisvogt/gatsby-theme-chronogrove'>
-                                External
-                                <span className='read-more-icon'>&rarr;</span>
-                              </WidgetCallToAction>
-                              <WidgetCallToAction linkComponent={NextLink} href='/'>
-                                App Router home
-                                <span className='read-more-icon'>&rarr;</span>
-                              </WidgetCallToAction>
+                            <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
+                              <PaginationButton active variant='primary'>
+                                3
+                              </PaginationButton>
+                              <PaginationButton variant='primary'>4</PaginationButton>
+                              <PaginationButton variant='secondary' size='small'>
+                                5
+                              </PaginationButton>
+                              <PaginationButton disabled variant='primary'>
+                                …
+                              </PaginationButton>
                             </Flex>
                           </DemoBlock>
                         </DemoPreview>
-                      </Box>
-                    </Section>
+                      </Section>
 
-                    <Section
-                      id='controls'
-                      title='Buttons & pagination'
-                      description='Filled Theme UI buttons, outline ActionButtons for dense toolbars, and the pagination bar used in media and long lists.'
-                    >
-                      <DemoPreview title='Controls'>
-                        <DemoBlock label='Button'>
-                          <Flex sx={{ flexWrap: 'wrap', gap: 2 }}>
-                            <Button type='button'>Publish</Button>
-                            <Button type='button' variant='secondary'>
-                              Back
-                            </Button>
-                          </Flex>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='ActionButton'>
-                          <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
-                            <ActionButton type='button' size='large'>
-                              Show more
-                            </ActionButton>
-                            <ActionButton type='button' variant='secondary' size='small'>
-                              Filter
-                            </ActionButton>
-                          </Flex>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='Pagination'>
-                          <Pagination
-                            currentPage={paginationBarPage}
-                            totalPages={10}
-                            onPageChange={setPaginationBarPage}
-                            maxVisiblePages={5}
-                          />
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='PaginationButton (building block)'>
-                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.6, m: 0 }}>
-                            Used inside Pagination for page numbers and prev/next; primary tint follows theme
-                            colors.primary.
-                          </Text>
-                          <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
-                            <PaginationButton active variant='primary'>
-                              3
-                            </PaginationButton>
-                            <PaginationButton variant='primary'>4</PaginationButton>
-                            <PaginationButton variant='secondary' size='small'>
-                              5
-                            </PaginationButton>
-                            <PaginationButton disabled variant='primary'>
-                              …
-                            </PaginationButton>
-                          </Flex>
-                        </DemoBlock>
-                      </DemoPreview>
-                    </Section>
-
-                    <Section
-                      id='layout'
-                      title='Layout primitives'
-                      description='Blog-style post title (PageHeader) and decorative masthead shell (Header) — same exports the Gatsby theme uses for MDX/blog and layout chrome.'
-                    >
-                      <DemoPreview title='PageHeader · Header'>
-                        <DemoBlock label='PageHeader (h1 · p-name)'>
-                          <PageHeader>October in the Bay Area</PageHeader>
-                          <Text sx={{ color: 'textMuted', fontSize: 1, m: 0, mt: 2, lineHeight: 1.6 }}>
-                            Microformats{' '}
-                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                              p-name
-                            </Text>{' '}
-                            on the title for posts.
-                          </Text>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='Header (variant: styles.Header)'>
-                          <Header>
-                            <Text sx={{ m: 0, color: 'text', fontFamily: 'heading', fontSize: 2 }}>Masthead slot</Text>
-                          </Header>
-                        </DemoBlock>
-                      </DemoPreview>
-                    </Section>
-
-                    <Section
-                      id='thumbnails'
-                      title='Post thumbnails'
-                      description='ThumbnailStrip (vertical stacked strip beside card copy) and ImageThumbnails (circular row above the title) — same exports as gatsby-theme-chronogrove recent-post cards. This page uses pass-through URLs; the Gatsby site wires ImageThumbnails with a Cloudinary optimizeSrc helper.'
-                    >
-                      <DemoPreview title='ThumbnailStrip · ImageThumbnails'>
-                        <DemoBlock label='ThumbnailStrip'>
-                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, lineHeight: 1.65, m: 0 }}>
-                            Compact vertical strip with staggered overlap — useful as a side rail next to a headline
-                            (horizontal post cards on the theme).
-                          </Text>
-                          <Flex sx={{ gap: [3, 4], alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                            <ThumbnailStrip images={DEMO_THUMB_IMAGES} maxImages={4} />
-                            <Box sx={{ flex: '1 1 12rem', minWidth: 0 }}>
-                              <Text
-                                sx={{
-                                  fontFamily: 'heading',
-                                  fontSize: 3,
-                                  color: 'text',
-                                  m: 0,
-                                  mb: 2,
-                                  lineHeight: 1.35
-                                }}
-                              >
-                                Sample headline row
+                      <Section
+                        id='layout'
+                        title='Layout primitives'
+                        description='Blog-style post title (PageHeader) and decorative masthead shell (Header) — same exports the Gatsby theme uses for MDX/blog and layout chrome.'
+                      >
+                        <DemoPreview title='PageHeader · Header'>
+                          <DemoBlock label='PageHeader (h1 · p-name)'>
+                            <PageHeader>October in the Bay Area</PageHeader>
+                            <Text sx={{ color: 'textMuted', fontSize: 1, m: 0, mt: 2, lineHeight: 1.6 }}>
+                              Microformats{' '}
+                              <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                                p-name
+                              </Text>{' '}
+                              on the title for posts.
+                            </Text>
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='Header (variant: styles.Header)'>
+                            <Header>
+                              <Text sx={{ m: 0, color: 'text', fontFamily: 'heading', fontSize: 2 }}>
+                                Masthead slot
                               </Text>
-                              <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.6, m: 0 }}>
-                                Second row uses{' '}
-                                <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                                  size=48
-                                </Text>{' '}
-                                for a larger strip.
-                              </Text>
-                              <Box sx={{ mt: 3 }}>
-                                <ThumbnailStrip images={DEMO_THUMB_IMAGES} maxImages={3} size={48} />
+                            </Header>
+                          </DemoBlock>
+                        </DemoPreview>
+                      </Section>
+
+                      <Section
+                        id='thumbnails'
+                        title='Post thumbnails'
+                        description='ThumbnailStrip (vertical stacked strip beside card copy) and ImageThumbnails (circular row above the title) — same exports as gatsby-theme-chronogrove recent-post cards. This page uses pass-through URLs; the Gatsby site wires ImageThumbnails with a Cloudinary optimizeSrc helper.'
+                      >
+                        <DemoPreview title='ThumbnailStrip · ImageThumbnails'>
+                          <DemoBlock label='ThumbnailStrip'>
+                            <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, lineHeight: 1.65, m: 0 }}>
+                              Compact vertical strip with staggered overlap — useful as a side rail next to a headline
+                              (horizontal post cards on the theme).
+                            </Text>
+                            <Flex sx={{ gap: [3, 4], alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                              <ThumbnailStrip images={DEMO_THUMB_IMAGES} maxImages={4} />
+                              <Box sx={{ flex: '1 1 12rem', minWidth: 0 }}>
+                                <Text
+                                  sx={{
+                                    fontFamily: 'heading',
+                                    fontSize: 3,
+                                    color: 'text',
+                                    m: 0,
+                                    mb: 2,
+                                    lineHeight: 1.35
+                                  }}
+                                >
+                                  Sample headline row
+                                </Text>
+                                <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.6, m: 0 }}>
+                                  Second row uses{' '}
+                                  <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                                    size=48
+                                  </Text>{' '}
+                                  for a larger strip.
+                                </Text>
+                                <Box sx={{ mt: 3 }}>
+                                  <ThumbnailStrip images={DEMO_THUMB_IMAGES} maxImages={3} size={48} />
+                                </Box>
                               </Box>
-                            </Box>
-                          </Flex>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='ImageThumbnails'>
-                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.65, m: 0 }}>
-                            Circular row used on vertical recap cards when a post exposes multiple thumbnails.
-                          </Text>
-                          <ImageThumbnails images={DEMO_THUMB_IMAGES} maxImages={4} />
-                          <Heading
-                            as='h3'
-                            sx={{ fontFamily: 'serif', fontSize: 3, color: 'text', m: 0, mt: 2, lineHeight: 1.35 }}
-                          >
-                            Title after thumbnail row
-                          </Heading>
-                        </DemoBlock>
-                      </DemoPreview>
-                    </Section>
+                            </Flex>
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='ImageThumbnails'>
+                            <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.65, m: 0 }}>
+                              Circular row used on vertical recap cards when a post exposes multiple thumbnails.
+                            </Text>
+                            <ImageThumbnails images={DEMO_THUMB_IMAGES} maxImages={4} />
+                            <Heading
+                              as='h3'
+                              sx={{ fontFamily: 'serif', fontSize: 3, color: 'text', m: 0, mt: 2, lineHeight: 1.35 }}
+                            >
+                              Title after thumbnail row
+                            </Heading>
+                          </DemoBlock>
+                        </DemoPreview>
+                      </Section>
 
-                    <Section
-                      id='tokens'
-                      title='Labels, cards, links'
-                      description='Small patterns used inside widgets: category label, muted footer, MetricBadge, outbound-link icon, typography tokens, and badges.'
-                    >
-                      <DemoPreview title='Patterns'>
-                        <DemoBlock label='CategoryLabel · card with MutedCardFooter'>
-                          <CategoryLabel>Travel Photography</CategoryLabel>
-                          <Card variant='primary' sx={{ mt: 2, p: 3, maxWidth: '22rem' }}>
-                            <Text sx={{ fontFamily: 'heading', fontSize: 2, color: 'text', m: 0, mb: 2 }}>
-                              Album notes
+                      <Section
+                        id='tokens'
+                        title='Labels, cards, links'
+                        description='Small patterns used inside widgets: category label, muted footer, MetricBadge, outbound-link icon, typography tokens, and badges.'
+                      >
+                        <DemoPreview title='Patterns'>
+                          <DemoBlock label='CategoryLabel · card with MutedCardFooter'>
+                            <CategoryLabel>Travel Photography</CategoryLabel>
+                            <Card variant='primary' sx={{ mt: 2, p: 3, maxWidth: '22rem' }}>
+                              <Text sx={{ fontFamily: 'heading', fontSize: 2, color: 'text', m: 0, mb: 2 }}>
+                                Album notes
+                              </Text>
+                              <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.6, m: 0, mb: 2 }}>
+                                Short description body.
+                              </Text>
+                              <MutedCardFooter>Updated this week</MutedCardFooter>
+                            </Card>
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='Outbound glyph'>
+                            <Text sx={{ display: 'flex', alignItems: 'center', gap: 2, color: 'textMuted', m: 0 }}>
+                              Documentation <ExternalLinkIcon aria-hidden />
                             </Text>
-                            <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.6, m: 0, mb: 2 }}>
-                              Short description body.
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='Headings · dense label · badges'>
+                            <Heading
+                              as='h3'
+                              sx={{ fontSize: [4, 5], fontFamily: 'heading', color: 'text', m: 0, mb: 2 }}
+                            >
+                              Widget title
+                            </Heading>
+                            <Text
+                              variant='text.title'
+                              sx={{ display: 'inline-block', fontSize: 1, color: 'textMuted', mb: 2 }}
+                            >
+                              theme.text.title
                             </Text>
-                            <MutedCardFooter>Updated this week</MutedCardFooter>
-                          </Card>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='Outbound glyph'>
-                          <Text sx={{ display: 'flex', alignItems: 'center', gap: 2, color: 'textMuted', m: 0 }}>
-                            Documentation <ExternalLinkIcon aria-hidden />
-                          </Text>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='Headings · dense label · badges'>
-                          <Heading as='h3' sx={{ fontSize: [4, 5], fontFamily: 'heading', color: 'text', m: 0, mb: 2 }}>
-                            Widget title
-                          </Heading>
-                          <Text
-                            variant='text.title'
-                            sx={{ display: 'inline-block', fontSize: 1, color: 'textMuted', mb: 2 }}
-                          >
-                            theme.text.title
-                          </Text>
-                          <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
-                            <Badge variant='primary'>primary</Badge>
-                            <Badge variant='outline'>outline</Badge>
-                            <MetricBadge variant='metrics'>metrics (MetricBadge)</MetricBadge>
-                          </Flex>
-                        </DemoBlock>
-                        <Box as='hr' sx={previewDividerSx} />
-                        <DemoBlock label='Widget CTA link style'>
+                            <Flex sx={{ flexWrap: 'wrap', gap: 2, alignItems: 'center' }}>
+                              <Badge variant='primary'>primary</Badge>
+                              <Badge variant='outline'>outline</Badge>
+                              <MetricBadge variant='metrics'>metrics (MetricBadge)</MetricBadge>
+                            </Flex>
+                          </DemoBlock>
+                          <Box as='hr' sx={previewDividerSx} />
+                          <DemoBlock label='Widget CTA link style'>
+                            <Link
+                              href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
+                              sx={{ variant: 'links.widgetCta' }}
+                            >
+                              links.widgetCta →
+                            </Link>
+                          </DemoBlock>
+                        </DemoPreview>
+                      </Section>
+
+                      <Section
+                        id='lazy'
+                        title='Lazy load'
+                        description='Content below the fold can wait until the block intersects the viewport (same helper as pinned repos and Steam cards). Scroll here to hydrate the placeholder.'
+                      >
+                        <DemoPreview title='IntersectionObserver'>
+                          <DemoBlock label={null}>
+                            <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, lineHeight: 1.65, m: 0 }}>
+                              Skeleton uses{' '}
+                              <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                                react-placeholder
+                              </Text>{' '}
+                              with{' '}
+                              <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                                show-loading-animation
+                              </Text>
+                              .
+                            </Text>
+                            <LazyLoad
+                              placeholder={<LazyPlaceholder />}
+                              useInViewOptions={{
+                                initialInView: false,
+                                rootMargin: '0px 0px -240px 0px',
+                                threshold: 0
+                              }}
+                            >
+                              <LazyLoadedContent />
+                            </LazyLoad>
+                          </DemoBlock>
+                        </DemoPreview>
+                      </Section>
+
+                      <Box
+                        as='footer'
+                        sx={{
+                          mt: 5,
+                          pt: 4,
+                          borderTop: '1px solid',
+                          borderColor: 'panel-divider',
+                          color: 'textMuted',
+                          fontSize: 1
+                        }}
+                      >
+                        <Text sx={{ m: 0 }}>
                           <Link
                             href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
                             sx={{ variant: 'links.widgetCta' }}
                           >
-                            links.widgetCta →
+                            gatsby-theme-chronogrove
                           </Link>
-                        </DemoBlock>
-                      </DemoPreview>
-                    </Section>
-
-                    <Section
-                      id='lazy'
-                      title='Lazy load'
-                      description='Content below the fold can wait until the block intersects the viewport (same helper as pinned repos and Steam cards). Scroll here to hydrate the placeholder.'
-                    >
-                      <DemoPreview title='IntersectionObserver'>
-                        <DemoBlock label={null}>
-                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, lineHeight: 1.65, m: 0 }}>
-                            Skeleton uses{' '}
-                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                              react-placeholder
-                            </Text>{' '}
-                            with{' '}
-                            <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
-                              show-loading-animation
-                            </Text>
-                            .
+                          {' · '}
+                          <Text as='span' sx={{ fontFamily: 'monospace' }}>
+                            packages/ui/README.md
                           </Text>
-                          <LazyLoad
-                            placeholder={<LazyPlaceholder />}
-                            useInViewOptions={{
-                              initialInView: false,
-                              rootMargin: '0px 0px -240px 0px',
-                              threshold: 0
-                            }}
-                          >
-                            <LazyLoadedContent />
-                          </LazyLoad>
-                        </DemoBlock>
-                      </DemoPreview>
-                    </Section>
-
-                    <Box
-                      as='footer'
-                      sx={{
-                        mt: 5,
-                        pt: 4,
-                        borderTop: '1px solid',
-                        borderColor: 'panel-divider',
-                        color: 'textMuted',
-                        fontSize: 1
-                      }}
-                    >
-                      <Text sx={{ m: 0 }}>
-                        <Link
-                          href='https://github.com/chrisvogt/gatsby-theme-chronogrove'
-                          sx={{ variant: 'links.widgetCta' }}
-                        >
-                          gatsby-theme-chronogrove
-                        </Link>
-                        {' · '}
-                        <Text as='span' sx={{ fontFamily: 'monospace' }}>
-                          packages/ui/README.md
                         </Text>
-                      </Text>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
-              </Box>
-            </Grid>
+              }
+            />
           </Container>
         </Box>
       </SkipNavContent>

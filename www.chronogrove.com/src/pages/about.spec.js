@@ -4,6 +4,14 @@ import '@testing-library/jest-dom'
 import AboutPage, { Head } from './about'
 import { ThemeUIProvider } from 'theme-ui'
 
+jest.mock('gatsby-theme-chronogrove/src/constants/article-column-container-sx', () => ({
+  articleColumnContainerSx: {
+    position: 'relative',
+    width: ['', '', 'max(80ch, 50vw)'],
+    lineHeight: 1.7
+  }
+}))
+
 // Mock Layout component
 jest.mock('gatsby-theme-chronogrove/src/components/layout', () => ({ children }) => (
   <div data-testid='layout'>{children}</div>

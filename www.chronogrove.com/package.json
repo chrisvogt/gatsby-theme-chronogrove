@@ -1,6 +1,6 @@
 {
   "name": "www.chronogrove.com",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "Official demo site for gatsby-theme-chronogrove",
   "scripts": {
     "develop": "gatsby develop",

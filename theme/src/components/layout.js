@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { ChronogrovePageShell } from '@chronogrove/ui/page-shell-layout'
 import { useAudioPlayerStore } from '../stores/audio-player-store'
 import React from 'react'
-import { SkipNavLink, SkipNavContent } from './skip-nav'
 
 import Footer from './footer'
 import TopNavigation from './top-navigation'
@@ -18,39 +18,17 @@ const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter, transpar
   const isVisible = useAudioPlayerStore(state => state.isVisible)
 
   return (
-    <div
-      sx={{
-        backgroundColor: transparentBackground ? 'transparent' : 'background',
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1,
-        color: theme => theme?.colors?.text,
-        // Add padding when audio player is visible
-        // 100px for player height + 24px (padding) + 16px (extra space)
-        pb: isVisible ? '140px' : 0
-      }}
+    <ChronogrovePageShell
+      disableMainWrapper={disableMainWrapper}
+      hideFooter={hideFooter}
+      hideHeader={hideHeader}
+      transparentBackground={transparentBackground}
+      paddingBottom={isVisible ? '140px' : 0}
+      header={<TopNavigation />}
+      footer={<Footer />}
     >
-      {/* Skip to content link - first in DOM for tab order, visually appears in header when focused */}
-      <SkipNavLink />
-
-      {/* NOTE(chrisvogt): hide the top navigation on the home and 404 pages */}
-      {!hideHeader && (
-        <header role='banner'>
-          <TopNavigation />
-        </header>
-      )}
-
-      {disableMainWrapper ? (
-        children
-      ) : (
-        <main role='main'>
-          <SkipNavContent />
-          {children}
-        </main>
-      )}
-
-      {!hideFooter && <Footer />}
-    </div>
+      {children}
+    </ChronogrovePageShell>
   )
 }
 
