@@ -5,6 +5,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
   <section
     class="css-vhkudu"
     id="github"
+    tabindex="-1"
   >
     <div
       class="css-33wwjq"
@@ -1594,6 +1595,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
   <section
     class="css-1gmhq94"
     id="github"
+    tabindex="-1"
   >
     <header
       class="css-f68fi0"
@@ -2920,6 +2922,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
   <section
     class="css-1gmhq94"
     id="github"
+    tabindex="-1"
   >
     <header
       class="css-f68fi0"

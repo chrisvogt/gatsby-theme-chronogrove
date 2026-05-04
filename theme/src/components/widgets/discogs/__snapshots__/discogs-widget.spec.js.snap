@@ -5,6 +5,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
   <section
     class="css-vhkudu"
     id="discogs"
+    tabindex="-1"
   >
     <div
       class="css-33wwjq"
@@ -114,6 +115,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
   <section
     class="css-1gmhq94"
     id="discogs"
+    tabindex="-1"
   >
     <header
       class="css-f68fi0"
@@ -297,6 +299,7 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
   <section
     class="css-1gmhq94"
     id="discogs"
+    tabindex="-1"
   >
     <header
       class="css-f68fi0"

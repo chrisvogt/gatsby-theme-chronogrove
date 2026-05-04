@@ -41,11 +41,15 @@ const BADGE_IDLE = 34
 
 /**
  * Filled rail height as a percentage of the track (0 when there is only one stop).
+ * `activeIndex` is clamped to [0, linkCount - 1] so a missing match (`findIndex` → -1)
+ * cannot yield a negative percentage for the rail fill `calc()`.
  * Exported for unit tests and the defensive `linkCount <= 1` branch.
  */
 export function getRailFillPct(linkCount, activeIndex) {
   if (linkCount <= 1) return 0
-  return Math.min(100, Math.round((activeIndex / (linkCount - 1)) * 100))
+  const idx = Number.isFinite(activeIndex) ? activeIndex : 0
+  const clamped = Math.max(0, Math.min(linkCount - 1, idx))
+  return Math.min(100, Math.max(0, Math.round((clamped / (linkCount - 1)) * 100)))
 }
 
 /** @public for tests — mirrors nav primary resolution including `#422EA3` fallback */
@@ -317,6 +321,10 @@ const HomeNavigation = props => {
                     window.history.pushState(null, '', href)
                     if (id === 'home' || href === '#top') {
                       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+                      const topSection = document.getElementById('top')
+                      if (topSection && typeof topSection.focus === 'function') {
+                        topSection.focus({ preventScroll: true })
+                      }
                     } else {
                       scrollToElementWhenReady(href)
                     }

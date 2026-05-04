@@ -8,13 +8,17 @@
 - **WidgetHeader**: Social-dashboard style — primary-colored icon chip, baseline-aligned headline + CTA, square metric chips using `panel-background` and subtle text-tinted borders; `ProfileMetricsBadge` inlined for consistent chip layout. Removed horizontal rules from earlier iterations.
 - **Metric chip borders**: Theme `text` is 3-digit hex (`#111` / `#fff`); borders use `normalizeHexToRrggbb` + `hexToRgba` (~`#RRGGBB22` alpha) instead of string-concatenating `22`, which produced invalid 5-digit hex and was ignored by browsers.
 - **color-utils**: Added `normalizeHexToRrggbb`; `hexToRgb` now accepts 3- and 4-digit hex shorthand.
-- **Tests**: `widget-header.spec.js`, `color-utils.spec.js`, and theme snapshots updated (widget headers that embed `WidgetHeader` pick up new Emotion class names).
+- **WidgetSection**: When **`id`** is set, the section defaults to **`tabIndex={-1}`** so callers (e.g. theme hash navigation) can move keyboard / screen reader focus onto the landmark after scrolling. An explicit **`tabIndex`** prop still overrides.
+- **Tests**: `widget-header.spec.js`, `color-utils.spec.js`, **`widget-section.spec.js`** (`tabIndex` / `id` behavior), and theme snapshots updated (widget headers that embed `WidgetHeader` pick up new Emotion class names).
 - **Version**: **0.83.2**
 
 ### `gatsby-theme-chronogrove` — Home sidebar scroll rail + WCAG contrast
 
 - **HomeNavigation**: Vertical progress rail with circular section badges; scroll-synced fill; WCAG-friendly idle label/icon opacity in light mode; dark-mode active badge uses a dark icon on the light primary blue for ≥3:1 contrast. Rail fill percentage uses exported `getRailFillPct`; primary color resolution uses `resolvePrimaryFromTheme`; `normalizeHomeNavProps` keeps nullish `props` handling testable.
-- **Tests**: `home-navigation.spec.js` expanded (hash clicks, theme fallbacks, rail/primary helpers); snapshots refreshed.
+- **HomeNavigation / rail robustness**: `getRailFillPct` clamps invalid indices (e.g. `findIndex` → `-1` when `activeSection` does not match any link id) so the rail fill never computes a negative `calc()` percentage.
+- **HomeNavigation / keyboard & screen readers**: After activating an in-page target, focus moves to the destination section (`#top` hero or hash targets). `scrollToElementWhenReady` scrolls smoothly then calls `focus({ preventScroll: true })` by default so focus follows navigation without doubling scroll; **`focusTarget: false`** opts out when needed.
+- **Home template**: `<section id="top">` uses **`tabIndex={-1}`** so programmatic focus matches hash / Home nav clicks.
+- **Tests**: `home-navigation.spec.js` (rail helpers, hash clicks including focus to `#top`); `scroll-to-element-when-ready.spec.js`; `scroll-to-hash-when-ready.spec.js`; `templates/home.spec.js` (hero focus target); snapshots refreshed where applicable.
 - **Version**: **0.85.7**
 
 ### `www.chrisvogt.me`
@@ -27,8 +31,8 @@
 
 ### Files changed
 
-- `packages/ui/package.json` (version **0.83.2**), `packages/ui/src/theme.js`, `packages/ui/src/color-utils.js`, `packages/ui/src/color-utils.spec.js`, `packages/ui/src/widget-header.js`, `packages/ui/src/widget-header.spec.js`, `packages/ui/src/__snapshots__/theme.spec.js.snap`, `packages/ui/src/__snapshots__/widget-header.spec.js.snap`
-- `theme/package.json` (version **0.85.7**), `theme/src/components/home-navigation.js`, `theme/src/components/home-navigation.spec.js`, `theme/src/gatsby-plugin-theme-ui/theme.spec.js`, theme snapshot files under `theme/src/**/__snapshots__/`
+- `packages/ui/package.json` (version **0.83.2**), `packages/ui/src/theme.js`, `packages/ui/src/color-utils.js`, `packages/ui/src/color-utils.spec.js`, `packages/ui/src/widget-section.js`, `packages/ui/src/widget-section.spec.js`, `packages/ui/src/widget-header.js`, `packages/ui/src/widget-header.spec.js`, `packages/ui/src/__snapshots__/theme.spec.js.snap`, `packages/ui/src/__snapshots__/widget-header.spec.js.snap`
+- `theme/package.json` (version **0.85.7**), `theme/src/templates/home.js`, `theme/src/templates/home.spec.js`, `theme/src/helpers/scroll-to-element-when-ready.js`, `theme/src/helpers/scroll-to-element-when-ready.spec.js`, `theme/src/components/scroll-to-hash-when-ready.spec.js`, `theme/src/components/home-navigation.js`, `theme/src/components/home-navigation.spec.js`, **`theme/src/components/home-navigation.hash-focus-integration.spec.js`**, `theme/src/gatsby-plugin-theme-ui/theme.spec.js`, theme snapshot files under `theme/src/**/__snapshots__/`
 - `www.chrisvogt.me/package.json` (version **1.16.7**), `www.chronogrove.com/package.json` (version **1.3.7**)
 - `CHANGELOG.md`
 

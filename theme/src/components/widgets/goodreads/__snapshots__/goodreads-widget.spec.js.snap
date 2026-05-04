@@ -5,6 +5,7 @@ exports[`Goodreads Widget matches the loading state snapshot 1`] = `
   <section
     class="css-1gmhq94"
     id="goodreads"
+    tabindex="-1"
   >
     <header
       class="css-f68fi0"
@@ -198,6 +199,7 @@ exports[`Goodreads Widget renders error state 1`] = `
   <section
     class="css-vhkudu"
     id="goodreads"
+    tabindex="-1"
   >
     <div
       class="css-33wwjq"
@@ -283,6 +285,7 @@ exports[`Goodreads Widget renders with data and AI summary 1`] = `
   <section
     class="css-1gmhq94"
     id="goodreads"
+    tabindex="-1"
   >
     <header
       class="css-f68fi0"
@@ -388,6 +391,7 @@ exports[`Goodreads Widget renders without AI summary when not available 1`] = `
   <section
     class="css-1gmhq94"
     id="goodreads"
+    tabindex="-1"
   >
     <header
       class="css-ubozo4"

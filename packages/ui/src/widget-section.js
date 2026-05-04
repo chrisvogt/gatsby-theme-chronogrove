@@ -13,7 +13,7 @@ const sectionSx = {
 /**
  * Wraps a dashboard widget: vertical spacing and optional fatal-error overlay.
  */
-const WidgetSection = ({ children, hasFatalError, id, styleOverrides = {}, ...props }) => {
+const WidgetSection = ({ children, hasFatalError, id, styleOverrides = {}, tabIndex, ...props }) => {
   const { colorMode } = useThemeUI()
   const darkMode = isDarkMode(colorMode)
 
@@ -30,6 +30,7 @@ const WidgetSection = ({ children, hasFatalError, id, styleOverrides = {}, ...pr
           : {})
       }}
       {...(id ? { id } : {})}
+      tabIndex={id ? (tabIndex ?? -1) : tabIndex}
       {...props}
     >
       {hasFatalError && (

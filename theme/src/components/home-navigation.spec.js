@@ -106,6 +106,14 @@ describe('getRailFillPct', () => {
   it('caps at 100 when the fraction rounds above 100', () => {
     expect(getRailFillPct(2, 10)).toBe(100)
   })
+
+  it('treats a negative index (no matching link id) as the first stop', () => {
+    expect(getRailFillPct(4, -1)).toBe(0)
+  })
+
+  it('treats a non-finite index as the first stop', () => {
+    expect(getRailFillPct(4, NaN)).toBe(0)
+  })
 })
 
 describe('HomeNavigation', () => {
@@ -499,6 +507,24 @@ describe('HomeNavigation', () => {
       expect(window.history.pushState).toHaveBeenCalledWith(null, '', '#top')
       expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'smooth' })
       expect(scrollToElementWhenReady).not.toHaveBeenCalled()
+    })
+
+    it('moves focus to #top when Home is clicked', () => {
+      const focusTop = jest.fn()
+      document.getElementById = jest.fn(id => {
+        if (id === 'top') {
+          return { focus: focusTop }
+        }
+        return { getBoundingClientRect: mockGetBoundingClientRect }
+      })
+
+      const { container } = render(
+        <TestProvider>
+          <HomeNavigation scrollSyncDisabled />
+        </TestProvider>
+      )
+      fireEvent.click(container.querySelector('a[href="#top"]'))
+      expect(focusTop).toHaveBeenCalledWith({ preventScroll: true })
     })
 
     it('calls scrollToElementWhenReady for non-top hash links', () => {

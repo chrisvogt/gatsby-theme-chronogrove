@@ -4,10 +4,14 @@
  * Used by home-navigation (hash link clicks) and scroll-to-hash-when-ready (route/hash sync).
  *
  * @param {string} targetId - Element id, with or without leading '#'
- * @param {{ maxWaitMs?: number, retryIntervalMs?: number }} [options]
+ * @param {{ maxWaitMs?: number, retryIntervalMs?: number, focusTarget?: boolean }} [options]
+ * @param {boolean} [options.focusTarget=true] Move focus to the target after scrolling (`focus({ preventScroll: true })` so it does not fight smooth scrolling).
  * @returns {(() => void) | undefined} Cleanup function that clears the poll interval when polling was started, or undefined if scroll happened immediately
  */
-export function scrollToElementWhenReady(targetId, { maxWaitMs = 3000, retryIntervalMs = 50 } = {}) {
+export function scrollToElementWhenReady(
+  targetId,
+  { maxWaitMs = 3000, retryIntervalMs = 50, focusTarget = true } = {}
+) {
   if (typeof document === 'undefined') return undefined
   const id = decodeURIComponent(String(targetId).replace(/^#/, ''))
   const start = Date.now()
@@ -16,6 +20,9 @@ export function scrollToElementWhenReady(targetId, { maxWaitMs = 3000, retryInte
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      if (focusTarget && typeof el.focus === 'function') {
+        el.focus({ preventScroll: true })
+      }
       return true
     }
     return false

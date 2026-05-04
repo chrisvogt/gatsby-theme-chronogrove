@@ -29,6 +29,12 @@ pnpm test:coverage
 
 If you change something that could affect the site build, running `pnpm build` is helpful too.
 
+## Accessibility Smoke Testing
+
+For **keyboard** behavior, Chrome on macOS does **not** provide a built‑in “jump to navigation landmark” shortcut; use **Tab** / **Shift+Tab** for sequential focus, and exercise **VoiceOver** (⌃⌥ U rotor → **Landmarks**) to mimic how many screen‑reader users reach **`<nav aria-label="…">`** regions.
+
+Changes that alter **skip links**, **in‑page anchors**, or **`scrollIntoView` / `focus`** on the home template should extend the relevant **`*.spec.js`** files (for example **`scroll-to-element-when-ready`**, **`scroll-to-hash-when-ready`**, **`home-navigation`**) so coverage stays aligned with WCAG‑oriented focus management.
+
 ## PR Titles
 
 Use Conventional Commits for the pull request title.

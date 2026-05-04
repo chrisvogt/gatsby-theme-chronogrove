@@ -41,7 +41,7 @@ const HomeTemplate = () => {
                     <SkipNavContent />
                     <div sx={homeDashboardMainShellSx}>
                       <div sx={homeDashboardMainInnerMaxWidthSx}>
-                        <section id='top'>
+                        <section id='top' tabIndex={-1}>
                           <HomeHeaderContent />
                         </section>
                         <HomeWidgets />
