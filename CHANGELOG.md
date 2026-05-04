@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.16.7
+
+### `www.chrisvogt.me`
+
+- **Footer**: Renamed the **`https://api.chrisvogt.me`** link label from **Status** to **API**; added a separate **Status** link to the public UptimeRobot page (**`https://stats.uptimerobot.com/xoB9jFJJxy`**).
+- **Version**: **1.16.7** (site package only; **`gatsby-theme-chronogrove`** remains **0.85.6**).
+
+### Files changed
+
+- `www.chrisvogt.me/gatsby-config.js`, `www.chrisvogt.me/package.json`
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.6
 
 ### `@chronogrove/ui` — Shared page layouts (article column, home dashboard, page shell)

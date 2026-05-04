@@ -262,9 +262,15 @@ module.exports = {
             },
             {
               path: 'https://api.chrisvogt.me',
+              slug: 'api',
+              text: 'API',
+              title: 'Metrics API at api.chrisvogt.me'
+            },
+            {
+              path: 'https://stats.uptimerobot.com/xoB9jFJJxy',
               slug: 'status',
               text: 'Status',
-              title: 'API status'
+              title: 'Service status (UptimeRobot)'
             }
           ]
         },
