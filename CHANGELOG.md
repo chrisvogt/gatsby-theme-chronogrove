@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.85.4
+
+### `@chronogrove/ui` — `ThumbnailStrip`, `ImageThumbnails`, Next showcase helpers ([Issue #566](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/566))
+
+- **New subpaths**: `@chronogrove/ui/thumbnail-strip`, `@chronogrove/ui/image-thumbnails` (optional **`optimizeSrc`** for CDN-specific URLs; **`IMAGE_THUMBNAILS_SIZE_PX`** aligns retina resize math with consumers).
+- **ThumbnailStrip**: layout dimensions use **`px` strings** in **`sx`** so Theme UI does not treat integer **`width` / `height` / `top` / `left`** values as theme scale tokens (fixes oversized tiles in App Router / strict Theme UI setups).
+- **Tests**: suites and snapshots in `packages/ui`; **`packages/ui/README.md`** documents the exports.
+- **Version**: **0.83.0**
+
+### `gatsby-theme-chronogrove`
+
+- **Recent posts**: **`image-thumbnails`** delegates to **`@chronogrove/ui/image-thumbnails`** with **`optimizeCloudinaryThumbnailSrc`** in **`theme/src/helpers/cloudinaryThumbnailUrl.js`** (hostname-safe Cloudinary **`/upload/`** rewriting; covered by **`cloudinaryThumbnailUrl.spec.js`**). **`thumbnail-strip`** is a shim re-export; **Jest** coverage ignores thin shims plus **`recent-posts` thumbnail specs moved to the UI package**.
+- **Version**: **0.85.4**
+
+### Examples
+
+- **`chronogrove-next`**: [`app/home-showcase.jsx`](examples/chronogrove-next/app/home-showcase.jsx) **`Post thumbnails`** section demonstrates **`ThumbnailStrip`** and **`ImageThumbnails`** (stable **`picsum.photos`** URLs; default pass-through **`optimizeSrc`**).
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.4** (tracks theme **0.85.4**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.4** (tracks theme **0.85.4**).
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.83.0**, new **`exports`**), `packages/ui/src/thumbnail-strip.js`, `packages/ui/src/image-thumbnails.js`, specs, snapshots, `packages/ui/README.md`
+- `theme/package.json` (version **0.85.4**), `theme/jest.config.js`, `theme/src/helpers/cloudinaryThumbnailUrl.js`, `theme/src/helpers/cloudinaryThumbnailUrl.spec.js`, `theme/src/components/widgets/recent-posts/thumbnail-strip.js`, `theme/src/components/widgets/recent-posts/image-thumbnails.js`, `theme/src/components/widgets/recent-posts/__snapshots__/post-card.spec.js.snap`, removed superseded **`recent-posts` thumbnail snapshots/specs**
+- `examples/chronogrove-next/app/home-showcase.jsx`
+- `www.chrisvogt.me/package.json` (version **1.16.4**), `www.chronogrove.com/package.json` (version **1.3.4**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.3
 
 ### `gatsby-theme-chronogrove` — Steam widget & GitHub contribution graph

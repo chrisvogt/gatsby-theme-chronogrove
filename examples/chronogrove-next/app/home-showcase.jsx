@@ -28,6 +28,17 @@ import StatusCard from '@chronogrove/ui/status-card'
 import WidgetSection from '@chronogrove/ui/widget-section'
 import WidgetHeader from '@chronogrove/ui/widget-header'
 import { WidgetCallToAction } from '@chronogrove/ui/widget-call-to-action'
+import ThumbnailStrip from '@chronogrove/ui/thumbnail-strip'
+import ImageThumbnails from '@chronogrove/ui/image-thumbnails'
+
+/** Stable demo assets for thumbnail components (no Cloudinary; pass-through `optimizeSrc` in the UI package). */
+const DEMO_THUMB_IMAGES = [
+  'https://picsum.photos/seed/chronogrove-t1/256/256',
+  'https://picsum.photos/seed/chronogrove-t2/256/256',
+  'https://picsum.photos/seed/chronogrove-t3/256/256',
+  'https://picsum.photos/seed/chronogrove-t4/256/256',
+  'https://picsum.photos/seed/chronogrove-t5/256/256'
+]
 
 const previewShellSx = {
   borderWidth: '1px',
@@ -134,6 +145,7 @@ const NAV = [
   { label: 'Widget preview', href: '#widget-demo' },
   { label: 'Controls', href: '#controls' },
   { label: 'Layout', href: '#layout' },
+  { label: 'Post thumbnails', href: '#thumbnails' },
   { label: 'Tokens', href: '#tokens' },
   { label: 'Lazy load', href: '#lazy' }
 ]
@@ -545,6 +557,61 @@ export default function HomeShowcase() {
                           <Header>
                             <Text sx={{ m: 0, color: 'text', fontFamily: 'heading', fontSize: 2 }}>Masthead slot</Text>
                           </Header>
+                        </DemoBlock>
+                      </DemoPreview>
+                    </Section>
+
+                    <Section
+                      id='thumbnails'
+                      title='Post thumbnails'
+                      description='ThumbnailStrip (vertical stacked strip beside card copy) and ImageThumbnails (circular row above the title) — same exports as gatsby-theme-chronogrove recent-post cards. This page uses pass-through URLs; the Gatsby site wires ImageThumbnails with a Cloudinary optimizeSrc helper.'
+                    >
+                      <DemoPreview title='ThumbnailStrip · ImageThumbnails'>
+                        <DemoBlock label='ThumbnailStrip'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 3, lineHeight: 1.65, m: 0 }}>
+                            Compact vertical strip with staggered overlap — useful as a side rail next to a headline
+                            (horizontal post cards on the theme).
+                          </Text>
+                          <Flex sx={{ gap: [3, 4], alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                            <ThumbnailStrip images={DEMO_THUMB_IMAGES} maxImages={4} />
+                            <Box sx={{ flex: '1 1 12rem', minWidth: 0 }}>
+                              <Text
+                                sx={{
+                                  fontFamily: 'heading',
+                                  fontSize: 3,
+                                  color: 'text',
+                                  m: 0,
+                                  mb: 2,
+                                  lineHeight: 1.35
+                                }}
+                              >
+                                Sample headline row
+                              </Text>
+                              <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.6, m: 0 }}>
+                                Second row uses{' '}
+                                <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
+                                  size=48
+                                </Text>{' '}
+                                for a larger strip.
+                              </Text>
+                              <Box sx={{ mt: 3 }}>
+                                <ThumbnailStrip images={DEMO_THUMB_IMAGES} maxImages={3} size={48} />
+                              </Box>
+                            </Box>
+                          </Flex>
+                        </DemoBlock>
+                        <Box as='hr' sx={previewDividerSx} />
+                        <DemoBlock label='ImageThumbnails'>
+                          <Text sx={{ color: 'textMuted', fontSize: 1, mb: 2, lineHeight: 1.65, m: 0 }}>
+                            Circular row used on vertical recap cards when a post exposes multiple thumbnails.
+                          </Text>
+                          <ImageThumbnails images={DEMO_THUMB_IMAGES} maxImages={4} />
+                          <Heading
+                            as='h3'
+                            sx={{ fontFamily: 'serif', fontSize: 3, color: 'text', m: 0, mt: 2, lineHeight: 1.35 }}
+                          >
+                            Title after thumbnail row
+                          </Heading>
                         </DemoBlock>
                       </DemoPreview>
                     </Section>

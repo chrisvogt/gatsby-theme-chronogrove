@@ -51,7 +51,9 @@ module.exports = {
     'src/components/skip-nav/SkipNavContent.js',
     'src/helpers/isDarkMode.js',
     'src/utils/colors.js',
-    'src/gatsby-plugin-theme-ui/theme.js'
+    'src/gatsby-plugin-theme-ui/theme.js',
+    'src/components/widgets/recent-posts/thumbnail-strip.js',
+    'src/components/widgets/recent-posts/image-thumbnails.js'
   ],
 
   coverageThreshold: {

@@ -44,7 +44,7 @@ Prefer deep imports so bundles stay lean:
 | `@chronogrove/ui/widget-header`            | Widget section title row (optional Font Awesome icon, aside slot, optional metrics)                                                                                                                                                                                                                                                              |
 | `@chronogrove/ui/gatsby`                   | Color-mode Gatsby SSR/browser helpers                                                                                                                                                                                                                                                                                                            |
 
-**Additional subpaths:** The table lists the most common entry points. Also published: **`pagination`** (full bar; composes **`pagination-button`**), **`category-label`**, **`metric-badge`**, **`metric-card`**, **`muted-card-footer`**, **`status-card`**, **`widget-section`**, **`widget-call-to-action`**, **`external-link-icon`**. The authoritative list is **`package.json`** → **`exports`**.
+**Additional subpaths:** The table lists the most common entry points. Also published: **`pagination`** (full bar; composes **`pagination-button`**), **`category-label`**, **`metric-badge`**, **`metric-card`**, **`muted-card-footer`**, **`status-card`**, **`widget-section`**, **`widget-call-to-action`**, **`external-link-icon`**, **`thumbnail-strip`**, **`image-thumbnails`** (`optimizeSrc` for CDN resizing; Gatsby passes a Cloudinary helper). The authoritative list is **`package.json`** → **`exports`**.
 
 ## Next.js (App Router)
 
