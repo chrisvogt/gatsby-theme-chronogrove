@@ -1,10 +1,9 @@
 /** @jsx jsx */
-import { jsx, useColorMode } from 'theme-ui'
+import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { Fragment } from 'react'
-import { Link } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import {
@@ -18,7 +17,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faFlickr, faGithub, faGoodreads, faInstagram, faSpotify, faSteam } from '@fortawesome/free-brands-svg-icons'
 
-// Hash-only links use a plain <a>; we handle click with preventDefault and smooth scroll.
 const isHashLink = href => typeof href === 'string' && href.startsWith('#')
 
 const icons = {
@@ -37,80 +35,36 @@ const icons = {
   faSteam
 }
 
-/**
- * Retro panel color palettes with 1960s/1970s-inspired 3D shape.
- *
- * Light mode uses the theme's primary purple (#422EA3) and secondary (#711E9B)
- * with glassmorphism transparency. Dark mode uses the dark-mode primary blue
- * (#4a9eff) at low opacity for the same frosted-glass consistency as other panels.
- */
-const retroPanelThemes = {
-  default: {
-    face: 'linear-gradient(160deg, rgba(66, 46, 163, 0.82) 0%, rgba(113, 30, 155, 0.86) 50%, rgba(69, 39, 160, 0.82) 100%)',
-    shadow:
-      'inset 0 2px 8px rgba(255,255,255,0.12), inset 0 -2px 6px rgba(0,0,0,0.15), 0 6px 20px rgba(66, 46, 163, 0.2)',
-    shadowMuted:
-      'inset 0 1px 4px rgba(255,255,255,0.06), inset 0 -1px 3px rgba(0,0,0,0.08), 0 2px 8px rgba(66, 46, 163, 0.08)',
-    border: 'rgba(255, 255, 255, 0.15)',
-    text: '#F0ECFF',
-    active: '#FFFFFF',
-    activeGlow: 'rgba(255, 255, 255, 0.5)',
-    divider: 'rgba(240, 236, 255, 0.15)',
-    hoverBg: 'rgba(255, 255, 255, 0.1)',
-    circle: 'rgba(255, 255, 255, 0.06)',
-    circleBorder: 'rgba(255, 255, 255, 0.1)',
-    bezelHighlight: 'rgba(255, 255, 255, 0.2)',
-    arcStroke: 'rgba(255, 255, 255, 0.06)'
-  },
-  dark: {
-    face: 'linear-gradient(160deg, rgba(74, 158, 255, 0.12) 0%, rgba(74, 158, 255, 0.08) 50%, rgba(74, 158, 255, 0.12) 100%)',
-    shadow: 'inset 0 1px 4px rgba(255,255,255,0.05), 0 6px 20px rgba(0,0,0,0.3)',
-    shadowMuted: 'inset 0 1px 2px rgba(255,255,255,0.03), 0 2px 8px rgba(0,0,0,0.12)',
-    border: 'rgba(255, 255, 255, 0.1)',
-    text: '#FFFFFF',
-    active: '#4a9eff',
-    activeGlow: 'rgba(74, 158, 255, 0.4)',
-    divider: 'rgba(255, 255, 255, 0.08)',
-    hoverBg: 'rgba(74, 158, 255, 0.08)',
-    circle: 'rgba(74, 158, 255, 0.06)',
-    circleBorder: 'rgba(74, 158, 255, 0.1)',
-    bezelHighlight: 'rgba(74, 158, 255, 0.15)',
-    arcStroke: 'rgba(74, 158, 255, 0.04)'
-  }
-}
+// Badge sizes
+const BADGE_ACTIVE = 44
+const BADGE_IDLE = 34
 
 /**
- * Build 3D shadow gradient from theme palette using color-mix (works with CSS vars or hex).
- * Gray token: gray[5] light, gray[7] dark; fallback to textMuted. Opacities tuned for visibility.
- */
-const sideShadowGradientFromTheme = (theme, colorMode) => {
-  const isDark = colorMode === 'dark'
-  const gray = (isDark ? theme?.colors?.gray?.[7] : theme?.colors?.gray?.[5]) ?? theme?.colors?.textMuted
-  if (!gray) return 'linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)'
-  const [pctStart, pctMid, pctEnd] = isDark ? [58, 32, 10] : [50, 26, 8]
-  return `linear-gradient(to right, color-mix(in srgb, ${gray} ${pctStart}%, transparent) 0%, color-mix(in srgb, ${gray} ${pctMid}%, transparent) 45%, color-mix(in srgb, ${gray} ${pctEnd}%, transparent) 85%, transparent 100%)`
-}
-
-/**
- * Sidebar navigation for the home page: on-page links (Home, Latest Posts) plus
- * configurable items from site metadata. Renders in a retro 3D panel (resting vs
- * hover/focus-within), with scroll-based active section and full keyboard support.
+ * Scroll-wheel sidebar navigation for the home page.
  *
- * @param {Object} props
- * @param {boolean} [props.scrollSyncDisabled] - If true, scroll-based active section is disabled (e.g. SSR). Used internally for testing.
+ * Replaces the retro 3D panel with a vertical progress rail:
+ * - A thin line runs the full height of the nav
+ * - Each section is represented by a circular badge (icon inside)
+ * - The active badge is filled with the primary color; idle badges are ghost rings
+ * - The rail fills from the top to the active badge center as you scroll
+ * - Labels sit to the right of each badge
+ *
+ * Scroll detection, link building, and keyboard handling are unchanged from the
+ * original retro panel implementation.
  */
 const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   const [activeSection, setActiveSection] = useState('home')
   const [colorMode] = useColorMode()
-  const colors = retroPanelThemes[colorMode] || retroPanelThemes.default
+  const { theme } = useThemeUI()
+  const isDark = colorMode === 'dark'
+  const scrollRef = useRef(null)
 
   const navigation = useNavigationData()
   const metadata = useSiteMetadata()
   const allHomeItems = navigation?.header?.home || []
-  // Only hide nav items when a widget exists for that slug but has no data source (e.g. Instagram removed)
   const homeItems = allHomeItems.filter(item => {
     const widgetConfig = metadata?.widgets?.[item.slug]
-    if (!widgetConfig) return true // Not a widget slug (e.g. travel, photography) — always show
+    if (!widgetConfig) return true
     return Boolean(widgetConfig.widgetDataSource)
   })
 
@@ -118,20 +72,19 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
     () => [
       {
         href: '#top',
-        icon: { name: 'home', reactIcon: 'faHome' },
+        icon: { reactIcon: 'faHome' },
         id: 'home',
         text: 'Home'
       },
       {
         href: '#posts',
-        icon: { name: 'newspaper', reactIcon: 'faNewspaper' },
+        icon: { reactIcon: 'faNewspaper' },
         id: 'posts',
         text: 'Latest Posts'
       },
       ...homeItems.map(item => ({
         href: item.path,
         icon: {
-          name: item.slug,
           reactIcon:
             item.slug === 'discogs'
               ? 'faRecordVinyl'
@@ -149,9 +102,7 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   )
 
   useEffect(() => {
-    if (scrollSyncDisabled || typeof document === 'undefined') {
-      return
-    }
+    if (scrollSyncDisabled || typeof document === 'undefined') return
     const handleScroll = () => {
       let currentSection = 'home'
       links.forEach(section => {
@@ -162,12 +113,31 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
       })
       setActiveSection(currentSection)
     }
-
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [links, scrollSyncDisabled])
+
+  const activeIndex = links.findIndex(l => l.id === activeSection)
+
+  // Palette: pull primary from theme so it stays in sync with color mode
+  const primaryColor = (isDark ? theme?.rawColors?.modes?.dark?.primary : theme?.rawColors?.primary) ?? '#422EA3'
+  const primaryRgb = isDark ? '74, 158, 255' : '66, 46, 163'
+
+  const trackBg = isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'
+  // Idle label: 0.65 opacity on light (#fdf8f5) → ~7.5:1 ✅; 0.55 on dark (#14141F) → ~5.9:1 ✅
+  const labelColor = isDark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.65)'
+  const labelActiveColor = isDark ? '#fff' : '#111'
+  const badgeIdleBorder = isDark ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.18)'
+  const badgeIdleBg = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.6)'
+  // Idle icon: 0.85 opacity on light (#fdf8f5) → ~5.9:1 ✅; 0.5 on dark → ~5.2:1 ✅
+  const badgeIdleIcon = isDark ? 'rgba(255,255,255,0.5)' : `rgba(${primaryRgb}, 0.85)`
+  // Active icon: white on dark-mode primary (#4a9eff) is only 2.6:1 — use near-black instead → 7.2:1 ✅
+  // White on light-mode primary (#422EA3) is 8.7:1 — keep white ✅
+  const activeIconColor = isDark ? '#111' : '#fff'
+
+  // The filled portion of the rail ends at the center of the active badge.
+  // Each badge is spaced ITEM_GAP px apart; top of list = half a badge + 4px top pad.
+  const railFillPct = links.length > 1 ? Math.min(100, Math.round((activeIndex / (links.length - 1)) * 100)) : 0
 
   return (
     <Fragment>
@@ -178,264 +148,172 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
           top: '1.5em'
         }}
       >
-        {/* Retro 3D panel container — resting/active state machine.
-            Resting: desaturated, shallow shadow, compressed side face.
-            Active (hover / focus-within): full vibrancy, depth, and shadow.
-            Enter is snappier (0.3s), exit fades gently (0.5s). */}
-        <div
-          sx={{
-            position: 'relative',
-            pr: '30px',
-            /* Resting: desaturated, slightly lifted brightness */
-            filter: 'saturate(0.5) brightness(1.02)',
-            transition: 'filter 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-            /* Active: full vibrancy */
-            '&:hover, &:focus-within': {
-              filter: 'saturate(1) brightness(1)',
-              transition: 'filter 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            },
-            /* Panel face shadow — resting (lighter, less depth) */
-            '& > div:first-child': {
-              boxShadow: colors.shadowMuted,
-              transition: 'box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-            },
-            /* Panel face shadow — active (full depth) */
-            '&:hover > div:first-child, &:focus-within > div:first-child': {
-              boxShadow: colors.shadow,
-              transition: 'box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            },
-            /* Shadow — resting: narrow strip (waist only), faded. Same gradient in both states so background never transitions (avoids solid↔gradient snap). */
-            '& > div:last-child': {
-              opacity: 0.35,
-              clipPath: 'polygon(0% 0%, 22% 0%, 22% 50%, 22% 100%, 0% 100%)',
-              transition: 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
-            },
-            /* Shadow — active: top and bottom fold out */
-            '&:hover > div:last-child, &:focus-within > div:last-child': {
-              opacity: 1,
-              clipPath: 'polygon(0% 0%, 100% 0%, 22% 50%, 100% 100%, 0% 100%)',
-              transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), clip-path 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-            },
-            /* Respect reduced-motion: show the panel at full vibrancy, no transitions */
-            '@media (prefers-reduced-motion: reduce)': {
-              filter: 'none',
-              transition: 'none',
-              '& > div:first-child': {
-                boxShadow: colors.shadow,
-                transition: 'none'
-              },
-              '& > div:last-child': {
-                opacity: 1,
-                clipPath: 'polygon(0% 0%, 100% 0%, 22% 50%, 100% 100%, 0% 100%)',
-                transition: 'none'
-              }
-            }
-          }}
-        >
-          {/* Main panel face */}
+        <nav role='navigation' aria-label='On-page navigation'>
+          {/* Outer scroll-wheel rail container */}
           <div
+            ref={scrollRef}
             sx={{
               position: 'relative',
-              background: colors.face,
-              backdropFilter: 'blur(12px) saturate(150%)',
-              WebkitBackdropFilter: 'blur(12px) saturate(150%)',
-              borderRadius: '28px 6px 6px 28px',
-              py: 3,
-              pl: 3,
-              pr: 2,
-              border: `2px solid ${colors.border}`,
-              overflow: 'hidden',
-              zIndex: 1
+              pl: '28px', // room for rail + badge overflow
+              pr: 2
             }}
           >
-            {/* Decorative circle: top-left corner */}
+            {/* Rail background track */}
             <div
+              aria-hidden='true'
               sx={{
                 position: 'absolute',
-                top: '-16px',
-                left: '-16px',
-                width: '52px',
-                height: '52px',
-                borderRadius: '50%',
-                background: colors.circle,
-                border: `1px solid ${colors.circleBorder}`,
-                pointerEvents: 'none'
+                left: '13px',
+                top: `${BADGE_ACTIVE / 2}px`,
+                bottom: `${BADGE_ACTIVE / 2}px`,
+                width: '2px',
+                borderRadius: '1px',
+                backgroundColor: trackBg,
+                zIndex: 0
               }}
-              aria-hidden='true'
-            />
-            {/* Decorative circle: bottom-left corner */}
-            <div
-              sx={{
-                position: 'absolute',
-                bottom: '-10px',
-                left: '-10px',
-                width: '38px',
-                height: '38px',
-                borderRadius: '50%',
-                background: colors.circle,
-                border: `1px solid ${colors.circleBorder}`,
-                pointerEvents: 'none'
-              }}
-              aria-hidden='true'
-            />
-            {/* Decorative circle: mid-right edge */}
-            <div
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                right: '-8px',
-                transform: 'translateY(-50%)',
-                width: '24px',
-                height: '24px',
-                borderRadius: '50%',
-                background: colors.circle,
-                border: `1px solid ${colors.circleBorder}`,
-                pointerEvents: 'none'
-              }}
-              aria-hidden='true'
-            />
-            {/* Top bezel highlight — convex surface light catch */}
-            <div
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: '24px',
-                right: '8px',
-                height: '1px',
-                background: colors.bezelHighlight,
-                pointerEvents: 'none'
-              }}
-              aria-hidden='true'
-            />
-            {/* Decorative arc: curved bezier accent */}
-            <div
-              sx={{
-                position: 'absolute',
-                top: '10px',
-                left: '10%',
-                width: '80%',
-                height: '20px',
-                borderTop: `1px solid ${colors.arcStroke}`,
-                borderRadius: '50%',
-                pointerEvents: 'none'
-              }}
-              aria-hidden='true'
             />
 
-            <nav role='navigation' aria-label='On-page navigation'>
-              {links.map(({ href, icon, id, text }) => {
-                const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
-                const linkSx = {
-                  fontFamily: 'sans',
-                  color: colors.text,
-                  display: 'flex',
-                  alignItems: 'center',
-                  position: 'relative',
-                  py: 2,
-                  px: 2,
-                  textDecoration: 'none',
-                  borderRadius: '6px',
-                  transition: 'all 0.2s ease',
-                  fontSize: 1,
-                  letterSpacing: '0.02em',
-                  '&:not(:last-of-type)': {
-                    borderBottom: `1px solid ${colors.divider}`
-                  },
-                  '&:hover, &:focus': {
-                    backgroundColor: colors.hoverBg,
-                    outline: 'none'
-                  },
-                  '&:focus-visible': {
-                    outline: 'none',
-                    boxShadow: theme => `0 0 0 2px ${theme.colors.primary}40`
-                  },
-                  '&.active': {
-                    color: colors.active,
-                    fontWeight: 'bold'
-                  },
-                  /* Glowing indicator dot for the active section */
-                  '&.active::before': {
-                    content: '""',
-                    position: 'absolute',
-                    left: 0,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    width: '5px',
-                    height: '5px',
-                    borderRadius: '50%',
-                    backgroundColor: colors.active,
-                    boxShadow: `0 0 8px ${colors.activeGlow}`
-                  }
-                }
-                const content = (
-                  <Fragment>
-                    {IconComponent ? (
-                      <span
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          width: 18,
-                          height: 18,
-                          marginRight: 8
-                        }}
-                        aria-hidden
-                      >
-                        <FontAwesomeIcon icon={IconComponent} style={{ width: 18, height: 18 }} />
-                      </span>
-                    ) : null}
-                    {text}
-                  </Fragment>
-                )
-                return isHashLink(href) ? (
-                  <a
-                    key={id}
-                    href={href}
-                    className={activeSection === id ? 'active' : ''}
-                    sx={linkSx}
-                    onClick={e => {
-                      e.preventDefault()
-                      if (typeof window !== 'undefined') {
-                        window.history.pushState(null, '', href)
-                        if (id === 'home' || href === '#top') {
-                          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-                        } else {
-                          scrollToElementWhenReady(href)
-                        }
-                      }
+            {/* Rail fill — grows from top to active badge center */}
+            <div
+              aria-hidden='true'
+              sx={{
+                position: 'absolute',
+                left: '13px',
+                top: `${BADGE_ACTIVE / 2}px`,
+                width: '2px',
+                borderRadius: '1px',
+                backgroundColor: primaryColor,
+                zIndex: 0,
+                transition: 'height 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                height: railFillPct === 0 ? '0px' : `calc(${railFillPct}% - ${BADGE_ACTIVE / 2}px)`
+              }}
+            />
+
+            {/* Nav items */}
+            {links.map(({ href, icon, id, text }, index) => {
+              const isActive = activeSection === id
+              const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
+              const badgeSize = isActive ? BADGE_ACTIVE : BADGE_IDLE
+
+              const itemContent = (
+                <div
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    py: index === 0 ? 0 : '7px',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    zIndex: 1,
+                    '&:hover .nav-label': {
+                      color: primaryColor,
+                      opacity: 1
+                    },
+                    '&:hover .nav-badge': {
+                      boxShadow: `0 0 0 3px rgba(${primaryRgb}, 0.2)`
+                    }
+                  }}
+                >
+                  {/* Circular badge */}
+                  <div
+                    className='nav-badge'
+                    aria-hidden='true'
+                    sx={{
+                      flexShrink: 0,
+                      width: `${badgeSize}px`,
+                      height: `${badgeSize}px`,
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: isActive ? primaryColor : badgeIdleBg,
+                      border: isActive ? 'none' : `2px solid ${badgeIdleBorder}`,
+                      boxShadow: isActive
+                        ? `0 2px 8px rgba(${primaryRgb}, 0.35), 0 0 0 3px rgba(${primaryRgb}, 0.15)`
+                        : 'none',
+                      transition: 'all 0.25s cubic-bezier(0.34, 1.2, 0.64, 1)',
+                      // Align smaller idle badges to their center with the active badge
+                      ml: isActive ? 0 : `${(BADGE_ACTIVE - BADGE_IDLE) / 2}px`
                     }}
                   >
-                    {content}
-                  </a>
-                ) : (
-                  <Link key={id} href={href} className={activeSection === id ? 'active' : ''} sx={linkSx}>
-                    {content}
-                  </Link>
-                )
-              })}
-            </nav>
-          </div>
+                    {IconComponent && (
+                      <FontAwesomeIcon
+                        icon={IconComponent}
+                        style={{
+                          width: isActive ? 18 : 14,
+                          height: isActive ? 18 : 14,
+                          color: isActive ? activeIconColor : badgeIdleIcon,
+                          transition: 'all 0.25s ease'
+                        }}
+                        aria-hidden='true'
+                      />
+                    )}
+                  </div>
 
-          {/* 3D shadow — resting: narrow strip; hover: top and bottom fold out, middle (22% 50%) stays fixed. */}
-          <div
-            sx={{
-              position: 'absolute',
-              top: '8px',
-              bottom: '8px',
-              left: 'calc(100% - 30px)',
-              width: '24px',
-              background: theme => sideShadowGradientFromTheme(theme, colorMode),
-              filter: 'blur(6px)',
-              WebkitFilter: 'blur(6px)',
-              zIndex: 0
-            }}
-            aria-hidden='true'
-          />
-        </div>
+                  {/* Label */}
+                  <span
+                    className='nav-label'
+                    sx={{
+                      fontSize: isActive ? '0.8rem' : '0.75rem',
+                      fontFamily: 'heading',
+                      fontWeight: isActive ? 'bold' : 'normal',
+                      color: isActive ? labelActiveColor : labelColor,
+                      letterSpacing: isActive ? '0.01em' : '0.02em',
+                      lineHeight: 1.2,
+                      transition: 'all 0.25s ease',
+                      whiteSpace: 'nowrap',
+                      userSelect: 'none'
+                    }}
+                  >
+                    {text}
+                  </span>
+                </div>
+              )
+
+              const commonProps = {
+                key: id,
+                className: isActive ? 'active' : '',
+                sx: {
+                  display: 'block',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  outline: 'none',
+                  '&:focus-visible .nav-badge': {
+                    boxShadow: `0 0 0 3px ${primaryColor}`
+                  }
+                }
+              }
+
+              return isHashLink(href) ? (
+                <a
+                  {...commonProps}
+                  href={href}
+                  onClick={e => {
+                    e.preventDefault()
+                    if (typeof window !== 'undefined') {
+                      window.history.pushState(null, '', href)
+                      if (id === 'home' || href === '#top') {
+                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+                      } else {
+                        scrollToElementWhenReady(href)
+                      }
+                    }
+                  }}
+                >
+                  {itemContent}
+                </a>
+              ) : (
+                <a {...commonProps} href={href}>
+                  {itemContent}
+                </a>
+              )
+            })}
+          </div>
+        </nav>
       </div>
     </Fragment>
   )
 }
 
-export { sideShadowGradientFromTheme }
+export { HomeNavigation }
 export default HomeNavigation

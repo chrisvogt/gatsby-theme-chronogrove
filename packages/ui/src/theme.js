@@ -14,11 +14,12 @@ const fonts = {
 }
 
 export const floatOnHover = {
-  transition: 'all 200ms ease-in-out',
+  transition: 'transform 200ms ease-in-out, box-shadow 200ms ease-in-out',
 
   '&:hover, &:focus': {
-    transform: 'scale(1.015)',
-    boxShadow: 'lg'
+    transform: 'translateY(-3px) scale(1.008)',
+    boxShadow:
+      '0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 8px 20px rgba(66,46,163,0.14)'
   }
 }
 
@@ -81,7 +82,9 @@ export const card = {
   borderRadius: 'card',
   bg: 'panel-background',
   color: 'text',
-  boxShadow: 'default',
+  // Layered paper-stack shadow: each layer is a 1px offset slice, the final spread is the ambient
+  boxShadow:
+    '0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 4px 12px rgba(66,46,163,0.08)',
   flexGrow: 1,
   padding: 3,
   fontSize: [1, 2],

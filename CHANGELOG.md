@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.85.7
+
+### `@chronogrove/ui` — Letterpress card depth + dashboard widget headers
+
+- **Theme**: `card` uses a layered paper-stack `box-shadow` instead of a flat Tailwind `default` shadow; `floatOnHover` lifts cards with a deeper shadow on hover (no scale pop).
+- **WidgetHeader**: Social-dashboard style — primary-colored icon chip, baseline-aligned headline + CTA, square metric chips using `panel-background` and mode-aware borders; `ProfileMetricsBadge` inlined for consistent chip layout. Removed horizontal rules from earlier iterations.
+- **Tests**: widget and theme snapshots updated in the theme package.
+- **Version**: **0.83.2**
+
+### `gatsby-theme-chronogrove` — Home sidebar scroll rail + WCAG contrast
+
+- **HomeNavigation**: Vertical progress rail with circular section badges; scroll-synced fill; WCAG-friendly idle label/icon opacity in light mode; dark-mode active badge uses a dark icon on the light primary blue for ≥3:1 contrast.
+- **Tests**: `home-navigation.spec.js` updated (removed obsolete `sideShadowGradientFromTheme` tests); snapshots refreshed.
+- **Version**: **0.85.7**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.7** (tracks theme **0.85.7**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.7** (tracks theme **0.85.7**).
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.83.2**), `packages/ui/src/theme.js`, `packages/ui/src/widget-header.js`, `packages/ui/src/widget-header.spec.js`, `packages/ui/src/__snapshots__/theme.spec.js.snap`, `packages/ui/src/__snapshots__/widget-header.spec.js.snap`
+- `theme/package.json` (version **0.85.7**), `theme/src/components/home-navigation.js`, `theme/src/components/home-navigation.spec.js`, `theme/src/gatsby-plugin-theme-ui/theme.spec.js`, theme snapshot files under `theme/src/**/__snapshots__/`
+- `www.chrisvogt.me/package.json` (version **1.16.7**), `www.chronogrove.com/package.json` (version **1.3.7**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.6
 
 ### `@chronogrove/ui` — Shared page layouts (article column, home dashboard, page shell)

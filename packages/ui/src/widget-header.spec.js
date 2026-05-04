@@ -29,22 +29,25 @@ describe('WidgetHeader', () => {
     const metrics = [{ displayName: 'Stars', id: 's', value: 12 }]
     const { getByText } = render(
       <ThemeUIProvider theme={chronogroveTheme}>
-        <WidgetHeader metrics={metrics}>Title</WidgetHeader>
-      </ThemeUIProvider>
-    )
-    expect(getByText('12 Stars')).toBeInTheDocument()
-  })
-
-  it('renders loading metrics placeholders when metricsLoading', () => {
-    const { container } = render(
-      <ThemeUIProvider theme={chronogroveTheme}>
-        <WidgetHeader metrics={[]} metricsLoading>
+        <WidgetHeader icon={mockIcon} metrics={metrics}>
           Title
         </WidgetHeader>
       </ThemeUIProvider>
     )
-    const badges = container.querySelectorAll('[class*="css-"]')
-    expect(badges.length).toBeGreaterThan(0)
+    expect(getByText('12')).toBeInTheDocument()
+    expect(getByText('Stars')).toBeInTheDocument()
+  })
+
+  it('renders loading metrics placeholders when metricsLoading', () => {
+    render(
+      <ThemeUIProvider theme={chronogroveTheme}>
+        <WidgetHeader icon={mockIcon} metrics={[]} metricsLoading>
+          Title
+        </WidgetHeader>
+      </ThemeUIProvider>
+    )
+    const placeholders = screen.getAllByText('—')
+    expect(placeholders).toHaveLength(2)
   })
 
   it('renders without icon', () => {
@@ -57,20 +60,23 @@ describe('WidgetHeader', () => {
     expect(screen.queryByTestId('fa-icon')).not.toBeInTheDocument()
   })
 
-  it('uses borderColor fallback when gray[4] is missing', () => {
-    const themeMissingGray4 = {
+  it('renders metric chips when theme omits gray scale entries', () => {
+    const themeMissingGray = {
       ...chronogroveTheme,
       colors: {
         ...chronogroveTheme.colors,
-        gray: { 0: '#111', 1: '#222', 2: '#333', 3: '#444' }
+        gray: undefined
       }
     }
-    const { container } = render(
-      <ThemeUIProvider theme={themeMissingGray4}>
-        <WidgetHeader>Border test</WidgetHeader>
+    render(
+      <ThemeUIProvider theme={themeMissingGray}>
+        <WidgetHeader icon={mockIcon} metrics={[{ displayName: 'X', id: 'x', value: 1 }]}>
+          Border test
+        </WidgetHeader>
       </ThemeUIProvider>
     )
-    expect(container.querySelector('header')).toBeTruthy()
     expect(screen.getByText('Border test')).toBeInTheDocument()
+    expect(screen.getByText('1')).toBeInTheDocument()
+    expect(screen.getByText('X')).toBeInTheDocument()
   })
 })

@@ -595,7 +595,7 @@ exports[`SteamWidget renders loading state 1`] = `
     >
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -612,7 +612,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -629,7 +629,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -646,7 +646,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -663,7 +663,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -680,7 +680,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"

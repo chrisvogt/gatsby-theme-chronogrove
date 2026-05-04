@@ -3,7 +3,7 @@ import { render, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import { TestProvider } from '../testUtils'
-import HomeNavigation, { sideShadowGradientFromTheme } from './home-navigation'
+import HomeNavigation from './home-navigation'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
 
@@ -655,51 +655,6 @@ describe('HomeNavigation', () => {
         </TestProvider>
       )
       expect(asFragment()).toMatchSnapshot()
-    })
-  })
-
-  describe('sideShadowGradientFromTheme', () => {
-    it('returns fallback gradient when theme has no gray or textMuted', () => {
-      const result = sideShadowGradientFromTheme({}, 'default')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-
-    it('returns fallback gradient when theme.colors is empty', () => {
-      const result = sideShadowGradientFromTheme({ colors: {} }, 'dark')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-
-    it('returns light-mode gradient using gray[5] when theme provides it', () => {
-      const theme = { colors: { gray: { 5: '#6b7280' }, textMuted: '#333' } }
-      const result = sideShadowGradientFromTheme(theme, 'default')
-      expect(result).toContain('color-mix(in srgb, #6b7280 50%, transparent)')
-      expect(result).toContain('26%')
-      expect(result).toContain('8%')
-    })
-
-    it('returns dark-mode gradient using gray[7] when theme provides it', () => {
-      const theme = { colors: { gray: { 7: '#374151' }, textMuted: '#d8d8d8' } }
-      const result = sideShadowGradientFromTheme(theme, 'dark')
-      expect(result).toContain('color-mix(in srgb, #374151 58%, transparent)')
-      expect(result).toContain('32%')
-      expect(result).toContain('10%')
-    })
-
-    it('falls back to textMuted when gray index is missing', () => {
-      const theme = { colors: { textMuted: '#9ca3af' } }
-      const result = sideShadowGradientFromTheme(theme, 'default')
-      expect(result).toContain('#9ca3af')
-      expect(result).toContain('50%')
-    })
-
-    it('returns fallback when theme is null', () => {
-      const result = sideShadowGradientFromTheme(null, 'default')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
-    })
-
-    it('returns fallback when theme is undefined', () => {
-      const result = sideShadowGradientFromTheme(undefined, 'dark')
-      expect(result).toBe('linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 100%)')
     })
   })
 
