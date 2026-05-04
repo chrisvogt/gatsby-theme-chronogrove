@@ -135,9 +135,12 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   // White on light-mode primary (#422EA3) is 8.7:1 — keep white ✅
   const activeIconColor = isDark ? '#111' : '#fff'
 
-  // The filled portion of the rail ends at the center of the active badge.
-  // Each badge is spaced ITEM_GAP px apart; top of list = half a badge + 4px top pad.
+  // Filled rail height: pct of the *track* (container minus half-badge at top and bottom).
+  // Track uses top/bottom each BADGE_ACTIVE/2, so track length = 100% - BADGE_ACTIVE.
+  // Height at P% must be P% of container minus P% of the 44px inset = calc(P% - P*44/100 px),
+  // not a constant 22px subtract (which overshoots at 100% and undershoots below 50%).
   const railFillPct = links.length > 1 ? Math.min(100, Math.round((activeIndex / (links.length - 1)) * 100)) : 0
+  const railFillHeightDeductionPx = (railFillPct * BADGE_ACTIVE) / 100
 
   return (
     <Fragment>
@@ -185,7 +188,7 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
                 backgroundColor: primaryColor,
                 zIndex: 0,
                 transition: 'height 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                height: railFillPct === 0 ? '0px' : `calc(${railFillPct}% - ${BADGE_ACTIVE / 2}px)`
+                height: railFillPct === 0 ? '0px' : `calc(${railFillPct}% - ${railFillHeightDeductionPx}px)`
               }}
             />
 
