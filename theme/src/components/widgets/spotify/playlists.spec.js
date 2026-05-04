@@ -7,7 +7,7 @@ import spotifyResponseFixture from '../../../../__mocks__/spotify.mock.json'
 import { TestProviderWithState } from '../../../testUtils'
 import { useAudioPlayerStore, resetAudioPlayerStore } from '../../../stores/audio-player-store'
 import { ThemeUIProvider } from 'theme-ui'
-import theme from '../../../gatsby-plugin-theme-ui/theme'
+import theme from '@chronogrove/ui/theme'
 
 jest.mock('./media-item-grid', () => jest.fn(() => <div data-testid='media-item-grid' />))
 

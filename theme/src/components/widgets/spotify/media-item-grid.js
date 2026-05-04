@@ -6,7 +6,7 @@ import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
 
-import { glassmorhismPanel } from '../../../gatsby-plugin-theme-ui/theme'
+import { glassmorhismPanel } from '@chronogrove/ui/theme'
 
 const MediaItemGrid = ({ isLoading, items = [], onTrackClick }) => {
   const { colorMode } = useThemeUI()

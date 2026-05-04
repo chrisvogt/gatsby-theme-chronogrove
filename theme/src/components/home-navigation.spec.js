@@ -708,7 +708,7 @@ describe('HomeNavigation', () => {
       // Theme UI warns when initialColorModeName matches a `colors.modes` key; we only need dark styles for this assertion.
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
       try {
-        const theme = require('../gatsby-plugin-theme-ui/theme').default
+        const theme = require('@chronogrove/ui/theme').default
         const darkTheme = {
           ...theme,
           config: {

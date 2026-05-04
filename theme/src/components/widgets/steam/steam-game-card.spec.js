@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
-import theme from '../../../gatsby-plugin-theme-ui'
+import theme from '@chronogrove/ui/theme'
 import SteamGameCard from './steam-game-card'
 
 // Mock LazyLoad component

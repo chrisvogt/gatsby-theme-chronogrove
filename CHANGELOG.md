@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.85.5
+
+### `gatsby-theme-chronogrove` — Direct `@chronogrove/ui/theme` imports ([Issue #569](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/569))
+
+- **Refactor**: Theme tests, **`testUtils`**, **`media-item-grid`**, and related specs import the design tokens from **`@chronogrove/ui/theme`** instead of the **`src/gatsby-plugin-theme-ui`** shim paths. The shim files remain for Gatsby theme shadowing and backward compatibility.
+- **Version**: **0.85.5**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.5** (tracks theme **0.85.5**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.5** (tracks theme **0.85.5**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.5**), `theme/src/testUtils.js`, `theme/src/components/widgets/spotify/media-item-grid.js`, `theme/src/components/category.spec.js`, `theme/src/components/animated-page-background.spec.js`, `theme/src/components/home-navigation.spec.js`, `theme/src/shortcodes/Note.spec.js`, `theme/src/components/widgets/spotify/playlists.spec.js`, `theme/src/components/widgets/spotify/top-tracks.spec.js`, `theme/src/components/widgets/steam/play-time-chart.spec.js`, `theme/src/components/widgets/steam/steam-game-card.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.5**), `www.chronogrove.com/package.json` (version **1.3.5**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.4
 
 ### `@chronogrove/ui` — `ThumbnailStrip`, `ImageThumbnails`, Next showcase helpers ([Issue #566](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/566))
