@@ -40,6 +40,26 @@ const BADGE_ACTIVE = 44
 const BADGE_IDLE = 34
 
 /**
+ * Filled rail height as a percentage of the track (0 when there is only one stop).
+ * Exported for unit tests and the defensive `linkCount <= 1` branch.
+ */
+export function getRailFillPct(linkCount, activeIndex) {
+  if (linkCount <= 1) return 0
+  return Math.min(100, Math.round((activeIndex / (linkCount - 1)) * 100))
+}
+
+/** @public for tests — mirrors nav primary resolution including `#422EA3` fallback */
+export function resolvePrimaryFromTheme(isDark, theme) {
+  const resolved = isDark ? theme?.rawColors?.modes?.dark?.primary : theme?.rawColors?.primary
+  return resolved ?? '#422EA3'
+}
+
+/** @public for tests — React passes `{}` for missing props; this keeps `??` branches reachable in unit tests */
+export function normalizeHomeNavProps(props) {
+  return props ?? {}
+}
+
+/**
  * Scroll-wheel sidebar navigation for the home page.
  *
  * Replaces the retro 3D panel with a vertical progress rail:
@@ -52,7 +72,8 @@ const BADGE_IDLE = 34
  * Scroll detection, link building, and keyboard handling are unchanged from the
  * original retro panel implementation.
  */
-const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
+const HomeNavigation = props => {
+  const { scrollSyncDisabled = false } = normalizeHomeNavProps(props)
   const [activeSection, setActiveSection] = useState('home')
   const [colorMode] = useColorMode()
   const { theme } = useThemeUI()
@@ -120,7 +141,7 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   const activeIndex = links.findIndex(l => l.id === activeSection)
 
   // Palette: pull primary from theme so it stays in sync with color mode
-  const primaryColor = (isDark ? theme?.rawColors?.modes?.dark?.primary : theme?.rawColors?.primary) ?? '#422EA3'
+  const primaryColor = resolvePrimaryFromTheme(isDark, theme)
   const primaryRgb = isDark ? '74, 158, 255' : '66, 46, 163'
 
   const trackBg = isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)'
@@ -139,7 +160,7 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
   // Track uses top/bottom each BADGE_ACTIVE/2, so track length = 100% - BADGE_ACTIVE.
   // Height at P% must be P% of container minus P% of the 44px inset = calc(P% - P*44/100 px),
   // not a constant 22px subtract (which overshoots at 100% and undershoots below 50%).
-  const railFillPct = links.length > 1 ? Math.min(100, Math.round((activeIndex / (links.length - 1)) * 100)) : 0
+  const railFillPct = getRailFillPct(links.length, activeIndex)
   const railFillHeightDeductionPx = (railFillPct * BADGE_ACTIVE) / 100
 
   return (
@@ -293,13 +314,11 @@ const HomeNavigation = ({ scrollSyncDisabled = false } = {}) => {
                   href={href}
                   onClick={e => {
                     e.preventDefault()
-                    if (typeof window !== 'undefined') {
-                      window.history.pushState(null, '', href)
-                      if (id === 'home' || href === '#top') {
-                        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-                      } else {
-                        scrollToElementWhenReady(href)
-                      }
+                    window.history.pushState(null, '', href)
+                    if (id === 'home' || href === '#top') {
+                      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+                    } else {
+                      scrollToElementWhenReady(href)
                     }
                   }}
                 >

@@ -172,7 +172,7 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
         class="css-1df6wzz"
       >
         <div
-          class="css-125mzmk"
+          class="css-1fzqdmc"
         >
           <div
             class="css-8kzs4n"
@@ -186,7 +186,7 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
           </div>
         </div>
         <div
-          class="css-125mzmk"
+          class="css-1fzqdmc"
         >
           <div
             class="css-8kzs4n"
@@ -332,7 +332,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
         class="css-1df6wzz"
       >
         <div
-          class="css-1023ard"
+          class="css-154mwpr"
         >
           <div
             class="css-8kzs4n"
@@ -344,7 +344,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="css-1023ard"
+          class="css-154mwpr"
         >
           <div
             class="css-8kzs4n"

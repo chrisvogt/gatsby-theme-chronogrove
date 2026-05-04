@@ -2,6 +2,11 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Heading } from '@theme-ui/components'
 
+import { hexToRgba, normalizeHexToRrggbb } from './color-utils.js'
+
+/** Alpha matching prior intent of appending `22` to 8-digit #RRGGBBAA (34/255) */
+const METRIC_CHIP_BORDER_ALPHA = 34 / 255
+
 /**
  * WidgetHeader
  *
@@ -123,8 +128,13 @@ const WidgetHeader = ({ aside, children, icon, metrics, metricsLoading }) => {
                 py: '4px',
                 borderRadius: '4px',
                 border: '1px solid',
-                // Use text color at low opacity so the border reads in both light and dark mode
-                borderColor: theme => `${theme?.colors?.text ?? '#111'}22`,
+                // Text-based border: theme `text` is often 3-digit hex (#111 / #fff); appending
+                // `22` for alpha is invalid CSS — use rgba() from expanded hex instead.
+                borderColor: theme => {
+                  const text = theme?.colors?.text ?? '#111'
+                  const base = normalizeHexToRrggbb(text)
+                  return base ? hexToRgba(base, METRIC_CHIP_BORDER_ALPHA) : 'rgba(17, 17, 17, 0.133)'
+                },
                 // panel-background is defined for both light + dark in chronogrove-theme-surface-colors
                 backgroundColor: 'panel-background',
                 ...(metricsLoading

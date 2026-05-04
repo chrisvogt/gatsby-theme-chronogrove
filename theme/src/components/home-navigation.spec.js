@@ -1,9 +1,8 @@
 import React from 'react'
 import { render, act, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-
 import { TestProvider } from '../testUtils'
-import HomeNavigation from './home-navigation'
+import HomeNavigation, { getRailFillPct, normalizeHomeNavProps, resolvePrimaryFromTheme } from './home-navigation'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
@@ -51,6 +50,64 @@ Object.defineProperty(window, 'innerHeight', {
   writable: true
 })
 
+describe('normalizeHomeNavProps', () => {
+  it('returns empty object for nullish props', () => {
+    expect(normalizeHomeNavProps(undefined)).toEqual({})
+    expect(normalizeHomeNavProps(null)).toEqual({})
+  })
+
+  it('returns the same object reference when props are provided', () => {
+    const p = { scrollSyncDisabled: true }
+    expect(normalizeHomeNavProps(p)).toBe(p)
+  })
+})
+
+describe('resolvePrimaryFromTheme', () => {
+  it('returns fallback when light theme has no primary', () => {
+    expect(resolvePrimaryFromTheme(false, { rawColors: {} })).toBe('#422EA3')
+  })
+
+  it('returns fallback when dark theme has no dark primary', () => {
+    expect(resolvePrimaryFromTheme(true, { rawColors: { modes: { dark: {} } } })).toBe('#422EA3')
+  })
+
+  it('returns light primary when present', () => {
+    expect(resolvePrimaryFromTheme(false, { rawColors: { primary: '#abc' } })).toBe('#abc')
+  })
+
+  it('returns dark primary when present', () => {
+    expect(resolvePrimaryFromTheme(true, { rawColors: { modes: { dark: { primary: '#def' } } } })).toBe('#def')
+  })
+
+  it('returns fallback when theme is undefined', () => {
+    expect(resolvePrimaryFromTheme(false, undefined)).toBe('#422EA3')
+  })
+})
+
+describe('getRailFillPct', () => {
+  it('returns 0 when there is at most one link', () => {
+    expect(getRailFillPct(0, 0)).toBe(0)
+    expect(getRailFillPct(1, 0)).toBe(0)
+  })
+
+  it('returns 0 at first stop with multiple links', () => {
+    expect(getRailFillPct(4, 0)).toBe(0)
+  })
+
+  it('returns 100 at last stop', () => {
+    expect(getRailFillPct(4, 3)).toBe(100)
+  })
+
+  it('returns rounded intermediate percentages', () => {
+    expect(getRailFillPct(4, 1)).toBe(33)
+    expect(getRailFillPct(4, 2)).toBe(67)
+  })
+
+  it('caps at 100 when the fraction rounds above 100', () => {
+    expect(getRailFillPct(2, 10)).toBe(100)
+  })
+})
+
 describe('HomeNavigation', () => {
   beforeEach(() => {
     useNavigationData.mockImplementation(() => mockNavigationData)
@@ -74,6 +131,11 @@ describe('HomeNavigation', () => {
     jest.clearAllMocks()
   })
 
+  it('uses default props when created with undefined props', () => {
+    const { container } = render(<TestProvider>{React.createElement(HomeNavigation)}</TestProvider>)
+    expect(container.querySelector('nav')).toBeInTheDocument()
+  })
+
   it('matches the snapshot', () => {
     const { asFragment } = render(
       <TestProvider>
@@ -81,11 +143,6 @@ describe('HomeNavigation', () => {
       </TestProvider>
     )
     expect(asFragment()).toMatchSnapshot()
-  })
-
-  it('accepts undefined props (default parameters)', () => {
-    const { container } = render(<TestProvider>{React.createElement(HomeNavigation, undefined)}</TestProvider>)
-    expect(container.querySelector('nav')).toBeInTheDocument()
   })
 
   it('hides nav items for widgets that have no data source configured', () => {
@@ -696,6 +753,41 @@ describe('HomeNavigation', () => {
   })
 
   describe('Dark mode', () => {
+    it('uses primary hex fallback when rawColors omit mode primary', () => {
+      const baseTheme = require('@chronogrove/ui/theme').default
+      const { ThemeUIProvider } = require('theme-ui')
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+      try {
+        const themeNoPrimary = {
+          ...baseTheme,
+          rawColors: {
+            ...baseTheme.rawColors,
+            primary: undefined,
+            modes: {
+              ...baseTheme.rawColors?.modes,
+              dark: {
+                ...baseTheme.rawColors?.modes?.dark,
+                primary: undefined
+              }
+            }
+          },
+          config: {
+            ...baseTheme.config,
+            initialColorModeName: 'dark',
+            useColorSchemeMediaQuery: false
+          }
+        }
+        const { container } = render(
+          <ThemeUIProvider theme={themeNoPrimary}>
+            <HomeNavigation scrollSyncDisabled />
+          </ThemeUIProvider>
+        )
+        expect(container.querySelector('nav')).toBeInTheDocument()
+      } finally {
+        warnSpy.mockRestore()
+      }
+    })
+
     it('renders with dark panel when theme initial color mode is dark', () => {
       // Theme UI warns when initialColorModeName matches a `colors.modes` key; we only need dark styles for this assertion.
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
