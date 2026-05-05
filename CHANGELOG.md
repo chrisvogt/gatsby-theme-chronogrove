@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.85.9
+
+### `gatsby-theme-chronogrove` — Goodreads grid pagination after book detail
+
+- **Goodreads / `recently-read-books`**: Reset carousel page to 1 only when the **book list identity** changes (ordered ids), not when the parent passes a new filtered **`books`** array reference on each render. Opening a book (**`?bookId=`**) no longer forces page 1 before returning from detail view ([#601](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/601)).
+- **Tests**: **`recently-read-books.spec.js`** — page survives rerender with a new array and the same ids.
+- **Version**: **0.85.9**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.9** (tracks theme **0.85.9**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.9** (tracks theme **0.85.9**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.9**), `theme/src/components/widgets/goodreads/recently-read-books.js`, `theme/src/components/widgets/goodreads/recently-read-books.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.9**), `www.chronogrove.com/package.json` (version **1.3.9**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.8
 
 ### `gatsby-theme-chronogrove` — Goodreads carousel WebGL and dark-mode background
