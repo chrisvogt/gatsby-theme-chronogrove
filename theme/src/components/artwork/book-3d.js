@@ -120,6 +120,12 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     const container = containerRef.current
     if (!container) return
 
+    // Prevents recreated WebGL contexts after teardown: observers may still deliver
+    // `isIntersecting` after dispose() clears `renderer`; without this, createScene()
+    // can fire again before disconnect() runs and leaks contexts (revoking older
+    // canvases like ColorBends).
+    let active = true
+
     // ── All Three.js state lives here so createScene/destroyScene can own it ──
     let renderer = null
     let scene = null
@@ -146,8 +152,12 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     }
 
     const startAnim = () => {
-      if (rafId !== null) return
+      if (!active || rafId !== null) return
       const tick = () => {
+        if (!active) {
+          rafId = null
+          return
+        }
         if (!inViewport) {
           rafId = null
           return
@@ -209,6 +219,9 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     const startIntroTimer = () => {
       clearTimeout(introTimer)
       introTimer = setTimeout(() => {
+        if (!active) return
+        /* Defensive: IO leave clears this timer first, so reaching !inViewport is effectively unreachable today. */
+        /* istanbul ignore next */
         if (!inViewport) {
           if (book) {
             book.rotation.y = REST_Y
@@ -232,7 +245,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
 
     // ── Scene creation ─────────────────────────────────────────────────────
     const createScene = () => {
-      if (renderer) return
+      if (!active || renderer) return
 
       const w = container.clientWidth || 200
       const h = container.clientHeight || 200
@@ -301,7 +314,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
 
       // Load cover texture (or fall back immediately if no URL)
       const applyFallback = () => {
-        if (!coverMat) return
+        if (!active || !coverMat) return
         const fallbackTex = buildCoverFallbackTexture(title)
         coverMat.map = fallbackTex
         coverMat.color.set(0xffffff)
@@ -317,7 +330,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
         loader.load(
           thumbnailURL,
           tex => {
-            if (!coverMat) return
+            if (!active || !coverMat) return
             tex.colorSpace = THREE.SRGBColorSpace
             coverMat.map = tex
             coverMat.color.set(0xffffff)
@@ -360,9 +373,17 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
       }
       coverMat = null
 
+      const domEl = renderer.domElement
+      const gl = renderer.getContext()
       renderer.dispose()
-      if (renderer.domElement.parentElement === container) {
-        container.removeChild(renderer.domElement)
+      try {
+        gl.getExtension('WEBGL_lose_context')?.loseContext()
+      } catch {
+        // Context may already be torn down during dispose().
+      }
+
+      if (domEl.parentElement === container) {
+        container.removeChild(domEl)
       }
       renderer = null
       scene = null
@@ -377,6 +398,7 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     if ('IntersectionObserver' in window) {
       observer = new window.IntersectionObserver(
         ([entry]) => {
+          if (!active) return
           if (entry.isIntersecting) {
             inViewport = true
             if (!renderer) {
@@ -411,14 +433,16 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     } else {
       // No IntersectionObserver support — create immediately
       inViewport = true
-      createScene()
+      if (active) {
+        createScene()
+      }
     }
 
     // ── ResizeObserver ─────────────────────────────────────────────────────
     let ro
     if ('ResizeObserver' in window) {
       ro = new ResizeObserver(() => {
-        if (!renderer || !camera) return
+        if (!active || !renderer || !camera) return
         const nw = container.clientWidth || 200
         const nh = container.clientHeight || 200
         camera.aspect = nw / nh
@@ -462,12 +486,13 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
 
     // ── Cleanup ────────────────────────────────────────────────────────────
     return () => {
-      destroyScene()
+      active = false
       if (observer) observer.disconnect()
       if (ro) ro.disconnect()
       container.removeEventListener('mouseenter', onMouseEnter)
       container.removeEventListener('mousemove', onMouseMove)
       container.removeEventListener('mouseleave', onMouseLeave)
+      destroyScene()
     }
   }, [thumbnailURL, title, introDelay])
 
