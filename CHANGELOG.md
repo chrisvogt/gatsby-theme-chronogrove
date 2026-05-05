@@ -6,7 +6,8 @@
 
 - **`Book3D`**: Guards teardown so a late **`IntersectionObserver`** callback cannot **`createScene()`** after **`dispose()`** (disconnect observers and DOM listeners **before** destroying the Three.js scene); animation frame, intro **`setTimeout`**, and **`TextureLoader`** paths respect **`active`**; **`WEBGL_lose_context`** (**`loseContext`**) after **`renderer.dispose()`** where available so contexts are released promptly on drivers that defer until GC if not lost explicitly.
 - **Goodreads / `recently-read-books`**: On **`currentPage`** change (not initial mount), the active slide renders **flat covers** for two **`requestAnimationFrame`** ticks before **`Book3D`** again, so disposing the previous slide’s canvases completes before allocating the next (~10+) contexts — avoids spikes that exceeded the browser cap and revoked the fixed **Color Bends** layer (**“Too many active WebGL contexts”**).
-- **Tests**: **`book-3d.spec.js`** (post-unmount intersect must not **`setSize`**, **`mockRenderer.getContext`** for **`WEBGL_lose_context`**).
+- **Tests**: **`book-3d.spec.js`** — post-unmount intersect must not recreate the renderer; **`getContext`** / **`WEBGL_lose_context`** (including **`getExtension`** throw swallowed in **`dispose`**); ResizeObserver callbacks after **unmount**; stale animation ticks after **unmount** or **leaveViewport**.
+- **`Book3D` instrumentation**: **`istanbul ignore next`** on the intro-timeout **`!inViewport`** guard (normally unreachable — viewport leave clears the timer before it fires).
 - **Version**: **0.85.8**
 
 ### `www.chrisvogt.me`

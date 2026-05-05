@@ -220,6 +220,8 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
       clearTimeout(introTimer)
       introTimer = setTimeout(() => {
         if (!active) return
+        /* Defensive: IO leave clears this timer first, so reaching !inViewport is effectively unreachable today. */
+        /* istanbul ignore next */
         if (!inViewport) {
           if (book) {
             book.rotation.y = REST_Y

@@ -284,6 +284,29 @@ describe('Artwork/Book3D', () => {
     expect(global.cancelAnimationFrame).toHaveBeenCalled()
   })
 
+  it('exits stale RAF tick when teardown already ran (!active)', () => {
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.runAllTimers()
+    const tick = animationCallback
+    expect(tick).toEqual(expect.any(Function))
+    jest.clearAllMocks()
+    unmount()
+    tick()
+    expect(mockRenderer.render).not.toHaveBeenCalled()
+  })
+
+  it('exits stale RAF tick when the viewport already marked off-screen (!inViewport)', () => {
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.runAllTimers()
+    const tick = animationCallback
+    leaveViewport()
+    jest.clearAllMocks()
+    tick()
+    expect(mockRenderer.render).not.toHaveBeenCalled()
+  })
+
   it('runs a tick after the intro fires', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
@@ -676,6 +699,16 @@ describe('Artwork/Book3D', () => {
     expect(mockRenderer.setSize).toHaveBeenCalled()
   })
 
+  it('ignores ResizeObserver resize callbacks after unmount (active guard)', () => {
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.clearAllMocks()
+    unmount()
+    resizeCallback && resizeCallback([])
+    expect(mockRenderer.setSize).not.toHaveBeenCalled()
+    expect(mockCamera.updateProjectionMatrix).not.toHaveBeenCalled()
+  })
+
   // ── Cleanup ────────────────────────────────────────────────────────────────
 
   it('cleans up all resources on unmount', () => {
@@ -687,6 +720,16 @@ describe('Artwork/Book3D', () => {
     expect(mockIntersectionObserver.disconnect).toHaveBeenCalled()
     expect(mockResizeObserver.disconnect).toHaveBeenCalled()
     expect(mockGeometry.dispose).toHaveBeenCalled()
+    expect(mockRenderer.dispose).toHaveBeenCalled()
+  })
+
+  it('swallows WEBGL_lose_context errors during dispose when getExtension throws', () => {
+    mockGl.getExtension.mockImplementationOnce(() => {
+      throw new Error('context already invalidated')
+    })
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    expect(() => unmount()).not.toThrow()
     expect(mockRenderer.dispose).toHaveBeenCalled()
   })
 
