@@ -118,9 +118,10 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
     }
   }, [currentPage, totalPages])
 
+  const booksIdentityKey = books.map(b => b.id).join(',')
   useEffect(() => {
     setCurrentPage(1)
-  }, [books])
+  }, [booksIdentityKey])
 
   useEffect(() => {
     if (skipInitialWebglDefer.current) {

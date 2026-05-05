@@ -177,6 +177,46 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
         'Book 1'
       )
     })
+
+    it('preserves the current page when the books prop gets a new array reference with identical ids', () => {
+      const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      const { rerender } = renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      // Simulate a parent re-render producing a new array reference with the same books
+      const sameBooksNewReference = [...paginatedBooks]
+
+      rerender(
+        <LocationProvider
+          history={{
+            location: { pathname: '/' },
+            listen: () => () => {},
+            navigate: () => {},
+            _onTransitionComplete: () => {}
+          }}
+        >
+          <Router>
+            <div default>
+              <RecentlyReadBooks books={sameBooksNewReference} isLoading={false} default />
+            </div>
+          </Router>
+        </LocationProvider>
+      )
+
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+      expect(within(screen.getByTestId('goodreads-page-2')).getAllByTestId('book-link')[0]).toHaveAttribute(
+        'title',
+        'Book 11'
+      )
+    })
   })
 
   describe('navigation and scroll behavior', () => {
