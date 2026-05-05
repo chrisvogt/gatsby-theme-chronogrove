@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.8
+
+### `gatsby-theme-chronogrove` — Goodreads carousel WebGL and dark-mode background
+
+- **`Book3D`**: Guards teardown so a late **`IntersectionObserver`** callback cannot **`createScene()`** after **`dispose()`** (disconnect observers and DOM listeners **before** destroying the Three.js scene); animation frame, intro **`setTimeout`**, and **`TextureLoader`** paths respect **`active`**; **`WEBGL_lose_context`** (**`loseContext`**) after **`renderer.dispose()`** where available so contexts are released promptly on drivers that defer until GC if not lost explicitly.
+- **Goodreads / `recently-read-books`**: On **`currentPage`** change (not initial mount), the active slide renders **flat covers** for two **`requestAnimationFrame`** ticks before **`Book3D`** again, so disposing the previous slide’s canvases completes before allocating the next (~10+) contexts — avoids spikes that exceeded the browser cap and revoked the fixed **Color Bends** layer (**“Too many active WebGL contexts”**).
+- **Tests**: **`book-3d.spec.js`** (post-unmount intersect must not **`setSize`**, **`mockRenderer.getContext`** for **`WEBGL_lose_context`**).
+- **Version**: **0.85.8**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.8** (tracks theme **0.85.8**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.8** (tracks theme **0.85.8**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.8**), `theme/src/components/artwork/book-3d.js`, `theme/src/components/artwork/book-3d.spec.js`, `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `www.chrisvogt.me/package.json` (version **1.16.8**), `www.chronogrove.com/package.json` (version **1.3.8**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.7
 
 ### `@chronogrove/ui` — Letterpress card depth + dashboard widget headers

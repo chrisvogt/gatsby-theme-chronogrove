@@ -49,8 +49,15 @@ const mockCamera = {
   updateProjectionMatrix: jest.fn()
 }
 
+const mockGl = {
+  getExtension: jest.fn(() => ({
+    loseContext: jest.fn()
+  }))
+}
+
 const mockRenderer = {
   domElement: createMockCanvas(),
+  getContext: jest.fn(() => mockGl),
   setSize: jest.fn(),
   setPixelRatio: jest.fn(),
   setClearColor: jest.fn(),
@@ -190,6 +197,16 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     expect(mockRenderer.setSize).toHaveBeenCalled()
     expect(mockScene.add).toHaveBeenCalledWith(mockMesh)
+  })
+
+  it('ignores IntersectionObserver intersect notifications after unmount (avoids stray WebGL recreation)', () => {
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    expect(mockRenderer.setSize).toHaveBeenCalled()
+    jest.clearAllMocks()
+    unmount()
+    intersectionCallback([{ isIntersecting: true }])
+    expect(mockRenderer.setSize).not.toHaveBeenCalled()
   })
 
   it('pauses WebGL when the book leaves the viewport without disposing the renderer', () => {
