@@ -6,7 +6,9 @@
 
 - **Discogs modal** (`discogs-modal.js`): Redesigned **header** with **album title**, a single meta line (**artist · release year**), light divider beneath, and themed foreground/muted colors in **light/dark** mode; **Added to collection** shows a **locale date** (no time) when `dateAdded` or known aliases resolve via **`getDiscogsCollectionAddedMs`** (**`sort-discogs-releases.js`**). **Surfaces** match the vinyl **list register**: translucent panel **`rgba(0,0,0,0.18)`** / **`rgba(255,255,255,0.92)`**, hairline borders, **frosted glass** (`backdrop-filter` blur + saturation), lighter **scrim** behind the dialog; tracklist and chrome use the same subtle **inset** translucency and row dividers as list rows.
 - **Sort controls**: The album-year sort toggle label is **Release Year** for clarity (**`vinyl-collection.js`**).
+- **Docs**: **`theme/src/components/widgets/discogs/README.md`** — modal UX, frost/register styling notes, **`discogs-modal.js`** in Components.
 - **Tests / snapshots**: **`discogs-modal.spec.js`**, **`discogs-widget.spec.js`**.
+- **Version**: **0.85.16**
 
 ### `www.chrisvogt.me`
 
@@ -18,10 +20,20 @@
 
 ### Files changed
 
-- `theme/package.json` (version **0.85.16**), `discogs-modal.js`, `discogs-modal.spec.js`, **`discogs-modal.spec.js.snap`**, **`vinyl-collection.js`**, `vinyl-collection.spec.js`, **`discogs-widget.spec.js.snap`**
+- `CHANGELOG.md`
+- `theme/package.json` (version **0.85.16**)
+- `theme/src/components/widgets/discogs/README.md`
+- `theme/src/components/widgets/discogs/discogs-modal.js`
+- `theme/src/components/widgets/discogs/discogs-modal.spec.js`
+- **`theme/src/components/widgets/discogs/__snapshots__/discogs-modal.spec.js.snap`**
+- `theme/src/components/widgets/discogs/vinyl-collection.js`
+- `theme/src/components/widgets/discogs/vinyl-collection.spec.js`
+- `theme/src/components/widgets/discogs/sort-discogs-releases.js`
+- `theme/src/components/widgets/discogs/sort-discogs-releases.spec.js`
+- `theme/src/components/widgets/discogs/vinyl-record-skeleton.js`
+- **`theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`**
 - `www.chrisvogt.me/package.json` (version **1.16.16**)
 - `www.chronogrove.com/package.json` (version **1.3.16**)
-- `CHANGELOG.md`
 
 ---
 
