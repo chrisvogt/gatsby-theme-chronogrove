@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.14
+
+### `gatsby-theme-chronogrove` — Discogs vinyl: five columns at widest breakpoint
+
+- **Discogs widget**: At **xl** (≥1280px), the grid uses **five** columns per row instead of **six**, so each vinyl is slightly larger and **`itemsPerPage` is 10** (5 × 2 rows) instead of 12. Narrower breakpoints unchanged (**[3, 4, 4, 5, 5]**). Loading skeleton count uses **`FULL_GRID_ITEMS = 10`**.
+- **Docs**: **`theme/src/components/widgets/discogs/README.md`**.
+- **Version**: **0.85.14**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.14** (tracks theme **0.85.14**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.14** (tracks theme **0.85.14**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.14**), `theme/src/components/widgets/discogs/vinyl-collection.js`, `theme/src/components/widgets/discogs/README.md`, `theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.16.14**)
+- `www.chronogrove.com/package.json` (version **1.3.14**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.13
 
 ### `gatsby-theme-chronogrove` — Discogs vinyl: two rows per carousel page

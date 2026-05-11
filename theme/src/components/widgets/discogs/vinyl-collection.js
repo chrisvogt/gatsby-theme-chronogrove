@@ -24,14 +24,14 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   /** Rows visible per carousel page at each breakpoint (controls items per page = columns × rows). */
   const ROWS_PER_PAGE = 2
-  // Full grid size (ROWS_PER_PAGE × 6 cols at xl); loading state reserves carousel width for max columns.
-  const FULL_GRID_ITEMS = 6 * ROWS_PER_PAGE
+  // Full grid size (ROWS_PER_PAGE × max columns at xl); loading placeholders match widest grid density.
+  const FULL_GRID_ITEMS = 5 * ROWS_PER_PAGE
   const LOADING_PAGE_COUNT = 3
 
   // Calculate items per page and pagination
   // Always maintain ROWS_PER_PAGE rows per page across all breakpoints
-  // Breakpoints: [3, 4, 4, 5, 6] columns → [6, 8, 8, 10, 12] items per page when ROWS_PER_PAGE = 2
-  const columnsPerBreakpoint = [3, 4, 4, 5, 6]
+  // Breakpoints: [3, 4, 4, 5, 5] columns → [6, 8, 8, 10, 10] items per page when ROWS_PER_PAGE = 2
+  const columnsPerBreakpoint = [3, 4, 4, 5, 5]
   const [currentBreakpointIndex, setCurrentBreakpointIndex] = useState(4) // Default to largest breakpoint
 
   // Calculate pagination to ensure each page fills exactly ROWS_PER_PAGE rows
@@ -76,7 +76,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       } else if (width < 1280) {
         breakpointIndex = 3 // Large: 5 columns
       } else {
-        breakpointIndex = 4 // XL: 6 columns
+        breakpointIndex = 4 // XL (≥1280): 5 columns
       }
 
       setCurrentBreakpointIndex(breakpointIndex)
@@ -228,7 +228,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                     'repeat(4, 1fr)',
                     'repeat(4, 1fr)',
                     'repeat(5, 1fr)',
-                    'repeat(6, 1fr)'
+                    'repeat(5, 1fr)'
                   ],
                   // Fill slide width including pr shadow gutter (negative mr does not widen 1fr tracks).
                   width: `calc(100% + ${t.space[3]})`,
