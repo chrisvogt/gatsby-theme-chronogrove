@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.85.10",
+  "version": "0.85.11",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
@@ -49,9 +49,9 @@
     "gatsby": "catalog:",
     "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^30.3.0",
+    "jest": "^30.4.2",
     "jest-canvas-mock": "^2.5.2",
-    "jest-environment-jsdom": "^30.3.0",
+    "jest-environment-jsdom": "^30.4.1",
     "jest-junit": "^16.0.0"
   },
   "dependencies": {
@@ -64,13 +64,13 @@
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
     "@fortawesome/free-regular-svg-icons": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
-    "@fortawesome/react-fontawesome": "^3.3.0",
+    "@fortawesome/react-fontawesome": "^3.3.1",
     "@gatsbyjs/reach-router": "^2.0.1",
     "@loadable/component": "^5.16.7",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/mdx": "^3.1.1",
     "@mdx-js/react": "catalog:",
-    "@tanstack/react-query": "^5.99.0",
+    "@tanstack/react-query": "^5.100.9",
     "@theme-toggles/react": "catalog:",
     "@theme-ui/color": "catalog:",
     "@theme-ui/components": "catalog:",
@@ -110,9 +110,9 @@
     "react-placeholder": "^4.1.0",
     "s-ago": "^2.2.0",
     "svg-loaders-react": "^3.1.1",
-    "three": "catalog:",
     "theme-ui": "catalog:",
+    "three": "catalog:",
     "vanilla-tilt": "^1.8.1",
-    "zustand": "^5.0.12"
+    "zustand": "^5.0.13"
   }
 }

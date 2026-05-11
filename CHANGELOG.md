@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.85.11
+
+### `gatsby-theme-chronogrove` — Workspace dependency refresh
+
+- **Ranges / lockfile**: Refreshed **semver ranges** and **`pnpm-lock.yaml`** with **`pnpm -r update`** (no source refactors). Root **ESLint** **^10.3.0**, **eslint-plugin-react-hooks** **^7.1.1**, **Turborepo** **^2.9.12**; theme **Jest** / **jest-environment-jsdom** **30.4.x**, **@tanstack/react-query** **^5.100.9**, **zustand** **^5.0.13**, **@fortawesome/react-fontawesome** **^3.3.1**.
+- **Workspace catalog** (`pnpm-workspace.yaml`): **Next** **^16.2.6**, **Prettier** **^3.8.3**, **React** / **React DOM** **^19.2.6**; **three** remains **^0.184.0**.
+- **Version**: **0.85.11**
+
+### `@chronogrove/ui`
+
+- **Dependencies**: **@fortawesome/react-fontawesome** **^3.3.1**; dev — **@babel/preset-env** **^7.29.5**, **babel-jest** / **jest** / **jest-environment-jsdom** **30.4.x**.
+- **Version**: **0.83.3**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.11** (tracks theme **0.85.11**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.11** (tracks theme **0.85.11**).
+
+### Files changed
+
+- `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`
+- `theme/package.json` (version **0.85.11**)
+- `packages/ui/package.json` (version **0.83.3**)
+- `www.chrisvogt.me/package.json` (version **1.16.11**), `www.chronogrove.com/package.json` (version **1.3.11**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.10
 
 ### `www.chrisvogt.me` — Travel & Music index layout
