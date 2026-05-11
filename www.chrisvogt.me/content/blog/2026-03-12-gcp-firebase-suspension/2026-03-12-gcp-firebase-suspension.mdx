@@ -5,9 +5,9 @@ category: meta
 date: '2026-03-13T01:41:00.000Z'
 banner: https://res.cloudinary.com/chrisvogt/image/upload/f_auto,c_scale,w_1200/v1773364970/posts/gcp-firebase-issue/firebase-this-is-fine-meme.png
 description: >
-  Last Saturday Google Cloud / Firebase suspended my website’s API (metrics.chrisvogt.me) as a phishing site. I’m on a backup a week later with no explanation and no response to my appeal. Here’s what happened and what I’m doing next.
+  Google Cloud / Firebase suspended metrics.chrisvogt.me as a phishing URL after emulator testing inadvertently hit production auth—then Safe Browsing cleared roughly a week later. What triggered it, how escalation worked from the outside, and the portability work that came out of the outage.
 excerpt: >
-  Google suspended my Firebase-backed API, calling it a phishing site. A week later: no clarity, no reply. I’m sharing the story so others might avoid the same trap.
+  Firebase API flagged phishing; emulator vs prod credentials; appeals split across GCP/Firebase; resolved after ~one week—and lessons for backing up critical paths.
 keywords:
   [Firebase, Google Cloud Platform, GCP suspension, phishing Firebase, trust and safety, Firebase project suspended]
 ---
@@ -38,7 +38,7 @@ It ended with:
 
 > Please note, you may have received a warning that we would suspend the url if you did not correct the violation. If you didn’t receive a warning, it was because your project’s behavior was seriously interfering with the service or other users. Google was forced to suspend the url in order to protect the integrity of the system.
 
-So: no prior warning, and the only explanation is that I was _seriously interfering with the service or other users_—from trying to sign in against prod auth while hitting the emulator, as far as I can tell.
+The notice didn’t cite an earlier warning. The template allows that when Google believes a project is _seriously interfering with the service or other users_. The only activity I can line up with the timing is emulator traffic accidentally pointed at production auth credentials—operator error on my side, not a published phishing kit—but the message didn’t spell out what rule or classifier fired.
 
 ![](https://res.cloudinary.com/chrisvogt/image/upload/f_auto,c_scale,w_1200/v1773364677/posts/gcp-firebase-issue/suspension-notice.png)
 
@@ -46,31 +46,33 @@ So: no prior warning, and the only explanation is that I was _seriously interfer
 
 My website’s API isn’t a product or a SaaS. It’s my own backend: it fetches data from Goodreads, Spotify, Instagram, Discogs, and Steam, transforms it for the front end, and caches it in Firestore. There are authenticated endpoints to manually trigger syncs for those integrations, behind Firebase Auth and a login screen—because _only I_ should be kicking off sync jobs.
 
-Is the login screen what triggered the phishing classification? I have no idea. The email doesn’t say. And as of today, Thursday—almost a week later—I still haven’t heard back from anyone with specifics.
+Whether the Firebase Auth login surface contributed to classification, I don’t know—the email stayed high level. Almost a week in, detailed feedback still hadn’t come back through appeal or compliance inboxes (later resolved once Safe Browsing cleared—see below).
 
 <PhotoGallery photos={gcpFirebaseSuspensionGallery} />
 
 ## What I’ve tried
 
-I submitted an appeal the same day the suspension landed. No response.
+I filed an appeal the same day and didn’t get a substantive answer back in the first several days.
 
-I emailed Firebase Support the same day. David replied promptly and explained that Firebase can’t clear suspensions—that Google Cloud owns security and compliance—and suggested: open an appeal, use Search Console (my API isn’t in that app), email google-cloud-compliance@google.com, or use paid Google Cloud Support to talk to a “Project Suspension” expert.
+I emailed Firebase Support the same day. David replied quickly and clarified that Firebase can’t lift GCP-side suspensions—that Google Cloud owns security and compliance—and suggested the appeal portal, Search Console (not applicable here), google-cloud-compliance@google.com, or paid Google Cloud Support for a suspension specialist.
 
-I also emailed google-cloud-compliance@google.com with my GCP and Firebase ticket numbers that same day. _Silence._
+I sent google-cloud-compliance@google.com the GCP and Firebase case numbers too. Same window: no meaningful reply yet.
 
-So I’m in a loop: Firebase can’t help, the appeal is a black box, and compliance hasn’t replied.
+Escalation was split across products and mailboxes—each step made sense individually, but there wasn’t one place to watch status end to end until things started moving later in the week.
 
 <PhotoGallery photos={gcpWhatIveTriedGallery} />
 
 ## Where things stand
 
-I’ve exported what I needed from the database and I’m running the home page on a backup right now. The site still loads, but the widgets no longer update automatically—the pipeline that kept them fresh is offline.
+_(Written mid-outage; see the March update at the end for resolution.)_
 
-I’m also thinking hard about migration. I no longer feel I can trust Firebase or GCP to keep a personal (or any) app healthy without warning or explanation. **If this were a real product instead of a personal site, I’d be in a much worse position.** As it is, I’m mainly frustrated—and I’m publishing this in the hope it helps someone else avoid the same situation, or at least know they’re not alone when an automated flag torpedoes a project overnight.
+I exported what I needed from the database and pointed the home page at a backup so it kept serving. Widgets stopped updating automatically because the sync pipeline was tied to the suspended hostname.
 
-Next step: I’m going to decouple Firebase and GCP from the project and introduce adapters so the backend and widgets can talk to any data source. That way the site (and the open-source metrics stack) can run on other platforms—Vercel, Fly.io, a simple Node server, or whatever comes after—without being locked to one vendor.
+The delay between flag and an all-clear explanation was awkward for a side project—and would matter more under customer SLAs. I’m documenting the stack-specific failure mode for others weighing the same tradeoffs.
 
-If you’re deploying anything behind Firebase Auth plus a login UI, be careful mixing emulator and production credentials—even once. I thought I was doing _routine QA_. Google categorized it as phishing and cut the URL with almost no recourse and no timeline.
+Next: introduce adapters so the metrics service and widgets can talk to more than one hosting path. The open-source repo should benefit from that portability—Vercel, Fly.io, a small Node host, whatever fits.
+
+If you run Firebase Auth with a login UI, treat emulator and production credentials as hard boundaries. I thought I was doing _routine QA_; the traffic still tripped automated enforcement, the URL went down, and timelines only became visible through several channels at once.
 
 ---
 
@@ -78,8 +80,6 @@ Reference (for support and transparency):
 
 - Firebase Case: 10398734
 - GCP Trust & Safety Case: YYCQAG2IWBMVSIWXMNLXF3UQUM
-
-If anyone from Google reads this and can explain what happened—or lift the suspension with clear guardrails?
 
 ---
 
