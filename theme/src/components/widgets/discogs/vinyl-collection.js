@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
-import { Box, Card, Heading } from '@theme-ui/components'
+import { Box, Card, Heading, Select } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -12,10 +12,18 @@ import {
   DEFAULT_DISCOGS_SORT_MODE,
   DISCOGS_SORT_ADDED,
   DISCOGS_SORT_ALPHABETICAL,
+  DISCOGS_SORT_ALPHABETICAL_ARTIST,
   DISCOGS_SORT_RELEASE_YEAR,
   getDiscogsReleaseYear,
   sortDiscogsReleases
 } from './sort-discogs-releases'
+
+const DISCOGS_SORT_OPTIONS = [
+  { value: DISCOGS_SORT_ADDED, label: 'Date added (newest first)' },
+  { value: DISCOGS_SORT_RELEASE_YEAR, label: 'Release year (newest first)' },
+  { value: DISCOGS_SORT_ALPHABETICAL, label: 'Album title (A–Z)' },
+  { value: DISCOGS_SORT_ALPHABETICAL_ARTIST, label: 'Artist (A–Z)' }
+]
 
 const DISCOGS_VIEW_GRID = 'grid'
 const DISCOGS_VIEW_LIST = 'list'
@@ -82,8 +90,37 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   })
 
-  const sortToggleSx = makeToggleSx(sortControlsDisabled)
   const viewToggleSx = makeToggleSx(viewControlsDisabled)
+
+  const sortSelectSx = useMemo(
+    () => ({
+      fontSize: ['11px', 1],
+      fontWeight: 'body',
+      lineHeight: 1.25,
+      px: 2,
+      py: '6px',
+      minHeight: ['28px', '30px'],
+      borderRadius: '6px',
+      border: `1px solid rgba(${primaryRgb}, 0.35)`,
+      color: 'text',
+      bg: darkModeActive ? 'rgba(0,0,0,0.25)' : `rgba(${primaryRgb}, 0.08)`,
+      cursor: sortControlsDisabled ? 'not-allowed' : 'pointer',
+      outline: 'none',
+      opacity: sortControlsDisabled ? 0.5 : 1,
+      width: ['100%', 'auto'],
+      minWidth: ['100%', 'min(100%, 260px)', '272px'],
+      maxWidth: '100%',
+      fontFamily: 'body',
+      transition: 'background 0.2s ease, border-color 0.2s ease, box-shadow 0.15s ease',
+      '&:focus-visible:not(:disabled)': {
+        boxShadow: `0 0 0 2px rgba(${primaryRgb}, 0.35)`
+      },
+      '&:disabled': {
+        cursor: 'not-allowed'
+      }
+    }),
+    [primaryRgb, darkModeActive, sortControlsDisabled]
+  )
 
   /** Carousel slides: grid = columns × 2 rows; list = same chunk size (`columns × 2`) inside a bordered “register” scroll. */
   const GRID_ROWS_PER_PAGE = 2
@@ -255,49 +292,41 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
           }}
         >
           <Box
-            role='radiogroup'
-            aria-label='Sort vinyl collection'
-            sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 1, display: 'flex' }}
+            sx={{
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: ['8px', 2],
+              display: 'flex',
+              flex: ['1 1 100%', '0 1 auto'],
+              justifyContent: ['stretch', 'flex-end']
+            }}
           >
-            <span
-              sx={{ fontSize: [0, 1], fontWeight: 'medium', mr: [0, 1], color: 'text' }}
-              id='vinyl-collection-sort-label'
-            >
-              Sort:
-            </span>
             <Box
-              as='button'
-              type='button'
-              aria-label='Sort collection by date added'
-              aria-pressed={collectionSortMode === DISCOGS_SORT_ADDED}
-              disabled={sortControlsDisabled}
-              sx={sortToggleSx(collectionSortMode === DISCOGS_SORT_ADDED)}
-              onClick={() => setCollectionSortMode(DISCOGS_SORT_ADDED)}
+              as='label'
+              htmlFor='vinyl-collection-sort-select'
+              sx={{
+                fontSize: [0, 1],
+                fontWeight: 'medium',
+                color: 'text',
+                flexShrink: 0,
+                userSelect: 'none'
+              }}
             >
-              Date added
+              Sort by
             </Box>
-            <Box
-              as='button'
-              type='button'
-              aria-label='Sort collection alphabetically by album title'
-              aria-pressed={collectionSortMode === DISCOGS_SORT_ALPHABETICAL}
+            <Select
+              id='vinyl-collection-sort-select'
+              value={collectionSortMode}
+              onChange={e => setCollectionSortMode(e.target.value)}
               disabled={sortControlsDisabled}
-              sx={sortToggleSx(collectionSortMode === DISCOGS_SORT_ALPHABETICAL)}
-              onClick={() => setCollectionSortMode(DISCOGS_SORT_ALPHABETICAL)}
+              sx={sortSelectSx}
             >
-              Alphabetical
-            </Box>
-            <Box
-              as='button'
-              type='button'
-              aria-label='Sort collection by release year, newest first'
-              aria-pressed={collectionSortMode === DISCOGS_SORT_RELEASE_YEAR}
-              disabled={sortControlsDisabled}
-              sx={sortToggleSx(collectionSortMode === DISCOGS_SORT_RELEASE_YEAR)}
-              onClick={() => setCollectionSortMode(DISCOGS_SORT_RELEASE_YEAR)}
-            >
-              Release Year
-            </Box>
+              {DISCOGS_SORT_OPTIONS.map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </Select>
           </Box>
           <Box
             role='radiogroup'
@@ -999,7 +1028,13 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       ) : null}
 
       {/* Modal */}
-      <DiscogsModal isOpen={isModalOpen} onClose={handleCloseModal} release={selectedRelease} />
+      <DiscogsModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        release={selectedRelease}
+        orderedReleases={sortedReleases}
+        onSelectRelease={setSelectedRelease}
+      />
     </div>
   )
 }

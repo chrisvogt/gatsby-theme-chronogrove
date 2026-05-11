@@ -202,6 +202,153 @@ describe('DiscogsModal', () => {
     expect(mockOnClose).toHaveBeenCalled()
   })
 
+  it('suppresses Added to collection when Intl.DateTimeFormat throws', () => {
+    const spy = jest.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => {
+      throw new Error('unavailable')
+    })
+
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+    expect(screen.queryByRole('heading', { name: 'Added to collection' })).not.toBeInTheDocument()
+
+    spy.mockRestore()
+  })
+
+  it('allows arrow keys without navigation props', () => {
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+    expect(() => fireEvent.keyDown(document, { key: 'ArrowLeft' })).not.toThrow()
+  })
+
+  it('skips modal arrow browsing when keyboard target is a select inside the page', () => {
+    const onSelect = jest.fn()
+    render(
+      <DiscogsModal
+        isOpen={true}
+        onClose={mockOnClose}
+        release={mockRelease}
+        orderedReleases={[mockRelease, mockReleaseMinimal]}
+        onSelectRelease={onSelect}
+      />
+    )
+
+    const sel = document.createElement('select')
+    document.body.appendChild(sel)
+
+    sel.focus()
+
+    fireEvent.keyDown(sel, { key: 'ArrowRight', bubbles: true })
+
+    expect(onSelect).not.toHaveBeenCalled()
+
+    document.body.removeChild(sel)
+  })
+
+  it('skips modal arrow browsing when keyboard target is contenteditable', () => {
+    const onSelect = jest.fn()
+    render(
+      <DiscogsModal
+        isOpen={true}
+        onClose={mockOnClose}
+        release={mockRelease}
+        orderedReleases={[mockRelease, mockReleaseMinimal]}
+        onSelectRelease={onSelect}
+      />
+    )
+
+    const editable = document.createElement('div')
+    editable.setAttribute('contenteditable', 'true')
+    document.body.appendChild(editable)
+    editable.focus()
+    fireEvent.keyDown(editable, { key: 'ArrowRight', bubbles: true })
+    expect(onSelect).not.toHaveBeenCalled()
+
+    document.body.removeChild(editable)
+  })
+
+  it('does not navigate when release id cannot be matched in orderedReleases', () => {
+    const onSelect = jest.fn()
+    render(
+      <DiscogsModal
+        isOpen={true}
+        onClose={mockOnClose}
+        release={{ ...mockRelease, id: -999 }}
+        orderedReleases={[mockRelease, mockReleaseMinimal]}
+        onSelectRelease={onSelect}
+      />
+    )
+
+    fireEvent.keyDown(document, { key: 'ArrowRight' })
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it('falls back to basicInformation.resourceUrl when resource.uri is absent', () => {
+    const noUriRelease = JSON.parse(JSON.stringify(mockRelease))
+    delete noUriRelease.resource.uri
+    noUriRelease.basicInformation.resourceUrl = 'https://www.example.com/release-from-basic-information'
+
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={noUriRelease} />)
+    expect(screen.getByRole('link', { name: /View on Discogs/i })).toHaveAttribute(
+      'href',
+      'https://www.example.com/release-from-basic-information'
+    )
+  })
+
+  it('calls onSelectRelease on Arrow Left / Arrow Right within orderedReleases', () => {
+    const onSelect = jest.fn()
+    const props = ordered => ({
+      isOpen: true,
+      onClose: mockOnClose,
+      orderedReleases: ordered,
+      onSelectRelease: onSelect
+    })
+
+    const { rerender } = render(<DiscogsModal {...props([mockRelease, mockReleaseMinimal])} release={mockRelease} />)
+
+    fireEvent.keyDown(document, { key: 'ArrowLeft' })
+    expect(onSelect).not.toHaveBeenCalled()
+
+    fireEvent.keyDown(document, { key: 'ArrowRight' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(onSelect).toHaveBeenCalledWith(mockReleaseMinimal)
+
+    onSelect.mockClear()
+    rerender(<DiscogsModal {...props([mockRelease, mockReleaseMinimal])} release={mockReleaseMinimal} />)
+    fireEvent.keyDown(document, { key: 'ArrowLeft' })
+    expect(onSelect).toHaveBeenCalledTimes(1)
+    expect(onSelect).toHaveBeenCalledWith(mockRelease)
+
+    onSelect.mockClear()
+    rerender(<DiscogsModal {...props([mockRelease, mockReleaseMinimal])} release={mockReleaseMinimal} />)
+    fireEvent.keyDown(document, { key: 'ArrowRight' })
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it('updates visible release when parent state follows onSelectRelease (arrow hops)', () => {
+    function Wrapper() {
+      const [r, setR] = React.useState(mockRelease)
+      return (
+        <>
+          <DiscogsModal
+            isOpen={true}
+            onClose={mockOnClose}
+            release={r}
+            orderedReleases={[mockRelease, mockReleaseMinimal]}
+            onSelectRelease={next => setR(next)}
+          />
+          <span data-testid='nav-release-id'>{r.id}</span>
+        </>
+      )
+    }
+
+    render(<Wrapper />)
+    expect(screen.getByTestId('nav-release-id')).toHaveTextContent('12345')
+    fireEvent.keyDown(document, { key: 'ArrowRight' })
+    expect(screen.getByTestId('nav-release-id')).toHaveTextContent('67890')
+    expect(screen.getByText('Minimal Album')).toBeInTheDocument()
+    fireEvent.keyDown(document, { key: 'ArrowLeft' })
+    expect(screen.getByTestId('nav-release-id')).toHaveTextContent('12345')
+  })
+
   it('calls onClose when backdrop is clicked', () => {
     render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
 

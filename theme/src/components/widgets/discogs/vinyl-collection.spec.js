@@ -4,6 +4,12 @@ import '@testing-library/jest-dom'
 import { act } from 'react'
 
 import VinylCollection from './vinyl-collection'
+import {
+  DISCOGS_SORT_ADDED,
+  DISCOGS_SORT_ALPHABETICAL,
+  DISCOGS_SORT_ALPHABETICAL_ARTIST,
+  DISCOGS_SORT_RELEASE_YEAR
+} from './sort-discogs-releases'
 
 const mockReleases = [
   {
@@ -385,6 +391,23 @@ describe('VinylCollection', () => {
 
       rerender(<VinylCollection isLoading={false} releases={manyReleases} />)
       expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+    })
+
+    it('reduces invalid current page after collection shrink', () => {
+      window.innerWidth = 1400
+      const manyReleases = createManyReleases(25)
+      const { rerender, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+
+      expect(screen.getByLabelText('Go to page 2')).toBeInTheDocument()
+
+      act(() => {
+        rerender(<VinylCollection isLoading={false} releases={createManyReleases(5)} />)
+      })
+
+      expect(screen.queryByLabelText('Go to page 2')).not.toBeInTheDocument()
+      expect(container.querySelectorAll('.vinyl-record')).toHaveLength(5)
     })
 
     it('keeps the current page when crossing 1280px if column count is unchanged', () => {
@@ -1299,39 +1322,105 @@ describe('VinylCollection', () => {
       }
     ]
 
-    it('renders sort radiogroup and default date-added mode', () => {
+    it('renders sort dropdown and default date-added mode', () => {
       render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
-      expect(screen.getByRole('radiogroup', { name: /sort vinyl collection/i })).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: /Sort collection by date added/i })).toHaveAttribute(
-        'aria-pressed',
-        'true'
-      )
+      const sortSelect = screen.getByRole('combobox', { name: /sort by/i })
+      expect(sortSelect).toBeInTheDocument()
+      expect(sortSelect).toHaveValue(DISCOGS_SORT_ADDED)
     })
 
     it('disables sort controls while loading with no releases', () => {
       render(<VinylCollection isLoading={true} releases={[]} />)
-      expect(screen.getByRole('button', { name: /Sort collection by date added/i })).toBeDisabled()
-      expect(screen.getByRole('button', { name: /Sort collection alphabetically by album title/i })).toBeDisabled()
-      expect(screen.getByRole('button', { name: /Sort collection by release year, newest first/i })).toBeDisabled()
+      expect(screen.getByRole('combobox', { name: /sort by/i })).toBeDisabled()
     })
 
-    it('reorders records alphabetically when Alphabetical is chosen', () => {
+    it('reorders records alphabetically when album title sort is chosen', () => {
       const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
       const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
       expect(firstTitle()).toMatch(/Zebra Strikes Back/)
 
-      fireEvent.click(screen.getByRole('button', { name: /Sort collection alphabetically by album title/i }))
+      fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
+        target: { value: DISCOGS_SORT_ALPHABETICAL }
+      })
       expect(firstTitle()).toMatch(/Alpha Dawn/)
     })
 
-    it('reorders records by release year newest first when Release Year is chosen', () => {
+    it('reorders records by artist A–Z when artist sort is chosen', () => {
+      const sameTitle = [
+        {
+          id: 1,
+          basicInformation: {
+            id: 1,
+            title: 'Same LP',
+            year: 2020,
+            artists: [{ name: 'Zebra' }],
+            cdnThumbUrl: 'https://example.com/z.jpg',
+            resourceUrl: 'https://discogs.com/release/1'
+          }
+        },
+        {
+          id: 2,
+          basicInformation: {
+            id: 2,
+            title: 'Same LP',
+            year: 2020,
+            artists: [{ name: 'Alpha' }],
+            cdnThumbUrl: 'https://example.com/a.jpg',
+            resourceUrl: 'https://discogs.com/release/2'
+          }
+        }
+      ]
+      const { container } = render(<VinylCollection isLoading={false} releases={sameTitle} />)
+      const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
+      expect(firstTitle()).toMatch(/Zebra/)
+
+      fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
+        target: { value: DISCOGS_SORT_ALPHABETICAL_ARTIST }
+      })
+      expect(firstTitle()).toMatch(/Alpha/)
+    })
+
+    it('reorders records by release year newest first when that sort is chosen', () => {
       const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
       const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
       expect(firstTitle()).toMatch(/Zebra Strikes Back/)
 
-      fireEvent.click(screen.getByRole('button', { name: /Sort collection by release year, newest first/i }))
+      fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
+        target: { value: DISCOGS_SORT_RELEASE_YEAR }
+      })
       expect(firstTitle()).toMatch(/Alpha Dawn/)
       expect(firstTitle()).toMatch(/2021/)
+    })
+
+    it('returns to grid layout from list using the Grid toggle', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a list/i }))
+      expect(container.querySelector('.vinyl-collection_list')).toBeTruthy()
+
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a grid/i }))
+      expect(container.querySelector('.vinyl-collection_grid')).toBeTruthy()
+    })
+
+    it('opens the modal from list view when Space activates a row', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a list/i }))
+      const row = container.querySelector('.vinyl-collection_list button[type="button"]')
+      expect(row).toBeTruthy()
+
+      fireEvent.keyDown(row, { key: ' ' })
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
+
+    it('shows list skeleton placeholders when loading clears releases but list view stays active', () => {
+      window.innerWidth = 1400
+      const { rerender, container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a list/i }))
+
+      rerender(<VinylCollection isLoading={true} releases={[]} />)
+
+      const listWrap = container.querySelector('.vinyl-collection_list')
+      expect(listWrap).toBeTruthy()
+      expect(listWrap.children.length).toBeGreaterThan(0)
     })
   })
 

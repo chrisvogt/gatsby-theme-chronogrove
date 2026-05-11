@@ -21,7 +21,7 @@ function formatCollectionAddedLocal(ms) {
   }
 }
 
-const DiscogsModal = ({ isOpen, onClose, release }) => {
+const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelease }) => {
   const { colorMode } = useThemeUI()
   const darkMode = isDarkMode(colorMode)
   const modalRef = useRef(null)
@@ -34,32 +34,59 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
     setImageLoaded(false)
   }, [coverImageUrl])
 
-  // Handle escape key
+  // Focus dialog when opening; restore focus only when closing (not when release changes while open)
   useEffect(() => {
-    const handleEscape = e => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose()
-      }
-    }
-
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
-      // Store the previously focused element
       previousActiveElement.current = document.activeElement
-      // Focus the modal
-      if (modalRef.current) {
-        modalRef.current.focus()
+      queueMicrotask(() => {
+        modalRef.current?.focus()
+      })
+    } else {
+      previousActiveElement.current?.focus?.()
+    }
+  }, [isOpen])
+
+  // Escape, ArrowLeft / ArrowRight (browse collection in current sort order)
+  useEffect(() => {
+    if (!isOpen) return
+
+    const onKeyDown = e => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
       }
+
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+
+      if (
+        typeof onSelectRelease !== 'function' ||
+        !Array.isArray(orderedReleases) ||
+        orderedReleases.length < 2 ||
+        !release
+      ) {
+        return
+      }
+
+      const el = e.target
+      const tag = el?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el?.closest?.('[contenteditable="true"]')) {
+        return
+      }
+
+      const idx = orderedReleases.findIndex(r => r && r.id === release.id)
+      if (idx === -1) return
+
+      const delta = e.key === 'ArrowRight' ? 1 : -1
+      const next = orderedReleases[idx + delta]
+      if (!next) return
+
+      e.preventDefault()
+      onSelectRelease(next)
     }
 
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      // Restore focus to the previously focused element
-      if (previousActiveElement.current) {
-        previousActiveElement.current.focus()
-      }
-    }
-  }, [isOpen, onClose])
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [isOpen, onClose, release, orderedReleases, onSelectRelease])
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -154,7 +181,9 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
           borderLeftColor: 'primary',
           backdropFilter: 'saturate(1.12) blur(20px)',
           WebkitBackdropFilter: 'saturate(1.12) blur(20px)',
+          width: ['100%', '100%', 'min(100%, 800px)'],
           maxWidth: ['95vw', '90vw', '800px'],
+          minWidth: 0,
           maxHeight: '90vh',
           overflow: 'auto',
           position: 'relative'
@@ -216,7 +245,9 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                 lineHeight: 1.15,
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
-                color: 'inherit'
+                color: 'inherit',
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word'
               }}
             >
               {title || 'Unknown Title'}
@@ -252,7 +283,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
           <div
             sx={{
               display: 'grid',
-              gridTemplateColumns: ['1fr', '1fr 1fr'],
+              gridTemplateColumns: ['1fr', '280px minmax(0, 1fr)'],
               gap: 4,
               alignItems: 'start'
             }}
@@ -330,7 +361,16 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
             </div>
 
             {/* Details */}
-            <div sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <div
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 3,
+                minWidth: 0,
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word'
+              }}
+            >
               {collectionAddedText && (
                 <div>
                   <Themed.h4 sx={{ margin: 0, fontSize: 2, color: darkMode ? '#a0aec0' : '#718096', mb: 1 }}>
@@ -378,7 +418,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                 <div
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: 'auto 1fr auto',
+                    gridTemplateColumns: 'auto minmax(0, 1fr) auto',
                     gap: 2,
                     padding: 3,
                     backgroundColor: insetHeaderBg,
@@ -390,7 +430,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                   }}
                 >
                   <div>Position</div>
-                  <div>Title</div>
+                  <div sx={{ minWidth: 0 }}>Title</div>
                   <div>Duration</div>
                 </div>
                 {tracklist.map((track, index) => (
@@ -398,12 +438,13 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                     key={index}
                     sx={{
                       display: 'grid',
-                      gridTemplateColumns: 'auto 1fr auto',
+                      gridTemplateColumns: 'auto minmax(0, 1fr) auto',
                       gap: 2,
                       padding: 3,
                       borderBottom: index < tracklist.length - 1 ? '1px solid' : 'none',
                       borderBottomColor: insetRule,
                       fontSize: 1,
+                      minWidth: 0,
                       '&:hover': {
                         backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.035)'
                       }
@@ -412,7 +453,16 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                     <div sx={{ fontWeight: 'bold', color: darkMode ? '#e2e8f0' : '#2d3748' }}>
                       {track.position || '—'}
                     </div>
-                    <div sx={{ color: darkMode ? '#e2e8f0' : '#2d3748' }}>{track.title || 'Unknown Title'}</div>
+                    <div
+                      sx={{
+                        color: darkMode ? '#e2e8f0' : '#2d3748',
+                        minWidth: 0,
+                        overflowWrap: 'break-word',
+                        wordBreak: 'break-word'
+                      }}
+                    >
+                      {track.title || 'Unknown Title'}
+                    </div>
                     <div sx={{ color: darkMode ? '#a0aec0' : '#718096', textAlign: 'right' }}>
                       {track.duration || '—'}
                     </div>

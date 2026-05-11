@@ -2,6 +2,7 @@
 
 export const DISCOGS_SORT_ADDED = 'added-to-collection'
 export const DISCOGS_SORT_ALPHABETICAL = 'alphabetical'
+export const DISCOGS_SORT_ALPHABETICAL_ARTIST = 'alphabetical-artist'
 export const DISCOGS_SORT_RELEASE_YEAR = 'release-year'
 
 export const DEFAULT_DISCOGS_SORT_MODE = DISCOGS_SORT_ADDED
@@ -50,6 +51,34 @@ function hasValidYear(y) {
 }
 
 /**
+ * Drops a leading English "The " from an artist filing string (case-insensitive), e.g.
+ * **`The Beatles`** sorts as **`Beatles`**. Applies only when **"The "** is at the **start** of the
+ * joined names (matches library-style filing).
+ *
+ * @param {string} joinedArtistNames
+ * @returns {string} trimmed, without leading article when present
+ */
+function stripLeadingArtistSortArticle(joinedArtistNames) {
+  let s = String(joinedArtistNames ?? '').trim()
+  if (!s) return ''
+  if (/^the\s+/i.test(s)) {
+    s = s.replace(/^the\s+/i, '').trim()
+  }
+  return s
+}
+
+function artistNamesSortKey(release) {
+  const artists = release?.basicInformation?.artists
+  if (!Array.isArray(artists)) return ''
+  const joined = artists
+    .map(a => String(a?.name ?? '').trim())
+    .filter(Boolean)
+    .join(', ')
+    .trim()
+  return stripLeadingArtistSortArticle(joined).toLocaleLowerCase()
+}
+
+/**
  * Release year from `basicInformation.year` (Discogs often sends a number or numeric string).
  *
  * @param {unknown} release
@@ -74,10 +103,12 @@ export function getDiscogsReleaseYear(release) {
  *   stay in stable catalog order alongside other undated items.
  * - **alphabetical**: sorts by album title (`basicInformation.title`) case-insensitively,
  *   ties by original position.
+ * - **alphabetical-artist**: sorts by joined artist names (same order as the UI line); a leading **`The `**
+ *   is ignored for filing ( **`The Beatles`** → **`Beatles`** ); case-insensitive; ties by original position.
  * - **release-year**: newest release year first; items without a parseable year follow, in catalog order among themselves.
  *
  * @param {object[]} releases
- * @param {typeof DISCOGS_SORT_ADDED | typeof DISCOGS_SORT_ALPHABETICAL | typeof DISCOGS_SORT_RELEASE_YEAR | string} sortMode
+ * @param {typeof DISCOGS_SORT_ADDED | typeof DISCOGS_SORT_ALPHABETICAL | typeof DISCOGS_SORT_ALPHABETICAL_ARTIST | typeof DISCOGS_SORT_RELEASE_YEAR | string} sortMode
  * @returns {object[]}
  */
 export function sortDiscogsReleases(releases, sortMode) {
@@ -90,6 +121,16 @@ export function sortDiscogsReleases(releases, sortMode) {
       const tA = (a.r.basicInformation?.title ?? '').trim().toLocaleLowerCase()
       const tB = (b.r.basicInformation?.title ?? '').trim().toLocaleLowerCase()
       const cmp = tA.localeCompare(tB, undefined, { sensitivity: 'base', numeric: true })
+      return cmp !== 0 ? cmp : a.index - b.index
+    })
+    return tagged.map(({ r }) => r)
+  }
+
+  if (sortMode === DISCOGS_SORT_ALPHABETICAL_ARTIST) {
+    tagged.sort((a, b) => {
+      const artistsA = artistNamesSortKey(a.r)
+      const artistsB = artistNamesSortKey(b.r)
+      const cmp = artistsA.localeCompare(artistsB, undefined, { sensitivity: 'base', numeric: true })
       return cmp !== 0 ? cmp : a.index - b.index
     })
     return tagged.map(({ r }) => r)

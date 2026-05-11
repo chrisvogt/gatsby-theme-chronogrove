@@ -87,43 +87,56 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
           class="css-1vz564k"
         >
           <div
-            aria-label="Sort vinyl collection"
-            class="css-1l647io"
-            role="radiogroup"
+            class="css-iz57sm"
           >
-            <span
-              class="css-128a175"
-              id="vinyl-collection-sort-label"
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
             >
-              Sort:
-            </span>
-            <button
-              aria-label="Sort collection by date added"
-              aria-pressed="true"
-              class="css-58fzx8"
-              disabled=""
-              type="button"
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
             >
-              Date added
-            </button>
-            <button
-              aria-label="Sort collection alphabetically by album title"
-              aria-pressed="false"
-              class="css-1dk5zix"
-              disabled=""
-              type="button"
-            >
-              Alphabetical
-            </button>
-            <button
-              aria-label="Sort collection by release year, newest first"
-              aria-pressed="false"
-              class="css-1dk5zix"
-              disabled=""
-              type="button"
-            >
-              Release Year
-            </button>
+              <select
+                class="css-vnlcr3"
+                disabled=""
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
           </div>
           <div
             aria-label="Vinyl collection layout"
@@ -271,40 +284,55 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
           class="css-1vz564k"
         >
           <div
-            aria-label="Sort vinyl collection"
-            class="css-1l647io"
-            role="radiogroup"
+            class="css-iz57sm"
           >
-            <span
-              class="css-128a175"
-              id="vinyl-collection-sort-label"
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
             >
-              Sort:
-            </span>
-            <button
-              aria-label="Sort collection by date added"
-              aria-pressed="true"
-              class="css-1oc3a3t"
-              type="button"
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
             >
-              Date added
-            </button>
-            <button
-              aria-label="Sort collection alphabetically by album title"
-              aria-pressed="false"
-              class="css-1lig866"
-              type="button"
-            >
-              Alphabetical
-            </button>
-            <button
-              aria-label="Sort collection by release year, newest first"
-              aria-pressed="false"
-              class="css-1lig866"
-              type="button"
-            >
-              Release Year
-            </button>
+              <select
+                class="css-1dw0swc"
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
           </div>
           <div
             aria-label="Vinyl collection layout"
@@ -540,43 +568,56 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
           class="css-1vz564k"
         >
           <div
-            aria-label="Sort vinyl collection"
-            class="css-1l647io"
-            role="radiogroup"
+            class="css-iz57sm"
           >
-            <span
-              class="css-128a175"
-              id="vinyl-collection-sort-label"
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
             >
-              Sort:
-            </span>
-            <button
-              aria-label="Sort collection by date added"
-              aria-pressed="true"
-              class="css-58fzx8"
-              disabled=""
-              type="button"
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
             >
-              Date added
-            </button>
-            <button
-              aria-label="Sort collection alphabetically by album title"
-              aria-pressed="false"
-              class="css-1dk5zix"
-              disabled=""
-              type="button"
-            >
-              Alphabetical
-            </button>
-            <button
-              aria-label="Sort collection by release year, newest first"
-              aria-pressed="false"
-              class="css-1dk5zix"
-              disabled=""
-              type="button"
-            >
-              Release Year
-            </button>
+              <select
+                class="css-vnlcr3"
+                disabled=""
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
           </div>
           <div
             aria-label="Vinyl collection layout"

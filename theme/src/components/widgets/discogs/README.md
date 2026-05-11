@@ -13,7 +13,7 @@ A widget that displays a Discogs vinyl collection as circular records with hover
 - **Pagination**: Shows 2 rows per page (items per page = columns × 2, e.g. 10 records at the widest breakpoint using 5 columns) for better performance
 - **Swipe/Drag Support**: Mobile users can swipe left/right, desktop users can drag with mouse
 - **Theme-Consistent Controls**: Pagination buttons match your site's design system
-- **Sort**: Visitors can switch among **order added to collection** (default, newest first when `dateAdded` is present), **alphabetical by album title**, and **release year** (`basicInformation.year`, **newest year first**; missing years sort after dated items). Sort controls read **Date added**, **Alphabetical**, and **Release Year**.
+- **Sort**: One **dropdown** (native `<select>` via Theme UI **`Select`**) labeled **Sort by** with **date added** (default, newest first when `dateAdded` is present), **release year** (`basicInformation.year`, newest first; unknown years after known), **album title (A–Z)**, and **artist (A–Z)** (joined like the list/grid line; **leading “The ”** ignored for filing). Mode values live in **`sort-discogs-releases.js`**.
 - **Layout**: Visitors can switch between **grid** (default) and **list**. List mode is a **flat register / panel**: one tight outer border, hairline dividers between rows, no elevated cards; miniature vinyl artwork and **click / Enter** still open the details **modal** like the grid.
 - **List pagination**: **`items per page = columns × 2`** (aligned with **grid** density, e.g. **10** per slide from 1024px–1279px at **5 columns**).
 - Responsive grid/list layout across screen sizes
@@ -78,8 +78,8 @@ Discogs may send **`basicInformation.year: 0`** (or other non-four-digit values)
 
 - `discogs-widget.js` - Main widget component with data fetching and layout
 - `vinyl-collection.js` - Renders the vinyl records in grid or bordered list “register” layouts, swipe carousel, pagination, sort, and view controls.
-- `discogs-modal.js` - Overlay and frosted detail panel aligned with list-register styling (`backdrop-filter`, translucent surfaces).
-- `sort-discogs-releases.js` - Client-side sort by collection date (`dateAdded` and aliases), **`basicInformation.year`** (release year), or album title.
+- `discogs-modal.js` - Overlay and frosted detail panel aligned with list-register styling (`backdrop-filter`, translucent surfaces). With **`orderedReleases`** + **`onSelectRelease`** from the collection, **Arrow Left** / **Arrow Right** move to the previous or next release in the **current sorted order** (clamped at the ends).
+- `sort-discogs-releases.js` - Client-side sort by collection date (`dateAdded` and aliases), **release year**, **album title (A–Z)**, or **artist (A–Z)**.
 - `vinyl-pagination.js` - Pagination component with swipe/drag support and theme-consistent controls
 - `index.js` - Export file for the widget
 
