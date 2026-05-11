@@ -4,7 +4,7 @@
 
 ### `gatsby-theme-chronogrove` — Discogs modal & vinyl sort labeling
 
-- **Discogs modal** (`discogs-modal.js`): Redesigned **header** with **album title**, a single meta line (**artist · release year**), light divider beneath, and themed foreground/muted colors in **light/dark** mode; **Added to collection** shows a **locale date** (no time) when `dateAdded` or known aliases resolve via **`getDiscogsCollectionAddedMs`** (**`sort-discogs-releases.js`**).
+- **Discogs modal** (`discogs-modal.js`): Redesigned **header** with **album title**, a single meta line (**artist · release year**), light divider beneath, and themed foreground/muted colors in **light/dark** mode; **Added to collection** shows a **locale date** (no time) when `dateAdded` or known aliases resolve via **`getDiscogsCollectionAddedMs`** (**`sort-discogs-releases.js`**). **Surfaces** match the vinyl **list register**: translucent panel **`rgba(0,0,0,0.18)`** / **`rgba(255,255,255,0.92)`**, hairline borders, **frosted glass** (`backdrop-filter` blur + saturation), lighter **scrim** behind the dialog; tracklist and chrome use the same subtle **inset** translucency and row dividers as list rows.
 - **Sort controls**: The album-year sort toggle label is **Release Year** for clarity (**`vinyl-collection.js`**).
 - **Tests / snapshots**: **`discogs-modal.spec.js`**, **`discogs-widget.spec.js`**.
 

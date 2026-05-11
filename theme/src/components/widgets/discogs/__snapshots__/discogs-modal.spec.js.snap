@@ -5,7 +5,7 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
   <div
     aria-labelledby="modal-title"
     aria-modal="true"
-    class="css-1f85zto"
+    class="css-15rnqx1"
     role="dialog"
   >
     <button
@@ -13,12 +13,12 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
       class="css-ugcw57"
     />
     <div
-      class="css-16e73id"
+      class="css-179bnwn"
       tabindex="-1"
     >
       <button
         aria-label="Close modal"
-        class="css-1eakr7c"
+        class="css-1i54b0d"
       >
         <svg
           aria-hidden="true"
@@ -74,7 +74,7 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
             class="css-byjint"
           >
             <div
-              class="css-cq2t9"
+              class="css-1vw28dv"
             >
               No Image Available
             </div>
@@ -129,10 +129,10 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
             Tracklist
           </h3>
           <div
-            class="css-1lfltae"
+            class="css-1okk1ph"
           >
             <div
-              class="css-17acj12"
+              class="css-11unurs"
             >
               <div>
                 Position
@@ -145,7 +145,7 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
               </div>
             </div>
             <div
-              class="css-ofyc7f"
+              class="css-6yskvp"
             >
               <div
                 class="css-uz5es8"
@@ -164,7 +164,7 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
               </div>
             </div>
             <div
-              class="css-ofyc7f"
+              class="css-6yskvp"
             >
               <div
                 class="css-uz5es8"
@@ -183,7 +183,7 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
               </div>
             </div>
             <div
-              class="css-ofyc7f"
+              class="css-6yskvp"
             >
               <div
                 class="css-uz5es8"
@@ -202,7 +202,7 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
               </div>
             </div>
             <div
-              class="css-kcs0kp"
+              class="css-7aj3hz"
             >
               <div
                 class="css-uz5es8"
@@ -223,10 +223,10 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
           </div>
         </div>
         <div
-          class="css-1y1q5jg"
+          class="css-y1fjpx"
         >
           <button
-            class="css-1faxcgi"
+            class="css-60qz6r"
           >
             Close
           </button>
@@ -263,7 +263,7 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
   <div
     aria-labelledby="modal-title"
     aria-modal="true"
-    class="css-1f85zto"
+    class="css-15rnqx1"
     role="dialog"
   >
     <button
@@ -271,12 +271,12 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
       class="css-ugcw57"
     />
     <div
-      class="css-37sdma"
+      class="css-6mycpe"
       tabindex="-1"
     >
       <button
         aria-label="Close modal"
-        class="css-103c3k9"
+        class="css-1fux1zn"
       >
         <svg
           aria-hidden="true"
@@ -395,10 +395,10 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
             Tracklist
           </h3>
           <div
-            class="css-1t95wsc"
+            class="css-18jtjg0"
           >
             <div
-              class="css-100y9xo"
+              class="css-cyiutc"
             >
               <div>
                 Position
@@ -411,7 +411,7 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
               </div>
             </div>
             <div
-              class="css-6o8al8"
+              class="css-un23o4"
             >
               <div
                 class="css-x52y0a"
@@ -430,7 +430,7 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
               </div>
             </div>
             <div
-              class="css-6o8al8"
+              class="css-un23o4"
             >
               <div
                 class="css-x52y0a"
@@ -449,7 +449,7 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
               </div>
             </div>
             <div
-              class="css-6o8al8"
+              class="css-un23o4"
             >
               <div
                 class="css-x52y0a"
@@ -468,7 +468,7 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
               </div>
             </div>
             <div
-              class="css-1546smc"
+              class="css-yms1kp"
             >
               <div
                 class="css-x52y0a"
@@ -489,10 +489,10 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
           </div>
         </div>
         <div
-          class="css-1nr862"
+          class="css-p1jsrd"
         >
           <button
-            class="css-1jogdc3"
+            class="css-sgh1bq"
           >
             Close
           </button>
@@ -529,7 +529,7 @@ exports[`DiscogsModal handles release with empty arrays 1`] = `
   <div
     aria-labelledby="modal-title"
     aria-modal="true"
-    class="css-1f85zto"
+    class="css-15rnqx1"
     role="dialog"
   >
     <button
@@ -537,12 +537,12 @@ exports[`DiscogsModal handles release with empty arrays 1`] = `
       class="css-ugcw57"
     />
     <div
-      class="css-16e73id"
+      class="css-179bnwn"
       tabindex="-1"
     >
       <button
         aria-label="Close modal"
-        class="css-1eakr7c"
+        class="css-1i54b0d"
       >
         <svg
           aria-hidden="true"
@@ -598,7 +598,7 @@ exports[`DiscogsModal handles release with empty arrays 1`] = `
             class="css-byjint"
           >
             <div
-              class="css-cq2t9"
+              class="css-1vw28dv"
             >
               No Image Available
             </div>
@@ -608,10 +608,10 @@ exports[`DiscogsModal handles release with empty arrays 1`] = `
           />
         </div>
         <div
-          class="css-1y1q5jg"
+          class="css-y1fjpx"
         >
           <button
-            class="css-1faxcgi"
+            class="css-60qz6r"
           >
             Close
           </button>
@@ -648,7 +648,7 @@ exports[`DiscogsModal handles release with missing basicInformation 1`] = `
   <div
     aria-labelledby="modal-title"
     aria-modal="true"
-    class="css-1f85zto"
+    class="css-15rnqx1"
     role="dialog"
   >
     <button
@@ -656,12 +656,12 @@ exports[`DiscogsModal handles release with missing basicInformation 1`] = `
       class="css-ugcw57"
     />
     <div
-      class="css-16e73id"
+      class="css-179bnwn"
       tabindex="-1"
     >
       <button
         aria-label="Close modal"
-        class="css-1eakr7c"
+        class="css-1i54b0d"
       >
         <svg
           aria-hidden="true"
@@ -706,7 +706,7 @@ exports[`DiscogsModal handles release with missing basicInformation 1`] = `
             class="css-byjint"
           >
             <div
-              class="css-cq2t9"
+              class="css-1vw28dv"
             >
               No Image Available
             </div>
@@ -716,10 +716,10 @@ exports[`DiscogsModal handles release with missing basicInformation 1`] = `
           />
         </div>
         <div
-          class="css-1y1q5jg"
+          class="css-y1fjpx"
         >
           <button
-            class="css-1faxcgi"
+            class="css-60qz6r"
           >
             Close
           </button>
@@ -735,7 +735,7 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
   <div
     aria-labelledby="modal-title"
     aria-modal="true"
-    class="css-1f85zto"
+    class="css-15rnqx1"
     role="dialog"
   >
     <button
@@ -743,12 +743,12 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
       class="css-ugcw57"
     />
     <div
-      class="css-16e73id"
+      class="css-179bnwn"
       tabindex="-1"
     >
       <button
         aria-label="Close modal"
-        class="css-1eakr7c"
+        class="css-1i54b0d"
       >
         <svg
           aria-hidden="true"
@@ -867,10 +867,10 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
             Tracklist
           </h3>
           <div
-            class="css-1lfltae"
+            class="css-1okk1ph"
           >
             <div
-              class="css-17acj12"
+              class="css-11unurs"
             >
               <div>
                 Position
@@ -883,7 +883,7 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
               </div>
             </div>
             <div
-              class="css-ofyc7f"
+              class="css-6yskvp"
             >
               <div
                 class="css-uz5es8"
@@ -902,7 +902,7 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
               </div>
             </div>
             <div
-              class="css-ofyc7f"
+              class="css-6yskvp"
             >
               <div
                 class="css-uz5es8"
@@ -921,7 +921,7 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
               </div>
             </div>
             <div
-              class="css-ofyc7f"
+              class="css-6yskvp"
             >
               <div
                 class="css-uz5es8"
@@ -940,7 +940,7 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
               </div>
             </div>
             <div
-              class="css-kcs0kp"
+              class="css-7aj3hz"
             >
               <div
                 class="css-uz5es8"
@@ -961,10 +961,10 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
           </div>
         </div>
         <div
-          class="css-1y1q5jg"
+          class="css-y1fjpx"
         >
           <button
-            class="css-1faxcgi"
+            class="css-60qz6r"
           >
             Close
           </button>
@@ -1001,7 +1001,7 @@ exports[`DiscogsModal renders modal with minimal release data 1`] = `
   <div
     aria-labelledby="modal-title"
     aria-modal="true"
-    class="css-1f85zto"
+    class="css-15rnqx1"
     role="dialog"
   >
     <button
@@ -1009,12 +1009,12 @@ exports[`DiscogsModal renders modal with minimal release data 1`] = `
       class="css-ugcw57"
     />
     <div
-      class="css-16e73id"
+      class="css-179bnwn"
       tabindex="-1"
     >
       <button
         aria-label="Close modal"
-        class="css-1eakr7c"
+        class="css-1i54b0d"
       >
         <svg
           aria-hidden="true"
@@ -1070,7 +1070,7 @@ exports[`DiscogsModal renders modal with minimal release data 1`] = `
             class="css-byjint"
           >
             <div
-              class="css-cq2t9"
+              class="css-1vw28dv"
             >
               No Image Available
             </div>
@@ -1080,10 +1080,10 @@ exports[`DiscogsModal renders modal with minimal release data 1`] = `
           />
         </div>
         <div
-          class="css-1y1q5jg"
+          class="css-y1fjpx"
         >
           <button
-            class="css-1faxcgi"
+            class="css-60qz6r"
           >
             Close
           </button>

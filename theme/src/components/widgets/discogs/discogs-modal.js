@@ -90,8 +90,14 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   const styleList = (styles || []).join(', ')
   const collectionAddedText = formatCollectionAddedLocal(getDiscogsCollectionAddedMs(release))
 
+  /** Match vinyl list register (`vinyl-collection_list`): frosted translucent panel + hairline border */
+  const listPanelBg = darkMode ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.92)'
+  const listPanelBorder = darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)'
   const muted = darkMode ? '#a0aec0' : '#718096'
   const headerRule = darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'
+  const insetRule = darkMode ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.075)'
+  const insetSurface = darkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.55)'
+  const insetHeaderBg = darkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.035)'
   const yearStr =
     year != null && year !== '' ? (typeof year === 'number' ? String(Math.trunc(year)) : String(year).trim()) : ''
   const showYear = Boolean(yearStr)
@@ -104,14 +110,14 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.45)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
         padding: 3,
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(4px)'
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)'
       }}
       role='dialog'
       aria-modal='true'
@@ -138,14 +144,16 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         ref={modalRef}
         tabIndex={-1}
         sx={{
-          backgroundColor: darkMode ? '#252e3c' : 'white',
+          backgroundColor: listPanelBg,
           color: darkMode ? '#fff' : '#000',
-          borderRadius: '10px',
-          boxShadow: 'xl',
+          borderRadius: 2,
+          boxShadow: ['md', null, 'lg'],
           border: '1px solid',
-          borderColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+          borderColor: listPanelBorder,
           borderLeft: '2px solid',
           borderLeftColor: 'primary',
+          backdropFilter: 'saturate(1.12) blur(20px)',
+          WebkitBackdropFilter: 'saturate(1.12) blur(20px)',
           maxWidth: ['95vw', '90vw', '800px'],
           maxHeight: '90vh',
           overflow: 'auto',
@@ -162,8 +170,9 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
             right: 3,
             background: 'none',
             border: '1px solid',
-            borderColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+            borderColor: listPanelBorder,
             color: darkMode ? '#fff' : '#000',
+            backgroundColor: darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.45)',
             cursor: 'pointer',
             padding: 2,
             borderRadius: '50%',
@@ -175,7 +184,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
             transition: 'all 0.2s ease',
             zIndex: 1,
             '&:hover': {
-              backgroundColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+              backgroundColor: darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)',
               transform: 'scale(1.1)',
               borderColor: 'primary'
             },
@@ -306,7 +315,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                   sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: darkMode ? '#2d3748' : '#f7fafc',
+                    backgroundColor: insetSurface,
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
@@ -359,11 +368,11 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
               <Themed.h3 sx={{ margin: 0, fontSize: 3, mb: 3 }}>Tracklist</Themed.h3>
               <div
                 sx={{
-                  backgroundColor: darkMode ? '#2d3748' : '#f7fafc',
+                  backgroundColor: insetSurface,
                   borderRadius: 2,
                   overflow: 'hidden',
                   border: '1px solid',
-                  borderColor: darkMode ? '#3a4a5c' : '#e1e5e9'
+                  borderColor: listPanelBorder
                 }}
               >
                 <div
@@ -372,9 +381,9 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                     gridTemplateColumns: 'auto 1fr auto',
                     gap: 2,
                     padding: 3,
-                    backgroundColor: darkMode ? '#1a202c' : '#edf2f7',
+                    backgroundColor: insetHeaderBg,
                     borderBottom: '1px solid',
-                    borderBottomColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+                    borderBottomColor: insetRule,
                     fontSize: 1,
                     fontWeight: 'bold',
                     color: darkMode ? '#a0aec0' : '#718096'
@@ -393,10 +402,10 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                       gap: 2,
                       padding: 3,
                       borderBottom: index < tracklist.length - 1 ? '1px solid' : 'none',
-                      borderBottomColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+                      borderBottomColor: insetRule,
                       fontSize: 1,
                       '&:hover': {
-                        backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'
+                        backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.035)'
                       }
                     }}
                   >
@@ -422,7 +431,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
               mt: 4,
               pt: 4,
               borderTop: '1px solid',
-              borderTopColor: darkMode ? '#3a4a5c' : '#e1e5e9'
+              borderTopColor: headerRule
             }}
           >
             <button
@@ -432,15 +441,15 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                 backgroundColor: 'transparent',
                 color: darkMode ? '#a0aec0' : '#718096',
                 border: '1px solid',
-                borderColor: darkMode ? '#3a4a5c' : '#e1e5e9',
-                borderRadius: '10px',
+                borderColor: listPanelBorder,
+                borderRadius: 2,
                 fontSize: 1,
                 fontWeight: 'bold',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 '&:hover': {
-                  backgroundColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
-                  borderColor: darkMode ? '#a0aec0' : '#718096'
+                  backgroundColor: darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.045)',
+                  borderColor: muted
                 },
                 '&:focus': {
                   outline: '2px solid',
