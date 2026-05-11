@@ -24,11 +24,11 @@ catalog:
   gatsby-plugin-robots-txt: ^1.8.0
   gatsby-plugin-sitemap: ^6.16.0
   lightgallery: ^2.9.0
-  next: ^16.2.3
-  prettier: ^3.8.2
-  react: ^19.2.5
-  react-dom: ^19.2.5
+  next: ^16.2.6
+  prettier: ^3.8.3
+  react: ^19.2.6
+  react-dom: ^19.2.6
   react-intersection-observer: ^10.0.3
   react-photo-gallery: ^8.0.0
   theme-ui: ^0.17.4
-  three: ^0.183.2
+  three: ^0.184.0
