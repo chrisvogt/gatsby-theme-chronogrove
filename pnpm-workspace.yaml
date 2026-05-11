@@ -31,4 +31,4 @@ catalog:
   react-intersection-observer: ^10.0.3
   react-photo-gallery: ^8.0.0
   theme-ui: ^0.17.4
-  three: ^0.183.2
+  three: ^0.184.0

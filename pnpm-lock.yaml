@@ -73,8 +73,8 @@ catalogs:
       specifier: ^0.17.4
       version: 0.17.4
     three:
-      specifier: ^0.183.2
-      version: 0.183.2
+      specifier: ^0.184.0
+      version: 0.184.0
 
 overrides:
   lodash: ^4.18.1
@@ -213,7 +213,7 @@ importers:
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
       three:
         specifier: 'catalog:'
-        version: 0.183.2
+        version: 0.184.0
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -421,7 +421,7 @@ importers:
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
       three:
         specifier: 'catalog:'
-        version: 0.183.2
+        version: 0.184.0
       vanilla-tilt:
         specifier: ^1.8.1
         version: 1.8.1
@@ -8761,8 +8761,8 @@ packages:
       '@emotion/react': '>=11.1.1'
       react: '>=18'
 
-  three@0.183.2:
-    resolution: {integrity: sha512-di3BsL2FEQ1PA7Hcvn4fyJOlxRRgFYBpMTcyOgkwJIaDOdJMebEFPA+t98EvjuljDx4hNulAGwF6KIjtwI5jgQ==}
+  three@0.184.0:
+    resolution: {integrity: sha512-wtTRjG92pM5eUg/KuUnHsqSAlPM296brTOcLgMRqEeylYTh/CdtvKUvCyyCQTzFuStieWxvZb8mVTMvdPyUpxg==}
 
   through2@0.4.2:
     resolution: {integrity: sha512-45Llu+EwHKtAZYTPPVn3XZHBgakWMN3rokhEv5hu596XP+cNgplMg+Gj+1nmAvj+L0K7+N49zBKx5rah5u0QIQ==}
@@ -20537,7 +20537,7 @@ snapshots:
       '@theme-ui/theme-provider': 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
       react: 19.2.5
 
-  three@0.183.2: {}
+  three@0.184.0: {}
 
   through2@0.4.2:
     dependencies:
