@@ -1,9 +1,15 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { act } from 'react'
 
 import VinylCollection from './vinyl-collection'
+import {
+  DISCOGS_SORT_ADDED,
+  DISCOGS_SORT_ALPHABETICAL,
+  DISCOGS_SORT_ALPHABETICAL_ARTIST,
+  DISCOGS_SORT_RELEASE_YEAR
+} from './sort-discogs-releases'
 
 const mockReleases = [
   {
@@ -30,7 +36,7 @@ const mockReleases = [
   }
 ]
 
-// Create enough releases to test pagination (more than 18 items)
+// Enough releases for multi-page pagination at typical breakpoints (25 items)
 const createManyReleases = count => {
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
@@ -90,6 +96,35 @@ describe('VinylCollection', () => {
     const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
     expect(container.querySelectorAll('.vinyl-record')).toHaveLength(25)
     expect(screen.getByText(/Page 1 of/)).toBeInTheDocument()
+  })
+
+  it('list layout exposes each release as an accessible row control', () => {
+    render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+    fireEvent.click(screen.getByRole('button', { name: /show vinyl collection as a list/i }))
+
+    expect(
+      screen.getByRole('button', {
+        name: /The Rise & Fall Of A Midwest Princess \(2023\) - Chappell Roan\. Click to view details\./i
+      })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', {
+        name: /Brat And It's Completely Different \(2025\) - Charli XCX\. Click to view details\./i
+      })
+    ).toBeInTheDocument()
+  })
+
+  it('list layout matches grid slide density and stays paginated', () => {
+    window.innerWidth = 1100
+    const { container } = render(<VinylCollection isLoading={false} releases={createManyReleases(25)} />)
+
+    expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: /show vinyl collection as a list/i }))
+
+    expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+    expect(container.querySelectorAll('.vinyl-collection_list button[type="button"]')).toHaveLength(25)
   })
 
   it('handles releases with missing basicInformation', () => {
@@ -334,28 +369,62 @@ describe('VinylCollection', () => {
 
       window.innerWidth = 500
       const { rerender } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
-      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 5')).toBeInTheDocument()
 
       window.innerWidth = 700
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
-      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 4')).toBeInTheDocument()
 
       window.innerWidth = 900
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
-      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 4')).toBeInTheDocument()
 
       window.innerWidth = 1400
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
-      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
 
       rerender(<VinylCollection isLoading={false} releases={manyReleases} />)
-      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+    })
+
+    it('reduces invalid current page after collection shrink', () => {
+      window.innerWidth = 1400
+      const manyReleases = createManyReleases(25)
+      const { rerender, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+
+      expect(screen.getByLabelText('Go to page 2')).toBeInTheDocument()
+
+      act(() => {
+        rerender(<VinylCollection isLoading={false} releases={createManyReleases(5)} />)
+      })
+
+      expect(screen.queryByLabelText('Go to page 2')).not.toBeInTheDocument()
+      expect(container.querySelectorAll('.vinyl-record')).toHaveLength(5)
+    })
+
+    it('keeps the current page when crossing 1280px if column count is unchanged', () => {
+      const manyReleases = createManyReleases(25)
+
+      window.innerWidth = 1100 // breakpoint index 3: 5 columns, 10 items/page → 3 pages for 25 items
+      render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 3')).toBeInTheDocument()
+
+      window.innerWidth = 1400 // index 4: still 5 columns — must not reset pagination to page 1
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+
+      expect(screen.getByText('Page 2 of 3')).toBeInTheDocument()
     })
 
     describe('when transition timers run (fake timers)', () => {
@@ -380,14 +449,14 @@ describe('VinylCollection', () => {
         act(() => {
           jest.advanceTimersByTime(300)
         })
-        expect(screen.getByText('Page 3 of 3')).toBeInTheDocument()
+        expect(screen.getByText('Page 3 of 5')).toBeInTheDocument()
 
         window.innerWidth = 1400
         act(() => {
           window.dispatchEvent(new Event('resize'))
         })
 
-        expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+        expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
       })
     })
   })
@@ -525,8 +594,8 @@ describe('VinylCollection', () => {
         const manyReleases = createManyReleases(25)
         const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
-        // Navigate to last page
-        const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
+        // Navigate to last page (1024px default: 5 cols × 2 rows = 10/page → 3 pages for 25 items)
+        const lastPageButton = container.querySelector('button[aria-label*="page 3"]')
         if (lastPageButton) {
           fireEvent.click(lastPageButton)
 
@@ -552,7 +621,7 @@ describe('VinylCollection', () => {
         const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
         // Navigate to last page
-        const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
+        const lastPageButton = container.querySelector('button[aria-label*="page 3"]')
         if (lastPageButton) {
           fireEvent.click(lastPageButton)
 
@@ -788,7 +857,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingTitle} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Unknown (2023) - Artist. Click to view details.'
       )
@@ -805,7 +874,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingYear} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (Unknown) - Artist. Click to view details.'
       )
@@ -823,7 +892,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtists} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -843,7 +912,10 @@ describe('VinylCollection', () => {
         }
       ]
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithMissingResourceUrl} />)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
@@ -858,7 +930,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingProperties} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (Unknown) - Unknown Artist. Click to view details.'
       )
@@ -876,7 +948,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithNullArtists} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -894,7 +966,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtists} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -912,7 +984,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingArtistName} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -930,7 +1002,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtistName} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -948,7 +1020,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtistName} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -1018,7 +1090,10 @@ describe('VinylCollection', () => {
       const { container } = render(
         <VinylCollection isLoading={false} releases={releasesWithMissingResourceUrlProperty} />
       )
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
@@ -1036,7 +1111,10 @@ describe('VinylCollection', () => {
         }
       ]
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedResourceUrl} />)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
@@ -1054,7 +1132,10 @@ describe('VinylCollection', () => {
         }
       ]
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyResourceUrl} />)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
   })
@@ -1187,23 +1268,21 @@ describe('VinylCollection', () => {
 
   describe('Pagination behavior tests', () => {
     it('displays all items when last page has fewer items than a complete row', () => {
-      // Test case: 25 items, 6 columns (18 items per page)
-      // Should display all 25 items across 2 pages (18 + 7 items)
+      // Test case: 25 items @ 1024px → 5 columns × 2 rows = 10 per page → 3 pages (10 + 10 + 5)
       const releasesWithPartialLastPage = createManyReleases(25)
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithPartialLastPage} />)
 
-      // Should have 2 page number buttons (plus prev/next buttons = 4 total)
+      // Should have 3 page number buttons (plus prev/next)
       const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
-      expect(paginationButtons).toHaveLength(2)
+      expect(paginationButtons).toHaveLength(3)
 
-      // All 25 vinyl items should be rendered (across both pages)
+      // All 25 vinyl items should be rendered (across all pages)
       const vinylItems = container.querySelectorAll('.vinyl-record')
       expect(vinylItems).toHaveLength(25)
     })
 
     it('handles edge case with fewer items than one page', () => {
-      // Test case: 5 items, 6 columns (18 items per page)
-      // Should have 1 page with all 5 items
+      // Test case: 5 items — still a single page at default width
       const releasesFewItems = createManyReleases(5)
       const { container } = render(<VinylCollection isLoading={false} releases={releasesFewItems} />)
 
@@ -1214,6 +1293,134 @@ describe('VinylCollection', () => {
       // All 5 vinyl items should be rendered
       const vinylItems = container.querySelectorAll('.vinyl-record')
       expect(vinylItems).toHaveLength(5)
+    })
+  })
+
+  describe('Collection sort controls', () => {
+    const sortMockReleases = [
+      {
+        id: 1,
+        basicInformation: {
+          id: 1,
+          title: 'Zebra Strikes Back',
+          year: 2020,
+          artists: [{ name: 'Z' }],
+          cdnThumbUrl: 'https://example.com/z.jpg',
+          resourceUrl: 'https://discogs.com/release/1'
+        }
+      },
+      {
+        id: 2,
+        basicInformation: {
+          id: 2,
+          title: 'Alpha Dawn',
+          year: 2021,
+          artists: [{ name: 'A' }],
+          cdnThumbUrl: 'https://example.com/a.jpg',
+          resourceUrl: 'https://discogs.com/release/2'
+        }
+      }
+    ]
+
+    it('renders sort dropdown and default date-added mode', () => {
+      render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      const sortSelect = screen.getByRole('combobox', { name: /sort by/i })
+      expect(sortSelect).toBeInTheDocument()
+      expect(sortSelect).toHaveValue(DISCOGS_SORT_ADDED)
+    })
+
+    it('disables sort controls while loading with no releases', () => {
+      render(<VinylCollection isLoading={true} releases={[]} />)
+      expect(screen.getByRole('combobox', { name: /sort by/i })).toBeDisabled()
+    })
+
+    it('reorders records alphabetically when album title sort is chosen', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
+      expect(firstTitle()).toMatch(/Zebra Strikes Back/)
+
+      fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
+        target: { value: DISCOGS_SORT_ALPHABETICAL }
+      })
+      expect(firstTitle()).toMatch(/Alpha Dawn/)
+    })
+
+    it('reorders records by artist A–Z when artist sort is chosen', () => {
+      const sameTitle = [
+        {
+          id: 1,
+          basicInformation: {
+            id: 1,
+            title: 'Same LP',
+            year: 2020,
+            artists: [{ name: 'Zebra' }],
+            cdnThumbUrl: 'https://example.com/z.jpg',
+            resourceUrl: 'https://discogs.com/release/1'
+          }
+        },
+        {
+          id: 2,
+          basicInformation: {
+            id: 2,
+            title: 'Same LP',
+            year: 2020,
+            artists: [{ name: 'Alpha' }],
+            cdnThumbUrl: 'https://example.com/a.jpg',
+            resourceUrl: 'https://discogs.com/release/2'
+          }
+        }
+      ]
+      const { container } = render(<VinylCollection isLoading={false} releases={sameTitle} />)
+      const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
+      expect(firstTitle()).toMatch(/Zebra/)
+
+      fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
+        target: { value: DISCOGS_SORT_ALPHABETICAL_ARTIST }
+      })
+      expect(firstTitle()).toMatch(/Alpha/)
+    })
+
+    it('reorders records by release year newest first when that sort is chosen', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
+      expect(firstTitle()).toMatch(/Zebra Strikes Back/)
+
+      fireEvent.change(screen.getByRole('combobox', { name: /sort by/i }), {
+        target: { value: DISCOGS_SORT_RELEASE_YEAR }
+      })
+      expect(firstTitle()).toMatch(/Alpha Dawn/)
+      expect(firstTitle()).toMatch(/2021/)
+    })
+
+    it('returns to grid layout from list using the Grid toggle', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a list/i }))
+      expect(container.querySelector('.vinyl-collection_list')).toBeTruthy()
+
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a grid/i }))
+      expect(container.querySelector('.vinyl-collection_grid')).toBeTruthy()
+    })
+
+    it('opens the modal from list view when Space activates a row', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a list/i }))
+      const row = container.querySelector('.vinyl-collection_list button[type="button"]')
+      expect(row).toBeTruthy()
+
+      fireEvent.keyDown(row, { key: ' ' })
+      expect(screen.getByRole('dialog')).toBeInTheDocument()
+    })
+
+    it('shows list skeleton placeholders when loading clears releases but list view stays active', () => {
+      window.innerWidth = 1400
+      const { rerender, container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      fireEvent.click(screen.getByRole('button', { name: /Show vinyl collection as a list/i }))
+
+      rerender(<VinylCollection isLoading={true} releases={[]} />)
+
+      const listWrap = container.querySelector('.vinyl-collection_list')
+      expect(listWrap).toBeTruthy()
+      expect(listWrap.children.length).toBeGreaterThan(0)
     })
   })
 

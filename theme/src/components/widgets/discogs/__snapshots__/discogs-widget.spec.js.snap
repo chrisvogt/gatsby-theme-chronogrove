@@ -76,16 +76,102 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       class="css-18bjwv1"
     >
       <div
-        class="css-10mejol"
+        class="css-7avkd0"
       >
         <h3
-          class="css-9nh3l5"
+          class="css-8ivgst"
         >
           Vinyl Collection
         </h3>
+        <div
+          class="css-1vz564k"
+        >
+          <div
+            class="css-iz57sm"
+          >
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
+            >
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
+            >
+              <select
+                class="css-vnlcr3"
+                disabled=""
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
+          >
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-58fzx8"
+              disabled=""
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              List
+            </button>
+          </div>
+        </div>
       </div>
       <p
-        class="css-1qwovgy"
+        class="css-1x7q8nj"
       >
         My owned vinyl records from Discogs.
       </p>
@@ -100,7 +186,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
             class="css-ynlqmx"
           >
             <div
-              class="vinyl-collection_grid null css-1xfuo0x"
+              class="vinyl-collection_grid null css-4go7zc"
             />
           </div>
         </div>
@@ -187,16 +273,99 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
       class="css-18bjwv1"
     >
       <div
-        class="css-10mejol"
+        class="css-7avkd0"
       >
         <h3
-          class="css-9nh3l5"
+          class="css-8ivgst"
         >
           Vinyl Collection
         </h3>
+        <div
+          class="css-1vz564k"
+        >
+          <div
+            class="css-iz57sm"
+          >
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
+            >
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
+            >
+              <select
+                class="css-1dw0swc"
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
+          >
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-1oc3a3t"
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1lig866"
+              type="button"
+            >
+              List
+            </button>
+          </div>
+        </div>
       </div>
       <p
-        class="css-1qwovgy"
+        class="css-1x7q8nj"
       >
         My owned vinyl records from Discogs.
       </p>
@@ -211,7 +380,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
             class="css-ynlqmx"
           >
             <div
-              class="vinyl-collection_grid null css-1xfuo0x"
+              class="vinyl-collection_grid null css-4go7zc"
             >
               <div
                 class="css-g3ckzk"
@@ -388,16 +557,102 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
       class="css-18bjwv1"
     >
       <div
-        class="css-10mejol"
+        class="css-7avkd0"
       >
         <h3
-          class="css-9nh3l5"
+          class="css-8ivgst"
         >
           Vinyl Collection
         </h3>
+        <div
+          class="css-1vz564k"
+        >
+          <div
+            class="css-iz57sm"
+          >
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
+            >
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
+            >
+              <select
+                class="css-vnlcr3"
+                disabled=""
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
+          >
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-58fzx8"
+              disabled=""
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              List
+            </button>
+          </div>
+        </div>
       </div>
       <p
-        class="css-1qwovgy"
+        class="css-1x7q8nj"
       >
         My owned vinyl records from Discogs.
       </p>
@@ -412,168 +667,8 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
             class="css-14hc1pz"
           >
             <div
-              class="vinyl-collection_grid null css-1xfuo0x"
+              class="vinyl-collection_grid null css-4go7zc"
             >
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div
                 class="css-180869n"
               >
@@ -780,168 +875,8 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
             class="css-14hc1pz"
           >
             <div
-              class="vinyl-collection_grid null css-1xfuo0x"
+              class="vinyl-collection_grid null css-4go7zc"
             >
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div
                 class="css-180869n"
               >
@@ -1148,168 +1083,8 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
             class="css-14hc1pz"
           >
             <div
-              class="vinyl-collection_grid null css-1xfuo0x"
+              class="vinyl-collection_grid null css-4go7zc"
             >
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="css-180869n"
-              >
-                <div
-                  aria-hidden="true"
-                  class="css-6bj1hg"
-                >
-                  <div
-                    class="css-12d7pfc"
-                  >
-                    <div
-                      class="css-6yhx8d"
-                    >
-                      <div
-                        class="show-loading-animation css-1lma7io"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div
                 class="css-180869n"
               >

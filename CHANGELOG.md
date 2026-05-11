@@ -1,5 +1,121 @@
 # Changelog
 
+## 0.85.16
+
+### `gatsby-theme-chronogrove` — Discogs modal & vinyl sort labeling
+
+- **Discogs modal** (`discogs-modal.js`): Redesigned **header** with **album title**, a single meta line (**artist · release year**), light divider beneath, and themed foreground/muted colors in **light/dark** mode; **Added to collection** shows a **locale date** (no time) when `dateAdded` or known aliases resolve via **`getDiscogsCollectionAddedMs`** (**`sort-discogs-releases.js`**). **Surfaces** match the vinyl **list register**: translucent panel **`rgba(0,0,0,0.18)`** / **`rgba(255,255,255,0.92)`**, hairline borders, **frosted glass** (`backdrop-filter` blur + saturation), lighter **scrim** behind the dialog; tracklist and chrome use the same subtle **inset** translucency and row dividers as list rows.
+- **Release year UX**: **`getDiscogsReleaseYear`** is the single gate for displaying a year in the **modal**, **list** rows, and **grid** orbit. Discogs **unknown year** (**`year: 0`**) no longer surfaces as **`· 0`** in the modal or list (aligned with grid behavior); **`sort-discogs-releases.spec.js`** / **`discogs-modal.spec.js`** cover **`0`** / **`'0'`**.
+- **Sort controls**: The album-year sort toggle label is **Release Year** for clarity (**`vinyl-collection.js`**).
+- **Docs**: **`theme/src/components/widgets/discogs/README.md`** — modal UX, frost/register styling notes, **`discogs-modal.js`** in Components, **Release year** (Discogs **`0`** / **`getDiscogsReleaseYear`**).
+- **Tests / snapshots**: **`discogs-modal.spec.js`**, **`sort-discogs-releases.spec.js`**, **`discogs-widget.spec.js`**.
+- **Version**: **0.85.16**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.16** (tracks theme **0.85.16**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.16** (tracks theme **0.85.16**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/package.json` (version **0.85.16**)
+- `theme/src/components/widgets/discogs/README.md` (incl. **Release year**)
+- `theme/src/components/widgets/discogs/discogs-modal.js`
+- `theme/src/components/widgets/discogs/discogs-modal.spec.js`
+- **`theme/src/components/widgets/discogs/__snapshots__/discogs-modal.spec.js.snap`**
+- `theme/src/components/widgets/discogs/vinyl-collection.js`
+- `theme/src/components/widgets/discogs/vinyl-collection.spec.js`
+- `theme/src/components/widgets/discogs/sort-discogs-releases.js`
+- `theme/src/components/widgets/discogs/sort-discogs-releases.spec.js`
+- `theme/src/components/widgets/discogs/vinyl-record-skeleton.js`
+- **`theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`**
+- `www.chrisvogt.me/package.json` (version **1.16.16**)
+- `www.chronogrove.com/package.json` (version **1.3.16**)
+
+---
+
+## 0.85.15
+
+### `gatsby-theme-chronogrove` — Discogs vinyl: collection sort & pagination reset fix
+
+- **Discogs widget**: Visitors can switch sort between **date added** (default; newest first when release **`dateAdded`** or known aliases exist) and **alphabetical by album title** via inline controls beside the heading.
+- **`sort-discogs-releases.js`**: Stable client-side sorting; documented optional **`dateAdded`** on releases in **`theme/src/components/widgets/discogs/README.md`**.
+- **Pagination**: Resetting to page **1** now keys off **`itemsPerRow`** and **sort mode**, not the Theme UI breakpoint index alone—crossing **1280px** no longer resets the carousel when density stays **5 columns** (indices **3** and **4** both map to **5** cols).
+- **Tests**: **`sort-discogs-releases.spec.js`**; **`vinyl-collection.spec.js`** includes a regression for the **1279 → ≥1280** resize preserving the current page.
+- **Version**: **0.85.15**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.15** (tracks theme **0.85.15**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.15** (tracks theme **0.85.15**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.15**), `theme/src/components/widgets/discogs/vinyl-collection.js`, `sort-discogs-releases.js`, `sort-discogs-releases.spec.js`, `vinyl-collection.spec.js`, **`theme/src/components/widgets/discogs/README.md`**, `theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.16.15**)
+- `www.chronogrove.com/package.json` (version **1.3.15**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.14
+
+### `gatsby-theme-chronogrove` — Discogs vinyl: five columns at widest breakpoint
+
+- **Discogs widget**: At **xl** (≥1280px), the grid uses **five** columns per row instead of **six**, so each vinyl is slightly larger and **`itemsPerPage` is 10** (5 × 2 rows) instead of 12. Narrower breakpoints unchanged (**[3, 4, 4, 5, 5]**). Loading skeleton count uses **`FULL_GRID_ITEMS = 10`**.
+- **Docs**: **`theme/src/components/widgets/discogs/README.md`**.
+- **Version**: **0.85.14**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.14** (tracks theme **0.85.14**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.14** (tracks theme **0.85.14**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.14**), `theme/src/components/widgets/discogs/vinyl-collection.js`, `theme/src/components/widgets/discogs/README.md`, `theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.16.14**)
+- `www.chronogrove.com/package.json` (version **1.3.14**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.13
+
+### `gatsby-theme-chronogrove` — Discogs vinyl: two rows per carousel page
+
+- **Discogs widget**: Pagination shows **two rows per page** (`itemsPerPage = columns × 2`, e.g. **12** items at xl instead of **18** under the previous three-row layout). Carousel loading placeholders use **`FULL_GRID_ITEMS = 12`**.
+- **Docs**: **`theme/src/components/widgets/discogs/README.md`** pagination description aligned with behavior.
+- **Tests**: **`theme/src/components/widgets/discogs/vinyl-collection.spec.js`** (page totals, clamp-on-resize, last-page elastic tests).
+- **Version**: **0.85.13**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.13** (tracks theme **0.85.13**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.13** (tracks theme **0.85.13**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.13**), `theme/src/components/widgets/discogs/vinyl-collection.js`, `vinyl-collection.spec.js`, `theme/src/components/widgets/discogs/README.md`
+- `www.chrisvogt.me/package.json` (version **1.16.13**)
+- `www.chronogrove.com/package.json` (version **1.3.13**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.12
 
 ### `gatsby-theme-chronogrove` — Color mode MDX image shortcode

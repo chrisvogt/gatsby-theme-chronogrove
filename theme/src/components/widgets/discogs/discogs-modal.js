@@ -8,10 +8,20 @@ import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
+import { getDiscogsCollectionAddedMs, getDiscogsReleaseYear } from './sort-discogs-releases'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
-const DiscogsModal = ({ isOpen, onClose, release }) => {
+function formatCollectionAddedLocal(ms) {
+  if (!Number.isFinite(ms) || ms <= 0) return null
+  try {
+    return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(new Date(ms))
+  } catch {
+    return null
+  }
+}
+
+const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelease }) => {
   const { colorMode } = useThemeUI()
   const darkMode = isDarkMode(colorMode)
   const modalRef = useRef(null)
@@ -24,32 +34,59 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
     setImageLoaded(false)
   }, [coverImageUrl])
 
-  // Handle escape key
+  // Focus dialog when opening; restore focus only when closing (not when release changes while open)
   useEffect(() => {
-    const handleEscape = e => {
-      if (e.key === 'Escape' && isOpen) {
-        onClose()
-      }
-    }
-
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
-      // Store the previously focused element
       previousActiveElement.current = document.activeElement
-      // Focus the modal
-      if (modalRef.current) {
-        modalRef.current.focus()
+      queueMicrotask(() => {
+        modalRef.current?.focus()
+      })
+    } else {
+      previousActiveElement.current?.focus?.()
+    }
+  }, [isOpen])
+
+  // Escape, ArrowLeft / ArrowRight (browse collection in current sort order)
+  useEffect(() => {
+    if (!isOpen) return
+
+    const onKeyDown = e => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
       }
+
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+
+      if (
+        typeof onSelectRelease !== 'function' ||
+        !Array.isArray(orderedReleases) ||
+        orderedReleases.length < 2 ||
+        !release
+      ) {
+        return
+      }
+
+      const el = e.target
+      const tag = el?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el?.closest?.('[contenteditable="true"]')) {
+        return
+      }
+
+      const idx = orderedReleases.findIndex(r => r && r.id === release.id)
+      if (idx === -1) return
+
+      const delta = e.key === 'ArrowRight' ? 1 : -1
+      const next = orderedReleases[idx + delta]
+      if (!next) return
+
+      e.preventDefault()
+      onSelectRelease(next)
     }
 
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      // Restore focus to the previously focused element
-      if (previousActiveElement.current) {
-        previousActiveElement.current.focus()
-      }
-    }
-  }, [isOpen, onClose])
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [isOpen, onClose, release, orderedReleases, onSelectRelease])
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -67,7 +104,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   if (!isOpen || !release) return null
 
   const { basicInformation = {}, resource = {} } = release
-  const { title, year, artists = [], genres = [], styles = [] } = basicInformation
+  const { title, artists = [], genres = [], styles = [] } = basicInformation
 
   // Extract additional data from resource object
   const { uri: discogsUrl, tracklist = [] } = resource
@@ -78,6 +115,19 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   const artistNames = (artists || []).map(artist => artist.name).join(', ')
   const genreList = (genres || []).join(', ')
   const styleList = (styles || []).join(', ')
+  const collectionAddedText = formatCollectionAddedLocal(getDiscogsCollectionAddedMs(release))
+
+  /** Match vinyl list register (`vinyl-collection_list`): frosted translucent panel + hairline border */
+  const listPanelBg = darkMode ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.92)'
+  const listPanelBorder = darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)'
+  const muted = darkMode ? '#a0aec0' : '#718096'
+  const headerRule = darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'
+  const insetRule = darkMode ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.075)'
+  const insetSurface = darkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.55)'
+  const insetHeaderBg = darkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.035)'
+  const parsedReleaseYear = getDiscogsReleaseYear(release)
+  const yearStr = Number.isFinite(parsedReleaseYear) ? String(parsedReleaseYear) : ''
+  const showYear = yearStr !== ''
 
   return createPortal(
     <div
@@ -87,14 +137,14 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.45)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
         padding: 3,
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(4px)'
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)'
       }}
       role='dialog'
       aria-modal='true'
@@ -121,15 +171,19 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         ref={modalRef}
         tabIndex={-1}
         sx={{
-          backgroundColor: darkMode ? '#252e3c' : 'white',
+          backgroundColor: listPanelBg,
           color: darkMode ? '#fff' : '#000',
-          borderRadius: '10px',
-          boxShadow: 'xl',
+          borderRadius: 2,
+          boxShadow: ['md', null, 'lg'],
           border: '1px solid',
-          borderColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+          borderColor: listPanelBorder,
           borderLeft: '2px solid',
           borderLeftColor: 'primary',
+          backdropFilter: 'saturate(1.12) blur(20px)',
+          WebkitBackdropFilter: 'saturate(1.12) blur(20px)',
+          width: ['100%', '100%', 'min(100%, 800px)'],
           maxWidth: ['95vw', '90vw', '800px'],
+          minWidth: 0,
           maxHeight: '90vh',
           overflow: 'auto',
           position: 'relative'
@@ -145,8 +199,9 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
             right: 3,
             background: 'none',
             border: '1px solid',
-            borderColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+            borderColor: listPanelBorder,
             color: darkMode ? '#fff' : '#000',
+            backgroundColor: darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.45)',
             cursor: 'pointer',
             padding: 2,
             borderRadius: '50%',
@@ -158,7 +213,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
             transition: 'all 0.2s ease',
             zIndex: 1,
             '&:hover': {
-              backgroundColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+              backgroundColor: darkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)',
               transform: 'scale(1.1)',
               borderColor: 'primary'
             },
@@ -174,26 +229,61 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         </button>
 
         <div sx={{ padding: 4, paddingTop: 5 }}>
-          {/* Header with title */}
-          <div sx={{ mb: 4 }}>
-            <Themed.h2 id='modal-title' sx={{ margin: 0, fontSize: [4, 5], lineHeight: 1.2 }}>
+          <header
+            sx={{
+              mb: 4,
+              pb: 4,
+              borderBottom: '1px solid',
+              borderBottomColor: headerRule
+            }}
+          >
+            <Themed.h2
+              id='modal-title'
+              sx={{
+                margin: 0,
+                fontSize: [4, 5],
+                lineHeight: 1.15,
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+                color: 'inherit',
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word'
+              }}
+            >
               {title || 'Unknown Title'}
             </Themed.h2>
-            <Themed.p sx={{ margin: 0, fontSize: [2, 3], color: darkMode ? '#a0aec0' : '#718096', mt: 1 }}>
-              {artistNames || 'Unknown Artist'}
-            </Themed.p>
-            {Boolean(year) && (
-              <Themed.p sx={{ margin: 0, fontSize: 2, color: darkMode ? '#a0aec0' : '#718096', mt: 1 }}>
-                {year}
-              </Themed.p>
-            )}
-          </div>
+            <p
+              sx={{
+                margin: 0,
+                mt: 2,
+                fontSize: [2, 3],
+                lineHeight: 1.45,
+                color: muted,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                gap: '0.4em'
+              }}
+            >
+              <span sx={{ fontWeight: 500, color: darkMode ? '#e2e8f0' : '#2d3748' }}>
+                {artistNames || 'Unknown Artist'}
+              </span>
+              {showYear && (
+                <>
+                  <span sx={{ color: muted, opacity: 0.85, userSelect: 'none' }} aria-hidden>
+                    ·
+                  </span>
+                  <span sx={{ fontVariantNumeric: 'tabular-nums' }}>{yearStr}</span>
+                </>
+              )}
+            </p>
+          </header>
 
           {/* Content grid */}
           <div
             sx={{
               display: 'grid',
-              gridTemplateColumns: ['1fr', '1fr 1fr'],
+              gridTemplateColumns: ['1fr', '280px minmax(0, 1fr)'],
               gap: 4,
               alignItems: 'start'
             }}
@@ -256,7 +346,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                   sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: darkMode ? '#2d3748' : '#f7fafc',
+                    backgroundColor: insetSurface,
                     borderRadius: 2,
                     display: 'flex',
                     alignItems: 'center',
@@ -271,7 +361,25 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
             </div>
 
             {/* Details */}
-            <div sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <div
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 3,
+                minWidth: 0,
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word'
+              }}
+            >
+              {collectionAddedText && (
+                <div>
+                  <Themed.h4 sx={{ margin: 0, fontSize: 2, color: darkMode ? '#a0aec0' : '#718096', mb: 1 }}>
+                    Added to collection
+                  </Themed.h4>
+                  <Themed.p sx={{ margin: 0, fontSize: 1 }}>{collectionAddedText}</Themed.p>
+                </div>
+              )}
+
               {/* Genres */}
               {genreList && (
                 <div>
@@ -300,29 +408,29 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
               <Themed.h3 sx={{ margin: 0, fontSize: 3, mb: 3 }}>Tracklist</Themed.h3>
               <div
                 sx={{
-                  backgroundColor: darkMode ? '#2d3748' : '#f7fafc',
+                  backgroundColor: insetSurface,
                   borderRadius: 2,
                   overflow: 'hidden',
                   border: '1px solid',
-                  borderColor: darkMode ? '#3a4a5c' : '#e1e5e9'
+                  borderColor: listPanelBorder
                 }}
               >
                 <div
                   sx={{
                     display: 'grid',
-                    gridTemplateColumns: 'auto 1fr auto',
+                    gridTemplateColumns: 'auto minmax(0, 1fr) auto',
                     gap: 2,
                     padding: 3,
-                    backgroundColor: darkMode ? '#1a202c' : '#edf2f7',
+                    backgroundColor: insetHeaderBg,
                     borderBottom: '1px solid',
-                    borderBottomColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+                    borderBottomColor: insetRule,
                     fontSize: 1,
                     fontWeight: 'bold',
                     color: darkMode ? '#a0aec0' : '#718096'
                   }}
                 >
                   <div>Position</div>
-                  <div>Title</div>
+                  <div sx={{ minWidth: 0 }}>Title</div>
                   <div>Duration</div>
                 </div>
                 {tracklist.map((track, index) => (
@@ -330,21 +438,31 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                     key={index}
                     sx={{
                       display: 'grid',
-                      gridTemplateColumns: 'auto 1fr auto',
+                      gridTemplateColumns: 'auto minmax(0, 1fr) auto',
                       gap: 2,
                       padding: 3,
                       borderBottom: index < tracklist.length - 1 ? '1px solid' : 'none',
-                      borderBottomColor: darkMode ? '#3a4a5c' : '#e1e5e9',
+                      borderBottomColor: insetRule,
                       fontSize: 1,
+                      minWidth: 0,
                       '&:hover': {
-                        backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'
+                        backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.035)'
                       }
                     }}
                   >
                     <div sx={{ fontWeight: 'bold', color: darkMode ? '#e2e8f0' : '#2d3748' }}>
                       {track.position || '—'}
                     </div>
-                    <div sx={{ color: darkMode ? '#e2e8f0' : '#2d3748' }}>{track.title || 'Unknown Title'}</div>
+                    <div
+                      sx={{
+                        color: darkMode ? '#e2e8f0' : '#2d3748',
+                        minWidth: 0,
+                        overflowWrap: 'break-word',
+                        wordBreak: 'break-word'
+                      }}
+                    >
+                      {track.title || 'Unknown Title'}
+                    </div>
                     <div sx={{ color: darkMode ? '#a0aec0' : '#718096', textAlign: 'right' }}>
                       {track.duration || '—'}
                     </div>
@@ -363,7 +481,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
               mt: 4,
               pt: 4,
               borderTop: '1px solid',
-              borderTopColor: darkMode ? '#3a4a5c' : '#e1e5e9'
+              borderTopColor: headerRule
             }}
           >
             <button
@@ -373,15 +491,15 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
                 backgroundColor: 'transparent',
                 color: darkMode ? '#a0aec0' : '#718096',
                 border: '1px solid',
-                borderColor: darkMode ? '#3a4a5c' : '#e1e5e9',
-                borderRadius: '10px',
+                borderColor: listPanelBorder,
+                borderRadius: 2,
                 fontSize: 1,
                 fontWeight: 'bold',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 '&:hover': {
-                  backgroundColor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
-                  borderColor: darkMode ? '#a0aec0' : '#718096'
+                  backgroundColor: darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.045)',
+                  borderColor: muted
                 },
                 '&:focus': {
                   outline: '2px solid',
