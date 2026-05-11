@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { act } from 'react'
 
@@ -356,6 +356,23 @@ describe('VinylCollection', () => {
 
       rerender(<VinylCollection isLoading={false} releases={manyReleases} />)
       expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+    })
+
+    it('keeps the current page when crossing 1280px if column count is unchanged', () => {
+      const manyReleases = createManyReleases(25)
+
+      window.innerWidth = 1100 // breakpoint index 3: 5 columns, 10 items/page → 3 pages for 25 items
+      render(<VinylCollection isLoading={false} releases={manyReleases} />)
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 3')).toBeInTheDocument()
+
+      window.innerWidth = 1400 // index 4: still 5 columns — must not reset pagination to page 1
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+
+      expect(screen.getByText('Page 2 of 3')).toBeInTheDocument()
     })
 
     describe('when transition timers run (fake timers)', () => {
@@ -788,7 +805,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingTitle} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Unknown (2023) - Artist. Click to view details.'
       )
@@ -805,7 +822,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingYear} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (Unknown) - Artist. Click to view details.'
       )
@@ -823,7 +840,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtists} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -843,7 +860,10 @@ describe('VinylCollection', () => {
         }
       ]
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithMissingResourceUrl} />)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
@@ -858,7 +878,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingProperties} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (Unknown) - Unknown Artist. Click to view details.'
       )
@@ -876,7 +896,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithNullArtists} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -894,7 +914,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtists} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -912,7 +932,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithMissingArtistName} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -930,7 +950,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithUndefinedArtistName} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -948,7 +968,7 @@ describe('VinylCollection', () => {
         }
       ]
       render(<VinylCollection isLoading={false} releases={releasesWithEmptyArtistName} />)
-      expect(screen.getByRole('button')).toHaveAttribute(
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
         'aria-label',
         'Album (2023) - Unknown Artist. Click to view details.'
       )
@@ -1018,7 +1038,10 @@ describe('VinylCollection', () => {
       const { container } = render(
         <VinylCollection isLoading={false} releases={releasesWithMissingResourceUrlProperty} />
       )
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
@@ -1036,7 +1059,10 @@ describe('VinylCollection', () => {
         }
       ]
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithUndefinedResourceUrl} />)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
 
@@ -1054,7 +1080,10 @@ describe('VinylCollection', () => {
         }
       ]
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithEmptyResourceUrl} />)
-      expect(screen.getByRole('button')).toHaveAttribute('aria-label', 'Album (2023) - Artist. Click to view details.')
+      expect(within(screen.getByTestId('vinyl-carousel')).getByRole('button')).toHaveAttribute(
+        'aria-label',
+        'Album (2023) - Artist. Click to view details.'
+      )
       expect(container.querySelector('.vinyl-record_album-art')).toHaveAttribute('src', 'https://example.com/thumb.jpg')
     })
   })
@@ -1212,6 +1241,57 @@ describe('VinylCollection', () => {
       // All 5 vinyl items should be rendered
       const vinylItems = container.querySelectorAll('.vinyl-record')
       expect(vinylItems).toHaveLength(5)
+    })
+  })
+
+  describe('Collection sort controls', () => {
+    const sortMockReleases = [
+      {
+        id: 1,
+        basicInformation: {
+          id: 1,
+          title: 'Zebra Strikes Back',
+          year: 2020,
+          artists: [{ name: 'Z' }],
+          cdnThumbUrl: 'https://example.com/z.jpg',
+          resourceUrl: 'https://discogs.com/release/1'
+        }
+      },
+      {
+        id: 2,
+        basicInformation: {
+          id: 2,
+          title: 'Alpha Dawn',
+          year: 2021,
+          artists: [{ name: 'A' }],
+          cdnThumbUrl: 'https://example.com/a.jpg',
+          resourceUrl: 'https://discogs.com/release/2'
+        }
+      }
+    ]
+
+    it('renders sort radiogroup and default date-added mode', () => {
+      render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      expect(screen.getByRole('radiogroup', { name: /sort vinyl collection/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Sort collection by date added/i })).toHaveAttribute(
+        'aria-pressed',
+        'true'
+      )
+    })
+
+    it('disables sort controls while loading with no releases', () => {
+      render(<VinylCollection isLoading={true} releases={[]} />)
+      expect(screen.getByRole('button', { name: /Sort collection by date added/i })).toBeDisabled()
+      expect(screen.getByRole('button', { name: /Sort collection alphabetically by album title/i })).toBeDisabled()
+    })
+
+    it('reorders records alphabetically when Alphabetical is chosen', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
+      expect(firstTitle()).toMatch(/Zebra Strikes Back/)
+
+      fireEvent.click(screen.getByRole('button', { name: /Sort collection alphabetically by album title/i }))
+      expect(firstTitle()).toMatch(/Alpha Dawn/)
     })
   })
 

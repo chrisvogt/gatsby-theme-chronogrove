@@ -76,16 +76,46 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
       class="css-18bjwv1"
     >
       <div
-        class="css-10mejol"
+        class="css-7avkd0"
       >
         <h3
-          class="css-9nh3l5"
+          class="css-8ivgst"
         >
           Vinyl Collection
         </h3>
+        <div
+          aria-label="Sort vinyl collection"
+          class="css-1l647io"
+          role="radiogroup"
+        >
+          <span
+            class="css-128a175"
+            id="vinyl-collection-sort-label"
+          >
+            Sort:
+          </span>
+          <button
+            aria-label="Sort collection by date added"
+            aria-pressed="true"
+            class="css-58fzx8"
+            disabled=""
+            type="button"
+          >
+            Date added
+          </button>
+          <button
+            aria-label="Sort collection alphabetically by album title"
+            aria-pressed="false"
+            class="css-1dk5zix"
+            disabled=""
+            type="button"
+          >
+            Alphabetical
+          </button>
+        </div>
       </div>
       <p
-        class="css-1qwovgy"
+        class="css-1x7q8nj"
       >
         My owned vinyl records from Discogs.
       </p>
@@ -187,16 +217,44 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
       class="css-18bjwv1"
     >
       <div
-        class="css-10mejol"
+        class="css-7avkd0"
       >
         <h3
-          class="css-9nh3l5"
+          class="css-8ivgst"
         >
           Vinyl Collection
         </h3>
+        <div
+          aria-label="Sort vinyl collection"
+          class="css-1l647io"
+          role="radiogroup"
+        >
+          <span
+            class="css-128a175"
+            id="vinyl-collection-sort-label"
+          >
+            Sort:
+          </span>
+          <button
+            aria-label="Sort collection by date added"
+            aria-pressed="true"
+            class="css-1oc3a3t"
+            type="button"
+          >
+            Date added
+          </button>
+          <button
+            aria-label="Sort collection alphabetically by album title"
+            aria-pressed="false"
+            class="css-1lig866"
+            type="button"
+          >
+            Alphabetical
+          </button>
+        </div>
       </div>
       <p
-        class="css-1qwovgy"
+        class="css-1x7q8nj"
       >
         My owned vinyl records from Discogs.
       </p>
@@ -388,16 +446,46 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
       class="css-18bjwv1"
     >
       <div
-        class="css-10mejol"
+        class="css-7avkd0"
       >
         <h3
-          class="css-9nh3l5"
+          class="css-8ivgst"
         >
           Vinyl Collection
         </h3>
+        <div
+          aria-label="Sort vinyl collection"
+          class="css-1l647io"
+          role="radiogroup"
+        >
+          <span
+            class="css-128a175"
+            id="vinyl-collection-sort-label"
+          >
+            Sort:
+          </span>
+          <button
+            aria-label="Sort collection by date added"
+            aria-pressed="true"
+            class="css-58fzx8"
+            disabled=""
+            type="button"
+          >
+            Date added
+          </button>
+          <button
+            aria-label="Sort collection alphabetically by album title"
+            aria-pressed="false"
+            class="css-1dk5zix"
+            disabled=""
+            type="button"
+          >
+            Alphabetical
+          </button>
+        </div>
       </div>
       <p
-        class="css-1qwovgy"
+        class="css-1x7q8nj"
       >
         My owned vinyl records from Discogs.
       </p>

@@ -13,6 +13,7 @@ A widget that displays a Discogs vinyl collection as circular records with hover
 - **Pagination**: Shows 2 rows per page (items per page = columns × 2, e.g. 10 records at the widest breakpoint using 5 columns) for better performance
 - **Swipe/Drag Support**: Mobile users can swipe left/right, desktop users can drag with mouse
 - **Theme-Consistent Controls**: Pagination buttons match your site's design system
+- **Sort**: Visitors can switch between **order added to collection** (default, newest first when `dateAdded` is present) and **alphabetical by album title**.
 - Responsive grid layout that adapts to different screen sizes
 
 ## Configuration
@@ -53,7 +54,8 @@ The widget expects data from a Discogs widget endpoint with this structure:
           "artists": [{"name": "Artist Name"}],
           "cdnThumbUrl": "https://cdn.example.com/thumb.jpg",
           "resourceUrl": "https://discogs.com/release/123"
-        }
+        },
+        "dateAdded": "2025-01-01T12:00:00.000Z"
       }
     ]
   },
@@ -69,7 +71,8 @@ The widget expects data from a Discogs widget endpoint with this structure:
 ## Components
 
 - `discogs-widget.js` - Main widget component with data fetching and layout
-- `vinyl-collection.js` - Renders the vinyl records in a grid with visual effects and pagination
+- `vinyl-collection.js` - Renders the vinyl records in a grid with visual effects, pagination, and sort controls
+- `sort-discogs-releases.js` - Client-side sort by collection date (`dateAdded` and aliases) or album title
 - `vinyl-pagination.js` - Pagination component with swipe/drag support and theme-consistent controls
 - `index.js` - Export file for the widget
 

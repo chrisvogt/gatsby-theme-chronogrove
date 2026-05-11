@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.85.15
+
+### `gatsby-theme-chronogrove` — Discogs vinyl: collection sort & pagination reset fix
+
+- **Discogs widget**: Visitors can switch sort between **date added** (default; newest first when release **`dateAdded`** or known aliases exist) and **alphabetical by album title** via inline controls beside the heading.
+- **`sort-discogs-releases.js`**: Stable client-side sorting; documented optional **`dateAdded`** on releases in **`theme/src/components/widgets/discogs/README.md`**.
+- **Pagination**: Resetting to page **1** now keys off **`itemsPerRow`** and **sort mode**, not the Theme UI breakpoint index alone—crossing **1280px** no longer resets the carousel when density stays **5 columns** (indices **3** and **4** both map to **5** cols).
+- **Tests**: **`sort-discogs-releases.spec.js`**; **`vinyl-collection.spec.js`** includes a regression for the **1279 → ≥1280** resize preserving the current page.
+- **Version**: **0.85.15**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.15** (tracks theme **0.85.15**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.15** (tracks theme **0.85.15**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.15**), `theme/src/components/widgets/discogs/vinyl-collection.js`, `sort-discogs-releases.js`, `sort-discogs-releases.spec.js`, `vinyl-collection.spec.js`, **`theme/src/components/widgets/discogs/README.md`**, `theme/src/components/widgets/discogs/__snapshots__/discogs-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.16.15**)
+- `www.chronogrove.com/package.json` (version **1.3.15**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.14
 
 ### `gatsby-theme-chronogrove` — Discogs vinyl: five columns at widest breakpoint

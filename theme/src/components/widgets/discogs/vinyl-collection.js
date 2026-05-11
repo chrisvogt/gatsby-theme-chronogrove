@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
-import { Card } from '@theme-ui/components'
-import { Heading } from '@theme-ui/components'
+import { Box, Card, Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -9,9 +8,15 @@ import Pagination from '../../pagination'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
 import DiscogsModal from './discogs-modal'
 import VinylRecordSkeleton from './vinyl-record-skeleton'
+import {
+  DEFAULT_DISCOGS_SORT_MODE,
+  DISCOGS_SORT_ADDED,
+  DISCOGS_SORT_ALPHABETICAL,
+  sortDiscogsReleases
+} from './sort-discogs-releases'
 
 const VinylCollection = ({ isLoading, releases = [] }) => {
-  const { colorMode } = useThemeUI()
+  const { colorMode, theme } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const [currentVinylId, setCurrentVinylId] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -21,6 +26,47 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   // Modal state
   const [selectedRelease, setSelectedRelease] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const [collectionSortMode, setCollectionSortMode] = useState(DEFAULT_DISCOGS_SORT_MODE)
+  const sortControlsDisabled = isLoading || !releases.length
+
+  const sortedReleases = useMemo(
+    () => sortDiscogsReleases(Array.isArray(releases) ? releases : [], collectionSortMode),
+    [releases, collectionSortMode]
+  )
+
+  const primaryHex = typeof theme?.colors?.primary === 'string' ? theme.colors.primary : '#422EA3'
+  const primaryRgb = theme?.colors?.primaryRgb ?? '66, 46, 163'
+
+  const sortToggleSx = active => ({
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: ['10px', '11px'],
+    fontWeight: active ? 'bold' : 'body',
+    lineHeight: 1.25,
+    px: 2,
+    py: '4px',
+    minHeight: ['24px', '28px'],
+    borderRadius: '6px',
+    cursor: sortControlsDisabled ? 'not-allowed' : 'pointer',
+    outline: 'none',
+    opacity: sortControlsDisabled ? 0.5 : 1,
+    border: active ? `1px solid ${primaryHex}` : `1px solid rgba(${primaryRgb}, 0.25)`,
+    color: active ? 'white' : primaryHex,
+    bg: active ? primaryHex : `rgba(${primaryRgb}, 0.1)`,
+    transition: 'background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease',
+    '&:hover:not(:disabled)': {
+      bg: active ? primaryHex : `rgba(${primaryRgb}, 0.2)`,
+      transform: darkModeActive ? 'none' : 'scale(1.02)'
+    },
+    '&:focus-visible:not(:disabled)': {
+      boxShadow: `0 0 0 2px rgba(${primaryRgb}, 0.35)`
+    },
+    '&:active:not(:disabled)': {
+      transform: 'scale(0.98)'
+    }
+  })
 
   /** Rows visible per carousel page at each breakpoint (controls items per page = columns × rows). */
   const ROWS_PER_PAGE = 2
@@ -41,12 +87,12 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     const itemsPerPage = itemsPerRow * ROWS_PER_PAGE
 
     // When loading, assume full grid and 3 pages so carousel + pagination layout matches final state
-    const effectiveItemsPerPage = isLoading && !releases?.length ? FULL_GRID_ITEMS : itemsPerPage
+    const effectiveItemsPerPage = isLoading && !sortedReleases.length ? FULL_GRID_ITEMS : itemsPerPage
     const totalPages =
-      isLoading && !releases?.length ? LOADING_PAGE_COUNT : Math.ceil(releases.length / itemsPerPage) || 1
+      isLoading && !sortedReleases.length ? LOADING_PAGE_COUNT : Math.ceil(sortedReleases.length / itemsPerPage) || 1
 
     // Check if the last page would have items that don't fill a complete row
-    const itemsOnLastPage = releases.length % itemsPerPage
+    const itemsOnLastPage = sortedReleases.length % itemsPerPage
     const hasPartialLastPage = itemsOnLastPage > 0 && itemsOnLastPage < itemsPerRow
 
     return {
@@ -57,9 +103,9 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       hasPartialLastPage,
       itemsOnLastPage: itemsOnLastPage || itemsPerPage // Use itemsPerPage if no remainder
     }
-  }, [currentBreakpointIndex, releases.length, isLoading])
+  }, [currentBreakpointIndex, sortedReleases.length, isLoading])
 
-  const { itemsPerPage, totalPages } = paginationData
+  const { itemsPerPage, totalPages, itemsPerRow } = paginationData
 
   // Detect current breakpoint based on window width
   useEffect(() => {
@@ -94,10 +140,12 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   }, [currentPage, totalPages])
 
-  // Reset to page 1 when breakpoint changes to ensure consistent pagination
+  // Reset page when pagination capacity changes (column count × rows), not merely when the Theme UI slot
+  // index flips—for example xl large vs xl ≥1280 are both 5 columns and must not wipe the carousel page.
+  // Sort mode always resets to avoid showing the wrong slide’s items.
   useEffect(() => {
     setCurrentPage(1)
-  }, [currentBreakpointIndex])
+  }, [itemsPerRow, collectionSortMode])
 
   const {
     getTransform,
@@ -130,8 +178,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     setSelectedRelease(null)
   }
 
-  // Create all vinyl items
-  const vinylItems = releases.map(release => {
+  const vinylItems = sortedReleases.map(release => {
     const { id, basicInformation = {} } = release
     const { title, year, artists = [], cdnThumbUrl, resourceUrl } = basicInformation || {}
     const artistName = (artists || []).map(artist => artist.name).join(', ')
@@ -164,13 +211,56 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   return (
     <div sx={{ mb: 4, maxWidth: '100%', overflow: 'hidden' }}>
-      <div sx={{ display: 'flex', alignItems: 'center' }}>
-        <Heading as='h3' sx={{ fontSize: [3, 4] }}>
+      <Box
+        sx={{
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 2,
+          mb: 2,
+          display: 'flex'
+        }}
+      >
+        <Heading as='h3' sx={{ fontSize: [3, 4], mb: 0 }}>
           Vinyl Collection
         </Heading>
-      </div>
+        <Box
+          role='radiogroup'
+          aria-label='Sort vinyl collection'
+          sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 1, display: 'flex' }}
+        >
+          <span
+            sx={{ fontSize: [0, 1], fontWeight: 'medium', mr: [0, 1], color: 'text' }}
+            id='vinyl-collection-sort-label'
+          >
+            Sort:
+          </span>
+          <Box
+            as='button'
+            type='button'
+            aria-label='Sort collection by date added'
+            aria-pressed={collectionSortMode === DISCOGS_SORT_ADDED}
+            disabled={sortControlsDisabled}
+            sx={sortToggleSx(collectionSortMode === DISCOGS_SORT_ADDED)}
+            onClick={() => setCollectionSortMode(DISCOGS_SORT_ADDED)}
+          >
+            Date added
+          </Box>
+          <Box
+            as='button'
+            type='button'
+            aria-label='Sort collection alphabetically by album title'
+            aria-pressed={collectionSortMode === DISCOGS_SORT_ALPHABETICAL}
+            disabled={sortControlsDisabled}
+            sx={sortToggleSx(collectionSortMode === DISCOGS_SORT_ALPHABETICAL)}
+            onClick={() => setCollectionSortMode(DISCOGS_SORT_ALPHABETICAL)}
+          >
+            Alphabetical
+          </Box>
+        </Box>
+      </Box>
 
-      <Themed.p>My owned vinyl records from Discogs.</Themed.p>
+      <Themed.p sx={{ mt: 0 }}>My owned vinyl records from Discogs.</Themed.p>
 
       {/* Carousel Container */}
       <div
@@ -241,7 +331,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                 {isLoading
                   ? pageItems.map(({ id }) => <VinylRecordSkeleton key={id} darkModeActive={darkModeActive} />)
                   : pageItems.map(({ id, title, year, artistName, cdnThumbUrl, details }) => {
-                      const release = releases.find(r => r.id === id)
+                      const release = sortedReleases.find(r => r.id === id)
                       return (
                         <Card
                           key={id}
