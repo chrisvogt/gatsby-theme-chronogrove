@@ -10,7 +10,7 @@ A widget that displays a Discogs vinyl collection as circular records with hover
 - Rotation animation on hover for a realistic vinyl effect
 - Clicking opens the Discogs release page in a new tab
 - Uses CDN-optimized images for fast loading
-- **Pagination**: Shows 3 rows (18 records) per page for better performance
+- **Pagination**: Shows 2 rows per page (items per page = columns × 2, e.g. 12 records at the widest breakpoint) for better performance
 - **Swipe/Drag Support**: Mobile users can swipe left/right, desktop users can drag with mouse
 - **Theme-Consistent Controls**: Pagination buttons match your site's design system
 - Responsive grid layout that adapts to different screen sizes

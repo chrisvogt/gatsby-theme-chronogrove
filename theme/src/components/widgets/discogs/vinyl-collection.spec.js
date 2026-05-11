@@ -30,7 +30,7 @@ const mockReleases = [
   }
 ]
 
-// Create enough releases to test pagination (more than 18 items)
+// Enough releases for multi-page pagination at typical breakpoints (25 items)
 const createManyReleases = count => {
   return Array.from({ length: count }, (_, i) => ({
     id: i + 1,
@@ -334,28 +334,28 @@ describe('VinylCollection', () => {
 
       window.innerWidth = 500
       const { rerender } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
-      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 5')).toBeInTheDocument()
 
       window.innerWidth = 700
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
-      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 4')).toBeInTheDocument()
 
       window.innerWidth = 900
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
-      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 4')).toBeInTheDocument()
 
       window.innerWidth = 1400
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
-      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
 
       rerender(<VinylCollection isLoading={false} releases={manyReleases} />)
-      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+      expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
     })
 
     describe('when transition timers run (fake timers)', () => {
@@ -380,14 +380,14 @@ describe('VinylCollection', () => {
         act(() => {
           jest.advanceTimersByTime(300)
         })
-        expect(screen.getByText('Page 3 of 3')).toBeInTheDocument()
+        expect(screen.getByText('Page 3 of 5')).toBeInTheDocument()
 
         window.innerWidth = 1400
         act(() => {
           window.dispatchEvent(new Event('resize'))
         })
 
-        expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+        expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
       })
     })
   })
@@ -525,8 +525,8 @@ describe('VinylCollection', () => {
         const manyReleases = createManyReleases(25)
         const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
-        // Navigate to last page
-        const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
+        // Navigate to last page (1024px default: 5 cols × 2 rows = 10/page → 3 pages for 25 items)
+        const lastPageButton = container.querySelector('button[aria-label*="page 3"]')
         if (lastPageButton) {
           fireEvent.click(lastPageButton)
 
@@ -552,7 +552,7 @@ describe('VinylCollection', () => {
         const { getByTestId, container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
         // Navigate to last page
-        const lastPageButton = container.querySelector('button[aria-label*="page 2"]')
+        const lastPageButton = container.querySelector('button[aria-label*="page 3"]')
         if (lastPageButton) {
           fireEvent.click(lastPageButton)
 
@@ -1187,23 +1187,21 @@ describe('VinylCollection', () => {
 
   describe('Pagination behavior tests', () => {
     it('displays all items when last page has fewer items than a complete row', () => {
-      // Test case: 25 items, 6 columns (18 items per page)
-      // Should display all 25 items across 2 pages (18 + 7 items)
+      // Test case: 25 items @ 1024px → 5 columns × 2 rows = 10 per page → 3 pages (10 + 10 + 5)
       const releasesWithPartialLastPage = createManyReleases(25)
       const { container } = render(<VinylCollection isLoading={false} releases={releasesWithPartialLastPage} />)
 
-      // Should have 2 page number buttons (plus prev/next buttons = 4 total)
+      // Should have 3 page number buttons (plus prev/next)
       const paginationButtons = container.querySelectorAll('button[aria-label*="Go to page"]')
-      expect(paginationButtons).toHaveLength(2)
+      expect(paginationButtons).toHaveLength(3)
 
-      // All 25 vinyl items should be rendered (across both pages)
+      // All 25 vinyl items should be rendered (across all pages)
       const vinylItems = container.querySelectorAll('.vinyl-record')
       expect(vinylItems).toHaveLength(25)
     })
 
     it('handles edge case with fewer items than one page', () => {
-      // Test case: 5 items, 6 columns (18 items per page)
-      // Should have 1 page with all 5 items
+      // Test case: 5 items — still a single page at default width
       const releasesFewItems = createManyReleases(5)
       const { container } = render(<VinylCollection isLoading={false} releases={releasesFewItems} />)
 

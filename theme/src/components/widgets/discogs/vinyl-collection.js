@@ -22,21 +22,23 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   const [selectedRelease, setSelectedRelease] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // Full grid size (3 rows × 6 cols); when loading assume 3 pages so carousel/pagination space is reserved
-  const FULL_GRID_ITEMS = 18
+  /** Rows visible per carousel page at each breakpoint (controls items per page = columns × rows). */
+  const ROWS_PER_PAGE = 2
+  // Full grid size (ROWS_PER_PAGE × 6 cols at xl); loading state reserves carousel width for max columns.
+  const FULL_GRID_ITEMS = 6 * ROWS_PER_PAGE
   const LOADING_PAGE_COUNT = 3
 
   // Calculate items per page and pagination
-  // Always maintain 3 rows per page across all breakpoints
-  // Breakpoints: [3, 4, 4, 5, 6] columns → [9, 12, 12, 15, 18] items per page
+  // Always maintain ROWS_PER_PAGE rows per page across all breakpoints
+  // Breakpoints: [3, 4, 4, 5, 6] columns → [6, 8, 8, 10, 12] items per page when ROWS_PER_PAGE = 2
   const columnsPerBreakpoint = [3, 4, 4, 5, 6]
   const [currentBreakpointIndex, setCurrentBreakpointIndex] = useState(4) // Default to largest breakpoint
 
-  // Calculate pagination to ensure each page fills exactly 3 rows
+  // Calculate pagination to ensure each page fills exactly ROWS_PER_PAGE rows
   const paginationData = useMemo(() => {
     const currentColumns = columnsPerBreakpoint[currentBreakpointIndex]
     const itemsPerRow = currentColumns
-    const itemsPerPage = itemsPerRow * 3 // Always 3 rows per page
+    const itemsPerPage = itemsPerRow * ROWS_PER_PAGE
 
     // When loading, assume full grid and 3 pages so carousel + pagination layout matches final state
     const effectiveItemsPerPage = isLoading && !releases?.length ? FULL_GRID_ITEMS : itemsPerPage
@@ -146,7 +148,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   })
 
-  // Split items into pages; when loading assume 3 full pages so carousel/pagination space is reserved
+  // Split items into pages; when loading assume LOADING_PAGE_COUNT full pages so carousel/pagination space is reserved
   const pages = []
   if (isLoading && !vinylItems.length) {
     for (let p = 0; p < LOADING_PAGE_COUNT; p++) {

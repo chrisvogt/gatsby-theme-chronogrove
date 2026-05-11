@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.85.13
+
+### `gatsby-theme-chronogrove` — Discogs vinyl: two rows per carousel page
+
+- **Discogs widget**: Pagination shows **two rows per page** (`itemsPerPage = columns × 2`, e.g. **12** items at xl instead of **18** under the previous three-row layout). Carousel loading placeholders use **`FULL_GRID_ITEMS = 12`**.
+- **Docs**: **`theme/src/components/widgets/discogs/README.md`** pagination description aligned with behavior.
+- **Tests**: **`theme/src/components/widgets/discogs/vinyl-collection.spec.js`** (page totals, clamp-on-resize, last-page elastic tests).
+- **Version**: **0.85.13**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.13** (tracks theme **0.85.13**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.13** (tracks theme **0.85.13**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.13**), `theme/src/components/widgets/discogs/vinyl-collection.js`, `vinyl-collection.spec.js`, `theme/src/components/widgets/discogs/README.md`
+- `www.chrisvogt.me/package.json` (version **1.16.13**)
+- `www.chronogrove.com/package.json` (version **1.3.13**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.12
 
 ### `gatsby-theme-chronogrove` — Color mode MDX image shortcode
