@@ -17,3 +17,6 @@ www.chrisvogt.me/certs/*
 .env*
 !.env.template
 .pnp.*
+
+# Removed from repo — do not re-add (local/editor copies stay untracked)
+.cursor/rules/www-content-voice.mdc
