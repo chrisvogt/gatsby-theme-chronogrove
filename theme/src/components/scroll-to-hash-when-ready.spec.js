@@ -47,22 +47,30 @@ describe('ScrollToHashWhenReady', () => {
 
   it('scrolls to element when hash is set and element exists', () => {
     const scrollIntoView = jest.fn()
-    document.body.innerHTML = '<div id="target">Target</div>'
-    document.getElementById('target').scrollIntoView = scrollIntoView
+    const focus = jest.fn()
+    document.body.innerHTML = '<div id="target" tabindex="-1">Target</div>'
+    const target = document.getElementById('target')
+    target.scrollIntoView = scrollIntoView
+    target.focus = focus
 
     render(<ScrollToHashWhenReady getHash={() => '#target'} />)
 
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' })
+    expect(focus).toHaveBeenCalledWith({ preventScroll: true })
   })
 
   it('decodes URI component in hash when scrolling', () => {
     const scrollIntoView = jest.fn()
-    document.body.innerHTML = '<div id="✔">Check</div>'
-    document.getElementById('✔').scrollIntoView = scrollIntoView
+    const focus = jest.fn()
+    document.body.innerHTML = '<div id="✔" tabindex="-1">Check</div>'
+    const glyph = document.getElementById('✔')
+    glyph.scrollIntoView = scrollIntoView
+    glyph.focus = focus
 
     render(<ScrollToHashWhenReady getHash={() => '#%E2%9C%94'} />)
 
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' })
+    expect(focus).toHaveBeenCalledWith({ preventScroll: true })
   })
 
   it('scrolls to element when it appears after interval', () => {
@@ -73,14 +81,18 @@ describe('ScrollToHashWhenReady', () => {
     expect(document.getElementById('lazy')).toBeNull()
 
     const scrollIntoView = jest.fn()
+    const focus = jest.fn()
     const el = document.createElement('div')
     el.id = 'lazy'
+    el.tabIndex = -1
     el.scrollIntoView = scrollIntoView
+    el.focus = focus
     document.body.appendChild(el)
 
     jest.advanceTimersByTime(50)
 
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' })
+    expect(focus).toHaveBeenCalledWith({ preventScroll: true })
 
     rerender(<ScrollToHashWhenReady />)
     jest.advanceTimersByTime(50)

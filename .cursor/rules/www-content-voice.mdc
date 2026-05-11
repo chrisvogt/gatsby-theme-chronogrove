@@ -1,0 +1,44 @@
+---
+description: Editorial voice for www.chrisvogt.me blog and music content
+globs: www.chrisvogt.me/content/**/*.mdx
+alwaysApply: false
+---
+
+# Content Voice for www.chrisvogt.me
+
+Canonical example: `www.chrisvogt.me/content/blog/2026-04-30-april-2026-recap/` (MDX + `photos.js`).
+
+## Two Tiers
+
+| Tier | Categories | Approach |
+|------|-----------|----------|
+| **Narrative** | `personal` recaps, `travel`, music posts with story-led intros | Full voice: scene-first, rhythm, texture. |
+| **Utility-first** | `meta`, incident reports, cost breakdowns | Lead with clarity. Apply texture in short opening/closing only — never inside procedural steps, quoted correspondence, or tables. |
+
+## Narrative Primitives
+
+- **Scene-first openers**: Start with time, place, or social frame. Never "This is my Nth recap" or "In this post I will..."
+- **No meta-commentary in body**: Remove lines that explain the writing format ("a monthly ritual I started in June 2025", "what's a now page?", "Thanks for reading ✌️").
+- **Chronological spine**: Each section opens with a concrete beat before going topical.
+- **Texture without bloat**: One well-chosen metaphor or institutional detail per paragraph max. Facts (dates, venue names, ship names, book titles) stay accurate.
+- **Clean closings**: Omit "Feel free to share your thoughts!", "Happy listening! 🎹", generic sign-offs.
+
+## Music Post Openings
+
+Do not open with `Hey everyone,`, `Hi, 👋`, or `Hi everyone,`. Open with the song, session, or moment directly.
+
+## Caption Discipline (`photos.js`)
+
+- Short, magazine-style: subject + location. No full sentences.
+- Name people when the frame features them: `Nick at the bridge optics — harbor geometry through glass`.
+- No "Here is a photo of..." constructions.
+
+## Frontmatter Rules
+
+- `description`: SEO-readable — literary but **literal** (include places, events, key names). 1–2 sentences.
+- `excerpt`: Compressed phrase or list — not a copy of `description`. No "A roundup of..." boilerplate.
+- `keywords`: Keep factual/topical terms; drop abstract filler.
+
+## Never Change
+
+`slug`, `banner`, `thumbnails`, image URLs, component imports, MDX syntax, internal/external links, quoted correspondence, structured tables, YouTube/SoundCloud embed IDs.

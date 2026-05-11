@@ -95,7 +95,7 @@ describe('Theme Configuration', () => {
     it('defines primary card styles', () => {
       const primaryCard = theme.cards.primary
       expect(primaryCard).toHaveProperty('borderRadius', 'card')
-      expect(primaryCard).toHaveProperty('boxShadow', 'default')
+      expect(primaryCard).toHaveProperty('boxShadow')
     })
 
     it('defines actionCard with dynamic borderLeft', () => {

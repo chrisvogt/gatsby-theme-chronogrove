@@ -39,6 +39,7 @@ const SteamWidget = React.memo(() => {
   const profileDisplayName = data?.profile?.displayName
   const profileURL = data?.profile?.profileURL
   const recentlyPlayedGames = data?.collections?.recentlyPlayedGames || []
+  const showRecentlyPlayedSection = isLoading || recentlyPlayedGames.length > 0
 
   const callToAction = (
     <CallToAction title={`${profileDisplayName} on Steam`} url={profileURL} isLoading={isLoading}>
@@ -53,52 +54,56 @@ const SteamWidget = React.memo(() => {
         Steam
       </WidgetHeader>
 
-      <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
-        <Heading as='h3' sx={{ fontSize: [3, 4] }}>
-          Recently-Played Games
-        </Heading>
-      </div>
+      {showRecentlyPlayedSection ? (
+        <>
+          <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
+            <Heading as='h3' sx={{ fontSize: [3, 4] }}>
+              Recently-Played Games
+            </Heading>
+          </div>
 
-      <Themed.p sx={{ mb: 4 }}>Games I've played in the last two weeks.</Themed.p>
+          <Themed.p sx={{ mb: 4 }}>Games I've played in the last two weeks.</Themed.p>
 
-      <div
-        sx={{
-          display: 'grid',
-          gridGap: [3, 2, 2, 3],
-          gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)'],
-          mb: 4
-        }}
-      >
-        {isLoading
-          ? Array.from({ length: RECENTLY_PLAYED_PLACEHOLDER_COUNT }).map((_, i) => (
-              <div
-                key={i}
-                aria-hidden
-                sx={{
-                  variant: 'styles.InstagramItem',
-                  borderRadius: '8px',
-                  boxShadow: 'md',
-                  overflow: 'hidden'
-                }}
-              >
-                <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
-                  <RectShape
-                    color={darkModeActive ? '#3a3a4a' : '#efefef'}
-                    style={{ width: '100%', height: '200px', borderRadius: '8px' }}
+          <div
+            sx={{
+              display: 'grid',
+              gridGap: [3, 2, 2, 3],
+              gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)'],
+              mb: 4
+            }}
+          >
+            {isLoading
+              ? Array.from({ length: RECENTLY_PLAYED_PLACEHOLDER_COUNT }).map((_, i) => (
+                  <div
+                    key={i}
+                    aria-hidden
+                    sx={{
+                      variant: 'styles.InstagramItem',
+                      borderRadius: '8px',
+                      boxShadow: 'md',
+                      overflow: 'hidden'
+                    }}
+                  >
+                    <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+                      <RectShape
+                        color={darkModeActive ? '#3a3a4a' : '#efefef'}
+                        style={{ width: '100%', height: '200px', borderRadius: '8px' }}
+                      />
+                    </div>
+                    <div sx={{ height: '72px', p: 3 }} />
+                  </div>
+                ))
+              : recentlyPlayedGames.map(game => (
+                  <SteamGameCard
+                    key={game.id}
+                    game={game}
+                    showRank={false}
+                    subtitle={getTimeSpent(game.playTime2Weeks * 60 * 1000)}
                   />
-                </div>
-                <div sx={{ height: '72px', p: 3 }} />
-              </div>
-            ))
-          : recentlyPlayedGames.map(game => (
-              <SteamGameCard
-                key={game.id}
-                game={game}
-                showRank={false}
-                subtitle={getTimeSpent(game.playTime2Weeks * 60 * 1000)}
-              />
-            ))}
-      </div>
+                ))}
+          </div>
+        </>
+      ) : null}
 
       <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>

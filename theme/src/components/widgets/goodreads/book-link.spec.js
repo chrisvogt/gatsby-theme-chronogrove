@@ -1,9 +1,41 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { navigate as gatsbyNavigate } from 'gatsby'
 
 import BookLink from './book-link'
+
+/** jsdom does not reliably complete `Image()` loads for remote URLs; the component probes with `Image()` before rendering `<img>`. */
+const OriginalImage = global.Image
+class MockImage {
+  constructor() {
+    this._onLoad = null
+    this._onErr = null
+  }
+
+  addEventListener(type, fn) {
+    if (type === 'load') this._onLoad = fn
+    if (type === 'error') this._onErr = fn
+  }
+
+  removeEventListener(type, fn) {
+    if (type === 'load' && this._onLoad === fn) this._onLoad = null
+    if (type === 'error' && this._onErr === fn) this._onErr = null
+  }
+
+  set src(value) {
+    this._src = value
+    queueMicrotask(() => {
+      const fail = !value || value === 'not-a-valid-url' || String(value).includes('__IMAGE_PROBE_ERROR__')
+      if (fail) this._onErr?.()
+      else this._onLoad?.()
+    })
+  }
+
+  get src() {
+    return this._src
+  }
+}
 
 // Mock gatsby's navigate function
 jest.mock('gatsby', () => ({
@@ -33,6 +65,11 @@ describe('Widget/Goodreads/BookLink', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     jest.spyOn(console, 'log').mockImplementation(() => {})
+    global.Image = MockImage
+  })
+
+  afterEach(() => {
+    global.Image = OriginalImage
   })
 
   it('renders a book link with the correct attributes', () => {
@@ -87,5 +124,52 @@ describe('Widget/Goodreads/BookLink', () => {
     // Simply verify the component renders without errors when introDelay is provided
     render(<BookLink {...mockProps} introDelay={240} />)
     expect(screen.getByTestId('book-preview-3d')).toBeInTheDocument()
+  })
+
+  it('renders a flat image preview when flatCover is true (no WebGL)', async () => {
+    render(<BookLink {...mockProps} flatCover />)
+    expect(screen.queryByTestId('book-preview-3d')).not.toBeInTheDocument()
+    expect(screen.getByTestId('book-preview-flat')).toHaveAttribute('aria-label', 'Test Book')
+    await waitFor(() => {
+      expect(screen.getByTestId('book-preview-thumbnail')).toHaveAttribute('src', 'https://example.com/book.jpg')
+    })
+  })
+
+  it('shows the title when the flat cover image fails to load', async () => {
+    render(<BookLink {...mockProps} thumbnailURL='not-a-valid-url' flatCover />)
+    await waitFor(() => {
+      expect(screen.queryByTestId('book-preview-thumbnail')).not.toBeInTheDocument()
+      expect(screen.getByText('Test Book')).toBeInTheDocument()
+    })
+  })
+
+  it('shows the title when flatCover has no image URL', () => {
+    render(<BookLink {...mockProps} thumbnailURL='' flatCover />)
+    expect(screen.getByText('Test Book')).toBeInTheDocument()
+    expect(screen.queryByTestId('book-preview-thumbnail')).not.toBeInTheDocument()
+  })
+
+  it('ignores flat-cover probe callbacks after unmount', () => {
+    jest.useFakeTimers()
+    global.Image = class DelayedMock {
+      constructor() {
+        this._onLoad = null
+      }
+
+      addEventListener(type, fn) {
+        if (type === 'load') this._onLoad = fn
+      }
+
+      removeEventListener() {}
+
+      set src(_value) {
+        setTimeout(() => this._onLoad?.(), 100)
+      }
+    }
+
+    const { unmount } = render(<BookLink {...mockProps} flatCover />)
+    unmount()
+    jest.advanceTimersByTime(200)
+    jest.useRealTimers()
   })
 })

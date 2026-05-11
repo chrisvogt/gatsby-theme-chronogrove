@@ -1,7 +1,7 @@
 import React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeUIProvider } from 'theme-ui'
-import theme from './gatsby-plugin-theme-ui'
+import theme from '@chronogrove/ui/theme'
 
 export { resetAudioPlayerStore } from './stores/audio-player-store'
 

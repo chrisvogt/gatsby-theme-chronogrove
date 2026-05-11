@@ -13,7 +13,7 @@ The Steam widget displays information from a Steam profile, including recently p
 
 ### Recently-Played Games Section
 
-- Shows games played in the last two weeks
+- Rendered only when data is still loading or the API returns at least one game from the last two weeks (no empty headline when there is nothing to show)
 - Displays game cards with headers and play time
 - Grid layout for responsive design
 
@@ -29,7 +29,7 @@ Main widget component that orchestrates the display of Steam data.
 
 - Fetches Steam data from configured data source
 - Displays profile metrics
-- Shows both owned games table and recently played games
+- Shows the leaderboard (owned games) and recently played games when present
 - Handles loading states
 
 ### OwnedGamesTable

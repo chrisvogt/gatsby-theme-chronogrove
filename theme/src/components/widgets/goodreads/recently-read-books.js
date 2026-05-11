@@ -4,7 +4,7 @@ import { Heading } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { Themed } from '@theme-ui/mdx'
 import { useLocation, navigate } from '@gatsbyjs/reach-router'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
 import Pagination from '../../pagination'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
@@ -22,6 +22,14 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
   const darkModeActive = isDarkMode(colorMode)
   const location = useLocation()
   const [currentPage, setCurrentPage] = useState(1)
+  /**
+   * After a page change, React unmounts the old slide's Book3D and mounts the new slide's in the
+   * same commit. That overlaps WebGL create/dispose and can briefly hold ~2× book contexts plus
+   * ColorBends, exceeding the browser cap and revoking the background. We show flat covers on the
+   * active slide for two animation frames so previous renderers can finish disposing first.
+   */
+  const [activeSlideWebglReady, setActiveSlideWebglReady] = useState(true)
+  const skipInitialWebglDefer = useRef(true)
   const params = new URLSearchParams(location.search)
   const bookId = params.get('bookId')
   const selectedBook = bookId ? books.find(book => book.id === bookId) : null
@@ -110,9 +118,29 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
     }
   }, [currentPage, totalPages])
 
+  const booksIdentityKey = books.map(b => b.id).join(',')
   useEffect(() => {
     setCurrentPage(1)
-  }, [books])
+  }, [booksIdentityKey])
+
+  useEffect(() => {
+    if (skipInitialWebglDefer.current) {
+      skipInitialWebglDefer.current = false
+      return
+    }
+    setActiveSlideWebglReady(false)
+    let raf1 = 0
+    let raf2 = 0
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        setActiveSlideWebglReady(true)
+      })
+    })
+    return () => {
+      cancelAnimationFrame(raf1)
+      if (raf2) cancelAnimationFrame(raf2)
+    }
+  }, [currentPage])
 
   const handleClose = e => {
     if (e) {
@@ -231,6 +259,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                         <BookLink
                           id={book.id}
                           key={book.id}
+                          flatCover={pageIndex !== currentPage - 1 || !activeSlideWebglReady}
                           introDelay={bookIndex * 80}
                           suppressNavigation={isDragging || isTransitioning}
                           thumbnailURL={book.cdnMediaURL || book.thumbnail}

@@ -1,5 +1,351 @@
 # Changelog
 
+## 0.85.11
+
+### `gatsby-theme-chronogrove` — Workspace dependency refresh
+
+- **Ranges / lockfile**: Refreshed **semver ranges** and **`pnpm-lock.yaml`** with **`pnpm -r update`** (no source refactors). Root **ESLint** **^10.3.0**, **eslint-plugin-react-hooks** **^7.1.1**, **Turborepo** **^2.9.12**; theme **Jest** / **jest-environment-jsdom** **30.4.x**, **@tanstack/react-query** **^5.100.9**, **zustand** **^5.0.13**, **@fortawesome/react-fontawesome** **^3.3.1**.
+- **Workspace catalog** (`pnpm-workspace.yaml`): **Next** **^16.2.6**, **Prettier** **^3.8.3**, **React** / **React DOM** **^19.2.6**; **three** remains **^0.184.0**.
+- **Version**: **0.85.11**
+
+### `@chronogrove/ui`
+
+- **Dependencies**: **@fortawesome/react-fontawesome** **^3.3.1**; dev — **@babel/preset-env** **^7.29.5**, **babel-jest** / **jest** / **jest-environment-jsdom** **30.4.x**.
+- **Version**: **0.83.3**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.11** (tracks theme **0.85.11**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.11** (tracks theme **0.85.11**).
+
+### Files changed
+
+- `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`
+- `theme/package.json` (version **0.85.11**)
+- `packages/ui/package.json` (version **0.83.3**)
+- `www.chrisvogt.me/package.json` (version **1.16.11**), `www.chronogrove.com/package.json` (version **1.3.11**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.10
+
+### `www.chrisvogt.me` — Travel & Music index layout
+
+- **Travel (`/travel/`)**: Uses **`articleColumnContainerSx`** (same reading measure as the blog index and MDX posts), **single-column** post list, **home-widget-style** `PostCard` (vertical thumbnails + title block), and optional **`excerpt`** under the title when set in frontmatter.
+- **Music (`/music/`)**: Same **article column** width and **single-column** cards (stacked embeds) for easier focus than the previous multi-column grid.
+- **Tests**: **`theme/src/pages/chrisvogt-me-travel-page.spec.js`** and **`theme/src/pages/chrisvogt-me-music-page.spec.js`** exercise the site pages (filters, empty states, `Head` SEO props). **`theme/jest.config.js`** collects coverage for **`www.chrisvogt.me/src/pages/travel.js`** and **`music.js`**.
+- **Jest / Babel**: **`theme/babel.config.js`** adds a **`babel-plugin-remove-graphql-queries`** override **only** for `www.chrisvogt.me/**/*.js` so Jest can compile those pages without breaking theme **`useStaticQuery`** JSON extraction. **`theme/jest.config.js`** raises global **`coverageThreshold`** for **statements**, **lines**, and **functions** to **98%** (branches remain **90%**).
+- **Version**: **0.85.10**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.10** (tracks theme **0.85.10**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.10** (tracks theme **0.85.10**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.10**), `theme/babel.config.js`, `theme/jest.config.js` (coverage thresholds + collect paths), `theme/src/pages/chrisvogt-me-travel-page.spec.js`, `theme/src/pages/chrisvogt-me-music-page.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.10**), `www.chrisvogt.me/src/pages/travel.js`, `www.chrisvogt.me/src/pages/music.js`
+- `www.chronogrove.com/package.json` (version **1.3.10**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.9
+
+### `gatsby-theme-chronogrove` — Goodreads grid pagination after book detail
+
+- **Goodreads / `recently-read-books`**: Reset carousel page to 1 only when the **book list identity** changes (ordered ids), not when the parent passes a new filtered **`books`** array reference on each render. Opening a book (**`?bookId=`**) no longer forces page 1 before returning from detail view ([#601](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/601)).
+- **Tests**: **`recently-read-books.spec.js`** — page survives rerender with a new array and the same ids.
+- **Version**: **0.85.9**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.9** (tracks theme **0.85.9**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.9** (tracks theme **0.85.9**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.9**), `theme/src/components/widgets/goodreads/recently-read-books.js`, `theme/src/components/widgets/goodreads/recently-read-books.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.9**), `www.chronogrove.com/package.json` (version **1.3.9**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.8
+
+### `gatsby-theme-chronogrove` — Goodreads carousel WebGL and dark-mode background
+
+- **`Book3D`**: Guards teardown so a late **`IntersectionObserver`** callback cannot **`createScene()`** after **`dispose()`** (disconnect observers and DOM listeners **before** destroying the Three.js scene); animation frame, intro **`setTimeout`**, and **`TextureLoader`** paths respect **`active`**; **`WEBGL_lose_context`** (**`loseContext`**) after **`renderer.dispose()`** where available so contexts are released promptly on drivers that defer until GC if not lost explicitly.
+- **Goodreads / `recently-read-books`**: On **`currentPage`** change (not initial mount), the active slide renders **flat covers** for two **`requestAnimationFrame`** ticks before **`Book3D`** again, so disposing the previous slide’s canvases completes before allocating the next (~10+) contexts — avoids spikes that exceeded the browser cap and revoked the fixed **Color Bends** layer (**“Too many active WebGL contexts”**).
+- **Tests**: **`book-3d.spec.js`** — post-unmount intersect must not recreate the renderer; **`getContext`** / **`WEBGL_lose_context`** (including **`getExtension`** throw swallowed in **`dispose`**); ResizeObserver callbacks after **unmount**; stale animation ticks after **unmount** or **leaveViewport**.
+- **`Book3D` instrumentation**: **`istanbul ignore next`** on the intro-timeout **`!inViewport`** guard (normally unreachable — viewport leave clears the timer before it fires).
+- **Version**: **0.85.8**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.8** (tracks theme **0.85.8**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.8** (tracks theme **0.85.8**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.8**), `theme/src/components/artwork/book-3d.js`, `theme/src/components/artwork/book-3d.spec.js`, `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `www.chrisvogt.me/package.json` (version **1.16.8**), `www.chronogrove.com/package.json` (version **1.3.8**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.7
+
+### `@chronogrove/ui` — Letterpress card depth + dashboard widget headers
+
+- **Theme**: `card` uses a layered paper-stack `box-shadow` instead of a flat Tailwind `default` shadow; `floatOnHover` lifts cards with a deeper shadow on hover (no scale pop).
+- **WidgetHeader**: Social-dashboard style — primary-colored icon chip, baseline-aligned headline + CTA, square metric chips using `panel-background` and subtle text-tinted borders; `ProfileMetricsBadge` inlined for consistent chip layout. Removed horizontal rules from earlier iterations.
+- **Metric chip borders**: Theme `text` is 3-digit hex (`#111` / `#fff`); borders use `normalizeHexToRrggbb` + `hexToRgba` (~`#RRGGBB22` alpha) instead of string-concatenating `22`, which produced invalid 5-digit hex and was ignored by browsers.
+- **color-utils**: Added `normalizeHexToRrggbb`; `hexToRgb` now accepts 3- and 4-digit hex shorthand.
+- **WidgetSection**: When **`id`** is set, the section defaults to **`tabIndex={-1}`** so callers (e.g. theme hash navigation) can move keyboard / screen reader focus onto the landmark after scrolling. An explicit **`tabIndex`** prop still overrides.
+- **Tests**: `widget-header.spec.js`, `color-utils.spec.js`, **`widget-section.spec.js`** (`tabIndex` / `id` behavior), and theme snapshots updated (widget headers that embed `WidgetHeader` pick up new Emotion class names).
+- **Version**: **0.83.2**
+
+### `gatsby-theme-chronogrove` — Home sidebar scroll rail + WCAG contrast
+
+- **HomeNavigation**: Vertical progress rail with circular section badges; scroll-synced fill; WCAG-friendly idle label/icon opacity in light mode; dark-mode active badge uses a dark icon on the light primary blue for ≥3:1 contrast. Rail fill percentage uses exported `getRailFillPct`; primary color resolution uses `resolvePrimaryFromTheme`; `normalizeHomeNavProps` keeps nullish `props` handling testable.
+- **HomeNavigation / rail robustness**: `getRailFillPct` clamps invalid indices (e.g. `findIndex` → `-1` when `activeSection` does not match any link id) so the rail fill never computes a negative `calc()` percentage.
+- **HomeNavigation / keyboard & screen readers**: After activating an in-page target, focus moves to the destination section (`#top` hero or hash targets). `scrollToElementWhenReady` scrolls smoothly then calls `focus({ preventScroll: true })` by default so focus follows navigation without doubling scroll; **`focusTarget: false`** opts out when needed.
+- **Home template**: `<section id="top">` uses **`tabIndex={-1}`** so programmatic focus matches hash / Home nav clicks.
+- **Tests**: `home-navigation.spec.js` (rail helpers, hash clicks including focus to `#top`); `scroll-to-element-when-ready.spec.js`; `scroll-to-hash-when-ready.spec.js`; `templates/home.spec.js` (hero focus target); snapshots refreshed where applicable.
+- **Version**: **0.85.7**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.7** (tracks theme **0.85.7**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.7** (tracks theme **0.85.7**).
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.83.2**), `packages/ui/src/theme.js`, `packages/ui/src/color-utils.js`, `packages/ui/src/color-utils.spec.js`, `packages/ui/src/widget-section.js`, `packages/ui/src/widget-section.spec.js`, `packages/ui/src/widget-header.js`, `packages/ui/src/widget-header.spec.js`, `packages/ui/src/__snapshots__/theme.spec.js.snap`, `packages/ui/src/__snapshots__/widget-header.spec.js.snap`
+- `theme/package.json` (version **0.85.7**), `theme/src/templates/home.js`, `theme/src/templates/home.spec.js`, `theme/src/helpers/scroll-to-element-when-ready.js`, `theme/src/helpers/scroll-to-element-when-ready.spec.js`, `theme/src/components/scroll-to-hash-when-ready.spec.js`, `theme/src/components/home-navigation.js`, `theme/src/components/home-navigation.spec.js`, **`theme/src/components/home-navigation.hash-focus-integration.spec.js`**, `theme/src/gatsby-plugin-theme-ui/theme.spec.js`, theme snapshot files under `theme/src/**/__snapshots__/`
+- `www.chrisvogt.me/package.json` (version **1.16.7**), `www.chronogrove.com/package.json` (version **1.3.7**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.6
+
+### `@chronogrove/ui` — Shared page layouts (article column, home dashboard, page shell)
+
+- **New subpaths**: `@chronogrove/ui/article-column-container` (`articleColumnContainerSx`, `ArticleColumnContainer`), `@chronogrove/ui/home-dashboard-layout` (`HomeDashboardGrid`, home dashboard `sx` tokens), `@chronogrove/ui/page-shell-layout` (`ChronogrovePageShell` — skip link, optional header/footer slots, main landmark or bare children).
+- **Tests**: unit specs for the new modules; coverage thresholds unchanged.
+- **Version**: **0.83.1**
+
+### `gatsby-theme-chronogrove`
+
+- **Layout**: `layout.js` composes **`ChronogrovePageShell`** from **`@chronogrove/ui/page-shell-layout`** (nav, footer, audio bar padding unchanged).
+- **Home**: `templates/home.js` uses **`HomeDashboardGrid`** and shared home layout tokens from **`@chronogrove/ui/home-dashboard-layout`**.
+- **Constants**: `constants/article-column-container-sx.js` re-exports **`articleColumnContainerSx`** from **`@chronogrove/ui/article-column-container`** for theme shadowing.
+- **Tests**: `layout.spec.js` snapshots updated for the shell’s `<main>` markup.
+- **Version**: **0.85.6**
+
+### `chronogrove-next` (example)
+
+- **`app/home-showcase.jsx`**: Uses the same **`@chronogrove/ui/home-dashboard-layout`** primitives as the Gatsby home template for the dashboard-style grid and main shell tokens.
+
+### `www.chrisvogt.me`
+
+- **About**: `articleColumnContainerSx` from **`gatsby-theme-chronogrove/src/constants/article-column-container-sx`** instead of duplicating container `sx`.
+- **Version**: **1.16.6** (tracks theme **0.85.6**).
+
+### `www.chronogrove.com` (demo)
+
+- **About**: Same **`articleColumnContainerSx`** import path; **`about.spec.js`** mocks the constants module for Jest.
+- **Version**: **1.3.6** (tracks theme **0.85.6**).
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.83.1**, new **`exports`**), `packages/ui/src/article-column-container.js`, `packages/ui/src/article-column-container.spec.js`, `packages/ui/src/home-dashboard-layout.js`, `packages/ui/src/home-dashboard-layout.spec.js`, `packages/ui/src/page-shell-layout.js`, `packages/ui/src/page-shell-layout.spec.js`
+- `theme/package.json` (version **0.85.6**), `theme/src/components/layout.js`, `theme/src/templates/home.js`, `theme/src/constants/article-column-container-sx.js`, `theme/src/components/__snapshots__/layout.spec.js.snap`
+- `examples/chronogrove-next/app/home-showcase.jsx`
+- `www.chrisvogt.me/package.json` (version **1.16.6**), `www.chrisvogt.me/src/pages/about.js`
+- `www.chronogrove.com/package.json` (version **1.3.6**), `www.chronogrove.com/src/pages/about.js`, `www.chronogrove.com/src/pages/about.spec.js`
+- `CHANGELOG.md`
+
+---
+
+## 0.85.5
+
+### `gatsby-theme-chronogrove` — Direct `@chronogrove/ui/theme` imports ([Issue #569](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/569))
+
+- **Refactor**: Theme tests, **`testUtils`**, **`media-item-grid`**, and related specs import the design tokens from **`@chronogrove/ui/theme`** instead of the **`src/gatsby-plugin-theme-ui`** shim paths. The shim files remain for Gatsby theme shadowing and backward compatibility.
+- **Version**: **0.85.5**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.5** (tracks theme **0.85.5**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.5** (tracks theme **0.85.5**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.5**), `theme/src/testUtils.js`, `theme/src/components/widgets/spotify/media-item-grid.js`, `theme/src/components/category.spec.js`, `theme/src/components/animated-page-background.spec.js`, `theme/src/components/home-navigation.spec.js`, `theme/src/shortcodes/Note.spec.js`, `theme/src/components/widgets/spotify/playlists.spec.js`, `theme/src/components/widgets/spotify/top-tracks.spec.js`, `theme/src/components/widgets/steam/play-time-chart.spec.js`, `theme/src/components/widgets/steam/steam-game-card.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.5**), `www.chronogrove.com/package.json` (version **1.3.5**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.4
+
+### `@chronogrove/ui` — `ThumbnailStrip`, `ImageThumbnails`, Next showcase helpers ([Issue #566](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/566))
+
+- **New subpaths**: `@chronogrove/ui/thumbnail-strip`, `@chronogrove/ui/image-thumbnails` (optional **`optimizeSrc`** for CDN-specific URLs; **`IMAGE_THUMBNAILS_SIZE_PX`** aligns retina resize math with consumers).
+- **ThumbnailStrip**: layout dimensions use **`px` strings** in **`sx`** so Theme UI does not treat integer **`width` / `height` / `top` / `left`** values as theme scale tokens (fixes oversized tiles in App Router / strict Theme UI setups).
+- **Tests**: suites and snapshots in `packages/ui`; **`packages/ui/README.md`** documents the exports.
+- **Version**: **0.83.0**
+
+### `gatsby-theme-chronogrove`
+
+- **Recent posts**: **`image-thumbnails`** delegates to **`@chronogrove/ui/image-thumbnails`** with **`optimizeCloudinaryThumbnailSrc`** in **`theme/src/helpers/cloudinaryThumbnailUrl.js`** (hostname-safe Cloudinary **`/upload/`** rewriting; covered by **`cloudinaryThumbnailUrl.spec.js`**). **`thumbnail-strip`** is a shim re-export; **Jest** coverage ignores thin shims plus **`recent-posts` thumbnail specs moved to the UI package**.
+- **Version**: **0.85.4**
+
+### Examples
+
+- **`chronogrove-next`**: [`app/home-showcase.jsx`](examples/chronogrove-next/app/home-showcase.jsx) **`Post thumbnails`** section demonstrates **`ThumbnailStrip`** and **`ImageThumbnails`** (stable **`picsum.photos`** URLs; default pass-through **`optimizeSrc`**).
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.4** (tracks theme **0.85.4**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.4** (tracks theme **0.85.4**).
+
+### Files changed
+
+- `packages/ui/package.json` (version **0.83.0**, new **`exports`**), `packages/ui/src/thumbnail-strip.js`, `packages/ui/src/image-thumbnails.js`, specs, snapshots, `packages/ui/README.md`
+- `theme/package.json` (version **0.85.4**), `theme/jest.config.js`, `theme/src/helpers/cloudinaryThumbnailUrl.js`, `theme/src/helpers/cloudinaryThumbnailUrl.spec.js`, `theme/src/components/widgets/recent-posts/thumbnail-strip.js`, `theme/src/components/widgets/recent-posts/image-thumbnails.js`, `theme/src/components/widgets/recent-posts/__snapshots__/post-card.spec.js.snap`, removed superseded **`recent-posts` thumbnail snapshots/specs**
+- `examples/chronogrove-next/app/home-showcase.jsx`
+- `www.chrisvogt.me/package.json` (version **1.16.4**), `www.chronogrove.com/package.json` (version **1.3.4**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.3
+
+### `gatsby-theme-chronogrove` — Steam widget & GitHub contribution graph
+
+- **Steam**: The **Recently-Played Games** block (heading, copy, and grid) is shown only while **loading** or when the API returns **at least one** recently played game. If the last-two-weeks list is empty after load, the section is omitted so the widget does not show a bare headline.
+- **GitHub contribution graph**: Uses an explicit **4px** gap constant for the heatmap, skeleton, legend, and day-label row math so month labels line up with cells (Theme UI **`gap: 1`** is not guaranteed to be 4px). **Month labels** match GitHub when the year view does not start on the 1st: skip the cramped first partial month and omit the trailing partial month. **Tests**: **`contribution-graph.spec.js`** covers partial-range month labeling.
+- **Version**: **0.85.3**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.3** (tracks theme **0.85.3**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.3** (tracks theme **0.85.3**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.3**), `theme/src/components/widgets/steam/steam-widget.js`, `theme/src/components/widgets/steam/README.md`, `theme/src/components/widgets/steam/__snapshots__/steam-widget.spec.js.snap`, `theme/src/components/widgets/github/contribution-graph.js`, `theme/src/components/widgets/github/contribution-graph.spec.js`, `theme/src/components/widgets/github/__snapshots__/contribution-graph.spec.js.snap`, `theme/src/components/widgets/github/__snapshots__/github-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.16.3**)
+- `www.chronogrove.com/package.json` (version **1.3.3**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.2
+
+### `gatsby-theme-chronogrove` — Goodreads carousel WebGL limits
+
+- **Bug fix**: The Goodreads carousel kept **every page** mounted for swipe layout, so each tile created a **`Book3D` / WebGL context**. That could exceed the browser context cap (**“Too many active WebGL contexts”**), trigger **context loss**, and break covers after pagination (and stress other canvases, e.g. the home background). **Non-active carousel pages** now use **`BookLink`** with **`flatCover`** (static `<img>` plus a title fallback on image error). Only the **current page** mounts **`Book3D`** (~10 contexts instead of dozens).
+- **Tests**: **`book-link.spec.js`** covers **`flatCover`**; **`recently-read-books`** pagination tests unchanged.
+- **Version**: **0.85.2**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.2** (tracks theme **0.85.2**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.2** (tracks theme **0.85.2**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.2**), `theme/src/components/widgets/goodreads/book-link.js`, `theme/src/components/widgets/goodreads/book-link.spec.js`, `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `www.chrisvogt.me/package.json` (version **1.16.2**)
+- `www.chronogrove.com/package.json` (version **1.3.2**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.1
+
+### `gatsby-theme-chronogrove` — Goodreads 3D books and WebGL background
+
+- **Bug fix**: **`Book3D`** no longer **`dispose()`**s its Three.js renderer when it leaves the viewport. It pauses animation, clears the intro timer, resets hover/intro state to the resting pose, and hides the canvas (**`visibility: hidden`**). Scrolling past many Goodreads tiles and back was creating a burst of new WebGL contexts and could exceed the browser limit, **revoking the dark-mode Color Bends background** on the home page. The scene is still fully torn down on component unmount.
+- **Tests**: **`book-3d.spec.js`** expects pause/reuse on viewport exit/re-entry instead of dispose/recreate.
+- **Version**: **0.85.1**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.1** (tracks theme **0.85.1**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.1** (tracks theme **0.85.1**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.1**), `theme/src/components/artwork/book-3d.js`, `theme/src/components/artwork/book-3d.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.1**)
+- `www.chronogrove.com/package.json` (version **1.3.1**)
+- `CHANGELOG.md`
+
+---
+
+## 0.85.0
+
+### `gatsby-theme-chronogrove` — home “Latest Posts” widget layout
+
+- **Recaps**: `PostCard` no longer receives **`excerpt`** (matches Travel-style cards: thumbnails, title, meta). Recaps use the same **2-column** grid as Travel on large breakpoints instead of a dynamic 3-column layout.
+- **Music**: **`useCategorizedPosts`** exposes **`musicSoundcloud`** and **`musicYoutube`** (up to **two** newest music posts per embed type). The home widget renders **two rows** under one Music heading: SoundCloud first, then YouTube, with spacing between rows. Posts already shown in the SoundCloud row are excluded from the YouTube row so dual-embed posts do not duplicate. Each row passes **only** the relevant embed props so previews align. Music posts **without** `soundcloudId` or `youtubeSrc` do not appear in these rows.
+- **Version**: **0.85.0**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.0** (tracks theme **0.85.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.0** (tracks theme **0.85.0**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.0**), `theme/src/hooks/use-categorized-posts.js`, `theme/src/hooks/use-categorized-posts.spec.js`, `theme/src/components/widgets/recent-posts/recent-posts-widget.js`, `theme/src/components/widgets/recent-posts/recent-posts-widget.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.0**)
+- `www.chronogrove.com/package.json` (version **1.3.0**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.84.0
 
 ### `gatsby-theme-chronogrove` — configurable footer links

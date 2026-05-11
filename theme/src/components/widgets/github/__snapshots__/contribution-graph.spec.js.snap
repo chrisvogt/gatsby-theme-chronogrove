@@ -19,7 +19,7 @@ exports[`ContributionGraph Component matches the empty state snapshot 1`] = `
         Loading contribution data...
       </p>
       <div
-        class="css-1oal0qm"
+        class="css-8j9u6e"
       >
         <div
           class="css-1oe1md6"
@@ -1141,7 +1141,7 @@ exports[`ContributionGraph Component matches the loading state snapshot 1`] = `
         Loading contribution data...
       </p>
       <div
-        class="css-1oal0qm"
+        class="css-8j9u6e"
       >
         <div
           class="css-1oe1md6"
@@ -2294,10 +2294,10 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
             style="overflow-x: auto; overflow-y: visible; min-width: 0; max-width: 100%; flex: 1 1 0%; -webkit-overflow-scrolling: touch; contain: inline-size;"
           >
             <div
-              class="css-1zugrk"
+              class="css-1n4gjdj"
             />
             <div
-              class="css-xn8io8"
+              class="css-j6uk15"
             >
               <div
                 class="cell-visible css-1j55t5o"
@@ -2332,7 +2332,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
         </div>
       </div>
       <div
-        class="css-1ts1diq"
+        class="css-gasiwb"
       >
         <div
           class="css-1yz7e9k"
@@ -2341,7 +2341,7 @@ exports[`ContributionGraph Component matches the successful state snapshot 1`] =
           Less
         </div>
         <div
-          class="css-1amotyw"
+          class="css-zi44v3"
         >
           <div
             class="css-mfiemg"

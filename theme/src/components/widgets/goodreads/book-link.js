@@ -2,9 +2,18 @@
 import { jsx } from 'theme-ui'
 import { Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
+import { useEffect, useState } from 'react'
 import Book3D from '../../artwork/book-3d'
 
-const BookLink = ({ id, thumbnailURL, title, suppressNavigation = false, introDelay = 0 }) => {
+const BookLink = ({
+  id,
+  thumbnailURL,
+  title,
+  suppressNavigation = false,
+  introDelay = 0,
+  // When true, use a static image instead of WebGL (limits contexts: one carousel page worth of Book3D).
+  flatCover = false
+}) => {
   // Append compression/format hints for imgix CDN images
   const imageUrl = (() => {
     try {
@@ -15,6 +24,40 @@ const BookLink = ({ id, thumbnailURL, title, suppressNavigation = false, introDe
       return thumbnailURL
     }
   })()
+
+  /** Flat cover only: probe URL off the DOM so the visible `<img>` needs no handlers (a11y lint). */
+  const [flatCoverMediaStatus, setFlatCoverMediaStatus] = useState('pending')
+
+  useEffect(() => {
+    if (!flatCover) {
+      setFlatCoverMediaStatus('pending')
+      return
+    }
+
+    if (!imageUrl) {
+      setFlatCoverMediaStatus('failed')
+      return
+    }
+
+    setFlatCoverMediaStatus('pending')
+    let cancelled = false
+    const probe = new window.Image()
+    const onLoad = () => {
+      if (!cancelled) setFlatCoverMediaStatus('ready')
+    }
+    const onErr = () => {
+      if (!cancelled) setFlatCoverMediaStatus('failed')
+    }
+    probe.addEventListener('load', onLoad)
+    probe.addEventListener('error', onErr)
+    probe.src = imageUrl
+
+    return () => {
+      cancelled = true
+      probe.removeEventListener('load', onLoad)
+      probe.removeEventListener('error', onErr)
+    }
+  }, [imageUrl, flatCover])
 
   const handleClick = e => {
     e.preventDefault()
@@ -71,7 +114,58 @@ const BookLink = ({ id, thumbnailURL, title, suppressNavigation = false, introDe
           }
         }}
       >
-        <Book3D thumbnailURL={imageUrl} title={title} introDelay={introDelay} />
+        {flatCover ? (
+          <div sx={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
+            <div
+              data-testid='book-preview-flat'
+              role='img'
+              aria-busy={flatCoverMediaStatus === 'pending'}
+              aria-label={title}
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                borderRadius: 2,
+                overflow: 'hidden',
+                bg: 'muted',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              {flatCoverMediaStatus === 'failed' ? (
+                <span
+                  sx={{
+                    p: 2,
+                    fontSize: 1,
+                    lineHeight: 'snug',
+                    textAlign: 'center',
+                    color: 'text',
+                    wordBreak: 'break-word'
+                  }}
+                >
+                  {title}
+                </span>
+              ) : flatCoverMediaStatus === 'ready' ? (
+                <img
+                  data-testid='book-preview-thumbnail'
+                  src={imageUrl}
+                  alt=''
+                  loading='lazy'
+                  decoding='async'
+                  sx={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              ) : null}
+            </div>
+          </div>
+        ) : (
+          <Book3D thumbnailURL={imageUrl} title={title} introDelay={introDelay} />
+        )}
       </button>
     </Card>
   )

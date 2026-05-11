@@ -63,8 +63,14 @@ const useCategorizedPosts = () => {
   // Get latest recaps (up to 2, including "now" page as the latest)
   const latestRecaps = allPosts.filter(post => isRecapPost(post)).slice(0, 2)
 
-  // Get latest music posts (2 posts)
-  const latestMusicPosts = allPosts.filter(post => isMusicPost(post)).slice(0, 2)
+  const musicPostsNewestFirst = allPosts.filter(post => isMusicPost(post))
+
+  // Two rows on the home widget: latest SoundCloud + latest YouTube (2 each, de-duped between rows)
+  const latestMusicSoundcloud = musicPostsNewestFirst.filter(post => post.frontmatter.soundcloudId).slice(0, 2)
+  const soundcloudRowIds = new Set(latestMusicSoundcloud.map(post => post.fields.id))
+  const latestMusicYoutube = musicPostsNewestFirst
+    .filter(post => post.frontmatter.youtubeSrc && !soundcloudRowIds.has(post.fields.id))
+    .slice(0, 2)
 
   // Get latest photography posts (2 posts)
   const latestPhotographyPosts = allPosts.filter(post => isPhotographyPost(post)).slice(0, 2)
@@ -97,10 +103,16 @@ const useCategorizedPosts = () => {
     }
   })
 
-  // Add music posts if not already included
-  latestMusicPosts.forEach(post => {
+  latestMusicSoundcloud.forEach(post => {
     if (!usedPostIds.has(post.fields.id)) {
-      deduplicatedPosts.push({ ...post, section: 'music' })
+      deduplicatedPosts.push({ ...post, section: 'musicSoundcloud' })
+      usedPostIds.add(post.fields.id)
+    }
+  })
+
+  latestMusicYoutube.forEach(post => {
+    if (!usedPostIds.has(post.fields.id)) {
+      deduplicatedPosts.push({ ...post, section: 'musicYoutube' })
       usedPostIds.add(post.fields.id)
     }
   })
@@ -132,7 +144,8 @@ const useCategorizedPosts = () => {
   return {
     posts: deduplicatedPosts,
     recaps: latestRecaps,
-    music: latestMusicPosts,
+    musicSoundcloud: latestMusicSoundcloud,
+    musicYoutube: latestMusicYoutube,
     photography: latestPhotographyPosts,
     travel: latestTravelPosts,
     other: latestOtherPosts

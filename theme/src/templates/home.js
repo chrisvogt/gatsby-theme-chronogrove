@@ -1,8 +1,14 @@
 /** @jsx jsx */
-import { jsx, Container, Grid } from 'theme-ui'
+import { jsx, Container } from 'theme-ui'
 import { graphql } from 'gatsby'
 import { Fragment } from 'react'
 import { SkipNavContent } from '../components/skip-nav'
+import {
+  HomeDashboardGrid,
+  homeDashboardMainInnerMaxWidthSx,
+  homeDashboardMainShellSx,
+  homeDashboardPageOuterSx
+} from '@chronogrove/ui/home-dashboard-layout'
 
 import AnimatedPageBackground from '../components/animated-page-background'
 import Footer from '../components/footer'
@@ -26,52 +32,26 @@ const HomeTemplate = () => {
         }}
       >
         <Layout hideFooter disableMainWrapper transparentBackground>
-          <div
-            sx={{
-              minHeight: '500px',
-              pt: 3,
-              px: 0
-            }}
-          >
+          <div sx={homeDashboardPageOuterSx}>
             <Container>
-              <Grid
-                columns={[
-                  null,
-                  null,
-                  'minmax(200px, 0.375fr) minmax(0, 1.625fr)' /* Sidebar min 200px, Content flexible */,
-                  'minmax(200px, 0.4fr) minmax(0, 1.6fr)' /* Sidebar min 200px, Content flexible */
-                ]}
-                gap={[null, 4]}
-              >
-                <aside sx={{ mb: [4, null] }}>
-                  <HomeNavigation />
-                </aside>
-                <main role='main'>
-                  <SkipNavContent />
-                  <div
-                    sx={{
-                      position: 'relative',
-                      borderTopRightRadius: '3em',
-                      borderTopLeftRadius: '.5em',
-                      px: [3, 4],
-                      pt: [2, 3]
-                    }}
-                  >
-                    <div
-                      sx={{
-                        maxWidth: '1200px'
-                      }}
-                    >
-                      <section id='top'>
-                        <HomeHeaderContent />
-                      </section>
-                      <HomeWidgets />
+              <HomeDashboardGrid
+                aside={<HomeNavigation />}
+                main={
+                  <main role='main'>
+                    <SkipNavContent />
+                    <div sx={homeDashboardMainShellSx}>
+                      <div sx={homeDashboardMainInnerMaxWidthSx}>
+                        <section id='top' tabIndex={-1}>
+                          <HomeHeaderContent />
+                        </section>
+                        <HomeWidgets />
+                      </div>
                     </div>
-                  </div>
-                  <Footer />
-                  <HCard />
-                </main>
-              </Grid>
+                    <Footer />
+                    <HCard />
+                  </main>
+                }
+              />
             </Container>
           </div>
         </Layout>

@@ -49,8 +49,15 @@ const mockCamera = {
   updateProjectionMatrix: jest.fn()
 }
 
+const mockGl = {
+  getExtension: jest.fn(() => ({
+    loseContext: jest.fn()
+  }))
+}
+
 const mockRenderer = {
   domElement: createMockCanvas(),
+  getContext: jest.fn(() => mockGl),
   setSize: jest.fn(),
   setPixelRatio: jest.fn(),
   setClearColor: jest.fn(),
@@ -192,22 +199,34 @@ describe('Artwork/Book3D', () => {
     expect(mockScene.add).toHaveBeenCalledWith(mockMesh)
   })
 
-  it('destroys the scene when the book leaves the viewport', () => {
+  it('ignores IntersectionObserver intersect notifications after unmount (avoids stray WebGL recreation)', () => {
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    expect(mockRenderer.setSize).toHaveBeenCalled()
+    jest.clearAllMocks()
+    unmount()
+    intersectionCallback([{ isIntersecting: true }])
+    expect(mockRenderer.setSize).not.toHaveBeenCalled()
+  })
+
+  it('pauses WebGL when the book leaves the viewport without disposing the renderer', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
     leaveViewport()
-    expect(mockRenderer.dispose).toHaveBeenCalled()
-    expect(mockGeometry.dispose).toHaveBeenCalled()
+    expect(mockRenderer.dispose).not.toHaveBeenCalled()
+    expect(mockGeometry.dispose).not.toHaveBeenCalled()
+    expect(mockRenderer.domElement.style.visibility).toBe('hidden')
   })
 
-  it('recreates the scene when the book re-enters after leaving', () => {
+  it('reuses the existing WebGL scene when the book re-enters after leaving', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
     leaveViewport()
     jest.clearAllMocks()
-    mockRenderer.domElement = createMockCanvas()
     enterViewport()
-    expect(mockRenderer.setSize).toHaveBeenCalled()
+    expect(mockRenderer.dispose).not.toHaveBeenCalled()
+    expect(mockRenderer.setSize).not.toHaveBeenCalled()
+    expect(mockRenderer.domElement.style.visibility).toBe('visible')
   })
 
   it('sets up an IntersectionObserver on mount', () => {
@@ -263,6 +282,29 @@ describe('Artwork/Book3D', () => {
     jest.runAllTimers()
     leaveViewport()
     expect(global.cancelAnimationFrame).toHaveBeenCalled()
+  })
+
+  it('exits stale RAF tick when teardown already ran (!active)', () => {
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.runAllTimers()
+    const tick = animationCallback
+    expect(tick).toEqual(expect.any(Function))
+    jest.clearAllMocks()
+    unmount()
+    tick()
+    expect(mockRenderer.render).not.toHaveBeenCalled()
+  })
+
+  it('exits stale RAF tick when the viewport already marked off-screen (!inViewport)', () => {
+    render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.runAllTimers()
+    const tick = animationCallback
+    leaveViewport()
+    jest.clearAllMocks()
+    tick()
+    expect(mockRenderer.render).not.toHaveBeenCalled()
   })
 
   it('runs a tick after the intro fires', () => {
@@ -646,13 +688,25 @@ describe('Artwork/Book3D', () => {
     expect(mockRenderer.setSize).toHaveBeenCalledTimes(2)
   })
 
-  it('does nothing in the resize callback when the scene has been destroyed', () => {
+  it('still applies resize when the book is off-screen (renderer kept alive)', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
-    leaveViewport() // destroyScene — renderer = null
+    leaveViewport()
 
-    // Should not throw due to the !renderer guard (line 377)
-    expect(() => resizeCallback && resizeCallback([])).not.toThrow()
+    resizeCallback && resizeCallback([])
+
+    expect(mockCamera.updateProjectionMatrix).toHaveBeenCalled()
+    expect(mockRenderer.setSize).toHaveBeenCalled()
+  })
+
+  it('ignores ResizeObserver resize callbacks after unmount (active guard)', () => {
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    jest.clearAllMocks()
+    unmount()
+    resizeCallback && resizeCallback([])
+    expect(mockRenderer.setSize).not.toHaveBeenCalled()
+    expect(mockCamera.updateProjectionMatrix).not.toHaveBeenCalled()
   })
 
   // ── Cleanup ────────────────────────────────────────────────────────────────
@@ -666,6 +720,16 @@ describe('Artwork/Book3D', () => {
     expect(mockIntersectionObserver.disconnect).toHaveBeenCalled()
     expect(mockResizeObserver.disconnect).toHaveBeenCalled()
     expect(mockGeometry.dispose).toHaveBeenCalled()
+    expect(mockRenderer.dispose).toHaveBeenCalled()
+  })
+
+  it('swallows WEBGL_lose_context errors during dispose when getExtension throws', () => {
+    mockGl.getExtension.mockImplementationOnce(() => {
+      throw new Error('context already invalidated')
+    })
+    const { unmount } = render(<Book3D {...defaultProps} />)
+    enterViewport()
+    expect(() => unmount()).not.toThrow()
     expect(mockRenderer.dispose).toHaveBeenCalled()
   })
 

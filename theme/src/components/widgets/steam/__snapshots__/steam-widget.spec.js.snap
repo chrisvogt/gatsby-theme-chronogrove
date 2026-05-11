@@ -541,23 +541,6 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
       <h3
         class="css-9nh3l5"
       >
-        Recently-Played Games
-      </h3>
-    </div>
-    <p
-      class="css-zxnhh7"
-    >
-      Games I've played in the last two weeks.
-    </p>
-    <div
-      class="css-1jvl2a0"
-    />
-    <div
-      class="css-5abbi3"
-    >
-      <h3
-        class="css-9nh3l5"
-      >
         Leaderboard
       </h3>
     </div>
@@ -612,7 +595,7 @@ exports[`SteamWidget renders loading state 1`] = `
     >
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -629,7 +612,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -646,7 +629,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -663,7 +646,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -680,7 +663,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -697,7 +680,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-eom9to"
+        class="css-uk8v2r"
       >
         <div
           class="show-loading-animation"
@@ -1072,23 +1055,6 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
     >
       Steam
     </div>
-    <div
-      class="css-5abbi3"
-    >
-      <h3
-        class="css-9nh3l5"
-      >
-        Recently-Played Games
-      </h3>
-    </div>
-    <p
-      class="css-zxnhh7"
-    >
-      Games I've played in the last two weeks.
-    </p>
-    <div
-      class="css-1jvl2a0"
-    />
     <div
       class="css-5abbi3"
     >

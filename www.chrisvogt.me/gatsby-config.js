@@ -43,7 +43,7 @@ module.exports = {
         widgetDataSource: 'https://api.chrisvogt.me/widgets/discogs'
       },
       flickr: {
-        username: 'chrisvogt',
+        username: 'c1v0',
         widgetDataSource: 'https://api.chrisvogt.me/widgets/flickr'
       },
       github: {
@@ -274,7 +274,7 @@ module.exports = {
             widgetDataSource: 'https://api.chrisvogt.me/widgets/discogs'
           },
           flickr: {
-            username: 'chrisvogt',
+            username: 'c1v0',
             widgetDataSource: 'https://api.chrisvogt.me/widgets/flickr'
           },
           github: {
