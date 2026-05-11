@@ -37,26 +37,36 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
       <div
         class="css-1x44wr8"
       >
-        <div
-          class="css-16ilj6a"
+        <header
+          class="css-14paj2s"
         >
           <h2
-            class="css-aw4tjo"
+            class="css-1gptag3"
             id="modal-title"
           >
             Test Album
           </h2>
           <p
-            class="css-1frxl4t"
+            class="css-1idv3d9"
           >
-            Test Artist
+            <span
+              class="css-rv0fol"
+            >
+              Test Artist
+            </span>
+            <span
+              aria-hidden="true"
+              class="css-72cs2q"
+            >
+              ·
+            </span>
+            <span
+              class="css-1ackbda"
+            >
+              2023
+            </span>
           </p>
-          <p
-            class="css-y0ziuu"
-          >
-            2023
-          </p>
-        </div>
+        </header>
         <div
           class="css-73r8mm"
         >
@@ -72,6 +82,18 @@ exports[`DiscogsModal cover image handling handles release with missing cover im
           <div
             class="css-zqnl66"
           >
+            <div>
+              <h4
+                class="css-1vvxkz4"
+              >
+                Added to collection
+              </h4>
+              <p
+                class="css-16r4ony"
+              >
+                Jun 15, 2024
+              </p>
+            </div>
             <div>
               <h4
                 class="css-1vvxkz4"
@@ -273,26 +295,36 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
       <div
         class="css-1x44wr8"
       >
-        <div
-          class="css-16ilj6a"
+        <header
+          class="css-17b0b2t"
         >
           <h2
-            class="css-aw4tjo"
+            class="css-1gptag3"
             id="modal-title"
           >
             Test Album
           </h2>
           <p
-            class="css-6y6d9e"
+            class="css-d9thsp"
           >
-            Test Artist
+            <span
+              class="css-dxpzgj"
+            >
+              Test Artist
+            </span>
+            <span
+              aria-hidden="true"
+              class="css-1ekygyk"
+            >
+              ·
+            </span>
+            <span
+              class="css-1ackbda"
+            >
+              2023
+            </span>
           </p>
-          <p
-            class="css-1q3zwp4"
-          >
-            2023
-          </p>
-        </div>
+        </header>
         <div
           class="css-73r8mm"
         >
@@ -316,6 +348,18 @@ exports[`DiscogsModal dark mode renders with dark mode styling 1`] = `
           <div
             class="css-zqnl66"
           >
+            <div>
+              <h4
+                class="css-tq71p3"
+              >
+                Added to collection
+              </h4>
+              <p
+                class="css-16r4ony"
+              >
+                Jun 15, 2024
+              </p>
+            </div>
             <div>
               <h4
                 class="css-tq71p3"
@@ -517,26 +561,36 @@ exports[`DiscogsModal handles release with empty arrays 1`] = `
       <div
         class="css-1x44wr8"
       >
-        <div
-          class="css-16ilj6a"
+        <header
+          class="css-14paj2s"
         >
           <h2
-            class="css-aw4tjo"
+            class="css-1gptag3"
             id="modal-title"
           >
             Empty Arrays Album
           </h2>
           <p
-            class="css-1frxl4t"
+            class="css-1idv3d9"
           >
-            Unknown Artist
+            <span
+              class="css-rv0fol"
+            >
+              Unknown Artist
+            </span>
+            <span
+              aria-hidden="true"
+              class="css-72cs2q"
+            >
+              ·
+            </span>
+            <span
+              class="css-1ackbda"
+            >
+              2023
+            </span>
           </p>
-          <p
-            class="css-y0ziuu"
-          >
-            2023
-          </p>
-        </div>
+        </header>
         <div
           class="css-73r8mm"
         >
@@ -626,21 +680,25 @@ exports[`DiscogsModal handles release with missing basicInformation 1`] = `
       <div
         class="css-1x44wr8"
       >
-        <div
-          class="css-16ilj6a"
+        <header
+          class="css-14paj2s"
         >
           <h2
-            class="css-aw4tjo"
+            class="css-1gptag3"
             id="modal-title"
           >
             Unknown Title
           </h2>
           <p
-            class="css-1frxl4t"
+            class="css-1idv3d9"
           >
-            Unknown Artist
+            <span
+              class="css-rv0fol"
+            >
+              Unknown Artist
+            </span>
           </p>
-        </div>
+        </header>
         <div
           class="css-73r8mm"
         >
@@ -709,26 +767,36 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
       <div
         class="css-1x44wr8"
       >
-        <div
-          class="css-16ilj6a"
+        <header
+          class="css-14paj2s"
         >
           <h2
-            class="css-aw4tjo"
+            class="css-1gptag3"
             id="modal-title"
           >
             Test Album
           </h2>
           <p
-            class="css-1frxl4t"
+            class="css-1idv3d9"
           >
-            Test Artist
+            <span
+              class="css-rv0fol"
+            >
+              Test Artist
+            </span>
+            <span
+              aria-hidden="true"
+              class="css-72cs2q"
+            >
+              ·
+            </span>
+            <span
+              class="css-1ackbda"
+            >
+              2023
+            </span>
           </p>
-          <p
-            class="css-y0ziuu"
-          >
-            2023
-          </p>
-        </div>
+        </header>
         <div
           class="css-73r8mm"
         >
@@ -752,6 +820,18 @@ exports[`DiscogsModal renders modal with complete release data 1`] = `
           <div
             class="css-zqnl66"
           >
+            <div>
+              <h4
+                class="css-1vvxkz4"
+              >
+                Added to collection
+              </h4>
+              <p
+                class="css-16r4ony"
+              >
+                Jun 15, 2024
+              </p>
+            </div>
             <div>
               <h4
                 class="css-1vvxkz4"
@@ -953,26 +1033,36 @@ exports[`DiscogsModal renders modal with minimal release data 1`] = `
       <div
         class="css-1x44wr8"
       >
-        <div
-          class="css-16ilj6a"
+        <header
+          class="css-14paj2s"
         >
           <h2
-            class="css-aw4tjo"
+            class="css-1gptag3"
             id="modal-title"
           >
             Minimal Album
           </h2>
           <p
-            class="css-1frxl4t"
+            class="css-1idv3d9"
           >
-            Minimal Artist
+            <span
+              class="css-rv0fol"
+            >
+              Minimal Artist
+            </span>
+            <span
+              aria-hidden="true"
+              class="css-72cs2q"
+            >
+              ·
+            </span>
+            <span
+              class="css-1ackbda"
+            >
+              2022
+            </span>
           </p>
-          <p
-            class="css-y0ziuu"
-          >
-            2022
-          </p>
-        </div>
+        </header>
         <div
           class="css-73r8mm"
         >

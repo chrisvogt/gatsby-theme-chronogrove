@@ -19,6 +19,7 @@ jest.mock('../../../helpers/isDarkMode', () => jest.fn(() => false))
 
 const mockRelease = {
   id: 12345,
+  dateAdded: '2024-06-15T14:30:00.000Z',
   basicInformation: {
     id: 12345,
     title: 'Test Album',
@@ -108,6 +109,17 @@ describe('DiscogsModal', () => {
   it('displays year when available', () => {
     render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
     expect(screen.getByText('2023')).toBeInTheDocument()
+  })
+
+  it('displays added-to-collection when dateAdded is parseable', () => {
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+    expect(screen.getByRole('heading', { level: 4, name: 'Added to collection' })).toBeInTheDocument()
+    expect(screen.getByText(/2024/)).toBeInTheDocument()
+  })
+
+  it('does not show added-to-collection when date is unknown', () => {
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockReleaseMinimal} />)
+    expect(screen.queryByRole('heading', { name: 'Added to collection' })).not.toBeInTheDocument()
   })
 
   it('displays genres when available', () => {

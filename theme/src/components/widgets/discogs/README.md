@@ -13,8 +13,10 @@ A widget that displays a Discogs vinyl collection as circular records with hover
 - **Pagination**: Shows 2 rows per page (items per page = columns × 2, e.g. 10 records at the widest breakpoint using 5 columns) for better performance
 - **Swipe/Drag Support**: Mobile users can swipe left/right, desktop users can drag with mouse
 - **Theme-Consistent Controls**: Pagination buttons match your site's design system
-- **Sort**: Visitors can switch between **order added to collection** (default, newest first when `dateAdded` is present) and **alphabetical by album title**.
-- Responsive grid layout that adapts to different screen sizes
+- **Sort**: Visitors can switch among **order added to collection** (default, newest first when `dateAdded` is present), **alphabetical by album title**, and **release year** (`basicInformation.year`, **newest year first**; missing years sort after dated items).
+- **Layout**: Visitors can switch between **grid** (default) and **list**. List mode is a **flat register / panel**: one tight outer border, hairline dividers between rows, no elevated cards; miniature vinyl artwork and **click / Enter** still open the details **modal** like the grid.
+- **List pagination**: **`items per page = columns × 2`** (aligned with **grid** density, e.g. **10** per slide from 1024px–1279px at **5 columns**).
+- Responsive grid/list layout across screen sizes
 
 ## Configuration
 
@@ -71,8 +73,8 @@ The widget expects data from a Discogs widget endpoint with this structure:
 ## Components
 
 - `discogs-widget.js` - Main widget component with data fetching and layout
-- `vinyl-collection.js` - Renders the vinyl records in a grid with visual effects, pagination, and sort controls
-- `sort-discogs-releases.js` - Client-side sort by collection date (`dateAdded` and aliases) or album title
+- `vinyl-collection.js` - Renders the vinyl records in grid or bordered list “register” layouts, swipe carousel, pagination, sort, and view controls.
+- `sort-discogs-releases.js` - Client-side sort by collection date (`dateAdded` and aliases), **`basicInformation.year`** (release year), or album title.
 - `vinyl-pagination.js` - Pagination component with swipe/drag support and theme-consistent controls
 - `index.js` - Export file for the widget
 

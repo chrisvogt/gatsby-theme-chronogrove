@@ -92,6 +92,35 @@ describe('VinylCollection', () => {
     expect(screen.getByText(/Page 1 of/)).toBeInTheDocument()
   })
 
+  it('list layout exposes each release as an accessible row control', () => {
+    render(<VinylCollection isLoading={false} releases={mockReleases} />)
+
+    fireEvent.click(screen.getByRole('button', { name: /show vinyl collection as a list/i }))
+
+    expect(
+      screen.getByRole('button', {
+        name: /The Rise & Fall Of A Midwest Princess \(2023\) - Chappell Roan\. Click to view details\./i
+      })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', {
+        name: /Brat And It's Completely Different \(2025\) - Charli XCX\. Click to view details\./i
+      })
+    ).toBeInTheDocument()
+  })
+
+  it('list layout matches grid slide density and stays paginated', () => {
+    window.innerWidth = 1100
+    const { container } = render(<VinylCollection isLoading={false} releases={createManyReleases(25)} />)
+
+    expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: /show vinyl collection as a list/i }))
+
+    expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
+    expect(container.querySelectorAll('.vinyl-collection_list button[type="button"]')).toHaveLength(25)
+  })
+
   it('handles releases with missing basicInformation', () => {
     const releasesWithMissingData = [
       {
@@ -1283,6 +1312,7 @@ describe('VinylCollection', () => {
       render(<VinylCollection isLoading={true} releases={[]} />)
       expect(screen.getByRole('button', { name: /Sort collection by date added/i })).toBeDisabled()
       expect(screen.getByRole('button', { name: /Sort collection alphabetically by album title/i })).toBeDisabled()
+      expect(screen.getByRole('button', { name: /Sort collection by release year, newest first/i })).toBeDisabled()
     })
 
     it('reorders records alphabetically when Alphabetical is chosen', () => {
@@ -1292,6 +1322,16 @@ describe('VinylCollection', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /Sort collection alphabetically by album title/i }))
       expect(firstTitle()).toMatch(/Alpha Dawn/)
+    })
+
+    it('reorders records by release year newest first when Release Year is chosen', () => {
+      const { container } = render(<VinylCollection isLoading={false} releases={sortMockReleases} />)
+      const firstTitle = () => container.querySelector('.vinyl-record')?.getAttribute('aria-label') || ''
+      expect(firstTitle()).toMatch(/Zebra Strikes Back/)
+
+      fireEvent.click(screen.getByRole('button', { name: /Sort collection by release year, newest first/i }))
+      expect(firstTitle()).toMatch(/Alpha Dawn/)
+      expect(firstTitle()).toMatch(/2021/)
     })
   })
 

@@ -84,34 +84,77 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
           Vinyl Collection
         </h3>
         <div
-          aria-label="Sort vinyl collection"
-          class="css-1l647io"
-          role="radiogroup"
+          class="css-1vz564k"
         >
-          <span
-            class="css-128a175"
-            id="vinyl-collection-sort-label"
+          <div
+            aria-label="Sort vinyl collection"
+            class="css-1l647io"
+            role="radiogroup"
           >
-            Sort:
-          </span>
-          <button
-            aria-label="Sort collection by date added"
-            aria-pressed="true"
-            class="css-58fzx8"
-            disabled=""
-            type="button"
+            <span
+              class="css-128a175"
+              id="vinyl-collection-sort-label"
+            >
+              Sort:
+            </span>
+            <button
+              aria-label="Sort collection by date added"
+              aria-pressed="true"
+              class="css-58fzx8"
+              disabled=""
+              type="button"
+            >
+              Date added
+            </button>
+            <button
+              aria-label="Sort collection alphabetically by album title"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              Alphabetical
+            </button>
+            <button
+              aria-label="Sort collection by release year, newest first"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              Release Year
+            </button>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
           >
-            Date added
-          </button>
-          <button
-            aria-label="Sort collection alphabetically by album title"
-            aria-pressed="false"
-            class="css-1dk5zix"
-            disabled=""
-            type="button"
-          >
-            Alphabetical
-          </button>
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-58fzx8"
+              disabled=""
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              List
+            </button>
+          </div>
         </div>
       </div>
       <p
@@ -225,32 +268,72 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
           Vinyl Collection
         </h3>
         <div
-          aria-label="Sort vinyl collection"
-          class="css-1l647io"
-          role="radiogroup"
+          class="css-1vz564k"
         >
-          <span
-            class="css-128a175"
-            id="vinyl-collection-sort-label"
+          <div
+            aria-label="Sort vinyl collection"
+            class="css-1l647io"
+            role="radiogroup"
           >
-            Sort:
-          </span>
-          <button
-            aria-label="Sort collection by date added"
-            aria-pressed="true"
-            class="css-1oc3a3t"
-            type="button"
+            <span
+              class="css-128a175"
+              id="vinyl-collection-sort-label"
+            >
+              Sort:
+            </span>
+            <button
+              aria-label="Sort collection by date added"
+              aria-pressed="true"
+              class="css-1oc3a3t"
+              type="button"
+            >
+              Date added
+            </button>
+            <button
+              aria-label="Sort collection alphabetically by album title"
+              aria-pressed="false"
+              class="css-1lig866"
+              type="button"
+            >
+              Alphabetical
+            </button>
+            <button
+              aria-label="Sort collection by release year, newest first"
+              aria-pressed="false"
+              class="css-1lig866"
+              type="button"
+            >
+              Release Year
+            </button>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
           >
-            Date added
-          </button>
-          <button
-            aria-label="Sort collection alphabetically by album title"
-            aria-pressed="false"
-            class="css-1lig866"
-            type="button"
-          >
-            Alphabetical
-          </button>
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-1oc3a3t"
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1lig866"
+              type="button"
+            >
+              List
+            </button>
+          </div>
         </div>
       </div>
       <p
@@ -454,34 +537,77 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
           Vinyl Collection
         </h3>
         <div
-          aria-label="Sort vinyl collection"
-          class="css-1l647io"
-          role="radiogroup"
+          class="css-1vz564k"
         >
-          <span
-            class="css-128a175"
-            id="vinyl-collection-sort-label"
+          <div
+            aria-label="Sort vinyl collection"
+            class="css-1l647io"
+            role="radiogroup"
           >
-            Sort:
-          </span>
-          <button
-            aria-label="Sort collection by date added"
-            aria-pressed="true"
-            class="css-58fzx8"
-            disabled=""
-            type="button"
+            <span
+              class="css-128a175"
+              id="vinyl-collection-sort-label"
+            >
+              Sort:
+            </span>
+            <button
+              aria-label="Sort collection by date added"
+              aria-pressed="true"
+              class="css-58fzx8"
+              disabled=""
+              type="button"
+            >
+              Date added
+            </button>
+            <button
+              aria-label="Sort collection alphabetically by album title"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              Alphabetical
+            </button>
+            <button
+              aria-label="Sort collection by release year, newest first"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              Release Year
+            </button>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
           >
-            Date added
-          </button>
-          <button
-            aria-label="Sort collection alphabetically by album title"
-            aria-pressed="false"
-            class="css-1dk5zix"
-            disabled=""
-            type="button"
-          >
-            Alphabetical
-          </button>
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-58fzx8"
+              disabled=""
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1dk5zix"
+              disabled=""
+              type="button"
+            >
+              List
+            </button>
+          </div>
         </div>
       </div>
       <p

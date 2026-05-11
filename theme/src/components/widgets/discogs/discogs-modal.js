@@ -8,8 +8,18 @@ import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
+import { getDiscogsCollectionAddedMs } from './sort-discogs-releases'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
+
+function formatCollectionAddedLocal(ms) {
+  if (!Number.isFinite(ms) || ms <= 0) return null
+  try {
+    return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(new Date(ms))
+  } catch {
+    return null
+  }
+}
 
 const DiscogsModal = ({ isOpen, onClose, release }) => {
   const { colorMode } = useThemeUI()
@@ -78,6 +88,13 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   const artistNames = (artists || []).map(artist => artist.name).join(', ')
   const genreList = (genres || []).join(', ')
   const styleList = (styles || []).join(', ')
+  const collectionAddedText = formatCollectionAddedLocal(getDiscogsCollectionAddedMs(release))
+
+  const muted = darkMode ? '#a0aec0' : '#718096'
+  const headerRule = darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'
+  const yearStr =
+    year != null && year !== '' ? (typeof year === 'number' ? String(Math.trunc(year)) : String(year).trim()) : ''
+  const showYear = Boolean(yearStr)
 
   return createPortal(
     <div
@@ -174,20 +191,53 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
         </button>
 
         <div sx={{ padding: 4, paddingTop: 5 }}>
-          {/* Header with title */}
-          <div sx={{ mb: 4 }}>
-            <Themed.h2 id='modal-title' sx={{ margin: 0, fontSize: [4, 5], lineHeight: 1.2 }}>
+          <header
+            sx={{
+              mb: 4,
+              pb: 4,
+              borderBottom: '1px solid',
+              borderBottomColor: headerRule
+            }}
+          >
+            <Themed.h2
+              id='modal-title'
+              sx={{
+                margin: 0,
+                fontSize: [4, 5],
+                lineHeight: 1.15,
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+                color: 'inherit'
+              }}
+            >
               {title || 'Unknown Title'}
             </Themed.h2>
-            <Themed.p sx={{ margin: 0, fontSize: [2, 3], color: darkMode ? '#a0aec0' : '#718096', mt: 1 }}>
-              {artistNames || 'Unknown Artist'}
-            </Themed.p>
-            {Boolean(year) && (
-              <Themed.p sx={{ margin: 0, fontSize: 2, color: darkMode ? '#a0aec0' : '#718096', mt: 1 }}>
-                {year}
-              </Themed.p>
-            )}
-          </div>
+            <p
+              sx={{
+                margin: 0,
+                mt: 2,
+                fontSize: [2, 3],
+                lineHeight: 1.45,
+                color: muted,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                gap: '0.4em'
+              }}
+            >
+              <span sx={{ fontWeight: 500, color: darkMode ? '#e2e8f0' : '#2d3748' }}>
+                {artistNames || 'Unknown Artist'}
+              </span>
+              {showYear && (
+                <>
+                  <span sx={{ color: muted, opacity: 0.85, userSelect: 'none' }} aria-hidden>
+                    ·
+                  </span>
+                  <span sx={{ fontVariantNumeric: 'tabular-nums' }}>{yearStr}</span>
+                </>
+              )}
+            </p>
+          </header>
 
           {/* Content grid */}
           <div
@@ -272,6 +322,15 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
 
             {/* Details */}
             <div sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              {collectionAddedText && (
+                <div>
+                  <Themed.h4 sx={{ margin: 0, fontSize: 2, color: darkMode ? '#a0aec0' : '#718096', mb: 1 }}>
+                    Added to collection
+                  </Themed.h4>
+                  <Themed.p sx={{ margin: 0, fontSize: 1 }}>{collectionAddedText}</Themed.p>
+                </div>
+              )}
+
               {/* Genres */}
               {genreList && (
                 <div>

@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.85.16
+
+### `gatsby-theme-chronogrove` — Discogs modal & vinyl sort labeling
+
+- **Discogs modal** (`discogs-modal.js`): Redesigned **header** with **album title**, a single meta line (**artist · release year**), light divider beneath, and themed foreground/muted colors in **light/dark** mode; **Added to collection** shows a **locale date** (no time) when `dateAdded` or known aliases resolve via **`getDiscogsCollectionAddedMs`** (**`sort-discogs-releases.js`**).
+- **Sort controls**: The album-year sort toggle label is **Release Year** for clarity (**`vinyl-collection.js`**).
+- **Tests / snapshots**: **`discogs-modal.spec.js`**, **`discogs-widget.spec.js`**.
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.16** (tracks theme **0.85.16**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.16** (tracks theme **0.85.16**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.16**), `discogs-modal.js`, `discogs-modal.spec.js`, **`discogs-modal.spec.js.snap`**, **`vinyl-collection.js`**, `vinyl-collection.spec.js`, **`discogs-widget.spec.js.snap`**
+- `www.chrisvogt.me/package.json` (version **1.16.16**)
+- `www.chronogrove.com/package.json` (version **1.3.16**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.15
 
 ### `gatsby-theme-chronogrove` — Discogs vinyl: collection sort & pagination reset fix

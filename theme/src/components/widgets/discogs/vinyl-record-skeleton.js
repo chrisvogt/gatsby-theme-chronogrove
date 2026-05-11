@@ -10,8 +10,78 @@ import 'react-placeholder/lib/reactPlaceholder.css'
  * so scroll-to-section and layout stay stable. Only the "album art" (center 70%)
  * is an animated placeholder until data is ready — same pattern as Steam game cards.
  */
-const VinylRecordSkeleton = ({ darkModeActive }) => {
+const VinylRecordSkeleton = ({ darkModeActive, variant = 'grid' }) => {
   const placeholderColor = darkModeActive ? '#3a3a4a' : '#efefef'
+
+  if (variant === 'list') {
+    return (
+      <div
+        aria-hidden
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: [2, 3],
+          py: [10, '11px', '12px'],
+          px: [2, 3],
+          width: '100%',
+          boxSizing: 'border-box'
+        }}
+      >
+        <div
+          aria-hidden
+          sx={{
+            width: ['44px', '50px', '52px'],
+            height: ['44px', '50px', '52px'],
+            flexShrink: 0,
+            borderRadius: '50%',
+            overflow: 'hidden',
+            position: 'relative',
+            border: '2px solid #333',
+            background: 'linear-gradient(45deg, #1a1a1a 0%, #2d2d2d 100%)',
+            '@media (max-width: 639px)': {
+              border: '1px solid #333'
+            }
+          }}
+        >
+          <div
+            className='show-loading-animation'
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '70%',
+              height: '70%',
+              borderRadius: '50%',
+              backgroundColor: placeholderColor
+            }}
+          />
+        </div>
+        <div sx={{ flex: 1, minWidth: 0 }}>
+          <div
+            className='show-loading-animation'
+            sx={{
+              height: '14px',
+              borderRadius: '4px',
+              backgroundColor: placeholderColor,
+              mb: 2,
+              maxWidth: '85%'
+            }}
+          />
+          <div
+            className='show-loading-animation'
+            sx={{
+              height: '11px',
+              borderRadius: '4px',
+              backgroundColor: placeholderColor,
+              maxWidth: '55%'
+            }}
+          />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <Card

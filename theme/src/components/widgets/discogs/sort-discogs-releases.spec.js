@@ -2,7 +2,9 @@ import {
   DEFAULT_DISCOGS_SORT_MODE,
   DISCOGS_SORT_ADDED,
   DISCOGS_SORT_ALPHABETICAL,
+  DISCOGS_SORT_RELEASE_YEAR,
   getDiscogsCollectionAddedMs,
+  getDiscogsReleaseYear,
   sortDiscogsReleases
 } from './sort-discogs-releases'
 
@@ -45,6 +47,26 @@ describe('sortDiscogsReleases', () => {
     })
   })
 
+  describe('getDiscogsReleaseYear', () => {
+    it('reads integer year', () => {
+      expect(getDiscogsReleaseYear(rel(1, 'A'))).toBe(2024)
+    })
+
+    it('reads year string', () => {
+      expect(
+        getDiscogsReleaseYear({
+          id: 1,
+          basicInformation: { title: 'T', year: '1999', artists: [] }
+        })
+      ).toBe(1999)
+    })
+
+    it('returns NaN when missing or invalid', () => {
+      expect(getDiscogsReleaseYear({ id: 1, basicInformation: { title: 'T' } })).toBeNaN()
+      expect(getDiscogsReleaseYear({ id: 1, basicInformation: { title: 'T', year: 12, artists: [] } })).toBeNaN()
+    })
+  })
+
   describe('DISCOGS_SORT_ALPHABETICAL', () => {
     it('orders by trimmed title ignoring case', () => {
       const out = sortDiscogsReleases([rel(1, 'Zen'), rel(2, 'alpha'), rel(3, 'Beta')], DISCOGS_SORT_ALPHABETICAL)
@@ -54,7 +76,36 @@ describe('sortDiscogsReleases', () => {
     it('is stable on equal titles', () => {
       const a = rel(1, 'Same')
       const b = rel(2, 'Same')
-      const out = sortDiscogsReleases([a, b], DISCOGS_SORT_ALPHABETICAL)
+      const out = sortDiscogsReleases([b, a], DISCOGS_SORT_ALPHABETICAL)
+      expect(out.map(r => r.id)).toEqual([2, 1])
+    })
+  })
+
+  describe('DISCOGS_SORT_RELEASE_YEAR', () => {
+    const relY = (id, title, year) => ({
+      id,
+      basicInformation: { id, title, year, artists: [{ name: 'X' }] }
+    })
+
+    it('orders newest release year first', () => {
+      const out = sortDiscogsReleases(
+        [relY(1, 'Old', 1990), relY(2, 'New', 2024), relY(3, 'Mid', 2010)],
+        DISCOGS_SORT_RELEASE_YEAR
+      )
+      expect(out.map(r => r.id)).toEqual([2, 3, 1])
+    })
+
+    it('keeps catalog order among equal years', () => {
+      const a = relY(1, 'A', 2000)
+      const b = relY(2, 'B', 2000)
+      const out = sortDiscogsReleases([b, a], DISCOGS_SORT_RELEASE_YEAR)
+      expect(out.map(r => r.id)).toEqual([2, 1])
+    })
+
+    it('puts unknown year after known years', () => {
+      const known = relY(1, 'K', 2000)
+      const unknown = { id: 2, basicInformation: { title: 'U', artists: [] } }
+      const out = sortDiscogsReleases([unknown, known], DISCOGS_SORT_RELEASE_YEAR)
       expect(out.map(r => r.id)).toEqual([1, 2])
     })
   })
