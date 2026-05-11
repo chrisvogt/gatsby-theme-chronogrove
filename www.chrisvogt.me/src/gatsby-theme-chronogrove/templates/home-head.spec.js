@@ -23,11 +23,11 @@ describe('HomeHead (chrisvogt.me shadow)', () => {
     expect(seoElement).toHaveAttribute('data-title', 'Home')
     expect(seoElement).toHaveAttribute(
       'data-description',
-      "Explore Chris Vogt's digital garden. A Software Engineer in San Francisco, Chris shares his interest in photography, piano, and travel."
+      'Principal software engineer in San Francisco (GoDaddy). Long-form writing on code, travel, and piano; home-page tiles sync daily from my own Firebase-backed API.'
     )
     expect(seoElement).toHaveAttribute(
       'data-keywords',
-      'Chris Vogt, Software Engineer in San Francisco, GoDaddy engineer blog, photography blog, piano recordings, travel blog, personal blog, digital garden'
+      'Chris Vogt, principal software engineer, San Francisco, GoDaddy, software blog, piano, travel photography, personal website'
     )
   })
 
@@ -65,7 +65,9 @@ describe('HomeHead (chrisvogt.me shadow)', () => {
     expect(websiteSchema.url).toBe('https://www.chrisvogt.me')
     expect(websiteSchema.name).toBe('Chris Vogt')
     expect(websiteSchema.inLanguage).toBe('en-US')
-    expect(websiteSchema.publisher['@id']).toBe('https://www.chrisvogt.me/#person')
+    expect(websiteSchema.description).toBe(
+      'Principal software engineer in San Francisco (GoDaddy). Long-form writing on code, travel, and piano; home-page tiles sync daily from my own Firebase-backed API.'
+    )
   })
 
   it('includes Person schema with Chris Vogt-specific information', () => {

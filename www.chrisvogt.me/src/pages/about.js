@@ -17,29 +17,29 @@ const AboutPage = () => {
         }}
       >
         <Container sx={{ width: ['', '', 'max(80ch, 50vw)'], lineHeight: 1.7 }}>
-          <Themed.h1>About Me</Themed.h1>
+          <Themed.h1>About</Themed.h1>
 
           <Themed.p>
-            By day, I'm a Principal Software Engineer at GoDaddy. I've been there since 2017 — nearly nine years — and I
-            work on the Airo-Growth-Innovation (AGI) team. We build intelligent customer dashboards, the recommendations
-            you see across GoDaddy, and GoDaddy Airo™. This site isn't about work, though. It's where I follow my
-            curiosity, experiment with ideas, and write code just for fun.
+            By day I'm a Principal Software Engineer at GoDaddy—there since 2017, on the Airo-Growth-Innovation (AGI)
+            team. We ship intelligent customer dashboards, the recommendations surfaced across GoDaddy, and GoDaddy
+            Airo™. Off the clock I keep this site: experiments, long posts, and tooling I build because the problem
+            interests me, not because it was assigned.
           </Themed.p>
 
           <Themed.p>
-            Most evenings, you'll find me at the piano — practicing, recording, or just playing around with sound. I've
-            been slowly teaching myself music, and I'm figuring out how to bring what I know from tech into making
-            music. I also spend a lot of time with friends in the city and love connecting with people who are
-            passionate about what they do.
+            Most evenings I'm at the piano—practicing, recording, or messing with arrangements. I am self-taught on the
+            instrument and borrow habits from engineering—tight feedback loops, versioning my own practice notes—where
+            they help. Weekends skew social: friends across San Francisco who care a lot about what they make, whether
+            that is code, music, or neither.
           </Themed.p>
 
-          <Themed.h2 sx={{ mt: 5 }}>Career Journey</Themed.h2>
+          <Themed.h2 sx={{ mt: 5 }}>Career journey</Themed.h2>
 
           <Themed.p>
-            The chart below shows how my career has actually played out: print and design first (OfficeMax, FedEx
-            Kinko's, then creative and freelance work), then IT and systems (contract roles, then Apogee Physicians and
-            Encore Discovery Solutions), and finally a shift into software engineering that led to web and front-end
-            roles and, in 2017, to GoDaddy, where I've been ever since.
+            Retail print and design first in Arizona (OfficeMax, FedEx Kinko's), then freelance creative work, then IT
+            contracts, Apogee Physicians, Encore Discovery Solutions—then a deliberate turn into software engineering
+            through web and front-end roles until GoDaddy brought me on in 2017. The SVG curve is that path in order,
+            without the usual résumé flattening.
           </Themed.p>
         </Container>
 
@@ -49,6 +49,6 @@ const AboutPage = () => {
   )
 }
 
-export const Head = () => <Seo canonicalPath='/about/' title='About Me' />
+export const Head = () => <Seo canonicalPath='/about/' title='About' />
 
 export default AboutPage

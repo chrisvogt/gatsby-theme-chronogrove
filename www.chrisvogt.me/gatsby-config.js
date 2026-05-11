@@ -19,7 +19,8 @@ module.exports = {
     avatarURL: '/images/avatar-256px.jpg',
     baseURL: 'https://www.chrisvogt.me',
     siteUrl,
-    description: 'Software Engineer in San Francisco blogging about code, photography and piano music.',
+    description:
+      'Principal software engineer in San Francisco (GoDaddy). Long-form writing on code, travel, and piano; home-page tiles sync daily from my own Firebase-backed API.',
     headline: 'Chris Vogt',
     hCard: {
       email: 'mail@chrisvogt.me',
@@ -75,7 +76,8 @@ module.exports = {
       options: {
         siteMetadata: {
           title: 'chrisvogt.me',
-          description: 'Software Engineer in San Francisco blogging about code, photography and piano music.',
+          description:
+            'Principal software engineer in San Francisco (GoDaddy). Long-form writing on code, travel, and piano; home-page tiles sync daily from my own Firebase-backed API.',
           headline: 'Chris Vogt',
           subhead: 'Code, Music & Photography',
           avatarURL: '/images/avatar-256px.jpg',
@@ -169,7 +171,7 @@ module.exports = {
                 path: '/about',
                 slug: 'about',
                 text: 'About',
-                title: 'About Me — Chris Vogt'
+                title: 'About — Chris Vogt'
               },
               {
                 path: '/now',

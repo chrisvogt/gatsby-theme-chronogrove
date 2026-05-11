@@ -42,22 +42,20 @@ const HomeHeaderContent = () => {
           }
         }}
       >
-        Hi!{' '}
-        <span className='emoji' ref={emojiRef} onAnimationEnd={handleAnimationEnd}>
+        Chris Vogt{' '}
+        <span className='emoji' ref={emojiRef} onAnimationEnd={handleAnimationEnd} aria-hidden='true'>
           👋
-        </span>{' '}
-        I'm Chris Vogt.
+        </span>
       </Themed.h1>
 
       <Themed.p>
-        This is my personal blog and digital garden: a place where I share what I'm building, exploring, and learning
-        over time. This space is always evolving — part notebook, part playground — and I'm glad you found your way
-        here.
+        San Francisco · Principal Software Engineer at GoDaddy. This site is where I publish build notes, trip
+        galleries, and piano recordings—the side projects and obsessions that do not live on a work roadmap.
       </Themed.p>
 
       <Themed.p>
-        This page is a dashboard of my posts and online activity. The social content below is updated automatically
-        every day.
+        GitHub, reading lists, music plays, and photo tiles along the page sync once a day from a small API I run on
+        Firebase—same pipeline that backs the public metrics service.
       </Themed.p>
     </div>
   )
