@@ -14,6 +14,8 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))',
     '../www.chrisvogt.me/components/**/*(.js|!(*.spec.js|*.scss|*.json|*.snap))',
+    '../www.chrisvogt.me/src/pages/travel.js',
+    '../www.chrisvogt.me/src/pages/music.js',
     'gatsby-browser.js',
     'gatsby-node.js',
     'gatsby-ssr.js',
@@ -58,10 +60,10 @@ module.exports = {
 
   coverageThreshold: {
     global: {
-      statements: 95,
+      statements: 98,
       branches: 90,
-      functions: 95,
-      lines: 95
+      functions: 98,
+      lines: 98
     }
   },
 
