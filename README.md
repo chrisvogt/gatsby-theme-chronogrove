@@ -12,7 +12,7 @@ A modern Gatsby theme for personal websites and blogs with social media integrat
 ## 🚀 Features
 
 - **Social Dashboard Homepage**: Display recent activity from multiple social platforms
-- **Blog System**: Full-featured blog with MDX support
+- **Blog System**: Full-featured blog with MDX support (built-in shortcodes such as `Note`, `ColorModeImage`, and embeds—see theme README)
 - **Widget System**: Pre-built widgets for GitHub, Instagram, Spotify, Goodreads, and Steam
 - **Responsive Design**: Mobile-first design with dark/light mode support
 - **Performance Optimized**: Built with Gatsby for fast loading and SEO

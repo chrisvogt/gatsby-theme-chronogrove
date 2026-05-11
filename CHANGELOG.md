@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.85.12
+
+### `gatsby-theme-chronogrove` — Color mode MDX image shortcode
+
+- **`ColorModeImage`**: MDX shortcode registered on **`wrapRootElement.js`** — `<ColorModeImage light='…' dark='…' alt='…' />` picks **`src`** from Theme UI color mode (light vs dark). Optional **`optimizeDelivery`** (default **`true`**) inserts Cloudinary **`f_auto,q_auto`** when delivery URLs omit transform segments; hostnames are validated as **`*.cloudinary.com`** via DNS labels (not substring checks) for CodeQL / URL sanitization.
+- **Tests**: **`theme/src/shortcodes/color-mode-image.spec.js`**.
+- **Version**: **0.85.12**
+
+### `www.chrisvogt.me`
+
+- **Blog**: Piano repertoire post uses **`ColorModeImage`** for separate light- and dark-mode screenshots.
+- **Version**: **1.16.12** (tracks theme **0.85.12**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.12** (tracks theme **0.85.12**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.12**), `theme/src/shortcodes/color-mode-image.js`, `theme/src/shortcodes/color-mode-image.spec.js`, `theme/wrapRootElement.js`
+- `www.chrisvogt.me/package.json` (version **1.16.12**), `www.chrisvogt.me/content/blog/2025-01-07-my-piano-repertoire.mdx`
+- `www.chronogrove.com/package.json` (version **1.3.12**)
+- `CHANGELOG.md`, `README.md`, `theme/README.md`
+
+---
+
 ## 0.85.11
 
 ### `gatsby-theme-chronogrove` — Workspace dependency refresh

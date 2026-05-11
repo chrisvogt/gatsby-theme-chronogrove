@@ -246,7 +246,7 @@ This is my first blog post using Gatsby Theme Chronogrove!
 ## Features
 
 - **MDX Support**: Write in Markdown with React components
-- **Built-in shortcodes**: `Note` (callout panels), `Emoji`, `YouTube`, `Spotify`, `SoundCloud`
+- **Built-in shortcodes**: `Note` (callout panels), `ColorModeImage` (light/dark screenshots), `Emoji`, `YouTube`, `Spotify`, `SoundCloud`
 - **Syntax Highlighting**: Code blocks with Prism.js
 - **Responsive Images**: Optimized images with Gatsby Image
 - **SEO**: Automatic meta tags and structured data
@@ -271,6 +271,21 @@ Use the built-in `Note` component for callout panels in blog posts. No import re
 ```
 
 Variants: `info` (default), `update` (green checkmark), `outdated` (amber clock).
+
+### Color mode images (`ColorModeImage`)
+
+Use **`ColorModeImage`** when you have separate screenshots or artwork per theme (e.g. product UI in light vs dark mode). No import required.
+
+```mdx
+<ColorModeImage
+  light='https://res.cloudinary.com/your-cloud/image/upload/v123/light.png'
+  dark='https://res.cloudinary.com/your-cloud/image/upload/v124/dark.png'
+  alt='Screenshot of the app'
+/>
+```
+
+- **`optimizeDelivery`** (default **`true`**): For **`*.cloudinary.com`** URLs without existing transformation segments, inserts **`f_auto,q_auto`** after **`/upload/`**. Pass **`optimizeDelivery={false}`** to use URLs verbatim.
+- **`loading`**: Defaults to **`lazy`**; override with **`eager`** if needed.
 
 ### Music Posts
 

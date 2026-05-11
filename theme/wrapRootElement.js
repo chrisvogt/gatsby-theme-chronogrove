@@ -4,6 +4,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Themed } from '@theme-ui/mdx'
 
+import ColorModeImage from './src/shortcodes/color-mode-image'
 import Emoji from './src/shortcodes/emoji'
 import Note from './src/shortcodes/Note'
 import RootWrapper from './src/components/root-wrapper'
@@ -26,6 +27,7 @@ const queryClient = new QueryClient({
 
 const components = {
   ...Themed,
+  ColorModeImage,
   Emoji,
   Note,
   pre: MdxPrePassthrough,
