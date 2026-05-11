@@ -1,31 +1,17 @@
 /** @jsx jsx */
-import { Container, jsx } from 'theme-ui'
+import { Container, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Flex } from '@theme-ui/components'
 import { Fragment } from 'react'
 import { graphql } from 'gatsby'
 
+import { articleColumnContainerSx } from 'gatsby-theme-chronogrove/src/constants/article-column-container-sx'
 import AnimatedPageBackground from '../../../theme/src/components/animated-page-background'
 import { getPosts } from '../../../theme/src/hooks/use-recent-posts'
 import Layout from '../../../theme/src/components/layout'
 import PageHeader from '../../../theme/src/components/blog/page-header'
 import PostCard from '../../../theme/src/components/widgets/recent-posts/post-card'
 import Seo from '../../../theme/src/components/seo'
-
-const getColumnCount = postsCount => {
-  let columnCount
-  switch (postsCount) {
-    case 1:
-      columnCount = 1
-      break
-    case 2:
-      columnCount = 2
-      break
-    default:
-      columnCount = 3
-  }
-  return columnCount
-}
 
 const TravelPage = ({ data }) => {
   const posts =
@@ -50,37 +36,39 @@ const TravelPage = ({ data }) => {
               py: 3
             }}
           >
-            <Container sx={{ flexGrow: 1, width: ['', '', 'max(95ch, 75vw)'] }}>
+            <Container sx={{ ...articleColumnContainerSx, flexGrow: 1 }}>
               <PageHeader>Travel</PageHeader>
 
               <Themed.p>Narrative posts and photo galleries from trips and destinations.</Themed.p>
 
-              <Themed.div
-                sx={{
-                  display: 'grid',
-                  gridAutoRows: '1fr',
-                  gridGap: [3, 3, 4],
-                  gridTemplateColumns: [
-                    '',
-                    '1fr 1fr',
-                    '1fr 1fr',
-                    '1fr 1fr',
-                    `repeat(${getColumnCount(posts.length)}, 1fr)`
-                  ],
-                  mt: 4
-                }}
-              >
-                {posts.map(post => (
-                  <PostCard
-                    category={post.fields.category}
-                    date={post.frontmatter.date}
-                    key={post.fields.id}
-                    link={post.fields.path}
-                    thumbnails={post.frontmatter.thumbnails}
-                    title={post.frontmatter.title}
-                  />
-                ))}
-              </Themed.div>
+              {posts.length > 0 ? (
+                <Box
+                  as='section'
+                  aria-label='Travel posts'
+                  sx={{
+                    display: 'grid',
+                    gridGap: [2, 2, 3, 3],
+                    gridTemplateColumns: '1fr',
+                    mt: 4
+                  }}
+                >
+                  {posts.map(post => (
+                    <PostCard
+                      key={post.fields.id}
+                      category={post.fields.category}
+                      date={post.frontmatter.date}
+                      excerpt={post.frontmatter.excerpt}
+                      link={post.fields.path}
+                      thumbnails={post.frontmatter.thumbnails}
+                      title={post.frontmatter.title}
+                    />
+                  ))}
+                </Box>
+              ) : (
+                <Box sx={{ textAlign: 'center', py: 6, mt: 4 }}>
+                  <Themed.p sx={{ fontSize: 3, color: 'textMuted' }}>No travel posts yet. Check back soon!</Themed.p>
+                </Box>
+              )}
             </Container>
           </Flex>
         </Layout>
@@ -111,10 +99,8 @@ export const pageQuery = graphql`
             path
           }
           frontmatter {
-            banner
             date(formatString: "MMMM DD, YYYY")
-            description
-            slug
+            excerpt
             thumbnails
             title
           }

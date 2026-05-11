@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.85.10
+
+### `www.chrisvogt.me` — Travel & Music index layout
+
+- **Travel (`/travel/`)**: Uses **`articleColumnContainerSx`** (same reading measure as the blog index and MDX posts), **single-column** post list, **home-widget-style** `PostCard` (vertical thumbnails + title block), and optional **`excerpt`** under the title when set in frontmatter.
+- **Music (`/music/`)**: Same **article column** width and **single-column** cards (stacked embeds) for easier focus than the previous multi-column grid.
+- **Tests**: **`theme/src/pages/chrisvogt-me-travel-page.spec.js`** and **`theme/src/pages/chrisvogt-me-music-page.spec.js`** exercise the site pages (filters, empty states, `Head` SEO props). **`theme/jest.config.js`** collects coverage for **`www.chrisvogt.me/src/pages/travel.js`** and **`music.js`**.
+- **Jest / Babel**: **`theme/babel.config.js`** adds a **`babel-plugin-remove-graphql-queries`** override **only** for `www.chrisvogt.me/**/*.js` so Jest can compile those pages without breaking theme **`useStaticQuery`** JSON extraction. **`theme/jest.config.js`** raises global **`coverageThreshold`** for **statements**, **lines**, and **functions** to **98%** (branches remain **90%**).
+- **Version**: **0.85.10**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.16.10** (tracks theme **0.85.10**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.3.10** (tracks theme **0.85.10**).
+
+### Files changed
+
+- `theme/package.json` (version **0.85.10**), `theme/babel.config.js`, `theme/jest.config.js` (coverage thresholds + collect paths), `theme/src/pages/chrisvogt-me-travel-page.spec.js`, `theme/src/pages/chrisvogt-me-music-page.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.16.10**), `www.chrisvogt.me/src/pages/travel.js`, `www.chrisvogt.me/src/pages/music.js`
+- `www.chronogrove.com/package.json` (version **1.3.10**)
+- `CHANGELOG.md`
+
+---
+
 ## 0.85.9
 
 ### `gatsby-theme-chronogrove` — Goodreads grid pagination after book detail
