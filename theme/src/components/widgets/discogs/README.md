@@ -70,6 +70,10 @@ The widget expects data from a Discogs widget endpoint with this structure:
 }
 ```
 
+## Release year
+
+Discogs may send **`basicInformation.year: 0`** (or other non-four-digit values) when the release year is unknown. The theme treats a year as known only when it parses to a **four-digit** value (**1000–9999**) via **`getDiscogsReleaseYear`** in **`sort-discogs-releases.js`**. That same rule drives **release-year sort**, the **modal** header (**artist · year**), the **list** row subtitle, and the **grid** orbit text so **`0`** is never shown as a literal year.
+
 ## Components
 
 - `discogs-widget.js` - Main widget component with data fetching and layout

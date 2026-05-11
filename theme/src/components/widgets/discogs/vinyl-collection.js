@@ -13,6 +13,7 @@ import {
   DISCOGS_SORT_ADDED,
   DISCOGS_SORT_ALPHABETICAL,
   DISCOGS_SORT_RELEASE_YEAR,
+  getDiscogsReleaseYear,
   sortDiscogsReleases
 } from './sort-discogs-releases'
 
@@ -197,14 +198,16 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
 
   const vinylItems = sortedReleases.map(release => {
     const { id, basicInformation = {} } = release
-    const { title, year, artists = [], cdnThumbUrl, resourceUrl } = basicInformation || {}
+    const { title, artists = [], cdnThumbUrl, resourceUrl } = basicInformation || {}
     const artistName = (artists || []).map(artist => artist.name).join(', ')
-    const details = `${title || 'Unknown'} (${year || 'Unknown'}) - ${artistName || 'Unknown Artist'}`
+    const ry = getDiscogsReleaseYear(release)
+    const displayYear = Number.isFinite(ry) ? String(ry) : ''
+    const details = `${title || 'Unknown'} (${displayYear || 'Unknown'}) - ${artistName || 'Unknown Artist'}`
 
     return {
       id,
       title,
-      year,
+      displayYear,
       artistName,
       cdnThumbUrl,
       resourceUrl,
@@ -403,7 +406,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                     ? pageItems.map(({ id }) => (
                         <VinylRecordSkeleton key={id} variant='list' darkModeActive={darkModeActive} />
                       ))
-                    : pageItems.map(({ id, title, year, artistName, cdnThumbUrl, details }) => {
+                    : pageItems.map(({ id, title, displayYear, artistName, cdnThumbUrl, details }) => {
                         const release = sortedReleases.find(r => r.id === id)
                         return (
                           <Box
@@ -580,7 +583,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                                 }}
                               >
                                 {artistName || 'Unknown Artist'}
-                                {year != null && year !== '' ? ` · ${year}` : ''}
+                                {displayYear !== '' ? ` · ${displayYear}` : ''}
                               </Themed.div>
                             </Themed.div>
                           </Box>
@@ -611,7 +614,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                 >
                   {isLoading
                     ? pageItems.map(({ id }) => <VinylRecordSkeleton key={id} darkModeActive={darkModeActive} />)
-                    : pageItems.map(({ id, title, year, artistName, cdnThumbUrl, details }) => {
+                    : pageItems.map(({ id, title, displayYear, artistName, cdnThumbUrl, details }) => {
                         const release = sortedReleases.find(r => r.id === id)
                         return (
                           <Card
@@ -935,7 +938,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                                             method='align'
                                             spacing='auto'
                                           >
-                                            {`${title || 'Unknown'} • ${artistName || 'Unknown Artist'} • ${year || 'Unknown Year'} • ${title || 'Unknown'} • ${artistName || 'Unknown Artist'} • ${year || 'Unknown Year'} • `}
+                                            {`${title || 'Unknown'} • ${artistName || 'Unknown Artist'} • ${displayYear || 'Unknown Year'} • ${title || 'Unknown'} • ${artistName || 'Unknown Artist'} • ${displayYear || 'Unknown Year'} • `}
                                           </textPath>
                                         </text>
                                       </g>

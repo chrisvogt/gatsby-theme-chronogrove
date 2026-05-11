@@ -64,6 +64,8 @@ describe('sortDiscogsReleases', () => {
     it('returns NaN when missing or invalid', () => {
       expect(getDiscogsReleaseYear({ id: 1, basicInformation: { title: 'T' } })).toBeNaN()
       expect(getDiscogsReleaseYear({ id: 1, basicInformation: { title: 'T', year: 12, artists: [] } })).toBeNaN()
+      expect(getDiscogsReleaseYear({ id: 1, basicInformation: { title: 'T', year: 0, artists: [] } })).toBeNaN()
+      expect(getDiscogsReleaseYear({ id: 1, basicInformation: { title: 'T', year: '0', artists: [] } })).toBeNaN()
     })
   })
 

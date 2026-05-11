@@ -8,7 +8,7 @@ import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
-import { getDiscogsCollectionAddedMs } from './sort-discogs-releases'
+import { getDiscogsCollectionAddedMs, getDiscogsReleaseYear } from './sort-discogs-releases'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
@@ -77,7 +77,7 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   if (!isOpen || !release) return null
 
   const { basicInformation = {}, resource = {} } = release
-  const { title, year, artists = [], genres = [], styles = [] } = basicInformation
+  const { title, artists = [], genres = [], styles = [] } = basicInformation
 
   // Extract additional data from resource object
   const { uri: discogsUrl, tracklist = [] } = resource
@@ -98,9 +98,9 @@ const DiscogsModal = ({ isOpen, onClose, release }) => {
   const insetRule = darkMode ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.075)'
   const insetSurface = darkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.55)'
   const insetHeaderBg = darkMode ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.035)'
-  const yearStr =
-    year != null && year !== '' ? (typeof year === 'number' ? String(Math.trunc(year)) : String(year).trim()) : ''
-  const showYear = Boolean(yearStr)
+  const parsedReleaseYear = getDiscogsReleaseYear(release)
+  const yearStr = Number.isFinite(parsedReleaseYear) ? String(parsedReleaseYear) : ''
+  const showYear = yearStr !== ''
 
   return createPortal(
     <div

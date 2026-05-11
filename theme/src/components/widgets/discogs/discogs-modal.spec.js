@@ -106,6 +106,15 @@ describe('DiscogsModal', () => {
     expect(screen.getByText('Test Artist')).toBeInTheDocument()
   })
 
+  it('does not surface Discogs unknown year (0) in the header', () => {
+    const releaseYearZero = {
+      ...mockRelease,
+      basicInformation: { ...mockRelease.basicInformation, year: 0 }
+    }
+    render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={releaseYearZero} />)
+    expect(screen.queryByText(/^0$/)).not.toBeInTheDocument()
+  })
+
   it('displays year when available', () => {
     render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
     expect(screen.getByText('2023')).toBeInTheDocument()
