@@ -1,11 +1,6 @@
 import React from 'react'
 import Seo from '../../../../theme/src/components/seo'
 
-const HOME_META_DESCRIPTION =
-  'Principal software engineer in San Francisco (GoDaddy). Long-form writing on code, travel, and piano; home-page tiles sync daily from my own Firebase-backed API.'
-const HOME_KEYWORDS =
-  'Chris Vogt, principal software engineer, San Francisco, GoDaddy, software blog, piano, travel photography, personal website'
-
 export default function HomeHead() {
   const structuredData = {
     '@context': 'https://schema.org',
@@ -15,7 +10,7 @@ export default function HomeHead() {
         '@id': 'https://www.chrisvogt.me/#website',
         url: 'https://www.chrisvogt.me',
         name: 'Chris Vogt',
-        description: HOME_META_DESCRIPTION,
+        description: 'Software Engineer in San Francisco blogging about code, photography and piano music.',
         publisher: {
           '@id': 'https://www.chrisvogt.me/#person'
         },
@@ -48,7 +43,12 @@ export default function HomeHead() {
   }
 
   return (
-    <Seo canonicalPath='/' title='Home' description={HOME_META_DESCRIPTION} keywords={HOME_KEYWORDS}>
+    <Seo
+      canonicalPath='/'
+      title='Home'
+      description="Explore Chris Vogt's digital garden. A Software Engineer in San Francisco, Chris shares his interest in photography, piano, and travel."
+      keywords='Chris Vogt, Software Engineer in San Francisco, GoDaddy engineer blog, photography blog, piano recordings, travel blog, personal blog, digital garden'
+    >
       <meta property='og:url' content='https://www.chrisvogt.me' />
       <meta property='og:type' content='website' />
       <script type='application/ld+json'>{JSON.stringify(structuredData)}</script>
