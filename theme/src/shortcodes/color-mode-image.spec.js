@@ -10,10 +10,31 @@ jest.mock('theme-ui', () => ({
   useColorMode: () => mockUseColorMode()
 }))
 
-import ColorModeImage, { applyCloudinaryAutoTransform } from './color-mode-image'
+import ColorModeImage, { applyCloudinaryAutoTransform, isCloudinaryDeliveryHostname } from './color-mode-image'
 
 const LIGHT = 'https://res.cloudinary.com/demo/image/upload/v169/example/light.png'
 const DARK = 'https://res.cloudinary.com/demo/image/upload/v169/example/dark.png'
+
+describe('isCloudinaryDeliveryHostname', () => {
+  it('returns false for empty or non-string values', () => {
+    expect(isCloudinaryDeliveryHostname('')).toBe(false)
+    expect(isCloudinaryDeliveryHostname(null)).toBe(false)
+    expect(isCloudinaryDeliveryHostname(undefined)).toBe(false)
+    expect(isCloudinaryDeliveryHostname(101)).toBe(false)
+  })
+
+  it('returns false for apex cloudinary.com or unrelated hosts', () => {
+    expect(isCloudinaryDeliveryHostname('cloudinary.com')).toBe(false)
+    expect(isCloudinaryDeliveryHostname('example.com')).toBe(false)
+    expect(isCloudinaryDeliveryHostname('evil-cloudinary.com')).toBe(false)
+  })
+
+  it('returns true for *.cloudinary.com', () => {
+    expect(isCloudinaryDeliveryHostname('res.cloudinary.com')).toBe(true)
+    expect(isCloudinaryDeliveryHostname('mytenant.res.cloudinary.com')).toBe(true)
+    expect(isCloudinaryDeliveryHostname('RES.CLOUDINARY.COM')).toBe(true)
+  })
+})
 
 describe('applyCloudinaryAutoTransform', () => {
   it('inserts f_auto,q_auto when only a version segment follows upload', () => {
@@ -35,6 +56,18 @@ describe('applyCloudinaryAutoTransform', () => {
   it('ignores non-Cloudinary URLs', () => {
     const u = 'https://example.com/image/upload/v1/foo.png'
     expect(applyCloudinaryAutoTransform(u)).toBe(u)
+  })
+
+  it('ignores hostnames that only contain cloudinary.com as a substring', () => {
+    const u = 'https://evil-cloudinary.com/image/upload/v169/foo.png'
+    expect(applyCloudinaryAutoTransform(u)).toBe(u)
+  })
+
+  it('still transforms nested Cloudinary subdomains', () => {
+    const u = 'https://mytenant.res.cloudinary.com/demo/image/upload/v169/example/light.png'
+    expect(applyCloudinaryAutoTransform(u)).toBe(
+      'https://mytenant.res.cloudinary.com/demo/image/upload/f_auto,q_auto/v169/example/light.png'
+    )
   })
 
   it('returns the original input when it cannot be parsed as a URL', () => {

@@ -5,6 +5,20 @@ import { Themed } from '@theme-ui/mdx'
 import isDarkMode from '../helpers/isDarkMode'
 
 /**
+ * True when the hostname is a subdomain of cloudinary.com (e.g. res.cloudinary.com).
+ * Uses DNS labels instead of substring checks so lookalikes like evil-cloudinary.com are rejected.
+ *
+ * @param {unknown} hostname
+ * @returns {boolean}
+ */
+export function isCloudinaryDeliveryHostname(hostname) {
+  if (!hostname || typeof hostname !== 'string') return false
+  const labels = hostname.toLowerCase().split('.').filter(Boolean)
+  const n = labels.length
+  return n >= 3 && labels[n - 2] === 'cloudinary' && labels[n - 1] === 'com'
+}
+
+/**
  * Insert `f_auto,q_auto` after `/upload/` when the URL is a vanilla Cloudinary
  * delivery URL (no existing transformation segment).
  *
@@ -15,7 +29,7 @@ export function applyCloudinaryAutoTransform(url) {
   if (!url || typeof url !== 'string') return url
   try {
     const parsed = new URL(url)
-    if (!parsed.hostname.includes('cloudinary.com')) return url
+    if (!isCloudinaryDeliveryHostname(parsed.hostname)) return url
     const segments = parsed.pathname.split('/').filter(Boolean)
     const uploadIdx = segments.indexOf('upload')
     if (uploadIdx === -1) return url
