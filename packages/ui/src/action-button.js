@@ -61,7 +61,7 @@ const ActionButton = ({ children, href, onClick, variant = 'primary', size = 'me
   const content = (
     <>
       {children}
-      {icon && icon}
+      {icon}
     </>
   )
 

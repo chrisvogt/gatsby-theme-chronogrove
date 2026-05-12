@@ -189,6 +189,7 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
           position: 'relative'
         }}
         onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
       >
         {/* Close button */}
         <button

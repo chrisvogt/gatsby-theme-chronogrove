@@ -92,7 +92,7 @@ const PaginationButton = ({
   const content = (
     <>
       {children}
-      {icon && icon}
+      {icon}
     </>
   )
 

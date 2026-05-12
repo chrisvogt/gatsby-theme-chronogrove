@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
+import { jsx, Box, useThemeUI } from 'theme-ui'
 import { useState } from 'react'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -16,7 +16,10 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
   const handleClick = onClick || (() => window.open(`https://store.steampowered.com/app/${game.id}`, '_blank'))
 
   return (
-    <div
+    <Box
+      as='button'
+      type='button'
+      aria-label={`View ${game.displayName} on Steam`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
@@ -166,7 +169,7 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
           </div>
         )}
       </div>
-    </div>
+    </Box>
   )
 }
 

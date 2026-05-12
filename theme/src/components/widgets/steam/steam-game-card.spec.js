@@ -102,6 +102,19 @@ describe('SteamGameCard', () => {
     expect(global.open).not.toHaveBeenCalled()
   })
 
+  it('renders as a button element for keyboard accessibility', () => {
+    const { container } = renderWithTheme(<SteamGameCard game={mockGame} />)
+    const card = container.firstChild
+    expect(card.tagName).toBe('BUTTON')
+    expect(card.getAttribute('type')).toBe('button')
+  })
+
+  it('has an aria-label describing the game', () => {
+    const { container } = renderWithTheme(<SteamGameCard game={mockGame} />)
+    const card = container.firstChild
+    expect(card.getAttribute('aria-label')).toBe('View Test Game on Steam')
+  })
+
   it('handles hover state correctly', () => {
     const { container } = renderWithTheme(<SteamGameCard game={mockGame} />)
     const card = container.firstChild

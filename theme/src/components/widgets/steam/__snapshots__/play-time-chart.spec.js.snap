@@ -8,8 +8,10 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -42,9 +44,11 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -77,9 +81,11 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -112,7 +118,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -150,8 +156,10 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -184,9 +192,11 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -219,9 +229,11 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -254,7 +266,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -292,8 +304,10 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -326,9 +340,11 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -361,9 +377,11 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -396,7 +414,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -434,8 +452,10 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -468,9 +488,11 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -503,9 +525,11 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -538,7 +562,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -576,8 +600,10 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -610,7 +636,7 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -702,8 +728,10 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -736,9 +764,11 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -771,9 +801,11 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -806,7 +838,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -844,8 +876,10 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -878,9 +912,11 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -913,9 +949,11 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -948,7 +986,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -1007,8 +1045,10 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -1041,9 +1081,11 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -1076,9 +1118,11 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -1111,7 +1155,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"
@@ -1149,8 +1193,10 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
     <div
       class="css-zxiliy"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Cities: Skylines on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -1183,9 +1229,11 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
             757.35h total • 2h recently
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View ARK: Survival Evolved on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -1218,9 +1266,11 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
             277.83h total
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View PUBG: BATTLEGROUNDS on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -1253,7 +1303,7 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
             200h total • 1h recently
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-rcbrnq"

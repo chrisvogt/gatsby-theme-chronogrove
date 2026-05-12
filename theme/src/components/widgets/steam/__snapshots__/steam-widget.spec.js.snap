@@ -27,8 +27,10 @@ exports[`SteamWidget renders AI summary if present 1`] = `
     <div
       class="css-1jvl2a0"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Half-Life on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -56,9 +58,11 @@ exports[`SteamWidget renders AI summary if present 1`] = `
             2 hours
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View Portal on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -86,7 +90,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
             45 minutes
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-5abbi3"
@@ -108,8 +112,10 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       <div
         class="css-zxiliy"
       >
-        <div
-          class="css-xsvu8c"
+        <button
+          aria-label="View Cities: Skylines on Steam"
+          class="css-1cffl98"
+          type="button"
         >
           <div
             class="css-w24l45"
@@ -142,9 +148,11 @@ exports[`SteamWidget renders AI summary if present 1`] = `
               757.35h total • 2 hours recently
             </div>
           </div>
-        </div>
-        <div
-          class="css-xsvu8c"
+        </button>
+        <button
+          aria-label="View ARK: Survival Evolved on Steam"
+          class="css-1cffl98"
+          type="button"
         >
           <div
             class="css-w24l45"
@@ -177,7 +185,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
               277.83h total
             </div>
           </div>
-        </div>
+        </button>
       </div>
       <div
         class="css-rcbrnq"
@@ -319,8 +327,10 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
     <div
       class="css-1jvl2a0"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Half-Life on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -348,9 +358,11 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
             2 hours
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View Portal on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -378,7 +390,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
             45 minutes
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-5abbi3"
@@ -400,8 +412,10 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       <div
         class="css-zxiliy"
       >
-        <div
-          class="css-xsvu8c"
+        <button
+          aria-label="View Cities: Skylines on Steam"
+          class="css-1cffl98"
+          type="button"
         >
           <div
             class="css-w24l45"
@@ -434,9 +448,11 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
               757.35h total • 2 hours recently
             </div>
           </div>
-        </div>
-        <div
-          class="css-xsvu8c"
+        </button>
+        <button
+          aria-label="View ARK: Survival Evolved on Steam"
+          class="css-1cffl98"
+          type="button"
         >
           <div
             class="css-w24l45"
@@ -469,7 +485,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
               277.83h total
             </div>
           </div>
-        </div>
+        </button>
       </div>
       <div
         class="css-rcbrnq"
@@ -839,8 +855,10 @@ exports[`SteamWidget renders with empty metrics 1`] = `
     <div
       class="css-1jvl2a0"
     >
-      <div
-        class="css-xsvu8c"
+      <button
+        aria-label="View Half-Life on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -868,9 +886,11 @@ exports[`SteamWidget renders with empty metrics 1`] = `
             2 hours
           </div>
         </div>
-      </div>
-      <div
-        class="css-xsvu8c"
+      </button>
+      <button
+        aria-label="View Portal on Steam"
+        class="css-1cffl98"
+        type="button"
       >
         <div
           class="css-w24l45"
@@ -898,7 +918,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
             45 minutes
           </div>
         </div>
-      </div>
+      </button>
     </div>
     <div
       class="css-5abbi3"
@@ -920,8 +940,10 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       <div
         class="css-zxiliy"
       >
-        <div
-          class="css-xsvu8c"
+        <button
+          aria-label="View Cities: Skylines on Steam"
+          class="css-1cffl98"
+          type="button"
         >
           <div
             class="css-w24l45"
@@ -954,9 +976,11 @@ exports[`SteamWidget renders with empty metrics 1`] = `
               757.35h total • 2 hours recently
             </div>
           </div>
-        </div>
-        <div
-          class="css-xsvu8c"
+        </button>
+        <button
+          aria-label="View ARK: Survival Evolved on Steam"
+          class="css-1cffl98"
+          type="button"
         >
           <div
             class="css-w24l45"
@@ -989,7 +1013,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
               277.83h total
             </div>
           </div>
-        </div>
+        </button>
       </div>
       <div
         class="css-rcbrnq"
