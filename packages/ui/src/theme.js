@@ -683,6 +683,17 @@ export default merge(tailwind, {
       fontSize: [1, 2],
       fontWeight: '550',
       textTransform: 'uppercase'
+    },
+    /**
+     * Secondary / meta lines (e.g. AI attribution): sans, italic, one step under `[1,2]` on the scale.
+     * Use `textMuted` (surface tokens), not Tailwind `colors.muted`—preset grays are often below WCAG AA for this size on `background` / panels.
+     */
+    mutedSans: {
+      color: 'textMuted',
+      fontFamily: 'heading',
+      fontSize: [0, 1],
+      fontStyle: 'italic',
+      lineHeight: 1.35
     }
   },
 
