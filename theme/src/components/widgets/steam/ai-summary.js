@@ -1,20 +1,55 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
-import { faRobot, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Heading } from '@theme-ui/components'
-import ActionButton from '../../action-button'
-import { Themed } from '@theme-ui/mdx'
+import { jsx } from 'theme-ui'
+import { Box, Text } from '@theme-ui/components'
 import React, { useEffect, useState, useRef } from 'react'
 
+import { formatAiSummarySyncedLabel } from '../../../helpers/ai-summary-synced-at'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
+import ActionButton from '../../action-button'
+import { getAiSummaryFadeBackground } from './ai-summary-fade'
 
-const AiSummary = React.memo(({ aiSummary }) => {
-  const { theme } = useThemeUI()
-  const primary = theme?.colors?.primary ?? '#422EA3'
-  const secondary = theme?.colors?.secondary ?? '#711E9B'
-  const primaryRgb = theme?.colors?.primaryRgb ?? '66, 46, 163'
+const AI_ATTRIBUTION = 'Generated with Claude Sonnet 4.6 (AI)'
 
+const READ_MORE = 'Read more'
+const READ_LESS = 'Read less'
+
+/** ~4–5 lines of body copy at `fontSize` [2,3]; reveals start of the next paragraph(s) before fade */
+const TEASER_MAX_HEIGHT = '6.75rem'
+
+const fadeOverlaySx = {
+  pointerEvents: 'none',
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  bottom: 0,
+  height: '4.5rem',
+  background: getAiSummaryFadeBackground
+}
+
+/** Parsed `<p>` nodes from html-react-parser do not use Theme UI `styles.p`; match site body copy (serif, scale). */
+const proseSx = {
+  fontFamily: 'body',
+  fontWeight: 'body',
+  lineHeight: 'body',
+  fontSize: [2, 3],
+  color: 'text',
+  '& p': {
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 1.65,
+    mt: 0,
+    mb: 2
+  },
+  '& p:last-of-type': {
+    mb: 0
+  },
+  '& a': {
+    color: 'primary'
+  }
+}
+
+const AiSummary = React.memo(({ aiSummary, aiSummarySyncedAt, sx: sxProp }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [showContent, setShowContent] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -53,133 +88,77 @@ const AiSummary = React.memo(({ aiSummary }) => {
     setShowContent(true)
   }, [aiSummary])
 
-  const handleToggleExpanded = () => {
-    setIsExpanded(!isExpanded)
-  }
-
   if (!aiSummary) {
     return null
   }
+
+  const syncedLabel = formatAiSummarySyncedLabel(aiSummarySyncedAt)
+  const hasMore = parsedContent.remainingParagraphs.length > 0
+  const remainingJoined = parsedContent.remainingParagraphs.join('')
 
   return (
     <div
       ref={containerRef}
       sx={{
-        variant: 'cards.aiSummary',
-        mt: 4,
-        mb: 4,
+        mb: [3, 4],
         opacity: isVisible ? 1 : 0,
         transition: 'opacity 0.3s ease-out',
-        animation: isVisible ? 'gentleFloat 8s ease-in-out infinite' : 'none'
+        ...(typeof sxProp === 'object' && sxProp !== null ? sxProp : {})
       }}
     >
-      {/* Two-column layout on larger breakpoints: content left, Read More right (vertically centered) */}
-      <div
-        sx={{
-          display: 'flex',
-          flexDirection: ['column', 'row'],
-          alignItems: ['stretch', 'center'],
-          gap: [3, 4],
-          mb: 3
-        }}
-      >
-        <div sx={{ flex: 1, minWidth: 0 }}>
-          <div sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-            <FontAwesomeIcon
-              icon={faRobot}
-              sx={{
-                color: 'primary',
-                fontSize: [2, 3],
-                mr: 2,
-                animation: 'pulse 2s infinite, gentleGlow 4s ease-in-out infinite alternate',
-                filter: `drop-shadow(0 0 12px rgba(${primaryRgb}, 0.4))`
-              }}
-            />
-            <Heading
-              as='h3'
-              sx={{
-                fontSize: [3, 4],
-                mb: 0,
-                background: `linear-gradient(45deg, ${primary}, ${secondary})`,
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                position: 'relative'
-              }}
-            >
-              AI Summary
-            </Heading>
-          </div>
+      <div sx={proseSx}>{showContent && parseSafeHtml(parsedContent.firstParagraph)}</div>
 
-          <div
-            sx={{
-              '& p': {
-                mb: 2,
-                lineHeight: 1.6
-              }
-            }}
-          >
-            {showContent && parseSafeHtml(parsedContent.firstParagraph)}
-          </div>
-        </div>
-
-        {/* Read More: right column on desktop (vertically centered), below content on mobile; matches Show More / pagination (ActionButton) */}
-        {parsedContent.remainingParagraphs.length > 0 && showContent && (
-          <div
-            sx={{
-              display: 'flex',
-              justifyContent: ['center', 'flex-end'],
-              flexShrink: 0
-            }}
-          >
-            <ActionButton
-              size='large'
-              onClick={handleToggleExpanded}
-              icon={
-                <FontAwesomeIcon
-                  icon={isExpanded ? faChevronUp : faChevronDown}
-                  sx={{
-                    fontSize: 1,
-                    transition: 'transform 0.3s ease-in-out',
-                    transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
-                  }}
-                />
-              }
-            >
-              {isExpanded ? 'Show Less' : 'Show More'}
-            </ActionButton>
-          </div>
-        )}
-      </div>
-
-      {/* Expanded Content */}
-      {isExpanded && parsedContent.remainingParagraphs.length > 0 && (
-        <div sx={{ '& p': { mb: 2, lineHeight: 1.6 } }}>
-          {parseSafeHtml(parsedContent.remainingParagraphs.join(''))}
-        </div>
+      {showContent && !hasMore && (
+        <Text variant='mutedSans' as='p' sx={{ mt: 3, mb: 0 }}>
+          {AI_ATTRIBUTION}
+          {syncedLabel ? ` · Synced ${syncedLabel}` : ''}
+        </Text>
       )}
 
-      <Themed.p
-        sx={{
-          mb: 0,
-          fontSize: [1, 2],
-          color: 'textMuted',
-          fontStyle: 'italic',
-          display: 'flex',
-          alignItems: 'center'
-        }}
-      >
-        <FontAwesomeIcon
-          icon={faRobot}
-          sx={{
-            fontSize: 1,
-            mr: 1,
-            opacity: 0.7,
-            animation: 'gentleBounce 3s infinite 2s'
-          }}
-        />
-        Generated by Gemini (AI)
-      </Themed.p>
+      {hasMore && showContent && (
+        <>
+          {!isExpanded ? (
+            <Box sx={{ mt: 2 }}>
+              <Box sx={{ position: 'relative' }}>
+                <Box
+                  sx={{
+                    ...proseSx,
+                    maxHeight: TEASER_MAX_HEIGHT,
+                    overflow: 'hidden',
+                    mb: 0
+                  }}
+                >
+                  {parseSafeHtml(remainingJoined)}
+                </Box>
+                <Box aria-hidden='true' sx={fadeOverlaySx} />
+              </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <ActionButton
+                  size='xlarge'
+                  aria-expanded={false}
+                  aria-label={READ_MORE}
+                  onClick={() => setIsExpanded(true)}
+                >
+                  {READ_MORE}
+                </ActionButton>
+              </Box>
+            </Box>
+          ) : (
+            <>
+              <Box sx={{ ...proseSx, mt: 2 }}>{parseSafeHtml(remainingJoined)}</Box>
+              <Text variant='mutedSans' as='p' sx={{ mt: 3, mb: 0 }}>
+                {AI_ATTRIBUTION}
+                {syncedLabel ? ` · Synced ${syncedLabel}` : ''}
+              </Text>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                <ActionButton size='xlarge' aria-expanded aria-label={READ_LESS} onClick={() => setIsExpanded(false)}>
+                  {READ_LESS}
+                </ActionButton>
+              </Box>
+            </>
+          )}
+        </>
+      )}
     </div>
   )
 })

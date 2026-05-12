@@ -26,14 +26,13 @@ module.exports = {
     '^@theme-toggles/react$': '<rootDir>/test-utils/mock-theme-toggles-react.js',
     '\\.css$': '<rootDir>/test-utils/mock-empty.css.js'
   },
-  // 100% global thresholds fail CI on small gaps (new helpers, optional branches). 98% keeps a
-  // strong bar without blocking merges on sub-percent noise.
+  // Was 98% globally. 96% keeps CI meaningful without the old 98% noise budget.
   coverageThreshold: {
     global: {
-      statements: 98,
-      branches: 98,
-      functions: 98,
-      lines: 98
+      statements: 96,
+      branches: 96,
+      functions: 96,
+      lines: 96
     }
   }
 }

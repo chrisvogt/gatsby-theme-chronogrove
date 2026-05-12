@@ -19,6 +19,7 @@ import SteamGameCard from './steam-game-card'
 
 const RECENTLY_PLAYED_PLACEHOLDER_COUNT = 6
 
+import { pickAiSummarySyncedAtRaw } from '../../../helpers/ai-summary-synced-at'
 import { getSteamWidgetDataSource } from '../../../selectors/metadata'
 import getTimeSpent from './get-time-spent'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
@@ -34,6 +35,7 @@ const SteamWidget = React.memo(() => {
 
   // Extract data from the query result
   const aiSummary = data?.aiSummary
+  const aiSummarySyncedAt = pickAiSummarySyncedAtRaw(data)
   const metrics = data?.metrics
   const ownedGames = data?.collections?.ownedGames || []
   const profileDisplayName = data?.profile?.displayName
@@ -53,6 +55,9 @@ const SteamWidget = React.memo(() => {
       <WidgetHeader aside={callToAction} icon={faSteam} metrics={metrics} metricsLoading={isLoading}>
         Steam
       </WidgetHeader>
+
+      {isLoading && !aiSummary ? <AiSummarySkeleton skeletonRows={3} /> : null}
+      {aiSummary ? <AiSummary aiSummary={aiSummary} aiSummarySyncedAt={aiSummarySyncedAt} /> : null}
 
       {showRecentlyPlayedSection ? (
         <>
@@ -114,9 +119,6 @@ const SteamWidget = React.memo(() => {
       <Themed.p sx={{ mb: 4 }}>My top 10 most played games.</Themed.p>
 
       <PlayTimeChart games={ownedGames} isLoading={isLoading} profileURL={profileURL} />
-
-      {isLoading && !aiSummary ? <AiSummarySkeleton skeletonRows={3} /> : null}
-      {aiSummary ? <AiSummary aiSummary={aiSummary} /> : null}
     </Widget>
   )
 })

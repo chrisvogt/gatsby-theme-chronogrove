@@ -2,6 +2,7 @@
 import { jsx } from 'theme-ui'
 import { faGoodreads } from '@fortawesome/free-brands-svg-icons'
 
+import { pickAiSummarySyncedAtRaw } from '../../../helpers/ai-summary-synced-at'
 import { getGoodreadsUsername, getGoodreadsWidgetDataSource } from '../../../selectors/metadata'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
@@ -23,6 +24,7 @@ export default () => {
 
   // Extract data from the query result (matching API structure)
   const aiSummary = data?.aiSummary
+  const aiSummarySyncedAt = pickAiSummarySyncedAtRaw(data)
 
   // Books come from recentlyReadBooks, filtered to only those with thumbnails
   const recentlyReadBooks = data?.collections?.recentlyReadBooks || []
@@ -55,18 +57,29 @@ export default () => {
     </CallToAction>
   )
 
+  const goodreadsHeaderSx = { pb: 2, mb: 3 }
+  const goodreadsAiBlockSx = { mb: [2, 3] }
+
   return (
     <Widget id='goodreads' hasFatalError={hasFatalError}>
-      <WidgetHeader aside={callToAction} icon={faGoodreads} metrics={metrics} metricsLoading={isLoading}>
+      <WidgetHeader
+        aside={callToAction}
+        icon={faGoodreads}
+        metrics={metrics}
+        metricsLoading={isLoading}
+        sx={goodreadsHeaderSx}
+      >
         Goodreads
       </WidgetHeader>
+
+      {isLoading && !aiSummary ? <AiSummarySkeleton skeletonRows={5} sx={goodreadsAiBlockSx} /> : null}
+      {aiSummary ? (
+        <AiSummary aiSummary={aiSummary} aiSummarySyncedAt={aiSummarySyncedAt} sx={goodreadsAiBlockSx} />
+      ) : null}
 
       <RecentlyReadBooks isLoading={isLoading} books={books} />
 
       <UserStatus actorName={profileDisplayName} isLoading={isLoading} status={status} />
-
-      {isLoading && !aiSummary ? <AiSummarySkeleton skeletonRows={5} /> : null}
-      {aiSummary ? <AiSummary aiSummary={aiSummary} /> : null}
     </Widget>
   )
 }

@@ -116,6 +116,16 @@ describe('ActionButton', () => {
     })
   })
 
+  it('applies xlarge size styles', () => {
+    renderWithProviders(<ActionButton size='xlarge'>XLarge Button</ActionButton>)
+
+    const button = screen.getByRole('button', { name: /xlarge button/i })
+    expect(button).toHaveStyle({
+      fontSize: '14px',
+      padding: '12px 20px'
+    })
+  })
+
   it('renders with icon', () => {
     const TestIcon = () => <span data-testid='test-icon'>→</span>
     renderWithProviders(<ActionButton icon={<TestIcon />}>Button with Icon</ActionButton>)

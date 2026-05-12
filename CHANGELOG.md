@@ -1,5 +1,58 @@
 # Changelog
 
+## 0.89.0
+
+### `@chronogrove/ui` — AI summary tokens, widget header, action sizing
+
+- **`theme.js`**: **`text.mutedSans`** variant (italic sans meta lines using **`textMuted`**).
+- **`action-button.js`**: **`xlarge`** size for prominent inline actions (e.g. read-more toggles).
+- **`widget-header.js`**: Optional **`sx`** prop merged onto the root header container.
+- **Jest**: Global **`coverageThreshold`** set to **96%** for statements, branches, functions, and lines.
+- **Tests**: **`action-button.spec.js`** (**`xlarge`**); **`theme.spec.js`** snapshot (**`mutedSans`**).
+- **Version**: **0.85.0**
+
+### `gatsby-theme-chronogrove` — Steam/Goodreads AI summary layout
+
+- **`ai-summary.js`**: News-style teaser (first paragraph full; remaining copy clipped with a background-matched gradient); **`Read more` / `Read less`** via theme **`ActionButton`** (**`xlarge`**); Claude attribution plus optional **`aiSummarySyncedAt`** via **`formatAiSummarySyncedLabel`**; streamlined chrome vs. the prior robot/gradient heading.
+- **`ai-summary-skeleton.js`**: Skeleton aligned with the loaded block; optional **`sx`**.
+- **`goodreads-widget.js`**: AI summary directly under the header (**`pickAiSummarySyncedAtRaw`**); header/summary spacing via **`WidgetHeader`** / block **`sx`**.
+- **Helpers**: **`ai-summary-synced-at.js`** (+ spec) for synced-at parsing/formatting.
+- **Jest**: Global **`coverageThreshold`** — statements/lines/functions **96%**, branches **90%**.
+- **Tests / snapshots**: **`ai-summary.spec.js`**, **`steam-widget.spec.js`**, **`goodreads-widget.spec.js`**.
+- **Version**: **0.89.0**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.20.0** (tracks theme **0.89.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.7.0** (tracks theme **0.89.0**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `packages/ui/package.json` (version **0.85.0**)
+- `packages/ui/jest.config.cjs`
+- `packages/ui/src/action-button.js`, `packages/ui/src/action-button.spec.js`
+- `packages/ui/src/theme.js`
+- `packages/ui/src/widget-header.js`
+- `packages/ui/src/__snapshots__/theme.spec.js.snap`
+- `theme/package.json` (version **0.89.0**)
+- `theme/jest.config.js`
+- `theme/src/helpers/ai-summary-synced-at.js`, `theme/src/helpers/ai-summary-synced-at.spec.js`
+- `theme/src/components/widgets/steam/ai-summary.js`, `theme/src/components/widgets/steam/ai-summary.spec.js`
+- `theme/src/components/widgets/steam/ai-summary-skeleton.js`
+- `theme/src/components/widgets/steam/steam-widget.js`
+- `theme/src/components/widgets/goodreads/goodreads-widget.js`
+- `theme/src/gatsby-plugin-theme-ui/__snapshots__/theme.spec.js.snap`
+- `theme/src/components/widgets/steam/__snapshots__/steam-widget.spec.js.snap`
+- `theme/src/components/widgets/goodreads/__snapshots__/goodreads-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.20.0**)
+- `www.chronogrove.com/package.json` (version **1.7.0**)
+
+---
+
 ## 0.88.0
 
 ### `gatsby-theme-chronogrove` — Music index repertoire promo & timeline slot

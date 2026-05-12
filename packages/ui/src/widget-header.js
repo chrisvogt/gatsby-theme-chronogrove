@@ -21,7 +21,7 @@ const METRIC_CHIP_BORDER_ALPHA = 34 / 255
  * a label on a physical card index tab. Metrics are monospaced square chips:
  * number + unit in a bordered box, no rounded pills.
  */
-const WidgetHeader = ({ aside, children, icon, metrics, metricsLoading }) => {
+const WidgetHeader = ({ aside, children, icon, metrics, metricsLoading, sx: sxProp }) => {
   const hasMetrics = (Array.isArray(metrics) && metrics.length > 0) || metricsLoading
 
   // Placeholder chips while loading
@@ -38,7 +38,8 @@ const WidgetHeader = ({ aside, children, icon, metrics, metricsLoading }) => {
         gap: [2, 3],
         flexWrap: 'wrap',
         pb: 3,
-        mb: hasMetrics ? 4 : 2
+        mb: hasMetrics ? 4 : 2,
+        ...(typeof sxProp === 'object' && sxProp !== null ? sxProp : {})
       }}
     >
       {/* Left cluster: icon chip (center-aligned) + heading/CTA sub-row (baseline-aligned) */}
