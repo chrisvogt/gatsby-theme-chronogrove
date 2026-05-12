@@ -26,23 +26,29 @@ jest.mock('../../../theme/src/components/layout', () => ({ children, transparent
   </div>
 ))
 jest.mock('../../../theme/src/components/blog/page-header', () => ({ children }) => <h1>{children}</h1>)
-jest.mock(
-  '../../../theme/src/components/blog/post-timeline-index',
-  () =>
-    ({ posts }) =>
-      (Array.isArray(posts) ? posts : []).map(p => (
-        <div
-          data-testid='post-timeline-slot'
-          key={p.fields.id}
-          data-category={p.fields.category}
-          data-link={p.fields.path}
-          data-soundcloud={p.frontmatter.soundcloudId ?? ''}
-          data-youtube={p.frontmatter.youtubeSrc ?? ''}
-        >
-          {p.frontmatter.title}
-        </div>
-      ))
-)
+jest.mock('../../../theme/src/components/blog/post-timeline-index', () => {
+  const React = require('react')
+  return ({ afterFeatured, posts }) =>
+    React.createElement(
+      React.Fragment,
+      null,
+      (Array.isArray(posts) ? posts : []).map(p =>
+        React.createElement(
+          'div',
+          {
+            'data-testid': 'post-timeline-slot',
+            key: p.fields.id,
+            'data-category': p.fields.category,
+            'data-link': p.fields.path,
+            'data-soundcloud': p.frontmatter.soundcloudId ?? '',
+            'data-youtube': p.frontmatter.youtubeSrc ?? ''
+          },
+          p.frontmatter.title
+        )
+      ),
+      afterFeatured ?? null
+    )
+})
 jest.mock('../../../theme/src/components/seo', () => {
   const MockSeo = ({ canonicalPath, title, description, children }) => (
     <div data-testid='seo' data-canonical-path={canonicalPath} data-title={title} data-description={description}>
@@ -120,6 +126,11 @@ describe('www.chrisvogt.me Music page', () => {
     expect(cards[1]).toHaveAttribute('data-category', 'music/covers')
     expect(cards[1]).toHaveAttribute('data-youtube', 'https://www.youtube.com/embed/abc')
     expect(screen.getByRole('region', { name: 'Music posts' })).toBeInTheDocument()
+    expect(screen.getByTestId('music-repertoire-promo')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /My piano repertoire/i })).toHaveAttribute(
+      'href',
+      'https://repertoire.chrisvogt.me/'
+    )
   })
 
   it('uses the default music lead when musicIndexLead is blank', () => {
@@ -133,6 +144,7 @@ describe('www.chrisvogt.me Music page', () => {
     )
 
     expect(screen.getByText('Original songs, covers, and audio posts.')).toBeInTheDocument()
+    expect(screen.getByTestId('music-repertoire-promo')).toBeInTheDocument()
   })
 
   it('filters out non-music posts', () => {
@@ -152,6 +164,7 @@ describe('www.chrisvogt.me Music page', () => {
 
     expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(1)
     expect(screen.queryByText('Trip')).not.toBeInTheDocument()
+    expect(screen.getByTestId('music-repertoire-promo')).toBeInTheDocument()
   })
 
   it('shows empty state when there are no music posts', () => {
@@ -164,6 +177,7 @@ describe('www.chrisvogt.me Music page', () => {
     )
 
     expect(screen.queryAllByTestId('post-timeline-slot')).toHaveLength(0)
+    expect(screen.queryByTestId('music-repertoire-promo')).not.toBeInTheDocument()
     expect(screen.getByText('No music posts yet. Check back soon!')).toBeInTheDocument()
   })
 
@@ -177,6 +191,7 @@ describe('www.chrisvogt.me Music page', () => {
     )
 
     expect(screen.getByText('No music posts yet. Check back soon!')).toBeInTheDocument()
+    expect(screen.queryByTestId('music-repertoire-promo')).not.toBeInTheDocument()
   })
 
   it('Head renders SEO for /music/', () => {

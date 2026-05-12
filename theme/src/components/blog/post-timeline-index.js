@@ -390,7 +390,14 @@ const MetaFeatured = ({ category, date }) => (
   </Box>
 )
 
-const Featured = ({ featuredImageAltFallback, post, readMoreAriaFallback, tid, timelineAsideMedia = false }) => {
+const Featured = ({
+  featuredImageAltFallback,
+  post,
+  readMoreAriaFallback,
+  showBottomSeparator = true,
+  tid,
+  timelineAsideMedia = false
+}) => {
   const fm = post.frontmatter
   const { banner, excerpt, thumbnails, title, date, soundcloudId, youtubeSrc } = fm
   const category = post.fields.category
@@ -423,13 +430,18 @@ const Featured = ({ featuredImageAltFallback, post, readMoreAriaFallback, tid, t
   return (
     <Box
       as='article'
+      data-bottom-rule={showBottomSeparator ? 'true' : 'false'}
       data-testid={tid('featured-entry')}
       sx={{
         mb: [4, null, null, '2.875rem'],
         pb: [3, null, null, '3.375rem'],
-        borderBottomWidth: '1px',
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'muted'
+        ...(showBottomSeparator
+          ? {
+              borderBottomWidth: '1px',
+              borderBottomStyle: 'solid',
+              borderBottomColor: 'muted'
+            }
+          : {})
       }}
     >
       <Box
@@ -731,7 +743,8 @@ const TimelineStamp = ({
  *   dataTestIdPrefix?: string,
  *   featuredImageAltFallback?: string,
  *   readMoreAriaFallback?: string,
- *   timelineAsideMedia?: boolean
+ *   timelineAsideMedia?: boolean,
+ *   afterFeatured?: import('react').ReactNode
  * }} props
  */
 export default function PostTimelineIndex({
@@ -739,7 +752,8 @@ export default function PostTimelineIndex({
   dataTestIdPrefix = 'post-timeline',
   featuredImageAltFallback = 'Post',
   readMoreAriaFallback = 'this post',
-  timelineAsideMedia = false
+  timelineAsideMedia = false,
+  afterFeatured = null
 }) {
   if (!Array.isArray(posts) || posts.length === 0) return null
 
@@ -753,10 +767,12 @@ export default function PostTimelineIndex({
           featuredImageAltFallback={featuredImageAltFallback}
           post={first}
           readMoreAriaFallback={readMoreAriaFallback}
+          showBottomSeparator={!afterFeatured}
           tid={tid}
           timelineAsideMedia={timelineAsideMedia}
         />
       ) : null}
+      {afterFeatured}
       {rest.length > 0 ? (
         <Box
           role='list'
