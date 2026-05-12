@@ -10,7 +10,7 @@ import AnimatedPageBackground from '../../../theme/src/components/animated-page-
 import { getPosts } from '../../../theme/src/hooks/use-recent-posts'
 import Layout from '../../../theme/src/components/layout'
 import PageHeader from '../../../theme/src/components/blog/page-header'
-import PostCard from '../../../theme/src/components/widgets/recent-posts/post-card'
+import TravelJournalIndex from '../components/travel-journal-index'
 import Seo from '../../../theme/src/components/seo'
 
 const TravelPage = ({ data }) => {
@@ -42,27 +42,8 @@ const TravelPage = ({ data }) => {
               <Themed.p>Narrative posts and photo galleries from trips and destinations.</Themed.p>
 
               {posts.length > 0 ? (
-                <Box
-                  as='section'
-                  aria-label='Travel posts'
-                  sx={{
-                    display: 'grid',
-                    gridGap: [2, 2, 3, 3],
-                    gridTemplateColumns: '1fr',
-                    mt: 4
-                  }}
-                >
-                  {posts.map(post => (
-                    <PostCard
-                      key={post.fields.id}
-                      category={post.fields.category}
-                      date={post.frontmatter.date}
-                      excerpt={post.frontmatter.excerpt}
-                      link={post.fields.path}
-                      thumbnails={post.frontmatter.thumbnails}
-                      title={post.frontmatter.title}
-                    />
-                  ))}
+                <Box as='section' aria-label='Travel posts' sx={{ mt: 4 }}>
+                  <TravelJournalIndex posts={posts} />
                 </Box>
               ) : (
                 <Box sx={{ textAlign: 'center', py: 6, mt: 4 }}>

@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.86.0
+
+### `gatsby-theme-chronogrove` — Travel-ready Cloudinary sizing & tests for www travel index
+
+- **Cloudinary helpers** (`cloudinaryThumbnailUrl.js`): **`optimizeCloudinaryFillDimensionsSrc`** resizes/transforms uploads for arbitrary **fill** dimensions (not just square thumbs); **`CLOUDINARY_FEATURED_PORTRAIT_2X`** (~780×1040) supports a sharper travel **featured portrait** crop. Covered in **`cloudinaryThumbnailUrl.spec.js`**.
+- **Jest**: **`jest.config.js`** includes **`www.chrisvogt.me/src/components/**`** in **`collectCoverageFrom`** so site-specific **`travel-journal-index`** stays within diff coverage thresholds. **`theme/src/pages/chrisvogt-me-travel-journal-index.spec.js`** exercises the travel journal UI (featured hero, carousel advance, **`+N`** overflow cue, stamps, **read-more** links, hero without image, **`Untitled`\*\* fallback).
+- **Version**: **0.86.0**
+
+### `www.chrisvogt.me`
+
+- **Travel journal** (`travel.js`): The travel index route uses **`TravelJournalIndex`** — featured **masthead** with **Instagram-style carousel** (interval, crossfade, dots, preload, gallery cue icon as **inline SVG**), timeline **stamp** rhythm, and **`travel-read-more-link`** CTAs with explicit **`aria-label`s**. Implemented in **`www.chrisvogt.me/src/components/travel-journal-index.js`**.
+- **`chrisvogt-me-travel-page.spec.js`**: Assertions updated for the new layout/cue semantics.
+- **Version**: **1.17.0** (tracks theme **0.86.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.4.0** (tracks theme **0.86.0**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/package.json` (version **0.86.0**)
+- `theme/jest.config.js`
+- `theme/src/helpers/cloudinaryThumbnailUrl.js`
+- `theme/src/helpers/cloudinaryThumbnailUrl.spec.js`
+- **`theme/src/pages/chrisvogt-me-travel-journal-index.spec.js`**
+- `theme/src/pages/chrisvogt-me-travel-page.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.17.0**)
+- `www.chrisvogt.me/src/pages/travel.js`
+- **`www.chrisvogt.me/src/components/travel-journal-index.js`**
+- `www.chronogrove.com/package.json` (version **1.4.0**)
+
+---
+
 ## 0.85.16
 
 ### `gatsby-theme-chronogrove` — Discogs modal & vinyl sort labeling
