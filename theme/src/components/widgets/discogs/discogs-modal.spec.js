@@ -371,6 +371,14 @@ describe('DiscogsModal', () => {
     expect(mockOnClose).not.toHaveBeenCalled()
   })
 
+  it('does not call onClose when a key is pressed inside modal content (stopPropagation)', () => {
+    const { container } = render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
+
+    const modalContent = container.querySelector('[role="dialog"]').children[1]
+    fireEvent.keyDown(modalContent, { key: 'Enter', bubbles: true })
+    expect(mockOnClose).not.toHaveBeenCalled()
+  })
+
   it('sets body overflow hidden when modal is open', () => {
     render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
     expect(document.body.style.overflow).toBe('hidden')

@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.87.1
+
+### `@chronogrove/ui` — Sonar bug fixes (patch)
+
+- **`action-button.js`**: Replaced redundant `{icon && icon}` expression with `{icon}` (Sonar S1764 — identical sub-expressions).
+- **`pagination-button.js`**: Same fix for the identical `{icon && icon}` expression.
+- **Version**: **0.84.1**
+
+### `gatsby-theme-chronogrove` — Sonar bug fixes (patch)
+
+- **`discogs-modal.js`**: Added `onKeyDown={e => e.stopPropagation()}` to the inner modal panel alongside its existing `onClick` to satisfy `jsx-a11y/click-events-have-key-events`.
+- **`vinyl-pagination.js`**: Collapsed `isCurrentPage ? 'primary' : 'primary'` to the literal `'primary'` (Sonar S3923 — dead conditional).
+- **`recently-read-books.js`**: Prefixed bare `goodreadsElement.offsetHeight` reflow read with `void` to satisfy `no-unused-expressions`.
+- **`steam-game-card.js`**: Replaced root `<div onClick>` with `<Box as='button' type='button'>` plus `aria-label` for full keyboard accessibility (`jsx-a11y/click-events-have-key-events`). Imports `Box` from `theme-ui`.
+- **`steam-game-card.spec.js`**: Added tests asserting the card renders as a `<button>` element with the correct `aria-label`.
+- **Version**: **0.87.1**
+
+### `www.chrisvogt.me` — Sonar bug fix (patch)
+
+- **`CareerPathVisualization.js`**: Collapsed `isSmallScreen ? 'Art In Reality' : 'Art In Reality'` to the literal `'Art In Reality'` (Sonar S3923 — dead conditional).
+- **Version**: **1.18.1**
+
+### Files changed
+
+- `CHANGELOG.md`
+- `packages/ui/package.json` (version **0.84.1**)
+- `packages/ui/src/action-button.js`
+- `packages/ui/src/pagination-button.js`
+- `theme/package.json` (version **0.87.1**)
+- `theme/src/components/widgets/discogs/discogs-modal.js`
+- `theme/src/components/widgets/discogs/vinyl-pagination.js`
+- `theme/src/components/widgets/goodreads/recently-read-books.js`
+- `theme/src/components/widgets/steam/steam-game-card.js`
+- `theme/src/components/widgets/steam/steam-game-card.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.18.1**)
+- `www.chrisvogt.me/components/CareerPathVisualization.js`
+
+---
+
 ## 0.87.0
 
 ### `@chronogrove/ui` — Category index hero chrome & layout tokens

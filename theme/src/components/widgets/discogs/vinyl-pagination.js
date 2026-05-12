@@ -122,7 +122,7 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
                       px: [1, 2],
                       borderRadius: ['14px', '16px'],
                       border: ['1px solid', '2px solid'],
-                      borderColor: isCurrentPage ? 'primary' : 'primary',
+                      borderColor: 'primary',
                       backgroundColor: isCurrentPage ? 'primary' : 'transparent',
                       color: isCurrentPage ? 'white' : 'primary',
                       cursor: 'pointer',

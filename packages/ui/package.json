@@ -1,6 +1,6 @@
 {
   "name": "@chronogrove/ui",
-  "version": "0.84.0",
+  "version": "0.84.1",
   "description": "Chronogrove Theme UI theme, color mode helpers, and shared UI primitives",
   "license": "MIT",
   "type": "module",

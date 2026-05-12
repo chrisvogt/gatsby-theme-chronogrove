@@ -75,7 +75,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
         const goodreadsElement = document.getElementById('goodreads')
         if (goodreadsElement) {
           // Force a reflow to ensure the element is properly positioned
-          goodreadsElement.offsetHeight
+          void goodreadsElement.offsetHeight
           // Use the browser's native hash navigation
           window.location.hash = 'goodreads'
         }

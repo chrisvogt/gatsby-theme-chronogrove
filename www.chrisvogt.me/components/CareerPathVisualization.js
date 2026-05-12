@@ -28,7 +28,7 @@ const CareerPathVisualization = () => {
       'Encore Discovery Solutions': isSmallScreen ? 'Encore' : 'Encore Discovery',
       'Pan Am Education': 'Pan Am',
       'Salucro Healthcare Solutions': isSmallScreen ? 'Salucro' : 'Salucro Healthcare',
-      'Art In Reality, LLC': isSmallScreen ? 'Art In Reality' : 'Art In Reality'
+      'Art In Reality, LLC': 'Art In Reality'
     }
     return abbreviations[name] || name
   }
