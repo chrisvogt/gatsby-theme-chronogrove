@@ -7,7 +7,6 @@
 - **`category-index-layout.js`**: **`CategoryIndexHeroChrome`** (animated background slot + overlay), plus Theme UI **`sx`** fragments for the main column flex, post-list section, and empty state (ported from the travel/blog shell pattern).
 - **`package.json` exports**: **`./category-index-layout`** subpath for Next.js and non-Gatsby consumers.
 - **Tests**: **`category-index-layout.spec.js`** (hero chrome / overlay height defaults).
-- **`test:coverage`**: Runs **`--runInBand`** to avoid intermittent worker crashes during coverage collection.
 - **Version**: **0.84.0**
 
 ### `gatsby-theme-chronogrove` — Blog & music on travel-style timeline; configurable leads
@@ -34,7 +33,7 @@
 ### Files changed
 
 - `CHANGELOG.md`
-- `packages/ui/package.json` (version **0.84.0**, **`test:coverage`** **`runInBand`**)
+- `packages/ui/package.json` (version **0.84.0**)
 - **`packages/ui/src/category-index-layout.js`**, **`packages/ui/src/category-index-layout.spec.js`**
 - `theme/package.json` (version **0.87.0**)
 - `theme/jest.config.js`
