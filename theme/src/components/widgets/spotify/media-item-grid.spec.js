@@ -41,6 +41,18 @@ describe('MediaItemGrid', () => {
     expect(mockOnTrackClick).toHaveBeenCalledWith('https://www.google.com/')
   })
 
+  it('does not call onTrackClick when interactionDisabled', () => {
+    const mockOnTrackClick = jest.fn()
+    const { getByTitle } = render(
+      <MediaItemGrid interactionDisabled isLoading={false} items={mockItems} onTrackClick={mockOnTrackClick} />
+    )
+
+    const firstItem = getByTitle('Item #1')
+    fireEvent.click(firstItem)
+
+    expect(mockOnTrackClick).not.toHaveBeenCalled()
+  })
+
   it('prevents default behavior when item is clicked', () => {
     const mockOnTrackClick = jest.fn()
     const { getByTitle } = render(<MediaItemGrid isLoading={false} items={mockItems} onTrackClick={mockOnTrackClick} />)

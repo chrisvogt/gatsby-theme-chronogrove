@@ -58,14 +58,13 @@ module.exports = {
     'src/components/widgets/recent-posts/image-thumbnails.js'
   ],
 
-  // Relaxed from 98–99% to avoid blocking on noise. Branches stay at 90% until more branch tests land
-  // (theme is ~90% branches; stmts/lines/funcs are ~98–99%).
+  // Branches stay at 90% until more branch tests land (~91% actual); stmts/lines/funcs enforced at 98%.
   coverageThreshold: {
     global: {
-      statements: 96,
+      statements: 98,
       branches: 90,
-      functions: 96,
-      lines: 96
+      functions: 98,
+      lines: 98
     }
   },
 
