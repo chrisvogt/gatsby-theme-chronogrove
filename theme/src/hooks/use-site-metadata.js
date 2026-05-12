@@ -6,6 +6,8 @@ const useSiteMetadata = () => {
       site {
         siteMetadata {
           baseURL
+          blogIndexLead
+          musicIndexLead
           siteUrl
           description
           footerText
@@ -79,3 +81,4 @@ const useSiteMetadata = () => {
 }
 
 export default useSiteMetadata
+export { useSiteMetadata }

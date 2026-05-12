@@ -9,6 +9,10 @@ const defaultConfig = {
   // Core site metadata
   siteMetadata: {
     title: 'My Personal Website',
+    /** Optional lead paragraph under the `/blog/` index heading (Theme UI MDX body style). */
+    blogIndexLead: 'Posts from the blog.',
+    /** Optional lead under the music index heading (site-level pages often supply this). */
+    musicIndexLead: 'Original songs, covers, and audio posts.',
     description: 'A personal website and blog',
     siteUrl: 'https://example.com',
     baseURL: 'https://example.com',

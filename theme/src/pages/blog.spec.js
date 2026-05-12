@@ -12,14 +12,17 @@ import BlogIndexPage from './blog'
 import { TestProvider } from '../testUtils'
 
 // Mock the components
-jest.mock('../components/animated-page-background', () => () => <div data-testid='animated-background'>Background</div>)
 jest.mock('../components/layout', () => ({ children }) => <div data-testid='layout'>{children}</div>)
 jest.mock('../components/blog/page-header', () => ({ children }) => <h1>{children}</h1>)
-jest.mock('../components/widgets/recent-posts/post-card', () => ({ title, category, horizontal }) => (
-  <div data-testid='post-card' data-category={category} data-horizontal={horizontal ? 'true' : 'false'}>
-    {title}
-  </div>
-))
+jest.mock('../components/blog/post-timeline-index', () => ({
+  __esModule: true,
+  default: ({ posts }) =>
+    (Array.isArray(posts) ? posts : []).map(p => (
+      <div key={p.fields.id} data-testid='post-timeline-slot' data-category={p.fields.category}>
+        {p.frontmatter.title}
+      </div>
+    ))
+}))
 jest.mock('../components/seo', () => () => <div data-testid='seo' />)
 jest.mock('./blog-head', () => () => <div data-testid='blog-head' />)
 
@@ -28,7 +31,21 @@ jest.mock('../hooks/use-recent-posts', () => ({
   getPosts: jest.fn()
 }))
 
+jest.mock('../hooks/use-site-metadata', () => ({
+  __esModule: true,
+  default: jest.fn()
+}))
+
+jest.mock('../components/category-index-layout', () => {
+  const actual = jest.requireActual('../components/category-index-layout')
+  return {
+    ...actual,
+    CategoryIndexHeroChrome: ({ children }) => <div data-testid='category-index-hero'>{children}</div>
+  }
+})
+
 import { getPosts } from '../hooks/use-recent-posts'
+import useSiteMetadata from '../hooks/use-site-metadata'
 
 describe('BlogIndexPage', () => {
   const mockPosts = [
@@ -78,6 +95,9 @@ describe('BlogIndexPage', () => {
 
   beforeEach(() => {
     getPosts.mockClear()
+    useSiteMetadata.mockImplementation(() => ({
+      blogIndexLead: 'Lead paragraph for tests.'
+    }))
   })
 
   it('renders the blog index page with posts', () => {
@@ -90,8 +110,23 @@ describe('BlogIndexPage', () => {
     )
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
+    expect(screen.getByTestId('category-index-hero')).toBeInTheDocument()
     expect(screen.getByText('Blog')).toBeInTheDocument()
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(screen.getByText('Lead paragraph for tests.')).toBeInTheDocument()
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
+  })
+
+  it('uses the default blog lead when blogIndexLead is blank or missing', () => {
+    useSiteMetadata.mockImplementation(() => ({ blogIndexLead: '   ' }))
+    getPosts.mockReturnValue(mockPosts)
+
+    render(
+      <TestProvider>
+        <BlogIndexPage data={mockData} />
+      </TestProvider>
+    )
+
+    expect(screen.getByText('Posts from the blog.')).toBeInTheDocument()
   })
 
   it('renders Technology posts', () => {
@@ -131,7 +166,7 @@ describe('BlogIndexPage', () => {
 
     expect(screen.getByTestId('layout')).toBeInTheDocument()
     expect(screen.getByText('Blog')).toBeInTheDocument()
-    expect(screen.queryAllByTestId('post-card')).toHaveLength(0)
+    expect(screen.queryAllByTestId('post-timeline-slot')).toHaveLength(0)
   })
 
   it('filters out posts with photography category', () => {
@@ -159,7 +194,7 @@ describe('BlogIndexPage', () => {
     )
 
     // Should only render the 2 blog posts, not the photography post
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
     expect(screen.queryByText('Photography Post')).not.toBeInTheDocument()
   })
 
@@ -188,7 +223,7 @@ describe('BlogIndexPage', () => {
     )
 
     // Should only render the 2 blog posts, not the music post
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
     expect(screen.queryByText('Music Post')).not.toBeInTheDocument()
   })
 
@@ -238,7 +273,7 @@ describe('BlogIndexPage', () => {
 
     expect(technologyCards).toHaveLength(1)
     expect(blogCards).toHaveLength(1)
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
   })
 
   it('handles category with only one post (no remaining posts grid)', () => {
@@ -269,7 +304,7 @@ describe('BlogIndexPage', () => {
     )
 
     expect(screen.getByText('Single Tech Post')).toBeInTheDocument()
-    expect(screen.getAllByTestId('post-card')).toHaveLength(1)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(1)
   })
 
   it('renders all matching posts regardless of banner', () => {
@@ -399,11 +434,11 @@ describe('BlogIndexPage', () => {
       </TestProvider>
     )
 
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
     expect(screen.queryByText('Trip Report')).not.toBeInTheDocument()
   })
 
-  it('renders recap posts with vertical cards (not horizontal)', () => {
+  it('renders multiple recap posts in the timeline list', () => {
     const recapPosts = [
       {
         id: 'recap-1',
@@ -441,7 +476,7 @@ describe('BlogIndexPage', () => {
 
     getPosts.mockReturnValue(recapPosts)
 
-    const { container } = render(
+    render(
       <TestProvider>
         <BlogIndexPage data={mockData} />
       </TestProvider>
@@ -449,11 +484,10 @@ describe('BlogIndexPage', () => {
 
     expect(screen.getByText('January 2025 Recap')).toBeInTheDocument()
     expect(screen.getByText('February 2025 Recap')).toBeInTheDocument()
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
-    expect(container.querySelectorAll('[data-horizontal="false"]')).toHaveLength(2)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
   })
 
-  it('renders recap and personal posts in one list with correct card types', () => {
+  it('renders recap and personal posts together in the timeline list', () => {
     const mixedPosts = [
       {
         id: 'recap-1',
@@ -498,11 +532,14 @@ describe('BlogIndexPage', () => {
 
     expect(screen.getByText('March 2025 Recap')).toBeInTheDocument()
     expect(screen.getByText('Personal Story')).toBeInTheDocument()
-    expect(screen.getAllByTestId('post-card')).toHaveLength(2)
-
-    const recapCard = screen.getByText('March 2025 Recap').closest('[data-testid="post-card"]')
-    const personalCard = screen.getByText('Personal Story').closest('[data-testid="post-card"]')
-    expect(recapCard).toHaveAttribute('data-horizontal', 'false')
-    expect(personalCard).toHaveAttribute('data-horizontal', 'true')
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(2)
+    expect(screen.getByText('March 2025 Recap').closest('[data-testid="post-timeline-slot"]')).toHaveAttribute(
+      'data-category',
+      'personal'
+    )
+    expect(screen.getByText('Personal Story').closest('[data-testid="post-timeline-slot"]')).toHaveAttribute(
+      'data-category',
+      'personal'
+    )
   })
 })

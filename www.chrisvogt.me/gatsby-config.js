@@ -35,6 +35,8 @@ module.exports = {
     languageCode: 'en',
     social: {},
     subhead: 'Code, Music & Photography',
+    blogIndexLead: 'Essays, notes, and updates—music, photography, and travel each have their own index.',
+    musicIndexLead: 'Original songs and covers—listen inline or open each post for the full story.',
     title: 'chrisvogt.me',
     titleTemplate: '%s — Chris Vogt, Software Engineer in San Francisco',
     widgets: {
@@ -78,6 +80,8 @@ module.exports = {
           description: 'Software Engineer in San Francisco blogging about code, photography and piano music.',
           headline: 'Chris Vogt',
           subhead: 'Code, Music & Photography',
+          blogIndexLead: 'Essays, notes, and updates—music, photography, and travel each have their own index.',
+          musicIndexLead: 'Original songs and covers—listen inline or open each post for the full story.',
           avatarURL: '/images/avatar-256px.jpg',
           imageURL: '/images/og-image.png',
           hCard: {

@@ -48,7 +48,7 @@ module.exports = {
     'src/components/widgets/widget-header.js',
     'src/components/lazy-load.js',
     'src/components/header.js',
-    'src/components/blog/page-header.js',
+    'src/components/category-index-layout.js',
     'src/components/skip-nav/SkipNavLink.js',
     'src/components/skip-nav/SkipNavContent.js',
     'src/helpers/isDarkMode.js',

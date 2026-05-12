@@ -2,16 +2,22 @@
 import { Container, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Flex } from '@theme-ui/components'
-import { Fragment } from 'react'
 import { graphql } from 'gatsby'
 
-import AnimatedPageBackground from '../components/animated-page-background'
+import {
+  CategoryIndexHeroChrome,
+  categoryIndexEmptyStateBoxSx,
+  categoryIndexMainColumnFlexSx,
+  categoryIndexPostListSectionSx
+} from '../components/category-index-layout'
 import { articleColumnContainerSx } from '../constants/article-column-container-sx'
 import { getPosts } from '../hooks/use-recent-posts'
 import { getCategoryGroup } from '../helpers/categoryHelpers'
 import Layout from '../components/layout'
 import PageHeader from '../components/blog/page-header'
-import PostCard from '../components/widgets/recent-posts/post-card'
+import PostTimelineIndex from '../components/blog/post-timeline-index'
+import { DEFAULT_BLOG_INDEX_LEAD } from '../constants/category-index-leads'
+import useSiteMetadata from '../hooks/use-site-metadata'
 
 /** Posts for /blog/: newest first, excluding music / photography / travel (dedicated indexes). */
 const getBlogIndexPosts = allPosts =>
@@ -23,68 +29,32 @@ const getBlogIndexPosts = allPosts =>
 const BlogIndexPage = ({ data }) => {
   const allPosts = getPosts(data)
   const posts = getBlogIndexPosts(allPosts)
+  const { blogIndexLead } = useSiteMetadata() || {}
+  const trimmedLead = typeof blogIndexLead === 'string' ? blogIndexLead.trim() : ''
+  const lead = trimmedLead.length > 0 ? trimmedLead : DEFAULT_BLOG_INDEX_LEAD
 
   return (
-    <Fragment>
-      <AnimatedPageBackground overlayHeight='min(75vh, 1000px)' />
-      <div
-        sx={{
-          position: 'relative',
-          zIndex: 1
-        }}
-      >
-        <Layout transparentBackground>
-          <Flex
-            sx={{
-              flexDirection: 'column',
-              flexGrow: 1,
-              position: 'relative',
-              py: 3
-            }}
-          >
-            <Container sx={{ ...articleColumnContainerSx, flexGrow: 1 }}>
-              <PageHeader>Blog</PageHeader>
+    <CategoryIndexHeroChrome>
+      <Layout transparentBackground>
+        <Flex sx={categoryIndexMainColumnFlexSx}>
+          <Container sx={{ ...articleColumnContainerSx, flexGrow: 1 }}>
+            <PageHeader>Blog</PageHeader>
 
-              {posts.length > 0 ? (
-                <Box
-                  as='section'
-                  aria-label='Blog posts'
-                  sx={{
-                    display: 'grid',
-                    gridGap: 4,
-                    gridTemplateColumns: '1fr',
-                    mb: 4
-                  }}
-                >
-                  {posts.map(post => {
-                    const group = getCategoryGroup(post.fields.category, post.frontmatter.title)
-                    const isRecap = group === 'recaps'
+            <Themed.p>{lead}</Themed.p>
 
-                    return (
-                      <PostCard
-                        banner={post.frontmatter.banner}
-                        category={post.fields.category}
-                        date={post.frontmatter.date}
-                        excerpt={post.frontmatter.excerpt}
-                        horizontal={!isRecap}
-                        key={post.fields.id}
-                        link={post.fields.path}
-                        thumbnails={post.frontmatter.thumbnails}
-                        title={post.frontmatter.title}
-                      />
-                    )
-                  })}
-                </Box>
-              ) : (
-                <Box sx={{ textAlign: 'center', py: 6 }}>
-                  <Themed.p sx={{ fontSize: 3, color: 'textMuted' }}>No posts yet. Check back soon!</Themed.p>
-                </Box>
-              )}
-            </Container>
-          </Flex>
-        </Layout>
-      </div>
-    </Fragment>
+            {posts.length > 0 ? (
+              <Box as='section' aria-label='Blog posts' sx={categoryIndexPostListSectionSx}>
+                <PostTimelineIndex posts={posts} />
+              </Box>
+            ) : (
+              <Box sx={categoryIndexEmptyStateBoxSx}>
+                <Themed.p sx={{ fontSize: 3, color: 'textMuted' }}>No posts yet. Check back soon!</Themed.p>
+              </Box>
+            )}
+          </Container>
+        </Flex>
+      </Layout>
+    </CategoryIndexHeroChrome>
   )
 }
 

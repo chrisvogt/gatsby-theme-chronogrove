@@ -12,7 +12,7 @@ import YouTube from '../../../shortcodes/youtube'
  * Extract YouTube video ID from embed URL
  * e.g., https://www.youtube.com/embed/fiocCvDeAYQ -> fiocCvDeAYQ
  */
-const getYouTubeVideoId = url => {
+export const getYouTubeVideoId = url => {
   if (!url) return null
   const match = url.match(/\/embed\/([^?]+)/)
   return match ? match[1] : null

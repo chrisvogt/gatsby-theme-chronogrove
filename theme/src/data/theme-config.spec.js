@@ -11,6 +11,8 @@ describe('theme-config', () => {
     it('should have default site metadata', () => {
       expect(defaultConfig.siteMetadata).toEqual({
         title: 'My Personal Website',
+        blogIndexLead: 'Posts from the blog.',
+        musicIndexLead: 'Original songs, covers, and audio posts.',
         description: 'A personal website and blog',
         siteUrl: 'https://example.com',
         baseURL: 'https://example.com',

@@ -6,6 +6,8 @@ const data = {
   site: {
     siteMetadata: {
       baseURL: 'https://www.fake-site.com',
+      blogIndexLead: 'Posts from the blog.',
+      musicIndexLead: 'Listen here.',
       description: 'A fake website for unit tests!',
       footerText: '© 2026',
       headline: 'My New Website',
