@@ -1,8 +1,9 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { shouldUpdateScroll, onRouteUpdate, wrapRootElement } from './gatsby-browser'
+import { onClientEntry, onRouteUpdate, shouldUpdateScroll, wrapRootElement } from './gatsby-browser'
 import { onRouteUpdateChronogroveNavigation } from './src/helpers/on-route-update-chronogrove-navigation'
+import * as chronogroveColorMode from '@chronogrove/ui/color-mode'
 
 jest.mock('@gatsbyjs/reach-router', () => ({
   ...jest.requireActual('@gatsbyjs/reach-router'),
@@ -139,6 +140,52 @@ describe('gatsby-browser', () => {
       }
       const result = shouldUpdateScroll({ routerProps, prevRouterProps: undefined })
       expect(result).toBe(false)
+    })
+
+    it('returns false when pathname matches previous pathname', () => {
+      expect(
+        shouldUpdateScroll({
+          routerProps: { location: { pathname: '/blog' } },
+          prevRouterProps: { location: { pathname: '/blog' } }
+        })
+      ).toBe(false)
+    })
+  })
+
+  describe('onClientEntry', () => {
+    let originalRegistrableDomain
+
+    beforeEach(() => {
+      originalRegistrableDomain = process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN
+    })
+
+    afterEach(() => {
+      if (originalRegistrableDomain === undefined) {
+        delete process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN
+      } else {
+        process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN = originalRegistrableDomain
+      }
+    })
+
+    it('configures cross-domain color mode when GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN is set', () => {
+      const spy = jest.spyOn(chronogroveColorMode, 'setChronogroveCrossDomainColorModeClientConfig')
+      process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN = '  example.test  '
+      onClientEntry()
+      expect(spy).toHaveBeenCalledWith({ registrableDomain: 'example.test' })
+      spy.mockRestore()
+    })
+
+    it('clears cross-domain color mode client config when env domain is absent or whitespace', () => {
+      const spy = jest.spyOn(chronogroveColorMode, 'setChronogroveCrossDomainColorModeClientConfig')
+      delete process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN
+      onClientEntry()
+      expect(spy).toHaveBeenCalledWith(null)
+
+      spy.mockClear()
+      process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN = '   \t'
+      onClientEntry()
+      expect(spy).toHaveBeenCalledWith(null)
+      spy.mockRestore()
     })
   })
 

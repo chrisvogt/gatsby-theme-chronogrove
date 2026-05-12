@@ -19,17 +19,20 @@ jest.mock('../../../hooks/use-site-metadata', () => () => ({
 jest.mock('../../../hooks/use-widget-data')
 import useWidgetData from '../../../hooks/use-widget-data'
 
-// Mock LightGallery at the top
-const mockLightGalleryInstance = {
-  openGallery: jest.fn()
-}
-
-jest.mock('lightgallery/react', () =>
-  jest.fn(({ onInit }) => {
-    onInit({ instance: mockLightGalleryInstance })
-    return <div data-testid='lightgallery-mock' />
+// Mock LightGallery at the top — instance lives on globalThis so tests can clear it without TDZ/hoist issues.
+jest.mock('lightgallery/react', () => {
+  globalThis.__chronogroveFlickrLightGalleryTest ??= {
+    instance: { openGallery: jest.fn() }
+  }
+  const state = globalThis.__chronogroveFlickrLightGalleryTest
+  const React = require('react')
+  return jest.fn(({ onInit }) => {
+    onInit({ instance: state.instance })
+    return React.createElement('div', { 'data-testid': 'lightgallery-mock' })
   })
-)
+})
+
+const mockLightGalleryInstance = () => globalThis.__chronogroveFlickrLightGalleryTest.instance
 
 jest.mock('lightgallery/plugins/thumbnail', () => jest.fn())
 jest.mock('lightgallery/plugins/zoom', () => jest.fn())
@@ -85,6 +88,7 @@ describe('FlickrWidget', () => {
   afterEach(() => {
     jest.clearAllMocks()
     console.error.mockRestore()
+    globalThis.__chronogroveFlickrLightGalleryTest.instance = { openGallery: jest.fn() }
   })
 
   it('renders without crashing', () => {
@@ -155,7 +159,22 @@ describe('FlickrWidget', () => {
     const thumbnails = screen.getAllByAltText(/Flickr photo:/i)
     fireEvent.click(thumbnails[0])
 
-    expect(mockLightGalleryInstance.openGallery).toHaveBeenCalledWith(0)
+    expect(mockLightGalleryInstance().openGallery).toHaveBeenCalledWith(0)
+  })
+
+  it('logs when LightGallery instance is not initialized on photo click', () => {
+    globalThis.__chronogroveFlickrLightGalleryTest.instance = undefined
+    useWidgetData.mockReturnValue(mockSuccessState)
+
+    render(
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
+    )
+
+    fireEvent.click(screen.getAllByAltText(/Flickr photo:/i)[0])
+
+    expect(console.error).toHaveBeenCalledWith('LightGallery instance is not initialized')
   })
 
   it('calls VanillaTilt.init when isShowingMore or !isLoading is true', () => {
@@ -192,7 +211,7 @@ describe('FlickrWidget', () => {
     )
 
     expect(screen.getByTestId('lightgallery-mock')).toBeInTheDocument()
-    expect(mockLightGalleryInstance.openGallery).not.toHaveBeenCalled()
+    expect(mockLightGalleryInstance().openGallery).not.toHaveBeenCalled()
   })
 
   it('handles fatal error state correctly', () => {

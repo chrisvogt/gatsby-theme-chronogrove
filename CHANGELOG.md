@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.88.0
+
+### `gatsby-theme-chronogrove` — Music index repertoire promo & timeline slot
+
+- **`PostTimelineIndex`** (`post-timeline-index.js`): Optional **`afterFeatured`** slot rendered between the featured row and stamp list; featured row exposes **`data-bottom-rule`** (`true` | `false`) for whether the muted bottom border is shown (omitted when **`afterFeatured`** is present).
+- **Tests**: **`post-timeline-index.spec.js`** (slot placement + **`data-bottom-rule`**); **`chrisvogt-me-music-repertoire-promo.spec.js`** (**`MusicRepertoirePromo`** / **`ColorModeImage`** light vs dark **`src`**); **`chrisvogt-me-music-page.spec.js`** mock forwards **`afterFeatured`**; **`gatsby-browser.spec.js`** (**`shouldUpdateScroll`** same-pathname branch, **`onClientEntry`** cross-domain color mode); **`flickr-widget.spec.js`** (missing LightGallery instance **`console.error`** path).
+- **Jest**: Global **`coverageThreshold.lines`** raised to **99%**.
+- **Version**: **0.88.0**
+
+### `www.chrisvogt.me`
+
+- **`music.js`**: Repertoire promo card (**`MusicRepertoirePromo`**) below the featured music post, linking to **https://repertoire.chrisvogt.me/** with color-mode screenshots; compact horizontal layout on narrow viewports; named export **`MusicRepertoirePromo`** for tests.
+- **Version**: **1.19.0**
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.6.0** (tracks theme **0.88.0**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/jest.config.js`
+- `theme/package.json` (version **0.88.0**)
+- `theme/gatsby-browser.spec.js`
+- `theme/src/components/blog/post-timeline-index.js`
+- `theme/src/components/blog/post-timeline-index.spec.js`
+- `theme/src/components/widgets/flickr/flickr-widget.spec.js`
+- `theme/src/pages/chrisvogt-me-music-page.spec.js`
+- `theme/src/pages/chrisvogt-me-music-repertoire-promo.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.19.0**)
+- `www.chrisvogt.me/src/pages/music.js`
+- `www.chronogrove.com/package.json` (version **1.6.0**)
+
+---
+
 ## 0.87.1
 
 ### `@chronogrove/ui` — Sonar bug fixes (patch)

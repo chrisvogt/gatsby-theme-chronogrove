@@ -84,6 +84,28 @@ describe('PostTimelineIndex', () => {
     expect(screen.getAllByTestId('post-timeline-entry')).toHaveLength(1)
     expect(screen.getByRole('heading', { level: 2, name: 'First Post' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 2, name: 'Second' })).toBeInTheDocument()
+    expect(screen.getByTestId('post-timeline-featured-entry')).toHaveAttribute('data-bottom-rule', 'true')
+  })
+
+  it('renders afterFeatured between featured row and stamp list', () => {
+    render(
+      <TestProvider>
+        <PostTimelineIndex
+          afterFeatured={<div data-testid='after-featured-slot'>Between</div>}
+          posts={[
+            makePost(),
+            makePost({
+              fields: { id: 'p2', path: '/blog/second/' },
+              frontmatter: { title: 'Second', thumbnails: [cloud('2')] }
+            })
+          ]}
+        />
+      </TestProvider>
+    )
+
+    expect(screen.getByTestId('after-featured-slot')).toHaveTextContent('Between')
+    expect(screen.getByTestId('post-timeline-featured-entry')).toHaveAttribute('data-bottom-rule', 'false')
+    expect(screen.getAllByTestId('post-timeline-entry')).toHaveLength(1)
   })
 
   it('featured carousel hero receives hover handlers when multiple slides exist', () => {
