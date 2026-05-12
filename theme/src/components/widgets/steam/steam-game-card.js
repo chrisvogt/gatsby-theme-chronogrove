@@ -7,8 +7,13 @@ import LazyLoad from '../../lazy-load'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
+/** px; must match lazy placeholder + RectShape — img can't use height % inside LazyLoad’s auto-height Box */
+const STEAM_CARD_IMAGE_HEIGHT = 200
+
 const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, onClick = null }) => {
   const [isHovered, setIsHovered] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+  const isImageZoomed = isHovered || isFocused
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
 
@@ -22,21 +27,30 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
       aria-label={`View ${game.displayName} on Steam`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
       onClick={handleClick}
       sx={{
         variant: 'styles.InstagramItem',
         position: 'relative',
+        display: 'block',
+        width: '100%',
         overflow: 'hidden',
         cursor: 'pointer',
         background: 'none',
+        backgroundColor: 'transparent',
         border: 'none',
         p: 0,
         borderRadius: '8px',
         boxShadow: 'md',
         transition: 'all 200ms ease-in-out',
+        alignSelf: 'start',
         '&:hover, &:focus': {
           transform: 'scale(1.015)',
           boxShadow: 'lg'
+        },
+        '&:hover .steam-game-card_caption, &:focus .steam-game-card_caption': {
+          opacity: 1
         }
       }}
     >
@@ -45,19 +59,19 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
         sx={{
           position: 'relative',
           width: '100%',
-          height: '200px',
+          height: STEAM_CARD_IMAGE_HEIGHT,
           overflow: 'hidden'
         }}
       >
         {gameImage ? (
           <LazyLoad
             placeholder={
-              <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+              <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
                 <RectShape
                   color={darkModeActive ? '#3a3a4a' : '#efefef'}
                   style={{
                     width: '100%',
-                    height: '200px'
+                    height: STEAM_CARD_IMAGE_HEIGHT
                   }}
                 />
               </div>
@@ -67,21 +81,22 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
               src={gameImage}
               alt={`${game.displayName} header`}
               sx={{
+                display: 'block',
                 width: '100%',
-                height: '100%',
+                height: STEAM_CARD_IMAGE_HEIGHT,
                 objectFit: 'cover',
                 transition: 'transform 0.3s ease',
-                transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                transform: isImageZoomed ? 'scale(1.05)' : 'scale(1)'
               }}
             />
           </LazyLoad>
         ) : (
-          <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+          <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
             <RectShape
               color={darkModeActive ? '#3a3a4a' : '#efefef'}
               style={{
                 width: '100%',
-                height: '200px'
+                height: STEAM_CARD_IMAGE_HEIGHT
               }}
             />
           </div>
@@ -94,6 +109,7 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
               position: 'absolute',
               top: 2,
               left: 2,
+              zIndex: 2,
               background: darkModeActive ? 'rgba(20, 20, 31, 0.85)' : 'rgba(255, 255, 255, 0.9)',
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
@@ -114,60 +130,55 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
           </div>
         )}
 
-        {/* Gradient Overlay */}
+        {/* Title / subtitle: hidden until hover or focus (Spotify media grid pattern) */}
         <div
+          className='steam-game-card_caption'
           sx={{
-            position: 'absolute',
+            alignItems: 'center',
+            background: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
             bottom: 0,
+            color: 'white',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
             left: 0,
+            opacity: 0,
+            padding: 3,
+            pointerEvents: 'none',
+            position: 'absolute',
             right: 0,
-            height: '140px',
-            background: darkModeActive
-              ? 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 80%, transparent 100%)'
-              : 'linear-gradient(to top, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 20%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)',
-            pointerEvents: 'none'
-          }}
-        />
-      </div>
-
-      {/* Text Content */}
-      <div
-        sx={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: 3,
-          color: darkModeActive ? '#fff' : '#000'
-        }}
-      >
-        {/* Game Name */}
-        <div
-          sx={{
-            fontSize: '14px',
-            fontWeight: 'bold',
-            mb: 1,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            textShadow: darkModeActive ? '0 1px 3px rgba(0,0,0,0.8)' : '0 1px 3px rgba(255,255,255,0.8)'
+            textAlign: 'center',
+            top: 0,
+            transition: 'opacity 0.2s ease-in-out',
+            zIndex: 1
           }}
         >
-          {game.displayName}
-        </div>
-
-        {/* Subtitle */}
-        {subtitle && (
           <div
             sx={{
-              fontSize: '12px',
-              color: darkModeActive ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.7)',
-              textShadow: darkModeActive ? '0 1px 2px rgba(0,0,0,0.8)' : '0 1px 2px rgba(255,255,255,0.8)'
+              fontSize: '14px',
+              fontWeight: 'bold',
+              mb: subtitle ? 1 : 0,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              width: '100%'
             }}
           >
-            {subtitle}
+            {game.displayName}
           </div>
-        )}
+          {subtitle && (
+            <div
+              sx={{
+                fontSize: '12px',
+                color: 'rgba(255,255,255,0.85)'
+              }}
+            >
+              {subtitle}
+            </div>
+          )}
+        </div>
       </div>
     </Box>
   )

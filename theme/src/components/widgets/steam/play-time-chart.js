@@ -97,7 +97,13 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
       <Grid
         sx={{
           gridGap: [3, 2, 2, 3],
-          gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)'],
+          gridTemplateColumns: [
+            'repeat(3, 1fr)',
+            'repeat(4, 1fr)',
+            'repeat(4, 1fr)',
+            'repeat(5, 1fr)',
+            'repeat(5, 1fr)'
+          ],
           mb: 4
         }}
       >

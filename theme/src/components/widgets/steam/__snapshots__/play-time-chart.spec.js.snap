@@ -6,11 +6,11 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -18,36 +18,33 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -55,36 +52,33 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -92,30 +86,27 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -154,11 +145,11 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -166,36 +157,33 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -203,36 +191,33 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -240,30 +225,27 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -302,11 +284,11 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -314,36 +296,33 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -351,36 +330,33 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -388,30 +364,27 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -450,11 +423,11 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -462,36 +435,33 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -499,36 +469,33 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -536,30 +503,27 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -598,11 +562,11 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -610,30 +574,27 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
@@ -726,11 +687,11 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -738,36 +699,33 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -775,36 +733,33 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -812,30 +767,27 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -874,11 +826,11 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -886,36 +838,33 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -923,36 +872,33 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -960,30 +906,27 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -1043,11 +986,11 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -1055,36 +998,33 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -1092,36 +1032,33 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -1129,30 +1066,27 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
@@ -1191,11 +1125,11 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
     class="css-sak8bt"
   >
     <div
-      class="css-zxiliy"
+      class="css-munl51"
     >
       <button
         aria-label="View Cities: Skylines on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -1203,36 +1137,33 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         >
           <img
             alt="Cities: Skylines header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             1
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Cities: Skylines
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            757.35h total • 2h recently
+            <div
+              class="css-h3pxs9"
+            >
+              Cities: Skylines
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              757.35h total • 2h recently
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View ARK: Survival Evolved on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -1240,36 +1171,33 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             2
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            ARK: Survival Evolved
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            277.83h total
+            <div
+              class="css-h3pxs9"
+            >
+              ARK: Survival Evolved
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              277.83h total
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View PUBG: BATTLEGROUNDS on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -1277,30 +1205,27 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-c86zxy"
+            class="css-17mv9gi"
           >
             3
           </div>
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            PUBG: BATTLEGROUNDS
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            200h total • 1h recently
+            <div
+              class="css-h3pxs9"
+            >
+              PUBG: BATTLEGROUNDS
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              200h total • 1h recently
+            </div>
           </div>
         </div>
       </button>
