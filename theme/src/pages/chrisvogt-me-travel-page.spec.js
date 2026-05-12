@@ -16,21 +16,6 @@ jest.mock('../../../theme/src/components/layout', () => ({ children, transparent
   </div>
 ))
 jest.mock('../../../theme/src/components/blog/page-header', () => ({ children }) => <h1>{children}</h1>)
-jest.mock(
-  '../../../theme/src/components/widgets/recent-posts/post-card',
-  () =>
-    ({ title, category, excerpt, link, thumbnails }) => (
-      <div
-        data-testid='post-card'
-        data-category={category}
-        data-link={link}
-        data-excerpt={excerpt ?? ''}
-        data-thumbnails={thumbnails ? thumbnails.join(',') : ''}
-      >
-        {title}
-      </div>
-    )
-)
 jest.mock('../../../theme/src/components/seo', () => {
   const MockSeo = ({ canonicalPath, title, description, children }) => (
     <div data-testid='seo' data-canonical-path={canonicalPath} data-title={title} data-description={description}>
@@ -71,7 +56,7 @@ describe('www.chrisvogt.me Travel page', () => {
     getPosts.mockReset()
   })
 
-  it('renders travel posts with home-style cards and excerpt', () => {
+  it('renders travel journal featured trip plus timeline stamps with excerpts', () => {
     getPosts.mockReturnValue([
       travelNode(),
       travelNode({
@@ -93,15 +78,43 @@ describe('www.chrisvogt.me Travel page', () => {
 
     expect(screen.getByTestId('layout')).toHaveAttribute('data-transparent', 'true')
     expect(screen.getByTestId('animated-background')).toHaveAttribute('data-overlay-height', 'min(75vh, 1000px)')
-    expect(screen.getByText('Travel')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Travel' })).toBeInTheDocument()
     expect(screen.getByText('Narrative posts and photo galleries from trips and destinations.')).toBeInTheDocument()
 
-    const cards = screen.getAllByTestId('post-card')
-    expect(cards).toHaveLength(2)
-    expect(cards[0]).toHaveAttribute('data-category', 'travel')
-    expect(cards[0]).toHaveAttribute('data-excerpt', 'Island hopping and reef days.')
-    expect(cards[1]).toHaveAttribute('data-category', 'travel/pnw')
+    expect(screen.getByTestId('travel-featured-entry')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Belize' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Pacific Northwest' })).toBeInTheDocument()
+    expect(screen.getAllByTestId('travel-entry')).toHaveLength(1)
     expect(screen.getByRole('region', { name: 'Travel posts' })).toBeInTheDocument()
+  })
+
+  it('shows a gallery cue on featured trip when thumbnails list has multiple photos', () => {
+    getPosts.mockReturnValue([
+      travelNode({
+        fields: { id: 'travel-multi', path: '/travel/multi/' },
+        frontmatter: {
+          title: 'Multi-photo trip',
+          thumbnails: ['https://example.com/img-a.jpg', 'https://example.com/img-b.jpg']
+        }
+      }),
+      travelNode({
+        fields: { category: 'travel/pnw', id: 't2', path: '/travel/pnw/' },
+        frontmatter: {
+          date: 'February 1, 2025',
+          excerpt: 'Mountains and coast.',
+          thumbnails: ['https://example.com/b.jpg'],
+          title: 'Pacific Northwest'
+        }
+      })
+    ])
+
+    render(
+      <TestProvider>
+        <TravelPage data={mockData} />
+      </TestProvider>
+    )
+
+    expect(screen.getByTestId('travel-featured-carousel-icon')).toBeInTheDocument()
   })
 
   it('filters out non-travel posts', () => {
@@ -119,7 +132,7 @@ describe('www.chrisvogt.me Travel page', () => {
       </TestProvider>
     )
 
-    expect(screen.getAllByTestId('post-card')).toHaveLength(1)
+    expect(screen.queryAllByTestId('travel-entry')).toHaveLength(0)
     expect(screen.getByText('Belize')).toBeInTheDocument()
     expect(screen.queryByText('Tech')).not.toBeInTheDocument()
   })
@@ -138,7 +151,8 @@ describe('www.chrisvogt.me Travel page', () => {
       </TestProvider>
     )
 
-    expect(screen.queryAllByTestId('post-card')).toHaveLength(0)
+    expect(screen.queryByTestId('travel-featured-entry')).not.toBeInTheDocument()
+    expect(screen.queryAllByTestId('travel-entry')).toHaveLength(0)
     expect(screen.getByText('No travel posts yet. Check back soon!')).toBeInTheDocument()
   })
 

@@ -1,4 +1,8 @@
-import { isCloudinaryUrl, optimizeCloudinaryThumbnailSrc } from './cloudinaryThumbnailUrl'
+import {
+  isCloudinaryUrl,
+  optimizeCloudinaryFillDimensionsSrc,
+  optimizeCloudinaryThumbnailSrc
+} from './cloudinaryThumbnailUrl'
 
 describe('cloudinaryThumbnailUrl', () => {
   const cloudinaryImages = [
@@ -59,5 +63,34 @@ describe('cloudinaryThumbnailUrl', () => {
   it('returns Cloudinary URLs without /upload/ unchanged', () => {
     const u = 'https://res.cloudinary.com/demo/image/simple.jpg'
     expect(optimizeCloudinaryThumbnailSrc(u)).toBe(u)
+  })
+
+  describe('optimizeCloudinaryFillDimensionsSrc', () => {
+    it('applies portrait hero dimensions', () => {
+      const out = optimizeCloudinaryFillDimensionsSrc(cloudinaryImages[0], 780, Math.round((780 * 4) / 3))
+      expect(out).toMatchInlineSnapshot(
+        '"https://res.cloudinary.com/chrisvogt/image/upload/w_780,h_1040,c_fill,f_auto,q_auto/v1234567890/folder/image1.jpg"'
+      )
+    })
+
+    it('replaces prior transforms like thumb helper does', () => {
+      expect(optimizeCloudinaryFillDimensionsSrc(cloudinaryWithTransforms[1], 400, 500)).toMatchInlineSnapshot(
+        '"https://res.cloudinary.com/chrisvogt/image/upload/w_400,h_500,c_fill,f_auto,q_auto/v1750231638/galleries/image2.jpg"'
+      )
+    })
+
+    it('does not rewrite spoof URLs', () => {
+      const maliciousUrls = [
+        'https://evil.com/?redirect=res.cloudinary.com/image/upload/v123/image.jpg',
+        'https://attacker.com/path?url=https://res.cloudinary.com/image/upload/v123/img.jpg'
+      ]
+      maliciousUrls.forEach(url => {
+        expect(optimizeCloudinaryFillDimensionsSrc(url, 780, 1040)).toBe(url)
+      })
+    })
+
+    it('returns unchanged when dimensions are non-finite', () => {
+      expect(optimizeCloudinaryFillDimensionsSrc(cloudinaryImages[0], Number.NaN, 1040)).toBe(cloudinaryImages[0])
+    })
   })
 })
