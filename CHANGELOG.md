@@ -1,5 +1,59 @@
 # Changelog
 
+## 0.87.0
+
+### `@chronogrove/ui` — Category index hero chrome & layout tokens
+
+- **`category-index-layout.js`**: **`CategoryIndexHeroChrome`** (animated background slot + overlay), plus Theme UI **`sx`** fragments for the main column flex, post-list section, and empty state (ported from the travel/blog shell pattern).
+- **`package.json` exports**: **`./category-index-layout`** subpath for Next.js and non-Gatsby consumers.
+- **Tests**: **`category-index-layout.spec.js`** (hero chrome / overlay height defaults).
+- **`test:coverage`**: Runs **`--runInBand`** to avoid intermittent worker crashes during coverage collection.
+- **Version**: **0.84.0**
+
+### `gatsby-theme-chronogrove` — Blog & music on travel-style timeline; configurable leads
+
+- **Blog index** (`blog.js`): Uses **`CategoryIndexHeroChrome`** + **`PostTimelineIndex`** (featured row + stamp timeline) instead of a **`PostCard`** grid; default intro copy from **`DEFAULT_BLOG_INDEX_LEAD`** when site metadata omits **`blogIndexLead`**.
+- **`PostTimelineIndex`** (`post-timeline-index.js`): Shared timeline for category indexes; optional **`timelineAsideMedia`** column (**YouTube** compact embed + **SoundCloud** iframe); uniform **80px** stamp thumbnails when not in media mode; **`TimelineEmbedAside`** reuse **`getYouTubeVideoId`** from **`post-card.js`**.
+- **Theme config / metadata**: **`blogIndexLead`** & **`musicIndexLead`** in **`theme-config.js`**; GraphQL + **`useSiteMetadata`** fields; **`category-index-leads.js`** holds defaults.
+- **`category-index-layout.js`**: Thin re-export from **`@chronogrove/ui/category-index-layout`** (shim path preserved for theme shadowing); listed in **`coveragePathIgnorePatterns`**.
+- **Jest**: **`collectCoverageFrom`** includes **`www.chrisvogt.me/src/pages/music.js`** alongside travel for site-route coverage.
+- **Tests**: **`blog.spec.js`**, **`post-timeline-index.spec.js`**, **`chrisvogt-me-music-page.spec.js`**, **`chrisvogt-me-travel-page.spec.js`**, **`theme-config.spec.js`**, **`use-site-metadata.spec.js`**, and related updates.
+- **Version**: **0.87.0**
+
+### `www.chrisvogt.me`
+
+- **`gatsby-config.js`**: **`blogIndexLead`** & **`musicIndexLead`** site metadata.
+- **Travel** (`travel.js`) & **music** (`music.js`): Shared category-index chrome; **music** passes **`timelineAsideMedia`** for embed column.
+- **`travel-journal-index.js`**: Thin wrapper around **`PostTimelineIndex`** with travel **`dataTestIdPrefix`** and copy hooks (existing travel tests unchanged).
+- **Version**: **1.18.0** (tracks theme **0.87.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.5.0** (tracks theme **0.87.0**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `packages/ui/package.json` (version **0.84.0**, **`test:coverage`** **`runInBand`**)
+- **`packages/ui/src/category-index-layout.js`**, **`packages/ui/src/category-index-layout.spec.js`**
+- `theme/package.json` (version **0.87.0**)
+- `theme/jest.config.js`
+- **`theme/src/components/category-index-layout.js`**
+- **`theme/src/components/blog/post-timeline-index.js`**, **`theme/src/components/blog/post-timeline-index.spec.js`**
+- `theme/src/components/widgets/recent-posts/post-card.js`
+- **`theme/src/constants/category-index-leads.js`**
+- `theme/src/data/theme-config.js`, `theme/src/data/theme-config.spec.js`
+- `theme/src/hooks/use-site-metadata.js`, `theme/src/hooks/use-site-metadata.spec.js`
+- `theme/src/pages/blog.js`, `theme/src/pages/blog.spec.js`
+- `theme/src/pages/chrisvogt-me-music-page.spec.js`, `theme/src/pages/chrisvogt-me-travel-page.spec.js`
+- `www.chrisvogt.me/package.json` (version **1.18.0**)
+- `www.chrisvogt.me/gatsby-config.js`
+- `www.chrisvogt.me/src/pages/travel.js`, `www.chrisvogt.me/src/pages/music.js`
+- **`www.chrisvogt.me/src/components/travel-journal-index.js`**
+- `www.chronogrove.com/package.json` (version **1.5.0**)
+
+---
+
 ## 0.86.0
 
 ### `gatsby-theme-chronogrove` — Travel-ready Cloudinary sizing & tests for www travel index

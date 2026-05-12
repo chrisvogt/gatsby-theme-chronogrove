@@ -2,73 +2,51 @@
 import { Container, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Flex } from '@theme-ui/components'
-import { Fragment } from 'react'
 import { graphql } from 'gatsby'
 
 import { articleColumnContainerSx } from 'gatsby-theme-chronogrove/src/constants/article-column-container-sx'
-import AnimatedPageBackground from '../../../theme/src/components/animated-page-background'
+import {
+  CategoryIndexHeroChrome,
+  categoryIndexEmptyStateBoxSx,
+  categoryIndexMainColumnFlexSx,
+  categoryIndexPostListSectionSx
+} from '../../../theme/src/components/category-index-layout'
+import { DEFAULT_MUSIC_INDEX_LEAD } from '../../../theme/src/constants/category-index-leads'
 import { getPosts } from '../../../theme/src/hooks/use-recent-posts'
+import useSiteMetadata from '../../../theme/src/hooks/use-site-metadata'
 import Layout from '../../../theme/src/components/layout'
 import PageHeader from '../../../theme/src/components/blog/page-header'
-import PostCard from '../../../theme/src/components/widgets/recent-posts/post-card'
+import PostTimelineIndex from '../../../theme/src/components/blog/post-timeline-index'
 import Seo from '../../../theme/src/components/seo'
 
 const MusicPage = ({ data }) => {
   const posts = getPosts(data)?.filter(post => post.fields.category?.startsWith('music')) || []
-  return (
-    <Fragment>
-      <AnimatedPageBackground overlayHeight='min(75vh, 1000px)' />
-      <div
-        sx={{
-          position: 'relative',
-          zIndex: 1
-        }}
-      >
-        <Layout transparentBackground>
-          <Flex
-            sx={{
-              flexDirection: 'column',
-              flexGrow: 1,
-              position: 'relative',
-              py: 3
-            }}
-          >
-            <Container sx={{ ...articleColumnContainerSx, flexGrow: 1 }}>
-              <PageHeader>My Music</PageHeader>
+  const { musicIndexLead } = useSiteMetadata() || {}
+  const trimmedLead = typeof musicIndexLead === 'string' ? musicIndexLead.trim() : ''
+  const musicLead = trimmedLead.length > 0 ? trimmedLead : DEFAULT_MUSIC_INDEX_LEAD
 
-              {posts.length > 0 ? (
-                <Box
-                  as='section'
-                  aria-label='Music posts'
-                  sx={{
-                    display: 'grid',
-                    gridGap: 4,
-                    gridTemplateColumns: '1fr',
-                    mt: 4
-                  }}
-                >
-                  {posts.map(post => (
-                    <PostCard
-                      category={post.fields.category}
-                      date={post.frontmatter.date}
-                      key={post.fields.id}
-                      link={post.fields.path}
-                      soundcloudId={post.frontmatter.soundcloudId}
-                      title={post.frontmatter.title}
-                      youtubeSrc={post.frontmatter.youtubeSrc}
-                    />
-                  ))}
-                </Box>
-              ) : (
-                <Box sx={{ textAlign: 'center', py: 6, mt: 4 }}>
-                  <Themed.p sx={{ fontSize: 3, color: 'textMuted' }}>No music posts yet. Check back soon!</Themed.p>
-                </Box>
-              )}
-            </Container>
-          </Flex>
-        </Layout>
-      </div>
-    </Fragment>
+  return (
+    <CategoryIndexHeroChrome>
+      <Layout transparentBackground>
+        <Flex sx={categoryIndexMainColumnFlexSx}>
+          <Container sx={{ ...articleColumnContainerSx, flexGrow: 1 }}>
+            <PageHeader>My Music</PageHeader>
+
+            <Themed.p>{musicLead}</Themed.p>
+
+            {posts.length > 0 ? (
+              <Box as='section' aria-label='Music posts' sx={categoryIndexPostListSectionSx}>
+                <PostTimelineIndex posts={posts} timelineAsideMedia />
+              </Box>
+            ) : (
+              <Box sx={categoryIndexEmptyStateBoxSx}>
+                <Themed.p sx={{ fontSize: 3, color: 'textMuted' }}>No music posts yet. Check back soon!</Themed.p>
+              </Box>
+            )}
+          </Container>
+        </Flex>
+      </Layout>
+    </CategoryIndexHeroChrome>
   )
 }
 
@@ -94,10 +72,13 @@ export const pageQuery = graphql`
             path
           }
           frontmatter {
+            banner
             date(formatString: "MMMM DD, YYYY")
             description
+            excerpt
             slug
             soundcloudId
+            thumbnails
             title
             youtubeSrc
           }

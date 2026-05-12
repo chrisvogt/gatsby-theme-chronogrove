@@ -7,9 +7,19 @@ jest.mock('gatsby', () => ({
   graphql: jest.fn()
 }))
 
-jest.mock('../../../theme/src/components/animated-page-background', () => ({ overlayHeight }) => (
-  <div data-testid='animated-background' data-overlay-height={overlayHeight} />
-))
+jest.mock('../../../theme/src/components/category-index-layout', () => {
+  const React = require('react')
+  const actual = jest.requireActual('../../../theme/src/components/category-index-layout')
+  return {
+    ...actual,
+    CategoryIndexHeroChrome: ({ children, overlayHeight = 'min(75vh, 1000px)' }) => (
+      <>
+        <div data-testid='animated-background' data-overlay-height={overlayHeight} />
+        {children}
+      </>
+    )
+  }
+})
 jest.mock('../../../theme/src/components/layout', () => ({ children, transparentBackground }) => (
   <div data-testid='layout' data-transparent={transparentBackground ? 'true' : 'false'}>
     {children}

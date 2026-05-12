@@ -7,9 +7,19 @@ jest.mock('gatsby', () => ({
   graphql: jest.fn()
 }))
 
-jest.mock('../../../theme/src/components/animated-page-background', () => ({ overlayHeight }) => (
-  <div data-testid='animated-background' data-overlay-height={overlayHeight} />
-))
+jest.mock('../../../theme/src/components/category-index-layout', () => {
+  const React = require('react')
+  const actual = jest.requireActual('../../../theme/src/components/category-index-layout')
+  return {
+    ...actual,
+    CategoryIndexHeroChrome: ({ children, overlayHeight = 'min(75vh, 1000px)' }) => (
+      <>
+        <div data-testid='animated-background' data-overlay-height={overlayHeight} />
+        {children}
+      </>
+    )
+  }
+})
 jest.mock('../../../theme/src/components/layout', () => ({ children, transparentBackground }) => (
   <div data-testid='layout' data-transparent={transparentBackground ? 'true' : 'false'}>
     {children}
@@ -17,19 +27,21 @@ jest.mock('../../../theme/src/components/layout', () => ({ children, transparent
 ))
 jest.mock('../../../theme/src/components/blog/page-header', () => ({ children }) => <h1>{children}</h1>)
 jest.mock(
-  '../../../theme/src/components/widgets/recent-posts/post-card',
+  '../../../theme/src/components/blog/post-timeline-index',
   () =>
-    ({ title, category, link, soundcloudId, youtubeSrc }) => (
-      <div
-        data-testid='post-card'
-        data-category={category}
-        data-link={link}
-        data-soundcloud={soundcloudId ?? ''}
-        data-youtube={youtubeSrc ?? ''}
-      >
-        {title}
-      </div>
-    )
+    ({ posts }) =>
+      (Array.isArray(posts) ? posts : []).map(p => (
+        <div
+          data-testid='post-timeline-slot'
+          key={p.fields.id}
+          data-category={p.fields.category}
+          data-link={p.fields.path}
+          data-soundcloud={p.frontmatter.soundcloudId ?? ''}
+          data-youtube={p.frontmatter.youtubeSrc ?? ''}
+        >
+          {p.frontmatter.title}
+        </div>
+      ))
 )
 jest.mock('../../../theme/src/components/seo', () => {
   const MockSeo = ({ canonicalPath, title, description, children }) => (
@@ -44,8 +56,14 @@ jest.mock('../../../theme/src/hooks/use-recent-posts', () => ({
   getPosts: jest.fn()
 }))
 
+jest.mock('../../../theme/src/hooks/use-site-metadata', () => ({
+  __esModule: true,
+  default: jest.fn()
+}))
+
 import MusicPage, { Head } from '../../../www.chrisvogt.me/src/pages/music'
 import { getPosts } from '../../../theme/src/hooks/use-recent-posts'
+import useSiteMetadata from '../../../theme/src/hooks/use-site-metadata'
 import { TestProvider } from '../testUtils'
 
 describe('www.chrisvogt.me Music page', () => {
@@ -69,6 +87,9 @@ describe('www.chrisvogt.me Music page', () => {
 
   beforeEach(() => {
     getPosts.mockReset()
+    useSiteMetadata.mockImplementation(() => ({
+      musicIndexLead: 'Lead line for music index tests.'
+    }))
   })
 
   it('renders music posts in a single column', () => {
@@ -92,12 +113,26 @@ describe('www.chrisvogt.me Music page', () => {
 
     expect(screen.getByTestId('layout')).toHaveAttribute('data-transparent', 'true')
     expect(screen.getByText('My Music')).toBeInTheDocument()
-    const cards = screen.getAllByTestId('post-card')
+    expect(screen.getByText('Lead line for music index tests.')).toBeInTheDocument()
+    const cards = screen.getAllByTestId('post-timeline-slot')
     expect(cards).toHaveLength(2)
     expect(cards[0]).toHaveAttribute('data-category', 'music')
     expect(cards[1]).toHaveAttribute('data-category', 'music/covers')
     expect(cards[1]).toHaveAttribute('data-youtube', 'https://www.youtube.com/embed/abc')
     expect(screen.getByRole('region', { name: 'Music posts' })).toBeInTheDocument()
+  })
+
+  it('uses the default music lead when musicIndexLead is blank', () => {
+    useSiteMetadata.mockImplementation(() => ({ musicIndexLead: '   ' }))
+    getPosts.mockReturnValue([musicNode()])
+
+    render(
+      <TestProvider>
+        <MusicPage data={mockData} />
+      </TestProvider>
+    )
+
+    expect(screen.getByText('Original songs, covers, and audio posts.')).toBeInTheDocument()
   })
 
   it('filters out non-music posts', () => {
@@ -115,7 +150,7 @@ describe('www.chrisvogt.me Music page', () => {
       </TestProvider>
     )
 
-    expect(screen.getAllByTestId('post-card')).toHaveLength(1)
+    expect(screen.getAllByTestId('post-timeline-slot')).toHaveLength(1)
     expect(screen.queryByText('Trip')).not.toBeInTheDocument()
   })
 
@@ -128,7 +163,7 @@ describe('www.chrisvogt.me Music page', () => {
       </TestProvider>
     )
 
-    expect(screen.queryAllByTestId('post-card')).toHaveLength(0)
+    expect(screen.queryAllByTestId('post-timeline-slot')).toHaveLength(0)
     expect(screen.getByText('No music posts yet. Check back soon!')).toBeInTheDocument()
   })
 
