@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.90.1
+
+### `gatsby-theme-chronogrove` — Steam game cards (UI polish)
+
+- **`steam-game-card.js`**: Spotify-style **hover/focus caption** (title and playtime copy hidden until interaction); full-bleed **`object-fit: cover`** artwork at a fixed height (fixes empty bands from `%` height + LazyLoad); **rank badge** stacks above the caption (**`z-index`**) so leaderboard numbers stay visible on the overlay; **`align-self: start`** so grid rows don’t stretch cards; transparent/block button styling for a tight image frame.
+- **`steam-widget.js`**: Recently-played **grid** aligned with Spotify density (**3 → 4 → 4 → 5 → 5** columns); loading skeleton **dropped the obsolete footer strip** under placeholders.
+- **`play-time-chart.js`**: Leaderboard grid uses the **same column scale** as recently-played.
+- **Tests**: **`steam-game-card.spec.js`** — focus/blur vs hover zoom, caption + rank stacking (`z-index`), rank null edge case, dark mode missing-image path.
+- **Version**: **0.90.1**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.21.1** (tracks theme **0.90.1**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.8.1** (tracks theme **0.90.1**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/package.json` (version **0.90.1**)
+- `theme/src/components/widgets/steam/steam-game-card.js`, **`steam-game-card.spec.js`**
+- `theme/src/components/widgets/steam/steam-widget.js`
+- `theme/src/components/widgets/steam/play-time-chart.js`
+- `theme/src/components/widgets/steam/__snapshots__/steam-widget.spec.js.snap`, **`play-time-chart.spec.js.snap`**
+- `www.chrisvogt.me/package.json` (version **1.21.1**)
+- `www.chronogrove.com/package.json` (version **1.8.1**)
+
+---
+
 ## 0.90.0
 
 ### `gatsby-theme-chronogrove` — Discogs & Spotify AI summaries

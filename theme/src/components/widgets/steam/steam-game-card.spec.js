@@ -63,6 +63,12 @@ describe('SteamGameCard', () => {
     expect(container.querySelector('.show-loading-animation')).toBeInTheDocument()
   })
 
+  it('uses dark skeleton colors when images are missing in dark mode', () => {
+    const gameWithoutImages = { ...mockGame, images: {} }
+    const { container } = renderWithTheme(<SteamGameCard game={gameWithoutImages} />, 'dark')
+    expect(container.querySelector('.show-loading-animation')).toBeInTheDocument()
+  })
+
   it('displays rank badge when showRank is true', () => {
     const { container } = renderWithTheme(<SteamGameCard game={mockGame} showRank={true} rank={1} />)
     expect(container.textContent).toContain('1')
@@ -126,6 +132,44 @@ describe('SteamGameCard', () => {
     fireEvent.mouseLeave(card)
     // Component should update hover state
     expect(card).toBeTruthy()
+  })
+
+  it('uses focus/blur for the same image zoom behavior as hover', () => {
+    const { container } = renderWithTheme(<SteamGameCard game={mockGame} />)
+    const card = container.firstChild
+    const img = container.querySelector('img')
+
+    const baseline = window.getComputedStyle(img).transform
+    fireEvent.focus(card)
+    expect(window.getComputedStyle(img).transform).not.toBe(baseline)
+
+    fireEvent.blur(card)
+    expect(window.getComputedStyle(img).transform).toBe(baseline)
+  })
+
+  it('renders the hover caption overlay (Spotify-style)', () => {
+    const { container } = renderWithTheme(<SteamGameCard game={mockGame} subtitle='1h' />)
+    expect(container.querySelector('.steam-game-card_caption')).toBeInTheDocument()
+  })
+
+  it('stacks rank badge above the caption overlay', () => {
+    const { container } = renderWithTheme(<SteamGameCard game={mockGame} showRank={true} rank={4} subtitle='10h' />)
+    const caption = container.querySelector('.steam-game-card_caption')
+    const badge = [...container.querySelectorAll('div')].find(
+      el => el !== caption && el.textContent === '4' && el !== container.firstChild
+    )
+    expect(caption).toBeTruthy()
+    expect(badge).toBeTruthy()
+    expect(window.getComputedStyle(caption).zIndex).toBe('1')
+    expect(window.getComputedStyle(badge).zIndex).toBe('2')
+  })
+
+  it('does not render rank badge when showRank is true but rank is null', () => {
+    const { container } = renderWithTheme(
+      <SteamGameCard game={{ ...mockGame, displayName: 'Alpha' }} showRank={true} rank={null} />
+    )
+    const digitOnlyDivs = [...container.querySelectorAll('div')].filter(d => /^\d+$/.test((d.textContent || '').trim()))
+    expect(digitOnlyDivs).toHaveLength(0)
   })
 
   describe('Dark mode', () => {

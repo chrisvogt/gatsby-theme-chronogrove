@@ -41,11 +41,11 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1jvl2a0"
+      class="css-1o4v4vi"
     >
       <button
         aria-label="View Half-Life on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -53,31 +53,28 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         >
           <img
             alt="Half-Life header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/halflife.jpg"
           />
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Half-Life
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            2 hours
+            <div
+              class="css-h3pxs9"
+            >
+              Half-Life
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              2 hours
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View Portal on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -85,25 +82,22 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         >
           <img
             alt="Portal header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/portal.jpg"
           />
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Portal
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            45 minutes
+            <div
+              class="css-h3pxs9"
+            >
+              Portal
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              45 minutes
+            </div>
           </div>
         </div>
       </button>
@@ -126,11 +120,11 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       class="css-sak8bt"
     >
       <div
-        class="css-zxiliy"
+        class="css-munl51"
       >
         <button
           aria-label="View Cities: Skylines on Steam"
-          class="css-1cffl98"
+          class="css-1br4deq"
           type="button"
         >
           <div
@@ -138,36 +132,33 @@ exports[`SteamWidget renders AI summary if present 1`] = `
           >
             <img
               alt="Cities: Skylines header"
-              class="css-1hlyxwi"
+              class="css-17nz09e"
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-c86zxy"
+              class="css-17mv9gi"
             >
               1
             </div>
             <div
-              class="css-13txfr7"
-            />
-          </div>
-          <div
-            class="css-rr301l"
-          >
-            <div
-              class="css-rkrxe3"
+              class="steam-game-card_caption css-k8brg5"
             >
-              Cities: Skylines
-            </div>
-            <div
-              class="css-k763k9"
-            >
-              757.35h total • 2 hours recently
+              <div
+                class="css-h3pxs9"
+              >
+                Cities: Skylines
+              </div>
+              <div
+                class="css-1i7ls3l"
+              >
+                757.35h total • 2 hours recently
+              </div>
             </div>
           </div>
         </button>
         <button
           aria-label="View ARK: Survival Evolved on Steam"
-          class="css-1cffl98"
+          class="css-1br4deq"
           type="button"
         >
           <div
@@ -175,30 +166,27 @@ exports[`SteamWidget renders AI summary if present 1`] = `
           >
             <img
               alt="ARK: Survival Evolved header"
-              class="css-1hlyxwi"
+              class="css-17nz09e"
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-c86zxy"
+              class="css-17mv9gi"
             >
               2
             </div>
             <div
-              class="css-13txfr7"
-            />
-          </div>
-          <div
-            class="css-rr301l"
-          >
-            <div
-              class="css-rkrxe3"
+              class="steam-game-card_caption css-k8brg5"
             >
-              ARK: Survival Evolved
-            </div>
-            <div
-              class="css-k763k9"
-            >
-              277.83h total
+              <div
+                class="css-h3pxs9"
+              >
+                ARK: Survival Evolved
+              </div>
+              <div
+                class="css-1i7ls3l"
+              >
+                277.83h total
+              </div>
             </div>
           </div>
         </button>
@@ -282,11 +270,11 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1jvl2a0"
+      class="css-1o4v4vi"
     >
       <button
         aria-label="View Half-Life on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -294,31 +282,28 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         >
           <img
             alt="Half-Life header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/halflife.jpg"
           />
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Half-Life
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            2 hours
+            <div
+              class="css-h3pxs9"
+            >
+              Half-Life
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              2 hours
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View Portal on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -326,25 +311,22 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         >
           <img
             alt="Portal header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/portal.jpg"
           />
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Portal
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            45 minutes
+            <div
+              class="css-h3pxs9"
+            >
+              Portal
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              45 minutes
+            </div>
           </div>
         </div>
       </button>
@@ -367,11 +349,11 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       class="css-sak8bt"
     >
       <div
-        class="css-zxiliy"
+        class="css-munl51"
       >
         <button
           aria-label="View Cities: Skylines on Steam"
-          class="css-1cffl98"
+          class="css-1br4deq"
           type="button"
         >
           <div
@@ -379,36 +361,33 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
           >
             <img
               alt="Cities: Skylines header"
-              class="css-1hlyxwi"
+              class="css-17nz09e"
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-c86zxy"
+              class="css-17mv9gi"
             >
               1
             </div>
             <div
-              class="css-13txfr7"
-            />
-          </div>
-          <div
-            class="css-rr301l"
-          >
-            <div
-              class="css-rkrxe3"
+              class="steam-game-card_caption css-k8brg5"
             >
-              Cities: Skylines
-            </div>
-            <div
-              class="css-k763k9"
-            >
-              757.35h total • 2 hours recently
+              <div
+                class="css-h3pxs9"
+              >
+                Cities: Skylines
+              </div>
+              <div
+                class="css-1i7ls3l"
+              >
+                757.35h total • 2 hours recently
+              </div>
             </div>
           </div>
         </button>
         <button
           aria-label="View ARK: Survival Evolved on Steam"
-          class="css-1cffl98"
+          class="css-1br4deq"
           type="button"
         >
           <div
@@ -416,30 +395,27 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
           >
             <img
               alt="ARK: Survival Evolved header"
-              class="css-1hlyxwi"
+              class="css-17nz09e"
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-c86zxy"
+              class="css-17mv9gi"
             >
               2
             </div>
             <div
-              class="css-13txfr7"
-            />
-          </div>
-          <div
-            class="css-rr301l"
-          >
-            <div
-              class="css-rkrxe3"
+              class="steam-game-card_caption css-k8brg5"
             >
-              ARK: Survival Evolved
-            </div>
-            <div
-              class="css-k763k9"
-            >
-              277.83h total
+              <div
+                class="css-h3pxs9"
+              >
+                ARK: Survival Evolved
+              </div>
+              <div
+                class="css-1i7ls3l"
+              >
+                277.83h total
+              </div>
             </div>
           </div>
         </button>
@@ -598,7 +574,7 @@ exports[`SteamWidget renders loading state 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1jvl2a0"
+      class="css-1o4v4vi"
     >
       <div
         aria-hidden="true"
@@ -613,9 +589,6 @@ exports[`SteamWidget renders loading state 1`] = `
             style="background-color: rgb(239, 239, 239); width: 100%; height: 200px; margin-right: 10px; border-radius: 8px;"
           />
         </div>
-        <div
-          class="css-16i9tn4"
-        />
       </div>
       <div
         aria-hidden="true"
@@ -630,9 +603,6 @@ exports[`SteamWidget renders loading state 1`] = `
             style="background-color: rgb(239, 239, 239); width: 100%; height: 200px; margin-right: 10px; border-radius: 8px;"
           />
         </div>
-        <div
-          class="css-16i9tn4"
-        />
       </div>
       <div
         aria-hidden="true"
@@ -647,9 +617,6 @@ exports[`SteamWidget renders loading state 1`] = `
             style="background-color: rgb(239, 239, 239); width: 100%; height: 200px; margin-right: 10px; border-radius: 8px;"
           />
         </div>
-        <div
-          class="css-16i9tn4"
-        />
       </div>
       <div
         aria-hidden="true"
@@ -664,9 +631,6 @@ exports[`SteamWidget renders loading state 1`] = `
             style="background-color: rgb(239, 239, 239); width: 100%; height: 200px; margin-right: 10px; border-radius: 8px;"
           />
         </div>
-        <div
-          class="css-16i9tn4"
-        />
       </div>
       <div
         aria-hidden="true"
@@ -681,9 +645,6 @@ exports[`SteamWidget renders loading state 1`] = `
             style="background-color: rgb(239, 239, 239); width: 100%; height: 200px; margin-right: 10px; border-radius: 8px;"
           />
         </div>
-        <div
-          class="css-16i9tn4"
-        />
       </div>
       <div
         aria-hidden="true"
@@ -698,9 +659,6 @@ exports[`SteamWidget renders loading state 1`] = `
             style="background-color: rgb(239, 239, 239); width: 100%; height: 200px; margin-right: 10px; border-radius: 8px;"
           />
         </div>
-        <div
-          class="css-16i9tn4"
-        />
       </div>
     </div>
     <div
@@ -762,11 +720,11 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1jvl2a0"
+      class="css-1o4v4vi"
     >
       <button
         aria-label="View Half-Life on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -774,31 +732,28 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         >
           <img
             alt="Half-Life header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/halflife.jpg"
           />
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Half-Life
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            2 hours
+            <div
+              class="css-h3pxs9"
+            >
+              Half-Life
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              2 hours
+            </div>
           </div>
         </div>
       </button>
       <button
         aria-label="View Portal on Steam"
-        class="css-1cffl98"
+        class="css-1br4deq"
         type="button"
       >
         <div
@@ -806,25 +761,22 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         >
           <img
             alt="Portal header"
-            class="css-1hlyxwi"
+            class="css-17nz09e"
             src="https://example.com/portal.jpg"
           />
           <div
-            class="css-13txfr7"
-          />
-        </div>
-        <div
-          class="css-rr301l"
-        >
-          <div
-            class="css-rkrxe3"
+            class="steam-game-card_caption css-k8brg5"
           >
-            Portal
-          </div>
-          <div
-            class="css-k763k9"
-          >
-            45 minutes
+            <div
+              class="css-h3pxs9"
+            >
+              Portal
+            </div>
+            <div
+              class="css-1i7ls3l"
+            >
+              45 minutes
+            </div>
           </div>
         </div>
       </button>
@@ -847,11 +799,11 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       class="css-sak8bt"
     >
       <div
-        class="css-zxiliy"
+        class="css-munl51"
       >
         <button
           aria-label="View Cities: Skylines on Steam"
-          class="css-1cffl98"
+          class="css-1br4deq"
           type="button"
         >
           <div
@@ -859,36 +811,33 @@ exports[`SteamWidget renders with empty metrics 1`] = `
           >
             <img
               alt="Cities: Skylines header"
-              class="css-1hlyxwi"
+              class="css-17nz09e"
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-c86zxy"
+              class="css-17mv9gi"
             >
               1
             </div>
             <div
-              class="css-13txfr7"
-            />
-          </div>
-          <div
-            class="css-rr301l"
-          >
-            <div
-              class="css-rkrxe3"
+              class="steam-game-card_caption css-k8brg5"
             >
-              Cities: Skylines
-            </div>
-            <div
-              class="css-k763k9"
-            >
-              757.35h total • 2 hours recently
+              <div
+                class="css-h3pxs9"
+              >
+                Cities: Skylines
+              </div>
+              <div
+                class="css-1i7ls3l"
+              >
+                757.35h total • 2 hours recently
+              </div>
             </div>
           </div>
         </button>
         <button
           aria-label="View ARK: Survival Evolved on Steam"
-          class="css-1cffl98"
+          class="css-1br4deq"
           type="button"
         >
           <div
@@ -896,30 +845,27 @@ exports[`SteamWidget renders with empty metrics 1`] = `
           >
             <img
               alt="ARK: Survival Evolved header"
-              class="css-1hlyxwi"
+              class="css-17nz09e"
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-c86zxy"
+              class="css-17mv9gi"
             >
               2
             </div>
             <div
-              class="css-13txfr7"
-            />
-          </div>
-          <div
-            class="css-rr301l"
-          >
-            <div
-              class="css-rkrxe3"
+              class="steam-game-card_caption css-k8brg5"
             >
-              ARK: Survival Evolved
-            </div>
-            <div
-              class="css-k763k9"
-            >
-              277.83h total
+              <div
+                class="css-h3pxs9"
+              >
+                ARK: Survival Evolved
+              </div>
+              <div
+                class="css-1i7ls3l"
+              >
+                277.83h total
+              </div>
             </div>
           </div>
         </button>

@@ -73,7 +73,13 @@ const SteamWidget = React.memo(() => {
             sx={{
               display: 'grid',
               gridGap: [3, 2, 2, 3],
-              gridTemplateColumns: ['repeat(2, 1fr)', 'repeat(3, 1fr)', 'repeat(4, 1fr)'],
+              gridTemplateColumns: [
+                'repeat(3, 1fr)',
+                'repeat(4, 1fr)',
+                'repeat(4, 1fr)',
+                'repeat(5, 1fr)',
+                'repeat(5, 1fr)'
+              ],
               mb: 4
             }}
           >
@@ -95,7 +101,6 @@ const SteamWidget = React.memo(() => {
                         style={{ width: '100%', height: '200px', borderRadius: '8px' }}
                       />
                     </div>
-                    <div sx={{ height: '72px', p: 3 }} />
                   </div>
                 ))
               : recentlyPlayedGames.map(game => (
