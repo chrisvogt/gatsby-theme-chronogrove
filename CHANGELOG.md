@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.90.0
+
+### `gatsby-theme-chronogrove` — Discogs & Spotify AI summaries
+
+- **`discogs-widget.js`**: Optional **`aiSummary`** under the header (reuses Steam **`AiSummary`** / **`AiSummarySkeleton`**, **`pickAiSummarySyncedAtRaw`**) when the metrics API provides copy.
+- **`spotify-widget.js`**: Same pattern above top tracks / playlists.
+- **Tests / snapshots**: **`discogs-widget.spec.js`**, **`spotify-widget.spec.js`** (loading skeleton, with summary, without summary).
+- **Version**: **0.90.0**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.21.0** (tracks theme **0.90.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.8.0** (tracks theme **0.90.0**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/package.json` (version **0.90.0**)
+- `theme/src/components/widgets/discogs/discogs-widget.js`, **`discogs-widget.spec.js`**, **`__snapshots__/discogs-widget.spec.js.snap`**
+- `theme/src/components/widgets/spotify/spotify-widget.js`, **`spotify-widget.spec.js`**, **`__snapshots__/spotify-widget.spec.js.snap`**
+- `www.chrisvogt.me/package.json` (version **1.21.0**)
+- `www.chronogrove.com/package.json` (version **1.8.0**)
+
+---
+
 ## 0.89.0
 
 ### `@chronogrove/ui` — AI summary tokens, widget header, action sizing

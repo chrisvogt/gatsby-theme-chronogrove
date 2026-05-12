@@ -270,6 +270,11 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
       </div>
     </header>
     <div
+      data-testid="ai-summary"
+    >
+      &lt;p&gt;Test Discogs AI summary.&lt;/p&gt;
+    </div>
+    <div
       class="css-18bjwv1"
     >
       <div
@@ -553,6 +558,48 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         </div>
       </div>
     </header>
+    <div
+      aria-hidden="true"
+      class="css-1x6v59e"
+    >
+      <div
+        class="show-loading-animation css-ylcmma"
+      >
+        <div
+          class="text-block"
+          style="width: 100%;"
+        >
+          <div
+            class="text-row"
+            style="max-height: 11.11111111111111%; width: 97%; height: 1em; background-color: rgb(239, 239, 239); margin-top: 0px;"
+          />
+          <div
+            class="text-row"
+            style="max-height: 11.11111111111111%; width: 100%; height: 1em; background-color: rgb(239, 239, 239); margin-top: 0.7em;"
+          />
+          <div
+            class="text-row"
+            style="max-height: 11.11111111111111%; width: 94%; height: 1em; background-color: rgb(239, 239, 239); margin-top: 0.7em;"
+          />
+          <div
+            class="text-row"
+            style="max-height: 11.11111111111111%; width: 90%; height: 1em; background-color: rgb(239, 239, 239); margin-top: 0.7em;"
+          />
+          <div
+            class="text-row"
+            style="max-height: 11.11111111111111%; width: 98%; height: 1em; background-color: rgb(239, 239, 239); margin-top: 0.7em;"
+          />
+        </div>
+      </div>
+      <div
+        class="css-n4yf41"
+      >
+        <div
+          aria-hidden="true"
+          class="css-obv90v"
+        />
+      </div>
+    </div>
     <div
       class="css-18bjwv1"
     >
@@ -1302,6 +1349,273 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         <div
           class="css-1ixi9e6"
         />
+      </div>
+    </div>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`Discogs Widget renders without AI summary when not available 1`] = `
+<DocumentFragment>
+  <section
+    class="css-1gmhq94"
+    id="discogs"
+    tabindex="-1"
+  >
+    <header
+      class="css-f68fi0"
+    >
+      <div
+        class="css-3vwaby"
+      >
+        <div
+          aria-hidden="true"
+          class="css-1muvmnm"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-record-vinyl"
+            data-icon="record-vinyl"
+            data-prefix="fas"
+            role="img"
+            style="width: 14px; height: 14px; color: rgb(255, 255, 255);"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1 -512 0zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 240a144 144 0 1 0 0-288 144 144 0 1 0 0 288zm0-112a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div
+          class="css-m8374l"
+        >
+          <h2
+            class="css-1tfs9qy"
+          >
+            Discogs
+          </h2>
+          <a
+            class="css-bgnrb"
+            href="https://www.discogs.com/user/chrisvogt/collection"
+            title="Collection on Discogs"
+          >
+            Browse Collection
+            <span
+              class="read-more-icon"
+            >
+              →
+            </span>
+          </a>
+        </div>
+      </div>
+      <div
+        class="css-1df6wzz"
+      >
+        <div
+          class="css-1fzqdmc"
+        >
+          <div
+            class="css-8kzs4n"
+          >
+            37
+          </div>
+          <div
+            class="css-b1klod"
+          >
+            Vinyls Owned
+          </div>
+        </div>
+      </div>
+    </header>
+    <div
+      class="css-18bjwv1"
+    >
+      <div
+        class="css-7avkd0"
+      >
+        <h3
+          class="css-8ivgst"
+        >
+          Vinyl Collection
+        </h3>
+        <div
+          class="css-1vz564k"
+        >
+          <div
+            class="css-iz57sm"
+          >
+            <label
+              class="css-kbw1ti"
+              for="vinyl-collection-sort-select"
+            >
+              Sort by
+            </label>
+            <div
+              class="css-z5fbhm"
+            >
+              <select
+                class="css-1dw0swc"
+                id="vinyl-collection-sort-select"
+              >
+                <option
+                  value="added-to-collection"
+                >
+                  Date added (newest first)
+                </option>
+                <option
+                  value="release-year"
+                >
+                  Release year (newest first)
+                </option>
+                <option
+                  value="alphabetical"
+                >
+                  Album title (A–Z)
+                </option>
+                <option
+                  value="alphabetical-artist"
+                >
+                  Artist (A–Z)
+                </option>
+              </select>
+              <svg
+                class="css-1uwn3wc"
+                fill="currentcolor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            aria-label="Vinyl collection layout"
+            class="css-1l647io"
+            role="radiogroup"
+          >
+            <span
+              class="css-128a175"
+              id="vinyl-collection-view-label"
+            >
+              View:
+            </span>
+            <button
+              aria-label="Show vinyl collection as a grid"
+              aria-pressed="true"
+              class="css-1oc3a3t"
+              type="button"
+            >
+              Grid
+            </button>
+            <button
+              aria-label="Show vinyl collection as a list"
+              aria-pressed="false"
+              class="css-1lig866"
+              type="button"
+            >
+              List
+            </button>
+          </div>
+        </div>
+      </div>
+      <p
+        class="css-1x7q8nj"
+      >
+        My owned vinyl records from Discogs.
+      </p>
+      <div
+        class="css-us3dds"
+      >
+        <div
+          class="css-nlq8f0"
+          data-testid="vinyl-carousel"
+        >
+          <div
+            class="css-ynlqmx"
+          >
+            <div
+              class="vinyl-collection_grid null css-4go7zc"
+            >
+              <div
+                class="css-g3ckzk"
+              >
+                <div
+                  aria-label="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan. Click to view details."
+                  class="vinyl-record css-1uxsoal"
+                  role="button"
+                  tabindex="0"
+                  title="The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan"
+                >
+                  <div
+                    class="css-12d7pfc"
+                  >
+                    <div
+                      class="vinyl-record_image css-18n965x"
+                    >
+                      <img
+                        alt="The Rise & Fall Of A Midwest Princess album cover"
+                        class="vinyl-record_album-art css-1ybonlr"
+                        crossorigin="anonymous"
+                        loading="lazy"
+                        src="https://example.com/thumb.jpg"
+                      />
+                    </div>
+                    <div
+                      class="vinyl-record_caption css-12vw5gc"
+                    >
+                      <span
+                        class="css-kvy207"
+                      >
+                        The Rise & Fall Of A Midwest Princess (2023) - Chappell Roan
+                      </span>
+                      <div
+                        class="vinyl-record_orbit css-nh7rc5"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          height="100%"
+                          role="presentation"
+                          style="display: block;"
+                          viewBox="0 0 100 100"
+                          width="100%"
+                        >
+                          <defs>
+                            <path
+                              d="M50,50 m0,-44 a44,44 0 1,1 0,88 a44,44 0 1,1 0,-88"
+                              id="textCircle-28461454"
+                            />
+                          </defs>
+                          <g
+                            class="css-1uqa7mt"
+                          >
+                            <text
+                              class="css-ir7wai"
+                              fill="currentColor"
+                            >
+                              <textpath
+                                href="#textCircle-28461454"
+                                method="align"
+                                spacing="auto"
+                                startOffset="0%"
+                              >
+                                The Rise & Fall Of A Midwest Princess • Chappell Roan • 2023 • The Rise & Fall Of A Midwest Princess • Chappell Roan • 2023 • 
+                              </textpath>
+                            </text>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
