@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.91.0
+
+### `gatsby-theme-chronogrove` — Spotify Top Tracks pagination
+
+- **`top-tracks.js`**: **Top Tracks** supports more API rows (e.g. **24**) by paginating **12 tiles per slide** with the same swipe/drag carousel pattern as Goodreads (`useSwipePagination`) plus shared **`Pagination`** controls; **`interactionDisabled`** on **`MediaItemGrid`** avoids starting playback after a drag.
+- **`media-item-grid.js`**: Optional **`interactionDisabled`** prop (prevents **`onTrackClick`** and still **`preventDefault`** on the anchor).
+- **Tests**: **`top-tracks.spec.js`** — multi-page grid, page clamp when the list shrinks, reset when track identities change; **`media-item-grid.spec.js`** — **`interactionDisabled`**; **`spotify-widget.spec.js`** snapshots updated.
+- **Jest**: Global **`coverageThreshold`** for **statements**, **functions**, and **lines** raised to **98%** (branches remain **90%**).
+- **Version**: **0.91.0**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.22.0** (tracks theme **0.91.0**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.9.0** (tracks theme **0.91.0**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/jest.config.js` (coverage thresholds)
+- `theme/package.json` (version **0.91.0**)
+- `theme/src/components/widgets/spotify/top-tracks.js`, **`top-tracks.spec.js`**, **`__snapshots__/top-tracks.spec.js.snap`**
+- `theme/src/components/widgets/spotify/media-item-grid.js`, **`media-item-grid.spec.js`**
+- `theme/src/components/widgets/spotify/__snapshots__/spotify-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.22.0**)
+- `www.chronogrove.com/package.json` (version **1.9.0**)
+
+---
+
 ## 0.90.1
 
 ### `gatsby-theme-chronogrove` — Steam game cards (UI polish)

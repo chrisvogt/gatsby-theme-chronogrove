@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { jsx } from 'theme-ui'
 import TopTracks from './top-tracks'
@@ -17,6 +17,15 @@ describe('TopTracks Component', () => {
     resetAudioPlayerStore()
     jest.clearAllMocks()
   })
+
+  const buildTracks = (count, idPrefix = '') =>
+    Array.from({ length: count }, (_, index) => ({
+      id: idPrefix ? `${idPrefix}-${index}` : String(index + 1),
+      name: `Song ${index + 1}`,
+      artists: ['Artist'],
+      albumImages: [{ url: `http://example.com/m-${index + 1}.jpg`, width: 300 }],
+      spotifyURL: `http://spotify.com/track${index + 1}`
+    }))
 
   const mockTracks = [
     {
@@ -102,5 +111,71 @@ describe('TopTracks Component', () => {
       isVisible: true,
       provider: 'spotify'
     })
+  })
+
+  it('splits more than 12 tracks into carousel pages and shows pagination', () => {
+    const manyTracks = buildTracks(13)
+
+    const { getByLabelText, getByTestId } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={manyTracks} />
+      </TestProviderWithState>
+    )
+
+    expect(getByTestId('spotify-top-tracks-carousel')).toBeInTheDocument()
+    expect(getByTestId('spotify-top-tracks-page-1')).toBeInTheDocument()
+    expect(getByTestId('spotify-top-tracks-page-2')).toBeInTheDocument()
+    expect(getByLabelText('Next page')).toBeInTheDocument()
+
+    const itemsLengths = MediaItemGrid.mock.calls.map(([props]) => props.items?.length ?? 0)
+    expect(itemsLengths.filter(length => length === 12)).toHaveLength(1)
+    expect(itemsLengths.filter(length => length === 1)).toHaveLength(1)
+  })
+
+  it('clamps the current page when the track list shrinks to fewer pages', async () => {
+    const thirteenTracks = buildTracks(13)
+    const twelveTracks = thirteenTracks.slice(0, 12)
+
+    const { getByLabelText, getByTestId, queryByLabelText, queryByTestId, rerender } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={thirteenTracks} />
+      </TestProviderWithState>
+    )
+
+    fireEvent.click(getByLabelText('Go to page 2'))
+
+    rerender(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={twelveTracks} />
+      </TestProviderWithState>
+    )
+
+    await waitFor(() => {
+      expect(queryByLabelText('Next page')).not.toBeInTheDocument()
+    })
+
+    expect(getByTestId('spotify-top-tracks-page-1')).toHaveAttribute('aria-hidden', 'false')
+    expect(queryByTestId('spotify-top-tracks-page-2')).not.toBeInTheDocument()
+  })
+
+  it('resets to page 1 when track identities change', () => {
+    const tracksV1 = buildTracks(13, 'a')
+    const tracksV2 = buildTracks(13, 'b')
+
+    const { getByLabelText, rerender } = render(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={tracksV1} />
+      </TestProviderWithState>
+    )
+
+    fireEvent.click(getByLabelText('Go to page 2'))
+
+    rerender(
+      <TestProviderWithState>
+        <TopTracks isLoading={false} tracks={tracksV2} />
+      </TestProviderWithState>
+    )
+
+    expect(getByLabelText('Go to page 1')).toHaveAttribute('aria-current', 'page')
   })
 })

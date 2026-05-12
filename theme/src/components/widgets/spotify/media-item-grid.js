@@ -8,7 +8,7 @@ import isDarkMode from '../../../helpers/isDarkMode'
 
 import { glassmorhismPanel } from '@chronogrove/ui/theme'
 
-const MediaItemGrid = ({ isLoading, items = [], onTrackClick }) => {
+const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onTrackClick }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const [currentMediaId, setCurrentMediaId] = useState(false)
@@ -31,6 +31,10 @@ const MediaItemGrid = ({ isLoading, items = [], onTrackClick }) => {
     ))
 
   const handleClick = (e, spotifyURL) => {
+    if (interactionDisabled) {
+      e.preventDefault()
+      return
+    }
     if (!onTrackClick) {
       return
     }
