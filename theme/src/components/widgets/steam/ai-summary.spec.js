@@ -20,11 +20,6 @@ jest.mock('../../../helpers/safeHtmlParser', () => ({
   }
 }))
 
-// Mock FontAwesome icons
-jest.mock('@fortawesome/react-fontawesome', () => ({
-  FontAwesomeIcon: ({ icon }) => <span data-testid={`icon-${icon.iconName}`}>{icon.iconName}</span>
-}))
-
 // Mock IntersectionObserver
 const mockIntersectionObserver = jest.fn()
 const mockUnobserve = jest.fn()
@@ -93,7 +88,20 @@ describe('AiSummary', () => {
       })
 
       expect(screen.getByText('This is a test summary with one paragraph.')).toBeInTheDocument()
-      expect(screen.queryByText(/Generated with Claude Sonnet 4\.6/)).not.toBeInTheDocument()
+      expect(screen.getByText(/Generated with Claude Sonnet 4\.6 \(AI\)/)).toBeInTheDocument()
+    })
+
+    it('appends sync date to attribution for a single-paragraph summary', async () => {
+      const aiSummary = '<p>One paragraph only.</p>'
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} aiSummarySyncedAt='2020-03-20T12:00:00.000Z' />)
+
+      await act(async () => {
+        triggerIntersection(true)
+      })
+
+      expect(screen.getByText(/Synced/)).toBeInTheDocument()
+      expect(screen.getByText(/2020/)).toBeInTheDocument()
     })
 
     it('renders the component with multiple paragraphs', async () => {
@@ -107,10 +115,10 @@ describe('AiSummary', () => {
 
       expect(screen.getByText('First paragraph.')).toBeInTheDocument()
       expect(screen.queryByText(/Generated with Claude Sonnet 4\.6/)).not.toBeInTheDocument()
-      expect(screen.getByText('Show More')).toBeInTheDocument()
+      expect(screen.getByText('Read more')).toBeInTheDocument()
     })
 
-    it('does not show Read More button when there is only one paragraph', async () => {
+    it('does not show read-more control when there is only one paragraph', async () => {
       const aiSummary = '<p>Single paragraph only.</p>'
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
@@ -119,8 +127,8 @@ describe('AiSummary', () => {
         triggerIntersection(true)
       })
 
-      expect(screen.queryByText('Show More')).not.toBeInTheDocument()
-      expect(screen.queryByText('Show Less')).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Read more' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Read less' })).not.toBeInTheDocument()
     })
 
     it('renders summary body with minimal theme', async () => {
@@ -134,12 +142,12 @@ describe('AiSummary', () => {
       })
 
       expect(screen.getByText('Fallback theme test.')).toBeInTheDocument()
-      expect(screen.queryByText(/Generated with Claude Sonnet 4\.6/)).not.toBeInTheDocument()
+      expect(screen.getByText(/Generated with Claude Sonnet 4\.6 \(AI\)/)).toBeInTheDocument()
     })
   })
 
   describe('Expand/Collapse functionality', () => {
-    it('expands and shows remaining paragraphs when Read More is clicked', async () => {
+    it('expands and shows remaining paragraphs when Read more is clicked', async () => {
       const aiSummary = '<p>First paragraph.</p><p>Second paragraph.</p><p>Third paragraph.</p>'
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
@@ -148,10 +156,10 @@ describe('AiSummary', () => {
         triggerIntersection(true)
       })
 
-      const showMoreButton = screen.getByText('Show More')
+      const showMoreButton = screen.getByText('Read more')
       fireEvent.click(showMoreButton)
 
-      expect(screen.getByText('Show Less')).toBeInTheDocument()
+      expect(screen.getByText('Read less')).toBeInTheDocument()
       expect(screen.getByText(/Generated with Claude Sonnet 4\.6 \(AI\)/)).toBeInTheDocument()
     })
 
@@ -164,13 +172,13 @@ describe('AiSummary', () => {
         triggerIntersection(true)
       })
 
-      fireEvent.click(screen.getByText('Show More'))
+      fireEvent.click(screen.getByText('Read more'))
 
       expect(screen.getByText(/Synced/)).toBeInTheDocument()
       expect(screen.getByText(/2020/)).toBeInTheDocument()
     })
 
-    it('collapses and hides remaining paragraphs when Show Less is clicked', async () => {
+    it('collapses and hides remaining paragraphs when Read less is clicked', async () => {
       const aiSummary = '<p>First paragraph.</p><p>Second paragraph.</p><p>Third paragraph.</p>'
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
@@ -179,13 +187,13 @@ describe('AiSummary', () => {
         triggerIntersection(true)
       })
 
-      const showMoreButton = screen.getByText('Show More')
+      const showMoreButton = screen.getByText('Read more')
       fireEvent.click(showMoreButton)
 
-      const showLessButton = screen.getByText('Show Less')
+      const showLessButton = screen.getByText('Read less')
       fireEvent.click(showLessButton)
 
-      expect(screen.getByText('Show More')).toBeInTheDocument()
+      expect(screen.getByText('Read more')).toBeInTheDocument()
       expect(screen.queryByText(/Generated with Claude Sonnet 4\.6/)).not.toBeInTheDocument()
     })
   })
@@ -256,7 +264,7 @@ describe('AiSummary', () => {
       })
 
       expect(screen.getByText('First paragraph.')).toBeInTheDocument()
-      expect(screen.getByText('Show More')).toBeInTheDocument()
+      expect(screen.getByText('Read more')).toBeInTheDocument()
     })
   })
 
@@ -292,13 +300,13 @@ describe('AiSummary', () => {
         triggerIntersection(true)
       })
 
-      fireEvent.click(screen.getByText('Show More'))
+      fireEvent.click(screen.getByText('Read more'))
 
       expect(screen.getByText(/Generated with Claude Sonnet 4\.6 \(AI\)/)).toBeInTheDocument()
       expect(screen.queryByTestId('icon-robot')).not.toBeInTheDocument()
     })
 
-    it('renders chevron icons in Read More button', async () => {
+    it('toggles aria-expanded on Read more / Read less', async () => {
       const aiSummary = '<p>First paragraph.</p><p>Second paragraph.</p>'
 
       renderWithTheme(<AiSummary aiSummary={aiSummary} />)
@@ -307,11 +315,13 @@ describe('AiSummary', () => {
         triggerIntersection(true)
       })
 
-      expect(screen.getByTestId('icon-chevron-down')).toBeInTheDocument()
+      const readMore = screen.getByRole('button', { name: 'Read more' })
+      expect(readMore).toHaveAttribute('aria-expanded', 'false')
 
-      // Click to expand
-      fireEvent.click(screen.getByText('Show More'))
-      expect(screen.getByTestId('icon-chevron-up')).toBeInTheDocument()
+      fireEvent.click(readMore)
+
+      const readLess = screen.getByRole('button', { name: 'Read less' })
+      expect(readLess).toHaveAttribute('aria-expanded', 'true')
     })
   })
 
@@ -326,11 +336,11 @@ describe('AiSummary', () => {
       })
 
       expect(screen.getByText('First paragraph.')).toBeInTheDocument()
-      expect(screen.getByText('Show More')).toBeInTheDocument()
+      expect(screen.getByText('Read more')).toBeInTheDocument()
 
       // Expand to see remaining content
-      fireEvent.click(screen.getByText('Show More'))
-      expect(screen.getByText('Show Less')).toBeInTheDocument()
+      fireEvent.click(screen.getByText('Read more'))
+      expect(screen.getByText('Read less')).toBeInTheDocument()
     })
 
     it('handles content with no paragraph tags', async () => {

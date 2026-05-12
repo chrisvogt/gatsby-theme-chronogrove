@@ -1,15 +1,39 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ActionButton from '../../action-button'
-import { Text } from '@theme-ui/components'
+import { Box, Text } from '@theme-ui/components'
 import React, { useEffect, useState, useRef } from 'react'
 
 import { formatAiSummarySyncedLabel } from '../../../helpers/ai-summary-synced-at'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
+import { hexToRgba } from '../../../utils/colors'
+import ActionButton from '../../action-button'
 
 const AI_ATTRIBUTION = 'Generated with Claude Sonnet 4.6 (AI)'
+
+const READ_MORE = 'Read more'
+const READ_LESS = 'Read less'
+
+/** ~4–5 lines of body copy at `fontSize` [2,3]; reveals start of the next paragraph(s) before fade */
+const TEASER_MAX_HEIGHT = '6.75rem'
+
+const fadeOverlaySx = {
+  pointerEvents: 'none',
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  bottom: 0,
+  height: '4.5rem',
+  background: theme => {
+    const bg = theme.colors?.background
+    if (typeof bg === 'string' && bg.startsWith('#')) {
+      return `linear-gradient(to bottom, ${hexToRgba(bg, 0)} 0%, ${hexToRgba(bg, 0.82)} 38%, ${bg} 100%)`
+    }
+    if (typeof bg === 'string') {
+      return `linear-gradient(to bottom, transparent 0%, ${bg} 100%)`
+    }
+    return 'linear-gradient(to bottom, transparent, rgba(253, 248, 245, 1))'
+  }
+}
 
 /** Parsed `<p>` nodes from html-react-parser do not use Theme UI `styles.p`; match site body copy (serif, scale). */
 const proseSx = {
@@ -73,15 +97,13 @@ const AiSummary = React.memo(({ aiSummary, aiSummarySyncedAt, sx: sxProp }) => {
     setShowContent(true)
   }, [aiSummary])
 
-  const handleToggleExpanded = () => {
-    setIsExpanded(!isExpanded)
-  }
-
   if (!aiSummary) {
     return null
   }
 
   const syncedLabel = formatAiSummarySyncedLabel(aiSummarySyncedAt)
+  const hasMore = parsedContent.remainingParagraphs.length > 0
+  const remainingJoined = parsedContent.remainingParagraphs.join('')
 
   return (
     <div
@@ -93,55 +115,57 @@ const AiSummary = React.memo(({ aiSummary, aiSummarySyncedAt, sx: sxProp }) => {
         ...(typeof sxProp === 'object' && sxProp !== null ? sxProp : {})
       }}
     >
-      {/* Two-column layout on larger breakpoints: content left, Show More right (vertically centered) */}
-      <div
-        sx={{
-          display: 'flex',
-          flexDirection: ['column', 'row'],
-          alignItems: ['stretch', 'center'],
-          gap: [3, 4],
-          mb: 0
-        }}
-      >
-        <div sx={{ flex: 1, minWidth: 0 }}>
-          <div sx={proseSx}>{showContent && parseSafeHtml(parsedContent.firstParagraph)}</div>
-        </div>
+      <div sx={proseSx}>{showContent && parseSafeHtml(parsedContent.firstParagraph)}</div>
 
-        {parsedContent.remainingParagraphs.length > 0 && showContent && (
-          <div
-            sx={{
-              display: 'flex',
-              justifyContent: ['center', 'flex-end'],
-              flexShrink: 0
-            }}
-          >
-            <ActionButton
-              size='large'
-              onClick={handleToggleExpanded}
-              icon={
-                <FontAwesomeIcon
-                  icon={isExpanded ? faChevronUp : faChevronDown}
-                  sx={{
-                    fontSize: 1,
-                    transition: 'transform 0.3s ease-in-out',
-                    transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
-                  }}
-                />
-              }
-            >
-              {isExpanded ? 'Show Less' : 'Show More'}
-            </ActionButton>
-          </div>
-        )}
-      </div>
+      {showContent && !hasMore && (
+        <Text variant='mutedSans' as='p' sx={{ mt: 3, mb: 0 }}>
+          {AI_ATTRIBUTION}
+          {syncedLabel ? ` · Synced ${syncedLabel}` : ''}
+        </Text>
+      )}
 
-      {isExpanded && parsedContent.remainingParagraphs.length > 0 && (
+      {hasMore && showContent && (
         <>
-          <div sx={{ ...proseSx, mt: 3 }}>{parseSafeHtml(parsedContent.remainingParagraphs.join(''))}</div>
-          <Text variant='mutedSans' as='p' sx={{ mt: 4, mb: 0 }}>
-            {AI_ATTRIBUTION}
-            {syncedLabel ? ` · Synced ${syncedLabel}` : ''}
-          </Text>
+          {!isExpanded ? (
+            <Box sx={{ mt: 2 }}>
+              <Box sx={{ position: 'relative' }}>
+                <Box
+                  sx={{
+                    ...proseSx,
+                    maxHeight: TEASER_MAX_HEIGHT,
+                    overflow: 'hidden',
+                    mb: 0
+                  }}
+                >
+                  {parseSafeHtml(remainingJoined)}
+                </Box>
+                <Box aria-hidden='true' sx={fadeOverlaySx} />
+              </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <ActionButton
+                  size='xlarge'
+                  aria-expanded={false}
+                  aria-label={READ_MORE}
+                  onClick={() => setIsExpanded(true)}
+                >
+                  {READ_MORE}
+                </ActionButton>
+              </Box>
+            </Box>
+          ) : (
+            <>
+              <Box sx={{ ...proseSx, mt: 2 }}>{parseSafeHtml(remainingJoined)}</Box>
+              <Text variant='mutedSans' as='p' sx={{ mt: 3, mb: 0 }}>
+                {AI_ATTRIBUTION}
+                {syncedLabel ? ` · Synced ${syncedLabel}` : ''}
+              </Text>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                <ActionButton size='xlarge' aria-expanded aria-label={READ_LESS} onClick={() => setIsExpanded(false)}>
+                  {READ_LESS}
+                </ActionButton>
+              </Box>
+            </>
+          )}
         </>
       )}
     </div>

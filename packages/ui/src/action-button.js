@@ -25,7 +25,9 @@ const ActionButton = ({ children, href, onClick, variant = 'primary', size = 'me
   const sizeVariants = {
     small: { fontSize: ['11px', '12px'], padding: '6px 10px', gap: 1 },
     medium: { fontSize: ['12px', '13px'], padding: '8px 12px', gap: 1 },
-    large: { fontSize: ['13px', '14px'], padding: '10px 16px', gap: 2 }
+    large: { fontSize: ['13px', '14px'], padding: '10px 16px', gap: 2 },
+    /** Prominent inline actions (e.g. widget read-more toggles) */
+    xlarge: { fontSize: ['14px', '16px'], padding: '12px 20px', gap: 2 }
   }
   const sizeStyles = sizeVariants[size] || sizeVariants.medium
 

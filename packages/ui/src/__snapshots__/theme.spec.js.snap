@@ -918,6 +918,16 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     },
   },
   "text": {
+    "mutedSans": {
+      "color": "textMuted",
+      "fontFamily": "heading",
+      "fontSize": [
+        0,
+        1,
+      ],
+      "fontStyle": "italic",
+      "lineHeight": 1.35,
+    },
     "title": {
       "color": "primary",
       "fontFamily": "heading",
