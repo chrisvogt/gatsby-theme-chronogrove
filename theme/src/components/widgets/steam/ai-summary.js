@@ -5,8 +5,8 @@ import React, { useEffect, useState, useRef } from 'react'
 
 import { formatAiSummarySyncedLabel } from '../../../helpers/ai-summary-synced-at'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
-import { hexToRgba } from '../../../utils/colors'
 import ActionButton from '../../action-button'
+import { getAiSummaryFadeBackground } from './ai-summary-fade'
 
 const AI_ATTRIBUTION = 'Generated with Claude Sonnet 4.6 (AI)'
 
@@ -23,16 +23,7 @@ const fadeOverlaySx = {
   right: 0,
   bottom: 0,
   height: '4.5rem',
-  background: theme => {
-    const bg = theme.colors?.background
-    if (typeof bg === 'string' && bg.startsWith('#')) {
-      return `linear-gradient(to bottom, ${hexToRgba(bg, 0)} 0%, ${hexToRgba(bg, 0.82)} 38%, ${bg} 100%)`
-    }
-    if (typeof bg === 'string') {
-      return `linear-gradient(to bottom, transparent 0%, ${bg} 100%)`
-    }
-    return 'linear-gradient(to bottom, transparent, rgba(253, 248, 245, 1))'
-  }
+  background: getAiSummaryFadeBackground
 }
 
 /** Parsed `<p>` nodes from html-react-parser do not use Theme UI `styles.p`; match site body copy (serif, scale). */

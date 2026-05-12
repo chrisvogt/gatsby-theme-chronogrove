@@ -31,6 +31,10 @@ describe('pickAiSummarySyncedAtRaw', () => {
     expect(pickAiSummarySyncedAtRaw({ aiSummaryGeneratedAt: 'g' })).toBe('g')
     expect(pickAiSummarySyncedAtRaw({ syncedAt: 1700000000 })).toBe(1700000000)
   })
+
+  it('uses fallbacks when meta lacks synced', () => {
+    expect(pickAiSummarySyncedAtRaw({ meta: {}, aiSummarySyncedAt: 'from-fallback' })).toBe('from-fallback')
+  })
 })
 
 describe('formatAiSummarySyncedLabel', () => {
@@ -59,5 +63,31 @@ describe('formatAiSummarySyncedLabel', () => {
 
   it('formats Date', () => {
     expect(formatAiSummarySyncedLabel(new Date('2020-06-15T12:00:00.000Z'))).toBeTruthy()
+  })
+
+  it('returns null for invalid Date instances', () => {
+    expect(formatAiSummarySyncedLabel(new Date(Number.NaN))).toBeNull()
+  })
+
+  it('returns null for Firestore-style objects with non-finite seconds', () => {
+    expect(formatAiSummarySyncedLabel({ seconds: NaN })).toBeNull()
+    expect(formatAiSummarySyncedLabel({ seconds: 'not-a-number' })).toBeNull()
+  })
+
+  it('returns null for unsupported primitive types', () => {
+    expect(formatAiSummarySyncedLabel(true)).toBeNull()
+    expect(formatAiSummarySyncedLabel(Symbol('x'))).toBeNull()
+  })
+
+  it('returns null when Intl.DateTimeFormat fails', () => {
+    const orig = Intl.DateTimeFormat
+    Intl.DateTimeFormat = function FailedDateTimeFormat() {
+      throw new RangeError('invalid locale')
+    }
+    try {
+      expect(formatAiSummarySyncedLabel('2020-06-15T12:00:00.000Z')).toBeNull()
+    } finally {
+      Intl.DateTimeFormat = orig
+    }
   })
 })

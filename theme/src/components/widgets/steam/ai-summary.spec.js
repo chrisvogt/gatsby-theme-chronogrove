@@ -144,6 +144,31 @@ describe('AiSummary', () => {
       expect(screen.getByText('Fallback theme test.')).toBeInTheDocument()
       expect(screen.getByText(/Generated with Claude Sonnet 4\.6 \(AI\)/)).toBeInTheDocument()
     })
+
+    it('applies default fade fallback when theme background is not a string', async () => {
+      const aiSummary = '<p>First.</p><p>Second paragraph.</p>'
+      const theme = { colors: { text: '#1a1a1a' } }
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} />, { theme })
+
+      await act(async () => {
+        triggerIntersection(true)
+      })
+
+      expect(screen.getByText('Read more')).toBeInTheDocument()
+    })
+
+    it('merges sx prop on the root when provided', async () => {
+      const aiSummary = '<p>With sx.</p>'
+
+      renderWithTheme(<AiSummary aiSummary={aiSummary} sx={{ mt: 2, mb: 0 }} />)
+
+      await act(async () => {
+        triggerIntersection(true)
+      })
+
+      expect(screen.getByText('With sx.')).toBeInTheDocument()
+    })
   })
 
   describe('Expand/Collapse functionality', () => {
