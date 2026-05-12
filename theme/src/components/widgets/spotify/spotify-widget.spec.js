@@ -8,6 +8,7 @@ import useWidgetData from '../../../hooks/use-widget-data'
 
 jest.mock('../../../hooks/use-site-metadata')
 jest.mock('../../../hooks/use-widget-data')
+jest.mock('../steam/ai-summary', () => ({ aiSummary }) => <div data-testid='ai-summary'>{aiSummary}</div>)
 
 const mockSiteMetadata = {
   widgets: {
@@ -28,6 +29,7 @@ const mockLoadingState = {
 
 const mockSuccessState = {
   data: {
+    aiSummary: '<p>Test Spotify AI summary.</p>',
     collections: {
       playlists: [
         {
@@ -66,6 +68,19 @@ const mockSuccessState = {
   error: null
 }
 
+const mockSuccessStateWithoutAiSummary = {
+  data: {
+    collections: mockSuccessState.data.collections,
+    metrics: mockSuccessState.data.metrics,
+    profile: mockSuccessState.data.profile,
+    provider: mockSuccessState.data.provider
+  },
+  isLoading: false,
+  hasFatalError: false,
+  isError: false,
+  error: null
+}
+
 const mockErrorState = {
   data: undefined,
   isLoading: false,
@@ -96,6 +111,17 @@ describe('Spotify Widget', () => {
 
   it('matches the loaded state snapshot', () => {
     useWidgetData.mockReturnValue(mockSuccessState)
+
+    const { asFragment } = render(
+      <TestProviderWithQuery>
+        <SpotifyWidget />
+      </TestProviderWithQuery>
+    )
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders without AI summary when not available', () => {
+    useWidgetData.mockReturnValue(mockSuccessStateWithoutAiSummary)
 
     const { asFragment } = render(
       <TestProviderWithQuery>
