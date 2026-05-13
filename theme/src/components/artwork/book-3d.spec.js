@@ -72,7 +72,7 @@ const mockCanvasTexture = { dispose: jest.fn() }
 const mockLoader = {
   setCrossOrigin: jest.fn(),
   load: jest.fn((url, onLoad) => {
-    onLoad && onLoad(mockTexture)
+    onLoad?.(mockTexture)
   })
 }
 
@@ -149,11 +149,11 @@ describe('Artwork/Book3D', () => {
 
   // Helper: fire the IntersectionObserver to create the scene
   const enterViewport = () => {
-    intersectionCallback && intersectionCallback([{ isIntersecting: true }])
+    intersectionCallback?.([{ isIntersecting: true }])
   }
 
   const leaveViewport = () => {
-    intersectionCallback && intersectionCallback([{ isIntersecting: false }])
+    intersectionCallback?.([{ isIntersecting: false }])
   }
 
   beforeEach(() => {
@@ -164,7 +164,7 @@ describe('Artwork/Book3D', () => {
     resizeCallback = null
     mockRenderer.domElement = createMockCanvas()
     mockLoader.load.mockImplementation((url, onLoad) => {
-      onLoad && onLoad(mockTexture)
+      onLoad?.(mockTexture)
     })
   })
 
@@ -180,9 +180,9 @@ describe('Artwork/Book3D', () => {
     expect(getByTestId('book-preview-3d')).toBeInTheDocument()
   })
 
-  it('exposes an accessible role and label', () => {
+  it('exposes an accessible cover image with alt text', () => {
     const { getByRole } = render(<Book3D {...defaultProps} />)
-    expect(getByRole('img', { name: 'A Test Book' })).toBeInTheDocument()
+    expect(getByRole('img', { name: 'A Test Book' })).toHaveAttribute('src', defaultProps.thumbnailURL)
   })
 
   it('does NOT create the WebGL renderer until the book enters the viewport', () => {
@@ -311,7 +311,7 @@ describe('Artwork/Book3D', () => {
     render(<Book3D {...defaultProps} />)
     enterViewport()
     jest.runAllTimers()
-    animationCallback && animationCallback()
+    animationCallback?.()
     expect(mockRenderer.render).toHaveBeenCalled()
   })
 
@@ -342,7 +342,7 @@ describe('Artwork/Book3D', () => {
 
     // Advance past INTRO_DURATION (480ms) so t >= 1
     nowValue = 500
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     // INTRO completed → stopAnim() called → RAF cancelled
     expect(global.cancelAnimationFrame).toHaveBeenCalled()
@@ -364,7 +364,7 @@ describe('Artwork/Book3D', () => {
 
     // Run tick mid-intro (t < 1) — loading pulse body (lines 185-186) executes
     nowValue = 100
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     expect(mockRenderer.render).toHaveBeenCalled()
     mockNow.mockRestore()
@@ -382,13 +382,13 @@ describe('Artwork/Book3D', () => {
 
     // Complete INTRO first
     nowValue = 500
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     // Hover → HOVERED phase, new RAF starts
     fireEvent.mouseEnter(container)
 
     // Tick in HOVERED phase (line 180)
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     expect(mockRenderer.render).toHaveBeenCalled()
     mockNow.mockRestore()
@@ -406,7 +406,7 @@ describe('Artwork/Book3D', () => {
 
     // Complete INTRO
     nowValue = 500
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     fireEvent.mouseEnter(container)
 
@@ -416,7 +416,7 @@ describe('Artwork/Book3D', () => {
 
     // Run tick mid-RETURN (t ≈ 0.3, < 1) — covers the false path of the t >= 1 check
     nowValue = 1100
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     expect(mockRenderer.render).toHaveBeenCalled()
     mockNow.mockRestore()
@@ -434,7 +434,7 @@ describe('Artwork/Book3D', () => {
 
     // Complete INTRO
     nowValue = 500
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     // Hover → HOVERED phase
     fireEvent.mouseEnter(container)
@@ -445,7 +445,7 @@ describe('Artwork/Book3D', () => {
 
     // Advance past RETURN_DURATION (320ms) so t >= 1
     nowValue = 1400
-    animationCallback && animationCallback()
+    animationCallback?.()
 
     expect(global.cancelAnimationFrame).toHaveBeenCalled()
     mockNow.mockRestore()
@@ -475,7 +475,7 @@ describe('Artwork/Book3D', () => {
 
   it('uses a canvas fallback texture when the cover image fails to load', () => {
     mockLoader.load.mockImplementation((url, onLoad, onProgress, onError) => {
-      onError && onError(new Error('404'))
+      onError?.(new Error('404'))
     })
     const { CanvasTexture } = require('three')
     render(<Book3D {...defaultProps} />)
@@ -556,7 +556,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     leaveViewport() // destroyScene — coverMat is now null
 
-    expect(() => storedOnLoad && storedOnLoad(mockTexture)).not.toThrow()
+    expect(() => storedOnLoad?.(mockTexture)).not.toThrow()
   })
 
   it('does not throw when onError (fallback) fires after the scene is destroyed by leaving the viewport', () => {
@@ -569,7 +569,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     leaveViewport()
 
-    expect(() => storedOnError && storedOnError(new Error('network error'))).not.toThrow()
+    expect(() => storedOnError?.(new Error('network error'))).not.toThrow()
   })
 
   it('does not throw when onLoad fires after unmount', () => {
@@ -582,7 +582,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     unmount()
 
-    expect(() => storedOnLoad && storedOnLoad(mockTexture)).not.toThrow()
+    expect(() => storedOnLoad?.(mockTexture)).not.toThrow()
   })
 
   it('does not throw when onError (fallback) fires after unmount', () => {
@@ -595,7 +595,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     unmount()
 
-    expect(() => storedOnError && storedOnError(new Error('network error'))).not.toThrow()
+    expect(() => storedOnError?.(new Error('network error'))).not.toThrow()
   })
 
   // ── Mouse interaction ──────────────────────────────────────────────────────
@@ -681,7 +681,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
 
     // Fire the ResizeObserver callback while the scene is active (lines 377-383)
-    resizeCallback && resizeCallback([])
+    resizeCallback?.([])
 
     expect(mockCamera.updateProjectionMatrix).toHaveBeenCalled()
     // setSize called once in createScene, once in the resize callback
@@ -693,7 +693,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     leaveViewport()
 
-    resizeCallback && resizeCallback([])
+    resizeCallback?.([])
 
     expect(mockCamera.updateProjectionMatrix).toHaveBeenCalled()
     expect(mockRenderer.setSize).toHaveBeenCalled()
@@ -704,7 +704,7 @@ describe('Artwork/Book3D', () => {
     enterViewport()
     jest.clearAllMocks()
     unmount()
-    resizeCallback && resizeCallback([])
+    resizeCallback?.([])
     expect(mockRenderer.setSize).not.toHaveBeenCalled()
     expect(mockCamera.updateProjectionMatrix).not.toHaveBeenCalled()
   })

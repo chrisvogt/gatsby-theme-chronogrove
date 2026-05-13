@@ -11,8 +11,13 @@ import { isHostnameUnderRegistrableDomain, validateRegistrableDomain } from './r
  * “no window” (tests only).
  */
 export function getHostnameForChronogroveCrossDomainCookie(globalWindow) {
-  const win = arguments.length === 0 ? (typeof window !== 'undefined' ? window : undefined) : globalWindow
-  if (win == null || !win.location) {
+  let win
+  if (arguments.length === 0) {
+    win = typeof window !== 'undefined' ? window : undefined
+  } else {
+    win = globalWindow
+  }
+  if (!win?.location) {
     return ''
   }
   return win.location.hostname || ''
@@ -20,8 +25,13 @@ export function getHostnameForChronogroveCrossDomainCookie(globalWindow) {
 
 /** Whether to append `Secure` to the cross-domain cookie (HTTPS only). */
 export function shouldUseSecureChronogroveCrossDomainCookie(globalWindow) {
-  const win = arguments.length === 0 ? (typeof window !== 'undefined' ? window : undefined) : globalWindow
-  return Boolean(win && win.location && win.location.protocol === 'https:')
+  let win
+  if (arguments.length === 0) {
+    win = typeof window !== 'undefined' ? window : undefined
+  } else {
+    win = globalWindow
+  }
+  return win?.location?.protocol === 'https:'
 }
 
 /**

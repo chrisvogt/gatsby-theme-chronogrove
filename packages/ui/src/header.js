@@ -7,8 +7,8 @@ import { Box } from '@theme-ui/components'
  */
 const Header = ({ children, styles }) => {
   return (
-    <Box as='header' role='banner' sx={{ variant: 'styles.Header' }}>
-      <Box sx={{ ...(styles ? styles : {}) }}>{children}</Box>
+    <Box as='header' sx={{ variant: 'styles.Header' }}>
+      <Box sx={{ ...(styles ?? {}) }}>{children}</Box>
     </Box>
   )
 }

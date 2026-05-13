@@ -34,6 +34,10 @@ const FEATURED_CAROUSEL_INTERVAL_MS = 3000
 const FEATURED_CAROUSEL_CROSSFADE_MS = 300
 const FEATURED_CAROUSEL_MAX_SLIDES = 8
 
+function nextFeaturedCarouselIndex(prev, slideCount) {
+  return slideCount > 0 ? (prev + 1) % slideCount : 0
+}
+
 const preloadFeaturedImage = url => {
   if (!url || typeof window === 'undefined') return
   const img = new Image()
@@ -244,14 +248,16 @@ const FeaturedHeroCarousel = ({ slideKeys, title, tid, featuredImageAltFallback 
       return clearTimers
     }
 
+    const advanceFeaturedCarouselSlide = () => {
+      const len = slidesLenRef.current
+      setCurrentIndex(prev => nextFeaturedCarouselIndex(prev, len))
+      setIsTransitioning(false)
+      timeoutRef.current = null
+    }
+
     intervalRef.current = window.setInterval(() => {
       setIsTransitioning(true)
-      timeoutRef.current = window.setTimeout(() => {
-        const len = slidesLenRef.current
-        setCurrentIndex(prev => (len > 0 ? (prev + 1) % len : 0))
-        setIsTransitioning(false)
-        timeoutRef.current = null
-      }, FEATURED_CAROUSEL_CROSSFADE_MS)
+      timeoutRef.current = window.setTimeout(advanceFeaturedCarouselSlide, FEATURED_CAROUSEL_CROSSFADE_MS)
     }, FEATURED_CAROUSEL_INTERVAL_MS)
 
     return clearTimers

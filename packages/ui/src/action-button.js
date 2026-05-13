@@ -15,11 +15,11 @@ const ActionButton = ({ children, href, onClick, variant = 'primary', size = 'me
     danger: { light: '#dc3545', dark: '#f44336' }
   }
   const isPrimary = variant === 'primary' || !colorVariants[variant]
-  const primaryColor = isPrimary
-    ? (theme?.colors?.primary ?? '#422EA3')
-    : darkModeActive
-      ? colorVariants[variant].dark
-      : colorVariants[variant].light
+  let primaryColor = theme?.colors?.primary ?? '#422EA3'
+  if (!isPrimary) {
+    const palette = colorVariants[variant]
+    primaryColor = darkModeActive ? palette.dark : palette.light
+  }
   const rgb = isPrimary ? (theme?.colors?.primaryRgb ?? '66, 46, 163') : hexToRgb(primaryColor)
 
   const sizeVariants = {

@@ -27,16 +27,8 @@ export const wrapRootElement = ({ element }) => (
   </CacheProvider>
 )
 
-export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) => {
-  const currentPath = routerProps?.location?.pathname
-  const prevPath = prevRouterProps?.location?.pathname
-
-  if (prevPath && currentPath === prevPath) {
-    return false
-  }
-
-  return false
-}
+export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) =>
+  routerProps?.location?.pathname !== prevRouterProps?.location?.pathname
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
   onRouteUpdateThemeUiColorMode()

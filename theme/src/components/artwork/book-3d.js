@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Box } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
@@ -15,6 +15,9 @@ const RETURN_DURATION = 320
 
 // Back face becomes visible at ±π/2 ≈ 1.57 rad; clamp well before that
 const MAX_HOVER_Y = 1.35
+
+/** 1×1 transparent GIF — valid `src` when no cover URL so the decorative `<img>` stays well-formed */
+const BOOK_3D_EMPTY_COVER_SRC = 'data:image/gif;base64,R0lGODlhAQABAAAAACw='
 
 const easeOutCubic = t => 1 - Math.pow(1 - t, 3)
 
@@ -115,6 +118,8 @@ function buildCoverFallbackTexture(title) {
 
 const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
   const containerRef = useRef(null)
+  const coverSrc =
+    typeof thumbnailURL === 'string' && thumbnailURL.trim() !== '' ? thumbnailURL : BOOK_3D_EMPTY_COVER_SRC
 
   useEffect(() => {
     const container = containerRef.current
@@ -497,15 +502,29 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
   }, [thumbnailURL, title, introDelay])
 
   return (
-    <div sx={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
-      <div
+    <Box sx={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
+      <Box
+        as='img'
+        src={coverSrc}
+        alt={typeof title === 'string' ? title : ''}
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'contain',
+          opacity: 0,
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
+      <Box
         ref={containerRef}
         data-testid='book-preview-3d'
-        role='img'
-        aria-label={title}
-        sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+        aria-hidden
+        sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1 }}
       />
-    </div>
+    </Box>
   )
 }
 

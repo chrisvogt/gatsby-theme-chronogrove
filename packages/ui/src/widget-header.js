@@ -25,7 +25,12 @@ const WidgetHeader = ({ aside, children, icon, metrics, metricsLoading, sx: sxPr
   const hasMetrics = (Array.isArray(metrics) && metrics.length > 0) || metricsLoading
 
   // Placeholder chips while loading
-  const metricsToShow = metricsLoading ? [{}, {}] : Array.isArray(metrics) ? metrics : []
+  let metricsToShow = []
+  if (metricsLoading) {
+    metricsToShow = [{}, {}]
+  } else if (Array.isArray(metrics)) {
+    metricsToShow = metrics
+  }
 
   return (
     <Box
