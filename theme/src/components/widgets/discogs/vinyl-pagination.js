@@ -41,6 +41,8 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
     return pages
   }
 
+  const visiblePages = getVisiblePages()
+
   return (
     <div sx={{ width: '100%' }}>
       {/* Pagination Controls */}
@@ -103,10 +105,10 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
                 gap: 1
               }}
             >
-              {getVisiblePages().map((page, index) => {
+              {visiblePages.map((page, index) => {
                 const isCurrentPage = page === currentPage
-                const totalPages = getVisiblePages().length
-                const isOuterPage = index === 0 || index === totalPages - 1
+                const visibleLen = visiblePages.length
+                const isOuterPage = index === 0 || index === visibleLen - 1
                 const isMobileHidden = isOuterPage && !isCurrentPage
 
                 return (
@@ -129,12 +131,10 @@ const VinylPagination = ({ currentPage, totalPages, onPageChange }) => {
                       transition: 'all 0.2s ease-in-out',
                       fontSize: 0,
                       fontWeight: isCurrentPage ? 'bold' : 'normal',
-                      // Hide outer pages on mobile (except current page)
                       '@media (max-width: 640px)': {
                         display: isMobileHidden ? 'none' : 'flex'
                       },
                       '&:hover': {
-                        borderColor: 'primary',
                         transform: 'scale(1.05)'
                       },
                       '&:active': {

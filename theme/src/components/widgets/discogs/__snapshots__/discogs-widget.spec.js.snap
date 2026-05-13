@@ -64,7 +64,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
           >
             Browse Collection
             <span
-              class="read-more-icon"
+              class="read-more-icon css-1f72j1"
             >
               →
             </span>
@@ -243,7 +243,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
           >
             Browse Collection
             <span
-              class="read-more-icon"
+              class="read-more-icon css-1f72j1"
             >
               →
             </span>
@@ -508,25 +508,30 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
           >
             Discogs
           </h2>
-          <svg
-            aria-label="Loading"
-            class="css-1xa9lgo"
-            height="24"
-            role="status"
-            viewBox="0 0 24 24"
-            width="24"
+          <output
+            aria-busy="true"
+            aria-live="polite"
+            class="css-hgaagu"
           >
-            <circle
-              cx="12"
-              cy="12"
-              fill="none"
-              r="10"
-              stroke="currentColor"
-              stroke-dasharray="31.4 31.4"
-              stroke-linecap="round"
-              stroke-width="3"
-            />
-          </svg>
+            <svg
+              aria-label="Loading"
+              class="css-sndroo"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                fill="none"
+                r="10"
+                stroke="currentColor"
+                stroke-dasharray="31.4 31.4"
+                stroke-linecap="round"
+                stroke-width="3"
+              />
+            </svg>
+          </output>
         </div>
       </div>
       <div
@@ -1402,7 +1407,7 @@ exports[`Discogs Widget renders without AI summary when not available 1`] = `
           >
             Browse Collection
             <span
-              class="read-more-icon"
+              class="read-more-icon css-1f72j1"
             >
               →
             </span>

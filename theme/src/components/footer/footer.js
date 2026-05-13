@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { Container, jsx } from 'theme-ui'
+import { Container, jsx, Link as ThemedLink } from 'theme-ui'
 import { Link } from 'gatsby'
-import { Link as ThemedLink } from 'theme-ui'
 
 import Profiles from './profiles'
 

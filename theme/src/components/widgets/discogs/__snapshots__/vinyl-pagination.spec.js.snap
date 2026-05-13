@@ -34,20 +34,20 @@ exports[`VinylPagination disables next button on last page 1`] = `
         >
           <button
             aria-label="Go to page 1"
-            class="css-rjnzsf"
+            class="css-mf40i"
           >
             1
           </button>
           <button
             aria-label="Go to page 2"
-            class="css-1tpqzpg"
+            class="css-fbv5gk"
           >
             2
           </button>
           <button
             aria-current="page"
             aria-label="Go to page 3"
-            class="css-qb4jev"
+            class="css-1nqwvhd"
           >
             3
           </button>
@@ -118,19 +118,19 @@ exports[`VinylPagination disables previous button on first page 1`] = `
           <button
             aria-current="page"
             aria-label="Go to page 1"
-            class="css-qb4jev"
+            class="css-1nqwvhd"
           >
             1
           </button>
           <button
             aria-label="Go to page 2"
-            class="css-1tpqzpg"
+            class="css-fbv5gk"
           >
             2
           </button>
           <button
             aria-label="Go to page 3"
-            class="css-rjnzsf"
+            class="css-mf40i"
           >
             3
           </button>
@@ -208,19 +208,19 @@ exports[`VinylPagination renders pagination controls when totalPages > 1 1`] = `
           <button
             aria-current="page"
             aria-label="Go to page 1"
-            class="css-qb4jev"
+            class="css-1nqwvhd"
           >
             1
           </button>
           <button
             aria-label="Go to page 2"
-            class="css-1tpqzpg"
+            class="css-fbv5gk"
           >
             2
           </button>
           <button
             aria-label="Go to page 3"
-            class="css-rjnzsf"
+            class="css-mf40i"
           >
             3
           </button>
@@ -288,26 +288,26 @@ exports[`VinylPagination shows correct page info 1`] = `
         >
           <button
             aria-label="Go to page 1"
-            class="css-rjnzsf"
+            class="css-mf40i"
           >
             1
           </button>
           <button
             aria-current="page"
             aria-label="Go to page 2"
-            class="css-qb4jev"
+            class="css-1nqwvhd"
           >
             2
           </button>
           <button
             aria-label="Go to page 3"
-            class="css-1tpqzpg"
+            class="css-fbv5gk"
           >
             3
           </button>
           <button
             aria-label="Go to page 4"
-            class="css-rjnzsf"
+            class="css-mf40i"
           >
             4
           </button>

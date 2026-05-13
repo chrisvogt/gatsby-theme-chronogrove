@@ -3,11 +3,14 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 jest.mock('gatsby', () => ({
-  Link: ({ children, to, ...rest }) => (
-    <a href={typeof to === 'string' ? to : '#'} {...rest}>
-      {children}
-    </a>
-  )
+  Link: ({ children, to, ...rest }) => {
+    const href = typeof to === 'string' && to.length > 0 ? to : '/'
+    return (
+      <a href={href} {...rest}>
+        {children}
+      </a>
+    )
+  }
 }))
 
 import PostTimelineIndex from './post-timeline-index'

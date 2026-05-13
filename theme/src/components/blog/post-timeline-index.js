@@ -44,6 +44,21 @@ const preloadFeaturedImage = url => {
   img.src = url
 }
 
+function resolveTimelineStampThumbRaw(post) {
+  const thumbs = post?.frontmatter?.thumbnails
+  if (Array.isArray(thumbs) && thumbs[0]) return thumbs[0]
+  const banner = post?.frontmatter?.banner
+  return typeof banner === 'string' ? banner : null
+}
+
+function timelineRestPostKey(post, index) {
+  const rawId = post?.fields?.id
+  const path = post?.fields?.path
+  const idPart = typeof rawId === 'string' || typeof rawId === 'number' ? String(rawId) : ''
+  const pathPart = typeof path === 'string' ? path : ''
+  return `${idPart}-${pathPart}-${index}`
+}
+
 /** Uniform timeline stamp thumbnail width (3:4 aspect); keeps the left column visually aligned row-to-row */
 const TIMELINE_STAMP_THUMB_PX = 80
 
@@ -526,6 +541,13 @@ const TimelineReadMoreLink = ({ emphasis = false, href, readMoreAriaFallback, ti
   const label = typeof title === 'string' && title.trim().length > 0 ? title.trim() : readMoreAriaFallback
   const featured = variant === 'featured'
 
+  let readMoreMarginTop = ['0.6875rem', null, null, '0.75rem']
+  if (featured) {
+    readMoreMarginTop = ['1rem', null, null, '1.125rem']
+  } else if (emphasis) {
+    readMoreMarginTop = ['0.875rem', null, null, '0.8125rem']
+  }
+
   return (
     <Box
       as={Link}
@@ -545,11 +567,7 @@ const TimelineReadMoreLink = ({ emphasis = false, href, readMoreAriaFallback, ti
         fontWeight: 600,
         letterSpacing: featured ? '0.02em' : '0.06em',
         lineHeight: 1.25,
-        mt: featured
-          ? ['1rem', null, null, '1.125rem']
-          : emphasis
-            ? ['0.875rem', null, null, '0.8125rem']
-            : ['0.6875rem', null, null, '0.75rem'],
+        mt: readMoreMarginTop,
         px: featured ? ['0.875rem', null, null, '1rem'] : ['0.625rem'],
         py: featured ? ['0.5rem', null, null, '0.5625rem'] : ['0.325rem'],
         textDecoration: 'none',
@@ -597,6 +615,101 @@ const StampDenseMeta = ({ category, date }) => (
   </Box>
 )
 
+function TimelineStampLeadMedia({ timelineAsideMedia, tid, soundcloudId, title, youtubeSrc, href, thumbUrl }) {
+  if (timelineAsideMedia) {
+    return (
+      <Box
+        data-testid={tid('entry-embed-aside')}
+        sx={{
+          flexShrink: 0,
+          maxWidth: '100%',
+          minWidth: 0,
+          width: ['100%', null, 'clamp(180px, 32vw, 260px)']
+        }}
+      >
+        <TimelineEmbedAside soundcloudId={soundcloudId} title={title} youtubeSrc={youtubeSrc} />
+      </Box>
+    )
+  }
+  return (
+    <Box aria-hidden sx={{ flexShrink: 0, mt: 0, width: `${TIMELINE_STAMP_THUMB_PX}px`, maxWidth: '100%' }}>
+      <Box as={Link} sx={{ display: 'block', lineHeight: 0 }} tabIndex={-1} to={href}>
+        <Thumb sizePx={TIMELINE_STAMP_THUMB_PX} url={thumbUrl} />
+      </Box>
+    </Box>
+  )
+}
+
+function TimelineStampArticleColumn({
+  category,
+  date,
+  emphasis,
+  excerpt,
+  href,
+  readMoreAriaFallback,
+  tid,
+  title,
+  titleFont
+}) {
+  return (
+    <Box sx={{ minWidth: 0, pt: 0 }}>
+      <Box
+        data-testid={tid('entry-link')}
+        as={Link}
+        sx={{
+          display: 'block',
+          textDecoration: 'none',
+          color: 'inherit',
+          '& h2:hover': { color: 'primary' },
+          '&:focus-visible': {
+            outline: '2px solid',
+            outlineOffset: '2px',
+            borderRadius: 'sm',
+            outlineColor: 'primary'
+          }
+        }}
+        to={href}
+      >
+        <Box
+          as='h2'
+          sx={{
+            m: 0,
+            mb: '0.5rem',
+            fontFamily: 'serif',
+            fontSize: titleFont,
+            lineHeight: emphasis ? [1.3, null, null, 1.32] : 1.36
+          }}
+        >
+          {title}
+        </Box>
+      </Box>
+      {emphasis ? <MetaFeatured category={category} date={date} /> : <StampDenseMeta category={category} date={date} />}
+      {excerpt ? (
+        <Box
+          as='p'
+          sx={{
+            m: 0,
+            color: 'text',
+            fontSize: emphasis ? [2, null, null, null] : [1, null, null, 2],
+            lineHeight: emphasis ? 1.6 : 1.55,
+            maxWidth: '38rem'
+          }}
+        >
+          {excerpt}
+        </Box>
+      ) : null}
+      <TimelineReadMoreLink
+        emphasis={emphasis}
+        href={href}
+        readMoreAriaFallback={readMoreAriaFallback}
+        tid={tid}
+        title={typeof title === 'string' ? title : null}
+        variant='timeline'
+      />
+    </Box>
+  )
+}
+
 const TimelineStamp = ({
   category,
   date,
@@ -616,10 +729,11 @@ const TimelineStamp = ({
 
   return (
     <Box
-      role='listitem'
+      as='li'
       data-testid={tid('entry')}
       sx={{
         position: 'relative',
+        listStyle: 'none',
         pl: timelineAsideMedia ? ['0rem', null, null, '0rem'] : ['0rem', null, null, '6.6875rem'],
         py: [2, null, null, '1.5rem'],
         borderBottomWidth: '1px',
@@ -658,84 +772,26 @@ const TimelineStamp = ({
           gap: [3, null, null, 4]
         }}
       >
-        {timelineAsideMedia ? (
-          <Box
-            data-testid={tid('entry-embed-aside')}
-            sx={{
-              flexShrink: 0,
-              maxWidth: '100%',
-              minWidth: 0,
-              width: ['100%', null, 'clamp(180px, 32vw, 260px)']
-            }}
-          >
-            <TimelineEmbedAside soundcloudId={soundcloudId} title={title} youtubeSrc={youtubeSrc} />
-          </Box>
-        ) : (
-          <Box aria-hidden sx={{ flexShrink: 0, mt: 0, width: `${TIMELINE_STAMP_THUMB_PX}px`, maxWidth: '100%' }}>
-            <Box as={Link} sx={{ display: 'block', lineHeight: 0 }} tabIndex={-1} to={href}>
-              <Thumb sizePx={TIMELINE_STAMP_THUMB_PX} url={thumbUrl} />
-            </Box>
-          </Box>
-        )}
-        <Box sx={{ minWidth: 0, pt: 0 }}>
-          <Box
-            data-testid={tid('entry-link')}
-            as={Link}
-            sx={{
-              display: 'block',
-              textDecoration: 'none',
-              color: 'inherit',
-              '& h2:hover': { color: 'primary' },
-              '&:focus-visible': {
-                outline: '2px solid',
-                outlineOffset: '2px',
-                borderRadius: 'sm',
-                outlineColor: 'primary'
-              }
-            }}
-            to={href}
-          >
-            <Box
-              as='h2'
-              sx={{
-                m: 0,
-                mb: '0.5rem',
-                fontFamily: 'serif',
-                fontSize: titleFont,
-                lineHeight: emphasis ? [1.3, null, null, 1.32] : 1.36
-              }}
-            >
-              {title}
-            </Box>
-          </Box>
-          {emphasis ? (
-            <MetaFeatured category={category} date={date} />
-          ) : (
-            <StampDenseMeta category={category} date={date} />
-          )}
-          {excerpt ? (
-            <Box
-              as='p'
-              sx={{
-                m: 0,
-                color: 'text',
-                fontSize: emphasis ? [2, null, null, null] : [1, null, null, 2],
-                lineHeight: emphasis ? 1.6 : 1.55,
-                maxWidth: '38rem'
-              }}
-            >
-              {excerpt}
-            </Box>
-          ) : null}
-          <TimelineReadMoreLink
-            emphasis={emphasis}
-            href={href}
-            readMoreAriaFallback={readMoreAriaFallback}
-            tid={tid}
-            title={typeof title === 'string' ? title : null}
-            variant='timeline'
-          />
-        </Box>
+        <TimelineStampLeadMedia
+          href={href}
+          soundcloudId={soundcloudId}
+          thumbUrl={thumbUrl}
+          tid={tid}
+          timelineAsideMedia={timelineAsideMedia}
+          title={title}
+          youtubeSrc={youtubeSrc}
+        />
+        <TimelineStampArticleColumn
+          category={category}
+          date={date}
+          emphasis={emphasis}
+          excerpt={excerpt}
+          href={href}
+          readMoreAriaFallback={readMoreAriaFallback}
+          tid={tid}
+          title={title}
+          titleFont={titleFont}
+        />
       </Box>
     </Box>
   )
@@ -781,9 +837,12 @@ export default function PostTimelineIndex({
       {afterFeatured}
       {rest.length > 0 ? (
         <Box
-          role='list'
+          as='ul'
           sx={{
             position: 'relative',
+            listStyle: 'none',
+            m: 0,
+            p: 0,
             ...(timelineAsideMedia
               ? {}
               : {
@@ -810,16 +869,11 @@ export default function PostTimelineIndex({
           }}
         >
           {rest.map((post, i) => {
-            const thumbRaw =
-              Array.isArray(post.frontmatter.thumbnails) && post.frontmatter.thumbnails[0]
-                ? post.frontmatter.thumbnails[0]
-                : typeof post.frontmatter.banner === 'string'
-                  ? post.frontmatter.banner
-                  : null
+            const thumbRaw = resolveTimelineStampThumbRaw(post)
 
             return (
               <TimelineStamp
-                key={`${post.fields.id ?? ''}-${post.fields.path ?? ''}-${String(i)}`}
+                key={timelineRestPostKey(post, i)}
                 category={typeof post.fields.category === 'string' ? post.fields.category : null}
                 date={typeof post.frontmatter.date === 'string' ? post.frontmatter.date : null}
                 excerpt={typeof post.frontmatter.excerpt === 'string' ? post.frontmatter.excerpt : null}

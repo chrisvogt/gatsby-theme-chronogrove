@@ -400,7 +400,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
         >
           {pages.map((pageItems, pageIndex) => (
             <div
-              key={pageIndex}
+              key={`${pageItems.map(r => r.id).join('|')}-${pageIndex}`}
               sx={{
                 width: `${100 / totalPages}%`,
                 flexShrink: 0,
@@ -437,6 +437,10 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                       ))
                     : pageItems.map(({ id, title, displayYear, artistName, cdnThumbUrl, details }) => {
                         const release = sortedReleases.find(r => r.id === id)
+                        let listRowHoverBg = 'transparent'
+                        if (!isDragging) {
+                          listRowHoverBg = darkModeActive ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.035)'
+                        }
                         return (
                           <Box
                             key={id}
@@ -476,11 +480,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                               appearance: 'none',
                               transition: 'background-color 0.12s ease',
                               '&:hover': {
-                                bg: isDragging
-                                  ? 'transparent'
-                                  : darkModeActive
-                                    ? 'rgba(255,255,255,0.05)'
-                                    : 'rgba(0,0,0,0.035)'
+                                bg: listRowHoverBg
                               },
                               '&:focus-visible': {
                                 zIndex: 1,
