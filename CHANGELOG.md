@@ -1,5 +1,60 @@
 # Changelog
 
+## 0.91.1
+
+### `@chronogrove/ui` — Accessibility polish and Sonar-driven refactors (patch)
+
+- **`widget-call-to-action.js`**: Widget CTA loading spinner wrapped in **`output`** with **`aria-live="polite"`** and **`aria-busy`** (SVG remains the visible spinner).
+- **`metric-card.js`**: Loading placeholder uses **`Box as="output"`** instead of **`role="status"`** on the busy container.
+- **`header.js`**: Redundant **`role="banner"`** removed from **`header`** (native landmark).
+- **`page-shell-layout.js`**: Redundant **`role="main"`** removed from **`main`**; tests query **`main`** without an explicit role.
+- **`image-thumbnails.js`** / **`thumbnail-strip.js`**: More stable React **`key`** values when thumbs reuse URLs or placeholders.
+- **`action-button.js`** / **`pagination-button.js`**: Variant color resolution flattened (no nested ternary).
+- **`cross-domain-color-mode-cookie.js`**: Clearer window resolution and optional chaining in hostname / HTTPS helpers.
+- **`widget-header.js`**: **`metricsToShow`** assignment simplified for readability.
+- **Version**: **0.85.1**
+
+### `gatsby-theme-chronogrove` — Scroll restoration regression, timeline, nav, Discogs, Book3D
+
+- **`gatsby-browser.js`**: **`shouldUpdateScroll`** again always returns **`false`** so **`gatsby-react-router-scroll`** does not restore a stale saved scroll position; **`onRouteUpdateChronogroveNavigation`** continues to **`scrollTo(0, 0)`** and focus skip-nav (restores behavior documented in **0.72.6**).
+- **`post-timeline-index.js`**: Timeline uses semantic **`ul`/`li`**; stamp layout split into smaller pieces; helpers for keys/thumbnails; Sonar-oriented readability fixes.
+- **`home-navigation.js`**: Icon slug → component map and **`HomeNavRailLink`** extraction; single React import stream.
+- **`footer.js`**: Single **`theme-ui`** import.
+- **Discogs**: **`discogs-modal`** uses explicit **`Fragment`** (jsx pragma); **`discogs-widget`** CTA spacing via **`marginInlineStart`** on the arrow; **`vinyl-collection`** list-row hover background when not dragging; **`vinyl-pagination`** control styling cleanup.
+- **`book-3d.js`**: Hidden **`img`** with transparent data-URI fallback for a valid **`src`** when no cover URL; WebGL mount **`aria-hidden`**; **`Box`** from Theme UI for wrappers.
+- **`gatsby-node.js`**: MDX **`createPage`** uses **`path: nodePath`** directly (aligned with **`getNodePath`** output).
+- **Tests / snapshots**: **`gatsby-browser.spec.js`**, **`post-timeline-index.spec.js`**, Discogs widget/pagination snapshots, **`book-3d.spec.js`**.
+- **Version**: **0.91.1**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.22.1** (tracks theme **0.91.1**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.9.1** (tracks theme **0.91.1**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `packages/ui/package.json` (version **0.85.1**), **`README.md`**
+- `packages/ui/src/action-button.js`, **`pagination-button.js`**, **`cross-domain-color-mode-cookie.js`**, **`header.js`**, **`image-thumbnails.js`**, **`metric-card.js`**, **`page-shell-layout.js`**, **`page-shell-layout.spec.js`**, **`thumbnail-strip.js`**, **`widget-call-to-action.js`**, **`widget-header.js`**, **`__snapshots__/header.spec.js.snap`**
+- `theme/package.json` (version **0.91.1**), **`README.md`**
+- `theme/gatsby-browser.js`, **`gatsby-node.js`**
+- `theme/src/components/blog/post-timeline-index.js`, **`post-timeline-index.spec.js`**
+- `theme/src/components/footer/footer.js`
+- `theme/src/components/home-navigation.js`
+- `theme/src/components/artwork/book-3d.js`, **`book-3d.spec.js`**
+- `theme/src/components/__snapshots__/layout.spec.js.snap`
+- `theme/src/components/widgets/discogs/discogs-modal.js`, **`discogs-widget.js`**, **`vinyl-collection.js`**, **`vinyl-pagination.js`**, **`__snapshots__/discogs-widget.spec.js.snap`**, **`__snapshots__/vinyl-pagination.spec.js.snap`**
+- `theme/src/components/widgets/github/__snapshots__/github-widget.spec.js.snap`
+- `theme/src/components/widgets/goodreads/__snapshots__/goodreads-widget.spec.js.snap`
+- `theme/src/components/widgets/spotify/__snapshots__/spotify-widget.spec.js.snap`
+- `www.chrisvogt.me/package.json` (version **1.22.1**)
+- `www.chronogrove.com/package.json` (version **1.9.1**)
+
+---
+
 ## 0.91.0
 
 ### `gatsby-theme-chronogrove` — Spotify Top Tracks pagination
