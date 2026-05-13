@@ -19,7 +19,7 @@ describe('ChronogrovePageShell', () => {
     expect(screen.getByText('inner')).toBeInTheDocument()
     expect(screen.getByText('hdr')).toBeInTheDocument()
     expect(screen.getByText('ftr')).toBeInTheDocument()
-    expect(document.querySelector('main[role="main"]')).toBeTruthy()
+    expect(document.querySelector('main')).toBeTruthy()
   })
 
   it('omits header when hideHeader', () => {
@@ -47,7 +47,7 @@ describe('ChronogrovePageShell', () => {
       </ChronogrovePageShell>
     )
     expect(screen.getByTestId('bare')).toBeInTheDocument()
-    expect(document.querySelector('main[role="main"]')).toBeFalsy()
+    expect(document.querySelector('main')).toBeFalsy()
   })
 
   it('uses transparent background when requested', () => {

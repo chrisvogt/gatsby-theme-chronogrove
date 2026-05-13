@@ -105,7 +105,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         : path.resolve('../theme/src/templates/post.js')
 
     actions.createPage({
-      path: nodePath ? nodePath : '/',
+      path: nodePath,
       component: `${template}?__contentFilePath=${node.internal.contentFilePath}`,
       context: {
         id: node.id

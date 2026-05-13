@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import React from 'react'
 import { jsx, useThemeUI } from 'theme-ui'
 import { createPortal } from 'react-dom'
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Themed } from '@theme-ui/mdx'
 import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -270,12 +269,12 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
                 {artistNames || 'Unknown Artist'}
               </span>
               {showYear && (
-                <>
+                <Fragment>
                   <span sx={{ color: muted, opacity: 0.85, userSelect: 'none' }} aria-hidden>
                     ·
                   </span>
                   <span sx={{ fontVariantNumeric: 'tabular-nums' }}>{yearStr}</span>
-                </>
+                </Fragment>
               )}
             </p>
           </header>
@@ -302,7 +301,7 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
               }}
             >
               {coverImageUrl ? (
-                <>
+                <Fragment>
                   {/* Skeleton shown until image loads */}
                   {!imageLoaded && (
                     <div
@@ -341,7 +340,7 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
                       transition: 'opacity 0.2s ease-in-out'
                     }}
                   />
-                </>
+                </Fragment>
               ) : (
                 <div
                   sx={{
@@ -436,7 +435,7 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
                 </div>
                 {tracklist.map((track, index) => (
                   <div
-                    key={index}
+                    key={`${String(track.position ?? '—')}-${String(track.title ?? '')}-${index}`}
                     sx={{
                       display: 'grid',
                       gridTemplateColumns: 'auto minmax(0, 1fr) auto',

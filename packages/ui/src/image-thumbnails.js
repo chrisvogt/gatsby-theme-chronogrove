@@ -49,10 +49,11 @@ const ImageThumbnails = ({
         const input = typeof src === 'string' ? src : ''
         const optimized = optimizeSrc(input)
         const url = optimized !== null && optimized !== undefined ? String(optimized) : ''
+        const thumbKey = url || input || `thumb-empty-${size}-${index}`
 
         return (
           <Box
-            key={index}
+            key={thumbKey}
             sx={{
               width: `${size}px`,
               height: `${size}px`,

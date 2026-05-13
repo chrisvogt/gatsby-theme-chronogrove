@@ -4,7 +4,6 @@ exports[`Header renders with children 1`] = `
 <DocumentFragment>
   <header
     class="css-1yz7e9k"
-    role="banner"
   >
     <div
       class="css-1yz7e9k"
@@ -21,7 +20,6 @@ exports[`Header renders with custom styles 1`] = `
 <DocumentFragment>
   <header
     class="css-1yz7e9k"
-    role="banner"
   >
     <div
       class="css-1g5wp3y"
@@ -38,7 +36,6 @@ exports[`Header renders with empty styles object 1`] = `
 <DocumentFragment>
   <header
     class="css-1yz7e9k"
-    role="banner"
   >
     <div
       class="css-1yz7e9k"
@@ -55,7 +52,6 @@ exports[`Header renders without styles prop 1`] = `
 <DocumentFragment>
   <header
     class="css-1yz7e9k"
-    role="banner"
   >
     <div
       class="css-1yz7e9k"

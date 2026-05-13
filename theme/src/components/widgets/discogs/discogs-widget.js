@@ -40,7 +40,9 @@ const DiscogsWidget = () => {
   const callToAction = (
     <CallToAction title='Collection on Discogs' url={profileURL} isLoading={isLoading}>
       Browse Collection
-      <span className='read-more-icon'>&rarr;</span>
+      <span className='read-more-icon' sx={{ marginInlineStart: '0.35em' }}>
+        &rarr;
+      </span>
     </CallToAction>
   )
 

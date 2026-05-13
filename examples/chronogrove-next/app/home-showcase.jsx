@@ -182,7 +182,7 @@ function LazyPlaceholder() {
 
   return (
     <Box
-      role='status'
+      as='output'
       aria-live='polite'
       aria-busy='true'
       sx={{
@@ -240,8 +240,7 @@ function WidgetCompositionDemo() {
   const headerMetrics = [{ id: 'commits', value: 847, displayName: 'commits' }]
   const widgetAside = (
     <WidgetCallToAction href='https://github.com/chrisvogt/gatsby-theme-chronogrove'>
-      View on GitHub
-      <span className='read-more-icon'>&rarr;</span>
+      View on GitHub <span className='read-more-icon'>&rarr;</span>
     </WidgetCallToAction>
   )
 
@@ -461,12 +460,10 @@ export default function HomeShowcase() {
                               </Text>
                               <Flex sx={{ flexDirection: 'column', gap: 2, alignItems: 'flex-start' }}>
                                 <WidgetCallToAction href='https://github.com/chrisvogt/gatsby-theme-chronogrove'>
-                                  External
-                                  <span className='read-more-icon'>&rarr;</span>
+                                  External <span className='read-more-icon'>&rarr;</span>
                                 </WidgetCallToAction>
                                 <WidgetCallToAction linkComponent={NextLink} href='/'>
-                                  App Router home
-                                  <span className='read-more-icon'>&rarr;</span>
+                                  App Router home <span className='read-more-icon'>&rarr;</span>
                                 </WidgetCallToAction>
                               </Flex>
                             </DemoBlock>

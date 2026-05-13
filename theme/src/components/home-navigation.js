@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
-import { Fragment } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
-import { useMemo, useState, useEffect } from 'react'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import {
@@ -35,6 +34,13 @@ const icons = {
   faSteam
 }
 
+function homeNavIconSlugToReactIcon(slug) {
+  if (slug === 'discogs') return 'faRecordVinyl'
+  if (slug === 'travel') return 'faMapMarkedAlt'
+  if (slug === 'photography') return 'faCamera'
+  return `fa${slug.charAt(0).toUpperCase() + slug.slice(1)}`
+}
+
 // Badge sizes
 const BADGE_ACTIVE = 44
 const BADGE_IDLE = 34
@@ -61,6 +67,136 @@ export function resolvePrimaryFromTheme(isDark, theme) {
 /** @public for tests — React passes `{}` for missing props; this keeps `??` branches reachable in unit tests */
 export function normalizeHomeNavProps(props) {
   return props ?? {}
+}
+
+function HomeNavRailLink({
+  activeSection,
+  activeIconColor,
+  badgeIdleBg,
+  badgeIdleBorder,
+  badgeIdleIcon,
+  href,
+  icon,
+  id,
+  index,
+  labelActiveColor,
+  labelColor,
+  primaryColor,
+  primaryRgb,
+  text
+}) {
+  const isActive = activeSection === id
+  const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
+  const badgeSize = isActive ? BADGE_ACTIVE : BADGE_IDLE
+
+  const itemContent = (
+    <div
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        py: index === 0 ? 0 : '7px',
+        cursor: 'pointer',
+        position: 'relative',
+        zIndex: 1,
+        '&:hover .nav-label': {
+          color: primaryColor,
+          opacity: 1
+        },
+        '&:hover .nav-badge': {
+          boxShadow: `0 0 0 3px rgba(${primaryRgb}, 0.2)`
+        }
+      }}
+    >
+      <div
+        className='nav-badge'
+        aria-hidden='true'
+        sx={{
+          flexShrink: 0,
+          width: `${badgeSize}px`,
+          height: `${badgeSize}px`,
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: isActive ? primaryColor : badgeIdleBg,
+          border: isActive ? 'none' : `2px solid ${badgeIdleBorder}`,
+          boxShadow: isActive ? `0 2px 8px rgba(${primaryRgb}, 0.35), 0 0 0 3px rgba(${primaryRgb}, 0.15)` : 'none',
+          transition: 'all 0.25s cubic-bezier(0.34, 1.2, 0.64, 1)',
+          ml: isActive ? 0 : `${(BADGE_ACTIVE - BADGE_IDLE) / 2}px`
+        }}
+      >
+        {IconComponent && (
+          <FontAwesomeIcon
+            icon={IconComponent}
+            style={{
+              width: isActive ? 18 : 14,
+              height: isActive ? 18 : 14,
+              color: isActive ? activeIconColor : badgeIdleIcon,
+              transition: 'all 0.25s ease'
+            }}
+            aria-hidden='true'
+          />
+        )}
+      </div>
+
+      <span
+        className='nav-label'
+        sx={{
+          fontSize: isActive ? '0.8rem' : '0.75rem',
+          fontFamily: 'heading',
+          fontWeight: isActive ? 'bold' : 'normal',
+          color: isActive ? labelActiveColor : labelColor,
+          letterSpacing: isActive ? '0.01em' : '0.02em',
+          lineHeight: 1.2,
+          transition: 'all 0.25s ease',
+          whiteSpace: 'nowrap',
+          userSelect: 'none'
+        }}
+      >
+        {text}
+      </span>
+    </div>
+  )
+
+  const commonProps = {
+    className: isActive ? 'active' : '',
+    sx: {
+      display: 'block',
+      textDecoration: 'none',
+      color: 'inherit',
+      outline: 'none',
+      '&:focus-visible .nav-badge': {
+        boxShadow: `0 0 0 3px ${primaryColor}`
+      }
+    }
+  }
+
+  return isHashLink(href) ? (
+    <a
+      {...commonProps}
+      href={href}
+      onClick={e => {
+        e.preventDefault()
+        window.history.pushState(null, '', href)
+        if (id === 'home' || href === '#top') {
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+          const topSection = document.getElementById('top')
+          if (topSection && typeof topSection.focus === 'function') {
+            topSection.focus({ preventScroll: true })
+          }
+        } else {
+          scrollToElementWhenReady(href)
+        }
+      }}
+    >
+      {itemContent}
+    </a>
+  ) : (
+    <a {...commonProps} href={href}>
+      {itemContent}
+    </a>
+  )
 }
 
 /**
@@ -109,14 +245,7 @@ const HomeNavigation = props => {
       ...homeItems.map(item => ({
         href: item.path,
         icon: {
-          reactIcon:
-            item.slug === 'discogs'
-              ? 'faRecordVinyl'
-              : item.slug === 'travel'
-                ? 'faMapMarkedAlt'
-                : item.slug === 'photography'
-                  ? 'faCamera'
-                  : `fa${item.slug.charAt(0).toUpperCase() + item.slug.slice(1)}`
+          reactIcon: homeNavIconSlugToReactIcon(item.slug)
         },
         id: item.slug,
         text: item.text
@@ -167,179 +296,76 @@ const HomeNavigation = props => {
   const railFillHeightDeductionPx = (railFillPct * BADGE_ACTIVE) / 100
 
   return (
-    <Fragment>
-      <div
-        sx={{
-          display: ['none', '', 'block'],
-          position: 'sticky',
-          top: '1.5em'
-        }}
-      >
-        <nav role='navigation' aria-label='On-page navigation'>
-          {/* Outer scroll-wheel rail container */}
+    <div
+      sx={{
+        display: ['none', '', 'block'],
+        position: 'sticky',
+        top: '1.5em'
+      }}
+    >
+      <nav role='navigation' aria-label='On-page navigation'>
+        {/* Outer scroll-wheel rail container */}
+        <div
+          sx={{
+            position: 'relative',
+            pl: '28px', // room for rail + badge overflow
+            pr: 2
+          }}
+        >
+          {/* Rail background track */}
           <div
+            aria-hidden='true'
             sx={{
-              position: 'relative',
-              pl: '28px', // room for rail + badge overflow
-              pr: 2
+              position: 'absolute',
+              left: '13px',
+              top: `${BADGE_ACTIVE / 2}px`,
+              bottom: `${BADGE_ACTIVE / 2}px`,
+              width: '2px',
+              borderRadius: '1px',
+              backgroundColor: trackBg,
+              zIndex: 0
             }}
-          >
-            {/* Rail background track */}
-            <div
-              aria-hidden='true'
-              sx={{
-                position: 'absolute',
-                left: '13px',
-                top: `${BADGE_ACTIVE / 2}px`,
-                bottom: `${BADGE_ACTIVE / 2}px`,
-                width: '2px',
-                borderRadius: '1px',
-                backgroundColor: trackBg,
-                zIndex: 0
-              }}
+          />
+
+          {/* Rail fill — grows from top to active badge center */}
+          <div
+            aria-hidden='true'
+            sx={{
+              position: 'absolute',
+              left: '13px',
+              top: `${BADGE_ACTIVE / 2}px`,
+              width: '2px',
+              borderRadius: '1px',
+              backgroundColor: primaryColor,
+              zIndex: 0,
+              transition: 'height 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+              height: railFillPct === 0 ? '0px' : `calc(${railFillPct}% - ${railFillHeightDeductionPx}px)`
+            }}
+          />
+
+          {/* Nav items */}
+          {links.map(({ href, icon, id, text }, index) => (
+            <HomeNavRailLink
+              key={id}
+              activeIconColor={activeIconColor}
+              activeSection={activeSection}
+              badgeIdleBg={badgeIdleBg}
+              badgeIdleBorder={badgeIdleBorder}
+              badgeIdleIcon={badgeIdleIcon}
+              href={href}
+              icon={icon}
+              id={id}
+              index={index}
+              labelActiveColor={labelActiveColor}
+              labelColor={labelColor}
+              primaryColor={primaryColor}
+              primaryRgb={primaryRgb}
+              text={text}
             />
-
-            {/* Rail fill — grows from top to active badge center */}
-            <div
-              aria-hidden='true'
-              sx={{
-                position: 'absolute',
-                left: '13px',
-                top: `${BADGE_ACTIVE / 2}px`,
-                width: '2px',
-                borderRadius: '1px',
-                backgroundColor: primaryColor,
-                zIndex: 0,
-                transition: 'height 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                height: railFillPct === 0 ? '0px' : `calc(${railFillPct}% - ${railFillHeightDeductionPx}px)`
-              }}
-            />
-
-            {/* Nav items */}
-            {links.map(({ href, icon, id, text }, index) => {
-              const isActive = activeSection === id
-              const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
-              const badgeSize = isActive ? BADGE_ACTIVE : BADGE_IDLE
-
-              const itemContent = (
-                <div
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    py: index === 0 ? 0 : '7px',
-                    cursor: 'pointer',
-                    position: 'relative',
-                    zIndex: 1,
-                    '&:hover .nav-label': {
-                      color: primaryColor,
-                      opacity: 1
-                    },
-                    '&:hover .nav-badge': {
-                      boxShadow: `0 0 0 3px rgba(${primaryRgb}, 0.2)`
-                    }
-                  }}
-                >
-                  {/* Circular badge */}
-                  <div
-                    className='nav-badge'
-                    aria-hidden='true'
-                    sx={{
-                      flexShrink: 0,
-                      width: `${badgeSize}px`,
-                      height: `${badgeSize}px`,
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: isActive ? primaryColor : badgeIdleBg,
-                      border: isActive ? 'none' : `2px solid ${badgeIdleBorder}`,
-                      boxShadow: isActive
-                        ? `0 2px 8px rgba(${primaryRgb}, 0.35), 0 0 0 3px rgba(${primaryRgb}, 0.15)`
-                        : 'none',
-                      transition: 'all 0.25s cubic-bezier(0.34, 1.2, 0.64, 1)',
-                      // Align smaller idle badges to their center with the active badge
-                      ml: isActive ? 0 : `${(BADGE_ACTIVE - BADGE_IDLE) / 2}px`
-                    }}
-                  >
-                    {IconComponent && (
-                      <FontAwesomeIcon
-                        icon={IconComponent}
-                        style={{
-                          width: isActive ? 18 : 14,
-                          height: isActive ? 18 : 14,
-                          color: isActive ? activeIconColor : badgeIdleIcon,
-                          transition: 'all 0.25s ease'
-                        }}
-                        aria-hidden='true'
-                      />
-                    )}
-                  </div>
-
-                  {/* Label */}
-                  <span
-                    className='nav-label'
-                    sx={{
-                      fontSize: isActive ? '0.8rem' : '0.75rem',
-                      fontFamily: 'heading',
-                      fontWeight: isActive ? 'bold' : 'normal',
-                      color: isActive ? labelActiveColor : labelColor,
-                      letterSpacing: isActive ? '0.01em' : '0.02em',
-                      lineHeight: 1.2,
-                      transition: 'all 0.25s ease',
-                      whiteSpace: 'nowrap',
-                      userSelect: 'none'
-                    }}
-                  >
-                    {text}
-                  </span>
-                </div>
-              )
-
-              const commonProps = {
-                key: id,
-                className: isActive ? 'active' : '',
-                sx: {
-                  display: 'block',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  outline: 'none',
-                  '&:focus-visible .nav-badge': {
-                    boxShadow: `0 0 0 3px ${primaryColor}`
-                  }
-                }
-              }
-
-              return isHashLink(href) ? (
-                <a
-                  {...commonProps}
-                  href={href}
-                  onClick={e => {
-                    e.preventDefault()
-                    window.history.pushState(null, '', href)
-                    if (id === 'home' || href === '#top') {
-                      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-                      const topSection = document.getElementById('top')
-                      if (topSection && typeof topSection.focus === 'function') {
-                        topSection.focus({ preventScroll: true })
-                      }
-                    } else {
-                      scrollToElementWhenReady(href)
-                    }
-                  }}
-                >
-                  {itemContent}
-                </a>
-              ) : (
-                <a {...commonProps} href={href}>
-                  {itemContent}
-                </a>
-              )
-            })}
-          </div>
-        </nav>
-      </div>
-    </Fragment>
+          ))}
+        </div>
+      </nav>
+    </div>
   )
 }
 

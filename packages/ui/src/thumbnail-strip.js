@@ -27,44 +27,47 @@ const ThumbnailStrip = ({ images = [], maxImages = 4, size = 36 }) => {
         flexShrink: 0
       }}
     >
-      {displayImages.map((src, index) => (
-        <Box
-          key={index}
-          sx={{
-            position: 'absolute',
-            top: `${index * (size - overlap)}px`,
-            left: index % 2 === 0 ? 0 : '8px',
-            width: `${size}px`,
-            height: `${size}px`,
-            borderRadius: '6px',
-            overflow: 'hidden',
-            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.12)',
-            border: '2px solid',
-            borderColor: 'background',
-            transition: 'transform 0.2s ease',
-            zIndex: displayImages.length - index,
-            '&:hover': {
-              transform: 'scale(1.08)',
-              zIndex: displayImages.length + 1
-            }
-          }}
-        >
+      {displayImages.map((src, index) => {
+        const srcKey = typeof src === 'string' && src ? src : `thumb-empty-${size}-${index}`
+        return (
           <Box
+            key={srcKey}
             sx={{
-              width: '100%',
-              height: '100%',
-              ...(typeof src === 'string' && src
-                ? {
-                    backgroundImage: `url(${src})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                  }
-                : {})
+              position: 'absolute',
+              top: `${index * (size - overlap)}px`,
+              left: index % 2 === 0 ? 0 : '8px',
+              width: `${size}px`,
+              height: `${size}px`,
+              borderRadius: '6px',
+              overflow: 'hidden',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.12)',
+              border: '2px solid',
+              borderColor: 'background',
+              transition: 'transform 0.2s ease',
+              zIndex: displayImages.length - index,
+              '&:hover': {
+                transform: 'scale(1.08)',
+                zIndex: displayImages.length + 1
+              }
             }}
-          />
-        </Box>
-      ))}
+          >
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                ...(typeof src === 'string' && src
+                  ? {
+                      backgroundImage: `url(${src})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }
+                  : {})
+              }}
+            />
+          </Box>
+        )
+      })}
     </Box>
   )
 }

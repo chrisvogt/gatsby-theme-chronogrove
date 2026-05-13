@@ -17,7 +17,7 @@ const MetricCard = ({ title, value, loading = false, showPlaceholder, loadingSlo
     (loadingSlot ?? (
       <Box
         aria-busy='true'
-        role='status'
+        as='output'
         sx={{
           minHeight: '3rem',
           borderRadius: 'default',

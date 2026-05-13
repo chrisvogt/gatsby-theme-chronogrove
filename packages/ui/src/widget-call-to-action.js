@@ -5,30 +5,31 @@ import { Box } from '@theme-ui/components'
  * Default loading indicator for widget CTAs (SVG spinner, no extra dependencies).
  */
 export const WidgetCtaLoadingIndicator = () => (
-  <Box
-    as='svg'
-    role='status'
-    aria-label='Loading'
-    width='24'
-    height='24'
-    viewBox='0 0 24 24'
-    sx={{
-      verticalAlign: 'middle',
-      color: 'primary',
-      animation: 'spin 0.8s linear infinite',
-      '@keyframes spin': { to: { transform: 'rotate(360deg)' } }
-    }}
-  >
-    <circle
-      cx='12'
-      cy='12'
-      r='10'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='3'
-      strokeLinecap='round'
-      strokeDasharray='31.4 31.4'
-    />
+  <Box as='output' aria-live='polite' aria-busy='true' sx={{ display: 'inline-block', verticalAlign: 'middle' }}>
+    <Box
+      as='svg'
+      aria-label='Loading'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      sx={{
+        display: 'block',
+        color: 'primary',
+        animation: 'spin 0.8s linear infinite',
+        '@keyframes spin': { to: { transform: 'rotate(360deg)' } }
+      }}
+    >
+      <circle
+        cx='12'
+        cy='12'
+        r='10'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='3'
+        strokeLinecap='round'
+        strokeDasharray='31.4 31.4'
+      />
+    </Box>
   </Box>
 )
 
