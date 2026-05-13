@@ -27,8 +27,10 @@ export const wrapRootElement = ({ element }) => (
   </CacheProvider>
 )
 
-export const shouldUpdateScroll = ({ routerProps, prevRouterProps }) =>
-  routerProps?.location?.pathname !== prevRouterProps?.location?.pathname
+// Always false so `gatsby-react-router-scroll` does not restore a saved scroll position
+// (that caused navigations to open mid-page). Scroll-to-top and skip-nav focus run in
+// `onRouteUpdateChronogroveNavigation` from `onRouteUpdate`. See CHANGELOG 0.72.6.
+export const shouldUpdateScroll = () => false
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
   onRouteUpdateThemeUiColorMode()
