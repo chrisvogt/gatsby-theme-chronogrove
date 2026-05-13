@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Container, Flex, jsx } from 'theme-ui'
+import { Container, Flex, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { graphql } from 'gatsby'
 import React, { useEffect } from 'react'
@@ -74,17 +74,31 @@ const MediaTemplate = ({ data: { mdx }, children }) => {
 
             {/* Hidden microformats data */}
             <div style={{ display: 'none' }}>
-              <a className='u-url' href={canonicalUrl} />
+              <a className='u-url' href={canonicalUrl}>
+                <Box
+                  as='span'
+                  sx={{
+                    clip: 'rect(0 0 0 0)',
+                    clipPath: 'inset(50%)',
+                    height: '1px',
+                    overflow: 'hidden',
+                    position: 'absolute',
+                    whiteSpace: 'nowrap',
+                    width: '1px'
+                  }}
+                >
+                  {canonicalUrl}
+                </Box>
+              </a>
               <span className='u-uid'>{mdx.id}</span>
               {description && <div className='p-summary'>{description}</div>}
               {banner && <img className='u-photo' src={banner} alt='' />}
               {category && <span className='p-category'>{category}</span>}
-              {keywords &&
-                keywords.map((keyword, index) => (
-                  <span key={index} className='p-category'>
-                    {keyword}
-                  </span>
-                ))}
+              {keywords?.map(keyword => (
+                <span key={keyword} className='p-category'>
+                  {keyword}
+                </span>
+              ))}
             </div>
 
             <div className='e-content article-content'>{children}</div>

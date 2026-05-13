@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
+import { jsx, Box, useThemeUI } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Grid } from '@theme-ui/components'
 import getTimeSpent from './get-time-spent'
@@ -7,7 +7,14 @@ import isDarkMode from '../../../helpers/isDarkMode'
 import ViewExternal from '../view-external'
 import SteamGameCard from './steam-game-card'
 
-// Accept profileURL as a prop
+/** Subtitle shown under leaderboard cards (recent playtime appended when present). */
+const leaderboardSubtitle = game => {
+  const hours = `${game.hoursPlayed}h total`
+  if (!game.playTime2Weeks) return hours
+  const recentLabel = getTimeSpent(game.playTime2Weeks * 60 * 1000)
+  return `${hours} • ${recentLabel} recently`
+}
+
 const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
   const { colorMode, theme } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
@@ -15,7 +22,6 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
   const primaryRgb = theme?.colors?.primaryRgb ?? (darkModeActive ? '74, 158, 255' : '66, 46, 163')
   const mutedTextColor = darkModeActive ? '#888' : '#666'
 
-  // Prepare data - top 10 games by playtime
   const topGames = (games || [])
     .filter(game => game.playTimeForever > 0)
     .sort((a, b) => b.playTimeForever - a.playTimeForever)
@@ -26,11 +32,10 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
       rank: index + 1
     }))
 
-  // Loading state
   if (isLoading) {
     return (
-      <div sx={{ mb: 4 }}>
-        <div
+      <Box sx={{ mb: 4 }}>
+        <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -39,7 +44,7 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
             py: 5
           }}
         >
-          <div
+          <Box
             sx={{
               width: '60px',
               height: '60px',
@@ -63,21 +68,15 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
           >
             Loading Gaming Library...
           </Themed.p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
-  // Empty state when not loading
   if (!games || games.length === 0) {
     return (
-      <div sx={{ mb: 4 }}>
-        <div
-          sx={{
-            textAlign: 'center',
-            py: 5
-          }}
-        >
+      <Box sx={{ mb: 4 }}>
+        <Box sx={{ textAlign: 'center', py: 5 }}>
           <Themed.p
             sx={{
               fontStyle: 'italic',
@@ -87,13 +86,15 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
           >
             No gaming data available for library.
           </Themed.p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
+  const gamesHref = profileURL ? `${profileURL.replace(/\/$/, '')}/games/?tab=all` : null
+
   return (
-    <div sx={{ mb: 4 }}>
+    <Box sx={{ mb: 4 }}>
       <Grid
         sx={{
           gridGap: [3, 2, 2, 3],
@@ -108,18 +109,11 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
         }}
       >
         {topGames.map(game => (
-          <SteamGameCard
-            key={game.id}
-            game={game}
-            showRank={true}
-            rank={game.rank}
-            subtitle={`${game.hoursPlayed}h total${game.playTime2Weeks ? ` • ${getTimeSpent(game.playTime2Weeks * 60 * 1000)} recently` : ''}`}
-          />
+          <SteamGameCard key={game.id} game={game} showRank rank={game.rank} subtitle={leaderboardSubtitle(game)} />
         ))}
       </Grid>
 
-      {/* Footer Stats */}
-      <div
+      <Box
         sx={{
           mt: 4,
           pt: 3,
@@ -131,30 +125,25 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
           gap: 3
         }}
       >
-        <div sx={{ color: mutedTextColor, fontSize: '12px' }}>
+        <Box sx={{ color: mutedTextColor, fontSize: '12px' }}>
           Total Hours:{' '}
-          <span sx={{ color: primaryColor, fontWeight: 'bold' }}>
+          <Box as='span' sx={{ color: primaryColor, fontWeight: 'bold' }}>
             {topGames.reduce((sum, game) => sum + game.hoursPlayed, 0).toFixed(1)}h
-          </span>
-        </div>
-        <div sx={{ color: mutedTextColor, fontSize: '12px' }}>
+          </Box>
+        </Box>
+        <Box sx={{ color: mutedTextColor, fontSize: '12px' }}>
           Average:{' '}
-          <span sx={{ color: primaryColor, fontWeight: 'bold' }}>
+          <Box as='span' sx={{ color: primaryColor, fontWeight: 'bold' }}>
             {(topGames.reduce((sum, game) => sum + game.hoursPlayed, 0) / topGames.length).toFixed(1)}h per game
-          </span>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
-      {/* View All Games Link */}
-      {profileURL && (
-        <div
-          sx={{
-            mt: 3,
-            textAlign: 'center'
-          }}
-        >
-          <a
-            href={`${profileURL.replace(/\/$/, '')}/games/?tab=all`}
+      {gamesHref ? (
+        <Box sx={{ mt: 3, textAlign: 'center' }}>
+          <Box
+            as='a'
+            href={gamesHref}
             sx={{
               color: primaryColor,
               textDecoration: 'none',
@@ -177,10 +166,10 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
           >
             View complete gaming library
             <ViewExternal />
-          </a>
-        </div>
-      )}
-    </div>
+          </Box>
+        </Box>
+      ) : null}
+    </Box>
   )
 }
 

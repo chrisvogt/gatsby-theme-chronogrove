@@ -7,8 +7,126 @@ import LazyLoad from '../../lazy-load'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
-/** px; must match lazy placeholder + RectShape — img can't use height % inside LazyLoad’s auto-height Box */
+/** px; must match lazy placeholder + RectShape — img can't use height % inside LazyLoad's auto-height Box */
 const STEAM_CARD_IMAGE_HEIGHT = 200
+
+const SteamCardGameMedia = ({ darkModeActive, game, gameImage, isImageZoomed, rank, showRank, subtitle }) => (
+  <Box
+    sx={{
+      position: 'relative',
+      width: '100%',
+      height: STEAM_CARD_IMAGE_HEIGHT,
+      overflow: 'hidden'
+    }}
+  >
+    {gameImage ? (
+      <LazyLoad
+        placeholder={
+          <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
+            <RectShape
+              color={darkModeActive ? '#3a3a4a' : '#efefef'}
+              style={{
+                width: '100%',
+                height: STEAM_CARD_IMAGE_HEIGHT
+              }}
+            />
+          </div>
+        }
+      >
+        <Box
+          alt={`${game.displayName} header`}
+          as='img'
+          src={gameImage}
+          sx={{
+            display: 'block',
+            width: '100%',
+            height: STEAM_CARD_IMAGE_HEIGHT,
+            objectFit: 'cover',
+            transition: 'transform 0.3s ease',
+            transform: isImageZoomed ? 'scale(1.05)' : 'scale(1)'
+          }}
+        />
+      </LazyLoad>
+    ) : (
+      <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
+        <RectShape
+          color={darkModeActive ? '#3a3a4a' : '#efefef'}
+          style={{
+            width: '100%',
+            height: STEAM_CARD_IMAGE_HEIGHT
+          }}
+        />
+      </div>
+    )}
+
+    {showRank && rank ? (
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 2,
+          left: 2,
+          zIndex: 2,
+          background: darkModeActive ? 'rgba(20, 20, 31, 0.85)' : 'rgba(255, 255, 255, 0.9)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          border: darkModeActive ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.1)',
+          color: darkModeActive ? '#fff' : '#000',
+          width: '28px',
+          height: '28px',
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 'bold',
+          fontSize: '12px',
+          boxShadow: darkModeActive ? '0 4px 16px rgba(0, 0, 0, 0.4)' : '0 4px 16px rgba(0, 0, 0, 0.15)'
+        }}
+      >
+        {rank}
+      </Box>
+    ) : null}
+
+    <Box
+      className='steam-game-card_caption'
+      sx={{
+        alignItems: 'center',
+        background: 'rgba(0, 0, 0, 0.85)',
+        backdropFilter: 'blur(2px)',
+        WebkitBackdropFilter: 'blur(2px)',
+        bottom: 0,
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        left: 0,
+        opacity: 0,
+        padding: 3,
+        pointerEvents: 'none',
+        position: 'absolute',
+        right: 0,
+        textAlign: 'center',
+        top: 0,
+        transition: 'opacity 0.2s ease-in-out',
+        zIndex: 1
+      }}
+    >
+      <Box
+        sx={{
+          fontSize: '14px',
+          fontWeight: 'bold',
+          mb: subtitle ? 1 : 0,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          width: '100%'
+        }}
+      >
+        {game.displayName}
+      </Box>
+      {subtitle ? <Box sx={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)' }}>{subtitle}</Box> : null}
+    </Box>
+  </Box>
+)
 
 const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, onClick = null }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -54,132 +172,15 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
         }
       }}
     >
-      {/* Game Image */}
-      <div
-        sx={{
-          position: 'relative',
-          width: '100%',
-          height: STEAM_CARD_IMAGE_HEIGHT,
-          overflow: 'hidden'
-        }}
-      >
-        {gameImage ? (
-          <LazyLoad
-            placeholder={
-              <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
-                <RectShape
-                  color={darkModeActive ? '#3a3a4a' : '#efefef'}
-                  style={{
-                    width: '100%',
-                    height: STEAM_CARD_IMAGE_HEIGHT
-                  }}
-                />
-              </div>
-            }
-          >
-            <img
-              src={gameImage}
-              alt={`${game.displayName} header`}
-              sx={{
-                display: 'block',
-                width: '100%',
-                height: STEAM_CARD_IMAGE_HEIGHT,
-                objectFit: 'cover',
-                transition: 'transform 0.3s ease',
-                transform: isImageZoomed ? 'scale(1.05)' : 'scale(1)'
-              }}
-            />
-          </LazyLoad>
-        ) : (
-          <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
-            <RectShape
-              color={darkModeActive ? '#3a3a4a' : '#efefef'}
-              style={{
-                width: '100%',
-                height: STEAM_CARD_IMAGE_HEIGHT
-              }}
-            />
-          </div>
-        )}
-
-        {/* Rank Badge */}
-        {showRank && rank && (
-          <div
-            sx={{
-              position: 'absolute',
-              top: 2,
-              left: 2,
-              zIndex: 2,
-              background: darkModeActive ? 'rgba(20, 20, 31, 0.85)' : 'rgba(255, 255, 255, 0.9)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: darkModeActive ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.1)',
-              color: darkModeActive ? '#fff' : '#000',
-              width: '28px',
-              height: '28px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 'bold',
-              fontSize: '12px',
-              boxShadow: darkModeActive ? '0 4px 16px rgba(0, 0, 0, 0.4)' : '0 4px 16px rgba(0, 0, 0, 0.15)'
-            }}
-          >
-            {rank}
-          </div>
-        )}
-
-        {/* Title / subtitle: hidden until hover or focus (Spotify media grid pattern) */}
-        <div
-          className='steam-game-card_caption'
-          sx={{
-            alignItems: 'center',
-            background: 'rgba(0, 0, 0, 0.85)',
-            backdropFilter: 'blur(2px)',
-            WebkitBackdropFilter: 'blur(2px)',
-            bottom: 0,
-            color: 'white',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            left: 0,
-            opacity: 0,
-            padding: 3,
-            pointerEvents: 'none',
-            position: 'absolute',
-            right: 0,
-            textAlign: 'center',
-            top: 0,
-            transition: 'opacity 0.2s ease-in-out',
-            zIndex: 1
-          }}
-        >
-          <div
-            sx={{
-              fontSize: '14px',
-              fontWeight: 'bold',
-              mb: subtitle ? 1 : 0,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              width: '100%'
-            }}
-          >
-            {game.displayName}
-          </div>
-          {subtitle && (
-            <div
-              sx={{
-                fontSize: '12px',
-                color: 'rgba(255,255,255,0.85)'
-              }}
-            >
-              {subtitle}
-            </div>
-          )}
-        </div>
-      </div>
+      <SteamCardGameMedia
+        darkModeActive={darkModeActive}
+        game={game}
+        gameImage={gameImage}
+        isImageZoomed={isImageZoomed}
+        rank={rank}
+        showRank={showRank}
+        subtitle={subtitle}
+      />
     </Box>
   )
 }

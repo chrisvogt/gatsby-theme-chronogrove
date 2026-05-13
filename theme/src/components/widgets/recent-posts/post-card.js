@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import React, { Fragment } from 'react'
-import { jsx } from 'theme-ui'
-import { Themed } from '@theme-ui/mdx'
-import { Card } from '@theme-ui/components'
+import { jsx, Box as ThemeBox } from 'theme-ui'
+import { Heading, Card } from '@theme-ui/components'
 import { Link } from 'gatsby'
 import Category from '../../category'
 import ImageThumbnails from './image-thumbnails'
@@ -40,27 +39,24 @@ const getHorizontalPreviewUrl = (banner, thumbnails) => {
   return null
 }
 
-export default ({
+/** Card body extracted from wrapper so definitions are stable across renders */
+function PostCardInner({
   banner,
   category,
   date,
   excerpt,
   link,
   title,
-  horizontal = false,
-  thumbnails = null,
-  youtubeSrc = null,
-  soundcloudId = null
-}) => {
-  const videoId = getYouTubeVideoId(youtubeSrc)
-  const hasYouTube = !!videoId
-  const hasSoundCloud = !!soundcloudId
-  const hasMediaEmbed = hasYouTube || hasSoundCloud
-
-  const horizontalPreviewUrl = horizontal && !hasMediaEmbed ? getHorizontalPreviewUrl(banner, thumbnails) : null
-
-  // Card content without wrapper - used when YouTube embed is present
-  const CardContent = () => (
+  horizontal,
+  thumbnails,
+  youtubeSrc,
+  soundcloudId,
+  hasMediaEmbed,
+  hasSoundCloud,
+  hasYouTube,
+  horizontalPreviewUrl
+}) {
+  return (
     <Card
       variant='actionCard'
       sx={{
@@ -73,15 +69,9 @@ export default ({
         }
       }}
     >
-      <div
+      <ThemeBox
         className='card-content'
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          flex: 1
-        }}
+        sx={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', flex: 1 }}
       >
         {/* Horizontal index: text-first; small image floats left in headline row */}
         {horizontal && !hasMediaEmbed && (
@@ -102,15 +92,15 @@ export default ({
           <Fragment>
             {/* Show thumbnails above text for vertical cards (Recaps) */}
             {thumbnails && thumbnails.length > 0 && (
-              <div className='card-thumbnails' sx={{ flexShrink: 0, mb: 2 }}>
+              <ThemeBox className='card-thumbnails' sx={{ flexShrink: 0, mb: 2 }}>
                 <ImageThumbnails images={thumbnails} maxImages={4} />
-              </div>
+              </ThemeBox>
             )}
 
             {/* Show banner for posts without thumbnails and no media embed */}
             {banner && (!thumbnails || thumbnails.length === 0) && !hasMediaEmbed && (
-              <div className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
-                <div
+              <ThemeBox className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
+                <ThemeBox
                   sx={{
                     backgroundImage: `url(${banner})`,
                     backgroundPosition: 'center',
@@ -123,10 +113,10 @@ export default ({
                     transition: 'all 2.5s ease'
                   }}
                 />
-              </div>
+              </ThemeBox>
             )}
 
-            <div sx={{ flexShrink: 0 }}>
+            <ThemeBox sx={{ flexShrink: 0 }}>
               <HorizontalTextBlock
                 category={category}
                 date={date}
@@ -137,13 +127,13 @@ export default ({
                 link={link}
                 title={title}
               />
-            </div>
+            </ThemeBox>
           </Fragment>
         )}
 
         {/* Horizontal: media embeds stay full-width below the row */}
         {horizontal && hasMediaEmbed && (
-          <div sx={{ flexShrink: 0 }}>
+          <ThemeBox sx={{ flexShrink: 0 }}>
             <HorizontalTextBlock
               category={category}
               date={date}
@@ -154,18 +144,12 @@ export default ({
               link={link}
               title={title}
             />
-          </div>
+          </ThemeBox>
         )}
 
         {/* YouTube embed */}
         {hasYouTube && (
-          <div
-            className='card-youtube'
-            sx={{
-              marginTop: 'auto',
-              width: '100%'
-            }}
-          >
+          <ThemeBox className='card-youtube' sx={{ marginTop: 'auto', width: '100%' }}>
             <YouTube
               compact
               title={title}
@@ -177,12 +161,12 @@ export default ({
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
               }}
             />
-          </div>
+          </ThemeBox>
         )}
 
         {/* SoundCloud embed */}
         {hasSoundCloud && (
-          <div
+          <ThemeBox
             className='card-soundcloud'
             sx={{
               display: 'flex',
@@ -195,7 +179,8 @@ export default ({
               marginTop: 'auto'
             }}
           >
-            <iframe
+            <ThemeBox
+              as='iframe'
               width='100%'
               scrolling='no'
               frameBorder='no'
@@ -209,40 +194,10 @@ export default ({
                 minHeight: '166px'
               }}
             />
-          </div>
+          </ThemeBox>
         )}
-      </div>
+      </ThemeBox>
     </Card>
-  )
-
-  // If media embed is present, don't wrap the whole card in a link
-  if (hasMediaEmbed) {
-    return (
-      <div
-        sx={{
-          display: 'flex',
-          height: '100%',
-          color: 'var(--theme-ui-colors-panel-text)'
-        }}
-      >
-        <CardContent />
-      </div>
-    )
-  }
-
-  // Standard card wrapped in link
-  return (
-    <Link
-      sx={{
-        display: 'flex',
-        height: '100%',
-        color: 'var(--theme-ui-colors-panel-text)',
-        textDecoration: 'none'
-      }}
-      to={link}
-    >
-      <CardContent />
-    </Link>
   )
 }
 
@@ -258,24 +213,37 @@ const HorizontalTextBlock = ({
 }) => {
   const showHeadlineWithPreview = horizontal && !hasMediaEmbed && headlinePreviewUrl
 
-  const titleHeading = (
-    <Themed.h3
-      sx={{
-        mt: 0,
-        mb: 0,
-        fontFamily: 'serif',
-        fontSize: horizontal ? 2 : 3,
-        lineHeight: 1.35,
-        transition: hasMediaEmbed ? 'color 0.2s ease' : undefined
-      }}
-    >
-      {title}
-    </Themed.h3>
-  )
+  const mediaTitleHeadingSx = {
+    mt: 0,
+    mb: 0,
+    fontFamily: 'serif',
+    fontSize: horizontal ? 2 : 3,
+    lineHeight: 1.35,
+    ...(hasMediaEmbed ? { transition: 'color 0.2s ease' } : {})
+  }
 
-  return (
-    <>
-      {hasMediaEmbed ? (
+  const inlinePreviewHeadingSx = {
+    flex: '1 1 0',
+    minWidth: 0,
+    mt: 0,
+    mb: 0,
+    fontFamily: 'serif',
+    fontSize: 2,
+    lineHeight: 1.35,
+    textAlign: 'left'
+  }
+
+  const defaultHeadingSx = {
+    mt: 0,
+    mb: 2,
+    fontFamily: 'serif',
+    fontSize: horizontal ? 2 : 3,
+    lineHeight: 1.3
+  }
+
+  const headline = (() => {
+    if (hasMediaEmbed) {
+      return (
         <Link
           to={link}
           sx={{
@@ -286,10 +254,15 @@ const HorizontalTextBlock = ({
             }
           }}
         >
-          {titleHeading}
+          <Heading as='h3' sx={mediaTitleHeadingSx}>
+            {title}
+          </Heading>
         </Link>
-      ) : showHeadlineWithPreview ? (
-        <div
+      )
+    }
+    if (showHeadlineWithPreview) {
+      return (
+        <ThemeBox
           sx={{
             display: 'flex',
             flexDirection: 'row',
@@ -298,21 +271,10 @@ const HorizontalTextBlock = ({
             mb: 2
           }}
         >
-          <Themed.h3
-            sx={{
-              flex: '1 1 0',
-              minWidth: 0,
-              mt: 0,
-              mb: 0,
-              fontFamily: 'serif',
-              fontSize: 2,
-              lineHeight: 1.35,
-              textAlign: 'left'
-            }}
-          >
+          <Heading as='h3' sx={inlinePreviewHeadingSx}>
             {title}
-          </Themed.h3>
-          <div
+          </Heading>
+          <ThemeBox
             aria-hidden
             className='card-headline-preview'
             sx={{
@@ -330,23 +292,22 @@ const HorizontalTextBlock = ({
               boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)'
             }}
           />
-        </div>
-      ) : (
-        <Themed.h3
-          sx={{
-            mt: 0,
-            mb: 2,
-            fontFamily: 'serif',
-            fontSize: horizontal ? 2 : 3,
-            lineHeight: 1.3
-          }}
-        >
-          {title}
-        </Themed.h3>
-      )}
+        </ThemeBox>
+      )
+    }
+    return (
+      <Heading as='h3' sx={defaultHeadingSx}>
+        {title}
+      </Heading>
+    )
+  })()
+
+  return (
+    <>
+      {headline}
 
       {(category || date) && (
-        <div
+        <ThemeBox
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -357,33 +318,21 @@ const HorizontalTextBlock = ({
         >
           {category && <Category type={category} />}
           {category && date && (
-            <span
-              sx={{
-                color: 'textMuted',
-                fontSize: 0,
-                opacity: 0.5
-              }}
-            >
+            <ThemeBox as='span' sx={{ color: 'textMuted', fontSize: 0, opacity: 0.5 }}>
               •
-            </span>
+            </ThemeBox>
           )}
           {date && (
-            <time
-              className='created'
-              sx={{
-                color: 'textMuted',
-                fontFamily: 'sans',
-                fontSize: 0
-              }}
-            >
+            <ThemeBox as='time' className='created' sx={{ color: 'textMuted', fontFamily: 'sans', fontSize: 0 }}>
               {date}
-            </time>
+            </ThemeBox>
           )}
-        </div>
+        </ThemeBox>
       )}
 
       {excerpt && !hasMediaEmbed && (
-        <p
+        <ThemeBox
+          as='p'
           className='description'
           sx={{
             mt: 0,
@@ -394,8 +343,63 @@ const HorizontalTextBlock = ({
           }}
         >
           {excerpt}
-        </p>
+        </ThemeBox>
       )}
     </>
+  )
+}
+
+export default ({
+  banner,
+  category,
+  date,
+  excerpt,
+  link,
+  title,
+  horizontal = false,
+  thumbnails = null,
+  youtubeSrc = null,
+  soundcloudId = null
+}) => {
+  const videoId = getYouTubeVideoId(youtubeSrc)
+  const hasYouTube = !!videoId
+  const hasSoundCloud = !!soundcloudId
+  const hasMediaEmbed = hasYouTube || hasSoundCloud
+
+  const horizontalPreviewUrl = horizontal && !hasMediaEmbed ? getHorizontalPreviewUrl(banner, thumbnails) : null
+
+  const innerProps = {
+    banner,
+    category,
+    date,
+    excerpt,
+    horizontal,
+    link,
+    title,
+    thumbnails,
+    youtubeSrc,
+    soundcloudId,
+    hasSoundCloud,
+    hasMediaEmbed,
+    hasYouTube,
+    horizontalPreviewUrl
+  }
+
+  const outerSx = { display: 'flex', height: '100%', color: 'var(--theme-ui-colors-panel-text)' }
+
+  // If media embed is present, don't wrap the whole card in a link
+  if (hasMediaEmbed) {
+    return (
+      <ThemeBox sx={outerSx}>
+        <PostCardInner {...innerProps} />
+      </ThemeBox>
+    )
+  }
+
+  // Standard card wrapped in link
+  return (
+    <Link sx={{ ...outerSx, textDecoration: 'none' }} to={link}>
+      <PostCardInner {...innerProps} />
+    </Link>
   )
 }

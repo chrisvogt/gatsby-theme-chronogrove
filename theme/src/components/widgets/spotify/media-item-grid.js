@@ -1,34 +1,40 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
+import { jsx, Box, useThemeUI } from 'theme-ui'
+import { useState } from 'react'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import { useState } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
 
 import { glassmorhismPanel } from '@chronogrove/ui/theme'
+
+const PLACEHOLDER_COUNT = 12
+
+/** Stable keys so skeleton placeholders are not keyed by map index alone */
+const MEDIA_ITEM_GRID_PLACEHOLDER_KEYS = Array.from(
+  { length: PLACEHOLDER_COUNT },
+  (_, i) => `media-item-grid-ph-${String(i).padStart(2, '0')}`
+)
 
 const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onTrackClick }) => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const [currentMediaId, setCurrentMediaId] = useState(false)
 
-  const placeholders = Array(12)
-    .fill()
-    .map((item, idx) => (
-      <div className='show-loading-animation' key={idx}>
-        <RectShape
-          color={darkModeActive ? '#3a3a4a' : '#efefef'}
-          sx={{
-            borderRadius: '8px',
-            boxShadow: 'md',
-            paddingBottom: '100%',
-            width: '100%'
-          }}
-          showLoadingAnimation
-        />
-      </div>
-    ))
+  const placeholders = MEDIA_ITEM_GRID_PLACEHOLDER_KEYS.map(key => (
+    <Box key={key} className='show-loading-animation'>
+      <RectShape
+        color={darkModeActive ? '#3a3a4a' : '#efefef'}
+        sx={{
+          borderRadius: '8px',
+          boxShadow: 'md',
+          paddingBottom: '100%',
+          width: '100%'
+        }}
+        showLoadingAnimation
+      />
+    </Box>
+  ))
 
   const handleClick = (e, spotifyURL) => {
     if (interactionDisabled) {
@@ -43,7 +49,7 @@ const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onT
   }
 
   return (
-    <div
+    <Box
       className={`media-item_grid ${currentMediaId ? 'media-item_grid--interacting' : null}`}
       sx={{
         display: 'grid',
@@ -80,14 +86,7 @@ const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onT
                 }
               }}
             >
-              <div
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: '100%',
-                  width: '100%'
-                }}
-              >
+              <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
                 {name && (
                   <Themed.div
                     className='media-item_caption'
@@ -115,8 +114,9 @@ const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onT
                     <span>{name}</span>
                   </Themed.div>
                 )}
-                <Themed.img
+                <Box
                   alt='cover artwork'
+                  as='img'
                   crossOrigin='anonymous'
                   loading='lazy'
                   src={thumbnailURL}
@@ -127,12 +127,12 @@ const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onT
                     aspectRatio: '1/1'
                   }}
                 />
-              </div>
+              </Box>
             </Themed.a>
           )
         })}
       </Placeholder>
-    </div>
+    </Box>
   )
 }
 

@@ -1,6 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
-import { useColorMode } from 'theme-ui'
+import { jsx, useColorMode } from 'theme-ui'
 
 // Use a theme-aware accent color for the SoundCloud player
 const buildSoundCloudEmbedURL = (trackId, isDarkMode) => {

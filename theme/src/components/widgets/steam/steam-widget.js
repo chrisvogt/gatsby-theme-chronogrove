@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useColorMode } from 'theme-ui'
+import { jsx, Box, useColorMode } from 'theme-ui'
 import { faSteam } from '@fortawesome/free-brands-svg-icons'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
@@ -17,13 +17,17 @@ import AiSummarySkeleton from './ai-summary-skeleton'
 import PlayTimeChart from './play-time-chart'
 import SteamGameCard from './steam-game-card'
 
-const RECENTLY_PLAYED_PLACEHOLDER_COUNT = 6
-
 import { pickAiSummarySyncedAtRaw } from '../../../helpers/ai-summary-synced-at'
 import { getSteamWidgetDataSource } from '../../../selectors/metadata'
 import getTimeSpent from './get-time-spent'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
+
+const RECENTLY_PLAYED_PLACEHOLDER_COUNT = 6
+const STEAM_RECENT_GRID_PLACEHOLDER_KEYS = Array.from(
+  { length: RECENTLY_PLAYED_PLACEHOLDER_COUNT },
+  (_, i) => `steam-recent-sk-${String(i).padStart(2, '0')}`
+)
 
 const SteamWidget = React.memo(() => {
   const [colorMode] = useColorMode()
@@ -45,8 +49,7 @@ const SteamWidget = React.memo(() => {
 
   const callToAction = (
     <CallToAction title={`${profileDisplayName} on Steam`} url={profileURL} isLoading={isLoading}>
-      Visit Profile
-      <span className='read-more-icon'>&rarr;</span>
+      Visit Profile <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )
 
@@ -61,15 +64,15 @@ const SteamWidget = React.memo(() => {
 
       {showRecentlyPlayedSection ? (
         <>
-          <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
+          <Box sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
             <Heading as='h3' sx={{ fontSize: [3, 4] }}>
               Recently-Played Games
             </Heading>
-          </div>
+          </Box>
 
           <Themed.p sx={{ mb: 4 }}>Games I've played in the last two weeks.</Themed.p>
 
-          <div
+          <Box
             sx={{
               display: 'grid',
               gridGap: [3, 2, 2, 3],
@@ -84,9 +87,9 @@ const SteamWidget = React.memo(() => {
             }}
           >
             {isLoading
-              ? Array.from({ length: RECENTLY_PLAYED_PLACEHOLDER_COUNT }).map((_, i) => (
-                  <div
-                    key={i}
+              ? STEAM_RECENT_GRID_PLACEHOLDER_KEYS.map(slotKey => (
+                  <Box
+                    key={slotKey}
                     aria-hidden
                     sx={{
                       variant: 'styles.InstagramItem',
@@ -101,7 +104,7 @@ const SteamWidget = React.memo(() => {
                         style={{ width: '100%', height: '200px', borderRadius: '8px' }}
                       />
                     </div>
-                  </div>
+                  </Box>
                 ))
               : recentlyPlayedGames.map(game => (
                   <SteamGameCard
@@ -111,15 +114,15 @@ const SteamWidget = React.memo(() => {
                     subtitle={getTimeSpent(game.playTime2Weeks * 60 * 1000)}
                   />
                 ))}
-          </div>
+          </Box>
         </>
       ) : null}
 
-      <div sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
+      <Box sx={{ display: 'flex', flex: 1, alignItems: 'center', mb: 3 }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
           Leaderboard
         </Heading>
-      </div>
+      </Box>
 
       <Themed.p sx={{ mb: 4 }}>My top 10 most played games.</Themed.p>
 

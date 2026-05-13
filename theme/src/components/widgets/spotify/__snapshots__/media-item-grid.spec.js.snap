@@ -3,7 +3,7 @@
 exports[`MediaItemGrid matches loading state snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="media-item_grid null css-4004kc"
+    class="media-item_grid null css-uoa9w6"
   >
     <a
       class="media-item_media css-1bdhn1b"
@@ -11,7 +11,7 @@ exports[`MediaItemGrid matches loading state snapshot 1`] = `
       title="Item #1"
     >
       <div
-        class="css-x4b07x"
+        class="css-pcble3"
       >
         <div
           class="media-item_caption css-764hy0"
@@ -22,7 +22,7 @@ exports[`MediaItemGrid matches loading state snapshot 1`] = `
         </div>
         <img
           alt="cover artwork"
-          class="css-karewm"
+          class="css-526are"
           crossorigin="anonymous"
           loading="lazy"
           src="http://placekitten.com/200/200"
@@ -35,7 +35,7 @@ exports[`MediaItemGrid matches loading state snapshot 1`] = `
       title="Item #2"
     >
       <div
-        class="css-x4b07x"
+        class="css-pcble3"
       >
         <div
           class="media-item_caption css-764hy0"
@@ -46,7 +46,7 @@ exports[`MediaItemGrid matches loading state snapshot 1`] = `
         </div>
         <img
           alt="cover artwork"
-          class="css-karewm"
+          class="css-526are"
           crossorigin="anonymous"
           loading="lazy"
           src="http://placekitten.com/300/300"
@@ -60,10 +60,10 @@ exports[`MediaItemGrid matches loading state snapshot 1`] = `
 exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
 <DocumentFragment>
   <div
-    class="media-item_grid null css-4004kc"
+    class="media-item_grid null css-uoa9w6"
   >
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -71,7 +71,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -79,7 +79,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -87,7 +87,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -95,7 +95,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -103,7 +103,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -111,7 +111,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -119,7 +119,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -127,7 +127,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -135,7 +135,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -143,7 +143,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"
@@ -151,7 +151,7 @@ exports[`MediaItemGrid matches the ready state snapshot state 1`] = `
       />
     </div>
     <div
-      class="show-loading-animation"
+      class="show-loading-animation css-1yz7e9k"
     >
       <div
         class="rect-shape css-n8oxh0"

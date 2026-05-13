@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Container } from 'theme-ui'
+import { jsx, Container, Box } from 'theme-ui'
 import { graphql } from 'gatsby'
 import { Fragment } from 'react'
 import { SkipNavContent } from '../components/skip-nav'
@@ -25,37 +25,37 @@ const HomeTemplate = () => {
     <Fragment>
       <ScrollToHashWhenReady />
       <AnimatedPageBackground />
-      <div
+      <Box
         sx={{
           position: 'relative',
           zIndex: 1
         }}
       >
         <Layout hideFooter disableMainWrapper transparentBackground>
-          <div sx={homeDashboardPageOuterSx}>
+          <Box sx={homeDashboardPageOuterSx}>
             <Container>
               <HomeDashboardGrid
                 aside={<HomeNavigation />}
                 main={
                   <main role='main'>
                     <SkipNavContent />
-                    <div sx={homeDashboardMainShellSx}>
-                      <div sx={homeDashboardMainInnerMaxWidthSx}>
+                    <Box sx={homeDashboardMainShellSx}>
+                      <Box sx={homeDashboardMainInnerMaxWidthSx}>
                         <section id='top' tabIndex={-1}>
                           <HomeHeaderContent />
                         </section>
                         <HomeWidgets />
-                      </div>
-                    </div>
+                      </Box>
+                    </Box>
                     <Footer />
                     <HCard />
                   </main>
                 }
               />
             </Container>
-          </div>
+          </Box>
         </Layout>
-      </div>
+      </Box>
     </Fragment>
   )
 }

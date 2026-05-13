@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Box } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import MediaItemGrid from './media-item-grid'
 import { Themed } from '@theme-ui/mdx'
@@ -50,17 +50,17 @@ const Playlists = ({ isLoading, playlists = [] }) => {
     .slice(0, 12) // Limit to 12 playlists for now. As of December 2024 the API response includes > 12 playlists.
 
   return (
-    <div>
-      <div sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+    <Box>
+      <Box sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
           Playlists
         </Heading>
-      </div>
+      </Box>
 
       <Themed.p>My 12 favorite playlists.</Themed.p>
 
       <MediaItemGrid isLoading={isLoading} items={items} onTrackClick={handlePlaylistClick} />
-    </div>
+    </Box>
   )
 }
 

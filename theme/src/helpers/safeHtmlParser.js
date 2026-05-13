@@ -1,60 +1,10 @@
 import React from 'react'
-import parse, { domToReact, Element } from 'html-react-parser'
+import parse, { domToReact, Element as DomElement } from 'html-react-parser'
 
-/**
- * Safely converts HTML entities to React elements
- *
- * @param {string} text - The text containing HTML entities
- * @returns {React.ReactNode} - React elements or the original string
- */
-export const parseSafeHtml = text => {
-  if (!text || typeof text !== 'string') {
-    return text
-  }
+const ALLOWED_TAGS = ['b', 'i', 'em', 'br', 'a', 'p', 'strong']
 
-  const options = {
-    replace: domNode => {
-      if (domNode instanceof Element && domNode.attribs) {
-        const { name, attribs, children } = domNode
-
-        // Whitelist of allowed tags
-        const allowedTags = ['b', 'i', 'em', 'br', 'a', 'p', 'strong']
-
-        // Check if tag is allowed
-        if (!allowedTags.includes(name)) {
-          // For disallowed tags, return false to skip rendering the tag entirely
-          // but still process its children
-          return false
-        }
-
-        // Handle self-closing tags that don't have Themed equivalents
-        if (name === 'br') {
-          return <br key={Math.random()} />
-        }
-
-        // Handle anchor tags with href validation
-        if (name === 'a') {
-          const href = attribs.href
-          if (!href || !isValidUrl(href)) {
-            // If no valid href, just return the text content
-            return domNode.children && domNode.children.length > 0 ? domToReact(domNode.children, options) : null
-          }
-
-          return (
-            <a key={Math.random()} href={href} target='_blank' rel='noopener noreferrer'>
-              {domToReact(children, options)}
-            </a>
-          )
-        }
-
-        // Handle other allowed tags (b, i, em, p, strong) using regular HTML elements
-        const Element = name
-        return <Element key={Math.random()}>{domToReact(children, options)}</Element>
-      }
-    }
-  }
-
-  return parse(text, options)
+function isAllowedTag(name) {
+  return ALLOWED_TAGS.includes(name)
 }
 
 /**
@@ -69,6 +19,65 @@ const isValidUrl = url => {
   } catch {
     return false
   }
+}
+
+/**
+ * Safely converts HTML entities to React elements
+ *
+ * @param {string} text - The text containing HTML entities
+ * @returns {React.ReactNode} - React elements or the original string
+ */
+export const parseSafeHtml = text => {
+  if (!text || typeof text !== 'string') {
+    return text
+  }
+
+  let keySeed = 0
+  const nextKey = prefix => `${prefix}-${++keySeed}`
+
+  const renderAnchor = (domNode, children, nestedOptions, href, key) => {
+    if (!href || !isValidUrl(href)) {
+      return domNode.children?.length ? domToReact(domNode.children, nestedOptions) : null
+    }
+    return (
+      <a key={key} href={href} target='_blank' rel='noopener noreferrer'>
+        {domToReact(children, nestedOptions)}
+      </a>
+    )
+  }
+
+  const renderSemanticTag = (name, domChildren, key, nestedOptions) => {
+    const Tag = name
+    return <Tag key={key}>{domToReact(domChildren, nestedOptions)}</Tag>
+  }
+
+  const options = {
+    replace: domNode => {
+      if (!(domNode instanceof DomElement) || !domNode.attribs) {
+        return undefined
+      }
+
+      const { name, attribs, children } = domNode
+
+      if (!isAllowedTag(name)) {
+        return false
+      }
+
+      const key = nextKey(name)
+
+      if (name === 'br') {
+        return <br key={key} />
+      }
+
+      if (name === 'a') {
+        return renderAnchor(domNode, children, options, attribs.href, key)
+      }
+
+      return renderSemanticTag(name, children, key, options)
+    }
+  }
+
+  return parse(text, options)
 }
 
 export default parseSafeHtml

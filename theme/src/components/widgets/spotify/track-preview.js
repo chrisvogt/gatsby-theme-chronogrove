@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 
 const TrackPreview = ({ link, name, thumbnailURL }) => (
@@ -10,10 +10,11 @@ const TrackPreview = ({ link, name, thumbnailURL }) => (
       variant: 'styles.TrackPreview'
     }}
   >
-    <img
+    <Box
       alt='album cover'
-      loading='lazy'
+      as='img'
       crossOrigin='anonymous'
+      loading='lazy'
       src={thumbnailURL}
       sx={{
         objectFit: 'cover',
