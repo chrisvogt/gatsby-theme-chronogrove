@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Flex, useThemeUI } from 'theme-ui'
+import { Box } from '@theme-ui/components'
 import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../../helpers/isDarkMode'
 
@@ -16,9 +17,9 @@ const GitHubPlaceholder = () => {
         <div>
           <RectShape color={placeholderColor} style={{ width: 40, height: 40, marginBottom: '2em' }} />
         </div>
-        <div sx={{ width: '100%', height: '100%' }}>
+        <Box sx={{ width: '100%', height: '100%' }}>
           <TextBlock rows={2} color={placeholderColor} />
-        </div>
+        </Box>
       </Flex>
       <TextBlock rows={3} color={placeholderColor} />
     </div>

@@ -3,11 +3,12 @@
 exports[`InstagramWidgetItem matches the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="instagram-item-button css-1mc8983"
+    class="instagram-item-button css-1vy9swr"
+    type="button"
   >
     <img
       alt="Instagram post: This is a test caption"
-      class="instagram-item-image css-62khl7"
+      class="instagram-item-image css-stq7pq"
       height="280"
       loading="lazy"
       src="https://cdn.example.com/images/fake-instagram-image.jpg?h=234&w=234&fit=crop&crop=faces,focalpoint&auto=compress&auto=enhance&auto=format"

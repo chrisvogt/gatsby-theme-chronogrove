@@ -55,8 +55,7 @@ const GitHubWidget = () => {
       url={`https://www.github.com/${githubUsername}`}
       isLoading={isLoading}
     >
-      Visit Profile
-      <span className='read-more-icon'>&rarr;</span>
+      Visit Profile <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )
 

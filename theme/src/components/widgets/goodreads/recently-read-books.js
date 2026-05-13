@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
-import { Heading } from '@theme-ui/components'
+import { Box, Heading } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { Themed } from '@theme-ui/mdx'
 import { useLocation, navigate } from '@gatsbyjs/reach-router'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
 import Pagination from '../../pagination'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
@@ -16,6 +16,7 @@ export const HEADLINE = 'Books'
 export const BODY_TEXT = 'Recently read and finished books from Goodreads.'
 
 const BOOKS_PER_PAGE = 10
+const RECENTLY_READ_SKELETON_KEYS = 'abcdefghij'.split('')
 
 const RecentlyReadBooks = ({ books = [], isLoading }) => {
   const { colorMode } = useThemeUI()
@@ -63,6 +64,20 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
     onPageChange: setCurrentPage
   })
 
+  const handleCarouselKeyDown = useCallback(
+    event => {
+      if (totalPages <= 1) return
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+        event.preventDefault()
+        handlePageChange(currentPage + 1)
+      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+        event.preventDefault()
+        handlePageChange(currentPage - 1)
+      }
+    },
+    [currentPage, handlePageChange, totalPages]
+  )
+
   // Handle scroll position restoration and prevention
   useEffect(() => {
     // Store the current scroll position when the component mounts
@@ -74,9 +89,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
       setTimeout(() => {
         const goodreadsElement = document.getElementById('goodreads')
         if (goodreadsElement) {
-          // Force a reflow to ensure the element is properly positioned
-          void goodreadsElement.offsetHeight
-          // Use the browser's native hash navigation
+          goodreadsElement.scrollIntoView?.({ block: 'nearest' })
           window.location.hash = 'goodreads'
         }
       }, 100)
@@ -157,9 +170,14 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
     })
   }
 
+  let carouselCursor = 'default'
+  if (totalPages > 1) {
+    carouselCursor = isDragging ? 'grabbing' : 'grab'
+  }
+
   return (
     <div className='gallery'>
-      <div sx={{ mb: 4 }}>
+      <Box sx={{ mb: 4 }}>
         <Heading
           as='h3'
           sx={{
@@ -175,7 +193,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
         {selectedBook ? (
           <BookExplorer book={selectedBook} onClose={handleClose} />
         ) : (
-          <div
+          <Box
             sx={{
               overflow: 'hidden',
               position: 'relative',
@@ -186,36 +204,38 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
             }}
           >
             {isLoading ? (
-              <div
+              <Box
                 sx={{
                   display: 'grid',
                   gridGap: [3, 1, 2],
                   gridTemplateColumns: ['repeat(3, 1fr)', 'repeat(4, 1fr)', 'repeat(4, 1fr)', 'repeat(6, 1fr)']
                 }}
               >
-                {Array(BOOKS_PER_PAGE)
-                  .fill()
-                  .map((item, idx) => (
-                    <RectShape
-                      color={darkModeActive ? '#3a3a4a' : '#efefef'}
-                      key={idx}
-                      sx={{
-                        boxShadow: 'md',
-                        minHeight: '140px',
-                        width: '100%'
-                      }}
-                    />
-                  ))}
-              </div>
+                {RECENTLY_READ_SKELETON_KEYS.map(slotKey => (
+                  <RectShape
+                    color={darkModeActive ? '#3a3a4a' : '#efefef'}
+                    key={`recently-read-skeleton-${slotKey}`}
+                    sx={{
+                      boxShadow: 'md',
+                      minHeight: '140px',
+                      width: '100%'
+                    }}
+                  />
+                ))}
+              </Box>
             ) : (
-              <div
+              <Box
                 data-testid='goodreads-carousel'
+                role='region'
+                aria-label='Recently read books'
+                tabIndex={0}
+                onKeyDown={handleCarouselKeyDown}
                 sx={{
                   display: 'flex',
                   width: `${totalPages * 100}%`,
                   transform: getTransform(),
                   transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  cursor: totalPages > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+                  cursor: carouselCursor,
                   userSelect: 'none',
                   touchAction: 'pan-y'
                 }}
@@ -229,7 +249,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                 onPointerCancel={handlePointerCancel}
               >
                 {pages.map((pageBooks, pageIndex) => (
-                  <div
+                  <Box
                     key={`goodreads-page-${pageIndex + 1}`}
                     aria-hidden={pageIndex !== currentPage - 1}
                     data-testid={`goodreads-page-${pageIndex + 1}`}
@@ -244,7 +264,7 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                       pb: 1
                     }}
                   >
-                    <div
+                    <Box
                       sx={t => ({
                         display: 'grid',
                         gridGap: [3, 1, 2],
@@ -266,18 +286,18 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
                           title={book.title}
                         />
                       ))}
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 ))}
-              </div>
+              </Box>
             )}
-          </div>
+          </Box>
         )}
 
         {!selectedBook && !isLoading && (
           <Pagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={totalPages} />
         )}
-      </div>
+      </Box>
     </div>
   )
 }

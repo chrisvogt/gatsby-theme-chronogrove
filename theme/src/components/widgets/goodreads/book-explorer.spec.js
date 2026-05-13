@@ -14,9 +14,13 @@ jest.mock('@gatsbyjs/reach-router', () => ({
 
 // Mock Book3D to avoid WebGL in jsdom
 jest.mock('../../artwork/book-3d', () => {
-  const React = require('react')
+  const { createElement } = require('react')
   return function MockBook3D({ thumbnailURL, title }) {
-    return <img data-testid='book-preview-3d' src={thumbnailURL} alt={title} />
+    return createElement('img', {
+      'data-testid': 'book-preview-3d',
+      src: thumbnailURL,
+      alt: title
+    })
   }
 })
 

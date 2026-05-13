@@ -16,7 +16,7 @@ const rendererRegistry = {
 
 const PinnedItemCard = ({ item, type = PLACEHOLDER }) => (
   <Card variant='actionCard' sx={actionCardPinnedLayoutSx}>
-    {rendererRegistry[type] && rendererRegistry[type](item)}
+    {rendererRegistry[type]?.(item)}
   </Card>
 )
 

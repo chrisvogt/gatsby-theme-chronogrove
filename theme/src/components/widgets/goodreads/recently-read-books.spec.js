@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { act } from 'react'
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Router, LocationProvider } from '@gatsbyjs/reach-router'
-import { act } from 'react'
 
 import RecentlyReadBooks, { HEADLINE, BODY_TEXT } from './recently-read-books'
 import goodreadsMock from '../../../../__mocks__/goodreads-widget.mock.json'
@@ -13,12 +12,16 @@ jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 // Mock Book3D so tests don't need a WebGL context; expose book-preview-thumbnail
 // so existing assertions continue to work
 jest.mock('../../artwork/book-3d', () => {
-  const React = require('react')
+  const { createElement } = require('react')
   return function MockBook3D({ title, thumbnailURL }) {
-    return (
-      <div data-testid='book-preview-3d' role='img' aria-label={title}>
-        <img data-testid='book-preview-thumbnail' src={thumbnailURL} alt={title} />
-      </div>
+    return createElement(
+      'div',
+      { 'data-testid': 'book-preview-3d' },
+      createElement('img', {
+        'data-testid': 'book-preview-thumbnail',
+        src: thumbnailURL,
+        alt: title
+      })
     )
   }
 })

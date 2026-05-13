@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
 
-import { Grid } from '@theme-ui/components'
+import { Box, Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -82,8 +82,7 @@ export default () => {
       url={`https://www.flickr.com/photos/${flickrUsername}`}
       isLoading={isLoading}
     >
-      Visit Profile
-      <span className='read-more-icon'>&rarr;</span>
+      Visit Profile <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )
 
@@ -131,8 +130,8 @@ export default () => {
 
       {/* Reserve space for Show More when loading; show button when loaded */}
       {isLoading ? (
-        <div sx={{ my: 4, textAlign: 'center' }} aria-hidden>
-          <div
+        <Box sx={{ my: 4, textAlign: 'center' }} aria-hidden>
+          <Box
             sx={{
               display: 'inline-block',
               height: '44px',
@@ -142,13 +141,13 @@ export default () => {
               opacity: 0.5
             }}
           />
-        </div>
+        </Box>
       ) : (
-        <div sx={{ my: 4, textAlign: 'center' }}>
+        <Box sx={{ my: 4, textAlign: 'center' }}>
           <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
             {isShowingMore ? 'Show Less' : 'Show More'}
           </ActionButton>
-        </div>
+        </Box>
       )}
 
       {photos?.length && (

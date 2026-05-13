@@ -9,6 +9,32 @@ import isDarkMode from '../../../helpers/isDarkMode'
 /** Must match grid / legend gap so month labels and row math align with cells (Theme UI `gap: 1` is not guaranteed to be 4px). */
 const CONTRIBUTION_CELL_GAP_PX = 4
 
+/** Stable keys for loading skeleton cells (53 columns × 7 rows, trimmed to 365). */
+const CONTRIBUTION_GRAPH_LOADING_KEYS = (() => {
+  const keys = []
+  for (let col = 0; col < 53 && keys.length < 365; col += 1) {
+    for (let row = 0; row < 7 && keys.length < 365; row += 1) {
+      keys.push(`contrib-graph-loading-${col}-${row}`)
+    }
+  }
+  return keys
+})()
+
+function githubCalendarRowIndex(dayOfWeek) {
+  if (dayOfWeek === 0) return 1
+  if (dayOfWeek === 6) return 0
+  return dayOfWeek + 1
+}
+
+function contributionLegendSquareBackground(level, darkMode) {
+  if (level === 0) {
+    return darkMode ? '#161b22' : '#ebedf0'
+  }
+  const dark = ['#0e4429', '#006d32', '#26a641', '#39d353']
+  const light = ['#9be9a8', '#40c463', '#30a14e', '#216e39']
+  return darkMode ? dark[level - 1] : light[level - 1]
+}
+
 function earliestContributionDate(weeks) {
   let min = null
   for (const week of weeks) {
@@ -105,9 +131,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
         const [year, month, dayOfMonth] = day.date.split('-').map(Number)
         const date = new Date(year, month - 1, dayOfMonth)
         const dayOfWeek = date.getDay() // 0=Sun, 1=Mon, ..., 6=Sat
-        // Convert to GitHub week: Sat=0, Sun=1, Mon=2, ..., Fri=6
-        const githubDayOfWeek = dayOfWeek === 0 ? 1 : dayOfWeek === 6 ? 0 : dayOfWeek + 1
-        map[githubDayOfWeek] = day
+        map[githubCalendarRowIndex(dayOfWeek)] = day
       })
       return map
     })
@@ -183,9 +207,9 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
               p: 3
             }}
           >
-            {Array.from({ length: 365 }).map((_, i) => (
+            {CONTRIBUTION_GRAPH_LOADING_KEYS.map(cellKey => (
               <Box
-                key={i}
+                key={cellKey}
                 sx={{
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
@@ -378,6 +402,11 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   const contributionText = hasContributions
                     ? `${day.contributionCount} contribution${day.contributionCount !== 1 ? 's' : ''}`
                     : 'No contributions'
+                  const emptyContributionCellBg = darkModeActive ? '#161b22' : '#ebedf0'
+                  const cellBackground = day.contributionCount === 0 ? emptyContributionCellBg : day.color
+                  const contributionHoverShadow = darkModeActive
+                    ? '0 0 0 2px rgba(255,255,255,0.25), 0 0 12px rgba(255,255,255,0.08)'
+                    : '0 0 0 2px rgba(0,0,0,0.12), 0 0 12px rgba(0,0,0,0.08)'
 
                   return (
                     <Box
@@ -402,7 +431,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                         width: `${cellSize}px`,
                         height: `${cellSize}px`,
                         borderRadius: '2px',
-                        bg: day.contributionCount === 0 ? (darkModeActive ? '#161b22' : '#ebedf0') : day.color,
+                        bg: cellBackground,
                         position: 'relative',
                         cursor: hasContributions ? 'pointer' : 'default',
                         overflow: 'hidden',
@@ -423,9 +452,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                             pointerEvents: 'none'
                           },
                           '&:hover': {
-                            boxShadow: darkModeActive
-                              ? '0 0 0 2px rgba(255,255,255,0.25), 0 0 12px rgba(255,255,255,0.08)'
-                              : '0 0 0 2px rgba(0,0,0,0.12), 0 0 12px rgba(0,0,0,0.08)',
+                            boxShadow: contributionHoverShadow,
                             transform: 'scale(1.12)',
                             zIndex: 5,
                             '&::after': {
@@ -471,14 +498,7 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
                   width: `${cellSize}px`,
                   height: `${cellSize}px`,
                   borderRadius: '2px',
-                  bg:
-                    level === 0
-                      ? darkModeActive
-                        ? '#161b22'
-                        : '#ebedf0'
-                      : darkModeActive
-                        ? ['#0e4429', '#006d32', '#26a641', '#39d353'][level - 1]
-                        : ['#9be9a8', '#40c463', '#30a14e', '#216e39'][level - 1]
+                  bg: contributionLegendSquareBackground(level, darkModeActive)
                 }}
               />
             ))}

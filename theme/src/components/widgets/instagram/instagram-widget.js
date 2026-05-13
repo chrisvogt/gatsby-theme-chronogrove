@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
 
-import { Grid } from '@theme-ui/components'
+import { Box, Grid } from '@theme-ui/components'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import { useCallback, useState, useRef, useEffect, useMemo } from 'react'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -168,23 +168,17 @@ export default () => {
     }
 
     // Start ambient rotation after a short delay (let user settle on page)
-    const startDelay = setTimeout(() => {
-      // Check ref - don't start if gallery is open
+    const advanceAmbientCarousel = () => {
       if (isGalleryOpenRef.current) return
 
-      const firstIdx = getNextCarousel()
-      setAmbientActiveIndex(firstIdx)
+      const nextIdx = getNextCarousel()
+      setAmbientActiveIndex(nextIdx)
       setAmbientTrigger(prev => prev + 1)
+    }
 
-      // Rotate to a new carousel every 3.5 seconds
-      ambientIntervalRef.current = setInterval(() => {
-        // Skip rotation if gallery is open (check ref, not state)
-        if (isGalleryOpenRef.current) return
-
-        const nextIdx = getNextCarousel()
-        setAmbientActiveIndex(nextIdx)
-        setAmbientTrigger(prev => prev + 1)
-      }, 3500)
+    const startDelay = setTimeout(() => {
+      advanceAmbientCarousel()
+      ambientIntervalRef.current = setInterval(advanceAmbientCarousel, 3500)
     }, 2000)
 
     return () => {
@@ -218,8 +212,7 @@ export default () => {
       url={profileURL || `https://www.instagram.com/${metadata?.widgets?.instagram?.username || 'instagram'}`}
       isLoading={isLoading}
     >
-      Visit Profile
-      <span className='read-more-icon'>&rarr;</span>
+      Visit Profile <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )
 
@@ -350,6 +343,32 @@ export default () => {
     [dynamicEl]
   )
 
+  let instagramPaginationFooter = null
+  if (isLoading) {
+    instagramPaginationFooter = (
+      <Box sx={{ my: 4, textAlign: 'center' }} aria-hidden>
+        <Box
+          sx={{
+            display: 'inline-block',
+            height: '44px',
+            minWidth: '140px',
+            borderRadius: '8px',
+            bg: darkModeActive ? 'gray.8' : 'gray.2',
+            opacity: 0.5
+          }}
+        />
+      </Box>
+    )
+  } else if (media?.length > MAX_IMAGES.default) {
+    instagramPaginationFooter = (
+      <Box sx={{ my: 4, textAlign: 'center' }}>
+        <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
+          {isShowingMore ? 'Show Less' : 'Show More'}
+        </ActionButton>
+      </Box>
+    )
+  }
+
   return (
     <Widget id='instagram' hasFatalError={hasFatalError}>
       <WidgetHeader aside={callToAction} icon={faInstagram} metrics={metrics} metricsLoading={isLoading}>
@@ -397,27 +416,7 @@ export default () => {
         </Grid>
       </div>
 
-      {/* Reserve space for Show More when loading; show button when loaded and > 8 items */}
-      {isLoading ? (
-        <div sx={{ my: 4, textAlign: 'center' }} aria-hidden>
-          <div
-            sx={{
-              display: 'inline-block',
-              height: '44px',
-              minWidth: '140px',
-              borderRadius: '8px',
-              bg: darkModeActive ? 'gray.8' : 'gray.2',
-              opacity: 0.5
-            }}
-          />
-        </div>
-      ) : media?.length > MAX_IMAGES.default ? (
-        <div sx={{ my: 4, textAlign: 'center' }}>
-          <ActionButton size='large' onClick={() => setIsShowingMore(!isShowingMore)}>
-            {isShowingMore ? 'Show Less' : 'Show More'}
-          </ActionButton>
-        </div>
-      ) : null}
+      {instagramPaginationFooter}
 
       {dynamicEl.length > 0 && (
         <LightGallery

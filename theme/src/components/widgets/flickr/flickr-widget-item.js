@@ -1,18 +1,22 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { Box } from '@theme-ui/components'
 
 const FlickrWidgetItem = ({ photo = {}, handleClick = () => {}, index }) => {
   const { title = '', thumbnailUrl = '' } = photo || {}
 
   return (
-    <button
+    <Box
+      as='button'
+      type='button'
       onClick={() => handleClick(index)}
       className='flickr-item-button'
       sx={{
         variant: 'styles.InstagramItem'
       }}
     >
-      <img
+      <Box
+        as='img'
         crossOrigin='anonymous'
         className='flickr-item-image'
         loading='lazy'
@@ -27,7 +31,7 @@ const FlickrWidgetItem = ({ photo = {}, handleClick = () => {}, index }) => {
           objectFit: 'cover'
         }}
       />
-    </button>
+    </Box>
   )
 }
 

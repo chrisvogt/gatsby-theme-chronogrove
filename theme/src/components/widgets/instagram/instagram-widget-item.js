@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { Box } from '@theme-ui/components'
 import { keyframes } from '@emotion/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { faImages, faVideo } from '@fortawesome/free-solid-svg-icons'
@@ -98,6 +99,13 @@ const InstagramWidgetItem = ({
     }
   }, [hasCarouselImages, isActive, carouselImages])
 
+  const advanceCarouselAfterTransition = useCallback(() => {
+    const currentLength = carouselImagesLengthRef.current
+    setCurrentImageIndex(prev => (currentLength > 0 ? (prev + 1) % currentLength : 0))
+    setIsTransitioning(false)
+    timeoutRef.current = null
+  }, [])
+
   const startCarouselRotation = useCallback(() => {
     // Guard against empty carouselImages array (all children have falsy cdnMediaURL)
     // and single-image carousels (no point rotating)
@@ -105,15 +113,9 @@ const InstagramWidgetItem = ({
 
     intervalRef.current = setInterval(() => {
       setIsTransitioning(true)
-      timeoutRef.current = setTimeout(() => {
-        // Use ref to get current length, avoiding stale closure if children prop changes mid-rotation
-        const currentLength = carouselImagesLengthRef.current
-        setCurrentImageIndex(prev => (currentLength > 0 ? (prev + 1) % currentLength : 0))
-        setIsTransitioning(false)
-        timeoutRef.current = null
-      }, 300) // Crossfade duration
+      timeoutRef.current = setTimeout(advanceCarouselAfterTransition, 300) // Crossfade duration
     }, CAROUSEL_INTERVAL_MS)
-  }, [hasCarouselImages, carouselImages.length])
+  }, [advanceCarouselAfterTransition, hasCarouselImages, carouselImages.length])
 
   const stopCarouselRotation = useCallback(() => {
     if (intervalRef.current) {
@@ -186,7 +188,9 @@ const InstagramWidgetItem = ({
   }, [])
 
   return (
-    <button
+    <Box
+      as='button'
+      type='button'
       key={id}
       onClick={event => handleClick(event, { index, currentImageIndex, photo: { caption, id, src: cdnMediaURL } })}
       onMouseEnter={handleMouseEnter}
@@ -207,7 +211,7 @@ const InstagramWidgetItem = ({
       }}
     >
       {(isCarousel || isVideo) && (
-        <div
+        <Box
           data-testid={isVideo ? 'video-icon' : 'carousel-icon'}
           sx={{
             color: 'white',
@@ -226,12 +230,12 @@ const InstagramWidgetItem = ({
           }}
         >
           <FontAwesomeIcon icon={isVideo ? faVideo : faImages} />
-        </div>
+        </Box>
       )}
 
       {/* Carousel indicator dots */}
       {hasCarouselImages && isActive && (
-        <div
+        <Box
           data-testid='carousel-indicators'
           sx={{
             position: 'absolute',
@@ -243,26 +247,32 @@ const InstagramWidgetItem = ({
             zIndex: 1
           }}
         >
-          {carouselImages.slice(0, 5).map((_, idx) => (
-            <span
-              key={idx}
+          {carouselImages.slice(0, 5).map((imageUrl, dotIndex) => (
+            <Box
+              as='span'
+              key={`${imageUrl || 'instagram-dot'}-${dotIndex}`}
               sx={{
                 width: '6px',
                 height: '6px',
                 borderRadius: '50%',
                 backgroundColor:
-                  idx === currentImageIndex % Math.min(5, carouselImages.length) ? 'white' : 'rgba(255, 255, 255, 0.5)',
+                  dotIndex === currentImageIndex % Math.min(5, carouselImages.length)
+                    ? 'white'
+                    : 'rgba(255, 255, 255, 0.5)',
                 transition: 'background-color 0.2s ease'
               }}
             />
           ))}
           {carouselImages.length > 5 && (
-            <span sx={{ color: 'white', fontSize: '10px', lineHeight: '6px' }}>+{carouselImages.length - 5}</span>
+            <Box as='span' sx={{ color: 'white', fontSize: '10px', lineHeight: '6px' }}>
+              +{carouselImages.length - 5}
+            </Box>
           )}
-        </div>
+        </Box>
       )}
 
-      <img
+      <Box
+        as='img'
         key={currentImageIndex}
         className='instagram-item-image'
         loading='lazy'
@@ -284,7 +294,7 @@ const InstagramWidgetItem = ({
             })
         }}
       />
-    </button>
+    </Box>
   )
 }
 
