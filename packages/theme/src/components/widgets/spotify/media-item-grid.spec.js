@@ -9,14 +9,14 @@ const mockItems = [
     details: 'Item #1',
     name: 'Test Item 1',
     spotifyURL: 'https://www.google.com/',
-    thumbnailURL: 'http://placekitten.com/200/200'
+    thumbnailURL: 'https://picsum.photos/200/200'
   },
   {
     id: 'ITEM-2',
     details: 'Item #2',
     name: 'Test Item 2',
     spotifyURL: 'https://www.example.com/',
-    thumbnailURL: 'http://placekitten.com/300/300'
+    thumbnailURL: 'https://picsum.photos/300/300'
   }
 ]
 
@@ -117,7 +117,7 @@ describe('MediaItemGrid', () => {
         id: 'ITEM-1',
         details: 'Item #1',
         spotifyURL: 'https://www.google.com/',
-        thumbnailURL: 'http://placekitten.com/200/200'
+        thumbnailURL: 'https://picsum.photos/200/200'
       }
     ]
 

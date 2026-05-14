@@ -14,7 +14,7 @@ const data = {
             slug: 'a-blog-article'
           },
           frontmatter: {
-            banner: 'https://placekitten.com/300/300',
+            banner: 'https://picsum.photos/300/300',
             title: 'A Blog Article',
             slug: 'a-blog-article'
           }
@@ -29,7 +29,7 @@ const data = {
             slug: 'another-article'
           },
           frontmatter: {
-            banner: 'https://placekitten.com/300/300',
+            banner: 'https://picsum.photos/300/300',
             title: 'Another Article',
             slug: 'another-article'
           }
@@ -44,7 +44,7 @@ const data = {
             slug: 'now'
           },
           frontmatter: {
-            banner: 'https://placekitten.com/300/300',
+            banner: 'https://picsum.photos/300/300',
             title: 'Now Page',
             slug: 'now'
           }

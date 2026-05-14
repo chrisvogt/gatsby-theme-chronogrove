@@ -29,6 +29,13 @@ import WidgetHeader from '../widget-header'
 import WidgetItem from './instagram-widget-item'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 
+/** Uniform index in [0, exclusiveMax) using `crypto.getRandomValues` (shuffle for ambient carousel order only). */
+function randomUIntBelow(exclusiveMax) {
+  const buf = new Uint32Array(1)
+  globalThis.crypto.getRandomValues(buf)
+  return buf[0] % exclusiveMax
+}
+
 const MAX_IMAGES = {
   default: 8,
   showMore: 16
@@ -60,11 +67,11 @@ export default () => {
   const carouselProgressRef = useRef({}) // Track {idx: imagesShownCount}
   const carouselDataRef = useRef([]) // Store carousel metadata {idx, totalImages}
 
-  // Fisher-Yates shuffle for true randomness without repeats
+  // Fisher–Yates shuffle for carousel rotation order (no `Math.random`; see randomUIntBelow).
   const shuffleArray = array => {
     const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
+      const j = randomUIntBelow(i + 1)
       ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
     return shuffled
