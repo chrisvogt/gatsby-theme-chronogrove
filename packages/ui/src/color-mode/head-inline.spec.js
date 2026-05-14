@@ -16,7 +16,7 @@ describe('head-inline scripts', () => {
     expect(s).toContain('theme-ui-color-mode')
     expect(s).toContain('localStorage.getItem')
     expect(s).not.toContain('__cgGetCookie')
-    expect(s).toContain('data-theme-ui-color-mode')
+    expect(s).toContain('dataset.themeUiColorMode')
   })
 
   it('embeds cookie merge when crossDomainColorMode.registrableDomain is set', () => {

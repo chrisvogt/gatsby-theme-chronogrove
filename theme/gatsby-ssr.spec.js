@@ -33,7 +33,7 @@ describe('gatsby-ssr', () => {
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(__cgKey\)/)
     expect(colorModeScriptTag).toHaveTextContent(/localStorage\.setItem\(__cgKey,/)
     expect(colorModeScriptTag).toHaveTextContent(/prefers-color-scheme/)
-    expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
+    expect(colorModeScriptTag).toHaveTextContent(/dataset\.themeUiColorMode/)
 
     const { container: htmlBgScriptContainer } = render(headComponents[3])
     const htmlBgScriptTag = htmlBgScriptContainer.querySelector('script')

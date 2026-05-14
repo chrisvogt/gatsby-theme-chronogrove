@@ -195,7 +195,7 @@ describe('gatsby-browser', () => {
 
   describe('onRouteUpdate', () => {
     it('prefers localStorage over DOM so route transitions do not perpetuate wrong paint', () => {
-      document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
+      document.documentElement.dataset.themeUiColorMode = 'dark'
       document.documentElement.classList.add('theme-ui-dark')
       window.localStorage.setItem('theme-ui-color-mode', 'default')
 
@@ -211,7 +211,7 @@ describe('gatsby-browser', () => {
 
     it('falls back to DOM when localStorage is empty', () => {
       window.localStorage.removeItem('theme-ui-color-mode')
-      document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
+      document.documentElement.dataset.themeUiColorMode = 'dark'
       document.documentElement.classList.add('theme-ui-dark')
 
       onRouteUpdate({
@@ -302,7 +302,7 @@ describe('gatsby-browser', () => {
     it('removes stale theme-ui classes before applying the resolved mode', () => {
       window.localStorage.setItem('theme-ui-color-mode', 'default')
       document.documentElement.className = 'theme-ui-dark theme-ui-default app-shell'
-      document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
+      document.documentElement.dataset.themeUiColorMode = 'dark'
 
       onRouteUpdate({
         location: { pathname: '/current', hash: '' },

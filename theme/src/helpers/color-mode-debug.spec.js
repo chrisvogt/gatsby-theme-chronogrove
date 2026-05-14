@@ -115,7 +115,7 @@ describe('color-mode-debug', () => {
 
     it('logs when debug is enabled', () => {
       globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
-      document.documentElement.setAttribute('data-theme-ui-color-mode', 'default')
+      document.documentElement.dataset.themeUiColorMode = 'default'
 
       logColorModeState('default', { colors: { text: '#111', background: '#fdf8f5' } }, 'Test')
 

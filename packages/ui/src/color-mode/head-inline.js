@@ -113,7 +113,7 @@ export function buildThemeUiNoFlashInlineScript(options) {
           htmlElement.classList.remove(classesToRemove[j]);
         }
         htmlElement.classList.add('theme-ui-' + mode);
-        htmlElement.setAttribute('data-theme-ui-color-mode', mode);
+        htmlElement.dataset.themeUiColorMode = mode;
       } catch (e) {}
     })();
   `

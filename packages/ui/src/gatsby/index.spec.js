@@ -30,7 +30,7 @@ describe('@chronogrove/ui/gatsby', () => {
       const colorModeScriptTag = colorModeScriptContainer.querySelector('script')
       expect(colorModeScriptTag).toHaveTextContent(/localStorage\.getItem\(__cgKey\)/)
       expect(colorModeScriptTag.textContent).not.toContain('__cgGetCookie')
-      expect(colorModeScriptTag).toHaveTextContent(/data-theme-ui-color-mode/)
+      expect(colorModeScriptTag).toHaveTextContent(/dataset\.themeUiColorMode/)
 
       const { container: htmlBgScriptContainer } = render(head[1])
       const htmlBgScriptTag = htmlBgScriptContainer.querySelector('script')
