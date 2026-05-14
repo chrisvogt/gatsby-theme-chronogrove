@@ -2,7 +2,7 @@
 
 Minimal **Next.js 16 App Router** app using **`@chronogrove/ui/next`** (`ChronogroveNextRootLayoutHead`, `ChronogroveNextEmotionRegistry`, `ChronogroveNextAppShell`) for Emotion SSR, Theme UI color-mode head scripts, three.js background, and client-side navigation reconcile.
 
-**Package name:** `chronogrove-next` (private workspace package). It is **not** the main site in this repo (that remains **Gatsby** under `www.chrisvogt.me`); it exists to exercise `@chronogrove/ui/next` in CI-friendly source form and to keep Next integration docs honest.
+**Package name:** `chronogrove-next` (private workspace package). It is **not** the main site in this repo (that remains **Gatsby** under `websites/www.chrisvogt.me`); it exists to exercise `@chronogrove/ui/next` in CI-friendly source form and to keep Next integration docs honest.
 
 ## Repository hygiene
 

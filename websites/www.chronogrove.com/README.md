@@ -20,7 +20,7 @@ From the root of the monorepo:
 pnpm develop:theme
 
 # Or run directly from this directory
-cd www.chronogrove.com
+cd websites/www.chronogrove.com
 pnpm develop
 ```
 
@@ -29,7 +29,7 @@ pnpm develop
 If dark/light mode does not update correctly after changing the theme, clear the cache and restart:
 
 ```bash
-cd www.chronogrove.com
+cd websites/www.chronogrove.com
 pnpm run clean
 pnpm develop
 # or in one step:
@@ -54,9 +54,9 @@ The site includes demo widget configurations that point to mock or demo endpoint
 
 ## Development Workflow
 
-1. Make changes to the theme in the `theme/` directory
+1. Make changes to the theme in the **`packages/theme/`** directory
 2. Test changes using this example site
-3. Once satisfied, test the change against the personal site in `www.chrisvogt.me`
+3. Once satisfied, test the change against the personal site in **`websites/www.chrisvogt.me/`**
 4. Commit and push changes
 
 This setup keeps the theme generic and reusable while still giving you a practical place to develop against.

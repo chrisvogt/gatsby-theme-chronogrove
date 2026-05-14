@@ -35,28 +35,31 @@ This is a monorepo using pnpm workspaces and Turborepo:
 ```
 gatsby-theme-chronogrove/
 ├── packages/
-│   └── ui/                   # @chronogrove/ui — Theme UI theme, color-mode, shared primitives
+│   ├── ui/                   # @chronogrove/ui — Theme UI theme, color-mode, shared primitives
+│   │   ├── src/
+│   │   └── package.json
+│   └── theme/                # gatsby-theme-chronogrove (Gatsby theme package)
 │       ├── src/
+│       │   ├── components/   # React components
+│       │   ├── widgets/      # Social media widgets
+│       │   ├── templates/    # Page templates
+│       │   └── ...
+│       ├── scripts/          # Theme-local tooling (e.g. postinstall banner)
+│       └── package.json
+├── websites/
+│   ├── www.chronogrove.com/  # Official demo site
+│   │   ├── content/          # Demo blog posts and content
+│   │   ├── gatsby-config.js
+│   │   └── package.json
+│   └── www.chrisvogt.me/     # Personal website implementation
+│       ├── content/          # Blog posts and content
+│       ├── src/pages/        # Custom pages
+│       ├── gatsby-config.js
 │       └── package.json
 ├── examples/
 │   └── chronogrove-next/     # Next.js 16 App Router reference (optional; not the main Gatsby site)
 │       ├── app/
 │       └── package.json
-├── theme/                    # Gatsby theme package (gatsby-theme-chronogrove)
-│   ├── src/
-│   │   ├── components/       # React components
-│   │   ├── widgets/          # Social media widgets
-│   │   ├── templates/        # Page templates
-│   │   └── ...
-│   └── package.json
-├── www.chronogrove.com/      # Official demo site
-│   ├── content/              # Demo blog posts and content
-│   ├── gatsby-config.js      # Demo site configuration
-│   └── package.json
-├── www.chrisvogt.me/         # Personal website implementation
-│   ├── content/              # Blog posts and content
-│   ├── src/pages/            # Custom pages
-│   └── gatsby-config.js      # Site configuration
 └── package.json              # Root workspace config
 ```
 
@@ -99,12 +102,12 @@ gatsby-theme-chronogrove/
    - Move certificates to the certs directory:
 
      ```bash
-     mkdir -p www.chrisvogt.me/certs
-     mv www.dev-chrisvogt.me-key.pem www.chrisvogt.me/certs/
-     mv www.dev-chrisvogt.me.pem www.chrisvogt.me/certs/
+     mkdir -p websites/www.chrisvogt.me/certs
+     mv www.dev-chrisvogt.me-key.pem websites/www.chrisvogt.me/certs/
+     mv www.dev-chrisvogt.me.pem websites/www.chrisvogt.me/certs/
      ```
 
-4. **If you do not plan to use Google Analytics, remove or comment out the analytics plugin block in `www.chrisvogt.me/gatsby-config.js`:**
+4. **If you do not plan to use Google Analytics, remove or comment out the analytics plugin block in `websites/www.chrisvogt.me/gatsby-config.js`:**
 
    ```
    {
@@ -149,27 +152,27 @@ gatsby-theme-chronogrove/
 
 #### Working on the Theme
 
-The theme code is located in the `/theme` directory. Shared **Theme UI** surface (theme object, color-mode helpers, `ChronogroveThemeProvider`, Button, skip-nav, color toggle) lives in **`packages/ui`** (`@chronogrove/ui`). To work on theme components:
+The theme code lives in **`packages/theme`** (`gatsby-theme-chronogrove`). Shared **Theme UI** surface (theme object, color-mode helpers, `ChronogroveThemeProvider`, Button, skip-nav, color toggle) lives in **`packages/ui`** (`@chronogrove/ui`). To work on theme components:
 
 1. Start the demo site: `pnpm develop:theme`
-2. Make your changes in `theme/src/components/` and/or `packages/ui/src/` as appropriate
+2. Make your changes in `packages/theme/src/components/` and/or `packages/ui/src/` as appropriate
 3. The changes will be reflected in the demo site at `http://localhost:8000`
 
 Run UI package tests only: `pnpm --filter @chronogrove/ui test`
 
 #### Working on Content
 
-**Demo Site Content** (`/www.chronogrove.com`):
+**Demo Site Content** (`websites/www.chronogrove.com/`):
 
-- **Blog posts**: `www.chronogrove.com/content/blog/`
-- **Music posts**: `www.chronogrove.com/content/music/`
-- **Site configuration**: `www.chronogrove.com/gatsby-config.js`
+- **Blog posts**: `websites/www.chronogrove.com/content/blog/`
+- **Music posts**: `websites/www.chronogrove.com/content/music/`
+- **Site configuration**: `websites/www.chronogrove.com/gatsby-config.js`
 
-**Personal Site Content** (`/www.chrisvogt.me`):
+**Personal Site Content** (`websites/www.chrisvogt.me/`):
 
-- **Blog posts**: `www.chrisvogt.me/content/blog/`
-- **Custom pages**: `www.chrisvogt.me/src/pages/`
-- **Site configuration**: `www.chrisvogt.me/gatsby-config.js`
+- **Blog posts**: `websites/www.chrisvogt.me/content/blog/`
+- **Custom pages**: `websites/www.chrisvogt.me/src/pages/`
+- **Site configuration**: `websites/www.chrisvogt.me/gatsby-config.js`
 
 4. **Start HTTPS development**:
    ```bash
@@ -225,7 +228,7 @@ module.exports = {
 }
 ```
 
-See the [mock data examples](theme/__mocks__/) for expected API response formats.
+See the [mock data examples](packages/theme/__mocks__/) for expected API response formats.
 
 ## 🧪 Testing
 
@@ -272,7 +275,9 @@ pnpm --filter www.chronogrove.com build
 pnpm --filter chronogrove-next build
 ```
 
-The Gatsby build outputs will be in `/www.chrisvogt.me/public` and `/www.chronogrove.com/public` respectively. The Next example writes to `examples/chronogrove-next/.next` (gitignored).
+The Gatsby build outputs are `websites/www.chrisvogt.me/public` and `websites/www.chronogrove.com/public` (relative to the repo root). The Next example writes to `examples/chronogrove-next/.next` (gitignored).
+
+**Netlify / static hosts:** If the site root is the monorepo, set **publish directory** to `websites/www.chrisvogt.me/public` (or `public` when **base directory** is `websites/www.chrisvogt.me`).
 
 ### Testing Production Build
 
@@ -282,8 +287,8 @@ To test the production build locally:
 # Install http-server globally
 npm install -g http-server
 
-# Serve the build with HTTPS
-http-server -o -S -C ../certs/www.chrisvogt.me.pem -K ../certs/www.chrisvogt.me-key.pem -a www.chrisvogt.me -p 443
+# Serve the build with HTTPS (use the same cert/key filenames as in develop:https)
+http-server -o -S -C websites/www.chrisvogt.me/certs/www.dev-chrisvogt.me.pem -K websites/www.chrisvogt.me/certs/www.dev-chrisvogt.me-key.pem -a www.dev-chrisvogt.me -p 443
 ```
 
 ## 🤝 Contributing
@@ -296,10 +301,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the pull request process, PR title 
 
 - **[`@chronogrove/ui`](packages/ui/README.md)**: Shared Theme UI layer, color-mode helpers, Gatsby helpers (`@chronogrove/ui/gatsby`), and **Next.js App Router** helpers (`@chronogrove/ui/next`)
 - **[Next.js example](examples/chronogrove-next/README.md)**: App Router reference (`chronogrove-next`): `@chronogrove/ui/next` shell plus [`home-showcase.jsx`](examples/chronogrove-next/app/home-showcase.jsx) demonstrating the same `@chronogrove/ui` primitives as the Gatsby theme (widgets, layout, controls)
-- **[Theme Documentation](theme/README.md)**: Detailed theme configuration and customization
-- **[Demo Site Documentation](www.chronogrove.com/README.md)**: Demo site setup and usage
-- **[Widget Documentation](theme/src/components/widgets/)**: Individual widget documentation
-- **[API Examples](theme/__mocks__/)**: Mock data examples for widget APIs
+- **[Theme Documentation](packages/theme/README.md)**: Detailed theme configuration and customization
+- **[Demo Site Documentation](websites/www.chronogrove.com/README.md)**: Demo site setup and usage
+- **[Widget Documentation](packages/theme/src/components/widgets/)**: Individual widget documentation
+- **[API Examples](packages/theme/__mocks__/)**: Mock data examples for widget APIs
 
 ## 🐛 Troubleshooting
 
@@ -320,7 +325,7 @@ lsof -ti:8000 | xargs kill
 
 **SSL certificate errors**
 
-- Ensure certificates are in the correct location: `www.chrisvogt.me/certs/`
+- Ensure certificates are in the correct location: `websites/www.chrisvogt.me/certs/`
 - Verify certificate names match expected format
 - Check that mkcert is properly installed
 

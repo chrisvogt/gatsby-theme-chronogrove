@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.91.5
+
+### Repository layout — `packages/theme`, `websites/*`, theme-local scripts
+
+- **Workspace**: Gatsby theme source moved from repo-root **`theme/`** to **`packages/theme/`** (npm package remains **`gatsby-theme-chronogrove`**). Both Gatsby sites live under **`websites/www.chrisvogt.me/`** and **`websites/www.chronogrove.com/`**. Root **`scripts/postinstall-banner.mjs`** moved to **`packages/theme/scripts/postinstall-banner.mjs`**; root **`postinstall`** runs it from that path.
+- **`pnpm-workspace.yaml`**: **`websites/*`** replaces explicit per-site entries; **`packages/*`** picks up **`packages/theme`**.
+- **`gatsby-node.js`**: Page templates resolve with **`path.join(__dirname, 'src/templates/...')`** so layout no longer depends on site **`cwd`**.
+- **Docs / CI**: Root **`README.md`**, **`CONTRIBUTING.md`**, **`packages/ui/README.md`**, **`docs/dependency-overrides.md`**, demo **`README`**, **`.cursorrules`**, and GitHub Actions path filters updated for the new tree. **Netlify**: publish directory **`websites/www.chrisvogt.me/public`** (or **`public`** when base directory is the site folder).
+- **Published npm packages**: No API or dependency changes for consumers of **`gatsby-theme-chronogrove`** or **`@chronogrove/ui`** from npm; this release aligns repo metadata and patch versions after the move.
+- **Versions**: **`gatsby-theme-chronogrove` 0.91.5**, **`@chronogrove/ui` 0.85.4**, **`www.chrisvogt.me` 1.22.4**, **`www.chronogrove.com` 1.9.4**
+
+### Files changed (high level)
+
+- `pnpm-workspace.yaml`, root `package.json`, `eslint.config.js`
+- `packages/theme/**` (incl. `scripts/postinstall-banner.mjs`, `babel.config.js`, `jest.config.js`, `gatsby-node.js`, specs, `README.md`)
+- `websites/www.chrisvogt.me/**`, `websites/www.chronogrove.com/**`
+- `.github/workflows/ci.yml`, `deploy-chronogrove-website.yml`, `publish.yml`
+- `README.md`, `CONTRIBUTING.md`, `.cursorrules`, `docs/dependency-overrides.md`, `packages/ui/README.md`, `packages/ui/src/color-mode/use-document-color-mode-surface.js`, `packages/ui/src/action-card-layout.js`
+- `pnpm-lock.yaml`
+
+---
+
 ## 0.91.4
 
 ### `gatsby-theme-chronogrove` — `dataset` for `data-*` DOM writes

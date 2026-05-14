@@ -462,7 +462,7 @@ exports.shouldUpdateScroll = themeBrowser.shouldUpdateScroll
 
 **Scroll position:** The theme’s **`shouldUpdateScroll`** always returns **`false`** so **`gatsby-react-router-scroll`** does not replay a saved scroll offset (which could open a new page mid-viewport). **`onRouteUpdate`** scrolls to the top and focuses skip-nav content instead.
 
-See [www.chronogrove.com/gatsby-browser.js](https://github.com/chrisvogt/gatsby-theme-chronogrove/blob/main/www.chronogrove.com/gatsby-browser.js) in the repo for the canonical example.
+See [www.chronogrove.com/gatsby-browser.js](https://github.com/chrisvogt/gatsby-theme-chronogrove/blob/main/websites/www.chronogrove.com/gatsby-browser.js) in the repo for the canonical example.
 
 Global CSS and Prism styles load via the theme's `gatsby-browser.js`. For how the same layer works in Next.js, and for font-loading guidance that applies to both hosts, see **[Global CSS, Prism / third-party CSS, and fonts](../../packages/ui/README.md#global-css-prism--third-party-css-and-fonts)** in `packages/ui/README.md`.
 
@@ -470,7 +470,7 @@ Global CSS and Prism styles load via the theme's `gatsby-browser.js`. For how th
 
 ## 🤝 Contributing
 
-Pull requests are welcome. See [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for the contribution flow, PR title format, and CI expectations.
+Pull requests are welcome. See [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md) for the contribution flow, PR title format, and CI expectations.
 
 ## 📄 License
 

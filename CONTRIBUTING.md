@@ -62,15 +62,15 @@ If your PR comes from a fork, it is normal for some checks to wait on maintainer
 
 ## `@chronogrove/ui`: Gatsby shims versus direct imports
 
-Shared presentation lives in **`packages/ui`** (`@chronogrove/ui`). The Gatsby theme (**`theme/`**) often exposes it through **thin files** that only re-export that package—for example `theme/src/components/button.js` → `@chronogrove/ui/button`.
+Shared presentation lives in **`packages/ui`** (`@chronogrove/ui`). The Gatsby theme (**`packages/theme`**, published as **`gatsby-theme-chronogrove`**) often exposes it through **thin files** that only re-export that package—for example `packages/theme/src/components/button.js` → `@chronogrove/ui/button`.
 
 **Why:** [Gatsby theme shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/theme-shadowing/) lets a consumer site override theme files by matching paths under the installed theme. Imports that go through those shim paths keep overrides predictable.
 
 **When you change or add UI:**
 
-- **Portable components and tokens** — implement in **`packages/ui`**, extend **`package.json` `exports`**, and add tests there. In **`theme/`**, wire a **one-line re-export** at the usual import path when other theme code (or shadowing) expects it.
+- **Portable components and tokens** — implement in **`packages/ui`**, extend **`package.json` `exports`**, and add tests there. In **`packages/theme`**, wire a **one-line re-export** at the usual import path when other theme code (or shadowing) expects it.
 - **Next.js reference app** (`examples/chronogrove-next`) — import **`@chronogrove/ui/...`** subpaths directly; there is no Gatsby shadow layer.
-- **Avoid** copying the same markup into **`theme/`** when it could live in **`packages/ui`** (unless it is truly Gatsby-specific).
+- **Avoid** copying the same markup into **`packages/theme`** when it could live in **`packages/ui`** (unless it is truly Gatsby-specific).
 
 ## Questions
 
