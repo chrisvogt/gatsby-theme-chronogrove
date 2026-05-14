@@ -7,7 +7,7 @@ import { resolveThemeUiColorMode, scheduleThemeUiColorModeSync, syncThemeUiColor
 describe('resolveThemeUiColorMode', () => {
   beforeEach(() => {
     document.documentElement.className = ''
-    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    delete document.documentElement.dataset.themeUiColorMode
     window.localStorage.clear()
     window.matchMedia = jest.fn(() => ({
       matches: false,
@@ -72,7 +72,7 @@ describe('resolveThemeUiColorMode', () => {
 describe('syncThemeUiColorMode', () => {
   beforeEach(() => {
     document.documentElement.className = ''
-    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    delete document.documentElement.dataset.themeUiColorMode
     window.localStorage.clear()
     window.matchMedia = jest.fn(() => ({
       matches: false,

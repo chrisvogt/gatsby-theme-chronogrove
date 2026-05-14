@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.91.7
+
+### `gatsby-theme-chronogrove` — Sonar maintainability (complexity, tests)
+
+- **Home navigation** (`home-navigation.js`): Extracted hash-link click handling and icon resolution from **`HomeNavRailLink`** to satisfy cognitive complexity limits.
+- **Discogs** (`discogs-modal.js`): Focus, keyboard navigation, and body scroll-lock are **`useDiscogsModal*`** hooks; cover and tracklist markup live in **`DiscogsModalCoverSection`** and **`DiscogsModalTracklistSection`**.
+- **Vinyl collection** (`vinyl-collection.js`): Breakpoint index, pagination page list, and grid hover-clear timing use module helpers (**`vinylBreakpointIndexForWidth`**, **`buildVinylCollectionPages`**, **`scheduleVinylGridHoverClear`**) to reduce complexity and nested callbacks.
+- **AI summary** (`ai-summary-synced-at.js`): Firestore-style **`seconds`** handling moved to **`tryFormatAiSummaryFirestoreSeconds`**.
+- **Tests**: Theme and UI color-mode specs clear **`data-theme-ui-color-mode`** with **`delete document.documentElement.dataset.themeUiColorMode`** instead of **`removeAttribute`**.
+- **Versions**: **`gatsby-theme-chronogrove` 0.91.7**; **`www.chrisvogt.me` 1.22.6**; **`@chronogrove/ui`** unchanged (spec-only edits).
+
+### `www.chrisvogt.me`
+
+- **Career path** (`CareerPathVisualization.js`): Label placement and collision adjustment moved to module helpers. **`CareerPathVisualization.spec.js`** builds the D3 mock with a short chain instead of deeply nested **`jest.fn`** wrappers.
+
+### Files changed (high level)
+
+- `CHANGELOG.md`
+- `packages/theme/package.json` (version **0.91.7**)
+- `packages/theme/gatsby-browser.spec.js`, `packages/theme/src/components/root-wrapper.spec.js`
+- `packages/theme/src/components/home-navigation.js`
+- `packages/theme/src/components/widgets/discogs/discogs-modal.js`, `vinyl-collection.js`
+- `packages/theme/src/helpers/ai-summary-synced-at.js`
+- `packages/ui/src/color-mode/browser-sync.spec.js`, `spa-navigation.spec.js`, `use-document-color-mode-surface.spec.js`, `packages/ui/src/gatsby/index.spec.js`
+- `websites/www.chrisvogt.me/package.json` (version **1.22.6**), `components/CareerPathVisualization.js`, `components/CareerPathVisualization.spec.js`
+
+---
+
 ## 0.91.6
 
 ### `gatsby-theme-chronogrove` — Widget CTAs from metrics profile data (#606)

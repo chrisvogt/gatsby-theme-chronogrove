@@ -31,7 +31,7 @@ function expectHtmlDatasetThemeUiColorMode(mode) {
 describe('useDocumentColorModeSurface', () => {
   beforeEach(() => {
     document.documentElement.className = 'theme-ui-stale'
-    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    delete document.documentElement.dataset.themeUiColorMode
     document.documentElement.style.backgroundColor = ''
     window.localStorage.removeItem('theme-ui-color-mode')
   })
@@ -114,7 +114,7 @@ describe('useDocumentColorModeSurface', () => {
     })
     expectHtmlDatasetThemeUiColorMode('default')
 
-    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    delete document.documentElement.dataset.themeUiColorMode
     act(() => {
       applyDocumentColorModeSurface(undefined, baseTheme, resolveChronogroveSurfaceColors(baseTheme))
     })

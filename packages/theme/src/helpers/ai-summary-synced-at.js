@@ -24,6 +24,29 @@ export function pickAiSummarySyncedAtRaw(payload) {
   )
 }
 
+function formatWithMediumDate(d) {
+  try {
+    return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(d)
+  } catch {
+    return null
+  }
+}
+
+/**
+ * @param {unknown} raw
+ * @returns {string|null|undefined} formatted label, null if invalid seconds object, undefined if not a Firestore seconds shape
+ */
+function tryFormatAiSummaryFirestoreSeconds(raw) {
+  if (typeof raw !== 'object' || raw === null || !('seconds' in raw)) {
+    return undefined
+  }
+  const sec = /** @type {{ seconds?: number }} */ (raw).seconds
+  if (typeof sec === 'number' && Number.isFinite(sec)) {
+    return formatWithMediumDate(new Date(sec * 1000))
+  }
+  return null
+}
+
 /**
  * @param {unknown} raw ISO string, unix ms/seconds, Date, or Firestore-style `{ seconds }`
  * @returns {string|null} medium date in the visitor's locale, or null if unparseable
@@ -38,12 +61,9 @@ export function formatAiSummarySyncedLabel(raw) {
     return Number.isNaN(t) ? null : formatWithMediumDate(new Date(t))
   }
 
-  if (typeof raw === 'object' && raw !== null && 'seconds' in raw) {
-    const sec = /** @type {{ seconds?: number }} */ (raw).seconds
-    if (typeof sec === 'number' && Number.isFinite(sec)) {
-      return formatWithMediumDate(new Date(sec * 1000))
-    }
-    return null
+  const firestoreLabel = tryFormatAiSummaryFirestoreSeconds(raw)
+  if (firestoreLabel !== undefined) {
+    return firestoreLabel
   }
 
   if (typeof raw === 'number' && Number.isFinite(raw)) {
@@ -57,12 +77,4 @@ export function formatAiSummarySyncedLabel(raw) {
   }
 
   return null
-}
-
-function formatWithMediumDate(d) {
-  try {
-    return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(d)
-  } catch {
-    return null
-  }
 }

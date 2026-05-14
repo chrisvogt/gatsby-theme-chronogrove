@@ -38,7 +38,7 @@ beforeEach(() => {
   })
   window.localStorage.removeItem('theme-ui-color-mode')
   document.documentElement.className = ''
-  document.documentElement.removeAttribute('data-theme-ui-color-mode')
+  delete document.documentElement.dataset.themeUiColorMode
 })
 
 function expectHtmlDatasetThemeUiColorMode(mode) {
@@ -225,7 +225,7 @@ describe('gatsby-browser', () => {
 
     it('falls back to theme-ui-* class when localStorage and data attribute are empty', () => {
       window.localStorage.removeItem('theme-ui-color-mode')
-      document.documentElement.removeAttribute('data-theme-ui-color-mode')
+      delete document.documentElement.dataset.themeUiColorMode
       document.documentElement.classList.add('theme-ui-dark')
 
       onRouteUpdate({

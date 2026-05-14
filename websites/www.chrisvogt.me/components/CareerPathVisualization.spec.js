@@ -4,31 +4,22 @@ import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
 import CareerPathVisualization from './CareerPathVisualization'
 
-// Mock D3.js with more comprehensive mock
-jest.mock('d3', () => ({
-  select: jest.fn(() => ({
-    selectAll: jest.fn(() => ({
-      remove: jest.fn(),
-      data: jest.fn(() => ({
-        enter: jest.fn(() => ({
-          append: jest.fn(() => ({
-            attr: jest.fn(() => ({
-              attr: jest.fn(() => ({
-                attr: jest.fn(() => ({
-                  style: jest.fn(() => ({
-                    style: jest.fn(() => ({
-                      style: jest.fn(() => ({
-                        text: jest.fn()
-                      }))
-                    }))
-                  }))
-                }))
-              }))
-            }))
-          }))
-        }))
-      }))
-    })),
+function buildD3SelectAllDataEnterChain() {
+  let inner = { text: jest.fn() }
+  for (const key of ['style', 'style', 'style', 'attr', 'attr', 'attr']) {
+    inner = { [key]: jest.fn(() => inner) }
+  }
+  const appendChain = { append: jest.fn(() => inner) }
+  const enterChain = { enter: jest.fn(() => appendChain) }
+  return {
+    remove: jest.fn(),
+    data: jest.fn(() => enterChain)
+  }
+}
+
+function createChainableD3SelectMock() {
+  return {
+    selectAll: jest.fn(() => buildD3SelectAllDataEnterChain()),
     attr: jest.fn(function () {
       return this
     }),
@@ -38,7 +29,19 @@ jest.mock('d3', () => ({
     append: jest.fn(function () {
       return this
     })
-  })),
+  }
+}
+
+function mockD3ScaleLinear() {
+  const range = jest.fn(() => jest.fn(d => d * 100))
+  return {
+    domain: jest.fn(() => ({ range }))
+  }
+}
+
+// Mock D3.js with more comprehensive mock
+jest.mock('d3', () => ({
+  select: jest.fn(() => createChainableD3SelectMock()),
   hierarchy: jest.fn(() => ({
     descendants: jest.fn(() => [
       {
@@ -90,11 +93,7 @@ jest.mock('d3', () => ({
       return this
     })
   })),
-  scaleLinear: jest.fn(() => ({
-    domain: jest.fn(() => ({
-      range: jest.fn(() => d => d * 100) // Simple mock scale function
-    }))
-  })),
+  scaleLinear: jest.fn(() => mockD3ScaleLinear()),
   linkVertical: jest.fn(() => ({
     x: jest.fn(() => ({
       y: jest.fn()

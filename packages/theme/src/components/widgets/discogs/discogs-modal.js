@@ -20,32 +20,35 @@ function formatCollectionAddedLocal(ms) {
   }
 }
 
-const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelease }) => {
-  const { colorMode } = useThemeUI()
-  const darkMode = isDarkMode(colorMode)
-  const modalRef = useRef(null)
-  const previousActiveElement = useRef(null)
-  const [imageLoaded, setImageLoaded] = useState(false)
+function discogsModalTargetIgnoresArrowKeys(el) {
+  const tag = el?.tagName
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true
+  return Boolean(el?.closest?.('[contenteditable="true"]'))
+}
 
-  // Reset image load state when release/cover changes
-  const coverImageUrl = release?.basicInformation?.cdnCoverUrl || release?.basicInformation?.coverImage
-  useEffect(() => {
-    setImageLoaded(false)
-  }, [coverImageUrl])
+function canBrowseDiscogsReleasesWithArrows(onSelectRelease, orderedReleases, release) {
+  return (
+    typeof onSelectRelease === 'function' &&
+    Array.isArray(orderedReleases) &&
+    orderedReleases.length >= 2 &&
+    Boolean(release)
+  )
+}
 
-  // Focus dialog when opening; restore focus only when closing (not when release changes while open)
+function useDiscogsModalFocus(isOpen, modalRef, previousActiveElementRef) {
   useEffect(() => {
     if (isOpen) {
-      previousActiveElement.current = document.activeElement
+      previousActiveElementRef.current = document.activeElement
       queueMicrotask(() => {
         modalRef.current?.focus()
       })
     } else {
-      previousActiveElement.current?.focus?.()
+      previousActiveElementRef.current?.focus?.()
     }
   }, [isOpen])
+}
 
-  // Escape, ArrowLeft / ArrowRight (browse collection in current sort order)
+function useDiscogsModalKeyboard(isOpen, onClose, release, orderedReleases, onSelectRelease) {
   useEffect(() => {
     if (!isOpen) return
 
@@ -57,18 +60,11 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
 
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
 
-      if (
-        typeof onSelectRelease !== 'function' ||
-        !Array.isArray(orderedReleases) ||
-        orderedReleases.length < 2 ||
-        !release
-      ) {
+      if (!canBrowseDiscogsReleasesWithArrows(onSelectRelease, orderedReleases, release)) {
         return
       }
 
-      const el = e.target
-      const tag = el?.tagName
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el?.closest?.('[contenteditable="true"]')) {
+      if (discogsModalTargetIgnoresArrowKeys(e.target)) {
         return
       }
 
@@ -86,8 +82,9 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [isOpen, onClose, release, orderedReleases, onSelectRelease])
+}
 
-  // Prevent body scroll when modal is open
+function useDiscogsModalBodyScrollLock(isOpen) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -99,6 +96,164 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
+}
+
+function DiscogsModalCoverSection({ coverImageUrl, title, darkMode, imageLoaded, setImageLoaded, insetSurface }) {
+  if (!coverImageUrl) {
+    return (
+      <div
+        sx={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: insetSurface,
+          borderRadius: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: darkMode ? '#a0aec0' : '#718096',
+          fontSize: 1
+        }}
+      >
+        No Image Available
+      </div>
+    )
+  }
+
+  return (
+    <Fragment>
+      {!imageLoaded && (
+        <div
+          className='show-loading-animation'
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: 2,
+            overflow: 'hidden'
+          }}
+        >
+          <RectShape
+            color={darkMode ? '#3a3a4a' : '#efefef'}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '8px'
+            }}
+          />
+        </div>
+      )}
+      <Themed.img
+        src={coverImageUrl}
+        alt={`${title} album cover`}
+        onLoad={() => setImageLoaded(true)}
+        sx={{
+          position: 'relative',
+          maxWidth: '100%',
+          maxHeight: '100%',
+          width: 'auto',
+          height: 'auto',
+          borderRadius: 2,
+          boxShadow: 'lg',
+          objectFit: 'contain',
+          opacity: imageLoaded ? 1 : 0,
+          transition: 'opacity 0.2s ease-in-out'
+        }}
+      />
+    </Fragment>
+  )
+}
+
+function DiscogsModalTracklistSection({
+  tracklist,
+  darkMode,
+  listPanelBorder,
+  insetSurface,
+  insetHeaderBg,
+  insetRule
+}) {
+  if (!tracklist?.length) return null
+
+  return (
+    <div sx={{ mt: 4 }}>
+      <Themed.h3 sx={{ margin: 0, fontSize: 3, mb: 3 }}>Tracklist</Themed.h3>
+      <div
+        sx={{
+          backgroundColor: insetSurface,
+          borderRadius: 2,
+          overflow: 'hidden',
+          border: '1px solid',
+          borderColor: listPanelBorder
+        }}
+      >
+        <div
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'auto minmax(0, 1fr) auto',
+            gap: 2,
+            padding: 3,
+            backgroundColor: insetHeaderBg,
+            borderBottom: '1px solid',
+            borderBottomColor: insetRule,
+            fontSize: 1,
+            fontWeight: 'bold',
+            color: darkMode ? '#a0aec0' : '#718096'
+          }}
+        >
+          <div>Position</div>
+          <div sx={{ minWidth: 0 }}>Title</div>
+          <div>Duration</div>
+        </div>
+        {tracklist.map((track, index) => (
+          <div
+            key={`${String(track.position ?? '—')}-${String(track.title ?? '')}-${index}`}
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'auto minmax(0, 1fr) auto',
+              gap: 2,
+              padding: 3,
+              borderBottom: index < tracklist.length - 1 ? '1px solid' : 'none',
+              borderBottomColor: insetRule,
+              fontSize: 1,
+              minWidth: 0,
+              '&:hover': {
+                backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.035)'
+              }
+            }}
+          >
+            <div sx={{ fontWeight: 'bold', color: darkMode ? '#e2e8f0' : '#2d3748' }}>{track.position || '—'}</div>
+            <div
+              sx={{
+                color: darkMode ? '#e2e8f0' : '#2d3748',
+                minWidth: 0,
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word'
+              }}
+            >
+              {track.title || 'Unknown Title'}
+            </div>
+            <div sx={{ color: darkMode ? '#a0aec0' : '#718096', textAlign: 'right' }}>{track.duration || '—'}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelease }) => {
+  const { colorMode } = useThemeUI()
+  const darkMode = isDarkMode(colorMode)
+  const modalRef = useRef(null)
+  const previousActiveElement = useRef(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  // Reset image load state when release/cover changes
+  const coverImageUrl = release?.basicInformation?.cdnCoverUrl || release?.basicInformation?.coverImage
+  useEffect(() => {
+    setImageLoaded(false)
+  }, [coverImageUrl])
+
+  useDiscogsModalFocus(isOpen, modalRef, previousActiveElement)
+  useDiscogsModalKeyboard(isOpen, onClose, release, orderedReleases, onSelectRelease)
+  useDiscogsModalBodyScrollLock(isOpen)
 
   if (!isOpen || !release) return null
 
@@ -300,64 +455,14 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
                 flexShrink: 0
               }}
             >
-              {coverImageUrl ? (
-                <Fragment>
-                  {/* Skeleton shown until image loads */}
-                  {!imageLoaded && (
-                    <div
-                      className='show-loading-animation'
-                      sx={{
-                        position: 'absolute',
-                        inset: 0,
-                        borderRadius: 2,
-                        overflow: 'hidden'
-                      }}
-                    >
-                      <RectShape
-                        color={darkMode ? '#3a3a4a' : '#efefef'}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          borderRadius: '8px'
-                        }}
-                      />
-                    </div>
-                  )}
-                  <Themed.img
-                    src={coverImageUrl}
-                    alt={`${title} album cover`}
-                    onLoad={() => setImageLoaded(true)}
-                    sx={{
-                      position: 'relative',
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      width: 'auto',
-                      height: 'auto',
-                      borderRadius: 2,
-                      boxShadow: 'lg',
-                      objectFit: 'contain',
-                      opacity: imageLoaded ? 1 : 0,
-                      transition: 'opacity 0.2s ease-in-out'
-                    }}
-                  />
-                </Fragment>
-              ) : (
-                <div
-                  sx={{
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: insetSurface,
-                    borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: darkMode ? '#a0aec0' : '#718096',
-                    fontSize: 1
-                  }}
-                >
-                  No Image Available
-                </div>
-              )}
+              <DiscogsModalCoverSection
+                coverImageUrl={coverImageUrl}
+                title={title}
+                darkMode={darkMode}
+                imageLoaded={imageLoaded}
+                setImageLoaded={setImageLoaded}
+                insetSurface={insetSurface}
+              />
             </div>
 
             {/* Details */}
@@ -402,75 +507,14 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
             </div>
           </div>
 
-          {/* Tracklist */}
-          {tracklist && tracklist.length > 0 && (
-            <div sx={{ mt: 4 }}>
-              <Themed.h3 sx={{ margin: 0, fontSize: 3, mb: 3 }}>Tracklist</Themed.h3>
-              <div
-                sx={{
-                  backgroundColor: insetSurface,
-                  borderRadius: 2,
-                  overflow: 'hidden',
-                  border: '1px solid',
-                  borderColor: listPanelBorder
-                }}
-              >
-                <div
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: 'auto minmax(0, 1fr) auto',
-                    gap: 2,
-                    padding: 3,
-                    backgroundColor: insetHeaderBg,
-                    borderBottom: '1px solid',
-                    borderBottomColor: insetRule,
-                    fontSize: 1,
-                    fontWeight: 'bold',
-                    color: darkMode ? '#a0aec0' : '#718096'
-                  }}
-                >
-                  <div>Position</div>
-                  <div sx={{ minWidth: 0 }}>Title</div>
-                  <div>Duration</div>
-                </div>
-                {tracklist.map((track, index) => (
-                  <div
-                    key={`${String(track.position ?? '—')}-${String(track.title ?? '')}-${index}`}
-                    sx={{
-                      display: 'grid',
-                      gridTemplateColumns: 'auto minmax(0, 1fr) auto',
-                      gap: 2,
-                      padding: 3,
-                      borderBottom: index < tracklist.length - 1 ? '1px solid' : 'none',
-                      borderBottomColor: insetRule,
-                      fontSize: 1,
-                      minWidth: 0,
-                      '&:hover': {
-                        backgroundColor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.035)'
-                      }
-                    }}
-                  >
-                    <div sx={{ fontWeight: 'bold', color: darkMode ? '#e2e8f0' : '#2d3748' }}>
-                      {track.position || '—'}
-                    </div>
-                    <div
-                      sx={{
-                        color: darkMode ? '#e2e8f0' : '#2d3748',
-                        minWidth: 0,
-                        overflowWrap: 'break-word',
-                        wordBreak: 'break-word'
-                      }}
-                    >
-                      {track.title || 'Unknown Title'}
-                    </div>
-                    <div sx={{ color: darkMode ? '#a0aec0' : '#718096', textAlign: 'right' }}>
-                      {track.duration || '—'}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <DiscogsModalTracklistSection
+            tracklist={tracklist}
+            darkMode={darkMode}
+            listPanelBorder={listPanelBorder}
+            insetSurface={insetSurface}
+            insetHeaderBg={insetHeaderBg}
+            insetRule={insetRule}
+          />
 
           {/* Action buttons */}
           <div

@@ -41,6 +41,25 @@ function homeNavIconSlugToReactIcon(slug) {
   return `fa${slug.charAt(0).toUpperCase() + slug.slice(1)}`
 }
 
+function handleHomeNavRailHashClick(e, { id, href }) {
+  e.preventDefault()
+  window.history.pushState(null, '', href)
+  if (id === 'home' || href === '#top') {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    const topSection = document.getElementById('top')
+    if (topSection && typeof topSection.focus === 'function') {
+      topSection.focus({ preventScroll: true })
+    }
+  } else {
+    scrollToElementWhenReady(href)
+  }
+}
+
+function resolveHomeNavRailIcon(icon) {
+  const key = icon?.reactIcon
+  return key && icons[key] ? icons[key] : null
+}
+
 // Badge sizes
 const BADGE_ACTIVE = 44
 const BADGE_IDLE = 34
@@ -86,7 +105,7 @@ function HomeNavRailLink({
   text
 }) {
   const isActive = activeSection === id
-  const IconComponent = icon?.reactIcon && icons[icon.reactIcon] ? icons[icon.reactIcon] : null
+  const IconComponent = resolveHomeNavRailIcon(icon)
   const badgeSize = isActive ? BADGE_ACTIVE : BADGE_IDLE
 
   const itemContent = (
@@ -173,23 +192,7 @@ function HomeNavRailLink({
   }
 
   return isHashLink(href) ? (
-    <a
-      {...commonProps}
-      href={href}
-      onClick={e => {
-        e.preventDefault()
-        window.history.pushState(null, '', href)
-        if (id === 'home' || href === '#top') {
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-          const topSection = document.getElementById('top')
-          if (topSection && typeof topSection.focus === 'function') {
-            topSection.focus({ preventScroll: true })
-          }
-        } else {
-          scrollToElementWhenReady(href)
-        }
-      }}
-    >
+    <a {...commonProps} href={href} onClick={e => handleHomeNavRailHashClick(e, { id, href })}>
       {itemContent}
     </a>
   ) : (
