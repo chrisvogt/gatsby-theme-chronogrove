@@ -62,6 +62,67 @@ const mockGetNode = jest.fn()
 // Import the functions to test
 const gatsbyNode = require('./gatsby-node')
 
+class ESLintWebpackPlugin {
+  constructor() {}
+}
+
+describe('onCreateWebpackConfig', () => {
+  const replaceWebpackConfig = jest.fn()
+
+  beforeEach(() => {
+    replaceWebpackConfig.mockClear()
+  })
+
+  it('merges Theme UI aliases into object resolve.alias and strips ESLintWebpackPlugin', () => {
+    const otherPlugin = { constructor: { name: 'OtherPlugin' } }
+    const config = {
+      plugins: [otherPlugin, new ESLintWebpackPlugin()],
+      resolve: {
+        alias: { 'existing-alias': '/abs/existing' }
+      }
+    }
+    const getConfig = jest.fn(() => config)
+
+    gatsbyNode.onCreateWebpackConfig({ actions: { replaceWebpackConfig }, getConfig })
+
+    expect(config.plugins).toEqual([otherPlugin])
+    expect(replaceWebpackConfig).toHaveBeenCalledTimes(1)
+    const out = replaceWebpackConfig.mock.calls[0][0]
+    expect(out.resolve.alias['existing-alias']).toBe('/abs/existing')
+    expect(out.resolve.alias['theme-ui']).toMatch(/[/\\]theme-ui$/)
+    expect(out.resolve.alias['@theme-ui/color-modes']).toMatch(/[/\\]color-modes$/)
+    expect(out.resolve.alias['@emotion/react']).toMatch(/[/\\]react$/)
+    expect(out.resolve.alias['gatsby-plugin-theme-ui']).toMatch(/[/\\]gatsby-plugin-theme-ui$/)
+  })
+
+  it('appends Theme UI aliases when resolve.alias is a webpack array', () => {
+    const aliasArr = [{ name: 'x', alias: '/x' }]
+    const config = {
+      plugins: [],
+      resolve: { alias: aliasArr }
+    }
+    const getConfig = jest.fn(() => config)
+
+    gatsbyNode.onCreateWebpackConfig({ actions: { replaceWebpackConfig }, getConfig })
+
+    const out = replaceWebpackConfig.mock.calls[0][0]
+    expect(out.resolve.alias).toBe(aliasArr)
+    const themeUiEntry = aliasArr.find(a => a.name === 'theme-ui')
+    expect(themeUiEntry.alias).toMatch(/theme-ui$/)
+    expect(aliasArr.some(a => a.name === '@theme-ui/mdx')).toBe(true)
+  })
+
+  it('initializes resolve and object alias when missing', () => {
+    const config = { plugins: [] }
+    const getConfig = jest.fn(() => config)
+
+    gatsbyNode.onCreateWebpackConfig({ actions: { replaceWebpackConfig }, getConfig })
+
+    const out = replaceWebpackConfig.mock.calls[0][0]
+    expect(out.resolve.alias['theme-ui']).toBeDefined()
+  })
+})
+
 describe('gatsby-node', () => {
   beforeEach(() => {
     jest.clearAllMocks()
