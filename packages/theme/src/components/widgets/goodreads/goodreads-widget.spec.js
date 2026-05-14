@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import GoodreadsWidget from './goodreads-widget'
 import { TestProviderWithQuery } from '../../../testUtils'
@@ -214,6 +214,51 @@ describe('Goodreads Widget', () => {
     )
 
     expect(getByTestId('user-status')).toBeInTheDocument()
+  })
+
+  it('prefers metrics API profile.profileURL for the Visit Profile CTA', () => {
+    useWidgetData.mockReturnValue({
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        profile: {
+          ...mockSuccessState.data.profile,
+          profileURL: 'https://www.goodreads.com/user/show/999-synced-profile'
+        }
+      }
+    })
+
+    render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    const cta = screen.getByText('Visit Profile')
+    expect(cta.closest('a')).toHaveAttribute('href', 'https://www.goodreads.com/user/show/999-synced-profile')
+    expect(cta.closest('a')).toHaveAttribute('title', 'Test User on Goodreads')
+  })
+
+  it('uses profile.link for Visit Profile when profileURL is omitted (live API shape)', () => {
+    useWidgetData.mockReturnValue({
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        profile: {
+          ...mockSuccessState.data.profile,
+          link: 'https://www.goodreads.com/user/show/10454947-chris-vogt'
+        }
+      }
+    })
+
+    render(
+      <TestProviderWithQuery>
+        <GoodreadsWidget />
+      </TestProviderWithQuery>
+    )
+
+    const cta = screen.getByText('Visit Profile')
+    expect(cta.closest('a')).toHaveAttribute('href', 'https://www.goodreads.com/user/show/10454947-chris-vogt')
   })
 
   it('handles missing profile metrics gracefully', () => {

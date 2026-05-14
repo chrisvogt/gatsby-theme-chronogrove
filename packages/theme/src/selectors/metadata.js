@@ -18,6 +18,14 @@ export const getGoodreadsUsername = metadata => metadata?.widgets?.goodreads?.us
 
 export const getGoodreadsWidgetDataSource = metadata => metadata?.widgets?.goodreads?.widgetDataSource
 
+/**
+ * Public Goodreads profile URL from a widget payload `profile` object.
+ * Prefer `profileURL` (same field name as other Chronogrove widgets); older responses may only set `link`.
+ * @param {{ profileURL?: string, link?: string } | null | undefined} profile
+ * @returns {string | undefined}
+ */
+export const getGoodreadsProfilePageUrl = profile => profile?.profileURL || profile?.link || undefined
+
 export const getHeadline = metadata => metadata?.headline
 
 export const getImageURL = metadata => metadata?.imageURL

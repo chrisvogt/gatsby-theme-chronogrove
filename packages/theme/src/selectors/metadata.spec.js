@@ -4,6 +4,7 @@ import {
   getDescription,
   getGithubUsername,
   getGithubWidgetDataSource,
+  getGoodreadsProfilePageUrl,
   getGoodreadsUsername,
   getGoodreadsWidgetDataSource,
   getHeadline,
@@ -82,6 +83,28 @@ describe('Metadata Selectors', () => {
   it('selects the goodreads widget data source', () => {
     const result = getGoodreadsWidgetDataSource(metadata)
     expect(result).toEqual(metadata.widgets.goodreads.widgetDataSource)
+  })
+
+  describe('getGoodreadsProfilePageUrl', () => {
+    it('prefers profileURL over link', () => {
+      expect(
+        getGoodreadsProfilePageUrl({
+          profileURL: 'https://www.goodreads.com/user/show/1-a',
+          link: 'https://www.goodreads.com/user/show/1-b'
+        })
+      ).toBe('https://www.goodreads.com/user/show/1-a')
+    })
+
+    it('falls back to link when profileURL is absent', () => {
+      expect(getGoodreadsProfilePageUrl({ link: 'https://www.goodreads.com/user/show/legacy' })).toBe(
+        'https://www.goodreads.com/user/show/legacy'
+      )
+    })
+
+    it('returns undefined when profile is missing or empty', () => {
+      expect(getGoodreadsProfilePageUrl(undefined)).toBeUndefined()
+      expect(getGoodreadsProfilePageUrl({})).toBeUndefined()
+    })
   })
 
   it('selects the twitter username', () => {

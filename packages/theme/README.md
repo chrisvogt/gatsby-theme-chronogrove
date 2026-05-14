@@ -225,6 +225,22 @@ Configure social media widgets for your dashboard:
 }
 ```
 
+#### Metrics API profile fields (`profile` / `user`)
+
+[`useWidgetData`](src/hooks/use-widget-data.js) normalizes `{ payload: {...} }` responses to the inner object. Dashboard **Visit Profile / Browse** CTAs prefer **canonical names and URLs** from that payload when present, and otherwise fall back to `siteMetadata.widgets.*` (configured usernames).
+
+| Widget        | CTA prefers (from metrics payload)                                                                                                          | Metadata fallback                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **Flickr**    | `profile.displayName`, `profile.profileURL`                                                                                                 | `widgets.flickr.username` → `https://www.flickr.com/photos/{username}`              |
+| **Instagram** | `profile.displayName`, `profile.profileURL`                                                                                                 | `widgets.instagram.username` → `https://www.instagram.com/{username}`               |
+| **GitHub**    | `user.url`, `user.name` / `user.login` (tooltip label)                                                                                      | `widgets.github.username` → `https://www.github.com/{username}`                     |
+| **Goodreads** | `profile.name` / `profile.displayName`; **`profile.profileURL`** (canonical; legacy `profile.link` supported until API normalization ships) | `widgets.goodreads.username` → `https://www.goodreads.com/{username}`               |
+| **Spotify**   | `profile.displayName`, `profile.profileURL`, `provider.displayName`                                                                         | _(CTA builds from payload; omitting profile leaves empty strings until data loads)_ |
+| **Steam**     | `profile.displayName`, `profile.profileURL`                                                                                                 | _(no alternate URL in widget; keyed by synced profile)_                             |
+| **Discogs**   | `profile.profileURL`                                                                                                                        | `https://www.discogs.com` if URL missing                                            |
+
+Implementations mirror [chrisvogt/metrics](https://github.com/chrisvogt/metrics) widget responses; omitting optional fields preserves backward compatibility.
+
 ## 📝 Content
 
 ### Blog Posts
