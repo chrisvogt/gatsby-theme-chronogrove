@@ -133,23 +133,33 @@ const renderWithTheme = component => {
   return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
 }
 
+function countBoundedDigitsBackward(text, fromIndex, maxDigits) {
+  let count = 0
+  for (let j = fromIndex; j >= 0 && count < maxDigits; j--) {
+    const c = text[j]
+    if (c < '0' || c > '9') break
+    count++
+  }
+  return count
+}
+
+function countBoundedDigitsForward(text, fromIndex, maxDigits) {
+  let count = 0
+  for (let j = fromIndex; j < text.length && count < maxDigits; j++) {
+    const c = text[j]
+    if (c < '0' || c > '9') break
+    count++
+  }
+  return count
+}
+
 function textHasSmallIntegerFraction(text, maxDigits = 4) {
   for (let i = 0; i < text.length; i++) {
     if (text[i] !== '/') continue
-    let before = 0
-    for (let j = i - 1; j >= 0 && before < maxDigits; j--) {
-      const c = text[j]
-      if (c < '0' || c > '9') break
-      before++
-    }
-    if (before === 0) continue
-    let after = 0
-    for (let j = i + 1; j < text.length && after < maxDigits; j++) {
-      const c = text[j]
-      if (c < '0' || c > '9') break
-      after++
-    }
-    if (after > 0) return true
+    const digitsBefore = countBoundedDigitsBackward(text, i - 1, maxDigits)
+    if (digitsBefore === 0) continue
+    const digitsAfter = countBoundedDigitsForward(text, i + 1, maxDigits)
+    if (digitsAfter > 0) return true
   }
   return false
 }
