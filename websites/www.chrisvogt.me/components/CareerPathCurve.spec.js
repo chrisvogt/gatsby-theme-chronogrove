@@ -133,6 +133,27 @@ const renderWithTheme = component => {
   return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
 }
 
+function textHasSmallIntegerFraction(text, maxDigits = 4) {
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] !== '/') continue
+    let before = 0
+    for (let j = i - 1; j >= 0 && before < maxDigits; j--) {
+      const c = text[j]
+      if (c < '0' || c > '9') break
+      before++
+    }
+    if (before === 0) continue
+    let after = 0
+    for (let j = i + 1; j < text.length && after < maxDigits; j++) {
+      const c = text[j]
+      if (c < '0' || c > '9') break
+      after++
+    }
+    if (after > 0) return true
+  }
+  return false
+}
+
 describe('CareerPathCurve', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -349,7 +370,7 @@ describe('CareerPathCurve', () => {
       await waitFor(() => {
         const textContent = container.textContent
         // Should show format like "1/2" or "2/2"
-        expect(textContent).toMatch(/\d+\/\d+/)
+        expect(textHasSmallIntegerFraction(textContent)).toBe(true)
       })
     })
   })
