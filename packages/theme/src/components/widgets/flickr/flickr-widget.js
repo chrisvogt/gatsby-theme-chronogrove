@@ -50,6 +50,10 @@ export default () => {
   // Extract data from the query result
   const photos = data?.collections?.photos
   const metrics = data?.metrics
+  const profileDisplayName = data?.profile?.displayName
+  const profileURL = data?.profile?.profileURL
+  const ctaLabel = profileDisplayName || flickrUsername || 'Flickr'
+  const ctaUrl = profileURL ?? (flickrUsername ? `https://www.flickr.com/photos/${flickrUsername}` : undefined)
 
   const [isShowingMore, setIsShowingMore] = useState(false)
 
@@ -77,11 +81,7 @@ export default () => {
   }, [isLoading, isShowingMore])
 
   const callToAction = (
-    <CallToAction
-      title={`${flickrUsername} on Flickr`}
-      url={`https://www.flickr.com/photos/${flickrUsername}`}
-      isLoading={isLoading}
-    >
+    <CallToAction title={`${ctaLabel} on Flickr`} url={ctaUrl} isLoading={isLoading}>
       Visit Profile <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )

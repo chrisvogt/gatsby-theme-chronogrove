@@ -280,7 +280,7 @@ exports[`Goodreads Widget renders with data and AI summary 1`] = `
           <a
             class="css-bgnrb"
             href="https://www.goodreads.com/mockusername"
-            title="mockusername on Goodreads"
+            title="Test User on Goodreads"
           >
             Visit Profile 
             <span
@@ -386,7 +386,7 @@ exports[`Goodreads Widget renders without AI summary when not available 1`] = `
           <a
             class="css-bgnrb"
             href="https://www.goodreads.com/mockusername"
-            title="mockusername on Goodreads"
+            title="Test User on Goodreads"
           >
             Visit Profile 
             <span

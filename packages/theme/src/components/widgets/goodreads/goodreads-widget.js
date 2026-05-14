@@ -3,7 +3,11 @@ import { jsx } from 'theme-ui'
 import { faGoodreads } from '@fortawesome/free-brands-svg-icons'
 
 import { pickAiSummarySyncedAtRaw } from '../../../helpers/ai-summary-synced-at'
-import { getGoodreadsUsername, getGoodreadsWidgetDataSource } from '../../../selectors/metadata'
+import {
+  getGoodreadsProfilePageUrl,
+  getGoodreadsUsername,
+  getGoodreadsWidgetDataSource
+} from '../../../selectors/metadata'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
 
@@ -39,8 +43,10 @@ export default () => {
     metrics.push({ displayName: 'Books Read', id: 'read-count', value: data.profile.readCount })
   }
 
-  // Profile display name
-  const profileDisplayName = data?.profile?.name
+  // Profile display name (metrics API); name or displayName, else site metadata username
+  const profileDisplayName = data?.profile?.name || data?.profile?.displayName
+  const profileURL = getGoodreadsProfilePageUrl(data?.profile)
+  const ctaLabel = profileDisplayName || goodreadsUsername || 'Goodreads'
 
   // Status comes from updates collection, finding first userstatus or review
   const updates = data?.collections?.updates || []
@@ -48,8 +54,11 @@ export default () => {
 
   const callToAction = (
     <CallToAction
-      title={`${goodreadsUsername} on Goodreads`}
-      url={`https://www.goodreads.com/${goodreadsUsername}`}
+      title={`${ctaLabel} on Goodreads`}
+      url={
+        profileURL ??
+        (goodreadsUsername ? `https://www.goodreads.com/${goodreadsUsername}` : 'https://www.goodreads.com')
+      }
       isLoading={isLoading}
     >
       Visit Profile <span className='read-more-icon'>&rarr;</span>

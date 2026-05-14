@@ -264,7 +264,7 @@ describe('FlickrWidget', () => {
     expect(container.querySelector('section')).toBeInTheDocument()
   })
 
-  it('renders CallToAction with correct Flickr profile URL', () => {
+  it('renders CallToAction with correct Flickr profile URL when API omits profile', () => {
     useWidgetData.mockReturnValue(mockSuccessState)
 
     render(
@@ -275,6 +275,29 @@ describe('FlickrWidget', () => {
     const callToAction = screen.getByText('Visit Profile')
     expect(callToAction).toBeInTheDocument()
     expect(callToAction.closest('a')).toHaveAttribute('href', 'https://www.flickr.com/photos/test_username')
+    expect(callToAction.closest('a')).toHaveAttribute('title', 'test_username on Flickr')
+  })
+
+  it('prefers metrics API profile.displayName / profile.profileURL for the Visit Profile CTA', () => {
+    useWidgetData.mockReturnValue({
+      ...mockSuccessState,
+      data: {
+        ...mockSuccessState.data,
+        profile: {
+          displayName: 'Synced Screen Name',
+          profileURL: 'https://www.flickr.com/people/real-nsid/'
+        }
+      }
+    })
+
+    render(
+      <TestProviderWithQuery>
+        <FlickrWidget />
+      </TestProviderWithQuery>
+    )
+    const callToAction = screen.getByText('Visit Profile')
+    expect(callToAction.closest('a')).toHaveAttribute('href', 'https://www.flickr.com/people/real-nsid/')
+    expect(callToAction.closest('a')).toHaveAttribute('title', 'Synced Screen Name on Flickr')
   })
 
   it('renders correct number of images based on show more/less state', () => {

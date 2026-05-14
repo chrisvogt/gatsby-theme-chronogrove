@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.91.6
+
+### `gatsby-theme-chronogrove` — Widget CTAs from metrics profile data (#606)
+
+- **Flickr** (`flickr-widget.js`): **Visit Profile** uses **`profile.displayName`** and **`profile.profileURL`** from the widget payload when present; falls back to **`widgets.flickr.username`** and the canonical Flickr photos URL.
+- **GitHub** (`github-widget.js`): CTA prefers **`user.url`**, **`user.name`**, and **`user.login`** from the API response, with metadata username and constructed **`www.github.com`** URL as fallback.
+- **Goodreads** (`goodreads-widget.js`, `metadata.js`): CTA prefers **`profile.name`** / **`profile.displayName`** and a canonical URL from **`getGoodreadsProfilePageUrl`** (**`profile.profileURL`** first, then legacy **`profile.link`** until [chrisvogt/chronogrove#322](https://github.com/chrisvogt/chronogrove/issues/322)); metadata username URL remains the last fallback.
+- **Docs** (`packages/theme/README.md`): Table documents which **`profile`** / **`user`** fields each widget consumes for CTAs versus site metadata fallbacks.
+- **Tests**: Flickr (metadata vs API profile), GitHub (API `user` fields), Goodreads (**`profileURL`** / **`link`**), **`metadata.spec.js`** for **`getGoodreadsProfilePageUrl`**; Goodreads snapshots updated where the CTA title reflects API **`profile.name`**.
+- **Versions**: **`gatsby-theme-chronogrove` 0.91.6**; **`www.chrisvogt.me` 1.22.5**; **`www.chronogrove.com` 1.9.5** (**`@chronogrove/ui`** unchanged).
+
+### Files changed (high level)
+
+- `CHANGELOG.md`
+- `packages/theme/package.json` (version **0.91.6**)
+- `packages/theme/README.md`
+- `packages/theme/src/selectors/metadata.js`, **`metadata.spec.js`**
+- `packages/theme/src/components/widgets/flickr/flickr-widget.js`, **`flickr-widget.spec.js`**
+- `packages/theme/src/components/widgets/github/github-widget.js`, **`github-widget.spec.js`**
+- `packages/theme/src/components/widgets/goodreads/goodreads-widget.js`, **`goodreads-widget.spec.js`**, **`__snapshots__/goodreads-widget.spec.js.snap`**
+- `websites/www.chrisvogt.me/package.json`, **`websites/www.chronogrove.com/package.json`**
+
+---
+
 ## 0.91.5
 
 ### Repository layout — `packages/theme`, `websites/*`, theme-local scripts

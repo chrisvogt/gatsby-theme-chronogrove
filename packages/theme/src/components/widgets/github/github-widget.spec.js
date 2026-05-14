@@ -138,4 +138,28 @@ describe('GitHub Widget', () => {
     expect(screen.getByText('Last Pull Request')).toBeInTheDocument()
     expect(screen.getByText('Contribution Graph')).toBeInTheDocument()
   })
+
+  it('uses user.url / user.name for the Visit Profile CTA when the API supplies them', () => {
+    useWidgetData.mockReturnValue({
+      ...mockSuccessState,
+      data: {
+        user: {
+          ...mockSuccessState.data.user,
+          url: 'https://github.com/octocat',
+          name: 'The Octocat',
+          login: 'octocat'
+        }
+      }
+    })
+
+    render(
+      <TestProviderWithQuery>
+        <GitHubWidget />
+      </TestProviderWithQuery>
+    )
+
+    const cta = screen.getByText('Visit Profile')
+    expect(cta.closest('a')).toHaveAttribute('href', 'https://github.com/octocat')
+    expect(cta.closest('a')).toHaveAttribute('title', 'The Octocat on GitHub')
+  })
 })

@@ -49,10 +49,13 @@ const GitHubWidget = () => {
   const pinnedItems = user?.pinnedItems?.nodes
   const contributionCalendar = user?.contributionsCollection?.contributionCalendar
 
+  const profileURL = user?.url
+  const profileLabel = user?.name || user?.login || githubUsername
+
   const callToAction = (
     <CallToAction
-      title={`${githubUsername} on GitHub`}
-      url={`https://www.github.com/${githubUsername}`}
+      title={`${profileLabel} on GitHub`}
+      url={profileURL || `https://www.github.com/${githubUsername}`}
       isLoading={isLoading}
     >
       Visit Profile <span className='read-more-icon'>&rarr;</span>
