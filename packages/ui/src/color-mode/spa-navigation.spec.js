@@ -8,7 +8,7 @@ import { RECONCILE_COLOR_MODE_EVENT } from './constants.js'
 describe('reconcileThemeUiColorModeOnNavigation', () => {
   beforeEach(() => {
     window.localStorage.removeItem('theme-ui-color-mode')
-    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    delete document.documentElement.dataset.themeUiColorMode
     document.documentElement.className = ''
   })
 

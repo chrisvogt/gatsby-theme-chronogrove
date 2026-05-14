@@ -29,6 +29,52 @@ const DISCOGS_VIEW_GRID = 'grid'
 const DISCOGS_VIEW_LIST = 'list'
 const DEFAULT_DISCOGS_VIEW_MODE = DISCOGS_VIEW_GRID
 
+function vinylBreakpointIndexForWidth(width) {
+  if (width < 640) return 0
+  if (width < 768) return 1
+  if (width < 1024) return 2
+  if (width < 1280) return 3
+  return 4
+}
+
+function buildVinylCollectionPages({
+  isLoading,
+  vinylItems,
+  LOADING_PAGE_COUNT,
+  skeletonItemsPerPage,
+  totalPages,
+  logicalItemsPerPage
+}) {
+  const pages = []
+  if (isLoading && !vinylItems.length) {
+    for (let p = 0; p < LOADING_PAGE_COUNT; p++) {
+      pages.push(Array.from({ length: skeletonItemsPerPage }, (_, i) => ({ _placeholder: true, id: `ph-p${p}-${i}` })))
+    }
+  } else {
+    for (let i = 0; i < totalPages; i++) {
+      const start = i * logicalItemsPerPage
+      const end = Math.min(start + logicalItemsPerPage, vinylItems.length)
+      pages.push(vinylItems.slice(start, end))
+    }
+  }
+  return pages
+}
+
+/** Delay before clearing hover "focused" state after pointer leave (orbit/caption fade). */
+export const VINYL_GRID_HOVER_LEAVE_DELAY_MS = 220
+
+function scheduleVinylGridHoverClear({ leaveTimeoutRef, vinylId, setCurrentVinylId, setExitingVinylId }) {
+  if (leaveTimeoutRef.current) {
+    clearTimeout(leaveTimeoutRef.current)
+  }
+  setExitingVinylId(vinylId)
+  leaveTimeoutRef.current = setTimeout(() => {
+    setCurrentVinylId(false)
+    setExitingVinylId(null)
+    leaveTimeoutRef.current = null
+  }, VINYL_GRID_HOVER_LEAVE_DELAY_MS)
+}
+
 /** List layout: fewer records per carousel slide than the old dense list (chunk = columns × this). Matches grid rows (2) for similar page counts. */
 const LIST_ROWS_PER_PAGE = 2
 
@@ -164,22 +210,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
   // Detect current breakpoint based on window width
   useEffect(() => {
     const updateBreakpoint = () => {
-      const width = window.innerWidth
-      let breakpointIndex
-
-      if (width < 640) {
-        breakpointIndex = 0 // Mobile: 3 columns
-      } else if (width < 768) {
-        breakpointIndex = 1 // Small: 4 columns
-      } else if (width < 1024) {
-        breakpointIndex = 2 // Medium: 4 columns
-      } else if (width < 1280) {
-        breakpointIndex = 3 // Large: 5 columns
-      } else {
-        breakpointIndex = 4 // XL (≥1280): 5 columns
-      }
-
-      setCurrentBreakpointIndex(breakpointIndex)
+      setCurrentBreakpointIndex(vinylBreakpointIndexForWidth(window.innerWidth))
     }
 
     updateBreakpoint()
@@ -252,19 +283,14 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
     }
   })
 
-  // Split items into pages; when loading assume LOADING_PAGE_COUNT full pages so carousel/pagination space is reserved
-  const pages = []
-  if (isLoading && !vinylItems.length) {
-    for (let p = 0; p < LOADING_PAGE_COUNT; p++) {
-      pages.push(Array.from({ length: skeletonItemsPerPage }, (_, i) => ({ _placeholder: true, id: `ph-p${p}-${i}` })))
-    }
-  } else {
-    for (let i = 0; i < totalPages; i++) {
-      const start = i * logicalItemsPerPage
-      const end = Math.min(start + logicalItemsPerPage, vinylItems.length)
-      pages.push(vinylItems.slice(start, end))
-    }
-  }
+  const pages = buildVinylCollectionPages({
+    isLoading,
+    vinylItems,
+    LOADING_PAGE_COUNT,
+    skeletonItemsPerPage,
+    totalPages,
+    logicalItemsPerPage
+  })
 
   return (
     <div sx={{ mb: 4, maxWidth: '100%', overflow: 'hidden' }}>
@@ -674,25 +700,14 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                                 setExitingVinylId(null)
                                 if (!isDragging) setCurrentVinylId(id)
                               }}
-                              onMouseLeave={() => {
-                                if (leaveTimeoutRef.current) {
-                                  clearTimeout(leaveTimeoutRef.current)
-                                }
-                                // Delay clearing focus to allow overlay fade-out without flashing center text
-                                const delay = process.env.NODE_ENV === 'test' ? 0 : 220
-                                if (delay === 0) {
-                                  // Synchronous for tests to avoid timing assertions
-                                  setCurrentVinylId(false)
-                                  setExitingVinylId(null)
-                                  return
-                                }
-                                setExitingVinylId(id)
-                                leaveTimeoutRef.current = setTimeout(() => {
-                                  setCurrentVinylId(false)
-                                  setExitingVinylId(null)
-                                  leaveTimeoutRef.current = null
-                                }, delay)
-                              }}
+                              onMouseLeave={() =>
+                                scheduleVinylGridHoverClear({
+                                  leaveTimeoutRef,
+                                  vinylId: id,
+                                  setCurrentVinylId,
+                                  setExitingVinylId
+                                })
+                              }
                               onClick={() => handleVinylClick(release)}
                               onKeyDown={e => {
                                 if (e.key === 'Enter' || e.key === ' ') {

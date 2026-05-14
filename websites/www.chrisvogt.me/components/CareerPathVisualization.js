@@ -4,34 +4,121 @@ import * as d3 from 'd3'
 import careerData from '../src/data/career-path.json'
 import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
 
+function getTruncatedCareerLabelText(text, maxLength) {
+  if (!text) return ''
+  if (text.length <= maxLength) return text
+  return `${text.substring(0, maxLength - 3)}...`
+}
+
+function getAbbreviatedCareerCompanyName(name, isSmallScreen = false) {
+  const abbreviations = {
+    'OfficeMax Print & Document Services': isSmallScreen ? 'OfficeMax' : 'OfficeMax Print & Doc',
+    "FedEx Kinko's": "FedEx Kinko's",
+    'Robert Half & TEKsystems': isSmallScreen ? 'Robert Half/TEK' : 'Robert Half & TEK',
+    'Apogee Physicians': 'Apogee',
+    'Encore Discovery Solutions': isSmallScreen ? 'Encore' : 'Encore Discovery',
+    'Pan Am Education': 'Pan Am',
+    'Salucro Healthcare Solutions': isSmallScreen ? 'Salucro' : 'Salucro Healthcare',
+    'Art In Reality, LLC': 'Art In Reality'
+  }
+  return abbreviations[name] || name
+}
+
+function resolveCareerNodeDisplayText(d, isSmallScreen) {
+  if (d.data.type === 'path') return d.data.name
+  if (d.data.name === 'GoDaddy') return d.data.name
+  const companyName = getAbbreviatedCareerCompanyName(d.data.name, isSmallScreen)
+  const title = d.data.title || d.data.name
+  const maxTitleLength = isSmallScreen ? 15 : 25
+  const truncatedTitle = getTruncatedCareerLabelText(title, maxTitleLength)
+  return companyName === title ? companyName : truncatedTitle
+}
+
+function resolveCareerNodeTextLayout(d, width, isSmallScreen) {
+  if (d.data.type === 'path') {
+    return { textX: 0, textY: isSmallScreen ? -12 : -15, textAnchor: 'middle' }
+  }
+  if (isSmallScreen) {
+    return { textX: 0, textY: d.children ? -20 : 20, textAnchor: 'middle' }
+  }
+  if (d.x < width * 0.25) {
+    return { textX: 15, textY: 0, textAnchor: 'start' }
+  }
+  if (d.x > width * 0.75) {
+    return { textX: -15, textY: 0, textAnchor: 'end' }
+  }
+  return {
+    textX: d.children ? -15 : 15,
+    textY: 0,
+    textAnchor: d.children ? 'end' : 'start'
+  }
+}
+
+function careerNodeLabelFontSizePx(d, isSmallScreen) {
+  const baseSize = isSmallScreen ? 9 : 11
+  if (d.data.type === 'path') return `${baseSize + 2}px`
+  if (d.data.name === 'GoDaddy') return `${baseSize + 1}px`
+  return `${baseSize}px`
+}
+
+function careerNodeLabelFontWeight(d) {
+  return d.data.type === 'path' || d.data.name === 'GoDaddy' ? 'bold' : 'normal'
+}
+
+function appendCareerTimelineNodeLabel(node, d, { width, isSmallScreen, darkModeActive }) {
+  if (d.data.name === 'Career Journey') return null
+
+  const displayText = resolveCareerNodeDisplayText(d, isSmallScreen)
+  const { textX, textY, textAnchor } = resolveCareerNodeTextLayout(d, width, isSmallScreen)
+
+  const textElement = node
+    .append('text')
+    .attr('x', textX)
+    .attr('y', textY)
+    .attr('dy', '0.35em')
+    .style('text-anchor', textAnchor)
+    .style('font-size', careerNodeLabelFontSizePx(d, isSmallScreen))
+    .style('font-weight', careerNodeLabelFontWeight(d))
+    .style('fill', darkModeActive ? '#e2e8f0' : '#2d3748')
+    .style('pointer-events', 'none')
+    .text(displayText)
+
+  return {
+    element: textElement,
+    node: d,
+    x: d.x + textX,
+    y: d.y + textY,
+    width: displayText.length * (isSmallScreen ? 5 : 6),
+    height: isSmallScreen ? 12 : 14
+  }
+}
+
+function adjustCareerTimelineLabelCollisions(textElements) {
+  textElements.forEach((text, i) => {
+    for (let j = i + 1; j < textElements.length; j++) {
+      const other = textElements[j]
+      const xOverlap = Math.abs(text.x - other.x) < (text.width + other.width) / 2 + 4
+      const yOverlap = Math.abs(text.y - other.y) < Math.max(text.height, other.height) + 2
+      if (!xOverlap || !yOverlap) continue
+
+      const adjustment = Math.max(text.height, other.height) + 4
+      if (other.y > text.y) {
+        other.y += adjustment
+      } else {
+        other.y -= adjustment
+      }
+      const relativeY = other.y - other.node.y
+      other.element.attr('y', relativeY)
+    }
+  })
+}
+
 const CareerPathVisualization = () => {
   const svgRef = useRef(null)
   const containerRef = useRef(null)
   const [selectedNode, setSelectedNode] = useState(null)
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
-
-  // Helper function to truncate text based on screen size
-  const getTruncatedText = (text, maxLength) => {
-    if (!text) return ''
-    if (text.length <= maxLength) return text
-    return text.substring(0, maxLength - 3) + '...'
-  }
-
-  // Helper function to get abbreviated company names
-  const getAbbreviatedName = (name, isSmallScreen = false) => {
-    const abbreviations = {
-      'OfficeMax Print & Document Services': isSmallScreen ? 'OfficeMax' : 'OfficeMax Print & Doc',
-      "FedEx Kinko's": "FedEx Kinko's",
-      'Robert Half & TEKsystems': isSmallScreen ? 'Robert Half/TEK' : 'Robert Half & TEK',
-      'Apogee Physicians': 'Apogee',
-      'Encore Discovery Solutions': isSmallScreen ? 'Encore' : 'Encore Discovery',
-      'Pan Am Education': 'Pan Am',
-      'Salucro Healthcare Solutions': isSmallScreen ? 'Salucro' : 'Salucro Healthcare',
-      'Art In Reality, LLC': 'Art In Reality'
-    }
-    return abbreviations[name] || name
-  }
 
   const createVisualization = useCallback(() => {
     if (!svgRef.current || !containerRef.current) return
@@ -255,117 +342,14 @@ const CareerPathVisualization = () => {
     // Collect text elements for collision detection
     const textElements = []
 
-    // Add labels with improved positioning and collision detection
+    const labelContext = { width, isSmallScreen, darkModeActive }
+
     nodes.each(function (d) {
-      if (d.data.name === 'Career Journey') return
-
-      const node = d3.select(this)
-      let displayText
-
-      if (d.data.type === 'path') {
-        displayText = d.data.name
-      } else if (d.data.name === 'GoDaddy') {
-        displayText = d.data.name
-      } else {
-        // Use abbreviated names for companies and truncate titles
-        const companyName = getAbbreviatedName(d.data.name, isSmallScreen)
-        const title = d.data.title || d.data.name
-        const maxTitleLength = isSmallScreen ? 15 : 25
-        const truncatedTitle = getTruncatedText(title, maxTitleLength)
-        displayText = companyName === title ? companyName : truncatedTitle
-      }
-
-      // Smart text positioning with collision avoidance
-      let textX
-      let textY
-      let textAnchor
-
-      // Determine initial position based on node location and type
-      if (d.data.type === 'path') {
-        // Path nodes: center the text
-        textX = 0
-        textY = isSmallScreen ? -12 : -15
-        textAnchor = 'middle'
-      } else {
-        // Job nodes: position based on screen size and location
-        if (isSmallScreen) {
-          // On small screens, stack text vertically
-          textX = 0
-          textY = d.children ? -20 : 20
-          textAnchor = 'middle'
-        } else {
-          // On larger screens, use horizontal positioning
-          if (d.x < width * 0.25) {
-            textX = 15
-            textAnchor = 'start'
-          } else if (d.x > width * 0.75) {
-            textX = -15
-            textAnchor = 'end'
-          } else {
-            textX = d.children ? -15 : 15
-            textAnchor = d.children ? 'end' : 'start'
-          }
-          textY = 0
-        }
-      }
-
-      const textElement = node
-        .append('text')
-        .attr('x', textX)
-        .attr('y', textY)
-        .attr('dy', '0.35em')
-        .style('text-anchor', textAnchor)
-        .style('font-size', d => {
-          const baseSize = isSmallScreen ? 9 : 11
-          if (d.data.type === 'path') return `${baseSize + 2}px`
-          if (d.data.name === 'GoDaddy') return `${baseSize + 1}px`
-          return `${baseSize}px`
-        })
-        .style('font-weight', d => {
-          if (d.data.type === 'path' || d.data.name === 'GoDaddy') return 'bold'
-          return 'normal'
-        })
-        .style('fill', darkModeActive ? '#e2e8f0' : '#2d3748')
-        .style('pointer-events', 'none')
-        .text(displayText)
-
-      // Store text element info for collision detection
-      textElements.push({
-        element: textElement,
-        node: d,
-        x: d.x + textX,
-        y: d.y + textY,
-        width: displayText.length * (isSmallScreen ? 5 : 6), // Approximate text width
-        height: isSmallScreen ? 12 : 14
-      })
+      const meta = appendCareerTimelineNodeLabel(d3.select(this), d, labelContext)
+      if (meta) textElements.push(meta)
     })
 
-    // Improved collision detection and adjustment
-    textElements.forEach((text, i) => {
-      for (let j = i + 1; j < textElements.length; j++) {
-        const other = textElements[j]
-
-        // Check for overlap with some padding
-        const xOverlap = Math.abs(text.x - other.x) < (text.width + other.width) / 2 + 4
-        const yOverlap = Math.abs(text.y - other.y) < Math.max(text.height, other.height) + 2
-
-        if (xOverlap && yOverlap) {
-          // More intelligent adjustment based on node positions
-          const adjustment = Math.max(text.height, other.height) + 4
-
-          // Prefer vertical adjustment to maintain readability
-          if (other.y > text.y) {
-            other.y += adjustment
-          } else {
-            other.y -= adjustment
-          }
-
-          // Update the actual text element position
-          const relativeY = other.y - other.node.y
-          other.element.attr('y', relativeY)
-        }
-      }
-    })
+    adjustCareerTimelineLabelCollisions(textElements)
 
     // Add year labels with better visibility and coverage (positioned inside container)
     const years = [2003, 2007, 2011, 2015, 2019, 2023] // Key career milestone years

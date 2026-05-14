@@ -46,7 +46,7 @@ describe('RootWrapper', () => {
       provider: 'soundcloud'
     })
     document.documentElement.className = ''
-    document.documentElement.removeAttribute('data-theme-ui-color-mode')
+    delete document.documentElement.dataset.themeUiColorMode
     document.documentElement.style.backgroundColor = ''
     try {
       window.localStorage.removeItem('theme-ui-color-mode')

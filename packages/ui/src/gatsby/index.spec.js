@@ -157,7 +157,7 @@ describe('@chronogrove/ui/gatsby', () => {
   describe('onRouteUpdateThemeUiColorMode', () => {
     beforeEach(() => {
       window.localStorage.removeItem('theme-ui-color-mode')
-      document.documentElement.removeAttribute('data-theme-ui-color-mode')
+      delete document.documentElement.dataset.themeUiColorMode
       document.documentElement.className = ''
     })
 
