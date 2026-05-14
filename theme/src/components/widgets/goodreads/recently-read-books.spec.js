@@ -144,6 +144,71 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
       )
     })
 
+    it('navigates the carousel with arrow keys when there is more than one page', () => {
+      jest.useFakeTimers()
+
+      const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      const carousel = screen.getByTestId('goodreads-carousel')
+      carousel.focus()
+
+      fireEvent.keyDown(carousel, { key: 'ArrowRight' })
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.keyDown(carousel, { key: 'ArrowDown' })
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.keyDown(carousel, { key: 'ArrowLeft' })
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.keyDown(carousel, { key: 'ArrowUp' })
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+    })
+
+    it('ignores arrow keys on the carousel when there is only one page', () => {
+      const paginatedBooks = Array.from({ length: 5 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      const carousel = screen.getByTestId('goodreads-carousel')
+      carousel.focus()
+      fireEvent.keyDown(carousel, { key: 'ArrowRight' })
+
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')).toHaveLength(5)
+      expect(screen.queryByTestId('goodreads-page-2')).not.toBeInTheDocument()
+    })
+
     it('returns to the first page when the books list shrinks', () => {
       const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
         ...mockBooks[idx % mockBooks.length],
