@@ -120,8 +120,18 @@ describe('color-mode-debug', () => {
       logColorModeState('default', { colors: { text: '#111', background: '#fdf8f5' } }, 'Test')
 
       expect(console.groupCollapsed).toHaveBeenCalled()
+      expect(console.groupCollapsed).toHaveBeenCalledWith(expect.stringContaining('data-attr=default'))
       expect(console.log).toHaveBeenCalled()
       expect(console.groupEnd).toHaveBeenCalled()
+    })
+
+    it('logs data-attr=none when data-theme-ui-color-mode is absent', () => {
+      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
+      document.documentElement.removeAttribute('data-theme-ui-color-mode')
+
+      logColorModeState('dark', { colors: { text: '#fff' } }, 'Test')
+
+      expect(console.groupCollapsed).toHaveBeenCalledWith(expect.stringContaining('data-attr=none'))
     })
 
     it('calls console.warn when debug log throws', () => {

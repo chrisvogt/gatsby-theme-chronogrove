@@ -913,16 +913,16 @@ describe('InstagramWidget', () => {
         })
 
         // Check data attributes were applied
-        expect(thumbItem0.getAttribute('data-album-start')).toBe('true')
-        expect(thumbItem0.getAttribute('data-album-index')).toBe('0')
+        expect(thumbItem0.dataset.albumStart).toBe('true')
+        expect(thumbItem0.dataset.albumIndex).toBe('0')
 
         // Call for second slide (album end)
         act(() => {
           mockLightGalleryCallbacks.onAfterAppendSlide({ index: 1 })
         })
 
-        expect(thumbItem1.getAttribute('data-album-end')).toBe('true')
-        expect(thumbItem1.getAttribute('data-album-index')).toBe('0')
+        expect(thumbItem1.dataset.albumEnd).toBe('true')
+        expect(thumbItem1.dataset.albumIndex).toBe('0')
       }
 
       // Cleanup

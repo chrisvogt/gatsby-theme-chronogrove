@@ -202,7 +202,7 @@ describe('gatsby-browser', () => {
 
       expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
       expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(false)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
     })
 
     it('falls back to DOM when localStorage is empty', () => {
@@ -216,7 +216,7 @@ describe('gatsby-browser', () => {
       })
 
       expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
     })
 
     it('falls back to theme-ui-* class when localStorage and data attribute are empty', () => {
@@ -230,7 +230,7 @@ describe('gatsby-browser', () => {
       })
 
       expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
     })
 
     it('syncs Theme UI mode class and data attribute from localStorage', () => {
@@ -242,7 +242,7 @@ describe('gatsby-browser', () => {
       })
 
       expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
     })
 
     it('normalizes light mode to default when syncing Theme UI mode', () => {
@@ -255,7 +255,7 @@ describe('gatsby-browser', () => {
 
       expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
       expect(document.documentElement.classList.contains('theme-ui-light')).toBe(false)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
     })
 
     it('falls back to system preference when localStorage is unavailable', () => {
@@ -274,7 +274,7 @@ describe('gatsby-browser', () => {
       })
 
       expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
 
       getItemSpy.mockRestore()
     })
@@ -290,7 +290,7 @@ describe('gatsby-browser', () => {
           prevLocation: null
         })
       }).not.toThrow()
-      expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+      expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
 
       window.CustomEvent = originalCustomEvent
     })

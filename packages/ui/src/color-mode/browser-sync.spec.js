@@ -31,6 +31,11 @@ describe('resolveThemeUiColorMode', () => {
     expect(resolveThemeUiColorMode()).toBe('dark')
   })
 
+  it('reads mode when set via documentElement.dataset.themeUiColorMode', () => {
+    document.documentElement.dataset.themeUiColorMode = 'dark'
+    expect(resolveThemeUiColorMode()).toBe('dark')
+  })
+
   it('infers default from theme-ui-light class', () => {
     document.documentElement.classList.add('theme-ui-light')
     expect(resolveThemeUiColorMode()).toBe('default')
@@ -85,7 +90,7 @@ describe('syncThemeUiColorMode', () => {
     window.localStorage.setItem('theme-ui-color-mode', 'dark')
     syncThemeUiColorMode()
     expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
     expect(document.documentElement.style.backgroundColor).toBe('rgb(20, 20, 31)')
   })
 

@@ -42,10 +42,10 @@ describe('BlogHead (chronogrove.com shadow)', () => {
     const seoElement = getByTestId('seo')
 
     // Verify site-specific title
-    expect(seoElement.getAttribute('data-title')).toBe('Blog - Chronogrove')
+    expect(seoElement.dataset.title).toBe('Blog - Chronogrove')
 
     // Verify site-specific description mentions technology and development
-    const description = seoElement.getAttribute('data-description')
+    const description = seoElement.dataset.description
     expect(description).toContain('Chronogrove')
     expect(description).toContain('technology, development')
   })

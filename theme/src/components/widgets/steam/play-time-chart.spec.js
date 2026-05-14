@@ -208,16 +208,21 @@ describe('PlayTimeChart', () => {
         fireEvent.click(gameCard)
         expect(window.open).toHaveBeenCalledWith(
           expect.stringContaining('https://store.steampowered.com/app/'),
-          '_blank'
+          '_blank',
+          'noopener,noreferrer'
         )
       } else {
         // Fallback: simulate click on first game (Cities: Skylines with id 255710)
         window.open = jest.fn()
 
         // Simulate the onClick behavior directly
-        window.open('https://store.steampowered.com/app/255710', '_blank')
+        window.open('https://store.steampowered.com/app/255710', '_blank', 'noopener,noreferrer')
 
-        expect(window.open).toHaveBeenCalledWith('https://store.steampowered.com/app/255710', '_blank')
+        expect(window.open).toHaveBeenCalledWith(
+          'https://store.steampowered.com/app/255710',
+          '_blank',
+          'noopener,noreferrer'
+        )
       }
     })
   })
@@ -741,7 +746,8 @@ describe('PlayTimeChart', () => {
         fireEvent.click(gameCard)
         expect(window.open).toHaveBeenCalledWith(
           expect.stringContaining('https://store.steampowered.com/app/'),
-          '_blank'
+          '_blank',
+          'noopener,noreferrer'
         )
       }
     })

@@ -42,10 +42,10 @@ describe('BlogHead (chrisvogt.me shadow)', () => {
     const seoElement = getByTestId('seo')
 
     // Verify site-specific title
-    expect(seoElement.getAttribute('data-title')).toBe('Blog - Latest Posts')
+    expect(seoElement.dataset.title).toBe('Blog - Latest Posts')
 
     // Verify site-specific description mentions chrisvogt.me
-    const description = seoElement.getAttribute('data-description')
+    const description = seoElement.dataset.description
     expect(description).toContain('chrisvogt.me')
     expect(description).toContain('technology, photography, music, and personal growth')
   })

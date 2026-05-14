@@ -45,7 +45,7 @@ describe('useDocumentColorModeSurface', () => {
 
     expect(document.documentElement.classList.contains('theme-ui-stale')).toBe(false)
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
   })
 
@@ -61,7 +61,7 @@ describe('useDocumentColorModeSurface', () => {
     })
 
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
   })
 
   it('applies dark surface when color mode is dark', () => {
@@ -76,7 +76,7 @@ describe('useDocumentColorModeSurface', () => {
     })
 
     expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
   })
 
   it('prefers rawColors.background when set', () => {
@@ -108,13 +108,13 @@ describe('useDocumentColorModeSurface', () => {
     act(() => {
       applyDocumentColorModeSurface('light', baseTheme, resolveChronogroveSurfaceColors(baseTheme))
     })
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
 
     document.documentElement.removeAttribute('data-theme-ui-color-mode')
     act(() => {
       applyDocumentColorModeSurface(undefined, baseTheme, resolveChronogroveSurfaceColors(baseTheme))
     })
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
   })
 
   it('prefers rawColors.background over colors.background', () => {

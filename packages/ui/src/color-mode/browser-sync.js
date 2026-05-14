@@ -19,7 +19,7 @@ export function resolveThemeUiColorMode(storageKey = THEME_UI_COLOR_MODE_STORAGE
 
   if (typeof document !== 'undefined') {
     const htmlElement = document.documentElement
-    const domAttributeMode = normalizeThemeUiColorMode(htmlElement?.getAttribute('data-theme-ui-color-mode'))
+    const domAttributeMode = normalizeThemeUiColorMode(htmlElement?.dataset.themeUiColorMode)
     if (domAttributeMode) {
       return domAttributeMode
     }

@@ -1,5 +1,46 @@
 # Changelog
 
+## 0.91.3
+
+### `gatsby-theme-chronogrove` — Security (S5148), Sonar dataset reads (S7761)
+
+- **`steam-game-card.js`**: Opens the Steam store with **`window.open(..., '_blank', 'noopener,noreferrer')`** so the new tab cannot access **`window.opener`** (reverse tabnabbing).
+- **`color-mode-debug.js`**: Reads **`data-theme-ui-color-mode`** via **`document.documentElement.dataset.themeUiColorMode`** for debug output.
+- **Tests**: **`steam-game-card.spec.js`**, **`play-time-chart.spec.js`**, head/widget specs, **`color-mode-debug.spec.js`** (assert debug header reflects **`dataset`** / **`data-attr=none`**), **`browser-sync.spec.js`** (resolve mode when set via **`dataset`**).
+- **Version**: **0.91.3**
+
+### `@chronogrove/ui`
+
+- **`browser-sync.js`**: **`resolveThemeUiColorMode`** reads **`data-theme-ui-color-mode`** from **`htmlElement.dataset.themeUiColorMode`** instead of **`getAttribute`**.
+- **Tests**: Color-mode and Gatsby specs updated to assert via **`dataset`**.
+- **Version**: **0.85.2**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.22.3** (tracks theme **0.91.3**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.9.3** (tracks theme **0.91.3**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `packages/ui/package.json` (version **0.85.2**)
+- `packages/ui/src/color-mode/browser-sync.js`, **`browser-sync.spec.js`**, **`spa-navigation.spec.js`**, **`use-document-color-mode-surface.spec.js`**
+- `packages/ui/src/gatsby/index.spec.js`
+- `theme/package.json` (version **0.91.3**)
+- `theme/gatsby-browser.spec.js`
+- `theme/src/helpers/color-mode-debug.js`, **`color-mode-debug.spec.js`**
+- `theme/src/components/root-wrapper.spec.js`
+- `theme/src/components/widgets/steam/steam-game-card.js`, **`steam-game-card.spec.js`**, **`play-time-chart.spec.js`**
+- `theme/src/components/widgets/instagram/instagram-widget.spec.js`
+- `theme/src/pages/blog-head.spec.js`, **`chrisvogt-me-music-page.spec.js`**, **`chrisvogt-me-travel-page.spec.js`**
+- `www.chrisvogt.me/package.json` (version **1.22.3**), **`src/gatsby-theme-chronogrove/pages/blog-head.spec.js`**
+- `www.chronogrove.com/package.json` (version **1.9.3**), **`src/gatsby-theme-chronogrove/pages/blog-head.spec.js`**, **`templates/home-head.spec.js`**
+
+---
+
 ## 0.91.2
 
 ### `gatsby-theme-chronogrove` — Sonar/widget refactors, safer HTML, Theme UI aliases, `prop-types`

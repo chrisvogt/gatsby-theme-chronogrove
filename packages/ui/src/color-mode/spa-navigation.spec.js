@@ -19,7 +19,7 @@ describe('reconcileThemeUiColorModeOnNavigation', () => {
 
     reconcileThemeUiColorModeOnNavigation()
 
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
     expect(listener).toHaveBeenCalled()
   })
 })

@@ -53,7 +53,7 @@ export function logColorModeState(colorMode, theme, source = '') {
     const computed = root && typeof window.getComputedStyle === 'function' ? window.getComputedStyle(root) : null
     const textVar = computed?.getPropertyValue('--theme-ui-colors-text')?.trim()
     const bgVar = computed?.getPropertyValue('--theme-ui-colors-background')?.trim()
-    const dataAttr = root?.getAttribute('data-theme-ui-color-mode')
+    const dataAttr = root?.dataset.themeUiColorMode
 
     console.groupCollapsed(`[theme-ui color-mode] ${source} | mode=${colorMode} | data-attr=${dataAttr ?? 'none'}`)
     console.log('colorMode', colorMode)

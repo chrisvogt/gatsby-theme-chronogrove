@@ -159,7 +159,8 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
   const darkModeActive = isDarkMode(colorMode)
 
   const gameImage = game.images?.header || game.images?.icon || ''
-  const handleClick = onClick || (() => window.open(`https://store.steampowered.com/app/${game.id}`, '_blank'))
+  const handleClick =
+    onClick || (() => window.open(`https://store.steampowered.com/app/${game.id}`, '_blank', 'noopener,noreferrer'))
 
   return (
     <Box
