@@ -65,7 +65,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: ${{ github.repository }}
-          files: theme/coverage/lcov.info,packages/ui/coverage/lcov.info
+          files: packages/theme/coverage/lcov.info,packages/ui/coverage/lcov.info
           flags: unittests
           fail_ci_if_error: true
           disable_search: true
@@ -81,7 +81,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: ${{ github.repository }}
           report_type: test_results
-          files: theme/junit.xml
+          files: packages/theme/junit.xml
           disable_search: true
           working-directory: ${{ github.workspace }}
 

@@ -3,16 +3,17 @@
 ## Project Overview
 This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal website and blog with a social dashboard home page. The project uses pnpm workspaces and Turborepo to separate the theme code from the content.
 
-**Current Goal**: Decouple all personal information and www.chrisvogt.me content from the `/theme` directory to make the theme more generic and reusable.
+**Current Goal**: Decouple all personal information and www.chrisvogt.me content from the **`packages/theme`** directory to make the theme more generic and reusable.
 
 ## Architecture
 - **Root**: Contains workspace configuration and shared tooling
 - **`packages/ui/`**: `@chronogrove/ui` — Theme UI theme object, `ChronogroveThemeProvider`, color-mode helpers, Emotion cache utilities, and portable components (Button, skip-nav, color toggle); consumable from Next.js or other React apps
-- **`theme/`**: The Gatsby theme package (`gatsby-theme-chronogrove`); depends on `@chronogrove/ui` via `workspace:*` with thin re-export shims for backwards-compatible import paths
-- **`www.chrisvogt.me/`**: The actual website content and configuration
+- **`packages/theme/`**: The Gatsby theme package (`gatsby-theme-chronogrove`); depends on `@chronogrove/ui` via `workspace:*` with thin re-export shims for backwards-compatible import paths
+- **`websites/www.chrisvogt.me/`**: The actual website content and configuration
+- **`websites/www.chronogrove.com/`**: Official demo site for the theme
 
 ### Importing `@chronogrove/ui` (Gatsby shims vs direct subpaths)
-- **Inside `theme/`**: Prefer existing **shim paths** under `theme/src/components/...` when they exist (e.g. `button.js` re-exports `@chronogrove/ui/button`). That preserves **[Gatsby theme shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/theme-shadowing/)** for sites that override files by path. Implement shared UI in **`packages/ui`**; keep theme files as thin re-exports unless the code is Gatsby-only (e.g. `Link` from `gatsby`).
+- **Inside `packages/theme/`**: Prefer existing **shim paths** under `packages/theme/src/components/...` when they exist (e.g. `button.js` re-exports `@chronogrove/ui/button`). That preserves **[Gatsby theme shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/theme-shadowing/)** for sites that override files by path. Implement shared UI in **`packages/ui`**; keep theme files as thin re-exports unless the code is Gatsby-only (e.g. `Link` from `gatsby`).
 - **Next.js (`examples/chronogrove-next`)**, tooling, or non-Gatsby code: import **`@chronogrove/ui/<subpath>`** directly (see `packages/ui/package.json` → `exports`).
 
 ## Back-end API
@@ -33,7 +34,7 @@ This is a Gatsby theme monorepo that powers www.chrisvogt.me - a personal websit
 - **FontAwesome 7.x**: Icon library
 
 ## Development Setup
-- **Node.js**: 24 (see `.nvmrc` and `engines` in theme/package.json)
+- **Node.js**: 24 (see `.nvmrc` and `engines` in `packages/theme/package.json`)
 - **pnpm**: 10.15.0 (see `packageManager` in root package.json)
 - **HTTPS**: Local development requires HTTPS (see `develop:https` script)
 - **Workspace Commands**: Use `pnpm --filter [package] [command]` for package-specific operations
@@ -59,8 +60,8 @@ The theme includes a sophisticated widget system for the home page dashboard:
 ## Data Flow
 1. **Data Sources**: Metrics API at `metrics.chrisvogt.me` (backed by chrisvogt/metrics GitHub repo)
 2. **Widget data**: `useWidgetData` (TanStack Query) fetches per-widget URLs from site metadata, caches responses, and exposes loading/error to widget components
-3. **Metadata selectors**: `theme/src/selectors/metadata.js` (and related) resolve widget endpoints and usernames from Gatsby site metadata
-4. **Audio player**: `theme/src/stores/audio-player-store.js` (Zustand) holds which track/embed is active; any component can call store actions, `RootWrapper` mounts the player
+3. **Metadata selectors**: `packages/theme/src/selectors/metadata.js` (and related) resolve widget endpoints and usernames from Gatsby site metadata
+4. **Audio player**: `packages/theme/src/stores/audio-player-store.js` (Zustand) holds which track/embed is active; any component can call store actions, `RootWrapper` mounts the player
 5. **Components**: Display data with loading states and error handling
 
 ## Environment Variables
@@ -76,25 +77,25 @@ The following environment variables may be required for full functionality:
 The following files contain hardcoded personal information that needs to be made configurable:
 
 ### High Priority (Core Theme Files)
-- `theme/src/components/h-card.js` - Personal details, email, location
-- `theme/src/components/home-header-content.js` - Name, personal description
-- `theme/src/data/social-profiles.json` - Social media links and usernames
-- `theme/gatsby-config.js` - Default site metadata with personal info
+- `packages/theme/src/components/h-card.js` - Personal details, email, location
+- `packages/theme/src/components/home-header-content.js` - Name, personal description
+- `packages/theme/src/data/social-profiles.json` - Social media links and usernames
+- `packages/theme/gatsby-config.js` - Default site metadata with personal info
 
 ### Medium Priority (Configuration)
-- `theme/src/templates/home.js` - SEO metadata with personal details
-- `theme/src/components/footer/footer.js` - GitHub source link
-- `scripts/postinstall-banner.js` - Personal branding (root level)
+- `packages/theme/src/templates/home.js` - SEO metadata with personal details
+- `packages/theme/src/components/footer/footer.js` - GitHub source link
+- `packages/theme/scripts/postinstall-banner.mjs` - Personal branding (theme package)
 - `index.js` - Personal branding (root level)
 
 ### Low Priority (Content)
-- `www.chrisvogt.me/` directory - All content should remain as-is
+- `websites/www.chrisvogt.me/` directory - All content should remain as-is
 
 ## Testing Strategy
 - **Jest**: Unit testing framework with comprehensive configuration
 - **React Testing Library**: Component testing with DOM queries and user interactions
 - **React Test Renderer**: Snapshot testing for visual regression testing
-- **Zustand**: Reset `useAudioPlayerStore` in tests via `resetAudioPlayerStore` from `theme/src/testUtils.js` when assertions depend on player state
+- **Zustand**: Reset `useAudioPlayerStore` in tests via `resetAudioPlayerStore` from `packages/theme/src/testUtils.js` when assertions depend on player state
 - **Jest Canvas Mock**: Canvas API mocking for visual components
 - **Identity Object Proxy**: CSS/SCSS module mocking
 - **File Mock**: Static asset mocking (images, fonts, etc.)
@@ -135,10 +136,10 @@ The following files contain hardcoded personal information that needs to be made
 
 ## Common Development Tasks
 When adding new widgets:
-1. Create widget component in `theme/src/components/widgets/[name]/`
-2. Add metadata helpers in `theme/src/selectors/metadata.js` (and `use-site-metadata` if needed) for API URL / username
-3. Use `useWidgetData` for fetching; add fixtures under `theme/__mocks__/` or inline test data
-4. Write comprehensive tests (QueryClient via `TestProviderWithQuery` / `renderWithProviders` from `theme/src/testUtils.js`)
+1. Create widget component in `packages/theme/src/components/widgets/[name]/`
+2. Add metadata helpers in `packages/theme/src/selectors/metadata.js` (and `use-site-metadata` if needed) for API URL / username
+3. Use `useWidgetData` for fetching; add fixtures under `packages/theme/__mocks__/` or inline test data
+4. Write comprehensive tests (QueryClient via `TestProviderWithQuery` / `renderWithProviders` from `packages/theme/src/testUtils.js`)
 5. Update documentation as needed
 
 When decoupling personal information:

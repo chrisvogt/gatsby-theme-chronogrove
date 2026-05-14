@@ -30,7 +30,7 @@ export function applyDocumentColorModeSurface(colorMode, theme, surface) {
 
 /**
  * Keeps `document.documentElement` aligned with Theme UI color mode — same responsibility as
- * `RootWrapper`’s layout effect in the Gatsby theme (`theme/src/components/root-wrapper.js`):
+ * `RootWrapper`’s layout effect in the Gatsby theme (`packages/theme/src/components/root-wrapper.js`):
  * `theme-ui-*` class, `data-theme-ui-color-mode`, and inline page background from the **resolved**
  * theme (including `rawColors` / `colors.background` for the active mode).
  *

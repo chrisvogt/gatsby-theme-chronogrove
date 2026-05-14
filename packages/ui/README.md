@@ -1,6 +1,6 @@
 # `@chronogrove/ui`
 
-Shared **Theme UI** theme, color-mode (light/dark) helpers, **Emotion** cache utilities, and small **Gatsby-independent** components used by [`gatsby-theme-chronogrove`](../../theme/README.md).
+Shared **Theme UI** theme, color-mode (light/dark) helpers, **Emotion** cache utilities, and small **Gatsby-independent** components used by [`gatsby-theme-chronogrove`](../theme/README.md).
 
 ## Install
 
@@ -12,7 +12,7 @@ pnpm add @chronogrove/ui
 
 Use **`pnpm publish`** for releases so `workspace:` dependencies in dependents are rewritten; see [pnpm workspaces — publishing](https://pnpm.io/workspaces#publishing-workspace-packages).
 
-**Shared dependencies with `gatsby-theme-chronogrove`:** both packages depend on Theme UI, Emotion, **`three`** (where WebGL backgrounds or artwork import it), and related libraries, with versions driven by the root [pnpm catalog](../../pnpm-workspace.yaml). When you bump those catalog entries, update **`packages/ui`**, **`theme`**, and any other workspace `package.json` files that reference `catalog:` for the same keys in the **same change** so installs stay aligned and you avoid duplicate or mismatched trees.
+**Shared dependencies with `gatsby-theme-chronogrove`:** both packages depend on Theme UI, Emotion, **`three`** (where WebGL backgrounds or artwork import it), and related libraries, with versions driven by the root [pnpm catalog](../../pnpm-workspace.yaml). When you bump those catalog entries, update **`packages/ui`**, **`packages/theme`**, and any other workspace `package.json` files that reference `catalog:` for the same keys in the **same change** so installs stay aligned and you avoid duplicate or mismatched trees.
 
 ## Subpath exports
 
@@ -73,15 +73,15 @@ Styles load in three layers. Understanding the split prevents accidental duplica
 
 ### Layer order
 
-| #   | Layer                                           | Mechanism                                                                                                                                                                                                               |
-| --- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **Head — color-mode + Emotion insertion point** | Gatsby: `theme/gatsby-ssr.js` + `@chronogrove/ui/gatsby` helpers. Next: `ChronogroveNextRootLayoutHead` from `@chronogrove/ui/next`. Emit before any `<style>` tags so Emotion and Theme UI no-flash scripts run first. |
-| 2   | **Theme UI globals (`theme.global`)**           | `ChronogroveThemeProvider` renders `<Global styles={theme.global} />` via Emotion. This applies identical baseline CSS under both Gatsby and Next as long as the provider wraps the app. No extra import needed.        |
-| 3   | **Host global CSS**                             | Each host owns its plain-CSS files. See below for Gatsby and Next specifics.                                                                                                                                            |
+| #   | Layer                                           | Mechanism                                                                                                                                                                                                                        |
+| --- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **Head — color-mode + Emotion insertion point** | Gatsby: `packages/theme/gatsby-ssr.js` + `@chronogrove/ui/gatsby` helpers. Next: `ChronogroveNextRootLayoutHead` from `@chronogrove/ui/next`. Emit before any `<style>` tags so Emotion and Theme UI no-flash scripts run first. |
+| 2   | **Theme UI globals (`theme.global`)**           | `ChronogroveThemeProvider` renders `<Global styles={theme.global} />` via Emotion. This applies identical baseline CSS under both Gatsby and Next as long as the provider wraps the app. No extra import needed.                 |
+| 3   | **Host global CSS**                             | Each host owns its plain-CSS files. See below for Gatsby and Next specifics.                                                                                                                                                     |
 
 ### Gatsby
 
-The theme's own global CSS entry is the side-effect import block in [`theme/gatsby-browser.js`](../../theme/gatsby-browser.js):
+The theme's own global CSS entry is the side-effect import block in [`packages/theme/gatsby-browser.js`](../theme/gatsby-browser.js):
 
 ```javascript
 import './src/styles/global.css' // layout, .sr-only, Prism overrides
@@ -92,9 +92,9 @@ import 'prismjs/themes/prism-solarizedlight.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 ```
 
-[`theme/src/styles/global.css`](../../theme/src/styles/global.css) also contains `@import '@chronogrove/ui/color-toggle-styles'` for the theme toggle animation.
+[`packages/theme/src/styles/global.css`](../theme/src/styles/global.css) also contains `@import '@chronogrove/ui/color-toggle-styles'` for the theme toggle animation.
 
-Prism is **tightly coupled to `gatsby-remark-prismjs`** (configured in [`theme/gatsby-config.js`](../../theme/gatsby-config.js)). The CSS theme and helper overrides (`.gatsby-highlight`, line-number padding, etc.) only make sense when that plugin is active. They are intentionally kept in the Gatsby theme rather than in this package.
+Prism is **tightly coupled to `gatsby-remark-prismjs`** (configured in [`packages/theme/gatsby-config.js`](../theme/gatsby-config.js)). The CSS theme and helper overrides (`.gatsby-highlight`, line-number padding, etc.) only make sense when that plugin is active. They are intentionally kept in the Gatsby theme rather than in this package.
 
 Sites that shadow or extend the theme can add additional side-effect imports in their own `gatsby-browser.js` alongside (not instead of) the theme's entry.
 

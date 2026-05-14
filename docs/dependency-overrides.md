@@ -4,7 +4,7 @@ This document explains why `pnpm` overrides are defined in the root `package.jso
 
 When upstream dependencies catch up, these overrides can be removed. Periodically run `gh api repos/chrisvogt/gatsby-theme-chronogrove/dependabot/alerts` to check whether the related alerts have been resolved.
 
-**Gatsby and shared semver pins** (not overrides) live in [`pnpm-workspace.yaml`](../pnpm-workspace.yaml) under `catalog:`; workspace packages reference them with `"catalog:"` in `package.json`. The published theme still documents supported ranges in `theme/package.json` `peerDependencies`.
+**Gatsby and shared semver pins** (not overrides) live in [`pnpm-workspace.yaml`](../pnpm-workspace.yaml) under `catalog:`; workspace packages reference them with `"catalog:"` in `package.json`. The published theme still documents supported ranges in [`packages/theme/package.json`](../packages/theme/package.json) `peerDependencies`.
 
 ## Security Fixes (Dependabot High/Critical)
 

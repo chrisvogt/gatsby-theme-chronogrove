@@ -11,9 +11,9 @@ module.exports = [
     ignores: [
       '**/*.json',
       '**/node_modules/**',
-      '**/theme/public/**',
-      '**/www.chrisvogt.me/public/**',
-      '**/www.chronogrove.com/public/**',
+      '**/packages/theme/public/**',
+      '**/websites/www.chrisvogt.me/public/**',
+      '**/websites/www.chronogrove.com/public/**',
       '**/examples/**/.next/**',
       '**/.cache/**'
     ]
@@ -29,7 +29,7 @@ module.exports = [
     }
   },
   {
-    files: ['scripts/**/*.js', 'scripts/**/*.mjs'],
+    files: ['packages/theme/scripts/**/*.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -39,14 +39,7 @@ module.exports = [
     }
   },
   {
-    files: [
-      'theme/**/*.js',
-      'www.chrisvogt.me/**/*.js',
-      'www.chronogrove.com/**/*.js',
-      'packages/**/*.js',
-      'examples/**/*.js',
-      'examples/**/*.jsx'
-    ],
+    files: ['packages/**/*.js', 'websites/**/*.js', 'examples/**/*.js', 'examples/**/*.jsx'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -70,14 +63,7 @@ module.exports = [
   },
   js.configs.recommended,
   {
-    files: [
-      'theme/**/*.js',
-      'www.chrisvogt.me/**/*.js',
-      'www.chronogrove.com/**/*.js',
-      'packages/**/*.js',
-      'examples/**/*.js',
-      'examples/**/*.jsx'
-    ],
+    files: ['packages/**/*.js', 'websites/**/*.js', 'examples/**/*.js', 'examples/**/*.jsx'],
     plugins: {
       react,
       'jsx-a11y': jsxA11Y,
@@ -129,7 +115,7 @@ module.exports = [
     }
   },
   {
-    files: ['**/*.spec.js', 'theme/jest-shim.js'], // Target Jest spec files
+    files: ['**/*.spec.js', 'packages/theme/jest-shim.js'], // Target Jest spec files
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',

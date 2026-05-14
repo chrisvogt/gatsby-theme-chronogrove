@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "www.chrisvogt.me",
+  "version": "1.22.4",
+  "license": "GPL",
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "develop": "gatsby develop",
+    "develop:https": "gatsby develop --https --host www.dev-chrisvogt.me --key-file ./certs/www.dev-chrisvogt.me-key.pem --cert-file ./certs/www.dev-chrisvogt.me.pem",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "@emotion/react": "catalog:",
+    "@mdx-js/react": "catalog:",
+    "@theme-ui/components": "catalog:",
+    "@theme-ui/mdx": "catalog:",
+    "boxen": "catalog:",
+    "d3": "^7.9.0",
+    "gatsby": "catalog:",
+    "gatsby-plugin-google-gtag": "catalog:",
+    "gatsby-plugin-robots-txt": "catalog:",
+    "gatsby-plugin-sitemap": "catalog:",
+    "gatsby-theme-chronogrove": "workspace:*",
+    "lightgallery": "catalog:",
+    "prettier": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-intersection-observer": "catalog:",
+    "react-photo-gallery": "catalog:",
+    "theme-ui": "catalog:"
+  }
+}

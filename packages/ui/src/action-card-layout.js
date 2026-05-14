@@ -1,6 +1,6 @@
 /**
  * Layout `sx` aligned with GitHub pinned cards — pair with `Card variant="actionCard"`.
- * @see theme/src/components/widgets/github/pinned-item-card.js
+ * @see packages/theme/src/components/widgets/github/pinned-item-card.js
  */
 export const actionCardPinnedLayoutSx = {
   height: '100%',
