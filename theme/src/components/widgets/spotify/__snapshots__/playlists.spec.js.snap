@@ -2,9 +2,11 @@
 
 exports[`Playlists Component matches snapshot with various playlist scenarios 1`] = `
 <DocumentFragment>
-  <div>
+  <div
+    class="css-1yz7e9k"
+  >
     <div
-      class="css-ccroti"
+      class="css-epkbn4"
     >
       <h3
         class="css-9nh3l5"

@@ -62,7 +62,7 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
             href=""
             title=" on "
           >
-            Browse Playlists
+            Browse Playlists 
             <span
               class="read-more-icon"
             >
@@ -73,10 +73,10 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
       </div>
     </header>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -90,27 +90,29 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
         Tracks I've played most over the last four weeks.
       </p>
       <div
-        class="css-us3dds"
+        class="css-4kg5kc"
       >
         <div
-          class="css-kdywdz"
+          class="css-vgd83x"
           data-testid="spotify-top-tracks-carousel"
         >
           <div
             aria-hidden="false"
-            class="css-4bo1uy"
+            class="css-1s44svb"
             data-testid="spotify-top-tracks-page-1"
           >
             <div
-              class="media-item_grid null css-5stlgz"
+              class="media-item_grid null css-rt3umk"
             />
           </div>
         </div>
       </div>
     </div>
-    <div>
+    <div
+      class="css-1yz7e9k"
+    >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -124,7 +126,7 @@ exports[`Spotify Widget matches the error state snapshot 1`] = `
         My 12 favorite playlists.
       </p>
       <div
-        class="media-item_grid null css-5stlgz"
+        class="media-item_grid null css-rt3umk"
       />
     </div>
   </section>
@@ -176,7 +178,7 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
             href="https://spotify.com/user/test"
             title="Test User on Spotify"
           >
-            Browse Playlists
+            Browse Playlists 
             <span
               class="read-more-icon"
             >
@@ -224,10 +226,10 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
       &lt;p&gt;Test Spotify AI summary.&lt;/p&gt;
     </div>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -241,26 +243,26 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
         Tracks I've played most over the last four weeks.
       </p>
       <div
-        class="css-us3dds"
+        class="css-4kg5kc"
       >
         <div
-          class="css-kdywdz"
+          class="css-vgd83x"
           data-testid="spotify-top-tracks-carousel"
         >
           <div
             aria-hidden="false"
-            class="css-4bo1uy"
+            class="css-1s44svb"
             data-testid="spotify-top-tracks-page-1"
           >
             <div
-              class="media-item_grid null css-5stlgz"
+              class="media-item_grid null css-rt3umk"
             >
               <a
                 class="media-item_media css-13fusor"
                 title="Test Track – [object Object]"
               >
                 <div
-                  class="css-x4b07x"
+                  class="css-pcble3"
                 >
                   <div
                     class="media-item_caption css-e7oldi"
@@ -271,7 +273,7 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
                   </div>
                   <img
                     alt="cover artwork"
-                    class="css-karewm"
+                    class="css-526are"
                     crossorigin="anonymous"
                     loading="lazy"
                   />
@@ -282,9 +284,11 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
         </div>
       </div>
     </div>
-    <div>
+    <div
+      class="css-1yz7e9k"
+    >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -298,7 +302,7 @@ exports[`Spotify Widget matches the loaded state snapshot 1`] = `
         My 12 favorite playlists.
       </p>
       <div
-        class="media-item_grid null css-5stlgz"
+        class="media-item_grid null css-rt3umk"
       />
     </div>
   </section>
@@ -443,10 +447,10 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
       </div>
     </div>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -460,13 +464,13 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
         Tracks I've played most over the last four weeks.
       </p>
       <div
-        class="css-us3dds"
+        class="css-4kg5kc"
       >
         <div
-          class="media-item_grid null css-5stlgz"
+          class="media-item_grid null css-rt3umk"
         >
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -474,7 +478,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -482,7 +486,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -490,7 +494,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -498,7 +502,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -506,7 +510,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -514,7 +518,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -522,7 +526,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -530,7 +534,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -538,7 +542,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -546,7 +550,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -554,7 +558,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
             />
           </div>
           <div
-            class="show-loading-animation"
+            class="show-loading-animation css-1yz7e9k"
           >
             <div
               class="rect-shape css-2us3i8"
@@ -564,9 +568,11 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
         </div>
       </div>
     </div>
-    <div>
+    <div
+      class="css-1yz7e9k"
+    >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -580,10 +586,10 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
         My 12 favorite playlists.
       </p>
       <div
-        class="media-item_grid null css-5stlgz"
+        class="media-item_grid null css-rt3umk"
       >
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -591,7 +597,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -599,7 +605,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -607,7 +613,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -615,7 +621,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -623,7 +629,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -631,7 +637,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -639,7 +645,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -647,7 +653,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -655,7 +661,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -663,7 +669,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -671,7 +677,7 @@ exports[`Spotify Widget matches the loading state snapshot 1`] = `
           />
         </div>
         <div
-          class="show-loading-animation"
+          class="show-loading-animation css-1yz7e9k"
         >
           <div
             class="rect-shape css-2us3i8"
@@ -729,7 +735,7 @@ exports[`Spotify Widget renders without AI summary when not available 1`] = `
             href="https://spotify.com/user/test"
             title="Test User on Spotify"
           >
-            Browse Playlists
+            Browse Playlists 
             <span
               class="read-more-icon"
             >
@@ -772,10 +778,10 @@ exports[`Spotify Widget renders without AI summary when not available 1`] = `
       </div>
     </header>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -789,26 +795,26 @@ exports[`Spotify Widget renders without AI summary when not available 1`] = `
         Tracks I've played most over the last four weeks.
       </p>
       <div
-        class="css-us3dds"
+        class="css-4kg5kc"
       >
         <div
-          class="css-kdywdz"
+          class="css-vgd83x"
           data-testid="spotify-top-tracks-carousel"
         >
           <div
             aria-hidden="false"
-            class="css-4bo1uy"
+            class="css-1s44svb"
             data-testid="spotify-top-tracks-page-1"
           >
             <div
-              class="media-item_grid null css-5stlgz"
+              class="media-item_grid null css-rt3umk"
             >
               <a
                 class="media-item_media css-13fusor"
                 title="Test Track – [object Object]"
               >
                 <div
-                  class="css-x4b07x"
+                  class="css-pcble3"
                 >
                   <div
                     class="media-item_caption css-e7oldi"
@@ -819,7 +825,7 @@ exports[`Spotify Widget renders without AI summary when not available 1`] = `
                   </div>
                   <img
                     alt="cover artwork"
-                    class="css-karewm"
+                    class="css-526are"
                     crossorigin="anonymous"
                     loading="lazy"
                   />
@@ -830,9 +836,11 @@ exports[`Spotify Widget renders without AI summary when not available 1`] = `
         </div>
       </div>
     </div>
-    <div>
+    <div
+      class="css-1yz7e9k"
+    >
       <div
-        class="css-ccroti"
+        class="css-epkbn4"
       >
         <h3
           class="css-9nh3l5"
@@ -846,7 +854,7 @@ exports[`Spotify Widget renders without AI summary when not available 1`] = `
         My 12 favorite playlists.
       </p>
       <div
-        class="media-item_grid null css-5stlgz"
+        class="media-item_grid null css-rt3umk"
       />
     </div>
   </section>
