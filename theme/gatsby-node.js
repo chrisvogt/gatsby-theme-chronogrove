@@ -5,14 +5,28 @@ const startCase = require('lodash/startCase')
  * pnpm can install multiple physical copies of Theme UI (different peer-dependency graphs). React
  * context from `ColorModeProvider` in one `@theme-ui/color-modes` instance is then invisible to
  * `useColorMode` loaded from another — runtime error:
- * "[useColorMode] requires the ColorModeProvider component". Force webpack to resolve `theme-ui`
- * and the core Theme UI packages from the same tree as `ChronogroveThemeProvider` (see
- * `wrapRootElement.js`).
+ * "[useColorMode] requires the ColorModeProvider component". Force webpack to resolve `theme-ui`,
+ * `@emotion/react`, and every Theme UI package the app imports from the same tree as
+ * `ChronogroveThemeProvider` (see `wrapRootElement.js`).
  */
 function getThemeUiSingleInstanceAliases() {
   const themeUiPkgDir = path.dirname(require.resolve('theme-ui/package.json', { paths: [__dirname] }))
   const searchPaths = [themeUiPkgDir]
-  const pkgs = ['theme-ui', '@theme-ui/color-modes', '@theme-ui/core', '@theme-ui/theme-provider']
+  const pkgs = [
+    '@emotion/react',
+    'theme-ui',
+    '@theme-ui/color',
+    '@theme-ui/color-modes',
+    '@theme-ui/components',
+    '@theme-ui/core',
+    '@theme-ui/css',
+    '@theme-ui/mdx',
+    '@theme-ui/presets',
+    '@theme-ui/prism',
+    '@theme-ui/style-guide',
+    '@theme-ui/theme-provider',
+    'gatsby-plugin-theme-ui'
+  ]
   return pkgs.reduce((alias, pkg) => {
     alias[pkg] = path.dirname(require.resolve(`${pkg}/package.json`, { paths: searchPaths }))
     return alias
