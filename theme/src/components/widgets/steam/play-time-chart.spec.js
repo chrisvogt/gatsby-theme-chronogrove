@@ -26,6 +26,33 @@ Object.defineProperty(window, 'open', {
   value: jest.fn()
 })
 
+/** Theme UI game rows use inline cursor:pointer on a wrapping div */
+function findPointerGameCard(container) {
+  const allDivs = container.querySelectorAll('div')
+  let gameCard = null
+  allDivs.forEach(div => {
+    if (div.getAttribute('key') || div.textContent?.includes('Cities: Skylines')) {
+      let current = div
+      while (current && current !== container) {
+        if (current.style && current.style.cursor === 'pointer') {
+          gameCard = current
+          break
+        }
+        current = current.parentElement
+      }
+    }
+  })
+  return gameCard
+}
+
+function assertSteamStoreTabOpenedWithNoopener(openImpl = window.open) {
+  expect(openImpl).toHaveBeenCalledWith(
+    expect.stringContaining('https://store.steampowered.com/app/'),
+    '_blank',
+    'noopener,noreferrer'
+  )
+}
+
 describe('PlayTimeChart', () => {
   const sampleGames = [
     {
@@ -185,32 +212,11 @@ describe('PlayTimeChart', () => {
     it('opens Steam store page when game card is clicked', () => {
       const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
 
-      // Find game cards by looking for elements with onclick handlers
-      const allDivs = container.querySelectorAll('div')
-      let gameCard = null
-
-      // Look for div elements that have the game card structure
-      allDivs.forEach(div => {
-        if (div.getAttribute('key') || div.textContent?.includes('Cities: Skylines')) {
-          // Check if this div or a parent has click handling
-          let current = div
-          while (current && current !== container) {
-            if (current.style && current.style.cursor === 'pointer') {
-              gameCard = current
-              break
-            }
-            current = current.parentElement
-          }
-        }
-      })
+      const gameCard = findPointerGameCard(container)
 
       if (gameCard) {
         fireEvent.click(gameCard)
-        expect(window.open).toHaveBeenCalledWith(
-          expect.stringContaining('https://store.steampowered.com/app/'),
-          '_blank',
-          'noopener,noreferrer'
-        )
+        assertSteamStoreTabOpenedWithNoopener()
       } else {
         // Fallback: simulate click on first game (Cities: Skylines with id 255710)
         window.open = jest.fn()
@@ -677,21 +683,7 @@ describe('PlayTimeChart', () => {
 
     it('matches snapshot for a hovered game card in light mode', () => {
       const { container, asFragment } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
-      // Simulate hover on a game card
-      const allDivs = container.querySelectorAll('div')
-      let gameCard = null
-      allDivs.forEach(div => {
-        if (div.getAttribute('key') || div.textContent?.includes('Cities: Skylines')) {
-          let current = div
-          while (current && current !== container) {
-            if (current.style && current.style.cursor === 'pointer') {
-              gameCard = current
-              break
-            }
-            current = current.parentElement
-          }
-        }
-      })
+      const gameCard = findPointerGameCard(container)
       if (gameCard) {
         fireEvent.mouseEnter(gameCard)
       }
@@ -700,21 +692,7 @@ describe('PlayTimeChart', () => {
 
     it('applies correct hover styles in light mode', () => {
       const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
-      // Simulate hover on a game card
-      const allDivs = container.querySelectorAll('div')
-      let gameCard = null
-      allDivs.forEach(div => {
-        if (div.getAttribute('key') || div.textContent?.includes('Cities: Skylines')) {
-          let current = div
-          while (current && current !== container) {
-            if (current.style && current.style.cursor === 'pointer') {
-              gameCard = current
-              break
-            }
-            current = current.parentElement
-          }
-        }
-      })
+      const gameCard = findPointerGameCard(container)
       if (gameCard) {
         fireEvent.mouseEnter(gameCard)
         fireEvent.mouseLeave(gameCard)
@@ -727,28 +705,10 @@ describe('PlayTimeChart', () => {
     it('calls window.open with correct URL when game card is clicked', () => {
       window.open = jest.fn()
       const { container } = renderWithTheme(<PlayTimeChart games={sampleGames} />)
-      // Find a clickable game card
-      const allDivs = container.querySelectorAll('div')
-      let gameCard = null
-      allDivs.forEach(div => {
-        if (div.getAttribute('key') || div.textContent?.includes('Cities: Skylines')) {
-          let current = div
-          while (current && current !== container) {
-            if (current.style && current.style.cursor === 'pointer') {
-              gameCard = current
-              break
-            }
-            current = current.parentElement
-          }
-        }
-      })
+      const gameCard = findPointerGameCard(container)
       if (gameCard) {
         fireEvent.click(gameCard)
-        expect(window.open).toHaveBeenCalledWith(
-          expect.stringContaining('https://store.steampowered.com/app/'),
-          '_blank',
-          'noopener,noreferrer'
-        )
+        assertSteamStoreTabOpenedWithNoopener()
       }
     })
   })

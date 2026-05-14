@@ -6,13 +6,13 @@
 
 - **`steam-game-card.js`**: Opens the Steam store with **`window.open(..., '_blank', 'noopener,noreferrer')`** so the new tab cannot access **`window.opener`** (reverse tabnabbing).
 - **`color-mode-debug.js`**: Reads **`data-theme-ui-color-mode`** via **`document.documentElement.dataset.themeUiColorMode`** for debug output.
-- **Tests**: **`steam-game-card.spec.js`**, **`play-time-chart.spec.js`**, head/widget specs, **`color-mode-debug.spec.js`** (assert debug header reflects **`dataset`** / **`data-attr=none`**), **`browser-sync.spec.js`** (resolve mode when set via **`dataset`**).
+- **Tests**: **`steam-game-card.spec.js`**, **`play-time-chart.spec.js`** (shared **`findPointerGameCard`** / **`assertSteamStoreTabOpenedWithNoopener`** to satisfy duplication checks), head/widget specs, **`color-mode-debug.spec.js`** (assert debug header reflects **`dataset`** / **`data-attr=none`**), **`browser-sync.spec.js`** (resolve mode when set via **`dataset`**), **`gatsby-browser.spec.js`** (**`expectHtmlDatasetThemeUiColorMode`** helper); **`www.*`** shadow **`blog-head.spec.js`** — dropped redundant **`dataset`** block that mirrored **`toHaveAttribute`** (Sonar duplication).
 - **Version**: **0.91.3**
 
 ### `@chronogrove/ui`
 
 - **`browser-sync.js`**: **`resolveThemeUiColorMode`** reads **`data-theme-ui-color-mode`** from **`htmlElement.dataset.themeUiColorMode`** instead of **`getAttribute`**.
-- **Tests**: Color-mode and Gatsby specs updated to assert via **`dataset`**.
+- **Tests**: Color-mode and Gatsby specs assert via **`dataset`**; **`use-document-color-mode-surface.spec.js`** uses **`expectHtmlDatasetThemeUiColorMode`** to reduce duplication.
 - **Version**: **0.85.2**
 
 ### `www.chrisvogt.me`

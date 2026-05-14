@@ -24,6 +24,10 @@ const baseTheme = {
   }
 }
 
+function expectHtmlDatasetThemeUiColorMode(mode) {
+  expect(document.documentElement.dataset.themeUiColorMode).toBe(mode)
+}
+
 describe('useDocumentColorModeSurface', () => {
   beforeEach(() => {
     document.documentElement.className = 'theme-ui-stale'
@@ -45,7 +49,7 @@ describe('useDocumentColorModeSurface', () => {
 
     expect(document.documentElement.classList.contains('theme-ui-stale')).toBe(false)
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
-    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
+    expectHtmlDatasetThemeUiColorMode('default')
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
   })
 
@@ -61,7 +65,7 @@ describe('useDocumentColorModeSurface', () => {
     })
 
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
-    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
+    expectHtmlDatasetThemeUiColorMode('default')
   })
 
   it('applies dark surface when color mode is dark', () => {
@@ -76,7 +80,7 @@ describe('useDocumentColorModeSurface', () => {
     })
 
     expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
-    expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
+    expectHtmlDatasetThemeUiColorMode('dark')
   })
 
   it('prefers rawColors.background when set', () => {
@@ -108,13 +112,13 @@ describe('useDocumentColorModeSurface', () => {
     act(() => {
       applyDocumentColorModeSurface('light', baseTheme, resolveChronogroveSurfaceColors(baseTheme))
     })
-    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
+    expectHtmlDatasetThemeUiColorMode('default')
 
     document.documentElement.removeAttribute('data-theme-ui-color-mode')
     act(() => {
       applyDocumentColorModeSurface(undefined, baseTheme, resolveChronogroveSurfaceColors(baseTheme))
     })
-    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
+    expectHtmlDatasetThemeUiColorMode('default')
   })
 
   it('prefers rawColors.background over colors.background', () => {
