@@ -38,11 +38,15 @@ function runResolutionFragment({ cookie, localStorageMap, prefersDark, crossDoma
     crossDomainColorMode
   )
 
-  const getMode = new Function(`
-    ${fragment}
-    return mode;
-  `)
-  return getMode()
+  // Run the real inline fragment like a browser would (no `Function` / eval: Sonar S1523).
+  const exportKey = '__cgHeadInlineResolutionTestExport'
+  const script = document.createElement('script')
+  script.textContent = `${fragment}\nwindow['${exportKey}'] = mode;`
+  document.documentElement.appendChild(script)
+  script.remove()
+  const mode = window[exportKey]
+  delete window[exportKey]
+  return mode
 }
 
 describe('buildInitialThemeUiColorModeResolutionInlineFragment', () => {

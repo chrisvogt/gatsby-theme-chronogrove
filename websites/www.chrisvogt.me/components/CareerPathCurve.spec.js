@@ -133,6 +133,37 @@ const renderWithTheme = component => {
   return render(<ThemeUIProvider theme={theme}>{component}</ThemeUIProvider>)
 }
 
+function countBoundedDigitsBackward(text, fromIndex, maxDigits) {
+  let count = 0
+  for (let j = fromIndex; j >= 0 && count < maxDigits; j--) {
+    const c = text[j]
+    if (c < '0' || c > '9') break
+    count++
+  }
+  return count
+}
+
+function countBoundedDigitsForward(text, fromIndex, maxDigits) {
+  let count = 0
+  for (let j = fromIndex; j < text.length && count < maxDigits; j++) {
+    const c = text[j]
+    if (c < '0' || c > '9') break
+    count++
+  }
+  return count
+}
+
+function textHasSmallIntegerFraction(text, maxDigits = 4) {
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] !== '/') continue
+    const digitsBefore = countBoundedDigitsBackward(text, i - 1, maxDigits)
+    if (digitsBefore === 0) continue
+    const digitsAfter = countBoundedDigitsForward(text, i + 1, maxDigits)
+    if (digitsAfter > 0) return true
+  }
+  return false
+}
+
 describe('CareerPathCurve', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -349,7 +380,7 @@ describe('CareerPathCurve', () => {
       await waitFor(() => {
         const textContent = container.textContent
         // Should show format like "1/2" or "2/2"
-        expect(textContent).toMatch(/\d+\/\d+/)
+        expect(textHasSmallIntegerFraction(textContent)).toBe(true)
       })
     })
   })
