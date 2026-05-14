@@ -1,10 +1,10 @@
 import React from 'react'
 import parse, { domToReact, Element as DomElement } from 'html-react-parser'
 
-const ALLOWED_TAGS = ['b', 'i', 'em', 'br', 'a', 'p', 'strong']
+const ALLOWED_TAGS = new Set(['b', 'i', 'em', 'br', 'a', 'p', 'strong'])
 
 function isAllowedTag(name) {
-  return ALLOWED_TAGS.includes(name)
+  return ALLOWED_TAGS.has(name)
 }
 
 /**

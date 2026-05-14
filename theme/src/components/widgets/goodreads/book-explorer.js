@@ -110,7 +110,7 @@ const BookExplorer = ({ book, onClose }) => {
                 My Rating:
               </Box>
               <Box as='span' sx={{ color: 'primary' }}>
-                {renderStarsForRating(parseInt(rating, 10))}
+                {renderStarsForRating(Number.parseInt(rating, 10))}
               </Box>
             </Box>
 

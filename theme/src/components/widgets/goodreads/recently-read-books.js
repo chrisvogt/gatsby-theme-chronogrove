@@ -15,8 +15,8 @@ import BookLink from './book-link'
 export const HEADLINE = 'Books'
 export const BODY_TEXT = 'Recently read and finished books from Goodreads.'
 
-const BOOKS_PER_PAGE = 10
-const RECENTLY_READ_SKELETON_KEYS = 'abcdefghij'.split('')
+export const BOOKS_PER_PAGE = 10
+const RECENTLY_READ_SKELETON_KEYS = Array.from({ length: BOOKS_PER_PAGE }, (_, index) => index)
 
 const RecentlyReadBooks = ({ books = [], isLoading }) => {
   const { colorMode } = useThemeUI()

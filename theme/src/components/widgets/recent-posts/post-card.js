@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { jsx, Box as ThemeBox } from 'theme-ui'
 import { Heading, Card } from '@theme-ui/components'
 import { Link } from 'gatsby'
@@ -26,6 +27,12 @@ export const buildYouTubeEmbedUrl = url => {
   const separator = url.includes('?') ? '&' : '?'
   return `${url}${separator}rel=0&modestbranding=1`
 }
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+const thumbnailsPropType = PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.oneOf([null])])
+
+const previewUrlPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 /** Small float beside headline — wide crop matches OG / banner art */
 const HORIZONTAL_PREVIEW_ASPECT = '1.9 / 1'
@@ -201,6 +208,23 @@ function PostCardInner({
   )
 }
 
+PostCardInner.propTypes = {
+  banner: nullableString,
+  category: PropTypes.string,
+  date: PropTypes.string,
+  excerpt: nullableString,
+  horizontal: PropTypes.bool.isRequired,
+  hasMediaEmbed: PropTypes.bool.isRequired,
+  hasSoundCloud: PropTypes.bool.isRequired,
+  hasYouTube: PropTypes.bool.isRequired,
+  horizontalPreviewUrl: previewUrlPropType,
+  link: PropTypes.string.isRequired,
+  soundcloudId: nullableString,
+  thumbnails: thumbnailsPropType,
+  title: PropTypes.string.isRequired,
+  youtubeSrc: nullableString
+}
+
 const HorizontalTextBlock = ({
   category,
   date,
@@ -349,7 +373,18 @@ const HorizontalTextBlock = ({
   )
 }
 
-export default ({
+HorizontalTextBlock.propTypes = {
+  category: PropTypes.string,
+  date: PropTypes.string,
+  excerpt: nullableString,
+  hasMediaEmbed: PropTypes.bool.isRequired,
+  headlinePreviewUrl: previewUrlPropType,
+  horizontal: PropTypes.bool.isRequired,
+  link: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
+}
+
+const PostCard = ({
   banner,
   category,
   date,
@@ -403,3 +438,19 @@ export default ({
     </Link>
   )
 }
+
+PostCard.propTypes = {
+  banner: nullableString,
+  category: PropTypes.string,
+  date: PropTypes.string,
+  excerpt: nullableString,
+  horizontal: PropTypes.bool,
+  isRecap: PropTypes.bool,
+  link: PropTypes.string.isRequired,
+  soundcloudId: nullableString,
+  thumbnails: thumbnailsPropType,
+  title: PropTypes.string.isRequired,
+  youtubeSrc: nullableString
+}
+
+export default PostCard

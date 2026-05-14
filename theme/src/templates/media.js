@@ -3,6 +3,7 @@ import { Container, Flex, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { graphql } from 'gatsby'
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Category from '../components/category'
 import Layout from '../components/layout'
 import PageHeader from '../components/blog/page-header'
@@ -107,6 +108,28 @@ const MediaTemplate = ({ data: { mdx }, children }) => {
       </Flex>
     </Layout>
   )
+}
+
+MediaTemplate.propTypes = {
+  children: PropTypes.node,
+  data: PropTypes.shape({
+    mdx: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      fields: PropTypes.shape({
+        category: PropTypes.string,
+        path: PropTypes.string.isRequired
+      }).isRequired,
+      frontmatter: PropTypes.shape({
+        banner: PropTypes.string,
+        date: PropTypes.string,
+        description: PropTypes.string,
+        keywords: PropTypes.arrayOf(PropTypes.string),
+        soundcloudId: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        youtubeSrc: PropTypes.string
+      }).isRequired
+    }).isRequired
+  }).isRequired
 }
 
 export const Head = ({ data: { mdx } }) => {

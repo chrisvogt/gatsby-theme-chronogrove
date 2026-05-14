@@ -3,7 +3,7 @@ import { render, screen, fireEvent, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Router, LocationProvider } from '@gatsbyjs/reach-router'
 
-import RecentlyReadBooks, { HEADLINE, BODY_TEXT } from './recently-read-books'
+import RecentlyReadBooks, { BOOKS_PER_PAGE, HEADLINE, BODY_TEXT } from './recently-read-books'
 import goodreadsMock from '../../../../__mocks__/goodreads-widget.mock.json'
 
 // Mock LazyLoad component
@@ -52,7 +52,7 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
   describe('loading state', () => {
     it('renders a placeholder for each book expected to render', () => {
       const { container } = renderWithRouter(<RecentlyReadBooks books={[]} isLoading={true} default />)
-      expect(container.querySelectorAll('.rect-shape')).toHaveLength(10)
+      expect(container.querySelectorAll('.rect-shape')).toHaveLength(BOOKS_PER_PAGE)
     })
   })
 
