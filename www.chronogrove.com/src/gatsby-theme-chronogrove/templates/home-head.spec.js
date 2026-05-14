@@ -84,15 +84,15 @@ describe('HomeHead (chronogrove.com shadow)', () => {
     const seoElement = getByTestId('seo')
 
     // Verify theme-specific title
-    expect(seoElement.getAttribute('data-title')).toContain('Chronogrove')
+    expect(seoElement.dataset.title).toContain('Chronogrove')
 
     // Verify theme-specific description mentions gatsby theme
-    const description = seoElement.getAttribute('data-description')
+    const description = seoElement.dataset.description
     expect(description).toContain('gatsby-theme-chronogrove')
     expect(description).toContain('theme')
 
     // Verify theme-specific keywords
-    const keywords = seoElement.getAttribute('data-keywords')
+    const keywords = seoElement.dataset.keywords
     expect(keywords).toContain('gatsby theme')
     expect(keywords).toContain('chronogrove')
   })

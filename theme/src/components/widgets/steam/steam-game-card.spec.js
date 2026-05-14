@@ -96,7 +96,7 @@ describe('SteamGameCard', () => {
     const { container } = renderWithTheme(<SteamGameCard game={mockGame} />)
     const card = container.firstChild
     fireEvent.click(card)
-    expect(global.open).toHaveBeenCalledWith('https://store.steampowered.com/app/123', '_blank')
+    expect(global.open).toHaveBeenCalledWith('https://store.steampowered.com/app/123', '_blank', 'noopener,noreferrer')
   })
 
   it('calls custom onClick handler when provided', () => {

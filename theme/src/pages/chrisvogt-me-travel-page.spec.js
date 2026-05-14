@@ -188,6 +188,6 @@ describe('www.chrisvogt.me Travel page', () => {
     const seo = screen.getByTestId('seo')
     expect(seo).toHaveAttribute('data-canonical-path', '/travel/')
     expect(seo).toHaveAttribute('data-title', 'Travel — Chris Vogt')
-    expect(seo.getAttribute('data-description')).toContain('Belize')
+    expect(seo.dataset.description).toContain('Belize')
   })
 })

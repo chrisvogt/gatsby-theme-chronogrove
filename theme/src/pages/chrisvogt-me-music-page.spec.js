@@ -203,7 +203,7 @@ describe('www.chrisvogt.me Music page', () => {
 
     const seo = screen.getByTestId('seo')
     expect(seo).toHaveAttribute('data-canonical-path', '/music/')
-    expect(seo.getAttribute('data-title')).toContain('Music')
-    expect(seo.getAttribute('data-description')).toContain('chrisvogt.me')
+    expect(seo.dataset.title).toContain('Music')
+    expect(seo.dataset.description).toContain('chrisvogt.me')
   })
 })

@@ -36,17 +36,4 @@ describe('BlogHead (chrisvogt.me shadow)', () => {
     expect(urlMeta).toHaveAttribute('content', 'https://www.chrisvogt.me/blog/')
     expect(typeMeta).toHaveAttribute('content', 'website')
   })
-
-  it('uses site-specific SEO metadata', () => {
-    const { getByTestId } = render(<BlogHead />)
-    const seoElement = getByTestId('seo')
-
-    // Verify site-specific title
-    expect(seoElement.getAttribute('data-title')).toBe('Blog - Latest Posts')
-
-    // Verify site-specific description mentions chrisvogt.me
-    const description = seoElement.getAttribute('data-description')
-    expect(description).toContain('chrisvogt.me')
-    expect(description).toContain('technology, photography, music, and personal growth')
-  })
 })

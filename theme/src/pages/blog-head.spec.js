@@ -64,9 +64,9 @@ describe('BlogHead', () => {
     const seoElement = getByTestId('seo')
 
     // Verify that the title includes the site title
-    expect(seoElement.getAttribute('data-title')).toBe('Blog - Test Site')
+    expect(seoElement.dataset.title).toBe('Blog - Test Site')
 
     // Verify that the description is passed through
-    expect(seoElement.getAttribute('data-description')).toBe('Test site description')
+    expect(seoElement.dataset.description).toBe('Test site description')
   })
 })

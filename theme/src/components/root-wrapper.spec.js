@@ -96,7 +96,7 @@ describe('RootWrapper', () => {
       </RootWrapper>
     )
 
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
     expect(document.documentElement.style.backgroundColor).toBeTruthy()
     expect(document.documentElement.style.backgroundColor).toMatch(/red|rgb\(255,\s*0,\s*0\)|#ff0000/i)
   })
@@ -161,7 +161,7 @@ describe('RootWrapper', () => {
     expect(bgColor).toMatch(/rgb\(20,\s*20,\s*31\)|#14141F/i)
     expect(document.documentElement.classList.contains('theme-ui-dark')).toBe(true)
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(false)
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('dark')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('dark')
   })
 
   it('handles light mode with default background color', () => {
@@ -181,7 +181,7 @@ describe('RootWrapper', () => {
     const bgColor = document.documentElement.style.backgroundColor
     expect(bgColor).toMatch(/rgb\(253,\s*248,\s*245\)|#fdf8f5/i)
     expect(document.documentElement.classList.contains('theme-ui-default')).toBe(true)
-    expect(document.documentElement.getAttribute('data-theme-ui-color-mode')).toBe('default')
+    expect(document.documentElement.dataset.themeUiColorMode).toBe('default')
   })
 
   it('reconcile event updates context from localStorage when stored differs from current mode', () => {

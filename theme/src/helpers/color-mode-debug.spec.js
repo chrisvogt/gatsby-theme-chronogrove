@@ -13,19 +13,19 @@ describe('color-mode-debug', () => {
     console.log.mockRestore()
     console.groupEnd.mockRestore()
     console.warn.mockRestore()
-    if (global.window) {
-      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+    if (globalThis.window) {
+      delete globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__
     }
   })
 
   describe('isColorModeDebugEnabled', () => {
     it('returns true when window.__THEME_UI_COLOR_MODE_DEBUG__ is true', () => {
-      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
+      globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
       expect(isColorModeDebugEnabled()).toBe(true)
     })
 
     it('returns true when localStorage theme-ui-color-mode-debug is "1"', () => {
-      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      delete globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__
       try {
         localStorage.setItem('theme-ui-color-mode-debug', '1')
         expect(isColorModeDebugEnabled()).toBe(true)
@@ -35,7 +35,7 @@ describe('color-mode-debug', () => {
     })
 
     it('returns true when localStorage theme-ui-color-mode-debug is "true"', () => {
-      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      delete globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__
       try {
         localStorage.setItem('theme-ui-color-mode-debug', 'true')
         expect(isColorModeDebugEnabled()).toBe(true)
@@ -45,13 +45,13 @@ describe('color-mode-debug', () => {
     })
 
     it('returns false when debug flag is not set', () => {
-      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      delete globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__
       localStorage.removeItem('theme-ui-color-mode-debug')
       expect(isColorModeDebugEnabled()).toBe(false)
     })
 
     it('returns true when URL has ?theme-ui-color-mode-debug', () => {
-      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      delete globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__
       localStorage.removeItem('theme-ui-color-mode-debug')
       const OriginalURLSearchParams = window.URLSearchParams
       window.URLSearchParams = class MockURLSearchParams {
@@ -65,7 +65,7 @@ describe('color-mode-debug', () => {
     })
 
     it('returns false when localStorage.getItem throws', () => {
-      delete global.window.__THEME_UI_COLOR_MODE_DEBUG__
+      delete globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__
       const getItem = jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
         throw new Error('Storage unavailable')
       })
@@ -108,24 +108,34 @@ describe('color-mode-debug', () => {
 
   describe('logColorModeState', () => {
     it('does not log when debug is disabled', () => {
-      global.localStorage.getItem = jest.fn(() => null)
+      globalThis.localStorage.getItem = jest.fn(() => null)
       logColorModeState('default', { colors: { text: '#111' } }, 'Test')
       expect(console.groupCollapsed).not.toHaveBeenCalled()
     })
 
     it('logs when debug is enabled', () => {
-      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
+      globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
       document.documentElement.setAttribute('data-theme-ui-color-mode', 'default')
 
       logColorModeState('default', { colors: { text: '#111', background: '#fdf8f5' } }, 'Test')
 
       expect(console.groupCollapsed).toHaveBeenCalled()
+      expect(console.groupCollapsed).toHaveBeenCalledWith(expect.stringContaining('data-attr=default'))
       expect(console.log).toHaveBeenCalled()
       expect(console.groupEnd).toHaveBeenCalled()
     })
 
+    it('logs data-attr=none when data-theme-ui-color-mode is absent', () => {
+      globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
+      delete document.documentElement.dataset.themeUiColorMode
+
+      logColorModeState('dark', { colors: { text: '#fff' } }, 'Test')
+
+      expect(console.groupCollapsed).toHaveBeenCalledWith(expect.stringContaining('data-attr=none'))
+    })
+
     it('calls console.warn when debug log throws', () => {
-      global.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
+      globalThis.window.__THEME_UI_COLOR_MODE_DEBUG__ = true
       const getComputedStyle = jest.spyOn(window, 'getComputedStyle').mockImplementation(() => {
         throw new Error('getComputedStyle failed')
       })

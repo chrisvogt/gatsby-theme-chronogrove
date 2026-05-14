@@ -139,11 +139,18 @@ const SteamCardGameMedia = ({ darkModeActive, game, gameImage, isImageZoomed, ra
   </Box>
 )
 
+const steamGamePropType = PropTypes.shape({
+  displayName: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  images: PropTypes.shape({
+    header: PropTypes.string,
+    icon: PropTypes.string
+  })
+}).isRequired
+
 SteamCardGameMedia.propTypes = {
   darkModeActive: PropTypes.bool.isRequired,
-  game: PropTypes.shape({
-    displayName: PropTypes.string.isRequired
-  }).isRequired,
+  game: steamGamePropType,
   gameImage: PropTypes.string.isRequired,
   isImageZoomed: PropTypes.bool.isRequired,
   rank: PropTypes.number,
@@ -159,7 +166,8 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
   const darkModeActive = isDarkMode(colorMode)
 
   const gameImage = game.images?.header || game.images?.icon || ''
-  const handleClick = onClick || (() => window.open(`https://store.steampowered.com/app/${game.id}`, '_blank'))
+  const handleClick =
+    onClick || (() => window.open(`https://store.steampowered.com/app/${game.id}`, '_blank', 'noopener,noreferrer'))
 
   return (
     <Box
@@ -206,6 +214,14 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
       />
     </Box>
   )
+}
+
+SteamGameCard.propTypes = {
+  game: steamGamePropType,
+  onClick: PropTypes.func,
+  rank: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null])]),
+  showRank: PropTypes.bool,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 }
 
 export default SteamGameCard

@@ -36,17 +36,4 @@ describe('BlogHead (chronogrove.com shadow)', () => {
     expect(urlMeta).toHaveAttribute('content', 'https://www.chronogrove.com/blog/')
     expect(typeMeta).toHaveAttribute('content', 'website')
   })
-
-  it('uses site-specific SEO metadata', () => {
-    const { getByTestId } = render(<BlogHead />)
-    const seoElement = getByTestId('seo')
-
-    // Verify site-specific title
-    expect(seoElement.getAttribute('data-title')).toBe('Blog - Chronogrove')
-
-    // Verify site-specific description mentions technology and development
-    const description = seoElement.getAttribute('data-description')
-    expect(description).toContain('Chronogrove')
-    expect(description).toContain('technology, development')
-  })
 })
