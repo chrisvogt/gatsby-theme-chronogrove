@@ -3,7 +3,7 @@
 exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in dark mode 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -14,28 +14,28 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -48,28 +48,28 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -82,28 +82,28 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -112,24 +112,24 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -142,7 +142,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a game card in da
 exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game card in dark mode 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -153,28 +153,28 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -187,28 +187,28 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -221,28 +221,28 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -251,24 +251,24 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -281,7 +281,7 @@ exports[`PlayTimeChart Dark Mode Coverage matches snapshot for a hovered game ca
 exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -292,28 +292,28 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -326,28 +326,28 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -360,28 +360,28 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -390,24 +390,24 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -420,7 +420,7 @@ exports[`PlayTimeChart Data Processing filters out games with zero playtime 1`] 
 exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -431,28 +431,28 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -465,28 +465,28 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -499,28 +499,28 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -529,24 +529,24 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -559,7 +559,7 @@ exports[`PlayTimeChart Data Processing renders correctly with sample data 1`] = 
 exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -570,28 +570,28 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -600,24 +600,24 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           757.4h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           757.4h per game
         </span>
@@ -630,10 +630,10 @@ exports[`PlayTimeChart Edge Cases handles single game scenario 1`] = `
 exports[`PlayTimeChart Empty States renders empty state when games is null 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-16q7rgc"
+      class="css-et6zal"
     >
       <p
         class="css-13s56l1"
@@ -648,10 +648,10 @@ exports[`PlayTimeChart Empty States renders empty state when games is null 1`] =
 exports[`PlayTimeChart Empty States renders empty state when games is undefined 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-16q7rgc"
+      class="css-et6zal"
     >
       <p
         class="css-13s56l1"
@@ -666,10 +666,10 @@ exports[`PlayTimeChart Empty States renders empty state when games is undefined 
 exports[`PlayTimeChart Empty States renders empty state when no games provided 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-16q7rgc"
+      class="css-et6zal"
     >
       <p
         class="css-13s56l1"
@@ -684,7 +684,7 @@ exports[`PlayTimeChart Empty States renders empty state when no games provided 1
 exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in light mode 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -695,28 +695,28 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -729,28 +729,28 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -763,28 +763,28 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -793,24 +793,24 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -823,7 +823,7 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a game card in l
 exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game card in light mode 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -834,28 +834,28 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -868,28 +868,28 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -902,28 +902,28 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -932,24 +932,24 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -962,13 +962,13 @@ exports[`PlayTimeChart Light Mode Coverage matches snapshot for a hovered game c
 exports[`PlayTimeChart Loading State renders loading state correctly 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-nyc2gr"
+      class="css-1g612vj"
     >
       <div
-        class="css-17cb55"
+        class="css-3wu3l6"
       />
       <p
         class="css-gej412"
@@ -983,7 +983,7 @@ exports[`PlayTimeChart Loading State renders loading state correctly 1`] = `
 exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -994,28 +994,28 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -1028,28 +1028,28 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -1062,28 +1062,28 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -1092,24 +1092,24 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>
@@ -1122,7 +1122,7 @@ exports[`PlayTimeChart Theme Integration adapts to dark mode styling 1`] = `
 exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
       class="css-munl51"
@@ -1133,28 +1133,28 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Cities: Skylines header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/cities-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             1
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Cities: Skylines
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               757.35h total • 2h recently
             </div>
@@ -1167,28 +1167,28 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="ARK: Survival Evolved header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/ark-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             2
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               ARK: Survival Evolved
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               277.83h total
             </div>
@@ -1201,28 +1201,28 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="PUBG: BATTLEGROUNDS header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/pubg-header.jpg"
           />
           <div
-            class="css-17mv9gi"
+            class="css-18c3nn9"
           >
             3
           </div>
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               PUBG: BATTLEGROUNDS
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               200h total • 1h recently
             </div>
@@ -1231,24 +1231,24 @@ exports[`PlayTimeChart Theme Integration renders correctly in light mode 1`] = `
       </button>
     </div>
     <div
-      class="css-rcbrnq"
+      class="css-1jvjqv3"
     >
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Total Hours: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           1235.2h
         </span>
       </div>
       <div
-        class="css-aq86v7"
+        class="css-12f4tqr"
       >
         Average: 
         <span
-          class="css-1eduwqk"
+          class="css-13epqkc"
         >
           411.7h per game
         </span>

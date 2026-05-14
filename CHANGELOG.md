@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.91.2
+
+### `gatsby-theme-chronogrove` — Sonar/widget refactors, safer HTML, Theme UI aliases, `prop-types`
+
+- **`safeHtmlParser.js`**: **`Element`** imported as **`DomElement`** so it is not mistaken for **`React.Element`**; allowlist as **`Set`**; stable **`nextKey`** instead of **`Math.random()`** for parsed nodes; **`renderAnchor`** / **`renderSemanticTag`** helpers; explicit **`undefined`** when a node is not handled in **`replace`**.
+- **`home.js`** / **`media.js`**: Outer layout uses **`Box`** where **`sx`** was applied to a raw **`div`**; hidden **`h-card`** **`u-url`** includes visually clipped canonical text; keyword microformat keys use **`keyword`**; **`MediaTemplate.propTypes`** for **`children`** / **`data`**.
+- **Dependencies**: **`prop-types`** added for **`MediaTemplate`** via **`catalog:`** ( **`pnpm-workspace.yaml`** ) so workspace packages share one pinned version.
+- **`gatsby-node.js`**: **`getThemeUiSingleInstanceAliases`** aliases **`@emotion/react`**, Theme UI packages (**`@theme-ui/*`**, **`gatsby-plugin-theme-ui`**, etc.) to the same install as **`theme-ui`** to avoid **`[useColorMode] requires the ColorModeProvider`** when pnpm resolves duplicates.
+- **Widgets & shortcodes**: Goodreads, Instagram, Recent Posts, Spotify, Steam, GitHub, Flickr — readability and Sonar-oriented fixes with updated specs/snapshots; **`soundcloud`** / **`spotify`** shortcodes and **`spotify`** snapshot tweaks.
+- **Tests**: **`gatsby-node.spec.js`** and widget snapshots aligned with the above.
+- **Version**: **0.91.2**
+
+### `www.chrisvogt.me`
+
+- **Version**: **1.22.2** (tracks theme **0.91.2**).
+
+### `www.chronogrove.com` (demo)
+
+- **Version**: **1.9.2** (tracks theme **0.91.2**).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `pnpm-lock.yaml`
+- `pnpm-workspace.yaml` (**`catalog.prop-types`**)
+- `theme/package.json` (version **0.91.2**, **`prop-types`**: **`catalog:`**)
+- `theme/gatsby-node.js`, **`gatsby-node.spec.js`**
+- `theme/src/helpers/safeHtmlParser.js`
+- `theme/src/templates/home.js`, **`media.js`**, **`__snapshots__/media.spec.js.snap`**
+- `theme/src/shortcodes/soundcloud.js`, **`spotify.js`**, **`__snapshots__/spotify.spec.js.snap`**
+- `theme/src/components/widgets/flickr/` — **`flickr-widget.js`**, **`flickr-widget-item.js`**, snapshots
+- `theme/src/components/widgets/github/` — **`github-widget.js`**, **`contribution-graph.js`**, **`pinned-item-card.js`**, **`pinned-items.js`**, **`renderers/`**, snapshots
+- `theme/src/components/widgets/goodreads/` — **`book-explorer.js`**, **`book-link.js`**, **`goodreads-widget.js`**, **`recently-read-books.js`**, **`user-profile.js`**, **`user-status.js`**, specs and **`goodreads-widget`** snapshot
+- `theme/src/components/widgets/instagram/` — **`instagram-widget.js`**, **`instagram-widget-item.js`**, snapshots
+- `theme/src/components/widgets/recent-posts/` — **`post-card.js`**, **`recent-posts-widget.js`**, **`post-card`** snapshots
+- `theme/src/components/widgets/spotify/` — **`media-item-grid.js`**, **`playlists.js`**, **`spotify-widget.js`**, **`top-tracks.js`**, **`track-preview.js`**, specs/snapshots
+- `theme/src/components/widgets/steam/` — **`play-time-chart.js`**, **`steam-game-card.js`**, **`steam-widget.js`**, snapshots
+- `www.chrisvogt.me/package.json` (version **1.22.2**)
+- `www.chronogrove.com/package.json` (version **1.9.2**)
+
+---
+
 ## 0.91.1
 
 ### `@chronogrove/ui` — Accessibility polish and Sonar-driven refactors (patch)

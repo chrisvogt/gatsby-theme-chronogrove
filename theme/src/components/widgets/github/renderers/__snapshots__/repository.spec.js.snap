@@ -11,7 +11,7 @@ exports[`GitHub Repository Renderer falls back to updatedAt when pushedAt is not
       themeuser/legacy-repo
     </h4>
     <span
-      class="css-gulexy"
+      class="css-1e5uqy3"
     >
       Legacy repository without pushedAt field.
     </span>
@@ -52,7 +52,7 @@ exports[`GitHub Repository Renderer matches the snapshot 1`] = `
       themeuser/gatsby-theme-chronogrove
     </h4>
     <span
-      class="css-gulexy"
+      class="css-1e5uqy3"
     >
       GatsbyJS blog theme with built-in social widgets for creatives and developers.
     </span>

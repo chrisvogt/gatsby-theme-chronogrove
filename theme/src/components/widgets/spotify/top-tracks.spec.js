@@ -2,11 +2,10 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { jsx } from 'theme-ui'
+import { jsx, ThemeUIProvider } from 'theme-ui'
 import TopTracks from './top-tracks'
 import { TestProviderWithState } from '../../../testUtils'
 import { useAudioPlayerStore, resetAudioPlayerStore } from '../../../stores/audio-player-store'
-import { ThemeUIProvider } from 'theme-ui'
 import theme from '@chronogrove/ui/theme'
 
 jest.mock('./media-item-grid', () => jest.fn(() => <div data-testid='media-item-grid' />))

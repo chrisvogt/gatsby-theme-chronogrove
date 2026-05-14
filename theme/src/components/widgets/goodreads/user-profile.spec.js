@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { ThemeUIProvider } from 'theme-ui'
+import { ThemeUIProvider, useThemeUI } from 'theme-ui'
 import UserProfile from './user-profile'
-import { useThemeUI } from 'theme-ui'
+
 import isDarkMode from '../../../helpers/isDarkMode'
 
 // Mock the useThemeUI hook

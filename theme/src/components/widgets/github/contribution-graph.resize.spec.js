@@ -18,6 +18,13 @@ const calendar = {
   ]
 }
 
+const mockOffsetWidth = value => {
+  Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+    configurable: true,
+    value
+  })
+}
+
 describe('ContributionGraph resize behavior', () => {
   it('handles window resize without errors and initializes cell size', () => {
     render(
@@ -36,15 +43,7 @@ describe('ContributionGraph resize behavior', () => {
   })
 
   it('scales cell size up on wide containers (no upper clamp)', () => {
-    const defineOffset = value => {
-      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
-        configurable: true,
-        value
-      })
-    }
-
-    // Wide container
-    defineOffset(1200)
+    mockOffsetWidth(1200)
 
     // Create a more realistic 53-week calendar with at least one day per week
     const weeks = Array.from({ length: 53 }, (_, i) => {
@@ -74,15 +73,7 @@ describe('ContributionGraph resize behavior', () => {
   })
 
   it('clamps cell size to a minimum on narrow containers', () => {
-    const defineOffset = value => {
-      Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
-        configurable: true,
-        value
-      })
-    }
-
-    // Narrow container (e.g., small mobile)
-    defineOffset(320)
+    mockOffsetWidth(320)
 
     // Use a full-year-like structure to stress the calculation
     const weeks = Array.from({ length: 53 }, (_, i) => {

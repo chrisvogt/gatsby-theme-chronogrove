@@ -57,6 +57,9 @@ catalogs:
     prettier:
       specifier: ^3.8.3
       version: 3.8.3
+    prop-types:
+      specifier: ^15.8.1
+      version: 15.8.1
     react:
       specifier: ^19.2.6
       version: 19.2.6
@@ -395,6 +398,9 @@ importers:
       prismjs:
         specifier: ^1.30.0
         version: 1.30.0
+      prop-types:
+        specifier: 'catalog:'
+        version: 15.8.1
       react:
         specifier: 'catalog:'
         version: 19.2.6

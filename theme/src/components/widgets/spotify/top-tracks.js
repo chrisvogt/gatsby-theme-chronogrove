@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Box } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import { useEffect, useMemo, useState } from 'react'
@@ -81,16 +81,16 @@ const TopTracks = ({ isLoading, tracks = [] }) => {
   }, [tracksIdentityKey])
 
   return (
-    <div sx={{ mb: 4 }}>
-      <div sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
+    <Box sx={{ mb: 4 }}>
+      <Box sx={{ display: 'flex', flex: 1, alignItems: 'center' }}>
         <Heading as='h3' sx={{ fontSize: [3, 4] }}>
           Top Tracks
         </Heading>
-      </div>
+      </Box>
 
       <Themed.p>Tracks I&apos;ve played most over the last four weeks.</Themed.p>
 
-      <div
+      <Box
         sx={{
           overflow: 'hidden',
           position: 'relative',
@@ -103,7 +103,7 @@ const TopTracks = ({ isLoading, tracks = [] }) => {
         {isLoading ? (
           <MediaItemGrid isLoading items={[]} onTrackClick={handleTrackClick} />
         ) : (
-          <div
+          <Box
             data-testid='spotify-top-tracks-carousel'
             sx={{
               display: 'flex',
@@ -124,7 +124,7 @@ const TopTracks = ({ isLoading, tracks = [] }) => {
             onPointerCancel={handlePointerCancel}
           >
             {pages.map((pageItems, pageIndex) => (
-              <div
+              <Box
                 key={`spotify-top-tracks-page-${pageIndex + 1}`}
                 aria-hidden={pageIndex !== currentPage - 1}
                 data-testid={`spotify-top-tracks-page-${pageIndex + 1}`}
@@ -143,16 +143,16 @@ const TopTracks = ({ isLoading, tracks = [] }) => {
                   items={pageItems}
                   onTrackClick={handleTrackClick}
                 />
-              </div>
+              </Box>
             ))}
-          </div>
+          </Box>
         )}
-      </div>
+      </Box>
 
       {!isLoading && totalPages > 1 ? (
         <Pagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={totalPages} />
       ) : null}
-    </div>
+    </Box>
   )
 }
 

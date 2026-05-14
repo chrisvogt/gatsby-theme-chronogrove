@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { act } from 'react'
 import { render, screen, fireEvent, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Router, LocationProvider } from '@gatsbyjs/reach-router'
-import { act } from 'react'
 
-import RecentlyReadBooks, { HEADLINE, BODY_TEXT } from './recently-read-books'
+import RecentlyReadBooks, { BOOKS_PER_PAGE, HEADLINE, BODY_TEXT } from './recently-read-books'
 import goodreadsMock from '../../../../__mocks__/goodreads-widget.mock.json'
 
 // Mock LazyLoad component
@@ -13,12 +12,16 @@ jest.mock('../../lazy-load', () => ({ children }) => <>{children}</>)
 // Mock Book3D so tests don't need a WebGL context; expose book-preview-thumbnail
 // so existing assertions continue to work
 jest.mock('../../artwork/book-3d', () => {
-  const React = require('react')
+  const { createElement } = require('react')
   return function MockBook3D({ title, thumbnailURL }) {
-    return (
-      <div data-testid='book-preview-3d' role='img' aria-label={title}>
-        <img data-testid='book-preview-thumbnail' src={thumbnailURL} alt={title} />
-      </div>
+    return createElement(
+      'div',
+      { 'data-testid': 'book-preview-3d' },
+      createElement('img', {
+        'data-testid': 'book-preview-thumbnail',
+        src: thumbnailURL,
+        alt: title
+      })
     )
   }
 })
@@ -49,7 +52,7 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
   describe('loading state', () => {
     it('renders a placeholder for each book expected to render', () => {
       const { container } = renderWithRouter(<RecentlyReadBooks books={[]} isLoading={true} default />)
-      expect(container.querySelectorAll('.rect-shape')).toHaveLength(10)
+      expect(container.querySelectorAll('.rect-shape')).toHaveLength(BOOKS_PER_PAGE)
     })
   })
 
@@ -139,6 +142,71 @@ describe('Widget/Goodreads/RecentlyReadBooks', () => {
         'title',
         'Book 11'
       )
+    })
+
+    it('navigates the carousel with arrow keys when there is more than one page', () => {
+      jest.useFakeTimers()
+
+      const paginatedBooks = Array.from({ length: 20 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      const carousel = screen.getByTestId('goodreads-carousel')
+      carousel.focus()
+
+      fireEvent.keyDown(carousel, { key: 'ArrowRight' })
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.keyDown(carousel, { key: 'ArrowDown' })
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.keyDown(carousel, { key: 'ArrowLeft' })
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.click(screen.getByLabelText('Go to page 2'))
+      expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+
+      act(() => {
+        jest.advanceTimersByTime(300)
+      })
+
+      fireEvent.keyDown(carousel, { key: 'ArrowUp' })
+      expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+    })
+
+    it('ignores arrow keys on the carousel when there is only one page', () => {
+      const paginatedBooks = Array.from({ length: 5 }, (_, idx) => ({
+        ...mockBooks[idx % mockBooks.length],
+        id: `book-${idx + 1}`,
+        title: `Book ${idx + 1}`,
+        thumbnail: `https://example.com/book-${idx + 1}.jpg`
+      }))
+
+      renderWithRouter(<RecentlyReadBooks books={paginatedBooks} isLoading={false} default />)
+
+      const carousel = screen.getByTestId('goodreads-carousel')
+      carousel.focus()
+      fireEvent.keyDown(carousel, { key: 'ArrowRight' })
+
+      expect(within(screen.getByTestId('goodreads-page-1')).getAllByTestId('book-link')).toHaveLength(5)
+      expect(screen.queryByTestId('goodreads-page-2')).not.toBeInTheDocument()
     })
 
     it('returns to the first page when the books list shrinks', () => {

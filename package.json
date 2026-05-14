@@ -11,8 +11,8 @@
     "postinstall": "node ./scripts/postinstall-banner.mjs",
     "prepare": "husky",
     "prettier": "prettier --check .",
-    "test": "turbo run test",
-    "test:coverage": "turbo run test:coverage",
+    "test": "turbo run test --concurrency=1",
+    "test:coverage": "turbo run test:coverage --concurrency=1",
     "test:watch": "pnpm --filter gatsby-theme-chronogrove test:watch",
     "build": "turbo run build"
   },

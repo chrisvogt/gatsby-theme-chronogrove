@@ -1,8 +1,9 @@
 /** @jsx jsx */
-import { Container, Flex, jsx } from 'theme-ui'
+import { Container, Flex, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { graphql } from 'gatsby'
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Category from '../components/category'
 import Layout from '../components/layout'
 import PageHeader from '../components/blog/page-header'
@@ -74,17 +75,31 @@ const MediaTemplate = ({ data: { mdx }, children }) => {
 
             {/* Hidden microformats data */}
             <div style={{ display: 'none' }}>
-              <a className='u-url' href={canonicalUrl} />
+              <a className='u-url' href={canonicalUrl}>
+                <Box
+                  as='span'
+                  sx={{
+                    clip: 'rect(0 0 0 0)',
+                    clipPath: 'inset(50%)',
+                    height: '1px',
+                    overflow: 'hidden',
+                    position: 'absolute',
+                    whiteSpace: 'nowrap',
+                    width: '1px'
+                  }}
+                >
+                  {canonicalUrl}
+                </Box>
+              </a>
               <span className='u-uid'>{mdx.id}</span>
               {description && <div className='p-summary'>{description}</div>}
               {banner && <img className='u-photo' src={banner} alt='' />}
               {category && <span className='p-category'>{category}</span>}
-              {keywords &&
-                keywords.map((keyword, index) => (
-                  <span key={index} className='p-category'>
-                    {keyword}
-                  </span>
-                ))}
+              {keywords?.map(keyword => (
+                <span key={keyword} className='p-category'>
+                  {keyword}
+                </span>
+              ))}
             </div>
 
             <div className='e-content article-content'>{children}</div>
@@ -93,6 +108,28 @@ const MediaTemplate = ({ data: { mdx }, children }) => {
       </Flex>
     </Layout>
   )
+}
+
+MediaTemplate.propTypes = {
+  children: PropTypes.node,
+  data: PropTypes.shape({
+    mdx: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      fields: PropTypes.shape({
+        category: PropTypes.string,
+        path: PropTypes.string.isRequired
+      }).isRequired,
+      frontmatter: PropTypes.shape({
+        banner: PropTypes.string,
+        date: PropTypes.string,
+        description: PropTypes.string,
+        keywords: PropTypes.arrayOf(PropTypes.string),
+        soundcloudId: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        youtubeSrc: PropTypes.string
+      }).isRequired
+    }).isRequired
+  }).isRequired
 }
 
 export const Head = ({ data: { mdx } }) => {

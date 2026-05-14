@@ -7,6 +7,10 @@
 const themeUiEntry = require.resolve('theme-ui')
 
 module.exports = {
+  // Recycle jest-worker processes before idle RAM grows large — reduces intermittent SIGSEGV when
+  // multiple workers run alongside Turbo’s other packages (see root `pnpm test --concurrency=1`).
+  workerIdleMemoryLimit: '512MB',
+
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 

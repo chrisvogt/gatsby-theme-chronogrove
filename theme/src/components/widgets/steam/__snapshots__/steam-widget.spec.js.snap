@@ -27,7 +27,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       </p>
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -41,7 +41,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1o4v4vi"
+      class="css-1dx5shc"
     >
       <button
         aria-label="View Half-Life on Steam"
@@ -49,23 +49,23 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Half-Life header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/halflife.jpg"
           />
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Half-Life
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               2 hours
             </div>
@@ -78,23 +78,23 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Portal header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/portal.jpg"
           />
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Portal
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               45 minutes
             </div>
@@ -103,7 +103,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       </button>
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -117,7 +117,7 @@ exports[`SteamWidget renders AI summary if present 1`] = `
       My top 10 most played games.
     </p>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
         class="css-munl51"
@@ -128,28 +128,28 @@ exports[`SteamWidget renders AI summary if present 1`] = `
           type="button"
         >
           <div
-            class="css-w24l45"
+            class="css-2w7wic"
           >
             <img
               alt="Cities: Skylines header"
-              class="css-17nz09e"
+              class="css-ac7c24"
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-17mv9gi"
+              class="css-18c3nn9"
             >
               1
             </div>
             <div
-              class="steam-game-card_caption css-k8brg5"
+              class="steam-game-card_caption css-18i3ee5"
             >
               <div
-                class="css-h3pxs9"
+                class="css-jae09u"
               >
                 Cities: Skylines
               </div>
               <div
-                class="css-1i7ls3l"
+                class="css-bcsjsw"
               >
                 757.35h total • 2 hours recently
               </div>
@@ -162,28 +162,28 @@ exports[`SteamWidget renders AI summary if present 1`] = `
           type="button"
         >
           <div
-            class="css-w24l45"
+            class="css-2w7wic"
           >
             <img
               alt="ARK: Survival Evolved header"
-              class="css-17nz09e"
+              class="css-ac7c24"
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-17mv9gi"
+              class="css-18c3nn9"
             >
               2
             </div>
             <div
-              class="steam-game-card_caption css-k8brg5"
+              class="steam-game-card_caption css-18i3ee5"
             >
               <div
-                class="css-h3pxs9"
+                class="css-jae09u"
               >
                 ARK: Survival Evolved
               </div>
               <div
-                class="css-1i7ls3l"
+                class="css-bcsjsw"
               >
                 277.83h total
               </div>
@@ -192,34 +192,34 @@ exports[`SteamWidget renders AI summary if present 1`] = `
         </button>
       </div>
       <div
-        class="css-rcbrnq"
+        class="css-1jvjqv3"
       >
         <div
-          class="css-aq86v7"
+          class="css-12f4tqr"
         >
           Total Hours: 
           <span
-            class="css-1eduwqk"
+            class="css-13epqkc"
           >
             1035.2h
           </span>
         </div>
         <div
-          class="css-aq86v7"
+          class="css-12f4tqr"
         >
           Average: 
           <span
-            class="css-1eduwqk"
+            class="css-13epqkc"
           >
             517.6h per game
           </span>
         </div>
       </div>
       <div
-        class="css-1gnkw3u"
+        class="css-1wrm9ji"
       >
         <a
-          class="css-4buc8m"
+          class="css-1vusgb5"
           href="https://steamcommunity.com/id/themeuser/games/?tab=all"
         >
           View complete gaming library
@@ -256,7 +256,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       Steam
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -270,7 +270,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1o4v4vi"
+      class="css-1dx5shc"
     >
       <button
         aria-label="View Half-Life on Steam"
@@ -278,23 +278,23 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Half-Life header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/halflife.jpg"
           />
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Half-Life
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               2 hours
             </div>
@@ -307,23 +307,23 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Portal header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/portal.jpg"
           />
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Portal
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               45 minutes
             </div>
@@ -332,7 +332,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       </button>
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -346,7 +346,7 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
       My top 10 most played games.
     </p>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
         class="css-munl51"
@@ -357,28 +357,28 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
           type="button"
         >
           <div
-            class="css-w24l45"
+            class="css-2w7wic"
           >
             <img
               alt="Cities: Skylines header"
-              class="css-17nz09e"
+              class="css-ac7c24"
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-17mv9gi"
+              class="css-18c3nn9"
             >
               1
             </div>
             <div
-              class="steam-game-card_caption css-k8brg5"
+              class="steam-game-card_caption css-18i3ee5"
             >
               <div
-                class="css-h3pxs9"
+                class="css-jae09u"
               >
                 Cities: Skylines
               </div>
               <div
-                class="css-1i7ls3l"
+                class="css-bcsjsw"
               >
                 757.35h total • 2 hours recently
               </div>
@@ -391,28 +391,28 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
           type="button"
         >
           <div
-            class="css-w24l45"
+            class="css-2w7wic"
           >
             <img
               alt="ARK: Survival Evolved header"
-              class="css-17nz09e"
+              class="css-ac7c24"
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-17mv9gi"
+              class="css-18c3nn9"
             >
               2
             </div>
             <div
-              class="steam-game-card_caption css-k8brg5"
+              class="steam-game-card_caption css-18i3ee5"
             >
               <div
-                class="css-h3pxs9"
+                class="css-jae09u"
               >
                 ARK: Survival Evolved
               </div>
               <div
-                class="css-1i7ls3l"
+                class="css-bcsjsw"
               >
                 277.83h total
               </div>
@@ -421,34 +421,34 @@ exports[`SteamWidget renders correctly with sample data 1`] = `
         </button>
       </div>
       <div
-        class="css-rcbrnq"
+        class="css-1jvjqv3"
       >
         <div
-          class="css-aq86v7"
+          class="css-12f4tqr"
         >
           Total Hours: 
           <span
-            class="css-1eduwqk"
+            class="css-13epqkc"
           >
             1035.2h
           </span>
         </div>
         <div
-          class="css-aq86v7"
+          class="css-12f4tqr"
         >
           Average: 
           <span
-            class="css-1eduwqk"
+            class="css-13epqkc"
           >
             517.6h per game
           </span>
         </div>
       </div>
       <div
-        class="css-1gnkw3u"
+        class="css-1wrm9ji"
       >
         <a
-          class="css-4buc8m"
+          class="css-1vusgb5"
           href="https://steamcommunity.com/id/themeuser/games/?tab=all"
         >
           View complete gaming library
@@ -485,7 +485,7 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
       Steam
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -499,10 +499,10 @@ exports[`SteamWidget renders error state (hasFatalError) 1`] = `
       My top 10 most played games.
     </p>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-16q7rgc"
+        class="css-et6zal"
       >
         <p
           class="css-13s56l1"
@@ -560,7 +560,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -574,11 +574,11 @@ exports[`SteamWidget renders loading state 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1o4v4vi"
+      class="css-1dx5shc"
     >
       <div
         aria-hidden="true"
-        class="css-uk8v2r"
+        class="css-11qn5ob"
       >
         <div
           class="show-loading-animation"
@@ -592,7 +592,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-uk8v2r"
+        class="css-11qn5ob"
       >
         <div
           class="show-loading-animation"
@@ -606,7 +606,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-uk8v2r"
+        class="css-11qn5ob"
       >
         <div
           class="show-loading-animation"
@@ -620,7 +620,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-uk8v2r"
+        class="css-11qn5ob"
       >
         <div
           class="show-loading-animation"
@@ -634,7 +634,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-uk8v2r"
+        class="css-11qn5ob"
       >
         <div
           class="show-loading-animation"
@@ -648,7 +648,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
       <div
         aria-hidden="true"
-        class="css-uk8v2r"
+        class="css-11qn5ob"
       >
         <div
           class="show-loading-animation"
@@ -662,7 +662,7 @@ exports[`SteamWidget renders loading state 1`] = `
       </div>
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -676,13 +676,13 @@ exports[`SteamWidget renders loading state 1`] = `
       My top 10 most played games.
     </p>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-nyc2gr"
+        class="css-1g612vj"
       >
         <div
-          class="css-17cb55"
+          class="css-3wu3l6"
         />
         <p
           class="css-gej412"
@@ -706,7 +706,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       Steam
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -720,7 +720,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       Games I've played in the last two weeks.
     </p>
     <div
-      class="css-1o4v4vi"
+      class="css-1dx5shc"
     >
       <button
         aria-label="View Half-Life on Steam"
@@ -728,23 +728,23 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Half-Life header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/halflife.jpg"
           />
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Half-Life
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               2 hours
             </div>
@@ -757,23 +757,23 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         type="button"
       >
         <div
-          class="css-w24l45"
+          class="css-2w7wic"
         >
           <img
             alt="Portal header"
-            class="css-17nz09e"
+            class="css-ac7c24"
             src="https://example.com/portal.jpg"
           />
           <div
-            class="steam-game-card_caption css-k8brg5"
+            class="steam-game-card_caption css-18i3ee5"
           >
             <div
-              class="css-h3pxs9"
+              class="css-jae09u"
             >
               Portal
             </div>
             <div
-              class="css-1i7ls3l"
+              class="css-bcsjsw"
             >
               45 minutes
             </div>
@@ -782,7 +782,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       </button>
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -796,7 +796,7 @@ exports[`SteamWidget renders with empty metrics 1`] = `
       My top 10 most played games.
     </p>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
         class="css-munl51"
@@ -807,28 +807,28 @@ exports[`SteamWidget renders with empty metrics 1`] = `
           type="button"
         >
           <div
-            class="css-w24l45"
+            class="css-2w7wic"
           >
             <img
               alt="Cities: Skylines header"
-              class="css-17nz09e"
+              class="css-ac7c24"
               src="https://example.com/cities-icon.jpg"
             />
             <div
-              class="css-17mv9gi"
+              class="css-18c3nn9"
             >
               1
             </div>
             <div
-              class="steam-game-card_caption css-k8brg5"
+              class="steam-game-card_caption css-18i3ee5"
             >
               <div
-                class="css-h3pxs9"
+                class="css-jae09u"
               >
                 Cities: Skylines
               </div>
               <div
-                class="css-1i7ls3l"
+                class="css-bcsjsw"
               >
                 757.35h total • 2 hours recently
               </div>
@@ -841,28 +841,28 @@ exports[`SteamWidget renders with empty metrics 1`] = `
           type="button"
         >
           <div
-            class="css-w24l45"
+            class="css-2w7wic"
           >
             <img
               alt="ARK: Survival Evolved header"
-              class="css-17nz09e"
+              class="css-ac7c24"
               src="https://example.com/ark-icon.jpg"
             />
             <div
-              class="css-17mv9gi"
+              class="css-18c3nn9"
             >
               2
             </div>
             <div
-              class="steam-game-card_caption css-k8brg5"
+              class="steam-game-card_caption css-18i3ee5"
             >
               <div
-                class="css-h3pxs9"
+                class="css-jae09u"
               >
                 ARK: Survival Evolved
               </div>
               <div
-                class="css-1i7ls3l"
+                class="css-bcsjsw"
               >
                 277.83h total
               </div>
@@ -871,34 +871,34 @@ exports[`SteamWidget renders with empty metrics 1`] = `
         </button>
       </div>
       <div
-        class="css-rcbrnq"
+        class="css-1jvjqv3"
       >
         <div
-          class="css-aq86v7"
+          class="css-12f4tqr"
         >
           Total Hours: 
           <span
-            class="css-1eduwqk"
+            class="css-13epqkc"
           >
             1035.2h
           </span>
         </div>
         <div
-          class="css-aq86v7"
+          class="css-12f4tqr"
         >
           Average: 
           <span
-            class="css-1eduwqk"
+            class="css-13epqkc"
           >
             517.6h per game
           </span>
         </div>
       </div>
       <div
-        class="css-1gnkw3u"
+        class="css-1wrm9ji"
       >
         <a
-          class="css-4buc8m"
+          class="css-1vusgb5"
           href="https://steamcommunity.com/id/themeuser/games/?tab=all"
         >
           View complete gaming library
@@ -935,7 +935,7 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
       Steam
     </div>
     <div
-      class="css-5abbi3"
+      class="css-1uxgoez"
     >
       <h3
         class="css-9nh3l5"
@@ -949,10 +949,10 @@ exports[`SteamWidget renders with empty recentlyPlayedGames and ownedGames 1`] =
       My top 10 most played games.
     </p>
     <div
-      class="css-sak8bt"
+      class="css-lnnjou"
     >
       <div
-        class="css-16q7rgc"
+        class="css-et6zal"
       >
         <p
           class="css-13s56l1"

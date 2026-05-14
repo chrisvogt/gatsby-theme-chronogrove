@@ -55,8 +55,7 @@ export default () => {
 
   const callToAction = (
     <CallToAction title='Browse all published content' to='/blog'>
-      Browse All
-      <span className='read-more-icon'>&rarr;</span>
+      Browse All <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )
 
@@ -75,7 +74,7 @@ export default () => {
         Latest Posts
       </WidgetHeader>
 
-      <div sx={{ width: '100%', mt: 4 }}>
+      <Box sx={{ width: '100%', mt: 4 }}>
         {/* Latest Recaps Section */}
         {postsBySection.recaps && postsBySection.recaps.length > 0 && (
           <Box sx={{ mb: 4 }}>
@@ -188,7 +187,7 @@ export default () => {
             )}
           </Box>
         )}
-      </div>
+      </Box>
     </Widget>
   )
 }

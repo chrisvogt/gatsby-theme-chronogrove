@@ -62,7 +62,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
             href="https://www.github.com/mockusername"
             title="mockusername on GitHub"
           >
-            Visit Profile
+            Visit Profile 
             <span
               class="read-more-icon"
             >
@@ -86,7 +86,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
         Pinned items on my GitHub profile.
       </p>
       <div
-        class="css-r2v68e"
+        class="css-1eii8wb"
       >
         <a
           class="css-nf0qmy"
@@ -107,7 +107,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -163,7 +163,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -219,7 +219,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -275,7 +275,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -331,7 +331,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -387,7 +387,7 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -1635,7 +1635,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
             href="https://www.github.com/mockusername"
             title="mockusername on GitHub"
           >
-            Visit Profile
+            Visit Profile 
             <span
               class="read-more-icon"
             >
@@ -1691,7 +1691,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
         Pinned items on my GitHub profile.
       </p>
       <div
-        class="css-r2v68e"
+        class="css-1eii8wb"
       >
         <a
           class="css-nf0qmy"
@@ -1713,7 +1713,7 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -3026,7 +3026,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         Pinned items on my GitHub profile.
       </p>
       <div
-        class="css-r2v68e"
+        class="css-1eii8wb"
       >
         <a
           class="css-nf0qmy"
@@ -3047,7 +3047,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -3103,7 +3103,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -3159,7 +3159,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -3215,7 +3215,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -3271,7 +3271,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"
@@ -3327,7 +3327,7 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
                   />
                 </div>
                 <div
-                  class="css-fjakwv"
+                  class="css-1fsahx3"
                 >
                   <div
                     class="text-block"

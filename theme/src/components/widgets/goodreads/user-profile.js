@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
-import { Card, Heading } from '@theme-ui/components'
+import { Box, Card, Heading } from '@theme-ui/components'
 import Placeholder from 'react-placeholder'
 
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -54,7 +54,7 @@ const UserProfile = ({ isLoading, profile }) => {
         Metrics
       </Heading>
 
-      <div
+      <Box
         sx={{
           display: 'grid',
           gridGap: 3,
@@ -64,7 +64,7 @@ const UserProfile = ({ isLoading, profile }) => {
         {metrics.map(({ id, title, value }) => (
           <MetricCard key={id} title={title} value={value} showPlaceholder={isLoading} />
         ))}
-      </div>
+      </Box>
     </Card>
   )
 }

@@ -45,12 +45,16 @@ jest.mock('gatsby', () => ({
 // Mock Book3D so tests don't need a WebGL context.
 // Exposes book-preview-thumbnail so URL-formatting assertions still work.
 jest.mock('../../artwork/book-3d', () => {
-  const React = require('react')
+  const { createElement } = require('react')
   return function MockBook3D({ title, thumbnailURL }) {
-    return (
-      <div data-testid='book-preview-3d' role='img' aria-label={title}>
-        <img data-testid='book-preview-thumbnail' src={thumbnailURL} alt={title} />
-      </div>
+    return createElement(
+      'div',
+      { 'data-testid': 'book-preview-3d' },
+      createElement('img', {
+        'data-testid': 'book-preview-thumbnail',
+        src: thumbnailURL,
+        alt: title
+      })
     )
   }
 })
@@ -154,13 +158,17 @@ describe('Widget/Goodreads/BookLink', () => {
     global.Image = class DelayedMock {
       constructor() {
         this._onLoad = null
+        this._onErr = null
       }
 
       addEventListener(type, fn) {
         if (type === 'load') this._onLoad = fn
       }
 
-      removeEventListener() {}
+      removeEventListener(type, fn) {
+        if (type === 'load' && this._onLoad === fn) this._onLoad = null
+        if (type === 'error' && this._onErr === fn) this._onErr = null
+      }
 
       set src(_value) {
         setTimeout(() => this._onLoad?.(), 100)

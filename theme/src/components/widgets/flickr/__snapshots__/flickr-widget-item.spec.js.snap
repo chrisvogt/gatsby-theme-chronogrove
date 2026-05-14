@@ -3,11 +3,12 @@
 exports[`FlickrWidgetItem matches the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="flickr-item-button css-1u8qly9"
+    class="flickr-item-button css-lwcnm9"
+    type="button"
   >
     <img
       alt="Flickr photo: Test Photo Title"
-      class="flickr-item-image css-16gz8ax"
+      class="flickr-item-image css-u88sdg"
       crossorigin="anonymous"
       height="280"
       loading="lazy"

@@ -3,10 +3,10 @@
 exports[`TopTracks Component handles tracks without a 300px image gracefully 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-ccroti"
+      class="css-epkbn4"
     >
       <h3
         class="css-9nh3l5"
@@ -20,15 +20,15 @@ exports[`TopTracks Component handles tracks without a 300px image gracefully 1`]
       Tracks I've played most over the last four weeks.
     </p>
     <div
-      class="css-us3dds"
+      class="css-4kg5kc"
     >
       <div
-        class="css-kdywdz"
+        class="css-vgd83x"
         data-testid="spotify-top-tracks-carousel"
       >
         <div
           aria-hidden="false"
-          class="css-4bo1uy"
+          class="css-1s44svb"
           data-testid="spotify-top-tracks-page-1"
         >
           <div
@@ -44,10 +44,10 @@ exports[`TopTracks Component handles tracks without a 300px image gracefully 1`]
 exports[`TopTracks Component renders correctly when loading 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-ccroti"
+      class="css-epkbn4"
     >
       <h3
         class="css-9nh3l5"
@@ -61,7 +61,7 @@ exports[`TopTracks Component renders correctly when loading 1`] = `
       Tracks I've played most over the last four weeks.
     </p>
     <div
-      class="css-us3dds"
+      class="css-4kg5kc"
     >
       <div
         data-testid="media-item-grid"
@@ -74,10 +74,10 @@ exports[`TopTracks Component renders correctly when loading 1`] = `
 exports[`TopTracks Component renders correctly with no tracks 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-ccroti"
+      class="css-epkbn4"
     >
       <h3
         class="css-9nh3l5"
@@ -91,15 +91,15 @@ exports[`TopTracks Component renders correctly with no tracks 1`] = `
       Tracks I've played most over the last four weeks.
     </p>
     <div
-      class="css-us3dds"
+      class="css-4kg5kc"
     >
       <div
-        class="css-kdywdz"
+        class="css-vgd83x"
         data-testid="spotify-top-tracks-carousel"
       >
         <div
           aria-hidden="false"
-          class="css-4bo1uy"
+          class="css-1s44svb"
           data-testid="spotify-top-tracks-page-1"
         >
           <div
@@ -115,10 +115,10 @@ exports[`TopTracks Component renders correctly with no tracks 1`] = `
 exports[`TopTracks Component renders correctly with tracks 1`] = `
 <DocumentFragment>
   <div
-    class="css-sak8bt"
+    class="css-lnnjou"
   >
     <div
-      class="css-ccroti"
+      class="css-epkbn4"
     >
       <h3
         class="css-9nh3l5"
@@ -132,15 +132,15 @@ exports[`TopTracks Component renders correctly with tracks 1`] = `
       Tracks I've played most over the last four weeks.
     </p>
     <div
-      class="css-us3dds"
+      class="css-4kg5kc"
     >
       <div
-        class="css-kdywdz"
+        class="css-vgd83x"
         data-testid="spotify-top-tracks-carousel"
       >
         <div
           aria-hidden="false"
-          class="css-4bo1uy"
+          class="css-1s44svb"
           data-testid="spotify-top-tracks-page-1"
         >
           <div

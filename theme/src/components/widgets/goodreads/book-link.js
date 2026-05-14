@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { Card } from '@theme-ui/components'
+import { Box, Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
 import { useEffect, useState } from 'react'
 import Book3D from '../../artwork/book-3d'
@@ -77,6 +77,43 @@ const BookLink = ({
     }, 0)
   }
 
+  const flatCoverBusy = flatCoverMediaStatus === 'pending'
+  let flatCoverInner = null
+  if (flatCoverMediaStatus === 'failed') {
+    flatCoverInner = (
+      <Box
+        sx={{
+          p: 2,
+          fontSize: 1,
+          lineHeight: 'snug',
+          textAlign: 'center',
+          color: 'text',
+          wordBreak: 'break-word'
+        }}
+      >
+        {title}
+      </Box>
+    )
+  } else if (flatCoverMediaStatus === 'ready') {
+    flatCoverInner = (
+      <Box
+        as='img'
+        data-testid='book-preview-thumbnail'
+        src={imageUrl}
+        alt={title}
+        loading='lazy'
+        decoding='async'
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover'
+        }}
+      />
+    )
+  }
+
   return (
     <Card
       variant='actionCard'
@@ -91,7 +128,8 @@ const BookLink = ({
         }
       }}
     >
-      <button
+      <Box
+        as='button'
         data-testid='book-link'
         type='button'
         onClick={handleClick}
@@ -115,11 +153,10 @@ const BookLink = ({
         }}
       >
         {flatCover ? (
-          <div sx={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
-            <div
+          <Box sx={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
+            <Box
               data-testid='book-preview-flat'
-              role='img'
-              aria-busy={flatCoverMediaStatus === 'pending'}
+              aria-busy={flatCoverBusy}
               aria-label={title}
               sx={{
                 position: 'absolute',
@@ -132,41 +169,13 @@ const BookLink = ({
                 justifyContent: 'center'
               }}
             >
-              {flatCoverMediaStatus === 'failed' ? (
-                <span
-                  sx={{
-                    p: 2,
-                    fontSize: 1,
-                    lineHeight: 'snug',
-                    textAlign: 'center',
-                    color: 'text',
-                    wordBreak: 'break-word'
-                  }}
-                >
-                  {title}
-                </span>
-              ) : flatCoverMediaStatus === 'ready' ? (
-                <img
-                  data-testid='book-preview-thumbnail'
-                  src={imageUrl}
-                  alt=''
-                  loading='lazy'
-                  decoding='async'
-                  sx={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                />
-              ) : null}
-            </div>
-          </div>
+              {flatCoverInner}
+            </Box>
+          </Box>
         ) : (
           <Book3D thumbnailURL={imageUrl} title={title} introDelay={introDelay} />
         )}
-      </button>
+      </Box>
     </Card>
   )
 }

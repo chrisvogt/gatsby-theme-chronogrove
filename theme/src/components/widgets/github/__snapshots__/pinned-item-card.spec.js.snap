@@ -18,7 +18,7 @@ exports[`Widget/GitHub/PinnedItemCard snapshots matches the placeholder snapshot
           />
         </div>
         <div
-          class="css-fjakwv"
+          class="css-1fsahx3"
         >
           <div
             class="text-block"
@@ -71,7 +71,7 @@ exports[`Widget/GitHub/PinnedItemCard snapshots matches the repository variant s
         themeuser/sample-repo
       </h4>
       <span
-        class="css-gulexy"
+        class="css-1e5uqy3"
       >
         A fake NodeJS project.
       </span>

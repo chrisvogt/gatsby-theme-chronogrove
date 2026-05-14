@@ -107,7 +107,7 @@ const UserStatus = ({ isLoading, status, actorName }) => {
               }}
             >
               {bookImageUrl && (
-                <div
+                <Box
                   ref={bookContainerRef}
                   data-testid='user-status-book-tilt-container'
                   sx={{
@@ -117,7 +117,7 @@ const UserStatus = ({ isLoading, status, actorName }) => {
                     transformStyle: 'preserve-3d'
                   }}
                 >
-                  <div
+                  <Box
                     data-testid='user-status-book-tilt-inner'
                     sx={{
                       width: '100%',
@@ -127,8 +127,8 @@ const UserStatus = ({ isLoading, status, actorName }) => {
                     }}
                   >
                     <Book thumbnailURL={bookImageUrl} title={bookTitle} />
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               )}
               <Box sx={{ flex: 1, minWidth: 0 }}>
                 <span>

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { Flex, Heading } from '@theme-ui/components'
+import { Box, Flex, Heading } from '@theme-ui/components'
 import ago from 's-ago'
 
 import CardFooter from '../../card-footer'
@@ -22,7 +22,9 @@ const Repository = ({ description, nameWithOwner, pushedAt, updatedAt }) => {
         {nameWithOwner}
       </Heading>
 
-      <span sx={{ flexGrow: 1, mb: 2 }}>{description}</span>
+      <Box as='span' sx={{ flexGrow: 1, mb: 2 }}>
+        {description}
+      </Box>
 
       <CardFooter>
         <span>Last updated {ago(new Date(lastActivityDate))}</span>

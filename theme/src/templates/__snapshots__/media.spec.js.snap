@@ -36,7 +36,13 @@ exports[`Media Post renders correctly with a SoundCloud source 1`] = `
             <a
               class="u-url"
               href="https://example.com/music/mock-media"
-            />
+            >
+              <span
+                class="css-17mbhtg"
+              >
+                https://example.com/music/mock-media
+              </span>
+            </a>
             <span
               class="u-uid"
             >
@@ -136,7 +142,13 @@ exports[`Media Post renders correctly with a YouTube source 1`] = `
             <a
               class="u-url"
               href="https://example.com/music/mock-media"
-            />
+            >
+              <span
+                class="css-17mbhtg"
+              >
+                https://example.com/music/mock-media
+              </span>
+            </a>
             <span
               class="u-uid"
             >
@@ -223,7 +235,13 @@ exports[`Media Post renders correctly with no media sources 1`] = `
             <a
               class="u-url"
               href="https://example.com/music/mock-media"
-            />
+            >
+              <span
+                class="css-17mbhtg"
+              >
+                https://example.com/music/mock-media
+              </span>
+            </a>
             <span
               class="u-uid"
             >

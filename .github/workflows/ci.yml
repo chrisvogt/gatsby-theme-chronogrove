@@ -58,7 +58,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run tests and collect coverage
-        run: pnpm exec turbo run test:coverage -- --maxWorkers=2
+        run: pnpm exec turbo run test:coverage --concurrency=1 -- --maxWorkers=2
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5

@@ -25,7 +25,7 @@ const PinnedItems = ({ isLoading, items = [], placeholderCount = 4 }) => {
 
       <Themed.p>Pinned items on my GitHub profile.</Themed.p>
 
-      <Themed.div
+      <Box
         sx={{
           display: 'grid',
           gridAutoRows: '1fr',
@@ -48,7 +48,7 @@ const PinnedItems = ({ isLoading, items = [], placeholderCount = 4 }) => {
             <PinnedItemCard item={item} type={item.__typename} />
           </Themed.a>
         ))}
-      </Themed.div>
+      </Box>
     </Box>
   )
 }

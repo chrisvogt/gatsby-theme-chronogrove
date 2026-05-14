@@ -35,8 +35,7 @@ const SpotifyWidget = () => {
 
   const callToAction = (
     <CallToAction title={`${profileDisplayName} on ${providerDisplayName}`} url={profileURL} isLoading={isLoading}>
-      Browse Playlists
-      <span className='read-more-icon'>&rarr;</span>
+      Browse Playlists <span className='read-more-icon'>&rarr;</span>
     </CallToAction>
   )
 
