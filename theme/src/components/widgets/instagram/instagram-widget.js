@@ -333,12 +333,12 @@ export default () => {
 
       // Apply data attributes for CSS styling
       if (slide.isAlbumStart) {
-        thumbItem.setAttribute('data-album-start', 'true')
+        thumbItem.dataset.albumStart = 'true'
       }
       if (slide.isAlbumEnd) {
-        thumbItem.setAttribute('data-album-end', 'true')
+        thumbItem.dataset.albumEnd = 'true'
       }
-      thumbItem.setAttribute('data-album-index', slide.albumIndex)
+      thumbItem.dataset.albumIndex = String(slide.albumIndex)
     },
     [dynamicEl]
   )

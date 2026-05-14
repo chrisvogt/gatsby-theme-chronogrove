@@ -24,7 +24,7 @@ export function applyDocumentColorModeSurface(colorMode, theme, surface) {
     .filter(className => className.startsWith('theme-ui-'))
     .forEach(className => htmlElement.classList.remove(className))
   htmlElement.classList.add(`theme-ui-${normalizedColorMode}`)
-  htmlElement.setAttribute('data-theme-ui-color-mode', normalizedColorMode)
+  htmlElement.dataset.themeUiColorMode = normalizedColorMode
   htmlElement.style.backgroundColor = bgColorRaw
 }
 

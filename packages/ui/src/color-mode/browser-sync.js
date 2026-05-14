@@ -52,7 +52,7 @@ export function syncThemeUiColorMode(storageKey = THEME_UI_COLOR_MODE_STORAGE_KE
     .filter(className => className.startsWith('theme-ui-'))
     .forEach(className => htmlElement.classList.remove(className))
   htmlElement.classList.add(`theme-ui-${mode}`)
-  htmlElement.setAttribute('data-theme-ui-color-mode', mode)
+  htmlElement.dataset.themeUiColorMode = mode
   // Match `buildHtmlBackgroundInlineScript`: inline background must follow toggles; otherwise the
   // initial head script’s color sticks and wins over Theme UI’s `--theme-ui-colors-background`.
   htmlElement.style.backgroundColor = mode === 'dark' ? SURFACE.darkBackgroundHex : SURFACE.defaultBackgroundHex

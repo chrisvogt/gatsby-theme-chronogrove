@@ -27,7 +27,7 @@ describe('resolveThemeUiColorMode', () => {
   })
 
   it('reads from data-theme-ui-color-mode on documentElement', () => {
-    document.documentElement.setAttribute('data-theme-ui-color-mode', 'dark')
+    document.documentElement.dataset.themeUiColorMode = 'dark'
     expect(resolveThemeUiColorMode()).toBe('dark')
   })
 

@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.91.4
+
+### `gatsby-theme-chronogrove` — `dataset` for `data-*` DOM writes
+
+- **`instagram-widget.js`**: Album thumbnail markers use **`thumbItem.dataset`** (**`albumStart`**, **`albumEnd`**, **`albumIndex`**) instead of **`setAttribute`**, matching specs and keeping **`global.css`** **`[data-album-*]`** selectors unchanged.
+- **Tests**: **`gatsby-browser.spec.js`**, **`gatsby-ssr.spec.js`**, **`color-mode-debug.spec.js`** seed or assert color mode via **`document.documentElement.dataset.themeUiColorMode`** where appropriate.
+- **Version**: **0.91.4**
+
+### `@chronogrove/ui`
+
+- **`browser-sync.js`**, **`use-document-color-mode-surface.js`**: Apply **`data-theme-ui-color-mode`** with **`htmlElement.dataset.themeUiColorMode`** (aligned with **`resolveThemeUiColorMode`** reads).
+- **`head-inline.js`**: No-flash inline script sets **`htmlElement.dataset.themeUiColorMode`** instead of **`setAttribute`**.
+- **Tests**: **`head-inline.spec.js`**, **`browser-sync.spec.js`**, **`packages/ui/src/gatsby/index.spec.js`**; **`theme/gatsby-ssr.spec.js`** expects the generated script to reference **`dataset.themeUiColorMode`**.
+- **Version**: **0.85.3**
+
+### Files changed
+
+- `CHANGELOG.md`
+- `packages/ui/package.json` (version **0.85.3**)
+- `packages/ui/src/color-mode/browser-sync.js`, **`browser-sync.spec.js`**, **`head-inline.js`**, **`head-inline.spec.js`**, **`use-document-color-mode-surface.js`**
+- `packages/ui/src/gatsby/index.spec.js`
+- `theme/package.json` (version **0.91.4**)
+- `theme/gatsby-browser.spec.js`, **`gatsby-ssr.spec.js`**
+- `theme/src/components/widgets/instagram/instagram-widget.js`
+- `theme/src/helpers/color-mode-debug.spec.js`
+
+---
+
 ## 0.91.3
 
 ### `gatsby-theme-chronogrove` — Security (S5148), Sonar dataset reads (S7761)
