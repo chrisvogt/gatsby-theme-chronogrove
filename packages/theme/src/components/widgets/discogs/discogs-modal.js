@@ -45,7 +45,7 @@ function useDiscogsModalFocus(isOpen, modalRef, previousActiveElementRef) {
     } else {
       previousActiveElementRef.current?.focus?.()
     }
-  }, [isOpen])
+  }, [isOpen, modalRef, previousActiveElementRef])
 }
 
 function useDiscogsModalKeyboard(isOpen, onClose, release, orderedReleases, onSelectRelease) {

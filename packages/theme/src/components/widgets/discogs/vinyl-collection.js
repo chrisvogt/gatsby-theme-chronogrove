@@ -60,22 +60,19 @@ function buildVinylCollectionPages({
   return pages
 }
 
+/** Delay before clearing hover "focused" state after pointer leave (orbit/caption fade). */
+export const VINYL_GRID_HOVER_LEAVE_DELAY_MS = 220
+
 function scheduleVinylGridHoverClear({ leaveTimeoutRef, vinylId, setCurrentVinylId, setExitingVinylId }) {
   if (leaveTimeoutRef.current) {
     clearTimeout(leaveTimeoutRef.current)
-  }
-  const delay = process.env.NODE_ENV === 'test' ? 0 : 220
-  if (delay === 0) {
-    setCurrentVinylId(false)
-    setExitingVinylId(null)
-    return
   }
   setExitingVinylId(vinylId)
   leaveTimeoutRef.current = setTimeout(() => {
     setCurrentVinylId(false)
     setExitingVinylId(null)
     leaveTimeoutRef.current = null
-  }, delay)
+  }, VINYL_GRID_HOVER_LEAVE_DELAY_MS)
 }
 
 /** List layout: fewer records per carousel slide than the old dense list (chunk = columns × this). Matches grid rows (2) for similar page counts. */

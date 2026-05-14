@@ -3,7 +3,7 @@ import { render, fireEvent, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { act } from 'react'
 
-import VinylCollection from './vinyl-collection'
+import VinylCollection, { VINYL_GRID_HOVER_LEAVE_DELAY_MS } from './vinyl-collection'
 import {
   DISCOGS_SORT_ADDED,
   DISCOGS_SORT_ALPHABETICAL,
@@ -208,20 +208,31 @@ describe('VinylCollection', () => {
     })
 
     it('handles mouse leave on vinyl item', () => {
-      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+      jest.useFakeTimers()
+      try {
+        const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
 
-      const vinylItem = container.querySelector('.vinyl-record')
-      expect(vinylItem).toBeTruthy()
+        const vinylItem = container.querySelector('.vinyl-record')
+        expect(vinylItem).toBeTruthy()
 
-      // First enter to set focus
-      fireEvent.mouseEnter(vinylItem)
-      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+        fireEvent.mouseEnter(vinylItem)
+        expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
 
-      // Then leave
-      fireEvent.mouseLeave(vinylItem)
+        fireEvent.mouseLeave(vinylItem)
+        expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
 
-      // Should remove focused class
-      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
+        act(() => {
+          jest.advanceTimersByTime(VINYL_GRID_HOVER_LEAVE_DELAY_MS)
+        })
+
+        expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
+        expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
+      } finally {
+        act(() => {
+          jest.runOnlyPendingTimers()
+        })
+        jest.useRealTimers()
+      }
     })
 
     it('opens and closes the Discogs modal when a vinyl is clicked', () => {
@@ -1175,13 +1186,7 @@ describe('VinylCollection', () => {
   })
 
   describe('Hover exit timing and accessibility', () => {
-    const originalNodeEnv = process.env.NODE_ENV
-
-    afterEach(() => {
-      process.env.NODE_ENV = originalNodeEnv
-    })
-
-    describe('mouse leave delay in production (fake timers)', () => {
+    describe('mouse leave delay (fake timers)', () => {
       beforeEach(() => {
         jest.useFakeTimers()
       })
@@ -1193,50 +1198,61 @@ describe('VinylCollection', () => {
         jest.useRealTimers()
       })
 
-      it('adds exiting class on mouse leave and clears after delay (production env)', () => {
-        process.env.NODE_ENV = 'production'
+      it('adds exiting class on mouse leave and clears after delay', () => {
         const manyReleases = createManyReleases(25)
         const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
         const vinylItem = container.querySelector('.vinyl-record')
         expect(vinylItem).toBeTruthy()
 
-        // Focus via mouse enter
         fireEvent.mouseEnter(vinylItem)
         expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
 
-        // Trigger exit
         fireEvent.mouseLeave(vinylItem)
         expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
 
-        // Advance timers to clear exit state
         act(() => {
-          jest.advanceTimersByTime(220)
+          jest.advanceTimersByTime(VINYL_GRID_HOVER_LEAVE_DELAY_MS)
         })
 
         expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
         expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(false)
       })
-    })
 
-    it('clears pending exit when re-entering quickly (production env)', () => {
-      process.env.NODE_ENV = 'production'
-      const manyReleases = createManyReleases(25)
-      const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
+      it('clears pending exit when re-entering quickly', () => {
+        const manyReleases = createManyReleases(25)
+        const { container } = render(<VinylCollection isLoading={false} releases={manyReleases} />)
 
-      const vinylItem = container.querySelector('.vinyl-record')
-      expect(vinylItem).toBeTruthy()
+        const vinylItem = container.querySelector('.vinyl-record')
+        expect(vinylItem).toBeTruthy()
 
-      // Enter, then leave to schedule exit, then quickly re-enter
-      fireEvent.mouseEnter(vinylItem)
-      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
-      fireEvent.mouseLeave(vinylItem)
-      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
-      fireEvent.mouseEnter(vinylItem)
+        fireEvent.mouseEnter(vinylItem)
+        expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+        fireEvent.mouseLeave(vinylItem)
+        expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(true)
+        fireEvent.mouseEnter(vinylItem)
 
-      // Exiting should be cleared and focused retained
-      expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
-      expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+        expect(vinylItem.classList.contains('vinyl-record--exiting')).toBe(false)
+        expect(vinylItem.classList.contains('vinyl-record--focused')).toBe(true)
+      })
+
+      it('clears a pending leave timeout when mouse leave fires again before the delay elapses', () => {
+        const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
+        const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
+        const vinylItem = container.querySelector('.vinyl-record')
+
+        fireEvent.mouseEnter(vinylItem)
+        fireEvent.mouseLeave(vinylItem)
+        fireEvent.mouseLeave(vinylItem)
+
+        expect(clearTimeoutSpy).toHaveBeenCalled()
+
+        act(() => {
+          jest.runOnlyPendingTimers()
+        })
+
+        clearTimeoutSpy.mockRestore()
+      })
     })
 
     it('exposes aria-label details and album art class', () => {
@@ -1421,40 +1437,6 @@ describe('VinylCollection', () => {
       const listWrap = container.querySelector('.vinyl-collection_list')
       expect(listWrap).toBeTruthy()
       expect(listWrap.children.length).toBeGreaterThan(0)
-    })
-  })
-
-  describe('development leave timeout', () => {
-    beforeEach(() => {
-      jest.useFakeTimers()
-    })
-
-    afterEach(() => {
-      act(() => {
-        jest.runOnlyPendingTimers()
-      })
-      jest.useRealTimers()
-    })
-
-    it('clears a pending leave timeout before scheduling another one outside test mode', () => {
-      const previousNodeEnv = process.env.NODE_ENV
-      process.env.NODE_ENV = 'development'
-
-      const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
-      const { container } = render(<VinylCollection isLoading={false} releases={mockReleases} />)
-      const vinylItem = container.querySelector('.vinyl-record')
-
-      fireEvent.mouseEnter(vinylItem)
-      fireEvent.mouseLeave(vinylItem)
-      fireEvent.mouseLeave(vinylItem)
-
-      expect(clearTimeoutSpy).toHaveBeenCalled()
-
-      act(() => {
-        jest.runOnlyPendingTimers()
-      })
-
-      process.env.NODE_ENV = previousNodeEnv
     })
   })
 })
