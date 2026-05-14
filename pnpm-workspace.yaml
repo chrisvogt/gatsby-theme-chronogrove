@@ -26,6 +26,7 @@ catalog:
   lightgallery: ^2.9.0
   next: ^16.2.6
   prettier: ^3.8.3
+  prop-types: ^15.8.1
   react: ^19.2.6
   react-dom: ^19.2.6
   react-intersection-observer: ^10.0.3

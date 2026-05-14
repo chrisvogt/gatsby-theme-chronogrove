@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-chronogrove",
   "description": "A personal website and digital garden theme for GatsbyJS.",
-  "version": "0.91.1",
+  "version": "0.91.2",
   "author": "Chris Vogt <mail@chrisvogt.me> (https://www.chrisvogt.me)",
   "main": "index.js",
   "license": "MIT",
@@ -103,7 +103,7 @@
     "lottie-react-web": "github:chrisvogt/lottie-react-web#codex/modernize-tooling-and-ci",
     "prettier": "catalog:",
     "prismjs": "^1.30.0",
-    "prop-types": "^15.8.1",
+    "prop-types": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-error-boundary": "^6.1.1",
