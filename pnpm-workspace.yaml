@@ -1,9 +1,7 @@
 packages:
   - packages/*
   - examples/*
-  - theme
-  - www.chrisvogt.me
-  - www.chronogrove.com
+  - websites/*
 
 # Shared dependency versions for workspace packages. Use "catalog:" in package.json deps.
 catalog:

@@ -7,8 +7,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'www.chronogrove.com/**'
-      - 'theme/**'
+      - 'websites/www.chronogrove.com/**'
+      - 'packages/theme/**'
   workflow_dispatch:
     inputs:
       branch:
@@ -50,5 +50,5 @@ jobs:
           port: 22
           user: ${{ secrets.CPANEL_USER }}
           pass: ${{ secrets.CPANEL_PASSWORD }}
-          localDir: www.chronogrove.com/public/
+          localDir: websites/www.chronogrove.com/public/
           remoteDir: public_html/

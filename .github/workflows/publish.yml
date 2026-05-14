@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths:
       - 'packages/ui/**'
-      - 'theme/**'
+      - 'packages/theme/**'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - 'package.json'
@@ -130,7 +130,7 @@ jobs:
           }
 
           publish_check "packages/ui/package.json" "ui"
-          publish_check "theme/package.json" "theme"
+          publish_check "packages/theme/package.json" "theme"
 
   changes:
     name: Detect package tree changes
@@ -171,7 +171,7 @@ jobs:
                   packages/ui/*)
                     packages_ui=true
                     ;;
-                  theme/*)
+                  packages/theme/*)
                     theme=true
                     ;;
                   pnpm-lock.yaml|pnpm-workspace.yaml|package.json|.github/workflows/publish.yml)
@@ -236,7 +236,7 @@ jobs:
 
       - name: Publish to npm (gatsby-theme-chronogrove)
         if: needs.resolve-version.outputs.publish_npm_theme == 'true'
-        run: pnpm publish --filter './theme' --access public --no-git-checks --provenance
+        run: pnpm publish --filter './packages/theme' --access public --no-git-checks --provenance
 
   publish-github:
     name: Publish (GitHub Packages)
@@ -313,20 +313,20 @@ jobs:
           fi
 
           if [ "${PUBLISH_GH_THEME}" = "true" ]; then
-            cp theme/package.json theme/package.json.publish-backup
+            cp packages/theme/package.json packages/theme/package.json.publish-backup
             UI_VER=$(node -p "require('./packages/ui/package.json').version")
             node -e "
               const fs = require('fs');
               const ghUi = process.argv[1];
               const ghTheme = process.argv[2];
               const uiVer = process.argv[3];
-              const j = JSON.parse(fs.readFileSync('theme/package.json', 'utf8'));
+              const j = JSON.parse(fs.readFileSync('packages/theme/package.json', 'utf8'));
               delete j.dependencies['@chronogrove/ui'];
               j.dependencies[ghUi] = uiVer;
               j.name = ghTheme;
               j.publishConfig = { registry: 'https://npm.pkg.github.com' };
-              fs.writeFileSync('theme/package.json', JSON.stringify(j, null, 2) + '\n');
+              fs.writeFileSync('packages/theme/package.json', JSON.stringify(j, null, 2) + '\n');
             " "${GH_PKG_UI}" "${GH_PKG_THEME}" "${UI_VER}"
-            pnpm publish --filter './theme' --registry https://npm.pkg.github.com --no-git-checks
-            mv theme/package.json.publish-backup theme/package.json
+            pnpm publish --filter './packages/theme' --registry https://npm.pkg.github.com --no-git-checks
+            mv packages/theme/package.json.publish-backup packages/theme/package.json
           fi

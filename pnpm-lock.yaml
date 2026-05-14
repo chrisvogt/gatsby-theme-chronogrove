@@ -185,78 +185,11 @@ importers:
         specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
 
-  packages/ui:
-    dependencies:
-      '@emotion/cache':
-        specifier: 'catalog:'
-        version: 11.14.0
-      '@emotion/react':
-        specifier: 'catalog:'
-        version: 11.14.0(@types/react@19.2.14)(react@19.2.6)
-      '@fortawesome/fontawesome-svg-core':
-        specifier: ^7.2.0
-        version: 7.2.0
-      '@fortawesome/react-fontawesome':
-        specifier: ^3.3.1
-        version: 3.3.1(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.6)
-      '@theme-toggles/react':
-        specifier: 'catalog:'
-        version: 4.1.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@theme-ui/components':
-        specifier: 'catalog:'
-        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@theme-ui/theme-provider@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(react@19.2.6))(react@19.2.6)
-      '@theme-ui/presets':
-        specifier: 'catalog:'
-        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@theme-ui/css@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6)))
-      react-intersection-observer:
-        specifier: 'catalog:'
-        version: 10.0.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      theme-ui:
-        specifier: 'catalog:'
-        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
-      three:
-        specifier: 'catalog:'
-        version: 0.184.0
-    devDependencies:
-      '@babel/core':
-        specifier: ^7.29.0
-        version: 7.29.0
-      '@babel/preset-env':
-        specifier: ^7.29.5
-        version: 7.29.5(@babel/core@7.29.0)
-      '@babel/preset-react':
-        specifier: ^7.28.5
-        version: 7.28.5(@babel/core@7.29.0)
-      '@testing-library/jest-dom':
-        specifier: ^6.9.1
-        version: 6.9.1
-      '@testing-library/react':
-        specifier: ^16.3.2
-        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      babel-jest:
-        specifier: ^30.4.1
-        version: 30.4.1(@babel/core@7.29.0)
-      jest:
-        specifier: ^30.4.2
-        version: 30.4.2(@types/node@25.6.2)(babel-plugin-macros@3.1.0)
-      jest-environment-jsdom:
-        specifier: ^30.4.1
-        version: 30.4.1
-      next:
-        specifier: 'catalog:'
-        version: 16.2.6(@babel/core@7.29.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      react:
-        specifier: 'catalog:'
-        version: 19.2.6
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.6(react@19.2.6)
-
-  theme:
+  packages/theme:
     dependencies:
       '@chronogrove/ui':
         specifier: workspace:*
-        version: link:../packages/ui
+        version: link:../ui
       '@emotion/cache':
         specifier: 'catalog:'
         version: 11.14.0
@@ -469,7 +402,74 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0
 
-  www.chrisvogt.me:
+  packages/ui:
+    dependencies:
+      '@emotion/cache':
+        specifier: 'catalog:'
+        version: 11.14.0
+      '@emotion/react':
+        specifier: 'catalog:'
+        version: 11.14.0(@types/react@19.2.14)(react@19.2.6)
+      '@fortawesome/fontawesome-svg-core':
+        specifier: ^7.2.0
+        version: 7.2.0
+      '@fortawesome/react-fontawesome':
+        specifier: ^3.3.1
+        version: 3.3.1(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.6)
+      '@theme-toggles/react':
+        specifier: 'catalog:'
+        version: 4.1.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@theme-ui/components':
+        specifier: 'catalog:'
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@theme-ui/theme-provider@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(react@19.2.6))(react@19.2.6)
+      '@theme-ui/presets':
+        specifier: 'catalog:'
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@theme-ui/css@0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6)))
+      react-intersection-observer:
+        specifier: 'catalog:'
+        version: 10.0.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      theme-ui:
+        specifier: 'catalog:'
+        version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
+      three:
+        specifier: 'catalog:'
+        version: 0.184.0
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.29.0
+        version: 7.29.0
+      '@babel/preset-env':
+        specifier: ^7.29.5
+        version: 7.29.5(@babel/core@7.29.0)
+      '@babel/preset-react':
+        specifier: ^7.28.5
+        version: 7.28.5(@babel/core@7.29.0)
+      '@testing-library/jest-dom':
+        specifier: ^6.9.1
+        version: 6.9.1
+      '@testing-library/react':
+        specifier: ^16.3.2
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      babel-jest:
+        specifier: ^30.4.1
+        version: 30.4.1(@babel/core@7.29.0)
+      jest:
+        specifier: ^30.4.2
+        version: 30.4.2(@types/node@25.6.2)(babel-plugin-macros@3.1.0)
+      jest-environment-jsdom:
+        specifier: ^30.4.1
+        version: 30.4.1
+      next:
+        specifier: 'catalog:'
+        version: 16.2.6(@babel/core@7.29.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.6
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.6(react@19.2.6)
+
+  websites/www.chrisvogt.me:
     dependencies:
       '@emotion/react':
         specifier: 'catalog:'
@@ -503,7 +503,7 @@ importers:
         version: 6.16.0(gatsby@5.16.1(babel-eslint@10.1.0(eslint@10.3.0))(eslint-plugin-jest@29.15.2(@typescript-eslint/eslint-plugin@8.58.1(@typescript-eslint/parser@8.58.1(eslint@10.3.0)(typescript@5.9.3))(eslint@10.3.0)(typescript@5.9.3))(eslint@10.3.0)(jest@30.4.2(@types/node@25.6.2)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(type-fest@4.41.0)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       gatsby-theme-chronogrove:
         specifier: workspace:*
-        version: link:../theme
+        version: link:../../packages/theme
       lightgallery:
         specifier: 'catalog:'
         version: 2.9.0
@@ -526,7 +526,7 @@ importers:
         specifier: 'catalog:'
         version: 0.17.4(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(react@19.2.6)
 
-  www.chronogrove.com:
+  websites/www.chronogrove.com:
     dependencies:
       '@emotion/react':
         specifier: 'catalog:'
@@ -545,7 +545,7 @@ importers:
         version: 5.16.1(babel-eslint@10.1.0(eslint@10.3.0))(eslint-plugin-jest@29.15.2(@typescript-eslint/eslint-plugin@8.58.1(@typescript-eslint/parser@8.58.1(eslint@10.3.0)(typescript@5.9.3))(eslint@10.3.0)(typescript@5.9.3))(eslint@10.3.0)(jest@30.4.2(@types/node@25.6.2)(babel-plugin-macros@3.1.0))(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(type-fest@4.41.0)(typescript@5.9.3)
       gatsby-theme-chronogrove:
         specifier: workspace:*
-        version: link:../theme
+        version: link:../../packages/theme
       react:
         specifier: 'catalog:'
         version: 19.2.6

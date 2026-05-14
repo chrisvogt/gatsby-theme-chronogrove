@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,mdx}\"",
     "lint": "eslint .",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "node ./scripts/postinstall-banner.mjs",
+    "postinstall": "node ./packages/theme/scripts/postinstall-banner.mjs",
     "prepare": "husky",
     "prettier": "prettier --check .",
     "test": "turbo run test --concurrency=1",
