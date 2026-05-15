@@ -1,3 +1,5 @@
+import { nullableCrossDomainColorMode } from '../prop-types-helpers.js'
+
 import {
   chronogroveHeadTheme,
   resolveChronogroveSurfaceColors,
@@ -42,4 +44,8 @@ export function ChronogroveNextRootLayoutHead({ crossDomainColorMode = null } = 
       <style dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
     </>
   )
+}
+
+ChronogroveNextRootLayoutHead.propTypes = {
+  crossDomainColorMode: nullableCrossDomainColorMode
 }

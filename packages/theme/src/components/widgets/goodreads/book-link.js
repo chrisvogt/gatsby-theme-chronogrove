@@ -3,6 +3,8 @@ import { jsx } from 'theme-ui'
 import { Box, Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import Book3D from '../../artwork/book-3d'
 
 const BookLink = ({
@@ -178,6 +180,15 @@ const BookLink = ({
       </Box>
     </Card>
   )
+}
+
+BookLink.propTypes = {
+  id: PropTypes.string.isRequired,
+  thumbnailURL: nullableString,
+  title: PropTypes.string.isRequired,
+  suppressNavigation: PropTypes.bool,
+  introDelay: PropTypes.number,
+  flatCover: PropTypes.bool
 }
 
 export default BookLink

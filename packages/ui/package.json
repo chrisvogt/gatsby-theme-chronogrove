@@ -1,6 +1,6 @@
 {
   "name": "@chronogrove/ui",
-  "version": "0.85.4",
+  "version": "0.85.5",
   "description": "Chronogrove Theme UI theme, color mode helpers, and shared UI primitives",
   "license": "MIT",
   "type": "module",
@@ -154,6 +154,10 @@
       "import": "./src/page-shell-layout.js",
       "default": "./src/page-shell-layout.js"
     },
+    "./prop-types-helpers": {
+      "import": "./src/prop-types-helpers.js",
+      "default": "./src/prop-types-helpers.js"
+    },
     "./thumbnail-strip": {
       "import": "./src/thumbnail-strip.js",
       "default": "./src/thumbnail-strip.js"
@@ -189,6 +193,7 @@
     "@theme-toggles/react": "catalog:",
     "@theme-ui/components": "catalog:",
     "@theme-ui/presets": "catalog:",
+    "prop-types": "catalog:",
     "react-intersection-observer": "catalog:",
     "theme-ui": "catalog:",
     "three": "catalog:"

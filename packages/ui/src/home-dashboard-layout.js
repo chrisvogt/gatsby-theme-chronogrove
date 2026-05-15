@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box, Grid } from '@theme-ui/components'
 
 /** Theme UI `Grid` `columns` for the home dashboard: single column until `md`, then sidebar + main. */
@@ -55,4 +56,11 @@ export function HomeDashboardGrid({ aside, main, asideSx = {}, gridProps = {}, .
       {main}
     </Grid>
   )
+}
+
+HomeDashboardGrid.propTypes = {
+  aside: PropTypes.node.isRequired,
+  main: PropTypes.node.isRequired,
+  asideSx: PropTypes.object,
+  gridProps: PropTypes.object
 }

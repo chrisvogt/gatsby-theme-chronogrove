@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, useColorMode } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
 
 import isDarkMode from '../helpers/isDarkMode'
@@ -61,6 +62,14 @@ const ColorModeImage = ({ light, dark, alt, optimizeDelivery = true, loading, ..
   const src = pickDark ? darkSrc : lightSrc
 
   return <Themed.img {...rest} alt={alt} src={src} loading={loading ?? 'lazy'} />
+}
+
+ColorModeImage.propTypes = {
+  light: PropTypes.string.isRequired,
+  dark: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  optimizeDelivery: PropTypes.bool,
+  loading: PropTypes.string
 }
 
 export default ColorModeImage

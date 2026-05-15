@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Card } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 
@@ -13,6 +14,10 @@ const StatusCard = ({ message, ...props }) => {
       {message}
     </Card>
   )
+}
+
+StatusCard.propTypes = {
+  message: PropTypes.node.isRequired
 }
 
 export default StatusCard

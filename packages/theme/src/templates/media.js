@@ -13,6 +13,23 @@ import { useAudioPlayerStore } from '../stores/audio-player-store'
 import YouTube from '../shortcodes/youtube'
 import useSiteMetadata from '../hooks/use-site-metadata'
 
+const mediaMdxPropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  fields: PropTypes.shape({
+    category: PropTypes.string,
+    path: PropTypes.string.isRequired
+  }).isRequired,
+  frontmatter: PropTypes.shape({
+    banner: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes.string,
+    keywords: PropTypes.arrayOf(PropTypes.string),
+    soundcloudId: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    youtubeSrc: PropTypes.string
+  }).isRequired
+}).isRequired
+
 const getBanner = mdx => mdx.frontmatter.banner
 const getDescription = mdx => mdx.frontmatter.description
 const getTitle = mdx => mdx.frontmatter.title
@@ -113,22 +130,7 @@ const MediaTemplate = ({ data: { mdx }, children }) => {
 MediaTemplate.propTypes = {
   children: PropTypes.node,
   data: PropTypes.shape({
-    mdx: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      fields: PropTypes.shape({
-        category: PropTypes.string,
-        path: PropTypes.string.isRequired
-      }).isRequired,
-      frontmatter: PropTypes.shape({
-        banner: PropTypes.string,
-        date: PropTypes.string,
-        description: PropTypes.string,
-        keywords: PropTypes.arrayOf(PropTypes.string),
-        soundcloudId: PropTypes.string,
-        title: PropTypes.string.isRequired,
-        youtubeSrc: PropTypes.string
-      }).isRequired
-    }).isRequired
+    mdx: mediaMdxPropType
   }).isRequired
 }
 
@@ -171,6 +173,12 @@ export const Head = ({ data: { mdx } }) => {
       <script type='application/ld+json'>{JSON.stringify(breadcrumbData)}</script>
     </Seo>
   )
+}
+
+Head.propTypes = {
+  data: PropTypes.shape({
+    mdx: mediaMdxPropType
+  }).isRequired
 }
 
 export const pageQuery = graphql`

@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box, useThemeUI } from 'theme-ui'
 import PropTypes from 'prop-types'
+import { nullableNumber, nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { useState } from 'react'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -50,6 +51,10 @@ const SteamCardImagePlaceholder = ({ darkModeActive }) => {
   )
 }
 
+SteamCardImagePlaceholder.propTypes = {
+  darkModeActive: PropTypes.bool.isRequired
+}
+
 const SteamCardGameLazyImage = ({ darkModeActive, displayName, gameImage, isImageZoomed }) => (
   <LazyLoad placeholder={<SteamCardImagePlaceholder darkModeActive={darkModeActive} />}>
     <Box
@@ -68,9 +73,22 @@ const SteamCardGameLazyImage = ({ darkModeActive, displayName, gameImage, isImag
   </LazyLoad>
 )
 
+SteamCardGameLazyImage.propTypes = {
+  darkModeActive: PropTypes.bool.isRequired,
+  displayName: PropTypes.string.isRequired,
+  gameImage: PropTypes.string.isRequired,
+  isImageZoomed: PropTypes.bool.isRequired
+}
+
 const SteamRankBadge = ({ darkModeActive, rank, showRank }) => {
   if (!showRank || !rank) return null
   return <Box sx={steamRankBadgeSx(darkModeActive)}>{rank}</Box>
+}
+
+SteamRankBadge.propTypes = {
+  darkModeActive: PropTypes.bool.isRequired,
+  rank: PropTypes.number,
+  showRank: PropTypes.bool.isRequired
 }
 
 const SteamGameCaptionOverlay = ({ displayName, subtitle }) => (
@@ -114,6 +132,11 @@ const SteamGameCaptionOverlay = ({ displayName, subtitle }) => (
     {subtitle ? <Box sx={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)' }}>{subtitle}</Box> : null}
   </Box>
 )
+
+SteamGameCaptionOverlay.propTypes = {
+  displayName: PropTypes.string.isRequired,
+  subtitle: PropTypes.string
+}
 
 const SteamCardGameMedia = ({ darkModeActive, game, gameImage, isImageZoomed, rank, showRank, subtitle }) => (
   <Box
@@ -219,9 +242,9 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
 SteamGameCard.propTypes = {
   game: steamGamePropType,
   onClick: PropTypes.func,
-  rank: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null])]),
+  rank: nullableNumber,
   showRank: PropTypes.bool,
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+  subtitle: nullableString
 }
 
 export default SteamGameCard

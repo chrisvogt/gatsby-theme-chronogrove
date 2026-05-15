@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useThemeUI } from 'theme-ui'
 
 import useSiteMetadata from '../hooks/use-site-metadata'
@@ -45,6 +46,16 @@ const Seo = ({ article, canonicalPath, children, description, image: imageURL, k
       {children}
     </>
   )
+}
+
+Seo.propTypes = {
+  article: PropTypes.bool,
+  canonicalPath: PropTypes.string,
+  children: PropTypes.node,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  keywords: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
+  title: PropTypes.string
 }
 
 export default Seo

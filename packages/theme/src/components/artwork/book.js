@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { useId } from 'react'
+import PropTypes from 'prop-types'
 
 const Book = ({ thumbnailURL, title }) => {
   const uniqueId = useId()
@@ -47,6 +48,11 @@ const Book = ({ thumbnailURL, title }) => {
       </g>
     </svg>
   )
+}
+
+Book.propTypes = {
+  thumbnailURL: PropTypes.string,
+  title: PropTypes.string.isRequired
 }
 
 export default Book

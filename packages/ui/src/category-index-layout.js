@@ -4,6 +4,7 @@
  */
 
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 import AnimatedPageBackground from './animated-page-background/index.js'
@@ -52,4 +53,9 @@ export function CategoryIndexHeroChrome({ children, overlayHeight = 'min(75vh, 1
       </Box>
     </Fragment>
   )
+}
+
+CategoryIndexHeroChrome.propTypes = {
+  children: PropTypes.node.isRequired,
+  overlayHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }

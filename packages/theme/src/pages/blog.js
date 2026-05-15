@@ -3,6 +3,7 @@ import { Container, jsx, Box } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Flex } from '@theme-ui/components'
 import { graphql } from 'gatsby'
+import PropTypes from 'prop-types'
 
 import {
   CategoryIndexHeroChrome,
@@ -56,6 +57,14 @@ const BlogIndexPage = ({ data }) => {
       </Layout>
     </CategoryIndexHeroChrome>
   )
+}
+
+BlogIndexPage.propTypes = {
+  data: PropTypes.shape({
+    allMdx: PropTypes.shape({
+      edges: PropTypes.array
+    })
+  }).isRequired
 }
 
 export { default as Head } from './blog-head'

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 /**
@@ -70,6 +71,12 @@ const ThumbnailStrip = ({ images = [], maxImages = 4, size = 36 }) => {
       })}
     </Box>
   )
+}
+
+ThumbnailStrip.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null, undefined])])),
+  maxImages: PropTypes.number,
+  size: PropTypes.number
 }
 
 export default ThumbnailStrip

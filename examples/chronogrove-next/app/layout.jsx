@@ -1,5 +1,6 @@
 import './globals.css'
 
+import PropTypes from 'prop-types'
 import { ChronogroveNextEmotionRegistry, ChronogroveNextRootLayoutHead } from '@chronogrove/ui/next'
 
 import Providers from './providers'
@@ -22,4 +23,8 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   )
+}
+
+RootLayout.propTypes = {
+  children: PropTypes.node.isRequired
 }

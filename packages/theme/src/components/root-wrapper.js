@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useShallow } from 'zustand/react/shallow'
 
@@ -71,6 +72,10 @@ const RootWrapper = ({ children }) => {
       />
     </>
   )
+}
+
+RootWrapper.propTypes = {
+  children: PropTypes.node
 }
 
 export default RootWrapper

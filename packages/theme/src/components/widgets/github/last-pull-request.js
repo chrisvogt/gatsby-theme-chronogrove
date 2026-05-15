@@ -5,6 +5,7 @@ import { Box, Card, Heading } from '@theme-ui/components'
 import Placeholder from 'react-placeholder'
 import { TextRow } from 'react-placeholder/lib/placeholders'
 import ago from 's-ago'
+import PropTypes from 'prop-types'
 
 import CardFooter from '../card-footer'
 import ViewExternal from '../view-external'
@@ -61,6 +62,11 @@ const LastPullRequest = ({ isLoading, pullRequest = {} }) => {
       </Themed.a>
     </Box>
   )
+}
+
+LastPullRequest.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  pullRequest: PropTypes.object
 }
 
 export default LastPullRequest

@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui'
 import { Box } from '@theme-ui/components'
 import { keyframes } from '@emotion/react'
 import { useState, useEffect, useRef, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import { faImages, faVideo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -296,6 +297,14 @@ const InstagramWidgetItem = ({
       />
     </Box>
   )
+}
+
+InstagramWidgetItem.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  post: PropTypes.object,
+  isAmbientActive: PropTypes.bool,
+  ambientTrigger: PropTypes.number
 }
 
 export default InstagramWidgetItem

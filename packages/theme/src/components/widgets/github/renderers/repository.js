@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { Box, Flex, Heading } from '@theme-ui/components'
 import ago from 's-ago'
 
@@ -32,6 +34,13 @@ const Repository = ({ description, nameWithOwner, pushedAt, updatedAt }) => {
       </CardFooter>
     </Flex>
   )
+}
+
+Repository.propTypes = {
+  description: nullableString,
+  nameWithOwner: PropTypes.string.isRequired,
+  pushedAt: nullableString,
+  updatedAt: nullableString
 }
 
 export default Repository

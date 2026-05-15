@@ -8,6 +8,7 @@ import { useLocation } from '@gatsbyjs/reach-router'
 import Book3D from '../../artwork/book-3d'
 import ViewExternal from '../view-external'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
+import PropTypes from 'prop-types'
 
 const renderStarsForRating = count => {
   const repeat = (char, n) => Array(n).fill(char).join('')
@@ -138,6 +139,11 @@ const BookExplorer = ({ book, onClose }) => {
       </Box>
     </Card>
   )
+}
+
+BookExplorer.propTypes = {
+  book: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired
 }
 
 export default BookExplorer

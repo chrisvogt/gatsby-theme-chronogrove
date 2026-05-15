@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Card } from '@theme-ui/components'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
@@ -185,6 +186,11 @@ const VinylRecordSkeleton = ({ darkModeActive, variant = 'grid' }) => {
       </div>
     </Card>
   )
+}
+
+VinylRecordSkeleton.propTypes = {
+  darkModeActive: PropTypes.bool.isRequired,
+  variant: PropTypes.oneOf(['grid', 'list'])
 }
 
 export default VinylRecordSkeleton

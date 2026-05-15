@@ -3,6 +3,7 @@ import { jsx, Box } from 'theme-ui'
 import { Heading } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import { useEffect, useMemo, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { useAudioPlayerStore } from '../../../stores/audio-player-store'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
@@ -154,6 +155,11 @@ const TopTracks = ({ isLoading, tracks = [] }) => {
       ) : null}
     </Box>
   )
+}
+
+TopTracks.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  tracks: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default TopTracks

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Container } from '@theme-ui/components'
 
 /**
@@ -20,4 +21,9 @@ export function ArticleColumnContainer({ children, sx = {}, ...rest }) {
       {children}
     </Container>
   )
+}
+
+ArticleColumnContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  sx: PropTypes.object
 }

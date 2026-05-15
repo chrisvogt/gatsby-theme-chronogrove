@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 const FlickrWidgetItem = ({ photo = {}, handleClick = () => {}, index }) => {
@@ -33,6 +34,12 @@ const FlickrWidgetItem = ({ photo = {}, handleClick = () => {}, index }) => {
       />
     </Box>
   )
+}
+
+FlickrWidgetItem.propTypes = {
+  photo: PropTypes.object,
+  handleClick: PropTypes.func,
+  index: PropTypes.number.isRequired
 }
 
 export default FlickrWidgetItem

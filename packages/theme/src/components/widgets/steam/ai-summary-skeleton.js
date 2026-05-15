@@ -4,6 +4,7 @@ import { TextBlock } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
+import PropTypes from 'prop-types'
 
 /**
  * Skeleton placeholder for AI summary block. Matches the layout of AiSummary
@@ -41,6 +42,11 @@ const AiSummarySkeleton = ({ skeletonRows = 4, sx: sxProp }) => {
       </div>
     </div>
   )
+}
+
+AiSummarySkeleton.propTypes = {
+  skeletonRows: PropTypes.number,
+  sx: PropTypes.object
 }
 
 export default AiSummarySkeleton

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 const Button = ({ variant = 'primary', ...props }) => (
@@ -22,5 +23,9 @@ const Button = ({ variant = 'primary', ...props }) => (
     }}
   />
 )
+
+Button.propTypes = {
+  variant: PropTypes.string
+}
 
 export default Button

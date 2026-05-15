@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Card } from '@theme-ui/components'
 import { actionCardPinnedLayoutSx } from '@chronogrove/ui/action-card-layout'
 
@@ -19,5 +20,10 @@ const PinnedItemCard = ({ item, type = PLACEHOLDER }) => (
     {rendererRegistry[type]?.(item)}
   </Card>
 )
+
+PinnedItemCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  type: PropTypes.string
+}
 
 export default PinnedItemCard

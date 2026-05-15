@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import CategoryLabel from '@chronogrove/ui/category-label'
 import { getCategoryDisplayName } from '../helpers/categoryHelpers'
@@ -11,6 +12,11 @@ const Category = ({ sx = {}, type, ...props }) => {
       {category}
     </CategoryLabel>
   )
+}
+
+Category.propTypes = {
+  sx: PropTypes.object,
+  type: PropTypes.string
 }
 
 export default Category

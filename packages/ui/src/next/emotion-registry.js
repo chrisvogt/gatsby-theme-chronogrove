@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 import { useServerInsertedHTML } from 'next/navigation'
@@ -65,4 +66,8 @@ export function ChronogroveNextEmotionRegistry({ children }) {
   })
 
   return <CacheProvider value={cache}>{children}</CacheProvider>
+}
+
+ChronogroveNextEmotionRegistry.propTypes = {
+  children: PropTypes.node.isRequired
 }

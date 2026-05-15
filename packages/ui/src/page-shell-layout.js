@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 import { SkipNavContent, SkipNavLink } from './skip-nav/index.js'
@@ -54,4 +55,15 @@ export function ChronogrovePageShell({
       {!hideFooter && footer ? footer : null}
     </Box>
   )
+}
+
+ChronogrovePageShell.propTypes = {
+  children: PropTypes.node.isRequired,
+  disableMainWrapper: PropTypes.bool,
+  hideHeader: PropTypes.bool,
+  hideFooter: PropTypes.bool,
+  transparentBackground: PropTypes.bool,
+  paddingBottom: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  header: PropTypes.node,
+  footer: PropTypes.node
 }

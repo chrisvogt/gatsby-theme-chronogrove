@@ -6,6 +6,9 @@ const globals = require('globals')
 
 const browserGlobals = Object.fromEntries(Object.entries(globals.browser).filter(([key]) => key.trim() === key))
 
+/** Monorepo root has no `react` dependency, so `detect` prints a warning; align with `pnpm-workspace.yaml` catalog. */
+const REACT_VERSION_FOR_ESLINT = '19.2'
+
 module.exports = [
   {
     ignores: [
@@ -92,7 +95,7 @@ module.exports = [
     },
     settings: {
       react: {
-        version: 'detect'
+        version: REACT_VERSION_FOR_ESLINT
       }
     },
     languageOptions: {
@@ -102,6 +105,47 @@ module.exports = [
         ecmaFeatures: {
           jsx: true
         }
+      }
+    }
+  },
+  /** PropTypes in theme `src/` (avoids mocks, tests). */
+  {
+    files: ['packages/theme/src/**/*.js'],
+    ignores: ['packages/theme/src/**/*.spec.js', 'packages/theme/src/testUtils.js'],
+    plugins: { react },
+    rules: {
+      'react/prop-types': 'warn'
+    },
+    settings: {
+      react: {
+        version: REACT_VERSION_FOR_ESLINT
+      }
+    }
+  },
+  /** PropTypes in @chronogrove/ui `src/` (portable components; same incremental typing story as the theme). */
+  {
+    files: ['packages/ui/src/**/*.js'],
+    ignores: ['packages/ui/src/**/*.spec.js'],
+    plugins: { react },
+    rules: {
+      'react/prop-types': 'warn'
+    },
+    settings: {
+      react: {
+        version: REACT_VERSION_FOR_ESLINT
+      }
+    }
+  },
+  /** PropTypes in Chronogrove Next.js reference app (`examples/chronogrove-next/app`, `.jsx`). */
+  {
+    files: ['examples/chronogrove-next/app/**/*.jsx'],
+    plugins: { react },
+    rules: {
+      'react/prop-types': 'warn'
+    },
+    settings: {
+      react: {
+        version: REACT_VERSION_FOR_ESLINT
       }
     }
   },

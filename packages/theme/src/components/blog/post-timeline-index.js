@@ -1,6 +1,8 @@
 /** @jsx jsx */
 /* global Image, IntersectionObserver */
 import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
+import { mdxMediaScalar, nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { jsx, Box } from 'theme-ui'
 import { Link } from 'gatsby'
 
@@ -893,4 +895,98 @@ export default function PostTimelineIndex({
       ) : null}
     </Fragment>
   )
+}
+
+TimelineEmbedAside.propTypes = {
+  soundcloudId: mdxMediaScalar,
+  sx: PropTypes.object,
+  title: mdxMediaScalar,
+  youtubeSrc: mdxMediaScalar
+}
+
+Thumb.propTypes = {
+  sizePx: PropTypes.number.isRequired,
+  sx: PropTypes.object,
+  url: PropTypes.string
+}
+
+FeaturedHeroCarousel.propTypes = {
+  slideKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  tid: PropTypes.func.isRequired,
+  featuredImageAltFallback: PropTypes.string.isRequired
+}
+
+MetaFeatured.propTypes = {
+  category: nullableString,
+  date: nullableString
+}
+
+Featured.propTypes = {
+  featuredImageAltFallback: PropTypes.string.isRequired,
+  post: PropTypes.object.isRequired,
+  readMoreAriaFallback: PropTypes.string.isRequired,
+  showBottomSeparator: PropTypes.bool,
+  tid: PropTypes.func.isRequired,
+  timelineAsideMedia: PropTypes.bool
+}
+
+TimelineReadMoreLink.propTypes = {
+  emphasis: PropTypes.bool,
+  href: PropTypes.string.isRequired,
+  readMoreAriaFallback: PropTypes.string.isRequired,
+  tid: PropTypes.func.isRequired,
+  title: nullableString,
+  variant: PropTypes.oneOf(['timeline', 'featured'])
+}
+
+StampDenseMeta.propTypes = {
+  category: nullableString,
+  date: nullableString
+}
+
+TimelineStampLeadMedia.propTypes = {
+  timelineAsideMedia: PropTypes.bool.isRequired,
+  tid: PropTypes.func.isRequired,
+  soundcloudId: mdxMediaScalar,
+  title: mdxMediaScalar,
+  youtubeSrc: mdxMediaScalar,
+  href: PropTypes.string.isRequired,
+  thumbUrl: PropTypes.string
+}
+
+TimelineStampArticleColumn.propTypes = {
+  category: nullableString,
+  date: nullableString,
+  emphasis: PropTypes.bool.isRequired,
+  excerpt: nullableString,
+  href: PropTypes.string.isRequired,
+  readMoreAriaFallback: PropTypes.string.isRequired,
+  tid: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  titleFont: PropTypes.array
+}
+
+TimelineStamp.propTypes = {
+  category: nullableString,
+  date: nullableString,
+  emphasis: PropTypes.bool.isRequired,
+  excerpt: nullableString,
+  href: PropTypes.string.isRequired,
+  readMoreAriaFallback: PropTypes.string.isRequired,
+  soundcloudId: mdxMediaScalar,
+  thumbUrl: PropTypes.string,
+  tid: PropTypes.func.isRequired,
+  timelineAsideMedia: PropTypes.bool,
+  title: PropTypes.string.isRequired,
+  youtubeSrc: mdxMediaScalar
+}
+
+PostTimelineIndex.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataTestIdPrefix: PropTypes.string,
+  featuredImageAltFallback: PropTypes.string,
+  readMoreAriaFallback: PropTypes.string,
+  timelineAsideMedia: PropTypes.bool,
+  afterFeatured: PropTypes.node
 }

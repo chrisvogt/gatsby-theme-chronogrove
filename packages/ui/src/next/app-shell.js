@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { nullableCrossDomainColorMode } from '../prop-types-helpers.js'
 
 import { Box } from '@theme-ui/components'
 
@@ -41,4 +43,10 @@ export function ChronogroveNextAppShell({ children, theme = chronogroveTheme, cr
       </Box>
     </ChronogroveThemeProvider>
   )
+}
+
+ChronogroveNextAppShell.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.object,
+  crossDomainColorMode: nullableCrossDomainColorMode
 }

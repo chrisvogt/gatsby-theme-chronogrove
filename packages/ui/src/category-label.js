@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 /**
@@ -19,5 +20,10 @@ const CategoryLabel = ({ children, sx: sxProp = {}, ...props }) => (
     {children}
   </Box>
 )
+
+CategoryLabel.propTypes = {
+  children: PropTypes.node.isRequired,
+  sx: PropTypes.object
+}
 
 export default CategoryLabel

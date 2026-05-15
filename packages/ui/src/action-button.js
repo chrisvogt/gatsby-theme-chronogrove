@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 import isDarkMode from './helpers/isDarkMode.js'
@@ -80,6 +81,15 @@ const ActionButton = ({ children, href, onClick, variant = 'primary', size = 'me
       {content}
     </Box>
   )
+}
+
+ActionButton.propTypes = {
+  children: PropTypes.node,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger']),
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge']),
+  icon: PropTypes.node
 }
 
 export default ActionButton

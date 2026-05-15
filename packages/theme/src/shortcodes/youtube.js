@@ -1,5 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { Themed } from '@theme-ui/mdx'
 import { Embed } from '@theme-ui/components'
 
@@ -31,5 +33,12 @@ const YouTube = ({ title, url, sx = {}, compact = false }) => (
     />
   </Themed.div>
 )
+
+YouTube.propTypes = {
+  title: nullableString,
+  url: PropTypes.string.isRequired,
+  sx: PropTypes.object,
+  compact: PropTypes.bool
+}
 
 export default YouTube

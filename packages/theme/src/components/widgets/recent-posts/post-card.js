@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { nullableString, nullableStringArray } from '@chronogrove/ui/prop-types-helpers'
 import { jsx, Box as ThemeBox } from 'theme-ui'
 import { Heading, Card } from '@theme-ui/components'
 import { Link } from 'gatsby'
@@ -28,13 +29,6 @@ export const buildYouTubeEmbedUrl = url => {
   return `${url}${separator}rel=0&modestbranding=1`
 }
 
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
-
-const thumbnailsPropType = PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.oneOf([null])])
-
-const previewUrlPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
-
-/** Small float beside headline — wide crop matches OG / banner art */
 const HORIZONTAL_PREVIEW_ASPECT = '1.9 / 1'
 /** Fixed width for the headline-row thumb (height follows aspect ratio); 5.625rem = 4.5rem × 1.25 */
 const HEADLINE_THUMB_WIDTH = '5.625rem'
@@ -217,10 +211,10 @@ PostCardInner.propTypes = {
   hasMediaEmbed: PropTypes.bool.isRequired,
   hasSoundCloud: PropTypes.bool.isRequired,
   hasYouTube: PropTypes.bool.isRequired,
-  horizontalPreviewUrl: previewUrlPropType,
+  horizontalPreviewUrl: nullableString,
   link: PropTypes.string.isRequired,
   soundcloudId: nullableString,
-  thumbnails: thumbnailsPropType,
+  thumbnails: nullableStringArray,
   title: PropTypes.string.isRequired,
   youtubeSrc: nullableString
 }
@@ -378,7 +372,7 @@ HorizontalTextBlock.propTypes = {
   date: PropTypes.string,
   excerpt: nullableString,
   hasMediaEmbed: PropTypes.bool.isRequired,
-  headlinePreviewUrl: previewUrlPropType,
+  headlinePreviewUrl: nullableString,
   horizontal: PropTypes.bool.isRequired,
   link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
@@ -448,7 +442,7 @@ PostCard.propTypes = {
   isRecap: PropTypes.bool,
   link: PropTypes.string.isRequired,
   soundcloudId: nullableString,
-  thumbnails: thumbnailsPropType,
+  thumbnails: nullableStringArray,
   title: PropTypes.string.isRequired,
   youtubeSrc: nullableString
 }

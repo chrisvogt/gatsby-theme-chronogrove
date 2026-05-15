@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Box, Card, Container, Flex, Grid, Heading, Text, Badge, Link } from '@theme-ui/components'
 import { useColorMode } from 'theme-ui'
 import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders'
@@ -156,6 +157,13 @@ function Section({ id, title, description, children }) {
   )
 }
 
+Section.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  children: PropTypes.node.isRequired
+}
+
 function DemoPreview({ title: previewTitle = 'Preview', children }) {
   return (
     <Box sx={previewShellSx}>
@@ -167,6 +175,11 @@ function DemoPreview({ title: previewTitle = 'Preview', children }) {
   )
 }
 
+DemoPreview.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node.isRequired
+}
+
 function DemoBlock({ label, children }) {
   return (
     <Box sx={{ p: [2, 3] }}>
@@ -174,6 +187,11 @@ function DemoBlock({ label, children }) {
       {children}
     </Box>
   )
+}
+
+DemoBlock.propTypes = {
+  label: PropTypes.node,
+  children: PropTypes.node.isRequired
 }
 
 function LazyPlaceholder() {

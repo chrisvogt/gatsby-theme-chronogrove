@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 
@@ -79,6 +80,14 @@ const WidgetSection = ({ children, hasFatalError, id, styleOverrides = {}, tabIn
       {children}
     </Box>
   )
+}
+
+WidgetSection.propTypes = {
+  children: PropTypes.node.isRequired,
+  hasFatalError: PropTypes.bool,
+  id: PropTypes.string,
+  styleOverrides: PropTypes.object,
+  tabIndex: PropTypes.number
 }
 
 export default WidgetSection

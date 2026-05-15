@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Container, jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
 import { graphql } from 'gatsby'
 
@@ -67,6 +68,28 @@ const PostTemplate = ({ children, data }) => {
   )
 }
 
+const mdxHeadPropType = PropTypes.shape({
+  id: PropTypes.string,
+  fields: PropTypes.shape({
+    category: PropTypes.string,
+    path: PropTypes.string
+  }),
+  frontmatter: PropTypes.shape({
+    banner: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes.string,
+    title: PropTypes.string,
+    keywords: PropTypes.arrayOf(PropTypes.string)
+  })
+}).isRequired
+
+PostTemplate.propTypes = {
+  children: PropTypes.node.isRequired,
+  data: PropTypes.shape({
+    mdx: mdxHeadPropType
+  }).isRequired
+}
+
 export const Head = ({ data: { mdx } }) => {
   const banner = mdx.frontmatter.banner
   const description = mdx.frontmatter.description
@@ -106,6 +129,12 @@ export const Head = ({ data: { mdx } }) => {
       <script type='application/ld+json'>{JSON.stringify(breadcrumbData)}</script>
     </Seo>
   )
+}
+
+Head.propTypes = {
+  data: PropTypes.shape({
+    mdx: mdxHeadPropType
+  }).isRequired
 }
 
 export const pageQuery = graphql`
