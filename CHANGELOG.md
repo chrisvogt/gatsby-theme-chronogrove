@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.91.8
+
+### `gatsby-theme-chronogrove` — PropTypes (Phase 1), shared nullable validators
+
+- **ESLint**: Root `eslint.config.js` enables **`react/prop-types`** (`warn`) for `packages/theme/src` (ignores `*.spec.js`, `testUtils.js`), with a **fixed React version** for ESLint (`settings.react.version`) so `react/version` detection does not warn.
+- **Components**: Broad **`propTypes`** on layout, navigation, SEO, audio player, widgets (GitHub, Spotify, Steam, Goodreads, Discogs, Flickr, Instagram, recent posts, …), shortcodes (YouTube, SoundCloud, Note, …), templates/pages, and MDX-related props—aligned with **runtime `null`** (GraphQL, Zustand, MDX/YAML) where plain `PropTypes.string` would lie.
+- **Deduping**: Theme imports **`nullableString`**, **`nullableObject`**, **`mdxMediaScalar`**, etc. from **`@chronogrove/ui/prop-types-helpers`** instead of repeating `oneOfType`/`oneOf([null])` per file.
+- **Tracking**: Contributes to [#630](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/630) (incremental TypeScript migration — Phase 1 PropTypes).
+
+### `@chronogrove/ui`
+
+- **ESLint**: **`react/prop-types`** (`warn`) for `packages/ui/src` (ignores `*.spec.js`).
+- **`prop-types`**: Declared dependency; portable components declare **`propTypes`**.
+- **`prop-types-helpers`**: New **`./prop-types-helpers`** export (`nullableString`, `nullableObject`, **`nullableCrossDomainColorMode`**, **`nullableObjectArray`**, …) used by theme and internal Next shell / **`ProfileMetricsBadge`**.
+
+### Repository (root + example)
+
+- **README**: “TypeScript roadmap” / contributor note for PropTypes on touched theme code and pointer to **`eslint.config.js`**.
+- **`examples/chronogrove-next`**: **`prop-types`** dependency and **`propTypes`** on local App Router components (`layout`, `providers`, `home-showcase`).
+
+### Versions
+
+- **`gatsby-theme-chronogrove` 0.91.8**; **`@chronogrove/ui` 0.85.5**; **`www.chrisvogt.me` 1.22.7**; **`www.chronogrove.com` 1.9.6**.
+
+### Files changed (high level)
+
+- `CHANGELOG.md`
+- `eslint.config.js`, `README.md`, `package.json`, `pnpm-lock.yaml`
+- `examples/chronogrove-next/package.json`, `examples/chronogrove-next/app/*.jsx`
+- `packages/theme/package.json` (version **0.91.8**) and broad `packages/theme/src/**/*.js` PropTypes + `@chronogrove/ui/prop-types-helpers` imports
+- `packages/ui/package.json` (version **0.85.5**), `packages/ui/src/prop-types-helpers.js`, `packages/ui/src/**/*.js`
+- `websites/www.chrisvogt.me/package.json` (version **1.22.7**), `websites/www.chronogrove.com/package.json` (version **1.9.6**)
+
+---
+
 ## 0.91.7
 
 ### `gatsby-theme-chronogrove` — Sonar maintainability (complexity, tests)
