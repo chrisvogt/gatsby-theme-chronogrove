@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box, useThemeUI } from 'theme-ui'
 import PropTypes from 'prop-types'
+import { nullableNumber, nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { useState } from 'react'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
@@ -241,9 +242,9 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
 SteamGameCard.propTypes = {
   game: steamGamePropType,
   onClick: PropTypes.func,
-  rank: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null])]),
+  rank: nullableNumber,
   showRank: PropTypes.bool,
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+  subtitle: nullableString
 }
 
 export default SteamGameCard

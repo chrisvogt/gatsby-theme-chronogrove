@@ -4,6 +4,7 @@ import { Themed } from '@theme-ui/mdx'
 import { Box, Card, Heading } from '@theme-ui/components'
 import React, { useMemo, useRef, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { nullableObject } from '@chronogrove/ui/prop-types-helpers'
 import { createPortal } from 'react-dom'
 import isDarkMode from '../../../helpers/isDarkMode'
 
@@ -556,8 +557,6 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
     </Box>
   )
 }
-
-const nullableObject = PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([null])])
 
 ContributionGraph.propTypes = {
   isLoading: PropTypes.bool.isRequired,

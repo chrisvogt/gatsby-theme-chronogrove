@@ -154,6 +154,10 @@
       "import": "./src/page-shell-layout.js",
       "default": "./src/page-shell-layout.js"
     },
+    "./prop-types-helpers": {
+      "import": "./src/prop-types-helpers.js",
+      "default": "./src/prop-types-helpers.js"
+    },
     "./thumbnail-strip": {
       "import": "./src/thumbnail-strip.js",
       "default": "./src/thumbnail-strip.js"

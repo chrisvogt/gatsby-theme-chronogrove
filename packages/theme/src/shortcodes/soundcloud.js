@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, useColorMode } from 'theme-ui'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 
 // Use a theme-aware accent color for the SoundCloud player
 const buildSoundCloudEmbedURL = (trackId, isDarkMode) => {
@@ -25,8 +26,6 @@ const SoundCloud = ({ title, soundcloudId }) => {
     ></iframe>
   )
 }
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 SoundCloud.propTypes = {
   title: nullableString,

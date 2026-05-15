@@ -2,6 +2,7 @@
 import { jsx, Box } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import * as THREE from 'three'
 
 const BOOK_W = 0.65
@@ -528,8 +529,6 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
     </Box>
   )
 }
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 Book3D.propTypes = {
   thumbnailURL: nullableString,

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { nullableCrossDomainColorMode } from '../prop-types-helpers.js'
 
 import { Box } from '@theme-ui/components'
 
@@ -44,16 +45,8 @@ export function ChronogroveNextAppShell({ children, theme = chronogroveTheme, cr
   )
 }
 
-const crossDomainColorModePropType = PropTypes.oneOfType([
-  PropTypes.shape({
-    registrableDomain: PropTypes.string,
-    cookieName: PropTypes.string
-  }),
-  PropTypes.oneOf([null])
-])
-
 ChronogroveNextAppShell.propTypes = {
   children: PropTypes.node.isRequired,
   theme: PropTypes.object,
-  crossDomainColorMode: crossDomainColorModePropType
+  crossDomainColorMode: nullableCrossDomainColorMode
 }

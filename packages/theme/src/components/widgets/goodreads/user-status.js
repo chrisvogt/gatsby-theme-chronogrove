@@ -4,6 +4,7 @@ import { Themed } from '@theme-ui/mdx'
 import { Box, Card, Heading } from '@theme-ui/components'
 import { useRef, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import ago from 's-ago'
 import Placeholder from 'react-placeholder'
 import { TextRow } from 'react-placeholder/lib/placeholders'
@@ -157,8 +158,6 @@ const UserStatus = ({ isLoading, status, actorName }) => {
     </Box>
   )
 }
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 UserStatus.propTypes = {
   isLoading: PropTypes.bool.isRequired,

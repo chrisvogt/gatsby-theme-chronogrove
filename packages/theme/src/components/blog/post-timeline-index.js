@@ -2,6 +2,7 @@
 /* global Image, IntersectionObserver */
 import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import { mdxMediaScalar, nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { jsx, Box } from 'theme-ui'
 import { Link } from 'gatsby'
 
@@ -895,11 +896,6 @@ export default function PostTimelineIndex({
     </Fragment>
   )
 }
-
-/** Optional `PropTypes.string` rejects `null`; timeline passes explicit `null` from GraphQL coercions. */
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
-/** MDX / frontmatter media fields may be string, number, or null (YAML looseness). */
-const mdxMediaScalar = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.oneOf([null])])
 
 TimelineEmbedAside.propTypes = {
   soundcloudId: mdxMediaScalar,

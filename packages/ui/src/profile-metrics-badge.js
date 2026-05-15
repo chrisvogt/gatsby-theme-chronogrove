@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { nullableObjectArray } from './prop-types-helpers.js'
 import { Badge, Box } from '@theme-ui/components'
 
 const ProfileMetricsBadge = ({ compact = false, isLoading, metrics = [] }) => {
@@ -33,7 +34,7 @@ const ProfileMetricsBadge = ({ compact = false, isLoading, metrics = [] }) => {
 ProfileMetricsBadge.propTypes = {
   compact: PropTypes.bool,
   isLoading: PropTypes.bool,
-  metrics: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.oneOf([null])])
+  metrics: nullableObjectArray
 }
 
 export default ProfileMetricsBadge

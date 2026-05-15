@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box } from 'theme-ui'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { Themed } from '@theme-ui/mdx'
 
 const TrackPreview = ({ link, name, thumbnailURL }) => (
@@ -24,8 +25,6 @@ const TrackPreview = ({ link, name, thumbnailURL }) => (
     />
   </Themed.a>
 )
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 TrackPreview.propTypes = {
   link: PropTypes.string.isRequired,

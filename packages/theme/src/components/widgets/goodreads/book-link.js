@@ -4,6 +4,7 @@ import { Box, Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import Book3D from '../../artwork/book-3d'
 
 const BookLink = ({
@@ -180,8 +181,6 @@ const BookLink = ({
     </Card>
   )
 }
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 BookLink.propTypes = {
   id: PropTypes.string.isRequired,

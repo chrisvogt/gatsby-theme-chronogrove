@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui'
 import { Box, Text } from '@theme-ui/components'
 import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 
 import { formatAiSummarySyncedLabel } from '../../../helpers/ai-summary-synced-at'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
@@ -163,8 +164,6 @@ function AiSummaryComponent({ aiSummary, aiSummarySyncedAt, sx: sxProp }) {
     </div>
   )
 }
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 AiSummaryComponent.propTypes = {
   /** Tests and callers may mount with `null` / omitted while the effect no-ops on falsy values. */

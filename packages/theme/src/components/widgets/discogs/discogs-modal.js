@@ -3,6 +3,7 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { createPortal } from 'react-dom'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import { nullableObject, nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { Themed } from '@theme-ui/mdx'
 import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -238,9 +239,6 @@ function DiscogsModalTracklistSection({
     </div>
   )
 }
-
-const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
-const nullableObject = PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([null])])
 
 DiscogsModalCoverSection.propTypes = {
   coverImageUrl: nullableString,

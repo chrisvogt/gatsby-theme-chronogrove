@@ -2,6 +2,7 @@
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { nullableString } from '@chronogrove/ui/prop-types-helpers'
 import { createPortal } from 'react-dom'
 import { useAudioPlayerStore } from '../stores/audio-player-store'
 import SoundCloud from '../shortcodes/soundcloud'
@@ -154,18 +155,15 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode:
   )
 }
 
-/** Optional string props that may be `null` at runtime (e.g. zustand initial state). */
-const nullishString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
-
 /** `useAudioPlayerStore` uses `null` when idle (see `initialAudioPlayerState`). */
 const audioProvider = PropTypes.oneOfType([PropTypes.oneOf(['soundcloud', 'spotify']), PropTypes.oneOf([null])])
 
 AudioPlayer.propTypes = {
-  soundcloudId: nullishString,
-  spotifyURL: nullishString,
+  soundcloudId: nullableString,
+  spotifyURL: nullableString,
   isVisible: PropTypes.bool,
   provider: audioProvider,
-  colorMode: nullishString
+  colorMode: nullableString
 }
 
 export default AudioPlayer

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import { nullableCrossDomainColorMode } from '../prop-types-helpers.js'
 
 import {
   chronogroveHeadTheme,
@@ -47,11 +47,5 @@ export function ChronogroveNextRootLayoutHead({ crossDomainColorMode = null } = 
 }
 
 ChronogroveNextRootLayoutHead.propTypes = {
-  crossDomainColorMode: PropTypes.oneOfType([
-    PropTypes.shape({
-      registrableDomain: PropTypes.string,
-      cookieName: PropTypes.string
-    }),
-    PropTypes.oneOf([null])
-  ])
+  crossDomainColorMode: nullableCrossDomainColorMode
 }
