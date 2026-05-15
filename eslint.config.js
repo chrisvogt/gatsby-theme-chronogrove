@@ -136,6 +136,19 @@ module.exports = [
       }
     }
   },
+  /** PropTypes in Chronogrove Next.js reference app (`examples/chronogrove-next/app`, `.jsx`). */
+  {
+    files: ['examples/chronogrove-next/app/**/*.jsx'],
+    plugins: { react },
+    rules: {
+      'react/prop-types': 'warn'
+    },
+    settings: {
+      react: {
+        version: REACT_VERSION_FOR_ESLINT
+      }
+    }
+  },
   {
     plugins: {
       json: require('eslint-plugin-json')
