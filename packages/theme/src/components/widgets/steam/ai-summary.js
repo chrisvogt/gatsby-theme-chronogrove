@@ -2,6 +2,7 @@
 import { jsx } from 'theme-ui'
 import { Box, Text } from '@theme-ui/components'
 import React, { useEffect, useState, useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import { formatAiSummarySyncedLabel } from '../../../helpers/ai-summary-synced-at'
 import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
@@ -49,7 +50,7 @@ const proseSx = {
   }
 }
 
-const AiSummary = React.memo(({ aiSummary, aiSummarySyncedAt, sx: sxProp }) => {
+function AiSummaryComponent({ aiSummary, aiSummarySyncedAt, sx: sxProp }) {
   const [isVisible, setIsVisible] = useState(false)
   const [showContent, setShowContent] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -161,6 +162,18 @@ const AiSummary = React.memo(({ aiSummary, aiSummarySyncedAt, sx: sxProp }) => {
       )}
     </div>
   )
-})
+}
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+AiSummaryComponent.propTypes = {
+  aiSummary: PropTypes.string.isRequired,
+  aiSummarySyncedAt: nullableString,
+  sx: PropTypes.object
+}
+
+const AiSummary = React.memo(AiSummaryComponent)
+
+AiSummary.propTypes = AiSummaryComponent.propTypes
 
 export default AiSummary

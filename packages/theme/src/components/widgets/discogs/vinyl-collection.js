@@ -3,6 +3,7 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { Box, Card, Heading, Select } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import { useState, useRef, useEffect, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import isDarkMode from '../../../helpers/isDarkMode'
 import Pagination from '../../pagination'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
@@ -1052,6 +1053,11 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       />
     </div>
   )
+}
+
+VinylCollection.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  releases: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default VinylCollection

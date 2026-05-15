@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Box, Flex, Heading } from '@theme-ui/components'
 import ago from 's-ago'
 
@@ -32,6 +33,15 @@ const Repository = ({ description, nameWithOwner, pushedAt, updatedAt }) => {
       </CardFooter>
     </Flex>
   )
+}
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+Repository.propTypes = {
+  description: nullableString,
+  nameWithOwner: PropTypes.string.isRequired,
+  pushedAt: nullableString,
+  updatedAt: nullableString
 }
 
 export default Repository

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Grid, Box, Text } from '@theme-ui/components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -35,6 +36,11 @@ const SectionHeader = ({ icon, title }) => (
     </Text>
   </Box>
 )
+
+SectionHeader.propTypes = {
+  icon: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired
+}
 
 const musicGridSx = {
   display: 'grid',

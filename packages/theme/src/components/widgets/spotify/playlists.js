@@ -4,6 +4,7 @@ import { Heading } from '@theme-ui/components'
 import MediaItemGrid from './media-item-grid'
 import { Themed } from '@theme-ui/mdx'
 import { useAudioPlayerStore } from '../../../stores/audio-player-store'
+import PropTypes from 'prop-types'
 
 const transformPlaylist = playlist => {
   if (!playlist) {
@@ -62,6 +63,11 @@ const Playlists = ({ isLoading, playlists = [] }) => {
       <MediaItemGrid isLoading={isLoading} items={items} onTrackClick={handlePlaylistClick} />
     </Box>
   )
+}
+
+Playlists.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  playlists: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Playlists

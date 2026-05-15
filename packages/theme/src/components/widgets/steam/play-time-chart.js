@@ -6,6 +6,7 @@ import getTimeSpent from './get-time-spent'
 import isDarkMode from '../../../helpers/isDarkMode'
 import ViewExternal from '../view-external'
 import SteamGameCard from './steam-game-card'
+import PropTypes from 'prop-types'
 
 /** Subtitle shown under leaderboard cards (recent playtime appended when present). */
 const leaderboardSubtitle = game => {
@@ -171,6 +172,12 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
       ) : null}
     </Box>
   )
+}
+
+PlayTimeChart.propTypes = {
+  games: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool,
+  profileURL: PropTypes.string
 }
 
 export default PlayTimeChart

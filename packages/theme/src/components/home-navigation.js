@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useMemo, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 import useNavigationData from '../hooks/use-navigation-data'
@@ -370,6 +371,31 @@ const HomeNavigation = props => {
       </nav>
     </div>
   )
+}
+
+const homeNavRailIconPropType = PropTypes.shape({
+  reactIcon: PropTypes.string
+})
+
+HomeNavRailLink.propTypes = {
+  activeIconColor: PropTypes.string.isRequired,
+  activeSection: PropTypes.string.isRequired,
+  badgeIdleBg: PropTypes.string.isRequired,
+  badgeIdleBorder: PropTypes.string.isRequired,
+  badgeIdleIcon: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  icon: homeNavRailIconPropType,
+  id: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  labelActiveColor: PropTypes.string.isRequired,
+  labelColor: PropTypes.string.isRequired,
+  primaryColor: PropTypes.string.isRequired,
+  primaryRgb: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
+}
+
+HomeNavigation.propTypes = {
+  scrollSyncDisabled: PropTypes.bool
 }
 
 export { HomeNavigation }

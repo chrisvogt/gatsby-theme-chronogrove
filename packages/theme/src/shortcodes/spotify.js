@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, Box } from 'theme-ui'
+import PropTypes from 'prop-types'
 
 // Build embed URL from share URL so we can render a simple iframe (like SoundCloud).
 // This avoids oEmbed fetch + state, so the iframe is preserved across re-renders and
@@ -34,6 +35,10 @@ const Spotify = ({ spotifyURL }) => {
       />
     </Box>
   )
+}
+
+Spotify.propTypes = {
+  spotifyURL: PropTypes.string.isRequired
 }
 
 export default Spotify

@@ -8,6 +8,7 @@
  * to it when it appears.
  */
 import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useLocation } from '@gatsbyjs/reach-router'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 
@@ -24,4 +25,8 @@ export default function ScrollToHashWhenReady({ getHash } = {}) {
   }, [location.pathname, location.hash, getHash])
 
   return null
+}
+
+ScrollToHashWhenReady.propTypes = {
+  getHash: PropTypes.func
 }

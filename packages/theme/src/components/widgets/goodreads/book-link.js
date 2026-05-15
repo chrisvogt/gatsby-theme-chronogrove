@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui'
 import { Box, Card } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import Book3D from '../../artwork/book-3d'
 
 const BookLink = ({
@@ -178,6 +179,17 @@ const BookLink = ({
       </Box>
     </Card>
   )
+}
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+BookLink.propTypes = {
+  id: PropTypes.string.isRequired,
+  thumbnailURL: nullableString,
+  title: PropTypes.string.isRequired,
+  suppressNavigation: PropTypes.bool,
+  introDelay: PropTypes.number,
+  flatCover: PropTypes.bool
 }
 
 export default BookLink

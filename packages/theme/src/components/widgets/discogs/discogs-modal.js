@@ -2,6 +2,7 @@
 import { jsx, useThemeUI } from 'theme-ui'
 import { createPortal } from 'react-dom'
 import { Fragment, useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
 import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -236,6 +237,26 @@ function DiscogsModalTracklistSection({
       </div>
     </div>
   )
+}
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+DiscogsModalCoverSection.propTypes = {
+  coverImageUrl: nullableString,
+  title: nullableString,
+  darkMode: PropTypes.bool.isRequired,
+  imageLoaded: PropTypes.bool.isRequired,
+  setImageLoaded: PropTypes.func.isRequired,
+  insetSurface: PropTypes.string.isRequired
+}
+
+DiscogsModalTracklistSection.propTypes = {
+  tracklist: PropTypes.arrayOf(PropTypes.object),
+  darkMode: PropTypes.bool.isRequired,
+  listPanelBorder: PropTypes.string.isRequired,
+  insetSurface: PropTypes.string.isRequired,
+  insetHeaderBg: PropTypes.string.isRequired,
+  insetRule: PropTypes.string.isRequired
 }
 
 const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelease }) => {
@@ -590,6 +611,14 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
     </div>,
     document.body
   )
+}
+
+DiscogsModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  release: PropTypes.object,
+  orderedReleases: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSelectRelease: PropTypes.func.isRequired
 }
 
 export default DiscogsModal

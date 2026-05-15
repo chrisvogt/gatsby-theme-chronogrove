@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Box, Card, Heading } from '@theme-ui/components'
 import { useRef, useState, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import ago from 's-ago'
 import Placeholder from 'react-placeholder'
 import { TextRow } from 'react-placeholder/lib/placeholders'
@@ -155,6 +156,14 @@ const UserStatus = ({ isLoading, status, actorName }) => {
       </Themed.a>
     </Box>
   )
+}
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+UserStatus.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  status: PropTypes.object,
+  actorName: nullableString
 }
 
 export default UserStatus

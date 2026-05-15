@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, useColorMode, useThemeUI } from 'theme-ui'
 import { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import { createPortal } from 'react-dom'
 import { useAudioPlayerStore } from '../stores/audio-player-store'
 import SoundCloud from '../shortcodes/soundcloud'
@@ -151,6 +152,14 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode:
     </div>,
     containerRef.current
   )
+}
+
+AudioPlayer.propTypes = {
+  soundcloudId: PropTypes.string,
+  spotifyURL: PropTypes.string,
+  isVisible: PropTypes.bool,
+  provider: PropTypes.string,
+  colorMode: PropTypes.string
 }
 
 export default AudioPlayer

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Box, Card, Heading } from '@theme-ui/components'
 import Placeholder from 'react-placeholder'
 
@@ -67,6 +68,11 @@ const UserProfile = ({ isLoading, profile }) => {
       </Box>
     </Card>
   )
+}
+
+UserProfile.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  profile: PropTypes.object.isRequired
 }
 
 export default UserProfile

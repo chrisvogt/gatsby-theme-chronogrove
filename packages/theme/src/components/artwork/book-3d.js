@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box } from 'theme-ui'
 import { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as THREE from 'three'
 
 const BOOK_W = 0.65
@@ -526,6 +527,14 @@ const Book3D = ({ thumbnailURL, title, introDelay = 0 }) => {
       />
     </Box>
   )
+}
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+Book3D.propTypes = {
+  thumbnailURL: nullableString,
+  title: PropTypes.string.isRequired,
+  introDelay: PropTypes.number
 }
 
 export default Book3D

@@ -3,6 +3,7 @@ import { jsx } from 'theme-ui'
 import { ChronogrovePageShell } from '@chronogrove/ui/page-shell-layout'
 import { useAudioPlayerStore } from '../stores/audio-player-store'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Footer from './footer'
 import TopNavigation from './top-navigation'
@@ -30,6 +31,14 @@ const Layout = ({ children, disableMainWrapper, hideHeader, hideFooter, transpar
       {children}
     </ChronogrovePageShell>
   )
+}
+
+Layout.propTypes = {
+  children: PropTypes.node,
+  disableMainWrapper: PropTypes.bool,
+  hideFooter: PropTypes.bool,
+  hideHeader: PropTypes.bool,
+  transparentBackground: PropTypes.bool
 }
 
 export default Layout

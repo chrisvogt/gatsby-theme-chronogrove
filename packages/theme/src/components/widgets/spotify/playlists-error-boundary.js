@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ErrorBoundary } from 'react-error-boundary'
 
 // This component is a temporary solution for an issue I've been observing the last month or two
@@ -20,6 +21,10 @@ const PlaylistsErrorBoundary = ({ children }) => {
       {children}
     </ErrorBoundary>
   )
+}
+
+PlaylistsErrorBoundary.propTypes = {
+  children: PropTypes.node
 }
 
 export default PlaylistsErrorBoundary

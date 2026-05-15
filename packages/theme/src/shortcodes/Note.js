@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Box, jsx, useColorMode } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck, faCircleInfo, faClock } from '@fortawesome/free-solid-svg-icons'
 
@@ -94,6 +95,12 @@ const Note = ({ children, variant = 'info', icon: showIcon = true }) => {
       </Box>
     </Box>
   )
+}
+
+Note.propTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['update', 'info', 'outdated']),
+  icon: PropTypes.bool
 }
 
 export default Note

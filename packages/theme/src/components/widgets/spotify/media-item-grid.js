@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Box, useThemeUI } from 'theme-ui'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
@@ -134,6 +135,13 @@ const MediaItemGrid = ({ interactionDisabled = false, isLoading, items = [], onT
       </Placeholder>
     </Box>
   )
+}
+
+MediaItemGrid.propTypes = {
+  interactionDisabled: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
+  onTrackClick: PropTypes.func
 }
 
 export default MediaItemGrid

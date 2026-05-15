@@ -3,6 +3,7 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Box, Card, Heading } from '@theme-ui/components'
 import React, { useMemo, useRef, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { createPortal } from 'react-dom'
 import isDarkMode from '../../../helpers/isDarkMode'
 
@@ -556,10 +557,19 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   )
 }
 
+ContributionGraph.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  contributionCalendar: PropTypes.object
+}
+
 // Wrap with React.memo to prevent unnecessary re-renders
 // Only re-render if isLoading or contributionCalendar changes
-export default React.memo(ContributionGraph, (prevProps, nextProps) => {
+const MemoizedContributionGraph = React.memo(ContributionGraph, (prevProps, nextProps) => {
   return (
     prevProps.isLoading === nextProps.isLoading && prevProps.contributionCalendar === nextProps.contributionCalendar
   )
 })
+
+MemoizedContributionGraph.propTypes = ContributionGraph.propTypes
+
+export default MemoizedContributionGraph

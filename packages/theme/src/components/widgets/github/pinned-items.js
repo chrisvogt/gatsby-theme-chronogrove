@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
 import { Box, Heading } from '@theme-ui/components'
 
@@ -51,6 +52,12 @@ const PinnedItems = ({ isLoading, items = [], placeholderCount = 4 }) => {
       </Box>
     </Box>
   )
+}
+
+PinnedItems.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
+  placeholderCount: PropTypes.number
 }
 
 export default PinnedItems

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
 import { Embed } from '@theme-ui/components'
 
@@ -31,5 +32,14 @@ const YouTube = ({ title, url, sx = {}, compact = false }) => (
     />
   </Themed.div>
 )
+
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+YouTube.propTypes = {
+  title: nullableString,
+  url: PropTypes.string.isRequired,
+  sx: PropTypes.object,
+  compact: PropTypes.bool
+}
 
 export default YouTube

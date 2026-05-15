@@ -5,6 +5,7 @@ import { RectShape } from 'react-placeholder/lib/placeholders'
 import { Themed } from '@theme-ui/mdx'
 import { useLocation, navigate } from '@gatsbyjs/reach-router'
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import isDarkMode from '../../../helpers/isDarkMode'
 import Pagination from '../../pagination'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
@@ -300,6 +301,11 @@ const RecentlyReadBooks = ({ books = [], isLoading }) => {
       </Box>
     </div>
   )
+}
+
+RecentlyReadBooks.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool.isRequired
 }
 
 export default RecentlyReadBooks
