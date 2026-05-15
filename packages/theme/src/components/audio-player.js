@@ -154,12 +154,18 @@ const AudioPlayer = ({ soundcloudId, spotifyURL, isVisible, provider, colorMode:
   )
 }
 
+/** Optional string props that may be `null` at runtime (e.g. zustand initial state). */
+const nullishString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+
+/** `useAudioPlayerStore` uses `null` when idle (see `initialAudioPlayerState`). */
+const audioProvider = PropTypes.oneOfType([PropTypes.oneOf(['soundcloud', 'spotify']), PropTypes.oneOf([null])])
+
 AudioPlayer.propTypes = {
-  soundcloudId: PropTypes.string,
-  spotifyURL: PropTypes.string,
+  soundcloudId: nullishString,
+  spotifyURL: nullishString,
   isVisible: PropTypes.bool,
-  provider: PropTypes.string,
-  colorMode: PropTypes.string
+  provider: audioProvider,
+  colorMode: nullishString
 }
 
 export default AudioPlayer

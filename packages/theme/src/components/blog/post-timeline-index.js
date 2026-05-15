@@ -896,11 +896,16 @@ export default function PostTimelineIndex({
   )
 }
 
+/** Optional `PropTypes.string` rejects `null`; timeline passes explicit `null` from GraphQL coercions. */
+const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+/** MDX / frontmatter media fields may be string, number, or null (YAML looseness). */
+const mdxMediaScalar = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.oneOf([null])])
+
 TimelineEmbedAside.propTypes = {
-  soundcloudId: PropTypes.string,
+  soundcloudId: mdxMediaScalar,
   sx: PropTypes.object,
-  title: PropTypes.string,
-  youtubeSrc: PropTypes.string
+  title: mdxMediaScalar,
+  youtubeSrc: mdxMediaScalar
 }
 
 Thumb.propTypes = {
@@ -917,8 +922,8 @@ FeaturedHeroCarousel.propTypes = {
 }
 
 MetaFeatured.propTypes = {
-  category: PropTypes.string,
-  date: PropTypes.string
+  category: nullableString,
+  date: nullableString
 }
 
 Featured.propTypes = {
@@ -935,30 +940,30 @@ TimelineReadMoreLink.propTypes = {
   href: PropTypes.string.isRequired,
   readMoreAriaFallback: PropTypes.string.isRequired,
   tid: PropTypes.func.isRequired,
-  title: PropTypes.string,
+  title: nullableString,
   variant: PropTypes.oneOf(['timeline', 'featured'])
 }
 
 StampDenseMeta.propTypes = {
-  category: PropTypes.string,
-  date: PropTypes.string
+  category: nullableString,
+  date: nullableString
 }
 
 TimelineStampLeadMedia.propTypes = {
   timelineAsideMedia: PropTypes.bool.isRequired,
   tid: PropTypes.func.isRequired,
-  soundcloudId: PropTypes.string,
-  title: PropTypes.string,
-  youtubeSrc: PropTypes.string,
+  soundcloudId: mdxMediaScalar,
+  title: mdxMediaScalar,
+  youtubeSrc: mdxMediaScalar,
   href: PropTypes.string.isRequired,
   thumbUrl: PropTypes.string
 }
 
 TimelineStampArticleColumn.propTypes = {
-  category: PropTypes.string,
-  date: PropTypes.string,
+  category: nullableString,
+  date: nullableString,
   emphasis: PropTypes.bool.isRequired,
-  excerpt: PropTypes.string,
+  excerpt: nullableString,
   href: PropTypes.string.isRequired,
   readMoreAriaFallback: PropTypes.string.isRequired,
   tid: PropTypes.func.isRequired,
@@ -967,18 +972,18 @@ TimelineStampArticleColumn.propTypes = {
 }
 
 TimelineStamp.propTypes = {
-  category: PropTypes.string,
-  date: PropTypes.string,
+  category: nullableString,
+  date: nullableString,
   emphasis: PropTypes.bool.isRequired,
-  excerpt: PropTypes.string,
+  excerpt: nullableString,
   href: PropTypes.string.isRequired,
   readMoreAriaFallback: PropTypes.string.isRequired,
-  soundcloudId: PropTypes.string,
+  soundcloudId: mdxMediaScalar,
   thumbUrl: PropTypes.string,
   tid: PropTypes.func.isRequired,
   timelineAsideMedia: PropTypes.bool,
   title: PropTypes.string.isRequired,
-  youtubeSrc: PropTypes.string
+  youtubeSrc: mdxMediaScalar
 }
 
 PostTimelineIndex.propTypes = {

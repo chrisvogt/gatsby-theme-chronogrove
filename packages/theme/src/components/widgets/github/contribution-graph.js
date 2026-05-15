@@ -557,9 +557,11 @@ const ContributionGraph = ({ isLoading, contributionCalendar }) => {
   )
 }
 
+const nullableObject = PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([null])])
+
 ContributionGraph.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  contributionCalendar: PropTypes.object
+  contributionCalendar: nullableObject
 }
 
 // Wrap with React.memo to prevent unnecessary re-renders

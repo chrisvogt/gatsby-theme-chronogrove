@@ -240,6 +240,7 @@ function DiscogsModalTracklistSection({
 }
 
 const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
+const nullableObject = PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([null])])
 
 DiscogsModalCoverSection.propTypes = {
   coverImageUrl: nullableString,
@@ -616,7 +617,7 @@ const DiscogsModal = ({ isOpen, onClose, release, orderedReleases, onSelectRelea
 DiscogsModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  release: PropTypes.object,
+  release: nullableObject,
   orderedReleases: PropTypes.arrayOf(PropTypes.object).isRequired,
   onSelectRelease: PropTypes.func.isRequired
 }

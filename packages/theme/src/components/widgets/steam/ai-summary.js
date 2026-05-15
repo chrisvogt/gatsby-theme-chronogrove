@@ -167,7 +167,8 @@ function AiSummaryComponent({ aiSummary, aiSummarySyncedAt, sx: sxProp }) {
 const nullableString = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])])
 
 AiSummaryComponent.propTypes = {
-  aiSummary: PropTypes.string.isRequired,
+  /** Tests and callers may mount with `null` / omitted while the effect no-ops on falsy values. */
+  aiSummary: nullableString,
   aiSummarySyncedAt: nullableString,
   sx: PropTypes.object
 }
