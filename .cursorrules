@@ -95,7 +95,7 @@ The following files contain hardcoded personal information that needs to be made
 - **Jest**: Unit testing framework with comprehensive configuration
 - **React Testing Library**: Component testing with DOM queries and user interactions
 - **React Test Renderer**: Snapshot testing for visual regression testing
-- **Zustand**: Reset `useAudioPlayerStore` in tests via `resetAudioPlayerStore` from `packages/theme/src/testUtils.js` when assertions depend on player state
+- **Zustand**: Reset `useAudioPlayerStore` in tests via `resetAudioPlayerStore` from `packages/theme/src/test-utils.js` when assertions depend on player state
 - **Jest Canvas Mock**: Canvas API mocking for visual components
 - **Identity Object Proxy**: CSS/SCSS module mocking
 - **File Mock**: Static asset mocking (images, fonts, etc.)
@@ -139,7 +139,7 @@ When adding new widgets:
 1. Create widget component in `packages/theme/src/components/widgets/[name]/`
 2. Add metadata helpers in `packages/theme/src/selectors/metadata.js` (and `use-site-metadata` if needed) for API URL / username
 3. Use `useWidgetData` for fetching; add fixtures under `packages/theme/__mocks__/` or inline test data
-4. Write comprehensive tests (QueryClient via `TestProviderWithQuery` / `renderWithProviders` from `packages/theme/src/testUtils.js`)
+4. Write comprehensive tests (QueryClient via `TestProviderWithQuery` / `renderWithProviders` from `packages/theme/src/test-utils.js`)
 5. Update documentation as needed
 
 When decoupling personal information:

@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import SpotifyWidget from './spotify-widget'
-import { TestProviderWithQuery } from '../../../testUtils'
+import { TestProviderWithQuery } from '../../../test-utils'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
 

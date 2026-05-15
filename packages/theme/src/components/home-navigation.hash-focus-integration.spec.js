@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 import HomeNavigation from './home-navigation'
 import useNavigationData from '../hooks/use-navigation-data'
 import useSiteMetadata from '../hooks/use-site-metadata'

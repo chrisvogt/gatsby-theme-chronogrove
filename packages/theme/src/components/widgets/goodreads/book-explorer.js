@@ -7,7 +7,7 @@ import { useLocation } from '@gatsbyjs/reach-router'
 
 import Book3D from '../../artwork/book-3d'
 import ViewExternal from '../view-external'
-import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
+import { parseSafeHtml } from '../../../helpers/safe-html-parser'
 
 const renderStarsForRating = count => {
   const repeat = (char, n) => Array(n).fill(char).join('')

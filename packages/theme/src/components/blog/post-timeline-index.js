@@ -11,7 +11,7 @@ import {
   CLOUDINARY_FEATURED_PORTRAIT_2X,
   optimizeCloudinaryFillDimensionsSrc,
   optimizeCloudinaryThumbnailSrc
-} from '../../helpers/cloudinaryThumbnailUrl'
+} from '../../helpers/cloudinary-thumbnail-url'
 
 function optimizedStampThumbnail(src) {
   if (typeof src !== 'string' || src.length === 0) return undefined

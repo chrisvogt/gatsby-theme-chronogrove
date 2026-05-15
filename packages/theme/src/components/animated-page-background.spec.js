@@ -18,7 +18,7 @@ jest.mock('theme-ui', () => {
 })
 
 // Mock WebGL layer (implementation lives in @chronogrove/ui)
-jest.mock('../../../ui/src/animated-page-background/ColorBends.js', () => {
+jest.mock('../../../ui/src/animated-page-background/color-bends.js', () => {
   return function MockColorBends() {
     return <div data-testid='color-bends'>Color Bends</div>
   }

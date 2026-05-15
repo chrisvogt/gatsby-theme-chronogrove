@@ -15,9 +15,9 @@ jest.mock('theme-ui', () => ({
 }))
 
 import chronogroveTheme from '../theme.js'
-import ChronogroveAnimatedPageBackground from './ChronogroveAnimatedPageBackground.js'
+import ChronogroveAnimatedPageBackground from './chronogrove-animated-page-background.js'
 
-jest.mock('./ColorBends.js', () => {
+jest.mock('./color-bends.js', () => {
   return function MockColorBends() {
     return <div data-testid='mock-color-bends' />
   }

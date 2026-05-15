@@ -51,8 +51,8 @@
       "default": "./src/emotion-cache.js"
     },
     "./is-dark-mode": {
-      "import": "./src/helpers/isDarkMode.js",
-      "default": "./src/helpers/isDarkMode.js"
+      "import": "./src/helpers/is-dark-mode.js",
+      "default": "./src/helpers/is-dark-mode.js"
     },
     "./color-utils": {
       "import": "./src/color-utils.js",
@@ -131,8 +131,8 @@
       "default": "./src/animated-page-background/index.js"
     },
     "./color-bends": {
-      "import": "./src/animated-page-background/ColorBends.js",
-      "default": "./src/animated-page-background/ColorBends.js"
+      "import": "./src/animated-page-background/color-bends.js",
+      "default": "./src/animated-page-background/color-bends.js"
     },
     "./action-card-layout": {
       "import": "./src/action-card-layout.js",

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Themed } from '@theme-ui/mdx'
 import Placeholder from 'react-placeholder'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 
 import { glassmorhismPanel } from '@chronogrove/ui/theme'
 

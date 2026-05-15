@@ -7,7 +7,7 @@ import {
   createTestQueryClient,
   renderWithProviders,
   resetAudioPlayerStore
-} from './testUtils'
+} from './test-utils'
 
 describe('testUtils', () => {
   it('exports resetAudioPlayerStore for test isolation', () => {

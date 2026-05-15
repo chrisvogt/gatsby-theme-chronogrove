@@ -26,6 +26,7 @@
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-unicorn": "^64.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "only-allow": "^1.2.2",

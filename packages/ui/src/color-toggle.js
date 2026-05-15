@@ -4,7 +4,7 @@ import { Expand } from '@theme-toggles/react'
 import { scheduleThemeUiColorModeSync } from './color-mode/browser-sync.js'
 import { getChronogroveCrossDomainColorModeClientConfig } from './color-mode/cross-domain-color-mode-client-config.js'
 import { setChronogroveCrossDomainColorModeCookie } from './color-mode/cross-domain-color-mode-cookie.js'
-import isDarkMode from './helpers/isDarkMode.js'
+import isDarkMode from './helpers/is-dark-mode.js'
 
 export default function ColorToggle() {
   const [colorMode, setColorMode] = useColorMode()

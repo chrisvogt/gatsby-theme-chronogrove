@@ -1,2 +1,2 @@
-export { default as SkipNavLink } from './SkipNavLink'
-export { default as SkipNavContent } from './SkipNavContent'
+export { default as SkipNavLink } from './skip-nav-link'
+export { default as SkipNavContent } from './skip-nav-content'

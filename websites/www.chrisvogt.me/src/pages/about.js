@@ -4,7 +4,7 @@ import { Themed } from '@theme-ui/mdx'
 import { articleColumnContainerSx } from 'gatsby-theme-chronogrove/src/constants/article-column-container-sx'
 import Layout from 'gatsby-theme-chronogrove/src/components/layout'
 import Seo from 'gatsby-theme-chronogrove/src/components/seo'
-import CareerPathCurve from '../../components/CareerPathCurve'
+import CareerPathCurve from '../../components/career-path-curve'
 
 const AboutPage = () => {
   return (

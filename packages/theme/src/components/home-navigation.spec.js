@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, act, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 import HomeNavigation, { getRailFillPct, normalizeHomeNavProps, resolvePrimaryFromTheme } from './home-navigation'
 import { scrollToElementWhenReady } from '../helpers/scroll-to-element-when-ready'
 import useNavigationData from '../hooks/use-navigation-data'

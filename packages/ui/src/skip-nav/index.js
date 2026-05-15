@@ -1,2 +1,2 @@
-export { default as SkipNavLink } from './SkipNavLink.js'
-export { default as SkipNavContent } from './SkipNavContent.js'
+export { default as SkipNavLink } from './skip-nav-link.js'
+export { default as SkipNavContent } from './skip-nav-content.js'

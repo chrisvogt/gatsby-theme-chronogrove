@@ -2,11 +2,11 @@ import React from 'react'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
-import { TestProvider } from '../../../testUtils'
+import { TestProvider } from '../../../test-utils'
 import AiSummary from './ai-summary'
 
 // Mock parseSafeHtml to return React elements for testing
-jest.mock('../../../helpers/safeHtmlParser', () => ({
+jest.mock('../../../helpers/safe-html-parser', () => ({
   parseSafeHtml: html => {
     if (!html) return null
 

@@ -4,7 +4,7 @@ import { Box, Text } from '@theme-ui/components'
 import React, { useEffect, useState, useRef } from 'react'
 
 import { formatAiSummarySyncedLabel } from '../../../helpers/ai-summary-synced-at'
-import { parseSafeHtml } from '../../../helpers/safeHtmlParser'
+import { parseSafeHtml } from '../../../helpers/safe-html-parser'
 import ActionButton from '../../action-button'
 import { getAiSummaryFadeBackground } from './ai-summary-fade'
 

@@ -3,7 +3,7 @@ import { version as themeVersion } from './package.json'
 import chronogroveTheme from '@chronogrove/ui/theme'
 import { buildThemeUiColorModeHeadComponents, onPreRenderHTMLSortThemeUiColorModeFirst } from '@chronogrove/ui/gatsby'
 
-export { default as wrapRootElement } from './wrapRootElement'
+export { default as wrapRootElement } from './wrap-root-element'
 
 const colorModeCrossDomain = process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN?.trim()
   ? { registrableDomain: process.env.GATSBY_COLOR_MODE_REGISTRABLE_DOMAIN.trim() }

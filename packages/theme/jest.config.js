@@ -23,8 +23,8 @@ module.exports = {
     'gatsby-browser.js',
     'gatsby-node.js',
     'gatsby-ssr.js',
-    'wrapPageElement.js',
-    'wrapRootElement.js'
+    'wrap-page-element.js',
+    'wrap-root-element.js'
   ],
 
   // The directory where Jest should output its coverage files
@@ -53,9 +53,9 @@ module.exports = {
     'src/components/lazy-load.js',
     'src/components/header.js',
     'src/components/category-index-layout.js',
-    'src/components/skip-nav/SkipNavLink.js',
-    'src/components/skip-nav/SkipNavContent.js',
-    'src/helpers/isDarkMode.js',
+    'src/components/skip-nav/skip-nav-link.js',
+    'src/components/skip-nav/skip-nav-content.js',
+    'src/helpers/is-dark-mode.js',
     'src/utils/colors.js',
     'src/gatsby-plugin-theme-ui/theme.js',
     'src/components/widgets/recent-posts/thumbnail-strip.js',

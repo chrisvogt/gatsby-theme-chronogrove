@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { TestProviderWithState } from '../../../testUtils'
+import { TestProviderWithState } from '../../../test-utils'
 
 // Mock dark mode before importing the component
-jest.mock('../../../helpers/isDarkMode', () => jest.fn(() => true))
+jest.mock('../../../helpers/is-dark-mode', () => jest.fn(() => true))
 
 // Import after mock so the component sees dark mode active
 const ContributionGraph = require('./contribution-graph').default

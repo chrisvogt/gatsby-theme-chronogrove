@@ -4,7 +4,7 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import SkipNavContent from './SkipNavContent'
+import SkipNavContent from './skip-nav-content'
 
 describe('SkipNavContent', () => {
   it('renders target region with id and data attribute', () => {

@@ -41,7 +41,7 @@ jest.mock('../hooks/use-recent-posts', () => ({
 
 import TravelPage, { Head } from '../../../../websites/www.chrisvogt.me/src/pages/travel'
 import { getPosts } from '../hooks/use-recent-posts'
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 
 describe('www.chrisvogt.me Travel page', () => {
   const mockData = { allMdx: { edges: [] } }

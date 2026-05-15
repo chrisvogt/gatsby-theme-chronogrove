@@ -2,7 +2,7 @@
 import { jsx, useColorMode } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 
-import isDarkMode from '../helpers/isDarkMode'
+import isDarkMode from '../helpers/is-dark-mode'
 
 /**
  * True when the hostname is a subdomain of cloudinary.com (e.g. res.cloudinary.com).

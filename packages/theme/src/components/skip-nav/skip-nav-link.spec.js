@@ -2,8 +2,8 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
 
-import SkipNavLink from './SkipNavLink'
-import { TestProvider } from '../../testUtils'
+import SkipNavLink from './skip-nav-link'
+import { TestProvider } from '../../test-utils'
 import * as isDarkModeModule from '@chronogrove/ui/is-dark-mode'
 
 describe('SkipNavLink', () => {

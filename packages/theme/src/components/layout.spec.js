@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { TestProviderWithState, resetAudioPlayerStore } from '../testUtils'
+import { TestProviderWithState, resetAudioPlayerStore } from '../test-utils'
 import Layout from './layout'
 import useSiteMetadata from '../hooks/use-site-metadata'
 import useNavigationData from '../hooks/use-navigation-data'

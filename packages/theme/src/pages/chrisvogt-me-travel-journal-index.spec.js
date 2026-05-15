@@ -12,7 +12,7 @@ jest.mock('gatsby', () => ({
 }))
 
 import TravelJournalIndex from '../../../../websites/www.chrisvogt.me/src/components/travel-journal-index'
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 
 /** Carousel advance ~= interval + crossfade in travel-journal-index */
 const CAROUSEL_STEP_MS = 3000 + 300

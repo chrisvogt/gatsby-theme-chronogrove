@@ -22,7 +22,7 @@ jest.mock('./src/shortcodes/emoji', () => () => <span data-testid='emoji'>emoji<
 jest.mock('./src/shortcodes/youtube', () => () => <div data-testid='youtube'>youtube</div>)
 
 // Now import the component
-import WrapRootElement from './wrapRootElement'
+import WrapRootElement from './wrap-root-element'
 
 describe('wrapRootElement', () => {
   it('renders children within all providers', () => {

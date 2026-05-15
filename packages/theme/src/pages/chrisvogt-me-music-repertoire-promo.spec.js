@@ -9,7 +9,7 @@ jest.mock('theme-ui', () => ({
 }))
 
 import { MusicRepertoirePromo } from '../../../../websites/www.chrisvogt.me/src/pages/music'
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 
 describe('MusicRepertoirePromo', () => {
   beforeEach(() => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import InstagramWidget from './instagram-widget'
-import { TestProviderWithQuery } from '../../../testUtils'
+import { TestProviderWithQuery } from '../../../test-utils'
 
 jest.mock('../../../hooks/use-site-metadata', () =>
   jest.fn(() => ({

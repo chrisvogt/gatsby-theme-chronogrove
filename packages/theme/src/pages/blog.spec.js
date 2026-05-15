@@ -9,7 +9,7 @@ jest.mock('gatsby', () => ({
 }))
 
 import BlogIndexPage from './blog'
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 
 // Mock the components
 jest.mock('../components/layout', () => ({ children }) => <div data-testid='layout'>{children}</div>)

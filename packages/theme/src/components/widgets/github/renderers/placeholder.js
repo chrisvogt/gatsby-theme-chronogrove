@@ -2,7 +2,7 @@
 import { jsx, Flex, useThemeUI } from 'theme-ui'
 import { Box } from '@theme-ui/components'
 import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders'
-import isDarkMode from '../../../../helpers/isDarkMode'
+import isDarkMode from '../../../../helpers/is-dark-mode'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 

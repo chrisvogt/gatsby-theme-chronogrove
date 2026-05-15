@@ -3,7 +3,7 @@ import { jsx, useThemeUI } from 'theme-ui'
 import { Box, Card, Heading } from '@theme-ui/components'
 import Placeholder from 'react-placeholder'
 
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 import MetricCard from '../metric-card'
 import StatusCard from '../status-card'
 

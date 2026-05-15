@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 
-import SkipNavContent from './SkipNavContent'
+import SkipNavContent from './skip-nav-content'
 
 describe('SkipNavContent', () => {
   it('renders with the default ID', () => {

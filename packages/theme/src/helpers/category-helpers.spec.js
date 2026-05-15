@@ -1,4 +1,10 @@
-import { categoryMappings, toTitleCase, getCategoryDisplayName, getCategoryGroup, isRecapPost } from './categoryHelpers'
+import {
+  categoryMappings,
+  toTitleCase,
+  getCategoryDisplayName,
+  getCategoryGroup,
+  isRecapPost
+} from './category-helpers'
 
 describe('categoryHelpers', () => {
   describe('categoryMappings', () => {

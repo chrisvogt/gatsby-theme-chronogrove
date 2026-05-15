@@ -5,7 +5,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { ThemeUIProvider } from 'theme-ui'
-import SkipNavLink from './SkipNavLink'
+import SkipNavLink from './skip-nav-link'
 
 const wrapperTheme = {
   colors: {

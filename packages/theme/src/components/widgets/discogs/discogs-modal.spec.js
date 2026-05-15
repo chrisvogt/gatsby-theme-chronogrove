@@ -15,7 +15,7 @@ jest.mock('react-dom', () => ({
 }))
 
 // Mock isDarkMode helper
-jest.mock('../../../helpers/isDarkMode', () => jest.fn(() => false))
+jest.mock('../../../helpers/is-dark-mode', () => jest.fn(() => false))
 
 const mockRelease = {
   id: 12345,
@@ -401,7 +401,7 @@ describe('DiscogsModal', () => {
 
   describe('dark mode', () => {
     it('renders with dark mode styling', () => {
-      const isDarkModeMock = require('../../../helpers/isDarkMode')
+      const isDarkModeMock = require('../../../helpers/is-dark-mode')
       isDarkModeMock.mockReturnValue(true)
 
       const { asFragment } = render(<DiscogsModal isOpen={true} onClose={mockOnClose} release={mockRelease} />)
@@ -473,7 +473,7 @@ describe('DiscogsModal', () => {
     })
 
     it('renders No Image Available with dark mode styling when no cover', () => {
-      const isDarkModeMock = require('../../../helpers/isDarkMode')
+      const isDarkModeMock = require('../../../helpers/is-dark-mode')
       isDarkModeMock.mockReturnValue(true)
 
       const releaseWithoutCover = {

@@ -4,7 +4,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { jsx, ThemeUIProvider } from 'theme-ui'
 import TopTracks from './top-tracks'
-import { TestProviderWithState } from '../../../testUtils'
+import { TestProviderWithState } from '../../../test-utils'
 import { useAudioPlayerStore, resetAudioPlayerStore } from '../../../stores/audio-player-store'
 import theme from '@chronogrove/ui/theme'
 

@@ -20,7 +20,7 @@ module.exports = {
     'src/gatsby/on-route-update-color-mode.js',
     'src/theme.js',
     // Shader + WebGL: exercised via ChronogroveAnimatedPageBackground; unit-testing three.js is brittle.
-    'src/animated-page-background/ColorBends.js'
+    'src/animated-page-background/color-bends.js'
   ],
   moduleNameMapper: {
     '^@theme-toggles/react$': '<rootDir>/test-utils/mock-theme-toggles-react.js',

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, useColorMode } from 'theme-ui'
 import { TextBlock } from 'react-placeholder/lib/placeholders'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 

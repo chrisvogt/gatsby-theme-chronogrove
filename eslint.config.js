@@ -1,6 +1,7 @@
 const react = require('eslint-plugin-react')
 const jsxA11Y = require('eslint-plugin-jsx-a11y')
 const prettier = require('eslint-plugin-prettier')
+const unicorn = require('eslint-plugin-unicorn').default
 const js = require('@eslint/js')
 const globals = require('globals')
 
@@ -67,9 +68,21 @@ module.exports = [
     plugins: {
       react,
       'jsx-a11y': jsxA11Y,
-      prettier
+      prettier,
+      unicorn
     },
     rules: {
+      'unicorn/filename-case': [
+        'error',
+        {
+          case: 'kebabCase',
+          ignore: [
+            // tooling entry filenames (not kebab strict segments)
+            /^babel\.config$/u,
+            /^jest\.config$/u
+          ]
+        }
+      ],
       'prettier/prettier': [
         'error',
         {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, act, screen } from '@testing-library/react'
-import { TestProviderWithState } from '../../../testUtils'
+import { TestProviderWithState } from '../../../test-utils'
 import ContributionGraph from './contribution-graph'
 
 const calendar = {

@@ -5,7 +5,7 @@ import { RectShape } from 'react-placeholder/lib/placeholders'
 import { Themed } from '@theme-ui/mdx'
 import { useLocation, navigate } from '@gatsbyjs/reach-router'
 import { useEffect, useMemo, useRef, useState, useCallback } from 'react'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 import Pagination from '../../pagination'
 import useSwipePagination from '../../../hooks/use-swipe-pagination'
 

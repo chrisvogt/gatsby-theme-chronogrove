@@ -70,7 +70,7 @@ jest.mock('../hooks/use-site-metadata', () => ({
 import MusicPage, { Head } from '../../../../websites/www.chrisvogt.me/src/pages/music'
 import { getPosts } from '../hooks/use-recent-posts'
 import useSiteMetadata from '../hooks/use-site-metadata'
-import { TestProvider } from '../testUtils'
+import { TestProvider } from '../test-utils'
 
 describe('www.chrisvogt.me Music page', () => {
   const mockData = { allMdx: { edges: [] } }

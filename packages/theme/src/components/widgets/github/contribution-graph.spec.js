@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import ContributionGraph from './contribution-graph'
-import { TestProviderWithState } from '../../../testUtils'
+import { TestProviderWithState } from '../../../test-utils'
 
 const mockContributionCalendar = {
   totalContributions: 487,

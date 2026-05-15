@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Card, Text } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 
-import isDarkMode from './helpers/isDarkMode.js'
+import isDarkMode from './helpers/is-dark-mode.js'
 
 /**
  * Metric summary card (e.g. Goodreads profile metrics). Uses `metricCard` / `metricCardDark` card variants.

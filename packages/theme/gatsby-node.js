@@ -7,7 +7,7 @@ const startCase = require('lodash/startCase')
  * `useColorMode` loaded from another — runtime error:
  * "[useColorMode] requires the ColorModeProvider component". Force webpack to resolve `theme-ui`,
  * `@emotion/react`, and every Theme UI package the app imports from the same tree as
- * `ChronogroveThemeProvider` (see `wrapRootElement.js`).
+ * `ChronogroveThemeProvider` (see `wrap-root-element.js`).
  */
 function getThemeUiSingleInstanceAliases() {
   const themeUiPkgDir = path.dirname(require.resolve('theme-ui/package.json', { paths: [__dirname] }))

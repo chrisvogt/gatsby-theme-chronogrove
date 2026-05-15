@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
-import CareerPathCurve from './CareerPathCurve'
+import CareerPathCurve from './career-path-curve'
 
 // Mock react-intersection-observer
 const mockRef = jest.fn()
@@ -13,7 +13,7 @@ jest.mock('react-intersection-observer', () => ({
 
 // Mock isDarkMode helper
 const mockIsDarkMode = jest.fn(() => false)
-jest.mock('gatsby-theme-chronogrove/src/helpers/isDarkMode', () => {
+jest.mock('gatsby-theme-chronogrove/src/helpers/is-dark-mode', () => {
   return jest.fn(() => mockIsDarkMode())
 })
 

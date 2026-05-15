@@ -248,7 +248,7 @@ module.exports = (themeOptions = {}) => {
       'gatsby-transformer-json'
 
       /**
-       * Theme UI: We provide a single ThemeUIProvider in wrapRootElement (see wrapRootElement.js)
+       * Theme UI: We provide a single ThemeUIProvider in wrapRootElement (see wrap-root-element.js)
        * using the theme from src/gatsby-plugin-theme-ui. Do NOT add gatsby-plugin-theme-ui here—
        * it would add a second provider and break color-mode toggling (e.g. after hash navigation).
        */

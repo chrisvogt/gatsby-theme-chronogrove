@@ -3,7 +3,7 @@ import { jsx, Box, useThemeUI } from 'theme-ui'
 import { Themed } from '@theme-ui/mdx'
 import { Grid } from '@theme-ui/components'
 import getTimeSpent from './get-time-spent'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 import ViewExternal from '../view-external'
 import SteamGameCard from './steam-game-card'
 

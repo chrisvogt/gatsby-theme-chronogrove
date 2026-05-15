@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import wrapPageElement from './wrapPageElement'
+import wrapPageElement from './wrap-page-element'
 
 // Mock the Layout component
 jest.mock('./src/components/layout', () => {

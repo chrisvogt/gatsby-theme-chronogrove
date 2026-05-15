@@ -1,4 +1,4 @@
-import isDarkMode from './isDarkMode'
+import isDarkMode from './is-dark-mode'
 
 describe('isDarkMode', () => {
   it('returns true when the color mode is dark', () => {

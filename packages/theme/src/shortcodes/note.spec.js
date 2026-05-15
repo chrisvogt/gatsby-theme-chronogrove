@@ -11,7 +11,7 @@ jest.mock('theme-ui', () => ({
   useColorMode: () => mockUseColorMode()
 }))
 
-import Note from './Note'
+import Note from './note'
 
 const renderWithTheme = (ui, colorMode = 'default') => {
   mockUseColorMode.mockReturnValue([colorMode])

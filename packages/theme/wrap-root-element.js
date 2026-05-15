@@ -6,7 +6,7 @@ import { Themed } from '@theme-ui/mdx'
 
 import ColorModeImage from './src/shortcodes/color-mode-image'
 import Emoji from './src/shortcodes/emoji'
-import Note from './src/shortcodes/Note'
+import Note from './src/shortcodes/note'
 import RootWrapper from './src/components/root-wrapper'
 import theme from '@chronogrove/ui/theme'
 import YouTube from './src/shortcodes/youtube'

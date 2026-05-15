@@ -2,8 +2,8 @@ import React, { useMemo, useState, useCallback } from 'react'
 import { Box, Flex, useThemeUI } from 'theme-ui'
 import { useInView } from 'react-intersection-observer'
 import careerData from '../src/data/career-path.json'
-import { groupCareerByCompany } from '../src/utils/flattenCareerPath'
-import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
+import { groupCareerByCompany } from '../src/utils/flatten-career-path'
+import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/is-dark-mode'
 import Pagination from 'gatsby-theme-chronogrove/src/components/pagination'
 
 const NUM_SAMPLES = 200

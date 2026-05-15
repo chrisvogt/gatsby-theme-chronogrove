@@ -1,4 +1,4 @@
-import { flattenCareerPath, groupCareerByCompany } from './flattenCareerPath'
+import { flattenCareerPath, groupCareerByCompany } from './flatten-career-path'
 
 const mockCareerData = {
   name: 'Career Journey',

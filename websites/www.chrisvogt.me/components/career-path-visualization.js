@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Box, useThemeUI } from 'theme-ui'
 import * as d3 from 'd3'
 import careerData from '../src/data/career-path.json'
-import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
+import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/is-dark-mode'
 
 function getTruncatedCareerLabelText(text, maxLength) {
   if (!text) return ''

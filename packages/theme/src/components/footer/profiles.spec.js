@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import Profiles from './profiles'
-import { TestProvider } from '../../testUtils'
+import { TestProvider } from '../../test-utils'
 import useSocialProfiles from '../../hooks/use-social-profiles'
 
 jest.mock('../../hooks/use-social-profiles')

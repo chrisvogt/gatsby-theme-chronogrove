@@ -4,7 +4,7 @@ import React, { useMemo, useEffect, useState } from 'react'
 import { Box } from '@theme-ui/components'
 import { useColorMode, useThemeUI } from 'theme-ui'
 
-import ColorBends from './ColorBends.js'
+import ColorBends from './color-bends.js'
 import {
   chronogroveThemeSurfaceColorsDark,
   chronogroveThemeSurfaceColorsLight

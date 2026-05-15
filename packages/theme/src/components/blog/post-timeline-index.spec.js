@@ -14,7 +14,7 @@ jest.mock('gatsby', () => ({
 }))
 
 import PostTimelineIndex from './post-timeline-index'
-import { TestProvider } from '../../testUtils'
+import { TestProvider } from '../../test-utils'
 
 const originalIntersectionObserver = global.IntersectionObserver
 

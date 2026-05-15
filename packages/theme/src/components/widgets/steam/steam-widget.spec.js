@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import SteamWidget from './steam-widget'
-import { TestProviderWithQuery } from '../../../testUtils'
+import { TestProviderWithQuery } from '../../../test-utils'
 
 // Mock child components to isolate the test
 jest.mock('../call-to-action', () => props => <div data-testid='CallToAction'>{props.title}</div>)

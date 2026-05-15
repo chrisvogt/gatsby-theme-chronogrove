@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import { Box, Flex, useThemeUI } from 'theme-ui'
 import careerData from '../src/data/career-path.json'
-import { groupCareerByCompany } from '../src/utils/flattenCareerPath'
-import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/isDarkMode'
+import { groupCareerByCompany } from '../src/utils/flatten-career-path'
+import isDarkMode from 'gatsby-theme-chronogrove/src/helpers/is-dark-mode'
 
 const TIME_MIN = 2003
 const TIME_MAX = 2026

@@ -4,7 +4,7 @@ import { Themed } from '@theme-ui/mdx'
 import { Box, Card, Heading } from '@theme-ui/components'
 import React, { useMemo, useRef, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 
 /** Must match grid / legend gap so month labels and row math align with cells (Theme UI `gap: 1` is not guaranteed to be 4px). */
 const CONTRIBUTION_CELL_GAP_PX = 4

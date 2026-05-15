@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-jest.mock('./ColorBends.js', () => {
+jest.mock('./color-bends.js', () => {
   return function MockColorBends() {
     return null
   }

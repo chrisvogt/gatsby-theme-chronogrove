@@ -12,7 +12,7 @@ import {
 } from '../components/category-index-layout'
 import { articleColumnContainerSx } from '../constants/article-column-container-sx'
 import { getPosts } from '../hooks/use-recent-posts'
-import { getCategoryGroup } from '../helpers/categoryHelpers'
+import { getCategoryGroup } from '../helpers/category-helpers'
 import Layout from '../components/layout'
 import PageHeader from '../components/blog/page-header'
 import PostTimelineIndex from '../components/blog/post-timeline-index'

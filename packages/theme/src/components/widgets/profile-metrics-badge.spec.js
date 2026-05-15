@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { TestProvider } from '../../testUtils'
+import { TestProvider } from '../../test-utils'
 import ProfileMetricsBadge from './profile-metrics-badge'
 
 describe('ProfileMetricsBadge', () => {

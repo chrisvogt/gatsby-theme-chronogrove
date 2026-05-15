@@ -2,7 +2,7 @@ import React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import FlickrWidget from './flickr-widget'
-import { TestProviderWithQuery } from '../../../testUtils'
+import { TestProviderWithQuery } from '../../../test-utils'
 import VanillaTilt from 'vanilla-tilt'
 
 // Mock use-site-metadata at the top

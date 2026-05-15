@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import { TestProviderWithQuery } from '../../../testUtils'
+import { TestProviderWithQuery } from '../../../test-utils'
 import DiscogsWidget from './discogs-widget'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'

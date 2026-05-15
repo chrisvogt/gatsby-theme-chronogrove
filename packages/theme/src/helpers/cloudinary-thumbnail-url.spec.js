@@ -2,7 +2,7 @@ import {
   isCloudinaryUrl,
   optimizeCloudinaryFillDimensionsSrc,
   optimizeCloudinaryThumbnailSrc
-} from './cloudinaryThumbnailUrl'
+} from './cloudinary-thumbnail-url'
 
 describe('cloudinaryThumbnailUrl', () => {
   const cloudinaryImages = [

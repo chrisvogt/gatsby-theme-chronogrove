@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { parseSafeHtml } from './safeHtmlParser'
+import { parseSafeHtml } from './safe-html-parser'
 
 describe('parseSafeHtml', () => {
   it('should return null/undefined as-is', () => {

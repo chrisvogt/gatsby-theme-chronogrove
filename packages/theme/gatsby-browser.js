@@ -10,7 +10,7 @@ import 'lightgallery/css/lg-zoom.css'
 import 'prismjs/themes/prism-solarizedlight.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
-import WrapRootElement from './wrapRootElement'
+import WrapRootElement from './wrap-root-element'
 import { onRouteUpdateThemeUiColorMode } from '@chronogrove/ui/gatsby'
 import { setChronogroveCrossDomainColorModeClientConfig } from '@chronogrove/ui/color-mode'
 import { getChronogroveEmotionCache } from '@chronogrove/ui/emotion-cache'

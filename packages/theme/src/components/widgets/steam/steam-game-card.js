@@ -3,7 +3,7 @@ import { jsx, Box, useThemeUI } from 'theme-ui'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 import LazyLoad from '../../lazy-load'
 
 import 'react-placeholder/lib/reactPlaceholder.css'

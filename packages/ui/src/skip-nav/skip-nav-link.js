@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { Box } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
-import isDarkMode from '../helpers/isDarkMode.js'
+import isDarkMode from '../helpers/is-dark-mode.js'
 
 const SkipNavLink = forwardRef(function SkipNavLink(
   { as: Comp = 'a', children = 'Skip to content', contentId = 'skip-nav-content', ...props },

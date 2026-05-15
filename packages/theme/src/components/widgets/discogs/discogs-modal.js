@@ -6,7 +6,7 @@ import { Themed } from '@theme-ui/mdx'
 import { faTimes, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RectShape } from 'react-placeholder/lib/placeholders'
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 import { getDiscogsCollectionAddedMs, getDiscogsReleaseYear } from './sort-discogs-releases'
 
 import 'react-placeholder/lib/reactPlaceholder.css'

@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ThemeUIProvider } from 'theme-ui'
-import CareerPathVisualization from './CareerPathVisualization'
+import CareerPathVisualization from './career-path-visualization'
 
 function buildD3SelectAllDataEnterChain() {
   let inner = { text: jest.fn() }
@@ -192,7 +192,7 @@ jest.mock('../src/data/career-path.json', () => ({
 }))
 
 // Mock isDarkMode helper
-jest.mock('gatsby-theme-chronogrove/src/helpers/isDarkMode', () => jest.fn(() => false))
+jest.mock('gatsby-theme-chronogrove/src/helpers/is-dark-mode', () => jest.fn(() => false))
 
 const mockTheme = {
   colors: {
@@ -285,7 +285,7 @@ describe('CareerPathVisualization', () => {
   })
 
   it('applies dark mode styles correctly', () => {
-    const isDarkMode = require('gatsby-theme-chronogrove/src/helpers/isDarkMode')
+    const isDarkMode = require('gatsby-theme-chronogrove/src/helpers/is-dark-mode')
     isDarkMode.mockReturnValue(true)
 
     renderWithTheme(<CareerPathVisualization />)

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import { ThemeUIProvider, useThemeUI } from 'theme-ui'
 import UserProfile from './user-profile'
 
-import isDarkMode from '../../../helpers/isDarkMode'
+import isDarkMode from '../../../helpers/is-dark-mode'
 
 // Mock the useThemeUI hook
 jest.mock('theme-ui', () => ({
@@ -22,7 +22,7 @@ jest.mock('../metric-card', () => ({ title, value }) => (
 jest.mock('../status-card', () => ({ message }) => <div data-testid='status-card'>{message}</div>)
 
 // Mock isDarkMode helper
-jest.mock('../../../helpers/isDarkMode', () => jest.fn())
+jest.mock('../../../helpers/is-dark-mode', () => jest.fn())
 
 const mockTheme = {
   colors: {
