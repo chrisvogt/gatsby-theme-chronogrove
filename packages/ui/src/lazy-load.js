@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import { useInView } from 'react-intersection-observer'
 
@@ -15,6 +16,11 @@ const DefaultPlaceholder = ({ height = '100%', width = '100%' }) => (
     {' '}
   </Box>
 )
+
+DefaultPlaceholder.propTypes = {
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
 
 /**
  * Lazy Loader
@@ -55,6 +61,12 @@ const LazyLoad = ({ children, placeholder = <DefaultPlaceholder />, useInViewOpt
   }, [mounted, inView])
 
   return <Box ref={ref}>{revealed ? children : placeholder}</Box>
+}
+
+LazyLoad.propTypes = {
+  children: PropTypes.node.isRequired,
+  placeholder: PropTypes.node,
+  useInViewOptions: PropTypes.object
 }
 
 export default LazyLoad

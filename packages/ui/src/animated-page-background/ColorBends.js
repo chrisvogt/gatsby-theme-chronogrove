@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import * as THREE from 'three'
 import './color-bends.css'
@@ -309,4 +310,20 @@ export default function ColorBends({
   }, [])
 
   return <div ref={containerRef} className={`color-bends-container ${className || ''}`} style={style} />
+}
+
+ColorBends.propTypes = {
+  className: PropTypes.string,
+  style: PropTypes.object,
+  rotation: PropTypes.number,
+  speed: PropTypes.number,
+  colors: PropTypes.arrayOf(PropTypes.string),
+  transparent: PropTypes.bool,
+  autoRotate: PropTypes.number,
+  scale: PropTypes.number,
+  frequency: PropTypes.number,
+  warpStrength: PropTypes.number,
+  mouseInfluence: PropTypes.number,
+  parallax: PropTypes.number,
+  noise: PropTypes.number
 }

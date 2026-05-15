@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useMemo, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import { useColorMode, useThemeUI } from 'theme-ui'
 
@@ -150,4 +151,11 @@ export default function ChronogroveAnimatedPageBackground({
       />
     </>
   )
+}
+
+ChronogroveAnimatedPageBackground.propTypes = {
+  overlayHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  darkOpacity: PropTypes.number,
+  fadeDistance: PropTypes.number,
+  maxParallaxOffset: PropTypes.number
 }

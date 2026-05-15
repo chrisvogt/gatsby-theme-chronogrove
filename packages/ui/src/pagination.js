@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 import PaginationButton from './pagination-button.js'
@@ -193,6 +194,19 @@ const Pagination = ({
       )}
     </Box>
   )
+}
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  showPageInfo: PropTypes.bool,
+  maxVisiblePages: PropTypes.number,
+  simple: PropTypes.bool,
+  prevIcon: PropTypes.node,
+  nextIcon: PropTypes.node
 }
 
 export default Pagination

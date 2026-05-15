@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import {
   chronogroveHeadTheme,
   resolveChronogroveSurfaceColors,
@@ -42,4 +44,14 @@ export function ChronogroveNextRootLayoutHead({ crossDomainColorMode = null } = 
       <style dangerouslySetInnerHTML={{ __html: colorModeFallbackCSS }} />
     </>
   )
+}
+
+ChronogroveNextRootLayoutHead.propTypes = {
+  crossDomainColorMode: PropTypes.oneOfType([
+    PropTypes.shape({
+      registrableDomain: PropTypes.string,
+      cookieName: PropTypes.string
+    }),
+    PropTypes.oneOf([null])
+  ])
 }

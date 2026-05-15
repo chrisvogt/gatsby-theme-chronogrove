@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 /**
@@ -18,5 +19,10 @@ const MutedCardFooter = ({ children, customStyles, ...props }) => (
     {children}
   </Box>
 )
+
+MutedCardFooter.propTypes = {
+  children: PropTypes.node.isRequired,
+  customStyles: PropTypes.object
+}
 
 export default MutedCardFooter

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 /**
@@ -11,6 +12,11 @@ const Header = ({ children, styles }) => {
       <Box sx={{ ...(styles ?? {}) }}>{children}</Box>
     </Box>
   )
+}
+
+Header.propTypes = {
+  children: PropTypes.node,
+  styles: PropTypes.object
 }
 
 export default Header

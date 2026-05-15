@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 /** Default cap on thumbnails shown when `images` exceeds this count. */
@@ -85,6 +86,14 @@ const ImageThumbnails = ({
       })}
     </Box>
   )
+}
+
+const thumbnailSrcItem = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null, undefined])])
+
+ImageThumbnails.propTypes = {
+  images: PropTypes.arrayOf(thumbnailSrcItem),
+  maxImages: PropTypes.number,
+  optimizeSrc: PropTypes.func
 }
 
 export default ImageThumbnails

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box, Card, Text } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 
@@ -91,6 +92,15 @@ const MetricCard = ({ title, value, loading = false, showPlaceholder, loadingSlo
       {body}
     </Card>
   )
+}
+
+MetricCard.propTypes = {
+  title: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
+  loading: PropTypes.bool,
+  showPlaceholder: PropTypes.bool,
+  loadingSlot: PropTypes.node,
+  sx: PropTypes.object
 }
 
 export default MetricCard

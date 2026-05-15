@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 import { Box } from '@theme-ui/components'
 
@@ -41,4 +42,18 @@ export function ChronogroveNextAppShell({ children, theme = chronogroveTheme, cr
       </Box>
     </ChronogroveThemeProvider>
   )
+}
+
+const crossDomainColorModePropType = PropTypes.oneOfType([
+  PropTypes.shape({
+    registrableDomain: PropTypes.string,
+    cookieName: PropTypes.string
+  }),
+  PropTypes.oneOf([null])
+])
+
+ChronogroveNextAppShell.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.object,
+  crossDomainColorMode: crossDomainColorModePropType
 }

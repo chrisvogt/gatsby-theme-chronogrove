@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 import isDarkMode from './helpers/isDarkMode.js'
@@ -101,6 +102,16 @@ const PaginationButton = ({
       {content}
     </Box>
   )
+}
+
+PaginationButton.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  active: PropTypes.bool,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'warning', 'danger']),
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  icon: PropTypes.node
 }
 
 export default PaginationButton

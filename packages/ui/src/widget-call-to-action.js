@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 
 /**
@@ -102,6 +103,18 @@ export const WidgetCallToAction = ({
       {children}
     </Box>
   )
+}
+
+WidgetCallToAction.propTypes = {
+  children: PropTypes.node,
+  isLoading: PropTypes.bool,
+  loadingSlot: PropTypes.node,
+  title: PropTypes.string,
+  to: PropTypes.string,
+  url: PropTypes.string,
+  href: PropTypes.string,
+  linkComponent: PropTypes.elementType,
+  sx: PropTypes.object
 }
 
 export default WidgetCallToAction

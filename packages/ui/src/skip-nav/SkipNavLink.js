@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@theme-ui/components'
 import { useThemeUI } from 'theme-ui'
 import isDarkMode from '../helpers/isDarkMode.js'
@@ -69,5 +70,11 @@ const SkipNavLink = forwardRef(function SkipNavLink(
 })
 
 SkipNavLink.displayName = 'SkipNavLink'
+
+SkipNavLink.propTypes = {
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  children: PropTypes.node,
+  contentId: PropTypes.string
+}
 
 export default SkipNavLink

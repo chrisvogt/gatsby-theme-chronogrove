@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Heading } from '@theme-ui/components'
 
@@ -183,6 +184,17 @@ const WidgetHeader = ({ aside, children, icon, metrics, metricsLoading, sx: sxPr
       )}
     </Box>
   )
+}
+
+WidgetHeader.propTypes = {
+  aside: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  /** Font Awesome icon definition (object or array/tuple). */
+  icon: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  /** Chip data; loading state uses `{}` entries; shape varies slightly by widget (e.g. `displayName` / `value`). */
+  metrics: PropTypes.arrayOf(PropTypes.object),
+  metricsLoading: PropTypes.bool,
+  sx: PropTypes.object
 }
 
 export default WidgetHeader

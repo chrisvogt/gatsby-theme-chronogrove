@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Badge } from '@theme-ui/components'
 
 const MetricBadge = ({ children, ...props }) => (
@@ -6,5 +7,9 @@ const MetricBadge = ({ children, ...props }) => (
     {children}
   </Badge>
 )
+
+MetricBadge.propTypes = {
+  children: PropTypes.node.isRequired
+}
 
 export default MetricBadge

@@ -108,10 +108,24 @@ module.exports = [
       }
     }
   },
-  /** PropTypes in theme `src/` only (avoids mocks, Gatsby root, tests; `react/prop-types` breaks on ESLint 10 + current plugin). */
+  /** PropTypes in theme `src/` (avoids mocks, tests). */
   {
     files: ['packages/theme/src/**/*.js'],
     ignores: ['packages/theme/src/**/*.spec.js', 'packages/theme/src/testUtils.js'],
+    plugins: { react },
+    rules: {
+      'react/prop-types': 'warn'
+    },
+    settings: {
+      react: {
+        version: REACT_VERSION_FOR_ESLINT
+      }
+    }
+  },
+  /** PropTypes in @chronogrove/ui `src/` (portable components; same incremental typing story as the theme). */
+  {
+    files: ['packages/ui/src/**/*.js'],
+    ignores: ['packages/ui/src/**/*.spec.js'],
     plugins: { react },
     rules: {
       'react/prop-types': 'warn'

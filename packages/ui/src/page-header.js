@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Heading } from '@theme-ui/components'
 
 const PageHeader = ({ children }) => (
@@ -6,5 +7,9 @@ const PageHeader = ({ children }) => (
     {children}
   </Heading>
 )
+
+PageHeader.propTypes = {
+  children: PropTypes.node.isRequired
+}
 
 export default PageHeader

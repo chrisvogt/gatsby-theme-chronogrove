@@ -189,6 +189,7 @@
     "@theme-toggles/react": "catalog:",
     "@theme-ui/components": "catalog:",
     "@theme-ui/presets": "catalog:",
+    "prop-types": "catalog:",
     "react-intersection-observer": "catalog:",
     "theme-ui": "catalog:",
     "three": "catalog:"
