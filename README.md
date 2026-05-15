@@ -9,6 +9,8 @@
 
 A modern Gatsby theme for personal websites and blogs with social media integration. It powers [www.chrisvogt.me](https://www.chrisvogt.me) and includes a demo site, reusable theme package, and content examples.
 
+> **TypeScript roadmap:** The monorepo is heading toward **incremental TypeScript adoption** (a full package rewrite in one step has been painful here, so we are not doing that again in one leap). Until files are ported, please **add or update [`prop-types`](https://github.com/facebook/prop-types)** on React components you **create** or **meaningfully change**—especially under **`packages/theme/src`**, where `react/prop-types` is enabled (see root **`eslint.config.js`**). Documenting props now makes it much easier to replace `propTypes` with TypeScript types **file by file** later.
+
 ## 🚀 Features
 
 - **Social Dashboard Homepage**: Display recent activity from multiple social platforms

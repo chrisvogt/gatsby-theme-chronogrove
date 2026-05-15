@@ -76,6 +76,7 @@ const mdxHeadPropType = PropTypes.shape({
   }),
   frontmatter: PropTypes.shape({
     banner: PropTypes.string,
+    date: PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.string,
     keywords: PropTypes.arrayOf(PropTypes.string)

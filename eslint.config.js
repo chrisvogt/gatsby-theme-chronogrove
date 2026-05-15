@@ -6,6 +6,9 @@ const globals = require('globals')
 
 const browserGlobals = Object.fromEntries(Object.entries(globals.browser).filter(([key]) => key.trim() === key))
 
+/** Monorepo root has no `react` dependency, so `detect` prints a warning; align with `pnpm-workspace.yaml` catalog. */
+const REACT_VERSION_FOR_ESLINT = '19.2'
+
 module.exports = [
   {
     ignores: [
@@ -92,7 +95,7 @@ module.exports = [
     },
     settings: {
       react: {
-        version: 'detect'
+        version: REACT_VERSION_FOR_ESLINT
       }
     },
     languageOptions: {
@@ -102,6 +105,20 @@ module.exports = [
         ecmaFeatures: {
           jsx: true
         }
+      }
+    }
+  },
+  /** PropTypes in theme `src/` only (avoids mocks, Gatsby root, tests; `react/prop-types` breaks on ESLint 10 + current plugin). */
+  {
+    files: ['packages/theme/src/**/*.js'],
+    ignores: ['packages/theme/src/**/*.spec.js', 'packages/theme/src/testUtils.js'],
+    plugins: { react },
+    rules: {
+      'react/prop-types': 'warn'
+    },
+    settings: {
+      react: {
+        version: REACT_VERSION_FOR_ESLINT
       }
     }
   },
