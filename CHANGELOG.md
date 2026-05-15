@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.92.0
+
+### Repository — kebab-case module filenames + ESLint enforcement
+
+- **Breaking (`gatsby-theme-chronogrove`)**: Several theme sources were **renamed to kebab-case**. Sites using **Gatsby theme shadowing** must move overrides from the old paths (for example **`wrapRootElement.js`**, **`SkipNavLink.js`**, **`helpers/isDarkMode.js`**, **`shortcodes/Note.js`**) to the new filenames (**`wrap-root-element.js`**, **`skip-nav-link.js`**, **`helpers/is-dark-mode.js`**, **`shortcodes/note.js`**, etc.).
+- **`@chronogrove/ui`**: Same style renames where applicable (**`color-bends.js`**, **`chronogrove-animated-page-background.js`**, **`skip-nav-link.js`**, **`helpers/is-dark-mode.js`**). **`package.json` `exports`** entry points are unchanged; consumers keep importing **`@chronogrove/ui/is-dark-mode`** and **`@chronogrove/ui/color-bends`**.
+- **Tooling**: Root **`eslint-plugin-unicorn`** with **`unicorn/filename-case`** (**`kebabCase`**), with ignores only for **`babel.config`** / **`jest.config`** stems (e.g. **`jest.config.cjs`**).
+- **Content**: Blog **directory names and MDX filenames** under **`websites/www.chrisvogt.me/content/blog/`** are unchanged (URLs unchanged). Only **MDX imports** were updated where they referenced renamed local components (for example **`photo-gallery`**).
+- **Versions**: **`gatsby-theme-chronogrove` 0.92.0**; **`@chronogrove/ui` 0.85.5**; **`www.chrisvogt.me` 1.22.7**; **`www.chronogrove.com` 1.9.6**.
+
+### Files changed (high level)
+
+- `CHANGELOG.md`, `.cursorrules`, `eslint.config.js`, root `package.json`, `pnpm-lock.yaml`
+- `packages/theme/package.json`, renamed theme modules (helpers, shortcodes, skip-nav shims, **`wrap-*-element.js`**), specs, **`jest.config.js`**, Gatsby entry files referencing wrappers
+- `packages/ui/package.json`, renamed UI modules under **`animated-page-background/`**, **`skip-nav/`**, **`helpers/`**, specs, **`jest.config.cjs`**
+- `websites/www.chrisvogt.me/package.json`, renamed **`components/`** and **`src/utils/`** modules; MDX import path updates only under **`content/blog/`**
+- `websites/www.chronogrove.com/package.json`
+
+---
+
 ## 0.91.7
 
 ### `gatsby-theme-chronogrove` — Sonar maintainability (complexity, tests)
