@@ -15,6 +15,11 @@ export const mdxMediaScalar = PropTypes.oneOfType([PropTypes.string, PropTypes.n
 
 export const nullableStringArray = PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), nullLiteral])
 
+/**
+ * `@chronogrove/ui/image-thumbnails` entry: URL string or null/undefined (sparse lists, CDN optimizer holes).
+ */
+export const thumbnailSrcItem = PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null, undefined])])
+
 /** Widget metric rows: array of objects or `null` while idle / loading. */
 export const nullableObjectArray = PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), nullLiteral])
 
