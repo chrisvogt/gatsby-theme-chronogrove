@@ -176,12 +176,6 @@ export function Head({ data }) {
   )
 }
 
-Head.propTypes = {
-  data: PropTypes.shape({
-    mdx: mediaMdxPropType
-  }).isRequired
-}
-
 export const pageQuery = graphql`
   query ($id: String!) {
     mdx(fields: { id: { eq: $id } }) {
