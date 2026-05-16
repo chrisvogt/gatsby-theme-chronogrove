@@ -90,7 +90,8 @@ PostTemplate.propTypes = {
   }).isRequired
 }
 
-export const Head = ({ data: { mdx } }) => {
+export function Head({ data }) {
+  const { mdx } = data
   const banner = mdx.frontmatter.banner
   const description = mdx.frontmatter.description
   const title = mdx.frontmatter.title

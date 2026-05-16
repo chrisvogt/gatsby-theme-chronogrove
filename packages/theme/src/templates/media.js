@@ -134,7 +134,8 @@ MediaTemplate.propTypes = {
   }).isRequired
 }
 
-export const Head = ({ data: { mdx } }) => {
+export function Head({ data }) {
+  const { mdx } = data
   const banner = getBanner(mdx)
   const description = getDescription(mdx)
   const title = getTitle(mdx)
