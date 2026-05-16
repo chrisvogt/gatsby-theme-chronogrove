@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Sonoran Dusk default: plum base + sunset accent (see styles/themes/sonoran-dusk.css) -->
+  <rect width="32" height="32" rx="6" fill="#0e0814"/>
+  <path
+    d="M4 16h8l4 8 4-16 4 8h8"
+    fill="none"
+    stroke="#e88838"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
