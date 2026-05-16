@@ -134,7 +134,8 @@ MediaTemplate.propTypes = {
   }).isRequired
 }
 
-export function Head({ data: { mdx } }) {
+export function Head({ data }) {
+  const { mdx } = data
   const banner = getBanner(mdx)
   const description = getDescription(mdx)
   const title = getTitle(mdx)
@@ -173,6 +174,12 @@ export function Head({ data: { mdx } }) {
       <script type='application/ld+json'>{JSON.stringify(breadcrumbData)}</script>
     </Seo>
   )
+}
+
+Head.propTypes = {
+  data: PropTypes.shape({
+    mdx: mediaMdxPropType
+  }).isRequired
 }
 
 export const pageQuery = graphql`
