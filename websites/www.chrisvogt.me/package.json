@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@emotion/react": "catalog:",
-    "@mdx-js/react": "catalog:",
+    "@mdx-js/react": "^3.1.1",
     "@theme-ui/components": "catalog:",
     "@theme-ui/mdx": "catalog:",
     "boxen": "catalog:",
