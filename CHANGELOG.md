@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.91.9
+
+### `gatsby-theme-chronogrove` — Dependency refresh
+
+- **Ranges / lockfile**: Patch bumps only — **`react-error-boundary`** **^6.1.2**, **`zustand`** **^5.0.14** (no source refactors).
+
+### `@chronogrove/ui`
+
+- **Dev dependencies**: **@babel/core**, **@babel/preset-env**, **@babel/preset-react** **^7.29.7**.
+
+### Repository (root)
+
+- **Dev dependencies**: **eslint-plugin-prettier** **^5.5.6**, **Turborepo** **^2.9.16**.
+
+### Versions
+
+- **`gatsby-theme-chronogrove` 0.91.9**; **`@chronogrove/ui` 0.85.6**; **`www.chrisvogt.me` 1.22.8**; **`www.chronogrove.com` 1.9.7**.
+
+### Files changed (high level)
+
+- `CHANGELOG.md`
+- `package.json`, `pnpm-lock.yaml`
+- `packages/theme/package.json` (version **0.91.9**)
+- `packages/ui/package.json` (version **0.85.6**)
+- `websites/www.chrisvogt.me/package.json` (version **1.22.8**), `websites/www.chronogrove.com/package.json` (version **1.9.7**)
+
+---
+
 ## 0.91.8
 
 ### `gatsby-theme-chronogrove` — PropTypes (Phase 1), shared nullable validators
