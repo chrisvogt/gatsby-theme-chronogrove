@@ -76,7 +76,7 @@ export const cruising = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287677/chrisvogt-me/galleries/now-may-2026/IMG_5324.jpg',
-    title: 'Dinner at Opus aboard Celebrity Reflection',
+    title: 'Chris & Nick having dinner at Opus aboard Celebrity Reflection',
     width: 4,
     height: 3
   }
@@ -103,7 +103,7 @@ export const medellinFirstGlance = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288173/chrisvogt-me/galleries/now-may-2026/IMG_5466.jpg',
-    title: 'Cocktail on a rooftop bar in Medellín',
+    title: 'Nick having a cocktail at Bololoi Rooftop in Medellín',
     width: 3,
     height: 4
   },
