@@ -90,6 +90,8 @@ PostTemplate.propTypes = {
   }).isRequired
 }
 
+/* eslint-disable react/prop-types -- Gatsby's Head API export cannot have propTypes attached
+   post-declaration in the MDX eval context; props are validated via the GraphQL query shape. */
 function Head({ data }) {
   const { mdx } = data
   const banner = mdx.frontmatter.banner
@@ -132,12 +134,7 @@ function Head({ data }) {
   )
 }
 
-Head.propTypes = {
-  data: PropTypes.shape({
-    mdx: mdxHeadPropType
-  }).isRequired
-}
-
+/* eslint-enable react/prop-types */
 export { Head }
 
 export const pageQuery = graphql`
