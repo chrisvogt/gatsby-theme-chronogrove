@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 export function InstagramEmbed({ permalink }) {
   useEffect(() => {
-    if (window.instgrm) {
-      window.instgrm.Embeds.process()
+    if (globalThis.instgrm) {
+      globalThis.instgrm.Embeds.process()
     } else {
       const script = document.createElement('script')
       script.src = '//www.instagram.com/embed.js'
@@ -33,4 +34,8 @@ export function InstagramEmbed({ permalink }) {
       />
     </div>
   )
+}
+
+InstagramEmbed.propTypes = {
+  permalink: PropTypes.string.isRequired
 }
