@@ -134,7 +134,7 @@ MediaTemplate.propTypes = {
   }).isRequired
 }
 
-export function Head({ data }) {
+function Head({ data }) {
   const { mdx } = data
   const banner = getBanner(mdx)
   const description = getDescription(mdx)
@@ -181,6 +181,8 @@ Head.propTypes = {
     mdx: mediaMdxPropType
   }).isRequired
 }
+
+export { Head }
 
 export const pageQuery = graphql`
   query ($id: String!) {

@@ -90,7 +90,7 @@ PostTemplate.propTypes = {
   }).isRequired
 }
 
-export function Head({ data }) {
+function Head({ data }) {
   const { mdx } = data
   const banner = mdx.frontmatter.banner
   const description = mdx.frontmatter.description
@@ -137,6 +137,8 @@ Head.propTypes = {
     mdx: mdxHeadPropType
   }).isRequired
 }
+
+export { Head }
 
 export const pageQuery = graphql`
   query ($id: String!) {
