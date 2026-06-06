@@ -60,6 +60,9 @@ jobs:
       - name: Run tests and collect coverage
         run: pnpm exec turbo run test:coverage --concurrency=1 -- --maxWorkers=2
 
+      - name: Import Codecov signing key
+        run: curl -fsSL https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --import
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
