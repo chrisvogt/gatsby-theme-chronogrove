@@ -1,28 +1,25 @@
-// Placeholder photo arrays for May 2026 recap
-// Replace these with uploaded gallery images when they are ready.
-
 export const fortLauderdale = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287771/chrisvogt-me/galleries/now-may-2026/IMG_5352.jpg',
-    title: 'Palm-fringed canal at golden hour in Fort Lauderdale',
+    title: 'Canal walk at golden hour in Fort Lauderdale',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287781/chrisvogt-me/galleries/now-may-2026/IMG_5193.jpg',
-    title: 'Green iguana sunning on the pool waterfall rocks',
+    title: 'Iguana sunning on the pool waterfall rocks',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287762/chrisvogt-me/galleries/now-may-2026/IMG_5195.jpg',
-    title: 'Sunlight rippling across a tropical backyard pool',
+    title: 'Sunlight on the backyard pool',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287783/chrisvogt-me/galleries/now-may-2026/IMG_5186.jpg',
-    title: 'Peeking over the edge of a lush backyard pool',
+    title: 'Peeking over the edge of the pool',
     width: 3,
     height: 4
   },
@@ -37,13 +34,13 @@ export const fortLauderdale = [
 export const cruising = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287717/chrisvogt-me/galleries/now-may-2026/IMG_5221.jpg',
-    title: 'Taking in coastal views from the upper deck',
+    title: 'Coastal views from the upper deck',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287718/chrisvogt-me/galleries/now-may-2026/IMG_5226.jpg',
-    title: 'Peeling crawfish and paella on the pool deck',
+    title: 'Crawfish and paella on the pool deck',
     width: 3,
     height: 4
   },
@@ -61,7 +58,7 @@ export const cruising = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780287772/chrisvogt-me/galleries/now-may-2026/IMG_5233.jpg',
-    title: 'Celebrity Reflection docked in a tropical port',
+    title: 'Celebrity Reflection docked in port',
     width: 4,
     height: 3
   },
@@ -88,25 +85,25 @@ export const cruising = [
 export const medellinFirstGlance = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288149/chrisvogt-me/galleries/now-may-2026/IMG_5438.jpg',
-    title: 'Panoramic view of Medellin from the hills',
+    title: 'Medellín from the hills',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288210/chrisvogt-me/galleries/now-may-2026/IMG_5453.jpg',
-    title: 'Neighborhood cityscape and the Aburra Valley mountains',
+    title: 'The neighborhood and the Aburrá Valley mountains',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288166/chrisvogt-me/galleries/now-may-2026/IMG_5455.jpg',
-    title: 'Rooftop hot tub overlooking the Medellin skyline',
+    title: 'Rooftop hot tub overlooking Medellín',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288173/chrisvogt-me/galleries/now-may-2026/IMG_5466.jpg',
-    title: 'Cocktail on a rooftop bar in Medellin',
+    title: 'Cocktail on a rooftop bar in Medellín',
     width: 3,
     height: 4
   },
@@ -121,7 +118,7 @@ export const medellinFirstGlance = [
 export const medellinZoo = [
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288234/chrisvogt-me/galleries/now-may-2026/IMG_5489.jpg',
-    title: 'Entrance sign at Parque de la Conservacion',
+    title: 'Entrance to Parque de la Conservación',
     width: 4,
     height: 3
   },
@@ -151,7 +148,7 @@ export const medellinZoo = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288259/chrisvogt-me/galleries/now-may-2026/IMG_5527.jpg',
-    title: 'Crocodile in the tropical pond enclosure',
+    title: 'Crocodile in the pond enclosure',
     width: 3,
     height: 4
   },
@@ -175,7 +172,7 @@ export const medellinZoo = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780288196/chrisvogt-me/galleries/now-may-2026/IMG_5546.jpg',
-    title: 'Howler monkeys climbing the rope playground',
+    title: 'Howler monkeys on the rope playground',
     width: 3,
     height: 4
   },
@@ -202,13 +199,13 @@ export const outro = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780711812/chrisvogt-me/galleries/now-may-2026/IMG_5588.jpg',
-    title: 'Medellin cityscape climbing toward the green mountains',
+    title: 'Medellín climbing toward the green mountains',
     width: 4,
     height: 3
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780711805/chrisvogt-me/galleries/now-may-2026/IMG_5645.jpg',
-    title: 'Brick towers and misty peaks over the Aburra Valley',
+    title: 'Brick towers and misty peaks over the Aburrá Valley',
     width: 3,
     height: 4
   },
@@ -220,13 +217,13 @@ export const outro = [
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780711813/chrisvogt-me/galleries/now-may-2026/IMG_5666.jpg',
-    title: 'Birra Latina bar glowing at night',
+    title: 'Birra Latina glowing at night',
     width: 3,
     height: 4
   },
   {
     src: 'https://res.cloudinary.com/chrisvogt/image/upload/c_scale,h_900,f_auto/v1780711823/chrisvogt-me/galleries/now-may-2026/IMG_5638.jpg',
-    title: 'Music-themed ball pit playground in a Medellin mall',
+    title: 'Music-themed ball pit in a Medellín mall',
     width: 3,
     height: 4
   },
