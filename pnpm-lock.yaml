@@ -516,6 +516,9 @@ importers:
       prettier:
         specifier: 'catalog:'
         version: 3.8.3
+      prop-types:
+        specifier: 'catalog:'
+        version: 15.8.1
       react:
         specifier: 'catalog:'
         version: 19.2.6
@@ -12484,8 +12487,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.58.1(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.58.1(typescript@5.9.3)
-      '@typescript-eslint/types': 8.58.1
+      '@typescript-eslint/tsconfig-utils': 8.60.0(typescript@5.9.3)
+      '@typescript-eslint/types': 8.60.0
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
