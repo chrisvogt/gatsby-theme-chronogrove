@@ -23,7 +23,7 @@ catalog:
   gatsby-plugin-sitemap: ^6.16.0
   lightgallery: ^2.9.0
   next: ^16.2.6
-  prettier: ^3.8.3
+  prettier: ^3.8.4
   prop-types: ^15.8.1
   react: ^19.2.6
   react-dom: ^19.2.6
