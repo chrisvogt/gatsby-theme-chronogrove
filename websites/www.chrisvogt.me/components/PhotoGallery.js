@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { useRef, useCallback, useState, useEffect, useMemo } from 'react'
+import { useRef, useCallback, useState, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import Gallery from 'react-photo-gallery'
 
 // Lazy load all lightgallery imports to avoid loading them until needed
-const LightGalleryComponent = ({ dynamicEl, onInit }) => {
+const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
   // Dynamic imports for lightgallery - only loaded when component mounts
   const [lightGalleryModules, setLightGalleryModules] = useState(null)
 
@@ -28,27 +28,28 @@ const LightGalleryComponent = ({ dynamicEl, onInit }) => {
     loadModules()
   }, [])
 
-  // Memoize plugins array so LightGallery doesn't reinitialize on every render
-  const plugins = useMemo(() => {
-    if (!lightGalleryModules) return []
-    return [lightGalleryModules.lgThumbnail, lightGalleryModules.lgZoom]
-  }, [lightGalleryModules])
-
   if (!lightGalleryModules) {
     return null // Return nothing while loading
   }
 
-  const { LightGallery } = lightGalleryModules
+  const { LightGallery, lgThumbnail, lgZoom } = lightGalleryModules
 
   return (
     <LightGallery
-      onInit={onInit}
-      plugins={plugins}
+      onInit={ref => {
+        if (ref?.instance) {
+          lightGalleryRef.current = ref.instance
+        }
+      }}
+      plugins={[lgThumbnail, lgZoom]}
       licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}
       download={false}
       dynamic
-      dynamicEl={dynamicEl}
-      loop={false}
+      dynamicEl={photos.map(photo => ({
+        src: photo.src,
+        thumb: photo.src,
+        subHtml: photo.title || ''
+      }))}
       speed={1000}
     />
   )
@@ -69,23 +70,6 @@ export const PhotoGallery = ({ photos }) => {
     }
   })
 
-  // Memoize dynamicEl so LightGallery doesn't reinitialize when the parent re-renders
-  const dynamicEl = useMemo(
-    () =>
-      photos.map(photo => ({
-        src: photo.src,
-        thumb: photo.src,
-        subHtml: photo.title || ''
-      })),
-    [photos]
-  )
-
-  const handleInit = useCallback(ref => {
-    if (ref?.instance) {
-      lightGalleryRef.current = ref.instance
-    }
-  }, [])
-
   const openLightbox = useCallback((event, { index }) => {
     const instance = lightGalleryRef.current
     if (instance) {
@@ -102,7 +86,7 @@ export const PhotoGallery = ({ photos }) => {
 
       {/* Sentinel element to trigger loading LightGallery 300px before view */}
       <div ref={ref} style={{ minHeight: '1px' }}>
-        {shouldLoadLightGallery && <LightGalleryComponent dynamicEl={dynamicEl} onInit={handleInit} />}
+        {shouldLoadLightGallery && <LightGalleryComponent lightGalleryRef={lightGalleryRef} photos={photos} />}
       </div>
     </div>
   )
