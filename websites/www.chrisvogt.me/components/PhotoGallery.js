@@ -1,12 +1,11 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
-import { useRef, useCallback, useState, useEffect } from 'react'
+import React, { useRef, useCallback, useState, useEffect } from 'react'
+import { Box } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { useInView } from 'react-intersection-observer'
 
 import Gallery from 'react-photo-gallery'
 
-// Lazy load all lightgallery imports to avoid loading them until needed
-const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
+const LightGalleryComponent = ({ lightGalleryRef, pendingIndexRef, photos }) => {
   // Dynamic imports for lightgallery - only loaded when component mounts
   const [lightGalleryModules, setLightGalleryModules] = useState(null)
 
@@ -39,6 +38,11 @@ const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
       onInit={ref => {
         if (ref?.instance) {
           lightGalleryRef.current = ref.instance
+          if (pendingIndexRef.current !== null) {
+            const idx = pendingIndexRef.current
+            pendingIndexRef.current = null
+            ref.instance.openGallery(idx)
+          }
         }
       }}
       plugins={[lgThumbnail, lgZoom]}
@@ -55,11 +59,22 @@ const LightGalleryComponent = ({ lightGalleryRef, photos }) => {
   )
 }
 
+LightGalleryComponent.propTypes = {
+  lightGalleryRef: PropTypes.shape({ current: PropTypes.object }),
+  pendingIndexRef: PropTypes.shape({ current: PropTypes.number }),
+  photos: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      title: PropTypes.string
+    })
+  ).isRequired
+}
+
 export const PhotoGallery = ({ photos }) => {
   const lightGalleryRef = useRef(null)
+  const pendingIndexRef = useRef(null)
   const [shouldLoadLightGallery, setShouldLoadLightGallery] = useState(false)
 
-  // Load LightGallery 300px before it comes into view
   const { ref } = useInView({
     rootMargin: '300px',
     triggerOnce: true,
@@ -75,19 +90,17 @@ export const PhotoGallery = ({ photos }) => {
     if (instance) {
       instance.openGallery(index)
     } else {
-      console.error('LightGallery instance is not initialized')
+      pendingIndexRef.current = index
     }
   }, [])
 
   return (
-    <div sx={{ mb: 4 }}>
-      {/* Render photo gallery - always visible */}
+    <Box ref={ref} sx={{ mb: 4 }}>
       <Gallery photos={photos} onClick={openLightbox} />
 
-      {/* Sentinel element to trigger loading LightGallery 300px before view */}
-      <div ref={ref} style={{ minHeight: '1px' }}>
-        {shouldLoadLightGallery && <LightGalleryComponent lightGalleryRef={lightGalleryRef} photos={photos} />}
-      </div>
-    </div>
+      {shouldLoadLightGallery && (
+        <LightGalleryComponent lightGalleryRef={lightGalleryRef} pendingIndexRef={pendingIndexRef} photos={photos} />
+      )}
+    </Box>
   )
 }
