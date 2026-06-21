@@ -19,7 +19,7 @@ jest.mock('react-intersection-observer', () => ({
 const MockGallery = jest.fn(({ onClick, photos }) => (
   <div data-testid='gallery'>
     {photos.map((photo, i) => (
-      <button key={i} data-testid={`photo-${i}`} onClick={e => onClick(e, { index: i })}>
+      <button key={photo.src} data-testid={`photo-${i}`} onClick={e => onClick(e, { index: i })}>
         photo-{i}
       </button>
     ))}

@@ -105,10 +105,10 @@ module.exports = {
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: [
     'node_modules',
-    '\\.cache',
+    String.raw`\.cache`,
     '<rootDir>.*/public',
-    'CareerPathVisualization\\.spec\\.js',
-    'CareerPathCurve\\.spec\\.js'
+    String.raw`CareerPathVisualization\.spec\.js`,
+    String.raw`CareerPathCurve\.spec\.js`
   ],
 
   testEnvironmentOptions: {

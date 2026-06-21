@@ -1,11 +1,10 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui'
-import { useRef, useCallback, useState, useEffect } from 'react'
+import React, { useRef, useCallback, useState, useEffect } from 'react'
+import { Box } from 'theme-ui'
+import PropTypes from 'prop-types'
 import { useInView } from 'react-intersection-observer'
 
 import Gallery from 'react-photo-gallery'
 
-// Lazy load all lightgallery imports to avoid loading them until needed
 const LightGalleryComponent = ({ lightGalleryRef, pendingIndexRef, photos }) => {
   // Dynamic imports for lightgallery - only loaded when component mounts
   const [lightGalleryModules, setLightGalleryModules] = useState(null)
@@ -60,6 +59,17 @@ const LightGalleryComponent = ({ lightGalleryRef, pendingIndexRef, photos }) => 
   )
 }
 
+LightGalleryComponent.propTypes = {
+  lightGalleryRef: PropTypes.shape({ current: PropTypes.object }),
+  pendingIndexRef: PropTypes.shape({ current: PropTypes.number }),
+  photos: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      title: PropTypes.string
+    })
+  ).isRequired
+}
+
 export const PhotoGallery = ({ photos }) => {
   const lightGalleryRef = useRef(null)
   const pendingIndexRef = useRef(null)
@@ -85,12 +95,12 @@ export const PhotoGallery = ({ photos }) => {
   }, [])
 
   return (
-    <div ref={ref} sx={{ mb: 4 }}>
+    <Box ref={ref} sx={{ mb: 4 }}>
       <Gallery photos={photos} onClick={openLightbox} />
 
       {shouldLoadLightGallery && (
         <LightGalleryComponent lightGalleryRef={lightGalleryRef} pendingIndexRef={pendingIndexRef} photos={photos} />
       )}
-    </div>
+    </Box>
   )
 }
