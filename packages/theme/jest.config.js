@@ -8,8 +8,10 @@ const themeUiEntry = require.resolve('theme-ui')
 
 module.exports = {
   // Recycle jest-worker processes before idle RAM grows large — reduces intermittent SIGSEGV when
-  // multiple workers run alongside Turbo’s other packages (see root `pnpm test --concurrency=1`).
+  // multiple workers run alongside Turbo's other packages (see root `pnpm test --concurrency=1`).
   workerIdleMemoryLimit: '512MB',
+
+  roots: ['<rootDir>', '<rootDir>/../../websites/www.chrisvogt.me/components'],
 
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
@@ -101,7 +103,13 @@ module.exports = {
   testMatch: ['**/__tests__/**/*.js?(x)', '**/?(*.)+(spec|test).js?(x)'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: ['node_modules', '\\.cache', '<rootDir>.*/public'],
+  testPathIgnorePatterns: [
+    'node_modules',
+    '\\.cache',
+    '<rootDir>.*/public',
+    'CareerPathVisualization\\.spec\\.js',
+    'CareerPathCurve\\.spec\\.js'
+  ],
 
   testEnvironmentOptions: {
     // This option sets the URL for the jsdom environment. It is reflected in properties such as location.href
