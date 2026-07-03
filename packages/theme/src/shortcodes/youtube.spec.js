@@ -1,7 +1,9 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import YouTube from './youtube'
+
+jest.mock('../components/lazy-load', () => ({ children }) => <>{children}</>)
 
 describe('YouTube Shortcode', () => {
   it('matches the snapshot', () => {
@@ -14,10 +16,70 @@ describe('YouTube Shortcode', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('renders a default title if one is not provided', () => {
-    const { container } = render(<YouTube url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />)
+  it('renders a facade with a play button instead of an iframe until activated', () => {
+    const { container } = render(
+      <YouTube title='Facade Video' url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />
+    )
+
+    expect(container.querySelector('iframe')).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Play video: Facade Video' })).toBeInTheDocument()
+  })
+
+  it('uses the video thumbnail as the facade image', () => {
+    const { container } = render(
+      <YouTube title='Facade Video' url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />
+    )
+
+    const thumbnail = container.querySelector('img')
+    expect(thumbnail).toHaveAttribute('src', 'https://i.ytimg.com/vi/XJashBvI17A/hqdefault.jpg')
+  })
+
+  it('renders a default label if no title is provided', () => {
+    render(<YouTube url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />)
+    expect(screen.getByRole('button', { name: 'Play video: YouTube video' })).toBeInTheDocument()
+  })
+
+  it('replaces the facade with an autoplaying iframe on click', () => {
+    const { container } = render(
+      <YouTube title='Facade Video' url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Play video: Facade Video' }))
+
+    expect(screen.queryByRole('button', { name: 'Play video: Facade Video' })).not.toBeInTheDocument()
+
     const iframe = container.querySelector('iframe')
-    expect(iframe).toHaveAttribute('title', 'Video on YouTube')
+    expect(iframe).toBeInTheDocument()
+    expect(iframe).toHaveAttribute('title', 'Facade Video')
+    expect(iframe.getAttribute('src')).toBe('https://www.youtube-nocookie.com/embed/XJashBvI17A?autoplay=1')
+  })
+
+  it('appends autoplay with & when the url already has query parameters', () => {
+    const { container } = render(
+      <YouTube title='Facade Video' url='https://www.youtube-nocookie.com/embed/XJashBvI17A?si=abc' />
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Play video: Facade Video' }))
+
+    const iframe = container.querySelector('iframe')
+    expect(iframe.getAttribute('src')).toBe('https://www.youtube-nocookie.com/embed/XJashBvI17A?si=abc&autoplay=1')
+  })
+
+  it('falls back to a default iframe title when none is provided and the facade is activated', () => {
+    const { container } = render(<YouTube url='https://www.youtube-nocookie.com/embed/XJashBvI17A' />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Play video: YouTube video' }))
+
+    expect(container.querySelector('iframe')).toHaveAttribute('title', 'Video on YouTube')
+  })
+
+  it('falls back to rendering an iframe directly when the video ID cannot be parsed', () => {
+    const { container } = render(<YouTube title='Broken Video' url='https://www.youtube.com/watch?v=abc123' />)
+
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
+    const iframe = container.querySelector('iframe')
+    expect(iframe).toBeInTheDocument()
+    expect(iframe).toHaveAttribute('src', 'https://www.youtube.com/watch?v=abc123')
   })
 
   it('renders with compact mode when compact prop is true', () => {
