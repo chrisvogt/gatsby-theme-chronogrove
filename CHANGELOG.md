@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.91.10
+
+### `gatsby-theme-chronogrove` — YouTube embed facade (Lighthouse: reduce unused JS)
+
+- **`shortcodes/youtube.js`**: Music preview embeds (home page + timeline) no longer mount the YouTube iframe eagerly. A lazy-loaded thumbnail (`i.ytimg.com/vi/{id}/hqdefault.jpg`) with a play button stands in until clicked; the real `<Embed>` iframe (with `autoplay=1`) only mounts on click, addressing Lighthouse's "Reduce unused JavaScript" and "third-party embeds ... facade" audits for the `post-card.js` Music widget.
+- **Fallback**: URLs that don't match `/embed/{id}` (unparseable video ID) still render the iframe directly, preserving prior behavior for edge cases.
+- **Tests**: `youtube.spec.js` covers facade rendering, click-to-activate, autoplay URL building (both query-string branches), and the direct-iframe fallback; 100% coverage on the file.
+- **Tracking**: [#645](https://github.com/chrisvogt/gatsby-theme-chronogrove/issues/645).
+
+### `@chronogrove/ui`
+
+- **`lazy-load.js`**: Fixed a missing `import React from 'react'` — the file's JSX relies on the classic runtime when compiled by a consumer using `babel-preset-gatsby` (e.g. the theme package's Jest config), which only surfaced once a theme test exercised `LazyLoad` unmocked for the first time (via the new YouTube facade).
+
+### Versions
+
+- **`gatsby-theme-chronogrove` 0.91.10**; **`@chronogrove/ui` 0.85.7**; **`www.chrisvogt.me`** and **`www.chronogrove.com`** unchanged (theme/ui resolve via `workspace:*`, no site code touched).
+
+### Files changed (high level)
+
+- `CHANGELOG.md`
+- `packages/theme/package.json` (version **0.91.10**)
+- `packages/theme/src/shortcodes/youtube.js`, `youtube.spec.js`, `__snapshots__/youtube.spec.js.snap`
+- `packages/ui/package.json` (version **0.85.7**)
+- `packages/ui/src/lazy-load.js`
+
+---
+
 ## 0.91.9
 
 ### `gatsby-theme-chronogrove` — Dependency refresh
