@@ -38,35 +38,7 @@
     "chalk": "^4.1.2",
     "lodash": "^4.18.1"
   },
-  "pnpm": {
-    "overrides": {
-      "lodash": "^4.18.1",
-      "@mdx-js/react": "^3.1.1",
-      "multer": "^2.1.1",
-      "serialize-javascript": ">=7.0.3",
-      "flatted": "^3.4.2",
-      "socket.io-parser": "^4.2.6",
-      "immutable": "^3.8.3",
-      "svgo": "^2.8.1",
-      "gatsby-plugin-google-analytics>minimatch": "^3.1.4",
-      "gatsby-plugin-sitemap>minimatch": "^3.1.4",
-      "path-to-regexp": ">=0.1.13 <0.2.0"
-    },
-    "publicHoistPattern": [
-      "*"
-    ],
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "core-js",
-      "core-js-pure",
-      "gatsby",
-      "gatsby-cli",
-      "lmdb",
-      "lottie-react-web",
-      "sharp"
-    ]
-  },
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix"
   }

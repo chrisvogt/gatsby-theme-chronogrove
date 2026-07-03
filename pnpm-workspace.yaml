@@ -3,6 +3,45 @@ packages:
   - examples/*
   - websites/*
 
+overrides:
+  lodash: ^4.18.1
+  '@mdx-js/react': ^3.1.1
+  multer: ^2.1.1
+  serialize-javascript: '>=7.0.3'
+  flatted: ^3.4.2
+  socket.io-parser: ^4.2.6
+  immutable: ^3.8.3
+  svgo: ^2.8.1
+  gatsby-plugin-google-analytics>minimatch: ^3.1.4
+  gatsby-plugin-sitemap>minimatch: ^3.1.4
+  path-to-regexp: '>=0.1.13 <0.2.0'
+
+publicHoistPattern:
+  - '*'
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - core-js
+  - core-js-pure
+  - gatsby
+  - gatsby-cli
+  - lmdb
+  - lottie-react-web
+  - sharp
+
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: true
+  core-js-pure: true
+  es5-ext: false
+  gatsby: true
+  gatsby-cli: true
+  lmdb: true
+  lottie-react-web@https://codeload.github.com/chrisvogt/lottie-react-web/tar.gz/b2ca0e5b418a071fb4681eae2d9f5c21cbeb1751: true
+  msgpackr-extract: true
+  sharp: true
+  unrs-resolver: true
+
 # Shared dependency versions for workspace packages. Use "catalog:" in package.json deps.
 catalog:
   '@emotion/cache': ^11.14.0
