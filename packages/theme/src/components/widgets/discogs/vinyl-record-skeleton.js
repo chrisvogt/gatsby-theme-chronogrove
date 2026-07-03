@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import PropTypes from 'prop-types'
-import { Card } from '@theme-ui/components'
+import { Box } from '@theme-ui/components'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
@@ -85,9 +85,9 @@ const VinylRecordSkeleton = ({ darkModeActive, variant = 'grid' }) => {
   }
 
   return (
-    <Card
-      variant='actionCard'
+    <Box
       sx={{
+        variant: 'styles.InstagramItem',
         p: [0.5, 1, 2, 3],
         minWidth: 0,
         boxSizing: 'border-box',
@@ -184,7 +184,7 @@ const VinylRecordSkeleton = ({ darkModeActive, variant = 'grid' }) => {
           </div>
         </div>
       </div>
-    </Card>
+    </Box>
   )
 }
 

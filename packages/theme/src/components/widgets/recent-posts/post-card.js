@@ -3,11 +3,12 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { nullableString, nullableStringArray } from '@chronogrove/ui/prop-types-helpers'
 import { jsx, Box as ThemeBox } from 'theme-ui'
-import { Heading, Card } from '@theme-ui/components'
+import { Heading } from '@theme-ui/components'
 import { Link } from 'gatsby'
 import Category from '../../category'
 import ImageThumbnails from './image-thumbnails'
 import YouTube from '../../../shortcodes/youtube'
+import { Thumb, TimelineReadMoreLink } from '../../blog/timeline-primitives'
 
 /**
  * Extract YouTube video ID from embed URL
@@ -40,6 +41,8 @@ const getHorizontalPreviewUrl = (banner, thumbnails) => {
   return null
 }
 
+const postCardTid = suffix => `post-card-${suffix}`
+
 /** Card body extracted from wrapper so definitions are stable across renders */
 function PostCardInner({
   banner,
@@ -58,8 +61,7 @@ function PostCardInner({
   horizontalPreviewUrl
 }) {
   return (
-    <Card
-      variant='actionCard'
+    <ThemeBox
       sx={{
         height: '100%',
         display: 'flex',
@@ -101,19 +103,7 @@ function PostCardInner({
             {/* Show banner for posts without thumbnails and no media embed */}
             {banner && (!thumbnails || thumbnails.length === 0) && !hasMediaEmbed && (
               <ThemeBox className='card-media' sx={{ flexShrink: 0, mb: 2 }}>
-                <ThemeBox
-                  sx={{
-                    backgroundImage: `url(${banner})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    borderRadius: '8px',
-                    width: '100%',
-                    height: 'auto',
-                    aspectRatio: '1.9 / 1',
-                    transition: 'all 2.5s ease'
-                  }}
-                />
+                <Thumb url={banner} sx={{ aspectRatio: '1.9 / 1', borderRadius: '8px' }} />
               </ThemeBox>
             )}
 
@@ -198,7 +188,7 @@ function PostCardInner({
           </ThemeBox>
         )}
       </ThemeBox>
-    </Card>
+    </ThemeBox>
   )
 }
 
@@ -292,22 +282,13 @@ const HorizontalTextBlock = ({
           <Heading as='h3' sx={inlinePreviewHeadingSx}>
             {title}
           </Heading>
-          <ThemeBox
-            aria-hidden
+          <Thumb
             className='card-headline-preview'
+            url={headlinePreviewUrl}
             sx={{
-              flexShrink: 0,
               width: HEADLINE_THUMB_WIDTH,
               aspectRatio: HORIZONTAL_PREVIEW_ASPECT,
-              borderRadius: '6px',
-              overflow: 'hidden',
-              backgroundImage: `url(${headlinePreviewUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              border: '1px solid',
-              borderColor: 'muted',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.08)'
+              borderRadius: '6px'
             }}
           />
         </ThemeBox>
@@ -362,6 +343,20 @@ const HorizontalTextBlock = ({
         >
           {excerpt}
         </ThemeBox>
+      )}
+
+      {/* Non-embed cards are already wrapped in a whole-card <Link> (see PostCard below) — an
+          inner "read more" link would nest an <a> inside an <a>. Media-embed cards aren't
+          whole-card links (the embed needs its own interactive iframe), so they get this
+          instead, mirroring blog's TimelineStamp where the row itself isn't a link. */}
+      {hasMediaEmbed && (
+        <TimelineReadMoreLink
+          href={link}
+          readMoreAriaFallback='this post'
+          tid={postCardTid}
+          title={title}
+          variant='timeline'
+        />
       )}
     </>
   )

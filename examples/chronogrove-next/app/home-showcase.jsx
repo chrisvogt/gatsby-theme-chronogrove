@@ -10,7 +10,7 @@ import 'react-placeholder/lib/reactPlaceholder.css'
 import NextLink from 'next/link'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
-import { actionCardPinnedLayoutSx } from '@chronogrove/ui/action-card-layout'
+import { dividedRowListSx } from '@chronogrove/ui/divided-row-list'
 import Header from '@chronogrove/ui/header'
 import { SkipNavLink, SkipNavContent } from '@chronogrove/ui/skip-nav'
 import Button from '@chronogrove/ui/button'
@@ -252,7 +252,7 @@ function LazyLoadedContent() {
 
 /**
  * One bounded “home widget” slice: `WidgetHeader` + `ProfileMetricsBadge` (from `@chronogrove/ui`), metric grid,
- * status strip, body rhythm, and a pinned-repo style actionCard — same primitives as the Gatsby home dashboard.
+ * status strip, body rhythm, and a divided-row pinned-repo panel — same primitives as the Gatsby home dashboard.
  */
 function WidgetCompositionDemo() {
   const headerMetrics = [{ id: 'commits', value: 847, displayName: 'commits' }]
@@ -296,14 +296,24 @@ function WidgetCompositionDemo() {
         </WidgetSection>
 
         <Box sx={{ mt: [3, 4] }}>
-          <Text sx={sectionKickerSx}>Pinned card (GitHub)</Text>
-          <Card variant='actionCard' sx={{ ...actionCardPinnedLayoutSx, p: [3, 3], maxWidth: ['100%', '28rem'] }}>
-            <Heading as='h3' sx={{ fontFamily: 'heading', fontSize: 3, color: 'text', m: 0, mb: 2, lineHeight: 1.25 }}>
-              gatsby-theme-chronogrove
-            </Heading>
-            <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.55, m: 0 }}>
-              Glass panels, primary accent edge, hover lift — same variant as pinned repositories.
-            </Text>
+          <Text sx={sectionKickerSx}>Pinned items (GitHub)</Text>
+          <Card variant='presentationalCard' sx={{ ...dividedRowListSx, maxWidth: ['100%', '28rem'] }}>
+            <Box sx={{ py: 3, '&:first-of-type': { pt: 0 } }}>
+              <Heading as='h3' sx={{ fontFamily: 'heading', fontSize: 3, color: 'text', m: 0, mb: 2, lineHeight: 1.25 }}>
+                gatsby-theme-chronogrove
+              </Heading>
+              <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.55, m: 0 }}>
+                One panel, divided rows, no per-item glass card — same pattern as pinned repositories.
+              </Text>
+            </Box>
+            <Box sx={{ py: 3, '&:last-of-type': { pb: 0 } }}>
+              <Heading as='h3' sx={{ fontFamily: 'heading', fontSize: 3, color: 'text', m: 0, mb: 2, lineHeight: 1.25 }}>
+                chronogrove-next
+              </Heading>
+              <Text sx={{ color: 'textMuted', fontSize: 1, lineHeight: 1.55, m: 0 }}>
+                A hairline divider separates rows instead of a shadow around each one.
+              </Text>
+            </Box>
           </Card>
         </Box>
       </Box>
@@ -452,7 +462,7 @@ export default function HomeShowcase() {
                           }}
                         >
                           It is a compact, realistic slice of the Gatsby home dashboard: shared WidgetHeader, metric
-                          tiles, and pinned-style cards — not a flat list of disconnected controls. See{' '}
+                          tiles, and a pinned-items panel — not a flat list of disconnected controls. See{' '}
                           <Text as='span' sx={{ fontFamily: 'monospace', fontSize: '0.92em' }}>
                             packages/ui/README.md
                           </Text>{' '}
@@ -463,7 +473,7 @@ export default function HomeShowcase() {
                       <Section
                         id='widget-demo'
                         title='Widget composition'
-                        description='Uses WidgetHeader from @chronogrove/ui (same module as gatsby-theme-chronogrove): optional icon, title, WidgetCallToAction aside, and ProfileMetricsBadge metrics — then MetricCard (including showPlaceholder), StatusCard, WidgetSection, and actionCard.'
+                        description='Uses WidgetHeader from @chronogrove/ui (same module as gatsby-theme-chronogrove): optional icon, title, WidgetCallToAction aside, and ProfileMetricsBadge metrics — then MetricCard (including showPlaceholder), StatusCard, WidgetSection, and a presentationalCard divided-row panel.'
                       >
                         <DemoPreview title='Composite widget (read-only demo)'>
                           <WidgetCompositionDemo />

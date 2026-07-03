@@ -65,32 +65,6 @@ describe('Theme Configuration', () => {
     })
   })
 
-  describe('PostCard styles', () => {
-    it('applies PostCard base styles', () => {
-      const postCard = theme.cards.PostCard
-      expect(postCard).toHaveProperty('display', 'flex')
-      expect(postCard).toHaveProperty('flexDirection', 'column')
-      expect(postCard).toHaveProperty('bg', 'panel-background')
-    })
-
-    it('integrates floatOnHover into PostCard', () => {
-      const postCard = theme.cards.PostCard
-      expect(postCard).toMatchObject(floatOnHover)
-    })
-
-    it('integrates glassmorphismPanel into PostCard', () => {
-      const postCard = theme.cards.PostCard
-      expect(postCard).toHaveProperty('borderRadius', '10px')
-      expect(postCard).toHaveProperty('backdropFilter', 'blur(10px)')
-    })
-
-    it('defines PostCard hover styles for .read-more-icon', () => {
-      const postCard = theme.cards.PostCard
-      expect(postCard['&:hover .read-more-icon']).toHaveProperty('opacity', 1)
-      expect(postCard['&:hover .read-more-icon']).toHaveProperty('paddingLeft', '8px')
-    })
-  })
-
   describe('Card styles and variants', () => {
     it('defines primary card styles', () => {
       const primaryCard = theme.cards.primary
@@ -98,10 +72,15 @@ describe('Theme Configuration', () => {
       expect(primaryCard).toHaveProperty('boxShadow')
     })
 
-    it('defines actionCard with dynamic borderLeft', () => {
+    it('defines actionCard without a left accent border', () => {
       const actionCard = theme.cards.actionCard
-      expect(actionCard.borderLeft(theme)).toBe(`2px solid ${theme.colors.primary}`)
+      expect(actionCard).not.toHaveProperty('borderLeft')
       expect(actionCard.a).toHaveProperty(':hover', 'pointer')
+    })
+
+    it('defines presentationalCard without a left accent border', () => {
+      const presentationalCard = theme.cards.presentationalCard
+      expect(presentationalCard).not.toHaveProperty('borderLeft')
     })
 
     it('defines metricCard with panel border (stat tiles)', () => {
@@ -165,13 +144,6 @@ describe('Theme Configuration', () => {
       const focusBoxShadow = theme.buttons.action['&:focus'].boxShadow(mockTheme)
       expect(hoverBg).toBe('rgba(66, 46, 163, 0.2)')
       expect(focusBoxShadow).toBe('0 0 0 2px #422EA340')
-    })
-
-    it('defines readMore button variant with theme function for border', () => {
-      expect(theme.buttons.readMore).toHaveProperty('color', 'primary')
-      expect(theme.buttons.readMore).toHaveProperty('bg', 'transparent')
-      const border = theme.buttons.readMore.border(theme)
-      expect(border).toBe(`1px solid ${theme.colors.primary}`)
     })
 
     it('defines badge variants', () => {

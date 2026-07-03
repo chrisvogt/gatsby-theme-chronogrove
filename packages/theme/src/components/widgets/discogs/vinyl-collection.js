@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
-import { Box, Card, Heading, Select } from '@theme-ui/components'
+import { Box, Heading, Select } from '@theme-ui/components'
 import { Themed } from '@theme-ui/mdx'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
@@ -673,10 +673,10 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                     : pageItems.map(({ id, title, displayYear, artistName, cdnThumbUrl, details }) => {
                         const release = sortedReleases.find(r => r.id === id)
                         return (
-                          <Card
+                          <Box
                             key={id}
-                            variant='actionCard'
                             sx={{
+                              variant: 'styles.InstagramItem',
                               p: [0.5, 1, 2, 3],
                               minWidth: 0,
                               boxSizing: 'border-box',
@@ -992,7 +992,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
                                 </Themed.div>
                               </div>
                             </Themed.div>
-                          </Card>
+                          </Box>
                         )
                       })}
                 </div>

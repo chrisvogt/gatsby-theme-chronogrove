@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import { Box, Card } from '@theme-ui/components'
+import { Box } from '@theme-ui/components'
 import { navigate as gatsbyNavigate } from 'gatsby'
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
@@ -117,9 +117,9 @@ const BookLink = ({
   }
 
   return (
-    <Card
-      variant='actionCard'
+    <Box
       sx={{
+        variant: 'styles.InstagramItem',
         minWidth: 0,
         height: '100%',
         display: 'flex',
@@ -178,7 +178,7 @@ const BookLink = ({
           <Book3D thumbnailURL={imageUrl} title={title} introDelay={introDelay} />
         )}
       </Box>
-    </Card>
+    </Box>
   )
 }
 

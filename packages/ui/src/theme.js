@@ -102,29 +102,6 @@ export const metricCard = {
   borderColor: 'panel-divider'
 }
 
-export const PostCard = {
-  ...card,
-  ...floatOnHover,
-  ...glassmorhismPanel,
-  display: 'flex',
-  height: '100%',
-  flexDirection: 'column',
-  '.card-media': {
-    mb: 2,
-    overflow: 'hidden'
-  },
-  '.read-more-icon': {
-    display: 'inline',
-    transition: 'all 250ms ease-in',
-    opacity: 0,
-    paddingLeft: 0
-  },
-  '&:hover .read-more-icon': {
-    opacity: 1,
-    paddingLeft: '8px'
-  }
-}
-
 export default merge(tailwind, {
   config: {
     initialColorModeName: 'default',
@@ -190,43 +167,6 @@ export default merge(tailwind, {
         transform: 'scale(0.98)'
       }
     },
-    readMore: {
-      color: 'primary',
-      bg: 'transparent',
-      border: theme => `1px solid ${theme.colors.primary}`,
-      borderRadius: 'card',
-      px: 3,
-      py: 2,
-      fontSize: [1, 2],
-      fontWeight: 'medium',
-      cursor: 'pointer',
-      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      position: 'relative',
-      overflow: 'hidden',
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: '-100%',
-        width: '100%',
-        height: '100%',
-        background: 'linear-gradient(90deg, transparent, rgba(66, 46, 163, 0.1), transparent)',
-        transition: 'left 0.5s ease-in-out'
-      },
-      '&:hover, &:focus': {
-        bg: 'primary',
-        color: 'background',
-        transform: 'translateY(-2px)',
-        boxShadow: '0 4px 12px rgba(66, 46, 163, 0.3)',
-        '&::before': {
-          left: '100%'
-        }
-      },
-      '&:active': {
-        transform: 'translateY(0)',
-        boxShadow: '0 2px 8px rgba(66, 46, 163, 0.2)'
-      }
-    }
   },
 
   cards: {
@@ -239,17 +179,15 @@ export default merge(tailwind, {
       ...card,
       ...floatOnHover,
       ...glassmorhismPanel,
-      borderLeft: theme => `2px solid ${theme.colors.primary}`,
       a: {
         ':hover': 'pointer'
       }
     },
 
-    /** Non-interactive content (AI Summary, Contribution Graph): same look as card + glass, neutral left border, no hover */
+    /** Non-interactive content (AI Summary, Contribution Graph): same look as card + glass, no hover */
     presentationalCard: {
       ...card,
-      ...glassmorhismPanel,
-      borderLeft: theme => `2px solid ${theme.colors.gray?.[6] ?? '#9ca3af'}`
+      ...glassmorhismPanel
     },
 
     metricCard: {
@@ -283,97 +221,6 @@ export default merge(tailwind, {
 
     StatusCardDark: {
       backgroundColor: '#1e2530'
-    },
-
-    PostCard,
-
-    aiSummary: {
-      ...card,
-      ...glassmorhismPanel,
-      borderLeft: theme => `2px solid ${theme.colors.gray?.[6] ?? '#9ca3af'}`,
-      '@keyframes pulse': {
-        '0%, 100%': {
-          opacity: 1
-        },
-        '50%': {
-          opacity: 0.7
-        }
-      },
-      '@keyframes gentleGlow': {
-        '0%': {
-          filter: 'drop-shadow(0 0 12px rgba(66, 46, 163, 0.4))'
-        },
-        '100%': {
-          filter: 'drop-shadow(0 0 20px rgba(66, 46, 163, 0.7))'
-        }
-      },
-      '@keyframes gentleFloat': {
-        '0%, 100%': {
-          transform: 'translateY(0px)'
-        },
-        '50%': {
-          transform: 'translateY(-4px)'
-        }
-      },
-      '@keyframes slideInFromLeft': {
-        '0%': {
-          opacity: 0,
-          transform: 'translateX(-30px)'
-        },
-        '100%': {
-          opacity: 1,
-          transform: 'translateX(0)'
-        }
-      },
-      '@keyframes expandWidth': {
-        '0%': {
-          width: '0%'
-        },
-        '100%': {
-          width: '100%'
-        }
-      },
-      '@keyframes gentleBounce': {
-        '0%, 20%, 50%, 80%, 100%': {
-          transform: 'translateY(0)'
-        },
-        '40%': {
-          transform: 'translateY(-4px)'
-        },
-        '60%': {
-          transform: 'translateY(-2px)'
-        }
-      },
-      '@keyframes blink': {
-        '0%, 50%': {
-          opacity: 1
-        },
-        '51%, 100%': {
-          opacity: 0
-        }
-      },
-      '@keyframes fadeInUp': {
-        '0%': {
-          opacity: 0,
-          transform: 'translateY(20px)'
-        },
-        '100%': {
-          opacity: 1,
-          transform: 'translateY(0)'
-        }
-      },
-      '@keyframes slideDown': {
-        '0%': {
-          opacity: 0,
-          maxHeight: '0px',
-          overflow: 'hidden'
-        },
-        '100%': {
-          opacity: 1,
-          maxHeight: '1000px',
-          overflow: 'visible'
-        }
-      }
     }
   },
 
@@ -382,11 +229,14 @@ export default merge(tailwind, {
     ...chronogroveThemeSurfaceColorsLight,
     'panel-divider': () => '1px solid rgba(255, 229, 224, 0.17)',
     'panel-highlight': theme => theme.colors.gray[1],
+    /** Plain hairline color for row dividers (e.g. dividedRowListSx) — unlike panel-divider, this is a bare color, not a border shorthand */
+    divider: 'rgba(0, 0, 0, 0.08)',
     modes: {
       dark: {
         ...chronogroveThemeSurfaceColorsDark,
         'panel-divider': theme => `1px solid ${theme.colors.gray[8]}`,
         'panel-highlight': theme => theme.colors.gray[8],
+        divider: 'rgba(255, 255, 255, 0.08)',
         primary: '#4a9eff',
         primaryRgb: '74, 158, 255',
         tableText: '#fff',

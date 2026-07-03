@@ -3,7 +3,7 @@
 exports[`GitHub Repository Renderer falls back to updatedAt when pushedAt is not available 1`] = `
 <DocumentFragment>
   <div
-    class="css-1kbinjp"
+    class="css-er0ssy"
   >
     <h4
       class="css-cpvk2h"
@@ -11,7 +11,7 @@ exports[`GitHub Repository Renderer falls back to updatedAt when pushedAt is not
       themeuser/legacy-repo
     </h4>
     <span
-      class="css-1e5uqy3"
+      class="css-rlbkph"
     >
       Legacy repository without pushedAt field.
     </span>
@@ -44,7 +44,7 @@ exports[`GitHub Repository Renderer falls back to updatedAt when pushedAt is not
 exports[`GitHub Repository Renderer matches the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="css-1kbinjp"
+    class="css-er0ssy"
   >
     <h4
       class="css-cpvk2h"
@@ -52,7 +52,7 @@ exports[`GitHub Repository Renderer matches the snapshot 1`] = `
       themeuser/gatsby-theme-chronogrove
     </h4>
     <span
-      class="css-1e5uqy3"
+      class="css-rlbkph"
     >
       GatsbyJS blog theme with built-in social widgets for creatives and developers.
     </span>

@@ -134,9 +134,9 @@
       "import": "./src/animated-page-background/ColorBends.js",
       "default": "./src/animated-page-background/ColorBends.js"
     },
-    "./action-card-layout": {
-      "import": "./src/action-card-layout.js",
-      "default": "./src/action-card-layout.js"
+    "./divided-row-list": {
+      "import": "./src/divided-row-list.js",
+      "default": "./src/divided-row-list.js"
     },
     "./article-column-container": {
       "import": "./src/article-column-container.js",
