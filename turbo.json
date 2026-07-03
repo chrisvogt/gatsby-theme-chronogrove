@@ -17,6 +17,7 @@
       "persistent": true
     },
     "test:codecov": {
+      "cache": false,
       "outputs": ["**/junit.xml"]
     },
     "lint": {},
