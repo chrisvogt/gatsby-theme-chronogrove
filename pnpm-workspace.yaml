@@ -68,3 +68,9 @@ catalog:
   react-photo-gallery: ^8.0.0
   theme-ui: ^0.17.4
   three: ^0.184.0
+
+# Default minimumReleaseAge (24h) blocks freshly-published packages as a
+# supply-chain safeguard. Excluded here because it's our own first-party
+# package published moments before this dependency bump was committed.
+minimumReleaseAgeExclude:
+  - '@chrisvogt/lottie-react-web'
