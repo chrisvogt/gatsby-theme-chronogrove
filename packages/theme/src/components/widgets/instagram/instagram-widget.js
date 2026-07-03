@@ -19,6 +19,7 @@ import 'lightgallery/css/lg-video.css'
 import 'lightgallery/css/lg-autoplay.css'
 
 import { getInstagramWidgetDataSource } from '../../../selectors/metadata'
+import useLightboxScrollLock from '../../../hooks/use-lightbox-scroll-lock'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
 
@@ -66,6 +67,7 @@ export default () => {
   const carouselQueueRef = useRef([]) // Shuffled queue of carousel indices
   const carouselProgressRef = useRef({}) // Track {idx: imagesShownCount}
   const carouselDataRef = useRef([]) // Store carousel metadata {idx, totalImages}
+  const { lockScroll, unlockScroll } = useLightboxScrollLock()
 
   // Fisher–Yates shuffle for carousel rotation order (no `Math.random`; see randomUIntBelow).
   const shuffleArray = array => {
@@ -320,7 +322,8 @@ export default () => {
 
   const handleGalleryClose = useCallback(() => {
     isGalleryOpenRef.current = false
-  }, [])
+    unlockScroll()
+  }, [unlockScroll])
 
   // Apply album boundary data attributes to thumbnails for CSS styling
   const handleAfterAppendSlide = useCallback(
@@ -428,6 +431,7 @@ export default () => {
       {dynamicEl.length > 0 && (
         <LightGallery
           onInit={handleLightGalleryInit}
+          onBeforeOpen={lockScroll}
           onAfterOpen={handleGalleryOpen}
           onAfterClose={handleGalleryClose}
           onAfterAppendSlide={handleAfterAppendSlide}

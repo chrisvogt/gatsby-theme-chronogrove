@@ -20,6 +20,7 @@ import 'lightgallery/css/lg-video.css'
 import 'lightgallery/css/lg-autoplay.css'
 
 import { getFlickrUsername, getFlickrWidgetDataSource } from '../../../selectors/metadata'
+import useLightboxScrollLock from '../../../hooks/use-lightbox-scroll-lock'
 import useSiteMetadata from '../../../hooks/use-site-metadata'
 import useWidgetData from '../../../hooks/use-widget-data'
 
@@ -40,6 +41,7 @@ export default () => {
   const { colorMode } = useThemeUI()
   const darkModeActive = isDarkMode(colorMode)
   const lightGalleryRef = useRef(null)
+  const { lockScroll, unlockScroll } = useLightboxScrollLock()
 
   const metadata = useSiteMetadata()
   const flickrUsername = getFlickrUsername(metadata)
@@ -155,6 +157,8 @@ export default () => {
           onInit={ref => {
             lightGalleryRef.current = ref.instance
           }}
+          onBeforeOpen={lockScroll}
+          onAfterClose={unlockScroll}
           plugins={[lgThumbnail, lgZoom, lgVideo, lgAutoplay]}
           licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}
           download={false}

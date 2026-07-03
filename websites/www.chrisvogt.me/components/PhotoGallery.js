@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 import { useInView } from 'react-intersection-observer'
 
 import Gallery from 'react-photo-gallery'
+import useLightboxScrollLock from 'gatsby-theme-chronogrove/src/hooks/use-lightbox-scroll-lock'
 
 const LightGalleryComponent = ({ lightGalleryRef, pendingIndexRef, photos }) => {
+  const { lockScroll, unlockScroll } = useLightboxScrollLock()
   // Dynamic imports for lightgallery - only loaded when component mounts
   const [lightGalleryModules, setLightGalleryModules] = useState(null)
 
@@ -45,6 +47,8 @@ const LightGalleryComponent = ({ lightGalleryRef, pendingIndexRef, photos }) => 
           }
         }
       }}
+      onBeforeOpen={lockScroll}
+      onAfterClose={unlockScroll}
       plugins={[lgThumbnail, lgZoom]}
       licenseKey={process.env.GATSBY_LIGHT_GALLERY_LICENSE_KEY}
       download={false}
