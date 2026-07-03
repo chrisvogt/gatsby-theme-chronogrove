@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import loadable from '@loadable/component'
 import { Themed } from '@theme-ui/mdx'
 
-const LottieClientOnly = loadable(() => import('lottie-react-web'), { ssr: false })
+const LottieClientOnly = loadable(() => import('@chrisvogt/lottie-react-web'), { ssr: false })
 
 import Layout from '../components/layout'
 

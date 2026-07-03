@@ -55,6 +55,7 @@
     "jest-junit": "^16.0.0"
   },
   "dependencies": {
+    "@chrisvogt/lottie-react-web": "^3.0.0",
     "@chronogrove/ui": "workspace:*",
     "@emotion/cache": "catalog:",
     "@emotion/react": "catalog:",
@@ -100,7 +101,6 @@
     "humanize-duration": "^3.33.2",
     "lightgallery": "catalog:",
     "lodash": "^4.18.1",
-    "lottie-react-web": "github:chrisvogt/lottie-react-web#codex/modernize-tooling-and-ci",
     "prettier": "catalog:",
     "prismjs": "^1.30.0",
     "prop-types": "catalog:",

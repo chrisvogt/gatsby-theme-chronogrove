@@ -8,7 +8,7 @@ import { ThemeUIProvider } from 'theme-ui'
 jest.mock('../components/layout', () => ({ children }) => <div className='layoutMock'>{children}</div>)
 
 // Mock loadable Lottie component
-jest.mock('lottie-react-web', () => {
+jest.mock('@chrisvogt/lottie-react-web', () => {
   const React = require('react')
   return {
     __esModule: true,
