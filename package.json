@@ -17,10 +17,10 @@
     "build": "turbo run build"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "eslint": "^9.39.4",
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.15.2",
+    "eslint-plugin-jest": "^29.16.0",
     "eslint-plugin-json": "^4.0.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.6",
@@ -31,14 +31,14 @@
     "only-allow": "^1.2.2",
     "prettier": "catalog:",
     "pretty-quick": "^4.2.2",
-    "turbo": "^2.9.18"
+    "turbo": "^2.10.7"
   },
   "dependencies": {
     "boxen": "catalog:",
     "chalk": "^4.1.2",
     "lodash": "^4.18.1"
   },
-  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b",
+  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix"
   }
