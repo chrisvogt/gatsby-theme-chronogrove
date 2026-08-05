@@ -16,7 +16,8 @@ exports[`PostCard does not render excerpt when explicitly null 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -69,7 +70,8 @@ exports[`PostCard does not render excerpt when explicitly undefined 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -122,7 +124,8 @@ exports[`PostCard matches the snapshot without excerpt 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -202,6 +205,14 @@ exports[`PostCard renders SoundCloud embed when soundcloudId is provided 1`] = `
               2024-05-12
             </time>
           </div>
+          <a
+            aria-label="Read full post: A House Is Not A Home"
+            class="css-7lmdfw"
+            data-testid="post-card-read-more-link"
+            href="/music/a-house-is-not-a-home"
+          >
+            Read more
+          </a>
         </div>
         <div
           class="card-soundcloud css-pdxy6l"
@@ -265,6 +276,14 @@ exports[`PostCard renders YouTube embed when youtubeSrc is provided 1`] = `
               2025-06-19
             </time>
           </div>
+          <a
+            aria-label="Read full post: Here and Now"
+            class="css-7lmdfw"
+            data-testid="post-card-read-more-link"
+            href="/music/here-and-now"
+          >
+            Read more
+          </a>
         </div>
         <div
           class="card-youtube css-1i0uxcs"
@@ -330,6 +349,14 @@ exports[`PostCard renders YouTube embed with horizontal layout when both props a
               2025-06-19
             </time>
           </div>
+          <a
+            aria-label="Read full post: Here and Now"
+            class="css-7lmdfw"
+            data-testid="post-card-read-more-link"
+            href="/music/here-and-now"
+          >
+            Read more
+          </a>
         </div>
         <div
           class="card-youtube css-1i0uxcs"
@@ -368,7 +395,8 @@ exports[`PostCard renders as image-only recap when isRecap prop is true 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -421,7 +449,8 @@ exports[`PostCard renders banner when thumbnails array is empty 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -474,7 +503,8 @@ exports[`PostCard renders banner when thumbnails is null 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -527,7 +557,8 @@ exports[`PostCard renders excerpt when provided 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -591,7 +622,7 @@ exports[`PostCard renders in horizontal layout when horizontal prop is true 1`] 
           </h3>
           <div
             aria-hidden="true"
-            class="card-headline-preview css-5q7tak"
+            class="card-headline-preview css-1eozubd"
           />
         </div>
         <div
@@ -809,7 +840,8 @@ exports[`PostCard renders without category when not provided 1`] = `
           class="card-media css-14iwub6"
         >
           <div
-            class="css-mxuynl"
+            aria-hidden="true"
+            class="css-15i286l"
           />
         </div>
         <div
@@ -858,7 +890,7 @@ exports[`PostCard uses first thumbnail as left preview in horizontal mode (no th
           </h3>
           <div
             aria-hidden="true"
-            class="card-headline-preview css-13mmkmj"
+            class="card-headline-preview css-sku5m"
           />
         </div>
         <div

@@ -164,46 +164,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "bg": "primary",
       "color": "background",
     },
-    "readMore": {
-      "&::before": {
-        "background": "linear-gradient(90deg, transparent, rgba(66, 46, 163, 0.1), transparent)",
-        "content": """",
-        "height": "100%",
-        "left": "-100%",
-        "position": "absolute",
-        "top": 0,
-        "transition": "left 0.5s ease-in-out",
-        "width": "100%",
-      },
-      "&:active": {
-        "boxShadow": "0 2px 8px rgba(66, 46, 163, 0.2)",
-        "transform": "translateY(0)",
-      },
-      "&:hover, &:focus": {
-        "&::before": {
-          "left": "100%",
-        },
-        "bg": "primary",
-        "boxShadow": "0 4px 12px rgba(66, 46, 163, 0.3)",
-        "color": "background",
-        "transform": "translateY(-2px)",
-      },
-      "bg": "transparent",
-      "border": [Function],
-      "borderRadius": "card",
-      "color": "primary",
-      "cursor": "pointer",
-      "fontSize": [
-        1,
-        2,
-      ],
-      "fontWeight": "medium",
-      "overflow": "hidden",
-      "position": "relative",
-      "px": 3,
-      "py": 2,
-      "transition": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-    },
     "secondary": {
       "bg": "secondary",
       "color": "background",
@@ -225,44 +185,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     },
   },
   "cards": {
-    "PostCard": {
-      "&:hover .read-more-icon": {
-        "opacity": 1,
-        "paddingLeft": "8px",
-      },
-      "&:hover, &:focus": {
-        "boxShadow": "0 1px 0 rgba(0,0,0,0.06), 0 2px 0 rgba(0,0,0,0.04), 0 3px 0 rgba(0,0,0,0.03), 0 8px 20px rgba(66,46,163,0.14)",
-        "transform": "translateY(-3px) scale(1.008)",
-      },
-      ".card-media": {
-        "mb": 2,
-        "overflow": "hidden",
-      },
-      ".read-more-icon": {
-        "display": "inline",
-        "opacity": 0,
-        "paddingLeft": 0,
-        "transition": "all 250ms ease-in",
-      },
-      "WebkitBackdropFilter": "blur(10px)",
-      "backdropFilter": "blur(10px)",
-      "bg": "panel-background",
-      "border": "1px solid rgba(255, 255, 255, 0.15)",
-      "borderRadius": "10px",
-      "boxShadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
-      "color": "text",
-      "display": "flex",
-      "flexDirection": "column",
-      "flexGrow": 1,
-      "fontSize": [
-        1,
-        2,
-      ],
-      "height": "100%",
-      "padding": 3,
-      "textDecoration": "none",
-      "transition": "transform 200ms ease-in-out, box-shadow 200ms ease-in-out",
-    },
     "StatusCardDark": {
       "backgroundColor": "#1e2530",
     },
@@ -301,7 +223,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "backdropFilter": "blur(10px)",
       "bg": "panel-background",
       "border": "1px solid rgba(255, 255, 255, 0.15)",
-      "borderLeft": [Function],
       "borderRadius": "10px",
       "boxShadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
       "color": "text",
@@ -313,106 +234,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "padding": 3,
       "textDecoration": "none",
       "transition": "transform 200ms ease-in-out, box-shadow 200ms ease-in-out",
-    },
-    "aiSummary": {
-      "@keyframes blink": {
-        "0%, 50%": {
-          "opacity": 1,
-        },
-        "51%, 100%": {
-          "opacity": 0,
-        },
-      },
-      "@keyframes expandWidth": {
-        "0%": {
-          "width": "0%",
-        },
-        "100%": {
-          "width": "100%",
-        },
-      },
-      "@keyframes fadeInUp": {
-        "0%": {
-          "opacity": 0,
-          "transform": "translateY(20px)",
-        },
-        "100%": {
-          "opacity": 1,
-          "transform": "translateY(0)",
-        },
-      },
-      "@keyframes gentleBounce": {
-        "0%, 20%, 50%, 80%, 100%": {
-          "transform": "translateY(0)",
-        },
-        "40%": {
-          "transform": "translateY(-4px)",
-        },
-        "60%": {
-          "transform": "translateY(-2px)",
-        },
-      },
-      "@keyframes gentleFloat": {
-        "0%, 100%": {
-          "transform": "translateY(0px)",
-        },
-        "50%": {
-          "transform": "translateY(-4px)",
-        },
-      },
-      "@keyframes gentleGlow": {
-        "0%": {
-          "filter": "drop-shadow(0 0 12px rgba(66, 46, 163, 0.4))",
-        },
-        "100%": {
-          "filter": "drop-shadow(0 0 20px rgba(66, 46, 163, 0.7))",
-        },
-      },
-      "@keyframes pulse": {
-        "0%, 100%": {
-          "opacity": 1,
-        },
-        "50%": {
-          "opacity": 0.7,
-        },
-      },
-      "@keyframes slideDown": {
-        "0%": {
-          "maxHeight": "0px",
-          "opacity": 0,
-          "overflow": "hidden",
-        },
-        "100%": {
-          "maxHeight": "1000px",
-          "opacity": 1,
-          "overflow": "visible",
-        },
-      },
-      "@keyframes slideInFromLeft": {
-        "0%": {
-          "opacity": 0,
-          "transform": "translateX(-30px)",
-        },
-        "100%": {
-          "opacity": 1,
-          "transform": "translateX(0)",
-        },
-      },
-      "WebkitBackdropFilter": "blur(10px)",
-      "backdropFilter": "blur(10px)",
-      "bg": "panel-background",
-      "border": "1px solid rgba(255, 255, 255, 0.15)",
-      "borderLeft": [Function],
-      "borderRadius": "10px",
-      "boxShadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
-      "color": "text",
-      "flexGrow": 1,
-      "fontSize": [
-        1,
-        2,
-      ],
-      "padding": 3,
-      "textDecoration": "none",
     },
     "metricCard": {
       "WebkitBackdropFilter": "blur(12px) saturate(150%)",
@@ -455,7 +276,6 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
       "backdropFilter": "blur(10px)",
       "bg": "panel-background",
       "border": "1px solid rgba(255, 255, 255, 0.15)",
-      "borderLeft": [Function],
       "borderRadius": "10px",
       "boxShadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
       "color": "text",
@@ -525,6 +345,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     ],
     "danger": "#fca5a5",
     "dark": "#1f2937",
+    "divider": "rgba(0, 0, 0, 0.08)",
     "emerald": [
       "#ecfdf5",
       "#d1fae5",
@@ -603,6 +424,7 @@ exports[`Theme Configuration a snapshot of the configuration matches the snapsho
     "modes": {
       "dark": {
         "background": "#14141F",
+        "divider": "rgba(255, 255, 255, 0.08)",
         "panel-background": "rgba(20, 20, 31, 0.45)",
         "panel-divider": [Function],
         "panel-highlight": [Function],

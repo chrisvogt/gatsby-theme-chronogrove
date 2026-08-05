@@ -14,17 +14,12 @@ const Repository = ({ description, nameWithOwner, pushedAt, updatedAt }) => {
   const lastActivityDate = pushedAt || updatedAt
 
   return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        height: '100%'
-      }}
-    >
+    <Flex sx={{ flexDirection: 'column' }}>
       <Heading as='h4' sx={{ p: 0, mb: 2 }}>
         {nameWithOwner}
       </Heading>
 
-      <Box as='span' sx={{ flexGrow: 1, mb: 2 }}>
+      <Box as='span' sx={{ mb: 2 }}>
         {description}
       </Box>
 

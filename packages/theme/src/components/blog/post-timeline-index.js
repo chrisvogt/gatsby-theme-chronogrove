@@ -9,6 +9,7 @@ import { Link } from 'gatsby'
 import Category from '../category'
 import YouTube from '../../shortcodes/youtube'
 import { buildYouTubeEmbedUrl, getYouTubeVideoId } from '../widgets/recent-posts/post-card'
+import { Thumb, TimelineReadMoreLink, TIMELINE_STAMP_THUMB_PX } from './timeline-primitives'
 import {
   CLOUDINARY_FEATURED_PORTRAIT_2X,
   optimizeCloudinaryFillDimensionsSrc,
@@ -60,9 +61,6 @@ function timelineRestPostKey(post, index) {
   const pathPart = typeof path === 'string' ? path : ''
   return `${idPart}-${pathPart}-${index}`
 }
-
-/** Uniform timeline stamp thumbnail width (3:4 aspect); keeps the left column visually aligned row-to-row */
-const TIMELINE_STAMP_THUMB_PX = 80
 
 function soundcloudPlayerSrc(trackId) {
   return `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${trackId}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`
@@ -136,28 +134,6 @@ const TimelineEmbedAside = ({ soundcloudId, sx = {}, title, youtubeSrc }) => {
     </Box>
   )
 }
-
-const Thumb = ({ sizePx, sx, url }) => (
-  <Box
-    aria-hidden
-    sx={{
-      width: `${sizePx}px`,
-      maxWidth: '100%',
-      aspectRatio: '3 / 4',
-      flexShrink: 0,
-      bg: 'muted',
-      ...(url ? { backgroundImage: `url(${url})` } : {}),
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      borderRadius: '11px',
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: 'muted',
-      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-      ...sx
-    }}
-  />
-)
 
 /** Stacked-frames cue (same role as instagram-widget-item carousel icon) — inline SVG so www has no FontAwesome dependency */
 const FeaturedGalleryCueIcon = () => (
@@ -539,59 +515,6 @@ const Featured = ({
   )
 }
 
-const TimelineReadMoreLink = ({ emphasis = false, href, readMoreAriaFallback, tid, title, variant = 'timeline' }) => {
-  const label = typeof title === 'string' && title.trim().length > 0 ? title.trim() : readMoreAriaFallback
-  const featured = variant === 'featured'
-
-  let readMoreMarginTop = ['0.6875rem', null, null, '0.75rem']
-  if (featured) {
-    readMoreMarginTop = ['1rem', null, null, '1.125rem']
-  } else if (emphasis) {
-    readMoreMarginTop = ['0.875rem', null, null, '0.8125rem']
-  }
-
-  return (
-    <Box
-      as={Link}
-      aria-label={`Read full post: ${label}`}
-      data-testid={tid('read-more-link')}
-      sx={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderColor: 'primary',
-        borderRadius: '7px',
-        borderStyle: 'solid',
-        borderWidth: '1px',
-        color: 'primary',
-        display: 'inline-flex',
-        fontFamily: 'body',
-        fontSize: featured ? [1] : [0],
-        fontWeight: 600,
-        letterSpacing: featured ? '0.02em' : '0.06em',
-        lineHeight: 1.25,
-        mt: readMoreMarginTop,
-        px: featured ? ['0.875rem', null, null, '1rem'] : ['0.625rem'],
-        py: featured ? ['0.5rem', null, null, '0.5625rem'] : ['0.325rem'],
-        textDecoration: 'none',
-        textTransform: featured ? 'none' : 'uppercase',
-        transition: 'background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease',
-        '&:hover': {
-          bg: 'primary',
-          color: 'background'
-        },
-        '&:focus-visible': {
-          outline: '2px solid',
-          outlineColor: 'primary',
-          outlineOffset: '3px'
-        }
-      }}
-      to={href}
-    >
-      Read more
-    </Box>
-  )
-}
-
 const StampDenseMeta = ({ category, date }) => (
   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: [2], alignItems: 'center', mb: '0.675rem', mt: '0.0625rem' }}>
     {category ? <Category type={category} /> : null}
@@ -904,12 +827,6 @@ TimelineEmbedAside.propTypes = {
   youtubeSrc: mdxMediaScalar
 }
 
-Thumb.propTypes = {
-  sizePx: PropTypes.number.isRequired,
-  sx: PropTypes.object,
-  url: PropTypes.string
-}
-
 FeaturedHeroCarousel.propTypes = {
   slideKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
@@ -929,15 +846,6 @@ Featured.propTypes = {
   showBottomSeparator: PropTypes.bool,
   tid: PropTypes.func.isRequired,
   timelineAsideMedia: PropTypes.bool
-}
-
-TimelineReadMoreLink.propTypes = {
-  emphasis: PropTypes.bool,
-  href: PropTypes.string.isRequired,
-  readMoreAriaFallback: PropTypes.string.isRequired,
-  tid: PropTypes.func.isRequired,
-  title: nullableString,
-  variant: PropTypes.oneOf(['timeline', 'featured'])
 }
 
 StampDenseMeta.propTypes = {

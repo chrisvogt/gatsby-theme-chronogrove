@@ -2,9 +2,19 @@
 import { jsx } from 'theme-ui'
 import PropTypes from 'prop-types'
 import { Themed } from '@theme-ui/mdx'
-import { Box, Heading } from '@theme-ui/components'
+import { Box, Card, Heading } from '@theme-ui/components'
+import { dividedRowListSx } from '@chronogrove/ui/divided-row-list'
 
-import PinnedItemCard from './pinned-item-card'
+import PlaceholderContent from './renderers/placeholder'
+import RepositoryContent from './renderers/repository'
+
+const PLACEHOLDER = 'placeholder'
+const REPOSITORY = 'Repository'
+
+const rendererRegistry = {
+  [PLACEHOLDER]: PlaceholderContent,
+  [REPOSITORY]: RepositoryContent
+}
 
 const PinnedItems = ({ isLoading, items = [], placeholderCount = 4 }) => {
   const placeholderItems = Array(placeholderCount).fill({
@@ -26,30 +36,31 @@ const PinnedItems = ({ isLoading, items = [], placeholderCount = 4 }) => {
 
       <Themed.p>Pinned items on my GitHub profile.</Themed.p>
 
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoRows: '1fr',
-          gridGap: [3, 3, 3, 4],
-          gridTemplateColumns: ['', '', '', 'repeat(2, 1fr)']
-        }}
-      >
+      <Card variant='presentationalCard' sx={dividedRowListSx}>
         {itemsToRender.map((item, index) => (
           <Themed.a
             href={item.url}
             key={item.id || index}
             sx={{
               color: 'text',
-              display: 'flex',
+              display: 'block',
+              py: 3,
+              '&:first-of-type': {
+                pt: 0
+              },
+              '&:last-of-type': {
+                pb: 0
+              },
               '&:hover, &:focus': {
-                textDecoration: 'none'
+                textDecoration: 'none',
+                bg: 'panel-highlight'
               }
             }}
           >
-            <PinnedItemCard item={item} type={item.__typename} />
+            {(rendererRegistry[item.__typename] || rendererRegistry[PLACEHOLDER])(item)}
           </Themed.a>
         ))}
-      </Box>
+      </Card>
     </Box>
   )
 }

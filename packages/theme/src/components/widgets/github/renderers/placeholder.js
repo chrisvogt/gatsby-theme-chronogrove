@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import { jsx, Flex, useThemeUI } from 'theme-ui'
-import { Box } from '@theme-ui/components'
-import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders'
+import { jsx, useThemeUI } from 'theme-ui'
+import { TextBlock } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../../helpers/isDarkMode'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
@@ -13,15 +12,9 @@ const GitHubPlaceholder = () => {
 
   return (
     <div className='show-loading-animation'>
-      <Flex>
-        <div>
-          <RectShape color={placeholderColor} style={{ width: 40, height: 40, marginBottom: '2em' }} />
-        </div>
-        <Box sx={{ width: '100%', height: '100%' }}>
-          <TextBlock rows={2} color={placeholderColor} />
-        </Box>
-      </Flex>
-      <TextBlock rows={3} color={placeholderColor} />
+      <TextBlock rows={1} color={placeholderColor} style={{ marginBottom: '0.75em' }} />
+      <TextBlock rows={2} color={placeholderColor} style={{ marginBottom: '0.75em' }} />
+      <TextBlock rows={1} color={placeholderColor} />
     </div>
   )
 }
