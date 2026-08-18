@@ -98,10 +98,10 @@ const SteamWidget = React.memo(() => {
                       overflow: 'hidden'
                     }}
                   >
-                    <div className='show-loading-animation' style={{ width: '100%', height: '200px' }}>
+                    <div className='show-loading-animation' style={{ width: '100%', aspectRatio: '2.15 / 1' }}>
                       <RectShape
                         color={darkModeActive ? '#3a3a4a' : '#efefef'}
-                        style={{ width: '100%', height: '200px', borderRadius: '8px' }}
+                        style={{ width: '100%', height: '100%', borderRadius: '8px' }}
                       />
                     </div>
                   </Box>

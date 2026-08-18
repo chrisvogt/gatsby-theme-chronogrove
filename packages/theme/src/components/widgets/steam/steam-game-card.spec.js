@@ -147,20 +147,28 @@ describe('SteamGameCard', () => {
     expect(window.getComputedStyle(img).transform).toBe(baseline)
   })
 
-  it('renders the hover caption overlay (Spotify-style)', () => {
+  it('renders the caption below the artwork, always visible (not hover-only)', () => {
     const { container } = renderWithTheme(<SteamGameCard game={mockGame} subtitle='1h' />)
-    expect(container.querySelector('.steam-game-card_caption')).toBeInTheDocument()
+    const caption = container.querySelector('.steam-game-card_caption')
+    expect(caption).toBeInTheDocument()
+    expect(window.getComputedStyle(caption).opacity).not.toBe('0')
   })
 
-  it('stacks rank badge above the caption overlay', () => {
+  it('renders an "Open in Steam" overlay on the artwork that is hidden until hover/focus', () => {
+    const { container } = renderWithTheme(<SteamGameCard game={mockGame} />)
+    const overlay = container.querySelector('.steam-game-card_hover-overlay')
+    expect(overlay).toBeInTheDocument()
+    expect(overlay.textContent).toContain('Open in Steam')
+    expect(window.getComputedStyle(overlay).opacity).toBe('0')
+  })
+
+  it('stacks rank badge above the hover overlay', () => {
     const { container } = renderWithTheme(<SteamGameCard game={mockGame} showRank={true} rank={4} subtitle='10h' />)
-    const caption = container.querySelector('.steam-game-card_caption')
-    const badge = [...container.querySelectorAll('div')].find(
-      el => el !== caption && el.textContent === '4' && el !== container.firstChild
-    )
-    expect(caption).toBeTruthy()
+    const overlay = container.querySelector('.steam-game-card_hover-overlay')
+    const badge = [...container.querySelectorAll('div')].find(el => el !== overlay && el.textContent === '4')
+    expect(overlay).toBeTruthy()
     expect(badge).toBeTruthy()
-    expect(window.getComputedStyle(caption).zIndex).toBe('1')
+    expect(window.getComputedStyle(overlay).zIndex).toBe('1')
     expect(window.getComputedStyle(badge).zIndex).toBe('2')
   })
 

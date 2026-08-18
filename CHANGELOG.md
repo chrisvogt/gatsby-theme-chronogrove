@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.91.12
+
+### `gatsby-theme-chronogrove` — Steam leaderboard card redesign & playtime formatting
+
+- **`steam-game-card.js`**: media zone now uses **`aspect-ratio: 2.15 / 1`** (matching Steam header art) instead of a fixed **200px** height, so `object-fit: cover` no longer crops most of the artwork's edges; title and playtime moved out of the hover-only overlay into an **always-visible caption** below the art; hover/focus now shows an **"Open in Steam"** cue (reusing the existing **`ViewExternal`** icon) over the artwork instead.
+- **`steam-widget.js`**: recently-played loading skeleton updated to the same **`2.15 / 1`** aspect ratio.
+- **`play-time-chart.js`**: total playtime no longer prints a raw 2-decimal float (`757.35h`); new **`formatHoursPlayed`** helper rounds to **one decimal** and thousands-separates via `toLocaleString`, and the unit changed from **`h`** to **`hrs`**, matching Steam's own **`X,XXX.Y hrs`** convention. Applied to the leaderboard card subtitle and the **Total Hours** / **Average** footer stats. The 2-week "recently" figure is unchanged (still the fully spelled-out **`getTimeSpent`** output).
+- **Tests**: **`steam-game-card.spec.js`** updated for the always-visible caption and renamed hover-overlay class; **`steam-widget.spec.js`** and **`play-time-chart.spec.js`** snapshots refreshed.
+- **Version**: **0.91.12**
+
+### `www.chrisvogt.me`, `www.chronogrove.com` (demo)
+
+- Unchanged (theme resolves via `workspace:*`, no site code touched).
+
+### Files changed
+
+- `CHANGELOG.md`
+- `theme/package.json` (version **0.91.12**)
+- `theme/src/components/widgets/steam/steam-game-card.js`, **`steam-game-card.spec.js`**
+- `theme/src/components/widgets/steam/steam-widget.js`
+- `theme/src/components/widgets/steam/play-time-chart.js`
+- `theme/src/components/widgets/steam/__snapshots__/steam-widget.spec.js.snap`, **`play-time-chart.spec.js.snap`**
+
+---
+
 ## 0.91.11
 
 ### `gatsby-theme-chronogrove` — Mobile layout overflow fixes (Discogs & GitHub widgets)

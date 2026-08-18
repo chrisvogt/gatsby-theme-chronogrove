@@ -8,9 +8,13 @@ import ViewExternal from '../view-external'
 import SteamGameCard from './steam-game-card'
 import PropTypes from 'prop-types'
 
+/** Steam's own UI shows total playtime as "X,XXX.Y hrs" — one decimal, thousands-separated. */
+const formatHoursPlayed = hours =>
+  hours.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+
 /** Subtitle shown under leaderboard cards (recent playtime appended when present). */
 const leaderboardSubtitle = game => {
-  const hours = `${game.hoursPlayed}h total`
+  const hours = `${formatHoursPlayed(game.hoursPlayed)} hrs total`
   if (!game.playTime2Weeks) return hours
   const recentLabel = getTimeSpent(game.playTime2Weeks * 60 * 1000)
   return `${hours} • ${recentLabel} recently`
@@ -29,7 +33,7 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
     .slice(0, 10)
     .map((game, index) => ({
       ...game,
-      hoursPlayed: Math.round(((game.playTimeForever || 0) / 60) * 100) / 100,
+      hoursPlayed: Math.round(((game.playTimeForever || 0) / 60) * 10) / 10,
       rank: index + 1
     }))
 
@@ -129,13 +133,14 @@ const PlayTimeChart = ({ games = [], isLoading = false, profileURL = '' }) => {
         <Box sx={{ color: mutedTextColor, fontSize: '12px' }}>
           Total Hours:{' '}
           <Box as='span' sx={{ color: primaryColor, fontWeight: 'bold' }}>
-            {topGames.reduce((sum, game) => sum + game.hoursPlayed, 0).toFixed(1)}h
+            {formatHoursPlayed(topGames.reduce((sum, game) => sum + game.hoursPlayed, 0))} hrs
           </Box>
         </Box>
         <Box sx={{ color: mutedTextColor, fontSize: '12px' }}>
           Average:{' '}
           <Box as='span' sx={{ color: primaryColor, fontWeight: 'bold' }}>
-            {(topGames.reduce((sum, game) => sum + game.hoursPlayed, 0) / topGames.length).toFixed(1)}h per game
+            {formatHoursPlayed(topGames.reduce((sum, game) => sum + game.hoursPlayed, 0) / topGames.length)} hrs per
+            game
           </Box>
         </Box>
       </Box>

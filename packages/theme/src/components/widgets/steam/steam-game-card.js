@@ -6,11 +6,12 @@ import { useState } from 'react'
 import { RectShape } from 'react-placeholder/lib/placeholders'
 import isDarkMode from '../../../helpers/isDarkMode'
 import LazyLoad from '../../lazy-load'
+import ViewExternal from '../view-external'
 
 import 'react-placeholder/lib/reactPlaceholder.css'
 
-/** px; must match lazy placeholder + RectShape — img can't use height % inside LazyLoad's auto-height Box */
-const STEAM_CARD_IMAGE_HEIGHT = 200
+/** Steam header art ships ~460x215; matching that ratio keeps object-fit: cover from cropping much off the sides. */
+const STEAM_CARD_IMAGE_ASPECT_RATIO = '2.15 / 1'
 
 /** @returns {Record<string, unknown>} Theme UI sx for rank pill */
 function steamRankBadgeSx(darkModeActive) {
@@ -39,12 +40,12 @@ function steamRankBadgeSx(darkModeActive) {
 const SteamCardImagePlaceholder = ({ darkModeActive }) => {
   const color = darkModeActive ? '#3a3a4a' : '#efefef'
   return (
-    <div className='show-loading-animation' style={{ width: '100%', height: STEAM_CARD_IMAGE_HEIGHT }}>
+    <div className='show-loading-animation' style={{ width: '100%', aspectRatio: STEAM_CARD_IMAGE_ASPECT_RATIO }}>
       <RectShape
         color={color}
         style={{
           width: '100%',
-          height: STEAM_CARD_IMAGE_HEIGHT
+          height: '100%'
         }}
       />
     </div>
@@ -64,7 +65,7 @@ const SteamCardGameLazyImage = ({ darkModeActive, displayName, gameImage, isImag
       sx={{
         display: 'block',
         width: '100%',
-        height: STEAM_CARD_IMAGE_HEIGHT,
+        aspectRatio: STEAM_CARD_IMAGE_ASPECT_RATIO,
         objectFit: 'cover',
         transition: 'transform 0.3s ease',
         transform: isImageZoomed ? 'scale(1.05)' : 'scale(1)'
@@ -91,59 +92,42 @@ SteamRankBadge.propTypes = {
   showRank: PropTypes.bool.isRequired
 }
 
-const SteamGameCaptionOverlay = ({ displayName, subtitle }) => (
+/** Shown over the artwork on hover/focus, since the title + subtitle now live in the caption below. */
+const SteamGameHoverOverlay = () => (
   <Box
-    className='steam-game-card_caption'
+    className='steam-game-card_hover-overlay'
     sx={{
       alignItems: 'center',
-      background: 'rgba(0, 0, 0, 0.85)',
+      background: 'rgba(0, 0, 0, 0.75)',
       backdropFilter: 'blur(2px)',
       WebkitBackdropFilter: 'blur(2px)',
       bottom: 0,
       color: 'white',
       display: 'flex',
-      flexDirection: 'column',
+      fontSize: '13px',
+      fontWeight: 'bold',
+      gap: 1,
       justifyContent: 'center',
       left: 0,
       opacity: 0,
-      padding: 3,
       pointerEvents: 'none',
       position: 'absolute',
       right: 0,
-      textAlign: 'center',
       top: 0,
       transition: 'opacity 0.2s ease-in-out',
       zIndex: 1
     }}
   >
-    <Box
-      sx={{
-        fontSize: '14px',
-        fontWeight: 'bold',
-        mb: subtitle ? 1 : 0,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        width: '100%'
-      }}
-    >
-      {displayName}
-    </Box>
-    {subtitle ? <Box sx={{ fontSize: '12px', color: 'rgba(255,255,255,0.85)' }}>{subtitle}</Box> : null}
+    Open in Steam
+    <ViewExternal />
   </Box>
 )
 
-SteamGameCaptionOverlay.propTypes = {
-  displayName: PropTypes.string.isRequired,
-  subtitle: PropTypes.string
-}
-
-const SteamCardGameMedia = ({ darkModeActive, game, gameImage, isImageZoomed, rank, showRank, subtitle }) => (
+const SteamCardGameMedia = ({ darkModeActive, game, gameImage, isImageZoomed, rank, showRank }) => (
   <Box
     sx={{
       position: 'relative',
       width: '100%',
-      height: STEAM_CARD_IMAGE_HEIGHT,
       overflow: 'hidden'
     }}
   >
@@ -158,7 +142,7 @@ const SteamCardGameMedia = ({ darkModeActive, game, gameImage, isImageZoomed, ra
       <SteamCardImagePlaceholder darkModeActive={darkModeActive} />
     )}
     <SteamRankBadge darkModeActive={darkModeActive} rank={rank} showRank={showRank} />
-    <SteamGameCaptionOverlay displayName={game.displayName} subtitle={subtitle} />
+    <SteamGameHoverOverlay />
   </Box>
 )
 
@@ -177,7 +161,43 @@ SteamCardGameMedia.propTypes = {
   gameImage: PropTypes.string.isRequired,
   isImageZoomed: PropTypes.bool.isRequired,
   rank: PropTypes.number,
-  showRank: PropTypes.bool.isRequired,
+  showRank: PropTypes.bool.isRequired
+}
+
+/** Always-visible title + subtitle, below the artwork. */
+const SteamGameCaption = ({ displayName, subtitle }) => (
+  <Box className='steam-game-card_caption' sx={{ padding: '10px 12px', textAlign: 'left' }}>
+    <Box
+      sx={{
+        color: 'text',
+        fontSize: '13px',
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }}
+    >
+      {displayName}
+    </Box>
+    {subtitle ? (
+      <Box
+        sx={{
+          color: 'textMuted',
+          fontSize: '12px',
+          mt: 1,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }}
+      >
+        {subtitle}
+      </Box>
+    ) : null}
+  </Box>
+)
+
+SteamGameCaption.propTypes = {
+  displayName: PropTypes.string.isRequired,
   subtitle: PropTypes.string
 }
 
@@ -205,23 +225,24 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
       sx={{
         variant: 'styles.InstagramItem',
         position: 'relative',
-        display: 'block',
+        display: 'flex',
+        flexDirection: 'column',
         width: '100%',
         overflow: 'hidden',
         cursor: 'pointer',
-        background: 'none',
-        backgroundColor: 'transparent',
+        backgroundColor: 'panel-background',
         border: 'none',
         p: 0,
         borderRadius: '8px',
         boxShadow: 'md',
+        textAlign: 'left',
         transition: 'all 200ms ease-in-out',
         alignSelf: 'start',
         '&:hover, &:focus': {
           transform: 'scale(1.015)',
           boxShadow: 'lg'
         },
-        '&:hover .steam-game-card_caption, &:focus .steam-game-card_caption': {
+        '&:hover .steam-game-card_hover-overlay, &:focus .steam-game-card_hover-overlay': {
           opacity: 1
         }
       }}
@@ -233,8 +254,8 @@ const SteamGameCard = ({ game, showRank = false, rank = null, subtitle = null, o
         isImageZoomed={isImageZoomed}
         rank={rank == null ? undefined : rank}
         showRank={showRank}
-        subtitle={subtitle == null ? undefined : subtitle}
       />
+      <SteamGameCaption displayName={game.displayName} subtitle={subtitle == null ? undefined : subtitle} />
     </Box>
   )
 }
