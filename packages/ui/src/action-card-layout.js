@@ -4,6 +4,7 @@
  */
 export const actionCardPinnedLayoutSx = {
   height: '100%',
+  minWidth: 0,
   display: 'flex',
   flexDirection: 'column',
   transition: 'transform 0.2s ease-in-out',

@@ -89,10 +89,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
         class="css-1eii8wb"
       >
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -145,10 +145,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -201,10 +201,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -257,10 +257,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -313,10 +313,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -369,10 +369,10 @@ exports[`GitHub Widget matches the error state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -1694,11 +1694,11 @@ exports[`GitHub Widget matches the loaded state snapshot 1`] = `
         class="css-1eii8wb"
       >
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
           href="https://github.com/test/repo"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -3029,10 +3029,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
         class="css-1eii8wb"
       >
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -3085,10 +3085,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -3141,10 +3141,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -3197,10 +3197,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -3253,10 +3253,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"
@@ -3309,10 +3309,10 @@ exports[`GitHub Widget matches the loading state snapshot 1`] = `
           </div>
         </a>
         <a
-          class="css-nf0qmy"
+          class="css-1ij827o"
         >
           <div
-            class="css-j0ff86"
+            class="css-1h68g1x"
           >
             <div
               class="show-loading-animation"

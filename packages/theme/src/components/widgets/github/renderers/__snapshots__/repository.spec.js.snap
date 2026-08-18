@@ -6,7 +6,7 @@ exports[`GitHub Repository Renderer falls back to updatedAt when pushedAt is not
     class="css-1kbinjp"
   >
     <h4
-      class="css-cpvk2h"
+      class="css-1u628qo"
     >
       themeuser/legacy-repo
     </h4>
@@ -47,7 +47,7 @@ exports[`GitHub Repository Renderer matches the snapshot 1`] = `
     class="css-1kbinjp"
   >
     <h4
-      class="css-cpvk2h"
+      class="css-1u628qo"
     >
       themeuser/gatsby-theme-chronogrove
     </h4>

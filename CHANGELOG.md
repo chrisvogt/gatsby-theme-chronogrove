@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.91.11
+
+### `gatsby-theme-chronogrove` — Mobile layout overflow fixes (Discogs & GitHub widgets)
+
+- **`templates/home.js`**: added `min-width: 0` to the home dashboard's `<main>` grid item. A CSS Grid item's automatic minimum size defaults to its content's intrinsic (min-content) width, so wide flex-row content deep in the tree (the Discogs vinyl carousel's non-shrinking pages) was quietly inflating the whole page's layout viewport past the device width on small screens — forcing the entire page to scroll horizontally even though the carousel itself was visually clipped.
+- **`components/widgets/discogs/vinyl-collection.js`**: reworked the widget header for narrow screens — the "Sort by" control now stacks its label above a full-width `<select>` instead of crowding onto one row, and the view toggle left-aligns with the heading/sort control at the smallest breakpoint instead of being pushed to the right edge. Also fixed the sort `<select>`'s padding, which had overridden theme-ui's built-in space for the dropdown arrow and caused the caret to overlap the selected option text.
+- **`components/widgets/github/pinned-items.js`, `.../renderers/repository.js`**: GitHub Pinned Item cards wouldn't shrink below ~300px on narrow screens (forcing horizontal scroll) because the grid item lacked `min-width: 0` and long `owner/repo` names (no spaces, so no natural wrap point) were treated as unbreakable text; added `overflow-wrap: anywhere` to the repo name heading so long names wrap instead of dictating a minimum card width.
+
+### `@chronogrove/ui`
+
+- **`page-shell-layout.js`**: added `min-width: 0` to the default page shell's `<main>` (defense-in-depth for any other page using the shared layout inside a grid/flex ancestor).
+- **`action-card-layout.js`**: added `min-width: 0` to `actionCardPinnedLayoutSx`, matching the GitHub pinned-card grid-item fix above.
+
+### Versions
+
+- **`gatsby-theme-chronogrove` 0.91.11**; **`@chronogrove/ui` 0.85.8**; **`www.chrisvogt.me`** and **`www.chronogrove.com`** unchanged (theme/ui resolve via `workspace:*`, no site code touched).
+
+### Files changed (high level)
+
+- `CHANGELOG.md`
+- `packages/theme/package.json` (version **0.91.11**)
+- `packages/theme/src/templates/home.js`
+- `packages/theme/src/components/widgets/discogs/vinyl-collection.js`
+- `packages/theme/src/components/widgets/github/pinned-items.js`, `renderers/repository.js`
+- `packages/ui/package.json` (version **0.85.8**)
+- `packages/ui/src/page-shell-layout.js`, `action-card-layout.js`
+
+---
+
 ## 0.91.10
 
 ### `gatsby-theme-chronogrove` — YouTube embed facade (Lighthouse: reduce unused JS)

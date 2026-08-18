@@ -144,7 +144,8 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
       fontSize: ['11px', 1],
       fontWeight: 'body',
       lineHeight: 1.25,
-      px: 2,
+      pl: 2,
+      pr: 4,
       py: '6px',
       minHeight: ['28px', '30px'],
       borderRadius: '6px',
@@ -305,7 +306,7 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
           display: 'flex'
         }}
       >
-        <Heading as='h3' sx={{ fontSize: [3, 4], mb: 0 }}>
+        <Heading as='h3' sx={{ fontSize: [3, 4], mb: 0, flex: ['1 1 100%', '0 1 auto'] }}>
           Vinyl Collection
         </Heading>
         <Box
@@ -314,13 +315,14 @@ const VinylCollection = ({ isLoading, releases = [] }) => {
             flexWrap: 'wrap',
             gap: [2, 3],
             display: 'flex',
-            justifyContent: 'flex-end',
+            justifyContent: ['flex-start', 'flex-end'],
             flex: 1
           }}
         >
           <Box
             sx={{
-              alignItems: 'center',
+              alignItems: ['stretch', 'center'],
+              flexDirection: ['column', 'row'],
               flexWrap: 'wrap',
               gap: ['8px', 2],
               display: 'flex',

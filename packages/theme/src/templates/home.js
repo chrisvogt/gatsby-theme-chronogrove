@@ -37,7 +37,7 @@ const HomeTemplate = () => {
               <HomeDashboardGrid
                 aside={<HomeNavigation />}
                 main={
-                  <main role='main'>
+                  <main role='main' sx={{ minWidth: 0 }}>
                     <SkipNavContent />
                     <Box sx={homeDashboardMainShellSx}>
                       <Box sx={homeDashboardMainInnerMaxWidthSx}>

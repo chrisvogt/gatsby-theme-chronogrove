@@ -79,15 +79,15 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
         class="css-7avkd0"
       >
         <h3
-          class="css-8ivgst"
+          class="css-f2ebd5"
         >
           Vinyl Collection
         </h3>
         <div
-          class="css-1vz564k"
+          class="css-1j5dq49"
         >
           <div
-            class="css-iz57sm"
+            class="css-1u26n1k"
           >
             <label
               class="css-kbw1ti"
@@ -99,7 +99,7 @@ exports[`Discogs Widget matches the error state snapshot 1`] = `
               class="css-z5fbhm"
             >
               <select
-                class="css-vnlcr3"
+                class="css-ldcb5j"
                 disabled=""
                 id="vinyl-collection-sort-select"
               >
@@ -281,15 +281,15 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
         class="css-7avkd0"
       >
         <h3
-          class="css-8ivgst"
+          class="css-f2ebd5"
         >
           Vinyl Collection
         </h3>
         <div
-          class="css-1vz564k"
+          class="css-1j5dq49"
         >
           <div
-            class="css-iz57sm"
+            class="css-1u26n1k"
           >
             <label
               class="css-kbw1ti"
@@ -301,7 +301,7 @@ exports[`Discogs Widget matches the loaded state snapshot 1`] = `
               class="css-z5fbhm"
             >
               <select
-                class="css-1dw0swc"
+                class="css-14yze7w"
                 id="vinyl-collection-sort-select"
               >
                 <option
@@ -612,15 +612,15 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
         class="css-7avkd0"
       >
         <h3
-          class="css-8ivgst"
+          class="css-f2ebd5"
         >
           Vinyl Collection
         </h3>
         <div
-          class="css-1vz564k"
+          class="css-1j5dq49"
         >
           <div
-            class="css-iz57sm"
+            class="css-1u26n1k"
           >
             <label
               class="css-kbw1ti"
@@ -632,7 +632,7 @@ exports[`Discogs Widget matches the loading state snapshot 1`] = `
               class="css-z5fbhm"
             >
               <select
-                class="css-vnlcr3"
+                class="css-ldcb5j"
                 disabled=""
                 id="vinyl-collection-sort-select"
               >
@@ -1440,15 +1440,15 @@ exports[`Discogs Widget renders without AI summary when not available 1`] = `
         class="css-7avkd0"
       >
         <h3
-          class="css-8ivgst"
+          class="css-f2ebd5"
         >
           Vinyl Collection
         </h3>
         <div
-          class="css-1vz564k"
+          class="css-1j5dq49"
         >
           <div
-            class="css-iz57sm"
+            class="css-1u26n1k"
           >
             <label
               class="css-kbw1ti"
@@ -1460,7 +1460,7 @@ exports[`Discogs Widget renders without AI summary when not available 1`] = `
               class="css-z5fbhm"
             >
               <select
-                class="css-1dw0swc"
+                class="css-14yze7w"
                 id="vinyl-collection-sort-select"
               >
                 <option

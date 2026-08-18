@@ -41,6 +41,7 @@ const PinnedItems = ({ isLoading, items = [], placeholderCount = 4 }) => {
             sx={{
               color: 'text',
               display: 'flex',
+              minWidth: 0,
               '&:hover, &:focus': {
                 textDecoration: 'none'
               }

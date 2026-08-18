@@ -46,7 +46,7 @@ export function ChronogrovePageShell({
       {disableMainWrapper ? (
         children
       ) : (
-        <Box as='main'>
+        <Box as='main' sx={{ minWidth: 0 }}>
           <SkipNavContent />
           {children}
         </Box>

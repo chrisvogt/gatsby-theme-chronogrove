@@ -3,7 +3,7 @@
 exports[`Widget/GitHub/PinnedItemCard snapshots matches the placeholder snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="css-139dwiw"
+    class="css-l9frz8"
   >
     <div
       class="show-loading-animation"
@@ -60,13 +60,13 @@ exports[`Widget/GitHub/PinnedItemCard snapshots matches the placeholder snapshot
 exports[`Widget/GitHub/PinnedItemCard snapshots matches the repository variant snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="css-139dwiw"
+    class="css-l9frz8"
   >
     <div
       class="css-1kbinjp"
     >
       <h4
-        class="css-cpvk2h"
+        class="css-1u628qo"
       >
         themeuser/sample-repo
       </h4>

@@ -20,7 +20,7 @@ const Repository = ({ description, nameWithOwner, pushedAt, updatedAt }) => {
         height: '100%'
       }}
     >
-      <Heading as='h4' sx={{ p: 0, mb: 2 }}>
+      <Heading as='h4' sx={{ p: 0, mb: 2, overflowWrap: 'anywhere' }}>
         {nameWithOwner}
       </Heading>
 
